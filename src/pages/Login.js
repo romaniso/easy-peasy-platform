@@ -2,9 +2,9 @@ import LoginForm from "../components/LoginForm";
 
 function Login() {
   return (
-    <main className="container mx-auto">
+    <section className="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 min-h-screen flex items-center justify-center">
       <LoginForm />
-    </main>
+    </section>
   );
 }
 
