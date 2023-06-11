@@ -2,7 +2,7 @@ import LoginForm from "../components/LoginForm";
 
 function Login() {
   return (
-    <main>
+    <main className="container mx-auto">
       <LoginForm />
     </main>
   );

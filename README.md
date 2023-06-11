@@ -71,4 +71,4 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 
 ### TODO
 
-[] - Login form with two options: sign-up and login.
+[ ] - Login form with two options: sign-up and login.

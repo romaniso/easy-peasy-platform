@@ -1,4 +1,3 @@
-import "./LoginForm.css";
 import { useState } from "react";
 import User from "./User";
 
@@ -28,44 +27,58 @@ function LoginForm() {
   };
 
   return (
-    <form onSubmit={handleFormSubmit}>
-      <div className="form-group">
-        <label htmlFor="userName">User Name</label>
-        <input
-          required
-          type="text"
-          name="userName"
-          id="userName"
-          value={userName}
-          onChange={handleUserName}
-        />
-      </div>
-      <div className="form-group">
-        <label htmlFor="userPassword">Password</label>
-        <input
-          required
-          type="password"
-          name="userPassword"
-          id="userPassword"
-          value={userPassword}
-          onChange={handleUserPassword}
-        />
-      </div>
-      <div className="form-group">
-        <input
-          type="checkbox"
-          name="rememberMe"
-          id="rememberMe"
-          checked={rememberMe}
-          onChange={handleRememberMe}
-        />
-        <label htmlFor="rememberMe">Remember me</label>
-      </div>
-      <div className="form-group"></div>
-      <a href="#">Forget Password?</a>
-      <button type="submit">Log in</button>
-      <a href="#">A New user? Sign Up</a>
-    </form>
+    <section className="form-wrapper w-full flex flex-col justify-center items-center py-5 bg-indigo-100">
+      <form className="flex flex-col" onSubmit={handleFormSubmit}>
+        <div className="form-group">
+          <label className="block" htmlFor="userName">
+            User Name
+          </label>
+          <input
+            className=" bg-cyan-200 rounded"
+            required
+            type="text"
+            name="userName"
+            id="userName"
+            value={userName}
+            onChange={handleUserName}
+          />
+        </div>
+        <div className="form-group">
+          <label className="block" htmlFor="userPassword">
+            Password
+          </label>
+          <input
+            className=" bg-cyan-200 rounded"
+            required
+            type="password"
+            name="userPassword"
+            id="userPassword"
+            value={userPassword}
+            onChange={handleUserPassword}
+          />
+        </div>
+        <div className="form-group">
+          <input
+            type="checkbox"
+            name="rememberMe"
+            id="rememberMe"
+            checked={rememberMe}
+            onChange={handleRememberMe}
+          />
+          <label htmlFor="rememberMe">Remember me</label>
+        </div>
+        <div className="form-group"></div>
+        <a className="" href="#">
+          Forget Password?
+        </a>
+        <button className="bg-cyan-200 rounded" type="submit">
+          Log in
+        </button>
+        <a className="" href="#">
+          A New user? Sign Up
+        </a>
+      </form>
+    </section>
   );
 }
 
