@@ -1,16 +1,21 @@
 import { useState } from "react";
 import User from "./User";
 import LoginImage from "../assets/images/login-image.jpg";
+import Password from "./Password";
 
 function LoginForm() {
+  const [showPassword, setShowPassword] = useState(false);
   const [userName, setUserName] = useState("");
   const [userPassword, setUserPassword] = useState("");
   const [rememberMe, setRememberMe] = useState(false);
 
+  const toggleShowPassword = () => {
+    setShowPassword(!showPassword);
+  };
   const handleFormSubmit = (event) => {
     event.preventDefault();
     if (userName && userPassword) {
-      const user = new User(userName, userPassword, rememberMe);
+      const user = new User(null, userName, userPassword, rememberMe);
       console.log(user);
     } else {
       console.log("Popup shows up");
@@ -46,40 +51,18 @@ function LoginForm() {
               autoComplete="off"
             />
             <label
-              className="absolute left-3 top-1/2 -translate-y-1/2 text-[#163A95] cursor-text peer-focus:text-xs peer-focus:-top-3 peer-focus:left-0 peer-focus:text-[#EB7F00] transition-all duration-500"
+              className="absolute left-3 top-1/2 -translate-y-1/2 text-[#163A95] cursor-text peer-focus:text-xs peer-focus:-top-3 peer-focus:left-0 peer-focus:text-[#EB7F00] peer-valid:text-xs peer-valid:-top-3 peer-valid:left-0 peer-valid:text-[#EB7F00] transition-all duration-500"
               htmlFor="userName"
             >
               User Name
             </label>
           </div>
-          <div className="mt-6 relative">
-            <input
-              className=" p-2 rounded-xl border w-full focus:outline-none focus:border-[#EB7F00] transition-colors peer"
-              required
-              type="password"
-              name="userPassword"
-              id="userPassword"
-              value={userPassword}
-              onChange={handleUserPassword}
-            />
-            <label
-              className="absolute left-3 top-1/2 -translate-y-1/2 text-[#163A95] cursor-text peer-focus:text-xs peer-focus:-top-3 peer-focus:left-0 peer-focus:text-[#EB7F00] transition-all duration-500"
-              htmlFor="userPassword"
-            >
-              Password
-            </label>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="16"
-              height="16"
-              fill="#163A95"
-              className="bi bi-eye-fill absolute top-1/2 right-3 -translate-y-1/2 cursor-pointer"
-              viewBox="0 0 16 16"
-            >
-              <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z" />
-              <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z" />
-            </svg>
-          </div>
+          <Password
+            showPassword={showPassword}
+            toggleShowPassword={toggleShowPassword}
+            value={userPassword}
+            onChange={handleUserPassword}
+          />
           <div className="mt-6 flex items-center">
             <input
               className="mr-2 appearance-none border-2 rounded-sm border-[#163A95] w-4 h-4 checked:bg-[#7797e9]"
