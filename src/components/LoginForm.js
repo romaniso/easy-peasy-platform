@@ -33,7 +33,7 @@ function LoginForm() {
   };
 
   return (
-    <div className="bg-gray-100 flex rounded-2xl shadow-lg max-w-3xl p-5">
+    <div className="bg-gray-100 flex rounded-2xl shadow-lg max-w-3xl p-5 ">
       {/* Form */}
       <div className="sm:w-1/2 px-16">
         <h2 className="font-bold text-2xl text-[#EB7F00]">Login</h2>
@@ -73,7 +73,7 @@ function LoginForm() {
               onChange={handleRememberMe}
             />
             <label
-              className="text-[#163A95] cursor-pointer"
+              className="text-[#163A95] cursor-pointer select-none"
               htmlFor="rememberMe"
             >
               Remember me
