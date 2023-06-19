@@ -1,4 +1,6 @@
 import { useState } from "react";
+import {Link} from "react-router-dom";
+import Button from "./Button";
 import User from "./User";
 import LoginImage from "../assets/images/login-image.jpg";
 import Password from "./Password";
@@ -37,7 +39,7 @@ function LoginForm() {
       {/* Form */}
       <div className="sm:w-1/2 px-16">
         <h2 className="font-bold text-2xl text-[#EB7F00]">Login</h2>
-        <p className="text-sm mt-4 text-[#163A95]">A New user? Sign Up</p>
+        <p className="text-sm mt-4 text-[#163A95]">A New user? <Link className="text-[#EB7F00]" to="/register">Sign Up</Link></p>
         <form className="flex flex-col gap-4" onSubmit={handleFormSubmit}>
           <div className="mt-6 relative">
             <input
@@ -83,12 +85,7 @@ function LoginForm() {
           <a className="text-sm mt-4 text-[#163A95]" href="#">
             Forget Password?
           </a>
-          <button
-            className="bg-[#163A95] rounded-xl text-[#EB7F00] py-2 hover:bg-[#EB7F00] hover:text-[#163A95] transition-colors"
-            type="submit"
-          >
-            Log in
-          </button>
+          <Button primary rounded type="submit">Log in</Button>
         </form>
       </div>
       {/* Image */}
