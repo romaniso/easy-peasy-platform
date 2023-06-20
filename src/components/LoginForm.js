@@ -1,5 +1,6 @@
 import { useState } from "react";
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
+import { CiLogin } from "react-icons/ci";
 import Button from "./Button";
 import User from "./User";
 import LoginImage from "../assets/images/login-image.jpg";
@@ -39,7 +40,12 @@ function LoginForm() {
       {/* Form */}
       <div className="sm:w-1/2 px-16">
         <h2 className="font-bold text-2xl text-[#EB7F00]">Login</h2>
-        <p className="text-sm mt-4 text-[#163A95]">A New user? <Link className="text-[#EB7F00]" to="/register">Sign Up</Link></p>
+        <p className="text-sm mt-4 text-[#163A95]">
+          A New user?{" "}
+          <Link className="text-[#EB7F00]" to="/register">
+            Sign Up
+          </Link>
+        </p>
         <form className="flex flex-col gap-4" onSubmit={handleFormSubmit}>
           <div className="mt-6 relative">
             <input
@@ -85,7 +91,10 @@ function LoginForm() {
           <a className="text-sm mt-4 text-[#163A95]" href="#">
             Forget Password?
           </a>
-          <Button primary rounded type="submit">Log in</Button>
+          <Button primary rounded type="submit">
+            <CiLogin />
+            Log in
+          </Button>
         </form>
       </div>
       {/* Image */}
