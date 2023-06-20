@@ -5,6 +5,7 @@ import Button from "./Button";
 import User from "./User";
 import LoginImage from "../assets/images/login-image.jpg";
 import Password from "./Password";
+import InputField from "./InputField";
 
 function LoginForm() {
   const [showPassword, setShowPassword] = useState(false);
@@ -25,8 +26,8 @@ function LoginForm() {
     }
   };
 
-  const handleUserName = (event) => {
-    setUserName(event.target.value);
+  const handleUserName = (value) => {
+    setUserName(value);
   };
   const handleUserPassword = (event) => {
     setUserPassword(event.target.value);
@@ -47,24 +48,17 @@ function LoginForm() {
           </Link>
         </p>
         <form className="flex flex-col gap-4" onSubmit={handleFormSubmit}>
-          <div className="mt-6 relative">
-            <input
-              className=" p-2 rounded-xl border w-full focus:outline-none focus:border-[#EB7F00] transition-colors peer"
-              required
-              type="text"
-              name="userName"
-              id="userName"
-              value={userName}
-              onChange={handleUserName}
-              autoComplete="off"
-            />
-            <label
-              className="absolute left-3 top-1/2 -translate-y-1/2 text-[#163A95] cursor-text peer-focus:text-xs peer-focus:-top-3 peer-focus:left-0 peer-focus:text-[#EB7F00] peer-valid:text-xs peer-valid:-top-3 peer-valid:left-0 peer-valid:text-[#EB7F00] transition-all duration-500"
-              htmlFor="userName"
-            >
-              User Name
-            </label>
-          </div>
+          <InputField
+            name="userName"
+            type="text"
+            primary
+            rounded
+            autoComplete="off"
+            onChange={handleUserName}
+            required
+          >
+            User Name
+          </InputField>
           <Password
             showPassword={showPassword}
             toggleShowPassword={toggleShowPassword}
