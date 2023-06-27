@@ -5,7 +5,7 @@ import Button from "./Button";
 import User from "./User";
 import LoginImage from "../assets/images/login-image.jpg";
 import Password from "./Password";
-import InputField from "./InputField";
+import Input from "./Input";
 
 function LoginForm() {
   const [showPassword, setShowPassword] = useState(false);
@@ -48,7 +48,7 @@ function LoginForm() {
           </Link>
         </p>
         <form className="flex flex-col gap-4" onSubmit={handleFormSubmit}>
-          <InputField
+          <Input
             name="userName"
             type="text"
             primary
@@ -58,7 +58,7 @@ function LoginForm() {
             required
           >
             User Name
-          </InputField>
+          </Input>
           <Password
             showPassword={showPassword}
             toggleShowPassword={toggleShowPassword}
@@ -82,7 +82,7 @@ function LoginForm() {
             </label>
           </div>
           <div className="mt-6"></div>
-          <a className="text-sm mt-4 text-[#163A95]" href="#">
+          <a className="text-sm mt-4 text-[#163A95]" href="/">
             Forget Password?
           </a>
           <Button primary rounded type="submit">

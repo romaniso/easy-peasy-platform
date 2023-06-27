@@ -1,7 +1,7 @@
 import { useState } from "react";
 import className from "classnames";
 
-function InputField({
+function Input({
   children,
   name,
   type,
@@ -62,4 +62,4 @@ function InputField({
   );
 }
 
-export default InputField;
+export default Input;
