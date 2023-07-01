@@ -1,6 +1,5 @@
-import { useState } from "react";
+import useLoginRegister from "../hooks/use-Login-Register";
 import { Link } from "react-router-dom";
-import User from "./User";
 import Panel from "./Panel";
 import LoginImage from "../assets/images/login-image.jpg";
 import Input from "./Input";
@@ -9,29 +8,14 @@ import Button from "./Button";
 import { CiLogin } from "react-icons/ci";
 
 function RegisterForm() {
-  const [showPassword, setShowPassword] = useState(false);
-  const [userName, setUserName] = useState("");
-  const [userPassword, setUserPassword] = useState("");
-  //  const [rememberMe, setRememberMe] = useState(false);
+  const {
+    handleFormSubmit,
+    handleUserName,
+    showPassword,
+    toggleShowPassword,
+    handleUserPassword,
+  } = useLoginRegister();
 
-  const toggleShowPassword = () => {
-    setShowPassword(!showPassword);
-  };
-  const handleFormSubmit = (event) => {
-    event.preventDefault();
-    if (userName && userPassword) {
-      const user = new User(null, userName, userPassword);
-      console.log(user);
-    } else {
-      console.log("Popup shows up");
-    }
-  };
-  const handleUserName = (value) => {
-    setUserName(value);
-  };
-  const handleUserPassword = (value) => {
-    setUserPassword(value);
-  };
   return (
     <Panel className="flex justify-center max-w-3xl p-0 m-4">
       <div className="flex flex-col justify-center sm:w-1/2 p-10">
