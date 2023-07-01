@@ -1,17 +1,18 @@
-import { useState } from "react";
+import { useState, forwardRef } from "react";
 import className from "classnames";
 
-function Input({
-  children,
-  name,
-  type,
-  onChange,
-  primary,
-  secondary,
-  rounded,
-  outline,
-  ...rest
-}) {
+const Input = forwardRef(function Input(props, ref) {
+  const {
+    children,
+    name,
+    type,
+    onChange,
+    primary,
+    secondary,
+    rounded,
+    outline,
+    ...rest
+  } = props;
   const inputClasses = className(
     rest.className,
     "p-2 focus:outline-none transition-colors peer border w-full",
@@ -46,20 +47,20 @@ function Input({
     <div className="mt-6 relative">
       <input
         className={inputClasses}
-        required
         type={type}
         name={name}
         id={name}
         value={value}
         onChange={handleChange}
-        autoComplete="off"
         {...rest}
+        ref={ref}
       />
       <label className={labelClasses} htmlFor={name}>
         {children}
       </label>
+      {null || rest.icon}
     </div>
   );
-}
+});
 
 export default Input;

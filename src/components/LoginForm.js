@@ -29,8 +29,8 @@ function LoginForm() {
   const handleUserName = (value) => {
     setUserName(value);
   };
-  const handleUserPassword = (event) => {
-    setUserPassword(event.target.value);
+  const handleUserPassword = (value) => {
+    setUserPassword(value);
   };
   const handleRememberMe = () => {
     setRememberMe(!rememberMe);
@@ -62,8 +62,11 @@ function LoginForm() {
           <Password
             showPassword={showPassword}
             toggleShowPassword={toggleShowPassword}
-            value={userPassword}
             onChange={handleUserPassword}
+            primary
+            rounded
+            autoComplete="off"
+            required
           />
           <div className="mt-6 flex items-center">
             <input
