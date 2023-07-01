@@ -20,7 +20,7 @@ function Button({
       "bg-yellow-500 text-fuchsia-900 hover:bg-yellow-600": warning,
       "bg-red-500 text-white hover:bg-red-600": danger,
       "bg-transparent": outline,
-      "rounded-full": rounded,
+      "rounded-md": rounded,
       "border-orange-400 text-orange-400 hover:text-white": outline && primary,
       "border-stone-500 text-stone-500 hover:text-white": outline && secondary,
       "border-green-500 text-green-500 hover:text-white": outline && success,

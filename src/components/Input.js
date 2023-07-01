@@ -17,9 +17,9 @@ const Input = forwardRef(function Input(props, ref) {
     rest.className,
     "p-2 focus:outline-none transition-colors peer border w-full",
     {
-      "focus:border-orange-400 text-sky-500": primary,
+      "focus:border-orange-400 text-sky-700": primary,
       "bg-stone-400 focus:border-sky-300 text-white": secondary,
-      "rounded-full": rounded,
+      "rounded-md": rounded,
       "bg-transparent": outline,
       "border-orange-400 bg-transparent text-orange-400 hover:text-orange-500":
         outline && primary,
@@ -31,7 +31,7 @@ const Input = forwardRef(function Input(props, ref) {
     rest.className,
     "absolute left-3 top-1/2 -translate-y-1/2 cursor-text peer-focus:text-xs peer-focus:-top-3 peer-focus:left-0 peer-valid:text-xs peer-valid:-top-3 peer-valid:left-0 transition-all duration-500",
     {
-      "text-sky-500  peer-focus:text-orange-500 peer-valid:text-orange-500":
+      "text-sky-700  peer-focus:text-orange-500 peer-valid:text-orange-500":
         primary,
       "text-orange-500  peer-focus:text-sky-500 peer-valid:text-sky-500":
         secondary,
@@ -44,7 +44,7 @@ const Input = forwardRef(function Input(props, ref) {
     onChange(value);
   };
   return (
-    <div className="mt-6 relative">
+    <div className="mt-4 relative">
       <input
         className={inputClasses}
         type={type}

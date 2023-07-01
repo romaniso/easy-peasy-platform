@@ -1,7 +1,13 @@
 import { useRef } from "react";
 import Input from "./Input";
 
-function Password({ showPassword, toggleShowPassword, onChange, ...rest }) {
+function Password({
+  children,
+  showPassword,
+  toggleShowPassword,
+  onChange,
+  ...rest
+}) {
   const inputRef = useRef(null);
   const handleToggleShowPassword = () => {
     inputRef.current?.focus();
@@ -38,7 +44,7 @@ function Password({ showPassword, toggleShowPassword, onChange, ...rest }) {
       {...rest}
       ref={inputRef}
     >
-      Password
+      {children}
     </Input>
   );
 }

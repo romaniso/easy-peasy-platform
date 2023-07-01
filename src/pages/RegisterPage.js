@@ -1,5 +1,11 @@
+import RegisterForm from "../components/RegisterForm";
+
 function Register() {
-  return <section>Register</section>;
+  return (
+    <section className="bg-slate-100 min-h-screen flex items-center justify-center">
+      <RegisterForm />
+    </section>
+  );
 }
 
 export default Register;
