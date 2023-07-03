@@ -6,6 +6,7 @@ import LoginImage from "../assets/images/login-image.jpg";
 import Password from "./Password";
 import Input from "./Input";
 import Panel from "./Panel";
+import Checkbox from "./Checkbox";
 function LoginForm() {
   const {
     handleFormSubmit,
@@ -50,22 +51,14 @@ function LoginForm() {
           >
             Password
           </Password>
-          <div className="mt-6 flex items-center">
-            <input
-              className="mr-2 appearance-none border-2 rounded-sm border-[#163A95] w-4 h-4 checked:bg-[#7797e9]"
-              type="checkbox"
-              name="rememberMe"
-              id="rememberMe"
-              checked={rememberMe}
-              onChange={handleRememberMe}
-            />
-            <label
-              className="text-[#163A95] cursor-pointer select-none"
-              htmlFor="rememberMe"
-            >
-              Remember me
-            </label>
-          </div>
+          <Checkbox
+            className="mt-2"
+            name="rememberMe"
+            checked={rememberMe}
+            onChange={handleRememberMe}
+          >
+            Remember me
+          </Checkbox>
           <div className="mt-6">
             <a className="text-sm mt-4 text-[#163A95]" href="/">
               Forget Password?
