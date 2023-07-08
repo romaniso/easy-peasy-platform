@@ -19,7 +19,7 @@ function Button({
       "bg-green-500 text-fuchsia-900 hover:bg-green-600": success,
       "bg-yellow-500 text-fuchsia-900 hover:bg-yellow-600": warning,
       "bg-red-500 text-white hover:bg-red-600": danger,
-      "bg-transparent": outline,
+      "bg-transparent font-semibold": outline,
       "rounded-md": rounded,
       "border-orange-400 text-orange-400 hover:text-white": outline && primary,
       "border-stone-500 text-stone-500 hover:text-white": outline && secondary,

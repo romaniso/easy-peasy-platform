@@ -3,7 +3,7 @@
 import LoginForm from "../components/LoginForm";
 //import UserContext from "../context/user";
 
-function Login() {
+function LoginPage() {
   //  const { isNewUser, handleUser } = useContext(UserContext);
   //  let { pathname } = useLocation();
   //  useEffect(() => {
@@ -19,4 +19,4 @@ function Login() {
   );
 }
 
-export default Login;
+export default LoginPage;

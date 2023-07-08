@@ -44,7 +44,7 @@ const Input = forwardRef(function Input(props, ref) {
     onChange(value);
   };
   return (
-    <div className="mt-4 relative">
+    <div className="mt-4 relative z-0">
       <input
         className={inputClasses}
         type={type}
