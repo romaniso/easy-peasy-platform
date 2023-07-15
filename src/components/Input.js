@@ -1,4 +1,4 @@
-import { useState, forwardRef } from "react";
+import { useState, forwardRef, useEffect } from "react";
 import className from "classnames";
 
 const Input = forwardRef(function Input(props, ref) {
@@ -41,8 +41,12 @@ const Input = forwardRef(function Input(props, ref) {
   const [value, setValue] = useState("");
   const handleChange = (event) => {
     setValue(event.target.value);
-    onChange(value);
   };
+
+  useEffect(() => {
+    onChange(value);
+  }, [value]);
+
   return (
     <div className="mt-4 relative z-0">
       <input

@@ -5,19 +5,49 @@ import Input from "./Input";
 import Password from "./Password";
 import Button from "./Button";
 import { CiLogin } from "react-icons/ci";
+import userSignUp from "../auth/userSignUp";
+import { useNavigate, useLocation } from "react-router-dom";
+import { useState } from "react";
 
 function Signup({ onToggleForm }) {
+  const [errorMessage, setErrorMessage] = useState(null);
+
   const {
-    handleFormSubmit,
     handleUserName,
     showPassword,
     toggleShowPassword,
     handleUserPassword,
+    userName,
+    userPassword,
   } = useLoginRegister();
+
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const from = location.state?.from?.path || "/dashboard";
+
+  const { error, signUp } = userSignUp();
+
+  const handleFormSubmit = async (event) => {
+    event.preventDefault();
+
+    await signUp(userName, userPassword);
+
+    if (!error) {
+      navigate(from, { replace: true });
+      handleUserName("");
+      handleUserPassword("");
+
+      return;
+    } else {
+      setErrorMessage(error);
+    }
+  };
 
   return (
     <Panel className="flex justify-center max-w-3xl p-0 m-4">
       <div className="flex flex-col justify-center sm:w-1/2 p-10">
+        {errorMessage && <p className="text-red-400 text-lg">{errorMessage}</p>}
         <h2 className="font-bold text-2xl text-[#EB7F00]">Sign-Up</h2>
         <p className="text-sm mt-4 text-sky-700">
           Already have an account?{" "}
@@ -29,17 +59,6 @@ function Signup({ onToggleForm }) {
           </span>
         </p>
         <form className="flex flex-col gap-4" onSubmit={handleFormSubmit}>
-          <Input
-            name="userName"
-            type="text"
-            primary
-            rounded
-            autoComplete="off"
-            onChange={handleUserName}
-            required
-          >
-            Your Name
-          </Input>
           <Input
             name="userEmail"
             type="email"

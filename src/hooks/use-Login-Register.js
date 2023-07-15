@@ -1,5 +1,4 @@
 import { useState } from "react";
-import User from "../components/User";
 
 function useLoginRegister() {
   const [showPassword, setShowPassword] = useState(false);
@@ -9,15 +8,6 @@ function useLoginRegister() {
 
   const toggleShowPassword = () => {
     setShowPassword(!showPassword);
-  };
-  const handleFormSubmit = (event) => {
-    event.preventDefault();
-    if (userName && userPassword) {
-      const user = new User(null, userName, userPassword);
-      console.log(user);
-    } else {
-      console.log("Popup shows up");
-    }
   };
   const handleUserName = (value) => {
     setUserName(value);
@@ -35,7 +25,6 @@ function useLoginRegister() {
     userPassword,
     rememberMe,
     toggleShowPassword,
-    handleFormSubmit,
     handleUserName,
     handleUserPassword,
     handleRememberMe,
