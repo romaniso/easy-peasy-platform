@@ -108,7 +108,7 @@ function Navbar() {
   });
 
   return (
-    <header className="bg-indigo-50 shadow-lg border-b-indigo-100 w-full fixed top-0 left-0 z-10">
+    <header className="md:bg-transparent bg-indigo-50 md:backdrop-blur-xl shadow-lg border-b-indigo-100 w-full fixed top-0 left-0 z-10">
       <nav className="md:flex justify-between items-center py-2 md:px-10 px-7">
         {/* LOGO */}
         <NavLink to="/">
@@ -165,7 +165,7 @@ function Navbar() {
         </div>
         {/* MENU */}
         <ul
-          className={`md:flex md:items-center md:pb-0 pb-12 absolute md:static bg-indigo-50 md:z-auto z-[-1] left-0 w-full md:w-auto md:pl-0 px-9 transition-all duration-500 ease-in shadow-md md:shadow-none ${
+          className={`md:bg-transparent bg-indigo-50 md:flex md:items-center md:pb-0 pb-12 absolute md:static md:z-auto z-[-1] left-0 w-full md:w-auto md:pl-0 px-9 transition-all duration-500 ease-in shadow-md md:shadow-none ${
             isOpen ? "top-12" : "top-[-490px]"
           }`}
         >

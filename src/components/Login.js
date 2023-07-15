@@ -43,14 +43,18 @@ function Login({ onToggleForm }) {
 
       return;
     } else {
-      setErrorMessage(error);
+      setErrorMessage("Ooops. Email or password are invalid. Try again");
     }
   };
 
   return (
     <Panel className="flex justify-center max-w-3xl p-0 m-4">
       <div className="flex flex-col justify-center sm:w-1/2 p-10">
-        {errorMessage && <p className="text-red-400 text-lg">{errorMessage}</p>}
+        {errorMessage && (
+          <Panel className="text-red-400 text-lg bg-white mb-2 py-1">
+            {errorMessage}
+          </Panel>
+        )}
         <h2 className="font-bold text-2xl text-[#EB7F00]">Login</h2>
         <p className="text-sm mt-4 text-[#163A95]">
           A New user?{" "}
