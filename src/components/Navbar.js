@@ -84,7 +84,7 @@ function Navbar() {
               isCollapsed ? "block" : "hidden"
             }`}
           >
-            <ul className="bg-white py-3 px-6 shadow-md rounded-md">
+            <ul className="bg-slate-50 py-3 px-6 shadow-md rounded-md">
               {link.subpaths.map((subpath) => {
                 return (
                   <li
