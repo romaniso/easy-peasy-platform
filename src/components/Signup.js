@@ -1,5 +1,4 @@
 import useLoginRegister from "../hooks/use-Login-Register";
-import { Link } from "react-router-dom";
 import Panel from "./Panel";
 import LoginImage from "../assets/images/login-image.jpg";
 import Input from "./Input";

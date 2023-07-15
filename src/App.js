@@ -4,6 +4,7 @@ import AuthenticationPage from "./pages/AuthenticationPage";
 import ErrorPage from "./pages/ErrorPage";
 import DashboardPage from "./pages/DashboardPage";
 import Layout from "./components/Layout";
+import PrivateRouteLayout from "./layouts/PrivateRouteLayout";
 
 function App() {
   return (
@@ -16,7 +17,9 @@ function App() {
           <Route path="*" element={<ErrorPage />} />
 
           {/* private pages */}
-          <Route path="/dashboard" element={<DashboardPage />} />
+          <Route element={<PrivateRouteLayout />}>
+            <Route path="/dashboard" element={<DashboardPage />} />
+          </Route>
         </Routes>
       </Layout>
     </Router>
