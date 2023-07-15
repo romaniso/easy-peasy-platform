@@ -7,7 +7,7 @@ import Password from "./Password";
 import Button from "./Button";
 import { CiLogin } from "react-icons/ci";
 
-function RegisterForm() {
+function Signup({ onToggleForm }) {
   const {
     handleFormSubmit,
     handleUserName,
@@ -22,9 +22,12 @@ function RegisterForm() {
         <h2 className="font-bold text-2xl text-[#EB7F00]">Sign-Up</h2>
         <p className="text-sm mt-4 text-sky-700">
           Already have an account?{" "}
-          <Link className="text-[#EB7F00]" to="/login">
+          <span
+            className="text-[#EB7F00] cursor-pointer"
+            onClick={onToggleForm}
+          >
             Log in
-          </Link>
+          </span>
         </p>
         <form className="flex flex-col gap-4" onSubmit={handleFormSubmit}>
           <Input
@@ -83,4 +86,4 @@ function RegisterForm() {
   );
 }
 
-export default RegisterForm;
+export default Signup;

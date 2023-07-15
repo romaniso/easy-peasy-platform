@@ -1,8 +1,8 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import Navbar from "./components/Navbar";
-import LoginPage from "./pages/LoginPage";
-import Register from "./pages/RegisterPage";
 import HomePage from "./pages/HomePage";
+import AuthenticationPage from "./pages/AuthenticationPage";
+import ErrorPage from "./pages/ErrorPage";
+import DashboardPage from "./pages/DashboardPage";
 import Layout from "./components/Layout";
 
 function App() {
@@ -10,9 +10,13 @@ function App() {
     <Router>
       <Layout>
         <Routes>
+          {/* public pages */}
           <Route exact path="/" element={<HomePage />} />
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/register" element={<Register />} />
+          <Route path="/auth" element={<AuthenticationPage />} />
+          <Route path="*" element={<ErrorPage />} />
+
+          {/* private pages */}
+          <Route path="/dashboard" element={<DashboardPage />} />
         </Routes>
       </Layout>
     </Router>

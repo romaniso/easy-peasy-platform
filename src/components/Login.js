@@ -7,7 +7,7 @@ import Password from "./Password";
 import Input from "./Input";
 import Panel from "./Panel";
 import Checkbox from "./Checkbox";
-function LoginForm() {
+function LoginForm({ onToggleForm }) {
   const {
     handleFormSubmit,
     handleUserName,
@@ -24,9 +24,12 @@ function LoginForm() {
         <h2 className="font-bold text-2xl text-[#EB7F00]">Login</h2>
         <p className="text-sm mt-4 text-[#163A95]">
           A New user?{" "}
-          <Link className="text-[#EB7F00]" to="/register">
+          <span
+            className="text-[#EB7F00] cursor-pointer"
+            onClick={onToggleForm}
+          >
             Sign Up
-          </Link>
+          </span>
         </p>
         <form className="flex flex-col gap-4" onSubmit={handleFormSubmit}>
           <Input

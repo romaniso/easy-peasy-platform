@@ -2,11 +2,11 @@ import Navbar from "./Navbar";
 
 function Layout({ children }) {
   return (
-    <div className="bg-slate-100">
-      <div className="container mx-auto">
-        <Navbar />
-        <main>{children}</main>
-      </div>
+    <div className="min-h-full overflow-hidden flex flex-col">
+      <Navbar />
+      <main className="grow shrink basis-auto">{children}</main>
+      {/* Footer */}
+      <footer>Footer</footer>
     </div>
   );
 }
