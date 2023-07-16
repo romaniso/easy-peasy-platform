@@ -1,10 +1,12 @@
 import Hero from "./Hero";
+import About from "./About";
 
 function HomePage() {
   return (
-    <div className="h-screen mt-24 container mx-auto">
+    <>
       <Hero />
-    </div>
+      <About />
+    </>
   );
 }
 

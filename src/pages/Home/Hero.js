@@ -3,7 +3,7 @@ import StatueImg from "../../assets/images/statue-of-liberty.png";
 
 function Hero() {
   return (
-    <section className="flex flex-row justify-center items-center">
+    <section className="flex flex-row justify-center items-center my-14 container mx-auto px-4">
       <div className="flex flex-col justify-center items-end">
         <h1 className="text-8xl text-right font-bold text-orange-500 drop-shadow mb-8">
           Easy-Peasy
