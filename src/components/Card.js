@@ -4,7 +4,7 @@ import Panel from "./Panel";
 
 function Card({ title, text, image }) {
   return (
-    <Panel className="bg-slate-100 flex flex-col md:max-w-xs">
+    <Panel className="bg-white shadow-lg border-stone-300 flex flex-col md:max-w-xs">
       {image && (
         <div className="h-28">
           <img
@@ -24,7 +24,7 @@ function Card({ title, text, image }) {
         <p className="text-md text-center text-orange-500">{text}</p>
       </div>
       <Link to={`/exercises/${title.toLowerCase()}`}>
-        <Button primary outline rounded className="w-full">
+        <Button primary rounded className="w-full">
           Check it out
         </Button>
       </Link>
