@@ -24,6 +24,7 @@ function Navbar() {
         { label: "Grammar", path: "/exercises/grammar" },
         { label: "Reading", path: "/exercises/reading" },
         { label: "Vocabulary", path: "/exercises/vocabulary" },
+        { label: "Listening", path: "/exercises/listening" },
       ],
     },
     {
@@ -34,6 +35,7 @@ function Navbar() {
         { label: "Articles", path: "/exercises/articles" },
         { label: "Podcasts", path: "/exercises/podcast" },
         { label: "Books", path: "/exercises/books" },
+        { label: "Exercises", path: "/exercises/exercises" },
       ],
     },
     { label: "Log in", path: "/auth", button: true, secondary: true },

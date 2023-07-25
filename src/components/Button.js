@@ -21,8 +21,10 @@ function Button({
       "bg-red-500 text-white hover:bg-red-600": danger,
       "bg-transparent font-semibold": outline,
       "rounded-md": rounded,
-      "border-orange-400 text-orange-400 hover:text-white": outline && primary,
-      "border-stone-500 text-stone-500 hover:text-white": outline && secondary,
+      "border-orange-400 text-orange-600 hover:text-stone-800 hover:bg-indigo-300 hover:border-indigo-300":
+        outline && primary,
+      "border-stone-500 text-stone-700 hover:text-indigo-300":
+        outline && secondary,
       "border-green-500 text-green-500 hover:text-white": outline && success,
       "border-yellow-500 text-yellow-500 hover:text-white hover:bg-yellow-500":
         outline && warning,
