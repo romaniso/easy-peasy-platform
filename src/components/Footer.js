@@ -77,7 +77,10 @@ function Footer() {
 
   const renderedSocials = socials.map((social) => {
     return (
-      <Link className="p-2 cursor-pointer inline-flex items-center rounded-full bg-stone-600 hover:bg-orange-400 mx-2 text-xl duration-300">
+      <Link
+        className="p-2 cursor-pointer inline-flex items-center rounded-full bg-stone-600 hover:bg-orange-400 mx-2 text-xl duration-300"
+        key={social.path}
+      >
         {social.icon}
       </Link>
     );
