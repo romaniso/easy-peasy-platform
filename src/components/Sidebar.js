@@ -25,8 +25,11 @@ function Sidebar() {
     );
   });
   return (
-    <aside className="sticky top-0 overflow-y-auto flex flex-col items-start">
-      {renderedLinks}
+    <aside className="bg-stone-800 h-screen sticky top-0 overflow-y-auto flex flex-col items-center">
+      {/*{renderedLinks}*/}
+      <div className="py-4">
+        <h1 className="font-bold text-white text-center text-lg">Your panel</h1>
+      </div>
     </aside>
   );
 }
