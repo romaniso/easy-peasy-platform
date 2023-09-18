@@ -8,7 +8,7 @@ function Layout({ children }) {
     <div className="bg-gradient-to-r from-violet-50 via-fuchsia-100 to-indigo-200 min-h-full overflow-hidden flex flex-col">
       {pathname !== "/dashboard" && <Navbar />}
       <main className="grow shrink basis-auto">{children}</main>
-      <Footer />
+      {pathname !== "/dashboard" && <Footer />}
     </div>
   );
 }

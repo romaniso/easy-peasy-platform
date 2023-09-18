@@ -1,5 +1,10 @@
 import { NavLink } from "react-router-dom";
 import classNames from "classnames";
+import {
+  RiDashboardFill,
+  RiMarkPenFill,
+  RiArrowDropRightLine,
+} from "react-icons/ri";
 
 function Sidebar() {
   const links = [
@@ -25,10 +30,30 @@ function Sidebar() {
     );
   });
   return (
-    <aside className="bg-stone-800 h-screen sticky top-0 overflow-y-auto flex flex-col items-center">
+    <aside className="bg-stone-800 h-screen px-6">
       {/*{renderedLinks}*/}
-      <div className="py-4">
-        <h1 className="font-bold text-white text-center text-lg">Your panel</h1>
+      <div className="px-4 py-7 flex items-center justify-center border-b border-indigo-500/40">
+        <h1 className="font-bold text-indigo-200 leading-6 text-xl cursor-pointer">
+          Your panel
+        </h1>
+      </div>
+      <div className="flex items-center gap-4 p-5 border-b border-indigo-500/40">
+        <RiDashboardFill className="text-indigo-400 text-lg" />
+        <p className="text-sm text-indigo-400 leading-5 font-bold">Dashboard</p>
+      </div>
+      <div>
+        <p className="text-xs font-extrabold leading-4 text-indigo-200">
+          INTERFACE
+        </p>
+        <div className="flex items-center justify-between gap-3 cursor-pointer">
+          <div className="flex items-center gap-2">
+            <RiMarkPenFill className="text-indigo-400 text-lg" />
+            <p className="text-sm text-indigo-400 leading-5 font-bold">
+              Exercises
+            </p>
+          </div>
+          <RiArrowDropRightLine className="text-indigo-400 text-lg" />
+        </div>
       </div>
     </aside>
   );
