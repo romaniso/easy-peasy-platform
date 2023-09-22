@@ -1,6 +1,7 @@
 import userLogOut from "../auth/userLogOut";
 import { useNavigate } from "react-router-dom";
-import Button from "../components/Button";
+
+//import Button from "../components/Button";
 import Sidebar from "../components/Sidebar";
 
 function DashboardPage() {
@@ -14,17 +15,14 @@ function DashboardPage() {
       navigate("/");
     }
   };
-
   return (
-    <div className="min-h-screen flex">
-      <div className="basis-[12%]">
-        <Sidebar />
-      </div>
-      <div className="basis-[88%] h-full border">
+    <div className="flex">
+      <Sidebar />
+      <div className="p-7">
         <h1 className="font-extrabold text-6xl text-center">
           Welcome to Dashboard
         </h1>
-        <Button onClick={handleLogOut}>Log out</Button>
+        {/*<Button onClick={handleLogOut}>Log out</Button>*/}
       </div>
     </div>
   );
