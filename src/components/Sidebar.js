@@ -1,52 +1,59 @@
-//import { NavLink } from "react-router-dom";
-//import classNames from "classnames";
-//import {
-//  RiDashboardFill,
-//  RiMarkPenFill,
-//  RiArrowDropRightLine,
-//} from "react-icons/ri";
-
-import { useState } from "react";
+import Dropdown from "./Dropdown";
+import { useState, useRef } from "react";
 
 import {
   BsArrowLeftShort,
   BsBook,
   BsSearch,
   BsChevronDown,
+  BsListTask,
+  BsBoxArrowRight,
+  BsReverseLayoutTextWindowReverse,
+  BsCollectionPlay,
+  BsCalendar3,
+  BsGear,
+  BsPersonFill,
+  BsEnvelopeFill,
 } from "react-icons/bs";
 import { MdDashboard } from "react-icons/md";
 
 function Sidebar() {
-  const [opennedSidebar, setOpennedSidebar] = useState(true);
-  const [opennedSubmenu, setOpennedSubmenu] = useState(false);
+  const [isSidebarOpenned, setIsSidebarOpenned] = useState(true);
+  const [isSubmenuOpenned, setIsSubmenuOpenned] = useState(false);
+
+  const liEl = useRef();
 
   const menu = [
     {
+      title: "Dashboard",
+      icon: <BsReverseLayoutTextWindowReverse />,
+      path: "/dashboard",
+    },
+    {
       title: "Exercises",
+      icon: <BsListTask />,
       links: [
         { label: "Grammar", path: "exercises/grammar" },
         { label: "Reading", path: "exercises/reading" },
         { label: "Vocabulary", path: "exercises/vocabulary" },
         { label: "Listening", path: "exercises/listening" },
       ],
-    },
-    {
-      title: "Example",
-      link: "/example",
+      spacing: true,
     },
     {
       title: "Resources",
-      spacing: true,
+      icon: <BsCollectionPlay />,
       links: [
         { label: "Articles", path: "resources/articles" },
         { label: "Podcasts", path: "resources/podcasts" },
         { label: "Books", path: "resources/books" },
-        { label: "Exercises", path: "resources/exercises" },
+        { label: "Videos", path: "resources/videos" },
       ],
     },
 
     {
       title: "Tutoring",
+      icon: <BsCalendar3 />,
       links: [
         { label: "Find a tutor", path: "tutors" },
         { label: "Order a class", path: "online-class" },
@@ -55,107 +62,87 @@ function Sidebar() {
       ],
     },
     {
-      title: "Student",
-      links: [
-        { label: "Dashboard", path: "dashboard" },
-        { label: "Your progress", path: "progress" },
-        { label: "Buy learning hours", path: "learning-hours" },
-        { label: "FAQ", path: "docs/faq" },
-      ],
+      title: "Inbox",
+      icon: <BsEnvelopeFill />,
+      path: "/inbox",
     },
     {
-      title: "Example",
+      title: "Profile",
+      icon: <BsPersonFill />,
+      path: "/profile",
       spacing: true,
-      link: "/example",
     },
     {
-      title: "Example",
-      link: "/example",
+      title: "Settings",
+      icon: <BsGear />,
+      link: "/settings",
     },
     {
-      title: "Example",
-      link: "/example",
-    },
-    {
-      title: "Example",
-      link: "/example",
-    },
-    {
-      title: "Example",
-      link: "/example",
+      title: "Log out",
+      icon: <BsBoxArrowRight />,
+      link: "/",
     },
   ];
+  const renderedMenu = menu.map((item, index) => (
+    <>
+      <li
+        ref={liEl}
+        key={index}
+        onClick={() => setIsSubmenuOpenned(!isSubmenuOpenned)}
+        className={`text-gray-300 text-sm flex items-center gap-x-4 cursor-pointer p-2 hover:bg-indigo-900 rounded-md mt-2 duration-300 ${
+          item.spacing ? "mt-9" : "mt-2"
+        }`}
+      >
+        <span className="text-2xl block float-left">
+          {item.icon ? item.icon : <MdDashboard />}
+        </span>
+        <span
+          className={`text-base font-medium flex-1 ${
+            !isSidebarOpenned && "hidden"
+          }`}
+        >
+          {item.title}
+        </span>
+        {item.links && isSidebarOpenned && (
+          <BsChevronDown className={`${isSubmenuOpenned && "rotate-180"}`} />
+        )}
+      </li>
+      {item.links && isSubmenuOpenned && isSidebarOpenned && (
+        <ul>
+          {item.links.map((item, index) => (
+            <li
+              key={index}
+              className="text-gray-300 text-sm flex items-center gap-x-4 cursor-pointer p-2 px-5 hover:bg-indigo-900 rounded-md mt-2 duration-300"
+            >
+              {item.label}
+            </li>
+          ))}
+        </ul>
+      )}
+    </>
+  ));
 
-  //  const links = [
-  //    { label: "Login", path: "/login" },
-  //    { label: "Register", path: "/register" },
-  //    { label: "Dropdown", path: "/dropdown" },
-  //    { label: "Accordion", path: "/accordion" },
-  //    { label: "Buttons", path: "/buttons" },
-  //  ];
-  //  const linkClasses = classNames("text-blue-500 mb-4");
-  //  const renderedLinks = links.map(({ label, path }) => {
-  //    return (
-  //      <NavLink
-  //        to={path}
-  //        className={({ isActive }) =>
-  //          isActive
-  //            ? `font-bold border-l-4 border-blue-500 pl-2 ${linkClasses}`
-  //            : linkClasses
-  //        }
-  //      >
-  //        {label}
-  //      </NavLink>
-  //    );
-  //  });
   return (
-    // <aside className="bg-stone-800 h-screen px-6">
-    //   {/*{renderedLinks}*/}
-    //   <div className="px-4 py-7 flex items-center justify-center border-b border-indigo-500/40">
-    //     <h1 className="font-bold text-indigo-200 leading-6 text-xl cursor-pointer">
-    //       Your panel
-    //     </h1>
-    //   </div>
-    //   <div className="flex items-center gap-4 p-5 border-b border-indigo-500/40">
-    //     <RiDashboardFill className="text-indigo-400 text-lg" />
-    //     <p className="text-sm text-indigo-400 leading-5 font-bold">Dashboard</p>
-    //   </div>
-    //   <div>
-    //     <p className="text-xs font-extrabold leading-4 text-indigo-200">
-    //       INTERFACE
-    //     </p>
-    //     <div className="flex items-center justify-between gap-3 cursor-pointer">
-    //       <div className="flex items-center gap-2">
-    //         <RiMarkPenFill className="text-indigo-400 text-lg" />
-    //         <p className="text-sm text-indigo-400 leading-5 font-bold">
-    //           Exercises
-    //         </p>
-    //       </div>
-    //       <RiArrowDropRightLine className="text-indigo-400 text-lg" />
-    //     </div>
-    //   </div>
-    //  </aside>
-
     <aside
       className={`bg-stone-800 h-screen p-5 pt-8 ${
-        opennedSidebar ? "w-72" : "w-20"
+        isSidebarOpenned ? "w-72" : "w-20"
       } relative duration-300`}
     >
       <BsArrowLeftShort
         className={`bg-indigo-100 text-stone-800 text-3xl rounded-full absolute -right-3 top-9 border border-indigo-200 cursor-pointer ${
-          !opennedSidebar && "rotate-180"
+          !isSidebarOpenned && "rotate-180"
         }`}
-        onClick={() => setOpennedSidebar(!opennedSidebar)}
+        onClick={() => setIsSidebarOpenned(!isSidebarOpenned)}
       />
       <div className="inline-flex">
         <BsBook
           className={`bg-indigo-100 text-4xl rounded p-1 cursor-pointer block float-left mr-2 duration-1000 ${
-            opennedSidebar && "rotate-[360deg]"
+            isSidebarOpenned && "rotate-[360deg]"
           }`}
         />
         <h1
           className={`text-indigo-100 origin-left font-medium text-2xl duration-300 ${
-            !opennedSidebar && "scale-0"
+            !isSidebarOpenned && "scale-0"
           }`}
         >
           Easy-Peasy
@@ -164,60 +151,22 @@ function Sidebar() {
 
       <div
         className={`flex tems-center rounded-md bg-indigo-900 mt-6 px-4 ${
-          !opennedSidebar ? "px-2.5" : "px-4"
+          !isSidebarOpenned ? "px-2.5" : "px-4"
         } p-2`}
       >
         <BsSearch
           className={`text-indigo-100 text-lg block float-left cursor-pointer ${
-            opennedSidebar && "mr-2"
+            isSidebarOpenned && "mr-2"
           }`}
         />
         <input
           type={"search"}
           className={`text-base bg-transparent w-full text-white focus:outline-none ${
-            !opennedSidebar && "hidden"
+            !isSidebarOpenned && "hidden"
           }`}
         />
       </div>
-
-      <ul className="pt-2">
-        {menu.map((item, index) => (
-          <>
-            <li
-              key={index}
-              className={`text-gray-300 text-sm flex items-center gap-x-4 cursor-pointer p-2 hover:bg-indigo-900 rounded-md mt-2 duration-300 ${
-                item.spacing ? "mt-9" : "mt-2"
-              }`}
-            >
-              <span className="text-2xl block float-left">
-                {item.icon ? item.icon : <MdDashboard />}
-              </span>
-              <span
-                className={`text-base font-medium flex-1 ${
-                  !opennedSidebar && "hidden"
-                }`}
-              >
-                {item.title}
-              </span>
-              {item.links && opennedSidebar && (
-                <BsChevronDown
-                  className={`${opennedSubmenu && "rotate-180"}`}
-                  onClick={() => setOpennedSubmenu(!opennedSubmenu)}
-                />
-              )}
-            </li>
-            {item.links && opennedSubmenu && opennedSidebar && (
-              <ul>
-                {item.links.map((item, index) => (
-                  <li className="text-gray-300 text-sm flex items-center gap-x-4 cursor-pointer p-2 px-5 hover:bg-indigo-900 rounded-md mt-2 duration-300">
-                    {item.label}
-                  </li>
-                ))}
-              </ul>
-            )}
-          </>
-        ))}
-      </ul>
+      <ul className="pt-2">{renderedMenu}</ul>
     </aside>
   );
 }
