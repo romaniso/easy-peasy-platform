@@ -1,5 +1,5 @@
-import Dropdown from "./Dropdown";
-import { useState, useRef } from "react";
+import { useState } from "react";
+//TODO: Handle single collapse issue (maybe by using a separate Dropdown component), consider how to change content (NavLink, or state)
 
 import {
   BsArrowLeftShort,
@@ -20,8 +20,6 @@ import { MdDashboard } from "react-icons/md";
 function Sidebar() {
   const [isSidebarOpenned, setIsSidebarOpenned] = useState(true);
   const [isSubmenuOpenned, setIsSubmenuOpenned] = useState(false);
-
-  const liEl = useRef();
 
   const menu = [
     {
@@ -86,7 +84,6 @@ function Sidebar() {
   const renderedMenu = menu.map((item, index) => (
     <>
       <li
-        ref={liEl}
         key={index}
         onClick={() => setIsSubmenuOpenned(!isSubmenuOpenned)}
         className={`text-gray-300 text-sm flex items-center gap-x-4 cursor-pointer p-2 hover:bg-indigo-900 rounded-md mt-2 duration-300 ${
@@ -148,7 +145,6 @@ function Sidebar() {
           Easy-Peasy
         </h1>
       </div>
-
       <div
         className={`flex tems-center rounded-md bg-indigo-900 mt-6 px-4 ${
           !isSidebarOpenned ? "px-2.5" : "px-4"
