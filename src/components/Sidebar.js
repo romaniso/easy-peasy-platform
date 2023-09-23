@@ -19,7 +19,7 @@ import { MdDashboard } from "react-icons/md";
 
 function Sidebar() {
   const [isSidebarOpenned, setIsSidebarOpenned] = useState(true);
-  const [isSubmenuOpenned, setIsSubmenuOpenned] = useState(false);
+  const [isSubmenuOpenned, setIsSubmenuOpenned] = useState(null);
 
   const menu = [
     {
@@ -81,43 +81,53 @@ function Sidebar() {
       link: "/",
     },
   ];
-  const renderedMenu = menu.map((item, index) => (
-    <>
-      <li
-        key={index}
-        onClick={() => setIsSubmenuOpenned(!isSubmenuOpenned)}
-        className={`text-gray-300 text-sm flex items-center gap-x-4 cursor-pointer p-2 hover:bg-indigo-900 rounded-md mt-2 duration-300 ${
-          item.spacing ? "mt-9" : "mt-2"
-        }`}
-      >
-        <span className="text-2xl block float-left">
-          {item.icon ? item.icon : <MdDashboard />}
-        </span>
-        <span
-          className={`text-base font-medium flex-1 ${
-            !isSidebarOpenned && "hidden"
+
+  const handleExpand = (index) => {
+    if (index === isSubmenuOpenned) setIsSubmenuOpenned(null);
+    else {
+      setIsSubmenuOpenned(index);
+    }
+  };
+  const renderedMenu = menu.map((item, index) => {
+    const isExpanded = isSubmenuOpenned === index;
+    return (
+      <>
+        <li
+          key={index}
+          onClick={() => handleExpand(index)}
+          className={`text-gray-300 text-sm flex items-center gap-x-4 cursor-pointer p-2 hover:bg-indigo-900 rounded-md mt-2 duration-300 ${
+            item.spacing ? "mt-9" : "mt-2"
           }`}
         >
-          {item.title}
-        </span>
-        {item.links && isSidebarOpenned && (
-          <BsChevronDown className={`${isSubmenuOpenned && "rotate-180"}`} />
+          <span className="text-2xl block float-left">
+            {item.icon ? item.icon : <MdDashboard />}
+          </span>
+          <span
+            className={`text-base font-medium flex-1 ${
+              !isSidebarOpenned && "hidden"
+            }`}
+          >
+            {item.title}
+          </span>
+          {item.links && isSidebarOpenned && (
+            <BsChevronDown className={`${isExpanded && "rotate-180"}`} />
+          )}
+        </li>
+        {item.links && isExpanded && isSidebarOpenned && (
+          <ul>
+            {item.links.map((item, index) => (
+              <li
+                key={index}
+                className="text-gray-300 text-sm flex items-center gap-x-4 cursor-pointer p-2 px-5 hover:bg-indigo-900 rounded-md mt-2 duration-300"
+              >
+                {item.label}
+              </li>
+            ))}
+          </ul>
         )}
-      </li>
-      {item.links && isSubmenuOpenned && isSidebarOpenned && (
-        <ul>
-          {item.links.map((item, index) => (
-            <li
-              key={index}
-              className="text-gray-300 text-sm flex items-center gap-x-4 cursor-pointer p-2 px-5 hover:bg-indigo-900 rounded-md mt-2 duration-300"
-            >
-              {item.label}
-            </li>
-          ))}
-        </ul>
-      )}
-    </>
-  ));
+      </>
+    );
+  });
 
   return (
     <aside
