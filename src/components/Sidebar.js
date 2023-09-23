@@ -1,3 +1,6 @@
+import userLogOut from "../auth/userLogOut";
+import { useNavigate } from "react-router-dom";
+
 import { useState } from "react";
 //TODO: Handle single collapse issue (maybe by using a separate Dropdown component), consider how to change content (NavLink, or state)
 
@@ -20,6 +23,18 @@ import { MdDashboard } from "react-icons/md";
 function Sidebar() {
   const [isSidebarOpenned, setIsSidebarOpenned] = useState(true);
   const [isSubmenuOpenned, setIsSubmenuOpenned] = useState(null);
+
+  //Logout feature
+  const navigate = useNavigate();
+  const { error, logOut } = userLogOut();
+
+  const handleLogOut = async () => {
+    await logOut();
+
+    if (!error) {
+      navigate("/");
+    }
+  };
 
   const menu = [
     {
@@ -79,6 +94,7 @@ function Sidebar() {
       title: "Log out",
       icon: <BsBoxArrowRight />,
       link: "/",
+      event: handleLogOut,
     },
   ];
 
@@ -94,12 +110,12 @@ function Sidebar() {
       <>
         <li
           key={index}
-          onClick={() => handleExpand(index)}
-          className={`text-gray-300 text-sm flex items-center gap-x-4 cursor-pointer p-2 hover:bg-indigo-900 rounded-md mt-2 duration-300 ${
+          onClick={item.event || (() => handleExpand(index))}
+          className={`text-orange-100 text-sm flex items-center gap-x-4 cursor-pointer p-2 hover:bg-indigo-900 rounded-md mt-2 duration-300 ${
             item.spacing ? "mt-9" : "mt-2"
           }`}
         >
-          <span className="text-2xl block float-left">
+          <span className="text-2xl text-indigo-100 block float-left">
             {item.icon ? item.icon : <MdDashboard />}
           </span>
           <span
@@ -118,7 +134,7 @@ function Sidebar() {
             {item.links.map((item, index) => (
               <li
                 key={index}
-                className="text-gray-300 text-sm flex items-center gap-x-4 cursor-pointer p-2 px-5 hover:bg-indigo-900 rounded-md mt-2 duration-300"
+                className="text-orange-300 text-sm flex items-center gap-x-4 cursor-pointer p-2 px-5 hover:bg-indigo-900 rounded-md mt-2 duration-300"
               >
                 {item.label}
               </li>
@@ -133,7 +149,7 @@ function Sidebar() {
     <aside
       className={`bg-stone-800 h-screen p-5 pt-8 ${
         isSidebarOpenned ? "w-72" : "w-20"
-      } relative duration-300`}
+      } relative duration-300 shadow`}
     >
       <BsArrowLeftShort
         className={`bg-indigo-100 text-stone-800 text-3xl rounded-full absolute -right-3 top-9 border border-indigo-200 cursor-pointer ${
