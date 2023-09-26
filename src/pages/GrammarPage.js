@@ -1,6 +1,7 @@
 import Card from "../components/Card";
 import FutureTensesImg from "../assets/images/exercises/future-tenses.jpg";
 import UsedToImg from "../assets/images/exercises/used-to.jpg";
+//TODO: Single Exercise Page with Dynamic Content (https://chat.openai.com/share/0d762506-785b-47dd-8a47-a87fe2787e84)
 
 function GrammarPage() {
   return (
@@ -16,14 +17,14 @@ function GrammarPage() {
           }
           image={FutureTensesImg}
           buttonTxt={"Let's learn"}
-          link={"/grammar/exercises/future-tenses"}
+          link={"/grammar/future-tenses"}
         />
         <Card
           title={"Used to"}
           text={`Did you have some past habits? I used to smoke! Shame on me!`}
           image={UsedToImg}
           buttonTxt={"Let's learn"}
-          link={"/grammar/exercises/used-to"}
+          link={"/grammar/used-to"}
         />
       </section>
     </div>
