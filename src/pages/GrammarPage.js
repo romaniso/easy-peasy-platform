@@ -1,7 +1,6 @@
 import Card from "../components/Card";
 import FutureTensesImg from "../assets/images/exercises/future-tenses.jpg";
 import UsedToImg from "../assets/images/exercises/used-to.jpg";
-//TODO: Single Exercise Page with Dynamic Content (https://chat.openai.com/share/0d762506-785b-47dd-8a47-a87fe2787e84)
 
 function GrammarPage() {
   return (

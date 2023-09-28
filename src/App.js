@@ -6,6 +6,7 @@ import DashboardPage from "./pages/DashboardPage";
 import Layout from "./components/Layout";
 import PrivateRouteLayout from "./layouts/PrivateRouteLayout";
 import GrammarPage from "./pages/GrammarPage";
+import ExercisePage from "./pages/ExercisePage";
 
 function App() {
   return (
@@ -14,9 +15,10 @@ function App() {
         <Routes>
           {/* public pages */}
           <Route exact path="/" element={<HomePage />} />
+          <Route path="*" element={<ErrorPage />} />
           <Route path="/auth" element={<AuthenticationPage />} />
           <Route path="/grammar" element={<GrammarPage />} />
-          <Route path="*" element={<ErrorPage />} />
+          <Route path="/grammar/:topic" element={<ExercisePage />} />
 
           {/* private pages */}
           <Route element={<PrivateRouteLayout />}>
