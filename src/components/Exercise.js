@@ -1,5 +1,6 @@
 import React from "react";
 import Panel from "./Panel";
+import Button from "./Button";
 
 //TODO: https://chat.openai.com/share/4a17c246-5c30-413d-8921-8926f895dae3
 //TODO: solve same keys issue, maybe add id for each option/question
@@ -58,9 +59,17 @@ function Exercise({
         // Replace *** with the rendered options
         return (
           <>
-            <select key={index}>
+            <select
+              className="text-xl p-1 border rounded-md shadow-inner text-indigo-800 cursor-pointer outline-none"
+              key={index}
+            >
+              <option disabled selected value></option>
               {options.map((option, optionIndex) => (
-                <option data-correct={option.isCorrect} key={optionIndex}>
+                <option
+                  className="hover:bg-orange-200"
+                  data-correct={option.isCorrect}
+                  key={optionIndex}
+                >
                   {option.text}
                 </option>
               ))}
@@ -73,7 +82,11 @@ function Exercise({
         return <span key={index}>{part}</span>;
       }
     });
-    return <li key={index}>{renderedQuestion}</li>;
+    return (
+      <li className="text-indigo-900 text-xl mb-10 " key={index}>
+        {renderedQuestion}
+      </li>
+    );
   });
 
   return (
@@ -82,12 +95,20 @@ function Exercise({
       <p className="text-2xl font-bold text-indigo-400 mb-4">
         Task Description
       </p>
-      <p className="text-base text-indigo-300 bg-stone-700 shadow p-5 mb-4 rounded-lg">
+      <p className="text-base text-orange-500 bg-stone-50 shadow-inner p-5 mb-4 rounded-lg">
         {instruction}
       </p>
-      <section>
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+          console.log("Submit");
+        }}
+      >
         <ul>{renderedExercise}</ul>
-      </section>
+        <Button primary rounded className="w-1/5">
+          Check out
+        </Button>
+      </form>
     </Panel>
   );
 }
