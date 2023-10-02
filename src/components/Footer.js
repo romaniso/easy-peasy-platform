@@ -55,16 +55,16 @@ function Footer() {
     { icon: <FaTiktok />, path: "wwww.google.com" },
   ];
 
-  const renderedMenu = menu.map((category) => {
+  const renderedMenu = menu.map((category, index) => {
     return (
-      <section className="mb-4 tracking-wide" key={category.title}>
+      <section className="mb-4 tracking-wide" key={index}>
         <h4 className="text-white font-medium mb-1">{category.title}</h4>
         <ul
           className="text-white font-light text-sm opacity-75 leading-6"
-          key={category}
+          key={index}
         >
-          {category.links.map((link) => (
-            <li key={link.label}>
+          {category.links.map((link, index) => (
+            <li key={index}>
               <Link to={link.path} className="hover:text-orange-300">
                 {link.label}
               </Link>
@@ -75,11 +75,11 @@ function Footer() {
     );
   });
 
-  const renderedSocials = socials.map((social) => {
+  const renderedSocials = socials.map((social, index) => {
     return (
       <Link
         className="p-2 cursor-pointer inline-flex items-center rounded-full bg-stone-600 hover:bg-orange-400 mx-2 text-xl duration-300"
-        key={social.path}
+        key={index}
       >
         {social.icon}
       </Link>

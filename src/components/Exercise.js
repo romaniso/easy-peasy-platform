@@ -1,6 +1,9 @@
 import React from "react";
 import Panel from "./Panel";
 
+//TODO: https://chat.openai.com/share/4a17c246-5c30-413d-8921-8926f895dae3
+//TODO: solve same keys issue, maybe add id for each option/question
+
 function Exercise({
   instruction = "Choose the correct or most appropriate future forms to complete the sentences below.",
   title = "Will / be going to / present continuous for future",
@@ -49,21 +52,27 @@ function Exercise({
     },
   ],
 }) {
-  //  const renderQuestion = (question, select) => {
-  //    return question.replace("***", "_____");
-  //  };
-
   const renderedExercise = questions.map(({ question, options }, index) => {
-    const renderedOptions = options.map((option, index) => {
-      return (
-        <option data-correct={option.isCorrect} key={index}>
-          {option.text}
-        </option>
-      );
+    const renderedQuestion = question.split("***").map((part, partIndex) => {
+      if (partIndex === 1) {
+        // Replace *** with the rendered options
+        return (
+          <>
+            <select key={index}>
+              {options.map((option, optionIndex) => (
+                <option data-correct={option.isCorrect} key={optionIndex}>
+                  {option.text}
+                </option>
+              ))}
+            </select>
+            {part}
+          </>
+        );
+      } else {
+        // Keep the original text part
+        return <span key={index}>{part}</span>;
+      }
     });
-
-    const renderedQuestion = question.replace("***", renderedOptions);
-
     return <li key={index}>{renderedQuestion}</li>;
   });
 
