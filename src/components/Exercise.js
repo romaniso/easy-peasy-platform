@@ -1,9 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import Panel from "./Panel";
 import Button from "./Button";
-
-//TODO: https://chat.openai.com/share/4a17c246-5c30-413d-8921-8926f895dae3
-//TODO: solve same keys issue, maybe add id for each option/question
+//TODO: I need to consider descturturing it by creating ExerciseSet(component with different exercises), adding exerciseType prop, rerender it depending on a type of an exercise, create feedback logics and component
 
 function Exercise({
   instruction = "Choose the correct or most appropriate future forms to complete the sentences below.",
@@ -53,6 +51,11 @@ function Exercise({
     },
   ],
 }) {
+  // Initialize state to store selected values
+  const [selectedValues, setSelectedValues] = useState(
+    Array(questions.length).fill("")
+  ); // Initialize with empty values
+
   const renderedExercise = questions.map(({ question, options }, index) => {
     const renderedQuestion = question.split("***").map((part, partIndex) => {
       if (partIndex === 1) {
@@ -62,12 +65,15 @@ function Exercise({
             <select
               className="text-xl p-1 border rounded-md shadow-inner text-indigo-800 cursor-pointer outline-none"
               key={index}
+              onChange={(e) => handleSelectChange(index, e)}
+              value={selectedValues[index] || undefined} // Bind the value to the selected value in state
             >
               <option disabled selected value></option>
               {options.map((option, optionIndex) => (
                 <option
                   className="hover:bg-orange-200"
                   data-correct={option.isCorrect}
+                  value={option.text}
                   key={optionIndex}
                 >
                   {option.text}
@@ -89,6 +95,20 @@ function Exercise({
     );
   });
 
+  const handleSelectChange = (index, event) => {
+    const updatedValues = [...selectedValues];
+    updatedValues[index] = event.target.value;
+    setSelectedValues(updatedValues);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // Now you have the selected values in the selectedValues array.
+    // You can validate them based on the "isCorrect" property in the questions variable.
+    console.log("Selected Values:", selectedValues);
+    // Perform your validation logic here
+  };
+
   return (
     <Panel className="bg-white px-12 py-10">
       <h2 className="text-3xl font-bold text-indigo-800 mb-8">{title}</h2>
@@ -98,14 +118,9 @@ function Exercise({
       <p className="text-base text-orange-500 bg-stone-50 shadow-inner p-5 mb-4 rounded-lg">
         {instruction}
       </p>
-      <form
-        onSubmit={(e) => {
-          e.preventDefault();
-          console.log("Submit");
-        }}
-      >
+      <form onSubmit={handleSubmit}>
         <ul>{renderedExercise}</ul>
-        <Button primary rounded className="w-1/5">
+        <Button primary rounded className="w-1/5" type="submit">
           Check out
         </Button>
       </form>
