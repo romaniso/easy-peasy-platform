@@ -1,6 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Panel from "./Panel";
 import Button from "./Button";
+import { FaRegThumbsUp, FaRegThumbsDown } from "react-icons/fa";
+
 //TODO: I need to consider descturturing it by creating ExerciseSet(component with different exercises), adding exerciseType prop, rerender it depending on a type of an exercise, create feedback logics and component
 
 function Exercise({
@@ -27,8 +29,8 @@ function Exercise({
     {
       question: "I think it *** rain later, so don't forget your umbrella.",
       options: [
-        { text: "will", isCorrect: false },
-        { text: "is going to", isCorrect: true },
+        { text: "will", isCorrect: true },
+        { text: "is going to", isCorrect: false },
         { text: "is raining", isCorrect: false },
       ],
     },
@@ -55,10 +57,29 @@ function Exercise({
   const [selectedValues, setSelectedValues] = useState(
     Array(questions.length).fill("")
   ); // Initialize with empty values
+  const [userResults, setUserResults] = useState(null);
+
+  useEffect(() => {
+    // This code will run whenever userResults changes
+    console.log(userResults);
+  }, [userResults]);
 
   const renderedExercise = questions.map(({ question, options }, index) => {
+    let feedbackIcon = null;
+    if (userResults) {
+      if (userResults[index] === "Same")
+        feedbackIcon = (
+          <FaRegThumbsUp className="inline-block ml-2 text-green-500" />
+        );
+      else if (userResults[index] === "Different")
+        feedbackIcon = (
+          <FaRegThumbsDown className="inline-block ml-2  text-red-400" />
+        );
+    }
+
     const renderedQuestion = question.split("***").map((part, partIndex) => {
       if (partIndex === 1) {
+        //FIXME: try to replace *** with something generic, not hard-coded. Stll, I have to mark the place of splitting somehow in a string
         // Replace *** with the rendered options
         return (
           <>
@@ -81,6 +102,7 @@ function Exercise({
               ))}
             </select>
             {part}
+            {feedbackIcon}
           </>
         );
       } else {
@@ -101,12 +123,33 @@ function Exercise({
     setSelectedValues(updatedValues);
   };
 
+  const validateUsersAnswers = (usersAnswers) => {
+    //  Create a keysheet for thw following validation out of props object
+    const keySheet = questions.map((question) => {
+      for (const option of question.options) {
+        if (option.isCorrect) return option.text;
+      }
+    });
+
+    const result = [];
+
+    // Compare user's answers with keysheet
+    for (let i = 0; i < Math.max(keySheet.length, usersAnswers.length); i++) {
+      if (keySheet[i] === usersAnswers[i]) {
+        result.push("Same");
+      } else {
+        result.push("Different");
+      }
+    }
+
+    //Show feedback
+    setUserResults(result);
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Now you have the selected values in the selectedValues array.
-    // You can validate them based on the "isCorrect" property in the questions variable.
-    console.log("Selected Values:", selectedValues);
     // Perform your validation logic here
+    validateUsersAnswers(selectedValues);
   };
 
   return (
