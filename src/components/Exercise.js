@@ -137,8 +137,16 @@ function Exercise({
       return (
         <p className="text-xl bg-stone-50 shadow-inner p-5 mb-4 rounded-lg inline-block">
           Your score:{" "}
-          <span className="text-green-500 font-bold">{correctAnswers}</span>/
-          <span className="text-indigo-500 font-bold">{questionsNumber}</span>
+          <span
+            className={
+              correctAnswers
+                ? "text-green-500 font-bold"
+                : "text-red-500 font-bold"
+            }
+          >
+            {correctAnswers}
+          </span>
+          /<span className="text-indigo-500 font-bold">{questionsNumber}</span>
         </p>
       );
     }
