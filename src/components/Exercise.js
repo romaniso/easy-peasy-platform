@@ -58,11 +58,7 @@ function Exercise({
   );
   const [userResults, setUserResults] = useState(null);
 
-  useEffect(() => {
-    // if (userResults !== null) {
-    //   console.log(showFeedback(userResults));
-    // }
-  }, [userResults]);
+  useEffect(() => {}, [userResults]);
 
   const handleSelectChange = (index, event) => {
     const updatedValues = [...selectedValues];
@@ -76,6 +72,7 @@ function Exercise({
     const correctAnswers = results.filter((answer) => answer === "Same").length;
     const questionsNumber = questions.length;
 
+    //FIXME: Create a separate React component here:
     return (
       <p className="text-xl text-indigo-900 bg-stone-50 shadow-inner p-5 mb-4 rounded-lg inline-block">
         Your score:{" "}
@@ -155,6 +152,7 @@ function Exercise({
     return renderedQuestion;
   });
 
+  //FIXME: Maybe consider creating ExerciseHeading/Heading component with Title, Task Description, Instruction, accordingly consider creating ExerciseBody component with the rest
   return (
     <Panel className="bg-white px-12 py-10">
       <h2 className="text-3xl font-bold text-indigo-800 mb-8">{title}</h2>
