@@ -61,15 +61,15 @@ function Exercise({
 
   useEffect(() => {
     // This code will run whenever userResults changes
-    console.log(userResults);
   }, [userResults]);
 
   const renderedExercise = questions.map(({ question, options }, index) => {
+    //FIXME: too complex function. Try to break it dowm a bit. Separate feedback icons from questions, selects
     let feedbackIcon = null;
     if (userResults) {
       if (userResults[index] === "Same")
         feedbackIcon = (
-          <FaRegThumbsUp className="inline-block ml-2 text-green-500" />
+          <FaRegThumbsUp className="inline-block text-green-500 ml-2 500 500" />
         );
       else if (userResults[index] === "Different")
         feedbackIcon = (
@@ -123,6 +123,27 @@ function Exercise({
     setSelectedValues(updatedValues);
   };
 
+  const showFeedback = (results) => {
+    if (results) {
+      let correctAnswers = 0;
+      const questionsNumber = questions.length;
+
+      for (const answer of results) {
+        if (answer === "Same") {
+          correctAnswers++;
+        }
+      }
+
+      return (
+        <p className="text-xl bg-stone-50 shadow-inner p-5 mb-4 rounded-lg inline-block">
+          Your score:{" "}
+          <span className="text-green-500 font-bold">{correctAnswers}</span>/
+          <span className="text-indigo-500 font-bold">{questionsNumber}</span>
+        </p>
+      );
+    }
+  };
+
   const validateUsersAnswers = (usersAnswers) => {
     //  Create a keysheet for thw following validation out of props object
     const keySheet = questions.map((question) => {
@@ -161,6 +182,7 @@ function Exercise({
       <p className="text-base text-orange-500 bg-stone-50 shadow-inner p-5 mb-4 rounded-lg">
         {instruction}
       </p>
+      {userResults && <h3>{showFeedback(userResults)}</h3>}
       <form onSubmit={handleSubmit}>
         <ul>{renderedExercise}</ul>
         <Button primary rounded className="w-1/5" type="submit">
