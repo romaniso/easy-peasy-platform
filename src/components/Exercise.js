@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import ExerciseHeader from "./ExerciseHeader";
 import ExerciseBody from "./ExerciseBody";
-import Panel from "./Panel";
 import ExerciseFeedback from "./ExerciseFeedback";
 
 //TODO: I need to consider descturturing it by creating ExerciseSet(component with different exercises), adding exerciseType prop, rerender it depending on a type of an exercise, create feedback logics and component
@@ -17,40 +16,6 @@ function Exercise({
         { text: "will", isCorrect: false },
         { text: "am going to", isCorrect: true },
         { text: "am visiting", isCorrect: false },
-      ],
-    },
-    {
-      question:
-        "They have tickets for the concert. They *** attend it tonight.",
-      options: [
-        { text: "will", isCorrect: false },
-        { text: "are going to", isCorrect: true },
-        { text: "are attending", isCorrect: false },
-      ],
-    },
-    {
-      question: "I think it *** rain later, so don't forget your umbrella.",
-      options: [
-        { text: "will", isCorrect: true },
-        { text: "is going to", isCorrect: false },
-        { text: "is raining", isCorrect: false },
-      ],
-    },
-    {
-      question: "She *** fly to Paris next week for a business meeting.",
-      options: [
-        { text: "will", isCorrect: false },
-        { text: "is going to", isCorrect: true },
-        { text: "is flying", isCorrect: false },
-      ],
-    },
-    {
-      question:
-        "We *** have a picnic at the park on Saturday if the weather is nice.",
-      options: [
-        { text: "will", isCorrect: false },
-        { text: "are going to", isCorrect: true },
-        { text: "are having", isCorrect: false },
       ],
     },
   ],
@@ -80,7 +45,7 @@ function Exercise({
   };
 
   return (
-    <Panel className="bg-white px-12 py-10">
+    <section>
       <ExerciseHeader title={title} instruction={instruction} />
       <ExerciseFeedback
         results={userResults}
@@ -94,7 +59,7 @@ function Exercise({
         selections={userSelections}
         onSelect={setUserSelections}
       />
-    </Panel>
+    </section>
   );
 }
 export default Exercise;
