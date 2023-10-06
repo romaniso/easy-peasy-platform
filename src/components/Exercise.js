@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from "react";
 import ExerciseHeader from "./ExerciseHeader";
+import ExerciseBody from "./ExerciseBody";
 import Panel from "./Panel";
 import Button from "./Button";
-import { FaRegThumbsUp, FaRegThumbsDown } from "react-icons/fa";
 
 //TODO: I need to consider descturturing it by creating ExerciseSet(component with different exercises), adding exerciseType prop, rerender it depending on a type of an exercise, create feedback logics and component
 
 function Exercise({
   instruction = "Choose the correct or most appropriate future forms to complete the sentences below.",
   title = "Will / be going to / present continuous for future",
+  type = "dropdown",
   questions = [
     {
       question: "I *** visit my grandmother tomorrow.",
@@ -58,14 +59,7 @@ function Exercise({
     Array(questions.length).fill("")
   );
   const [userResults, setUserResults] = useState(null);
-
   useEffect(() => {}, [userResults]);
-
-  const handleSelectChange = (index, event) => {
-    const updatedValues = [...selectedValues];
-    updatedValues[index] = event.target.value;
-    setSelectedValues(updatedValues);
-  };
 
   const showFeedback = (results) => {
     if (!results) return null;
@@ -108,62 +102,18 @@ function Exercise({
     validateUsersAnswers(selectedValues);
   };
 
-  const renderedExercise = questions.map(({ question, options }, index) => {
-    const feedbackIcon =
-      userResults &&
-      (userResults[index] === "Same" ? (
-        <FaRegThumbsUp className="inline-block text-green-500 ml-2" />
-      ) : (
-        <FaRegThumbsDown className="inline-block ml-2 text-red-400" />
-      ));
-
-    const renderedQuestion = (
-      <li className="text-indigo-900 text-xl mb-10" key={index}>
-        {question.split("***").map((part, partIndex) => {
-          return partIndex === 1 ? (
-            <>
-              <select
-                className="text-xl p-1 border rounded-md shadow-inner text-indigo-800 cursor-pointer outline-none"
-                key={index}
-                onChange={(e) => handleSelectChange(index, e)}
-                value={selectedValues[index] || ""}
-              >
-                <option disabled value=""></option>
-                {options.map((option, optionIndex) => (
-                  <option
-                    className="hover:bg-orange-200"
-                    data-correct={option.isCorrect}
-                    value={option.text}
-                    key={optionIndex}
-                  >
-                    {option.text}
-                  </option>
-                ))}
-              </select>
-              {part}
-              {feedbackIcon}
-            </>
-          ) : (
-            <span key={index}>{part}</span>
-          );
-        })}
-      </li>
-    );
-
-    return renderedQuestion;
-  });
-
-  //FIXME: Maybe consider creating ExerciseHeading/Heading component with Title, Task Description, Instruction, accordingly consider creating ExerciseBody component with the rest
   return (
     <Panel className="bg-white px-12 py-10">
       <ExerciseHeader title={title} instruction={instruction} />
       {userResults && showFeedback(userResults)}
-      <form onSubmit={handleSubmit}>
-        <ul>{renderedExercise}</ul>
-        <Button primary rounded className="w-1/5" type="submit">
-          Check out
-        </Button>
-      </form>
+      <ExerciseBody
+        onSubmit={handleSubmit}
+        exerciseType={type}
+        questions={questions}
+        results={userResults}
+        selections={selectedValues}
+        onSelect={setSelectedValues}
+      />
     </Panel>
   );
 }
