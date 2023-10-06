@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import ExerciseHeader from "./ExerciseHeader";
 import Panel from "./Panel";
 import Button from "./Button";
 import { FaRegThumbsUp, FaRegThumbsDown } from "react-icons/fa";
@@ -155,13 +156,7 @@ function Exercise({
   //FIXME: Maybe consider creating ExerciseHeading/Heading component with Title, Task Description, Instruction, accordingly consider creating ExerciseBody component with the rest
   return (
     <Panel className="bg-white px-12 py-10">
-      <h2 className="text-3xl font-bold text-indigo-800 mb-8">{title}</h2>
-      <p className="text-2xl font-bold text-indigo-400 mb-4">
-        Task Description
-      </p>
-      <p className="text-base text-orange-500 bg-stone-50 shadow-inner p-5 mb-4 rounded-lg">
-        {instruction}
-      </p>
+      <ExerciseHeader title={title} instruction={instruction} />
       {userResults && showFeedback(userResults)}
       <form onSubmit={handleSubmit}>
         <ul>{renderedExercise}</ul>
