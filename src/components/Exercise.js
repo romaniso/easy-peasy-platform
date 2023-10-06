@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import ExerciseHeader from "./ExerciseHeader";
 import ExerciseBody from "./ExerciseBody";
 import Panel from "./Panel";
-import Button from "./Button";
 
 //TODO: I need to consider descturturing it by creating ExerciseSet(component with different exercises), adding exerciseType prop, rerender it depending on a type of an exercise, create feedback logics and component
 
@@ -55,7 +54,7 @@ function Exercise({
     },
   ],
 }) {
-  const [selectedValues, setSelectedValues] = useState(
+  const [userSelections, setUserSelections] = useState(
     Array(questions.length).fill("")
   );
   const [userResults, setUserResults] = useState(null);
@@ -99,7 +98,7 @@ function Exercise({
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    validateUsersAnswers(selectedValues);
+    validateUsersAnswers(userSelections);
   };
 
   return (
@@ -111,8 +110,8 @@ function Exercise({
         exerciseType={type}
         questions={questions}
         results={userResults}
-        selections={selectedValues}
-        onSelect={setSelectedValues}
+        selections={userSelections}
+        onSelect={setUserSelections}
       />
     </Panel>
   );
