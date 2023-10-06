@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import ExerciseHeader from "./ExerciseHeader";
 import ExerciseBody from "./ExerciseBody";
 import Panel from "./Panel";
+import ExerciseFeedback from "./ExerciseFeedback";
 
 //TODO: I need to consider descturturing it by creating ExerciseSet(component with different exercises), adding exerciseType prop, rerender it depending on a type of an exercise, create feedback logics and component
 
@@ -60,30 +61,7 @@ function Exercise({
   const [userResults, setUserResults] = useState(null);
   useEffect(() => {}, [userResults]);
 
-  const showFeedback = (results) => {
-    if (!results) return null;
-
-    const correctAnswers = results.filter((answer) => answer === "Same").length;
-    const questionsNumber = questions.length;
-
-    //FIXME: Create a separate React component here:
-    return (
-      <p className="text-xl text-indigo-900 bg-stone-50 shadow-inner p-5 mb-4 rounded-lg inline-block">
-        Your score:{" "}
-        <span
-          className={
-            correctAnswers
-              ? "text-green-500 font-bold"
-              : "text-red-500 font-bold"
-          }
-        >
-          {correctAnswers}
-        </span>
-        /<span className="text-indigo-500 font-bold">{questionsNumber}</span>
-      </p>
-    );
-  };
-
+  //TODO: It may be refactored as a hook
   const validateUsersAnswers = (usersAnswers) => {
     const keySheet = questions.map((question) => {
       return question.options.find((option) => option.isCorrect).text;
@@ -104,7 +82,10 @@ function Exercise({
   return (
     <Panel className="bg-white px-12 py-10">
       <ExerciseHeader title={title} instruction={instruction} />
-      {userResults && showFeedback(userResults)}
+      <ExerciseFeedback
+        results={userResults}
+        questionsNumber={questions.length}
+      />
       <ExerciseBody
         onSubmit={handleSubmit}
         exerciseType={type}
