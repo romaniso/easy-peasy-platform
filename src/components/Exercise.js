@@ -45,7 +45,7 @@ function Exercise({
   };
 
   return (
-    <section>
+    <section className="px-12 py-10 flex-auto">
       <ExerciseHeader title={title} instruction={instruction} />
       <ExerciseFeedback
         results={userResults}

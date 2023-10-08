@@ -25,7 +25,7 @@ function ExerciseBody({
       ));
 
     const renderedQuestion = (
-      <li className="text-indigo-900 text-xl mb-10" key={index}>
+      <li className="text-indigo-900 text-xl mb-8" key={index}>
         {question.split("***").map((part, partIndex) => {
           return partIndex === 1 ? (
             <>

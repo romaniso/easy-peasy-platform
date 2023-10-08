@@ -2,7 +2,7 @@ import { useParams } from "react-router-dom";
 import Exercise from "../components/Exercise";
 import Cheetsheet from "../components/Cheetsheet";
 import Panel from "../components/Panel";
-//TODO: Here I will probably implement API request for data base where I get all content for exercises, instructions, etc based on path of URL and then send it to the Exercise component. Maybe I will create ExerciseSet component as well
+//TODO: Here I will probably implement API request for data base where I get all content for cheetsheet md, exercises, instructions, etc based on path of URL and then send it to the Exercise component. Maybe I will create ExerciseSet component as well
 
 function ExercisePage() {
   const { topic } = useParams();
@@ -58,20 +58,33 @@ function ExercisePage() {
     ],
   };
   const { instruction, title, type, questions } = data;
-
+  const cheetsheet = {
+    topic: "Future Tenses",
+    level: "B1",
+    content: `
+      <article>
+         <h3>Will / Be going to / Present Continuous for future</h3>
+         <p>What tenses should I use to talk about future? Future simple or be going to or, maybe, present continuous will be enough? All! But it depends what you wanna say! Let break it down and see the difference.</p>
+      </article>
+      `,
+  };
   return (
     <div className="my-24 container mx-auto px-4">
       <h1 className="text-6xl text-center font-bold text-orange-500 drop-shadow mb-8">
         {topic}
       </h1>
-      <Panel className="bg-white px-12 py-10 flex">
+      <Panel className="bg-white flex h-screen">
         <Exercise
           title={title}
           type={type}
           instruction={instruction}
           questions={questions}
         />
-        <Cheetsheet />
+        <Cheetsheet
+          topic={cheetsheet.topic}
+          level={cheetsheet.level}
+          content={cheetsheet.content}
+        />
       </Panel>
     </div>
   );
