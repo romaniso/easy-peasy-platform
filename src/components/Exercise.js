@@ -6,6 +6,7 @@ import ExerciseFeedback from "./ExerciseFeedback";
 //TODO: I need to consider descturturing it by creating ExerciseSet(component with different exercises), adding exerciseType prop, rerender it depending on a type of an exercise, create feedback logics and component
 
 function Exercise({
+  active = false,
   instruction = "Choose the correct or most appropriate future forms to complete the sentences below.",
   title = "Will / be going to / present continuous for future",
   type = "dropdown",
@@ -26,7 +27,7 @@ function Exercise({
   const [userResults, setUserResults] = useState(null);
   useEffect(() => {}, [userResults]);
 
-  //TODO: It may be refactored as a hook
+  //TODO: It may be refactored as a hook, show info when a field is empty before submitting
   const validateUsersAnswers = (usersAnswers) => {
     const keySheet = questions.map((question) => {
       return question.options.find((option) => option.isCorrect).text;
@@ -45,7 +46,7 @@ function Exercise({
   };
 
   return (
-    <section className="px-12 py-10 flex-auto">
+    <section className={active ? "px-12 py-10" : "hidden"}>
       <ExerciseHeader title={title} instruction={instruction} />
       <ExerciseFeedback
         results={userResults}
