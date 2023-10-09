@@ -10,6 +10,7 @@ function ExerciseSet({ data }) {
       const exerciseNumber = index + 1;
       return (
         <Exercise
+          key={exerciseNumber}
           active={activeExercise === exerciseNumber ? true : false}
           title={title}
           type={type}

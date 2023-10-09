@@ -3,7 +3,7 @@ import ExerciseHeader from "./ExerciseHeader";
 import ExerciseBody from "./ExerciseBody";
 import ExerciseFeedback from "./ExerciseFeedback";
 
-//TODO: I need to consider descturturing it by creating ExerciseSet(component with different exercises), adding exerciseType prop, rerender it depending on a type of an exercise, create feedback logics and component
+//TODO: Implement Conditional Rendering based on a type prop
 
 function Exercise({
   active = false,

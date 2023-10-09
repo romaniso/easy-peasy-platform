@@ -1,5 +1,3 @@
-import { useState } from "react";
-
 function Tabs({ exercises, activeExercise, setSelection }) {
   const handleTab = (tab) => {
     setSelection(tab);
