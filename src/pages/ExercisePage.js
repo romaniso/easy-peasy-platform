@@ -119,7 +119,7 @@ function ExercisePage() {
     //   questions: [
     //     {
     //       question: "I *** visit my grandmother tomorrow.",
-    //       key: "am going to",
+    //       isCorrect: "am going to",
     //     },
     //   ],
     // },

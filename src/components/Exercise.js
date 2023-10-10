@@ -29,9 +29,19 @@ function Exercise({
 
   //TODO: It may be refactored as a hook, show info when a field is empty before submitting
   const validateUsersAnswers = (usersAnswers) => {
-    const keySheet = questions.map((question) => {
-      return question.options.find((option) => option.isCorrect).text;
-    });
+    let keySheet;
+    switch (type) {
+      case "dropdown":
+        keySheet = questions.map(
+          (question) => question.options.find((option) => option.isCorrect).text
+        );
+        break;
+      case "fill-in":
+        keySheet = questions.map((question) => question.isCorrect);
+        break;
+      default:
+        throw new Error("There is no such a exercise type");
+    }
 
     const result = usersAnswers.map((answer, index) => {
       return answer === keySheet[index] ? "Same" : "Different";
