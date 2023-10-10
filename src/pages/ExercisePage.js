@@ -60,69 +60,36 @@ function ExercisePage() {
         },
       ],
     },
+    // FIll-IN
     {
       instruction:
-        "Choose the correct or most appropriate future forms to complete the sentences below.",
-      title: "2 Will / be going to / present continuous for future",
-      type: "dropdown",
+        "Fill in the gaps with a correct or most appropriate future forms using a word in prompts to complete the sentences below.",
+      title: "Will / be going to / present continuous for future",
+      type: "fill-in",
       questions: [
         {
-          question: "I *** visit my grandmother tomorrow.",
-          options: [
-            { text: "will", isCorrect: false },
-            { text: "am going to", isCorrect: true },
-            { text: "am visiting", isCorrect: false },
-          ],
+          question: "I *** my grandmother tomorrow. (visit)",
+          isCorrect: "am going to visit",
+        },
+        {
+          question: "This year I *** to Italy (go).",
+          isCorrect: "am going to go",
+        },
+        {
+          question: "Maybe we *** a new car next year. (buy)",
+          isCorrect: "will buy",
+        },
+        {
+          question: "I think current Presindent *** reelected once again. (be)",
+          isCorrect: "will be",
         },
         {
           question:
-            "They have tickets for the concert. They *** attend it tonight.",
-          options: [
-            { text: "will", isCorrect: false },
-            { text: "are going to", isCorrect: true },
-            { text: "are attending", isCorrect: false },
-          ],
-        },
-        {
-          question: "I think it *** rain later, so don't forget your umbrella.",
-          options: [
-            { text: "will", isCorrect: true },
-            { text: "is going to", isCorrect: false },
-            { text: "is raining", isCorrect: false },
-          ],
-        },
-        {
-          question: "She *** fly to Paris next week for a business meeting.",
-          options: [
-            { text: "will", isCorrect: false },
-            { text: "is going to", isCorrect: true },
-            { text: "is flying", isCorrect: false },
-          ],
-        },
-        {
-          question:
-            "We *** have a picnic at the park on Saturday if the weather is nice.",
-          options: [
-            { text: "will", isCorrect: false },
-            { text: "are going to", isCorrect: true },
-            { text: "are having", isCorrect: false },
-          ],
+            "Tomorrow morning John *** to Madrid for a business trip. (fly)",
+          isCorrect: "is flying",
         },
       ],
     },
-    // FIll-IN
-    // {
-    //   instruction:
-    //     "Fill in the gaps with a correct or most appropriate future forms to complete the sentences below.",
-    //   title: "Will / be going to / present continuous for future",
-    //   type: "fill-in",
-    //   questions: [
-    //     {
-    //       question: "I *** visit my grandmother tomorrow.",
-    //       isCorrect: "am going to",
-    //     },
-    //   ],
-    // },
   ];
   const cheetsheet = {
     topic: "Future Tenses",

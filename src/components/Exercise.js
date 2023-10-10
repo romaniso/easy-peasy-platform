@@ -29,6 +29,18 @@ function Exercise({
 
   //TODO: It may be refactored as a hook, show info when a field is empty before submitting
   const validateUsersAnswers = (usersAnswers) => {
+    // Check if usersAnswers is an array with a map method
+    if (
+      !Array.isArray(usersAnswers) ||
+      typeof usersAnswers.map !== "function"
+    ) {
+      // Handle the case where usersAnswers is not an array
+      console.error("usersAnswers is not an array");
+      console.log("userAnswers:", usersAnswers);
+
+      return;
+    }
+
     let keySheet;
     switch (type) {
       case "dropdown":
@@ -44,7 +56,9 @@ function Exercise({
     }
 
     const result = usersAnswers.map((answer, index) => {
-      return answer === keySheet[index] ? "Same" : "Different";
+      return answer.toLowerCase() === keySheet[index].toLowerCase()
+        ? "Same"
+        : "Different";
     });
 
     setUserResults(result);
