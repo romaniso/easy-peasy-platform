@@ -1,8 +1,10 @@
 import { useState } from "react";
+import useTop from "../hooks/useTop";
 import Login from "../components/Login";
 import Signup from "../components/Signup";
 
 function AuthenticationPage() {
+  useTop();
   const [toggle, setToggle] = useState(true);
 
   const handleToggle = () => {

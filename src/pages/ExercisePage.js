@@ -1,3 +1,4 @@
+import useTop from "../hooks/useTop";
 import { useParams } from "react-router-dom";
 import Panel from "../components/Panel";
 import ExerciseSet from "../components/ExerciseSet";
@@ -5,6 +6,7 @@ import Cheetsheet from "../components/Cheetsheet";
 //TODO: Here I will probably implement API request for data base where I get all content for cheetsheet md, exercises, instructions, etc based on path of URL and then send it to the Exercise component. Maybe I will create ExerciseSet component as well
 
 function ExercisePage() {
+  useTop();
   const { topic } = useParams();
   //TODO: to be fetched from API/server
   const data = [

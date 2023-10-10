@@ -1,6 +1,8 @@
+import useTop from "../hooks/useTop";
 import Sidebar from "../components/Sidebar";
 
 function DashboardPage() {
+  useTop();
   return (
     <div className="flex">
       <Sidebar />

@@ -1,8 +1,10 @@
+import useTop from "../hooks/useTop";
 import Card from "../components/Card";
 import FutureTensesImg from "../assets/images/exercises/future-tenses.jpg";
 import UsedToImg from "../assets/images/exercises/used-to.jpg";
 
 function GrammarPage() {
+  useTop();
   return (
     <div className="my-24 container mx-auto px-4">
       <h1 className="text-6xl text-center font-bold text-orange-500 drop-shadow mb-8">
