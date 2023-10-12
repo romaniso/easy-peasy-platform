@@ -1,4 +1,3 @@
-// TODO: This component will render an array of exercises. There will be a tab section at the top where depending on a selection, it will render a specific type of exercise
 import { useState } from "react";
 import Exercise from "./Exercise";
 import Tabs from "./Tabs";

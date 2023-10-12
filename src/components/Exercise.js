@@ -28,6 +28,7 @@ function Exercise({
   useEffect(() => {}, [userResults]);
 
   //TODO: It may be refactored as a hook, show info when a field is empty before submitting
+  //FIXME: Refactor is so a user may input two possible values. Refactor is also required in data, e.g isCorrect not a string but array of two possible options
   const validateUsersAnswers = (usersAnswers) => {
     // Check if usersAnswers is an array with a map method
     if (
@@ -36,8 +37,6 @@ function Exercise({
     ) {
       // Handle the case where usersAnswers is not an array
       console.error("usersAnswers is not an array");
-      console.log("userAnswers:", usersAnswers);
-
       return;
     }
 

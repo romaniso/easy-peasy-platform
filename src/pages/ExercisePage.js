@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import Panel from "../components/Panel";
 import ExerciseSet from "../components/ExerciseSet";
 import Cheetsheet from "../components/Cheetsheet";
-//TODO: Here I will probably implement API request for data base where I get all content for cheetsheet md, exercises, instructions, etc based on path of URL and then send it to the Exercise component. Maybe I will create ExerciseSet component as well
+//TODO: Here I will probably implement API request for data base where I get all content for cheetsheet md, exercises, instructions, etc based on path of URL and then send it to the Exercise component.
 
 function ExercisePage() {
   useTop();
@@ -90,6 +90,35 @@ function ExercisePage() {
         },
       ],
     },
+    // DRAG-&-DROP
+    {
+      instruction:
+        "Drag an option of future tense and drop it into a fitting sentence to complete it.",
+      title: "Will / be going to / present continuous for future",
+      type: "drag-&-drop",
+      questions: [
+        {
+          question: "I *** my grandmother tomorrow.",
+          isCorrect: "am going to visit",
+        },
+        {
+          question: "This year I *** to Italy.",
+          isCorrect: "am going to go",
+        },
+        {
+          question: "Maybe we *** a new car next year.",
+          isCorrect: "will buy",
+        },
+        {
+          question: "I think current Presindent *** reelected once again.",
+          isCorrect: "will be",
+        },
+        {
+          question: "Tomorrow morning John *** to Madrid for a business trip.",
+          isCorrect: "is flying",
+        },
+      ],
+    },
   ];
   const cheetsheet = {
     topic: "Future Tenses",
@@ -162,7 +191,7 @@ function ExercisePage() {
       <h1 className="text-6xl text-center font-bold text-orange-500 drop-shadow mb-8">
         {topic}
       </h1>
-      <Panel className="bg-white flex h-screen !p-0">
+      <Panel className="bg-white flex h-[850px] !p-0">
         <ExerciseSet data={data} />
         <Cheetsheet
           topic={cheetsheet.topic}
