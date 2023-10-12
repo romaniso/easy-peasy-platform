@@ -1,4 +1,5 @@
 import Button from "./Button";
+import ExerciseDraggable from "./ExerciseDraggable";
 import { FaRegThumbsUp, FaRegThumbsDown } from "react-icons/fa";
 
 function ExerciseBody({
@@ -17,6 +18,8 @@ function ExerciseBody({
   };
 
   let renderedExercise;
+
+  //TODO: It will be better to create separate components and render them depending on a exercise type: Maybe as a solution I will remove ExerciseBody and just replace it with various exerice type components
 
   switch (exerciseType) {
     case "dropdown":
@@ -120,18 +123,12 @@ function ExerciseBody({
       );
       break;
     case "drag-&-drop":
-      const drops = questions.map((question, index) => {
-        return <div>{question.question}</div>;
-      });
-      const drags = questions.map((question, index) => {
-        return <div>{question.isCorrect}</div>;
-      });
-
       renderedExercise = (
-        <section className="flex">
-          <div>{drops}</div>
-          <div>{drags}</div>
-        </section>
+        <ExerciseDraggable
+          questions={questions}
+          onSelect={onSelect}
+          selections={selections}
+        />
       );
       break;
     default:
