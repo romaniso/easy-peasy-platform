@@ -51,7 +51,7 @@ function Exercise({
         keySheet = questions.map((question) => question.isCorrect);
         break;
       default:
-        throw new Error("There is no such a exercise type");
+        throw new Error("There is no such an exercise type");
     }
 
     const result = usersAnswers.map((answer, index) => {

@@ -1,27 +1,23 @@
-import { useState, useEffect } from "react";
-import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
+import { useState } from "react";
+import { MdDragIndicator } from "react-icons/md";
+import { DndContext } from "@dnd-kit/core";
+
+import Draggable from "./Draggable";
+import Droppable from "./Droppable";
 
 function ExerciseDraggable({ questions, onSelect, selections }) {
-  const result = {
-    draggableId: "0",
-    type: "TYPE",
-    reason: "DROP",
-    source: {
-      droppableId: "droppableID",
-      index: 0,
-    },
-    destination: null,
-  };
+  const [parent, setParent] = useState(null);
+  let draggableMarkup = <Draggable>OK</Draggable>;
 
-  const handleOnDragEnd = (result) => {
-    const { destination, source, draggableId } = result;
-
-    if (!destination) return;
-    if (
-      destination.droppableId === source.droppableId &&
-      destination.index === source.index
-    )
-      return;
+  const handleDragEnd = (event) => {
+    const { over, active } = event;
+    if (over) {
+      // Set the parent state to indicate the item has been dropped
+      setParent(active.id);
+    } else {
+      // If the item wasn't dropped over a droppable, reset the parent state
+      setParent(null);
+    }
   };
 
   //Droppable
@@ -29,7 +25,9 @@ function ExerciseDraggable({ questions, onSelect, selections }) {
     const renderedQuestion = question.split("***").map((part, partIndex) => {
       return partIndex === 1 ? (
         <>
-          <span className="border rounded-md w-[150px] inline-block h-[30px]"></span>
+          <Droppable key={index} id={index + ""}>
+            {parent ? draggableMarkup : "Drop here"}
+          </Droppable>
           <span>{part}</span>
         </>
       ) : (
@@ -47,44 +45,28 @@ function ExerciseDraggable({ questions, onSelect, selections }) {
   });
   //Draggable
   const drags = questions.map((question, index) => (
-    <Draggable
-      key={index}
-      draggableId={index.toString()} // Each Draggable should have a unique draggableId
-      index={index}
-    >
-      {(provided) => (
-        <div
-          className="border py-1 px-2 text-center rounded-md text-indigo-900 text-lg shadow backdrop-blur"
-          ref={provided.innerRef}
-          {...provided.draggableProps}
-          {...provided.dragHandleProps}
-        >
-          {question.isCorrect}
-        </div>
-      )}
+    <Draggable id={index + ""}>
+      <div
+        key={index}
+        className="border py-1 px-2 min-w-[180px] text-center rounded-md text-indigo-900 text-base shadow backdrop-blur flex justify-between items-center"
+      >
+        <span>{question.isCorrect}</span>
+
+        <MdDragIndicator />
+      </div>
     </Draggable>
   ));
 
   return (
-    <DragDropContext onDragEnd={handleOnDragEnd}>
-      <section className="flex justify-between">
+    <DndContext onDragEnd={handleDragEnd}>
+      <section className="flex justify-between mb-8">
+        {parent === null ? draggableMarkup : null}
         {/* container od drops */}
         <div>{drops}</div>
-        {/* container od drags */}
-        <Droppable droppableId="droppableID">
-          {(provided) => (
-            <div
-              className="flex flex-col justify-center gap-2"
-              ref={provided.innerRef}
-              {...provided.droppableProps}
-            >
-              {drags}
-              {provided.placeholder}
-            </div>
-          )}
-        </Droppable>
+        {/*container od drags*/}
+        <div className="flex flex-col justify-center gap-3">{drags}</div>
       </section>
-    </DragDropContext>
+    </DndContext>
   );
 }
 
