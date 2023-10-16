@@ -15,6 +15,8 @@ function Droppable({ children, id, isFilled }) {
       className={
         isOver
           ? "border bg-orange-200 shadow-inner rounded-md w-[170px] inline-block h-[30px] transition-colors"
+          : isFilled
+          ? "border bg-white shadow text-base pl-2 rounded-md w-[170px] inline-block h-[30px] transition-colors"
           : "border bg-stone-200 shadow-inner rounded-md w-[170px] inline-block h-[30px] transition-colors"
       }
     >

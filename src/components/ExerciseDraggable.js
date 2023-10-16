@@ -5,6 +5,8 @@ import Draggable from "./Draggable";
 import Droppable from "./Droppable";
 import { DndContext } from "@dnd-kit/core";
 
+//TODO: This component definitely requires a lot of refactoring. First, it needs to be validated and a feedback should be given. Next, a user can currently dnd in one way but cannot drag a draggable component backwards.
+
 function ExerciseDraggable({
   questions,
   draggables,
