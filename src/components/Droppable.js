@@ -1,11 +1,14 @@
 import { useDroppable } from "@dnd-kit/core";
 
-function Droppable({ children, id, parent }) {
+function Droppable({ children, id, isFilled }) {
   const { isOver, setNodeRef } = useDroppable({
-    id: id + "",
+    id: id.toString(),
+    data: {
+      accepts: id.toString(),
+      type: "droppable",
+    },
   });
 
-  //  const isParent = parent === id;
   return (
     <div
       ref={setNodeRef}
@@ -15,7 +18,7 @@ function Droppable({ children, id, parent }) {
           : "border bg-stone-200 shadow-inner rounded-md w-[170px] inline-block h-[30px] transition-colors"
       }
     >
-      {children}
+      {isFilled ? isFilled : children}
     </div>
   );
 }

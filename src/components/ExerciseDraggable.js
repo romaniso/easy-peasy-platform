@@ -1,39 +1,66 @@
 import { useState } from "react";
 import { MdDragIndicator } from "react-icons/md";
-import { DndContext } from "@dnd-kit/core";
 
 import Draggable from "./Draggable";
 import Droppable from "./Droppable";
+import { DndContext } from "@dnd-kit/core";
 
-function ExerciseDraggable({ questions, onSelect, selections }) {
-  const [parent, setParent] = useState(null);
-  let draggableMarkup = <Draggable>OK</Draggable>;
+function ExerciseDraggable({
+  questions,
+  draggables,
+  droppables,
+  onSelect,
+  selections,
+}) {
+  const [toDrags, setDraggables] = useState(draggables);
+  const [toDrops, setDroppables] = useState(droppables);
+  const [isDropped, setIsDropped] = useState(false);
 
-  const handleDragEnd = (event) => {
-    const { over, active } = event;
-    if (over) {
-      // Set the parent state to indicate the item has been dropped
-      setParent(active.id);
-    } else {
-      // If the item wasn't dropped over a droppable, reset the parent state
-      setParent(null);
+  console.log(toDrags);
+  console.log(toDrops);
+
+  function handleDragEnd(event) {
+    if (event.over && event.over.data.current.type === "droppable") {
+      const droppableId = Number(event.over.id);
+      const draggableId = Number(event.active.id);
+
+      const updatedToDrags = toDrags.map((drag) => {
+        if (drag.id === draggableId) {
+          return { ...drag, isPulled: true };
+        }
+        return drag;
+      });
+
+      const updatedToDrops = toDrops.map((drop) => {
+        if (drop.id === droppableId) {
+          return { ...drop, isFilled: toDrags[draggableId].title };
+        }
+        return drop;
+      });
+
+      setDraggables(updatedToDrags);
+      setDroppables(updatedToDrops);
     }
-  };
+  }
 
   //Droppable
-  const drops = questions.map(({ question }, index) => {
-    const renderedQuestion = question.split("***").map((part, partIndex) => {
-      return partIndex === 1 ? (
-        <>
-          <Droppable key={index} id={index + ""}>
-            {parent ? draggableMarkup : "Drop here"}
-          </Droppable>
-          <span>{part}</span>
-        </>
-      ) : (
-        <span key={index}>{part}</span>
-      );
-    });
+  const drops = toDrops.map((droppable, index) => {
+    const renderedQuestion = droppable.title
+      .split("***")
+      .map((part, partIndex) => {
+        return partIndex === 1 ? (
+          <>
+            <Droppable
+              id={droppable.id}
+              key={droppable.id}
+              isFilled={droppable.isFilled}
+            ></Droppable>
+            <span>{part}</span>
+          </>
+        ) : (
+          <span key={index}>{part}</span>
+        );
+      });
     return (
       <div
         className="flex justify-start gap-2 items-center text-indigo-900 text-xl [&:not(:last-child)]:mb-8"
@@ -44,23 +71,24 @@ function ExerciseDraggable({ questions, onSelect, selections }) {
     );
   });
   //Draggable
-  const drags = questions.map((question, index) => (
-    <Draggable id={index + ""}>
-      <div
-        key={index}
-        className="border py-1 px-2 min-w-[180px] text-center rounded-md text-indigo-900 text-base shadow backdrop-blur flex justify-between items-center"
-      >
-        <span>{question.isCorrect}</span>
+  const drags = toDrags.map((drag) =>
+    drag.isPulled ? null : (
+      <Draggable id={drag.id} title={drag.title} key={drag.id}>
+        <div
+          key={drag.id}
+          className="border py-1 px-2 min-w-[180px] text-center rounded-md text-indigo-900 text-base shadow backdrop-blur flex justify-between items-center hover:bg-orange-50 hover:shadow-lg transition-colors"
+        >
+          <span>{drag.title}</span>
 
-        <MdDragIndicator />
-      </div>
-    </Draggable>
-  ));
+          <MdDragIndicator />
+        </div>
+      </Draggable>
+    )
+  );
 
   return (
     <DndContext onDragEnd={handleDragEnd}>
       <section className="flex justify-between mb-8">
-        {parent === null ? draggableMarkup : null}
         {/* container od drops */}
         <div>{drops}</div>
         {/*container od drags*/}
@@ -69,5 +97,4 @@ function ExerciseDraggable({ questions, onSelect, selections }) {
     </DndContext>
   );
 }
-
 export default ExerciseDraggable;

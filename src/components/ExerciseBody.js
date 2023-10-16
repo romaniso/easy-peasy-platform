@@ -128,6 +128,16 @@ function ExerciseBody({
           questions={questions}
           onSelect={onSelect}
           selections={selections}
+          draggables={questions.map(({ isCorrect }, index) => ({
+            title: isCorrect,
+            id: index,
+            isPulled: false,
+          }))}
+          droppables={questions.map(({ question }, index) => ({
+            title: question,
+            id: index,
+            isFilled: null,
+          }))}
         />
       );
       break;
