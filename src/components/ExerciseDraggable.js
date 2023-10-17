@@ -16,7 +16,6 @@ function ExerciseDraggable({
 }) {
   const [toDrags, setDraggables] = useState(draggables);
   const [toDrops, setDroppables] = useState(droppables);
-  const [isDropped, setIsDropped] = useState(false);
 
   console.log(toDrags);
   console.log(toDrops);
@@ -27,14 +26,14 @@ function ExerciseDraggable({
       const draggableId = Number(event.active.id);
 
       const updatedToDrags = toDrags.map((drag) => {
-        if (drag.id === draggableId) {
+        if (drag.id === draggableId && !toDrops[droppableId].isFilled) {
           return { ...drag, isPulled: true };
         }
         return drag;
       });
 
       const updatedToDrops = toDrops.map((drop) => {
-        if (drop.id === droppableId) {
+        if (drop.id === droppableId && !drop.isFilled) {
           return { ...drop, isFilled: toDrags[draggableId].title };
         }
         return drop;
@@ -75,7 +74,12 @@ function ExerciseDraggable({
   //Draggable
   const drags = toDrags.map((drag) =>
     drag.isPulled ? null : (
-      <Draggable id={drag.id} title={drag.title} key={drag.id}>
+      <Draggable
+        id={drag.id}
+        title={drag.title}
+        key={drag.id}
+        isPulled={drag.isPulled}
+      >
         <div
           key={drag.id}
           className="border py-1 px-2 min-w-[180px] text-center rounded-md text-indigo-900 text-base shadow backdrop-blur flex justify-between items-center hover:bg-orange-50 hover:shadow-lg transition-colors"

@@ -1,10 +1,11 @@
 import { useDraggable } from "@dnd-kit/core";
 import { CSS } from "@dnd-kit/utilities";
 
-function Draggable({ children, id, title }) {
+function Draggable({ children, id, title, isPulled }) {
   const { attributes, listeners, setNodeRef, transform } = useDraggable({
     id: id.toString(),
     data: {
+      title,
       type: id.toString(),
     },
   });
