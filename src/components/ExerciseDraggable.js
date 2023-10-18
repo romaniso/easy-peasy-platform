@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import Draggable from "./Draggable";
 import Droppable from "./Droppable";
@@ -7,8 +7,23 @@ import { DndContext } from "@dnd-kit/core";
 //TODO: This component definitely requires a lot of refactoring. A user can currently dnd in one way but cannot drag a draggable component backwards.
 
 function ExerciseDraggable({ draggables, droppables, onSelect, results }) {
+  //  const [shuffledDrags, setShuffledDrags] = useState([]);
   const [toDrags, setDraggables] = useState(draggables);
   const [toDrops, setDroppables] = useState(droppables);
+
+  //FIXME: I need to shuffle the answers
+  //  function shuffleArray(array) {
+  //    for (let i = array.length - 1; i > 0; i--) {
+  //      const j = Math.floor(Math.random() * (i + 1));
+  //      [array[i], array[j]] = [array[j], array[i]];
+  //    }
+  //  }
+  // Initialize the shuffledDrags when the component mounts
+  //  useEffect(() => {
+  //    const initialShuffledDrags = [...draggables]; // Create a copy of the draggable items
+  //    shuffleArray(initialShuffledDrags); // Shuffle the copy
+  //    setShuffledDrags(initialShuffledDrags); // Set the shuffled items as the initial state
+  //  }, [draggables]); // Trigger the effect when draggable items change
 
   function handleDragEnd(event) {
     if (event.over && event.over.data.current.type === "droppable") {
