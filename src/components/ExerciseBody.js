@@ -148,16 +148,21 @@ function ExerciseBody({
 
   return (
     <div>
-      {/*{exerciseType === "drag-&-drop" ? (*/}
-      {/*//  renderedExercise*/}
-      {/*//) : (*/}
-      <form onSubmit={onSubmit}>
-        {renderedExercise}
-        <Button primary rounded className="w-1/5" type="submit">
-          {btnText}
-        </Button>
-      </form>
-      {/*)}*/}
+      {exerciseType === "drag-&-drop" ? (
+        <div>
+          {renderedExercise}
+          <Button primary rounded className="w-1/5" onClick={onSubmit}>
+            {btnText}
+          </Button>
+        </div>
+      ) : (
+        <form onSubmit={onSubmit}>
+          {renderedExercise}
+          <Button primary rounded className="w-1/5" type="submit">
+            {btnText}
+          </Button>
+        </form>
+      )}
     </div>
   );
 }

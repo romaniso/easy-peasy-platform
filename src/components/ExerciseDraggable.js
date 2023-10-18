@@ -4,7 +4,7 @@ import Draggable from "./Draggable";
 import Droppable from "./Droppable";
 import { DndContext } from "@dnd-kit/core";
 
-//TODO: This component definitely requires a lot of refactoring. First, it needs to be validated and a feedback should be given. Next, a user can currently dnd in one way but cannot drag a draggable component backwards.
+//TODO: This component definitely requires a lot of refactoring. A user can currently dnd in one way but cannot drag a draggable component backwards.
 
 function ExerciseDraggable({ draggables, droppables, onSelect, results }) {
   const [toDrags, setDraggables] = useState(draggables);
@@ -43,10 +43,10 @@ function ExerciseDraggable({ draggables, droppables, onSelect, results }) {
         return partIndex === 1 ? (
           <>
             <Droppable
-              results={results}
               id={droppable.id}
               key={droppable.id}
               isFilled={droppable.isFilled}
+              results={results}
             ></Droppable>
             <span>{part}</span>
           </>
@@ -66,21 +66,14 @@ function ExerciseDraggable({ draggables, droppables, onSelect, results }) {
   //Draggable
   const drags = toDrags.map((drag) =>
     drag.isPulled ? null : (
-      <Draggable
-        id={drag.id}
-        title={drag.title}
-        key={drag.id}
-        isPulled={drag.isPulled}
-      ></Draggable>
+      <Draggable id={drag.id} title={drag.title} key={drag.id}></Draggable>
     )
   );
 
   return (
     <DndContext onDragEnd={handleDragEnd}>
       <section className="flex justify-between mb-8">
-        {/* container od drops */}
         <div>{drops}</div>
-        {/*container od drags*/}
         <div className="flex flex-col justify-center gap-3">{drags}</div>
       </section>
     </DndContext>
