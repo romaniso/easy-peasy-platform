@@ -1,4 +1,5 @@
 import { useDroppable } from "@dnd-kit/core";
+import className from "classnames";
 
 function Droppable({ children, id, isFilled }) {
   const { isOver, setNodeRef } = useDroppable({
@@ -9,23 +10,16 @@ function Droppable({ children, id, isFilled }) {
     },
   });
 
-  //TODO: use classname library ;)
-
-  let style;
-
-  if (isOver && !isFilled) {
-    style =
-      "border bg-orange-200 shadow-inner rounded-md w-[170px] inline-block h-[30px] transition-colors";
-  } else if (isFilled) {
-    style =
-      "border bg-white shadow text-base pl-2 rounded-md w-[170px] inline-block h-[30px] transition-colors";
-  } else {
-    style =
-      "border bg-stone-200 shadow-inner rounded-md w-[170px] inline-block h-[30px] transition-colors";
-  }
-
+  const droppableClasses = className(
+    "border rounded-md w-[170px] inline-block h-[30px] transition-colors",
+    {
+      "bg-stone-200 shadow-inner": !isFilled && !isOver,
+      "bg-white shadow text-base pl-2": !!isFilled,
+      "bg-orange-200": !!isOver && !isFilled,
+    }
+  );
   return (
-    <div ref={setNodeRef} className={style}>
+    <div ref={setNodeRef} className={droppableClasses}>
       {isFilled ? isFilled : children}
     </div>
   );
