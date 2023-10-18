@@ -48,6 +48,7 @@ function Exercise({
         );
         break;
       case "fill-in":
+      case "drag-&-drop":
         keySheet = questions.map((question) => question.isCorrect);
         break;
       default:

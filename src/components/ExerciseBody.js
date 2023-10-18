@@ -13,7 +13,8 @@ function ExerciseBody({
 }) {
   const handleSelectChange = (index, event) => {
     const updatedValues = [...selections];
-    updatedValues[index] = event.target.value;
+    updatedValues[index] =
+      exerciseType === "drag-&-drop" ? event : event.target.value;
     onSelect(updatedValues);
   };
 
@@ -125,9 +126,9 @@ function ExerciseBody({
     case "drag-&-drop":
       renderedExercise = (
         <ExerciseDraggable
-          questions={questions}
-          onSelect={onSelect}
+          onSelect={handleSelectChange}
           selections={selections}
+          results={results}
           draggables={questions.map(({ isCorrect }, index) => ({
             title: isCorrect,
             id: index,
@@ -147,16 +148,16 @@ function ExerciseBody({
 
   return (
     <div>
-      {exerciseType === "drag-&-drop" ? (
-        renderedExercise
-      ) : (
-        <form onSubmit={onSubmit}>
-          {renderedExercise}
-          <Button primary rounded className="w-1/5" type="submit">
-            {btnText}
-          </Button>
-        </form>
-      )}
+      {/*{exerciseType === "drag-&-drop" ? (*/}
+      {/*//  renderedExercise*/}
+      {/*//) : (*/}
+      <form onSubmit={onSubmit}>
+        {renderedExercise}
+        <Button primary rounded className="w-1/5" type="submit">
+          {btnText}
+        </Button>
+      </form>
+      {/*)}*/}
     </div>
   );
 }

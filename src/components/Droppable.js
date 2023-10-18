@@ -1,7 +1,7 @@
 import { useDroppable } from "@dnd-kit/core";
 import className from "classnames";
 
-function Droppable({ children, id, isFilled }) {
+function Droppable({ children, id, isFilled, results }) {
   const { isOver, setNodeRef } = useDroppable({
     id: id.toString(),
     data: {
@@ -16,6 +16,8 @@ function Droppable({ children, id, isFilled }) {
       "bg-stone-200 shadow-inner": !isFilled && !isOver,
       "bg-white shadow text-base pl-2": !!isFilled,
       "bg-orange-200": !!isOver && !isFilled,
+      "bg-green-200": results && results[id] === "Same" && !!isFilled,
+      "bg-red-200": results && results[id] === "Different" && !!isFilled,
     }
   );
   return (

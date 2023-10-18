@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { MdDragIndicator } from "react-icons/md";
 
 import Draggable from "./Draggable";
 import Droppable from "./Droppable";
@@ -7,18 +6,9 @@ import { DndContext } from "@dnd-kit/core";
 
 //TODO: This component definitely requires a lot of refactoring. First, it needs to be validated and a feedback should be given. Next, a user can currently dnd in one way but cannot drag a draggable component backwards.
 
-function ExerciseDraggable({
-  questions,
-  draggables,
-  droppables,
-  onSelect,
-  selections,
-}) {
+function ExerciseDraggable({ draggables, droppables, onSelect, results }) {
   const [toDrags, setDraggables] = useState(draggables);
   const [toDrops, setDroppables] = useState(droppables);
-
-  console.log(toDrags);
-  console.log(toDrops);
 
   function handleDragEnd(event) {
     if (event.over && event.over.data.current.type === "droppable") {
@@ -41,6 +31,7 @@ function ExerciseDraggable({
 
       setDraggables(updatedToDrags);
       setDroppables(updatedToDrops);
+      onSelect(droppableId, toDrags[draggableId].title);
     }
   }
 
@@ -52,6 +43,7 @@ function ExerciseDraggable({
         return partIndex === 1 ? (
           <>
             <Droppable
+              results={results}
               id={droppable.id}
               key={droppable.id}
               isFilled={droppable.isFilled}
@@ -79,16 +71,7 @@ function ExerciseDraggable({
         title={drag.title}
         key={drag.id}
         isPulled={drag.isPulled}
-      >
-        <div
-          key={drag.id}
-          className="border py-1 px-2 min-w-[180px] text-center rounded-md text-indigo-900 text-base shadow backdrop-blur flex justify-between items-center hover:bg-orange-50 hover:shadow-lg transition-colors"
-        >
-          <span>{drag.title}</span>
-
-          <MdDragIndicator />
-        </div>
-      </Draggable>
+      ></Draggable>
     )
   );
 

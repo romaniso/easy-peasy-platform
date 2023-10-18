@@ -33,9 +33,9 @@ const Input = forwardRef(function Input(props, ref) {
     // rest.className,
     "absolute left-3 top-1/2 -translate-y-1/2 cursor-text peer-focus:text-xs peer-focus:-top-3 peer-focus:left-0 peer-valid:text-xs peer-valid:-top-3 peer-valid:left-0 transition-all duration-500",
     {
-      "text-sky-700  peer-focus:text-orange-500 peer-valid:text-orange-500":
+      "text-sky-700 peer-focus:text-orange-500 peer-valid:text-orange-500":
         primary,
-      "text-orange-500  peer-focus:text-indigo-300 peer-valid:text-sky-500":
+      "text-orange-500 peer-focus:text-indigo-300 peer-valid:text-sky-500":
         secondary,
     }
   );
