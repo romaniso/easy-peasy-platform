@@ -16,8 +16,8 @@ function Droppable({ children, id, isFilled, results }) {
       "bg-stone-200 shadow-inner": !isFilled && !isOver,
       "bg-white shadow text-base pl-2": !!isFilled,
       "bg-orange-200": !!isOver && !isFilled,
-      "bg-green-200": results && results[id] === "Same" && !!isFilled,
-      "bg-red-200": results && results[id] === "Different" && !!isFilled,
+      "!bg-green-100": results && results[id] === "Same" && !!isFilled,
+      "!bg-red-100": results && results[id] === "Different" && !!isFilled,
     }
   );
   return (
