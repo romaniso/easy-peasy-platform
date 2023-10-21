@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import useShuffle from "../hooks/useShuffle";
 
 import Draggable from "./Draggable";
 import Droppable from "./Droppable";
@@ -8,45 +9,31 @@ import { DndContext } from "@dnd-kit/core";
 
 function ExerciseDraggable({ draggables, droppables, onSelect, results }) {
   const [shuffledDrags, setShuffledDrags] = useState([]);
-  //  const [toDrags, setDraggables] = useState(draggables);
   const [toDrops, setDroppables] = useState(droppables);
+  const { shuffleArray } = useShuffle();
 
-  //FIXME: I need to shuffle the answers
-  function shuffleArray(array) {
-    for (let i = array.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [array[i], array[j]] = [array[j], array[i]];
-    }
-  }
-  //Initialize the shuffledDrags when the component mounts
   useEffect(() => {
-    const initialShuffledDrags = [...draggables]; // Create a copy of the draggable items
-    shuffleArray(initialShuffledDrags); // Shuffle the copy
+    const initialShuffledDrags = [...draggables];
+    shuffleArray(initialShuffledDrags);
     setShuffledDrags(
-      initialShuffledDrags.map((drag, index) => {
-        return { ...drag, id: index };
-      })
-    ); // Set the shuffled items as the initial state
-  }, []); // Trigger the effect when draggable items change
+      initialShuffledDrags.map((drag, index) => ({ ...drag, id: index }))
+    );
+  }, []);
 
   function handleDragEnd(event) {
     if (event.over && event.over.data.current.type === "droppable") {
       const droppableId = Number(event.over.id);
       const draggableId = Number(event.active.id);
 
-      console.log(droppableId, draggableId);
-
       const updatedToDrags = shuffledDrags.map((drag) => {
-        if (drag.id === draggableId && !toDrops[droppableId].isFilled) {
+        if (drag.id === draggableId && !toDrops[droppableId].isFilled)
           return { ...drag, isPulled: true };
-        }
         return drag;
       });
 
       const updatedToDrops = toDrops.map((drop) => {
-        if (drop.id === droppableId && !drop.isFilled) {
+        if (drop.id === droppableId && !drop.isFilled)
           return { ...drop, isFilled: shuffledDrags[draggableId].title };
-        }
         return drop;
       });
 
@@ -60,8 +47,8 @@ function ExerciseDraggable({ draggables, droppables, onSelect, results }) {
   const drops = toDrops.map((droppable, index) => {
     const renderedQuestion = droppable.title
       .split("***")
-      .map((part, partIndex) => {
-        return partIndex === 1 ? (
+      .map((part, partIndex) =>
+        partIndex === 1 ? (
           <>
             <Droppable
               id={droppable.id}
@@ -73,8 +60,8 @@ function ExerciseDraggable({ draggables, droppables, onSelect, results }) {
           </>
         ) : (
           <span key={index}>{part}</span>
-        );
-      });
+        )
+      );
     return (
       <div
         className="flex justify-start gap-2 items-center text-indigo-900 text-xl [&:not(:last-child)]:mb-8"
