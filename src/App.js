@@ -7,6 +7,7 @@ import Layout from "./components/Layout";
 import PrivateRouteLayout from "./layouts/PrivateRouteLayout";
 import GrammarPage from "./pages/GrammarPage";
 import ExercisePage from "./pages/ExercisePage";
+import VocabularyPage from "./pages/VocabularyPage";
 
 function App() {
   return (
@@ -17,8 +18,12 @@ function App() {
           <Route exact path="/" element={<HomePage />} />
           <Route path="*" element={<ErrorPage />} />
           <Route path="/auth" element={<AuthenticationPage />} />
+          {/* Grammar */}
           <Route path="/grammar" element={<GrammarPage />} />
           <Route path="/grammar/:topic" element={<ExercisePage />} />
+          {/* Vocabulary */}
+          <Route path="/vocabulary" element={<VocabularyPage />} />
+          {/*<Route path="/vocabulary/:topic" element={<ExercisePage />} />*/}
 
           {/* private pages */}
           <Route element={<PrivateRouteLayout />}>
