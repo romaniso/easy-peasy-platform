@@ -17,7 +17,7 @@ function VocabularyPage() {
           }
           image={RelationshipsImg}
           buttonTxt={"Let's learn"}
-          link={"/vocabulary/topic-1"}
+          link={"/vocabulary/relationships"}
         />
       </section>
     </div>

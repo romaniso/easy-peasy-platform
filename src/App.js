@@ -23,7 +23,7 @@ function App() {
           <Route path="/grammar/:topic" element={<ExercisePage />} />
           {/* Vocabulary */}
           <Route path="/vocabulary" element={<VocabularyPage />} />
-          {/*<Route path="/vocabulary/:topic" element={<ExercisePage />} />*/}
+          <Route path="/vocabulary/:topic" element={<ExercisePage />} />
 
           {/* private pages */}
           <Route element={<PrivateRouteLayout />}>

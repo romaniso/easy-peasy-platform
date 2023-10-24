@@ -4,7 +4,8 @@ import Tabs from "./Tabs";
 
 function ExerciseSet({ data }) {
   const [activeExercise, setActiveExercise] = useState(1);
-  const renderedExercises = data.map(
+  const [, ...exercises] = data;
+  const renderedExercises = exercises.map(
     ({ instruction, title, type, questions }, index) => {
       const exerciseNumber = index + 1;
       return (
@@ -23,7 +24,7 @@ function ExerciseSet({ data }) {
   return (
     <section className="flex-auto">
       <Tabs
-        exercises={data}
+        exercises={exercises}
         activeExercise={activeExercise}
         setSelection={setActiveExercise}
       />

@@ -8,118 +8,121 @@ import Cheetsheet from "../components/Cheetsheet";
 function ExercisePage() {
   useTop();
   const { topic } = useParams();
-  //TODO: to be fetched from API/server
-  const data = [
-    {
-      instruction:
-        "Choose the correct or most appropriate future forms to complete the sentences below.",
-      title: "Will / be going to / present continuous for future",
-      type: "dropdown",
-      questions: [
-        {
-          question: "I *** visit my grandmother tomorrow.",
-          options: [
-            { text: "will", isCorrect: false },
-            { text: "am going to", isCorrect: true },
-            { text: "am visiting", isCorrect: false },
-          ],
-        },
-        {
-          question:
-            "They have tickets for the concert. They *** attend it tonight.",
-          options: [
-            { text: "will", isCorrect: false },
-            { text: "are going to", isCorrect: true },
-            { text: "are attending", isCorrect: false },
-          ],
-        },
-        {
-          question: "I think it *** rain later, so don't forget your umbrella.",
-          options: [
-            { text: "will", isCorrect: true },
-            { text: "is going to", isCorrect: false },
-            { text: "is raining", isCorrect: false },
-          ],
-        },
-        {
-          question: "She *** fly to Paris next week for a business meeting.",
-          options: [
-            { text: "will", isCorrect: false },
-            { text: "is going to", isCorrect: true },
-            { text: "is flying", isCorrect: false },
-          ],
-        },
-        {
-          question:
-            "We *** have a picnic at the park on Saturday if the weather is nice.",
-          options: [
-            { text: "will", isCorrect: false },
-            { text: "are going to", isCorrect: true },
-            { text: "are having", isCorrect: false },
-          ],
-        },
-      ],
-    },
-    // FIll-IN
-    {
-      instruction:
-        "Fill in the gaps with a correct or most appropriate future forms using a word in prompts to complete the sentences below.",
-      title: "Will / be going to / present continuous for future",
-      type: "fill-in",
-      questions: [
-        {
-          question: "I *** my grandmother tomorrow. (visit)",
-          isCorrect: "am going to visit",
-        },
-        {
-          question: "This year I *** to Italy (go).",
-          isCorrect: "am going to go",
-        },
-        {
-          question: "Maybe we *** a new car next year. (buy)",
-          isCorrect: "will buy",
-        },
-        {
-          question: "I think current Presindent *** reelected once again. (be)",
-          isCorrect: "will be",
-        },
-        {
-          question:
-            "Tomorrow morning John *** to Madrid for a business trip. (fly)",
-          isCorrect: "is flying",
-        },
-      ],
-    },
-    // DRAG-&-DROP
-    {
-      instruction:
-        "Drag an option of future tense and drop it into a fitting sentence to complete it.",
-      title: "Will / be going to / present continuous for future",
-      type: "drag-&-drop",
-      questions: [
-        {
-          question: "I *** my grandmother tomorrow.",
-          isCorrect: "am going to visit",
-        },
-        {
-          question: "This year I *** to Italy.",
-          isCorrect: "am going to go",
-        },
-        {
-          question: "Maybe we *** a new car next year.",
-          isCorrect: "will buy",
-        },
-        {
-          question: "I think current Presindent *** reelected once again.",
-          isCorrect: "will be",
-        },
-        {
-          question: "Tomorrow morning John *** to Madrid for a business trip.",
-          isCorrect: "is flying",
-        },
-      ],
-    },
-  ];
+  //TODO: to be fetched from API/server and depending on a section type it will render a body conditionally
+
+  //Grammar section
+  //  const data = [
+  //    { section: "grammar" },
+  //    {
+  //      instruction:
+  //        "Choose the correct or most appropriate future forms to complete the sentences below.",
+  //      title: "Will / be going to / present continuous for future",
+  //      type: "dropdown",
+  //      questions: [
+  //        {
+  //          question: "I *** visit my grandmother tomorrow.",
+  //          options: [
+  //            { text: "will", isCorrect: false },
+  //            { text: "am going to", isCorrect: true },
+  //            { text: "am visiting", isCorrect: false },
+  //          ],
+  //        },
+  //        {
+  //          question:
+  //            "They have tickets for the concert. They *** attend it tonight.",
+  //          options: [
+  //            { text: "will", isCorrect: false },
+  //            { text: "are going to", isCorrect: true },
+  //            { text: "are attending", isCorrect: false },
+  //          ],
+  //        },
+  //        {
+  //          question: "I think it *** rain later, so don't forget your umbrella.",
+  //          options: [
+  //            { text: "will", isCorrect: true },
+  //            { text: "is going to", isCorrect: false },
+  //            { text: "is raining", isCorrect: false },
+  //          ],
+  //        },
+  //        {
+  //          question: "She *** fly to Paris next week for a business meeting.",
+  //          options: [
+  //            { text: "will", isCorrect: false },
+  //            { text: "is going to", isCorrect: true },
+  //            { text: "is flying", isCorrect: false },
+  //          ],
+  //        },
+  //        {
+  //          question:
+  //            "We *** have a picnic at the park on Saturday if the weather is nice.",
+  //          options: [
+  //            { text: "will", isCorrect: false },
+  //            { text: "are going to", isCorrect: true },
+  //            { text: "are having", isCorrect: false },
+  //          ],
+  //        },
+  //      ],
+  //    },
+  //    // FIll-IN
+  //    {
+  //      instruction:
+  //        "Fill in the gaps with a correct or most appropriate future forms using a word in prompts to complete the sentences below.",
+  //      title: "Will / be going to / present continuous for future",
+  //      type: "fill-in",
+  //      questions: [
+  //        {
+  //          question: "I *** my grandmother tomorrow. (visit)",
+  //          isCorrect: "am going to visit",
+  //        },
+  //        {
+  //          question: "This year I *** to Italy (go).",
+  //          isCorrect: "am going to go",
+  //        },
+  //        {
+  //          question: "Maybe we *** a new car next year. (buy)",
+  //          isCorrect: "will buy",
+  //        },
+  //        {
+  //          question: "I think current Presindent *** reelected once again. (be)",
+  //          isCorrect: "will be",
+  //        },
+  //        {
+  //          question:
+  //            "Tomorrow morning John *** to Madrid for a business trip. (fly)",
+  //          isCorrect: "is flying",
+  //        },
+  //      ],
+  //    },
+  //    // DRAG-&-DROP
+  //    {
+  //      instruction:
+  //        "Drag an option of future tense and drop it into a fitting sentence to complete it.",
+  //      title: "Will / be going to / present continuous for future",
+  //      type: "drag-&-drop",
+  //      questions: [
+  //        {
+  //          question: "I *** my grandmother tomorrow.",
+  //          isCorrect: "am going to visit",
+  //        },
+  //        {
+  //          question: "This year I *** to Italy.",
+  //          isCorrect: "am going to go",
+  //        },
+  //        {
+  //          question: "Maybe we *** a new car next year.",
+  //          isCorrect: "will buy",
+  //        },
+  //        {
+  //          question: "I think current Presindent *** reelected once again.",
+  //          isCorrect: "will be",
+  //        },
+  //        {
+  //          question: "Tomorrow morning John *** to Madrid for a business trip.",
+  //          isCorrect: "is flying",
+  //        },
+  //      ],
+  //    },
+  //  ];
   const cheetsheet = {
     topic: "Future Tenses",
     level: "B1",
@@ -186,19 +189,160 @@ function ExercisePage() {
       </article>
       `,
   };
+
+  //Vocabulary section
+  const data = [
+    { section: "vocabulary" },
+    {
+      instruction:
+        "Choose the correct or most appropriate future forms to complete the sentences below.",
+      title: "Will / be going to / present continuous for future",
+      type: "dropdown",
+      questions: [
+        {
+          question: "I *** visit my grandmother tomorrow.",
+          options: [
+            { text: "will", isCorrect: false },
+            { text: "am going to", isCorrect: true },
+            { text: "am visiting", isCorrect: false },
+          ],
+        },
+        {
+          question:
+            "They have tickets for the concert. They *** attend it tonight.",
+          options: [
+            { text: "will", isCorrect: false },
+            { text: "are going to", isCorrect: true },
+            { text: "are attending", isCorrect: false },
+          ],
+        },
+        {
+          question: "I think it *** rain later, so don't forget your umbrella.",
+          options: [
+            { text: "will", isCorrect: true },
+            { text: "is going to", isCorrect: false },
+            { text: "is raining", isCorrect: false },
+          ],
+        },
+        {
+          question: "She *** fly to Paris next week for a business meeting.",
+          options: [
+            { text: "will", isCorrect: false },
+            { text: "is going to", isCorrect: true },
+            { text: "is flying", isCorrect: false },
+          ],
+        },
+        {
+          question:
+            "We *** have a picnic at the park on Saturday if the weather is nice.",
+          options: [
+            { text: "will", isCorrect: false },
+            { text: "are going to", isCorrect: true },
+            { text: "are having", isCorrect: false },
+          ],
+        },
+      ],
+    },
+    // FIll-IN
+    // {
+    //   instruction:
+    //     "Fill in the gaps with a correct or most appropriate future forms using a word in prompts to complete the sentences below.",
+    //   title: "Will / be going to / present continuous for future",
+    //   type: "fill-in",
+    //   questions: [
+    //     {
+    //       question: "I *** my grandmother tomorrow. (visit)",
+    //       isCorrect: "am going to visit",
+    //     },
+    //     {
+    //       question: "This year I *** to Italy (go).",
+    //       isCorrect: "am going to go",
+    //     },
+    //     {
+    //       question: "Maybe we *** a new car next year. (buy)",
+    //       isCorrect: "will buy",
+    //     },
+    //     {
+    //       question: "I think current Presindent *** reelected once again. (be)",
+    //       isCorrect: "will be",
+    //     },
+    //     {
+    //       question:
+    //         "Tomorrow morning John *** to Madrid for a business trip. (fly)",
+    //       isCorrect: "is flying",
+    //     },
+    //   ],
+    // },
+    // DRAG-&-DROP
+    // {
+    //   instruction:
+    //     "Drag an option of future tense and drop it into a fitting sentence to complete it.",
+    //   title: "Will / be going to / present continuous for future",
+    //   type: "drag-&-drop",
+    //   questions: [
+    //     {
+    //       question: "I *** my grandmother tomorrow.",
+    //       isCorrect: "am going to visit",
+    //     },
+    //     {
+    //       question: "This year I *** to Italy.",
+    //       isCorrect: "am going to go",
+    //     },
+    //     {
+    //       question: "Maybe we *** a new car next year.",
+    //       isCorrect: "will buy",
+    //     },
+    //     {
+    //       question: "I think current Presindent *** reelected once again.",
+    //       isCorrect: "will be",
+    //     },
+    //     {
+    //       question: "Tomorrow morning John *** to Madrid for a business trip.",
+    //       isCorrect: "is flying",
+    //     },
+    //   ],
+    // },
+  ];
+
+  const { section } = data[0];
+
+  let content;
+  switch (section) {
+    case "grammar":
+      content = (
+        <Panel className="bg-white flex h-[850px] !p-0">
+          <ExerciseSet data={data} />
+          <Cheetsheet
+            topic={cheetsheet.topic}
+            level={cheetsheet.level}
+            content={cheetsheet.content}
+          />
+        </Panel>
+      );
+      break;
+    case "vocabulary":
+      content = (
+        <Panel className="bg-white flex h-[850px] !p-0">
+          Vocabulary
+          {/*<ExerciseSet data={data} />
+            <Cheetsheet
+              topic={cheetsheet.topic}
+              level={cheetsheet.level}
+              content={cheetsheet.content}
+            />*/}
+        </Panel>
+      );
+      break;
+    default:
+      throw new Error("There is no such an exercise section");
+  }
+
   return (
     <div className="my-24 container mx-auto px-4">
       <h1 className="text-6xl text-center font-bold text-orange-500 drop-shadow mb-8">
         {topic}
       </h1>
-      <Panel className="bg-white flex h-[850px] !p-0">
-        <ExerciseSet data={data} />
-        <Cheetsheet
-          topic={cheetsheet.topic}
-          level={cheetsheet.level}
-          content={cheetsheet.content}
-        />
-      </Panel>
+      {content}
     </div>
   );
 }
