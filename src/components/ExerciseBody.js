@@ -74,6 +74,9 @@ function ExerciseBody({
         </div>
       );
       break;
+    case "flash-card":
+      renderedExercise = <p>Flashcard</p>;
+      break;
     default:
       throw new Error("There is no such an exercise type");
   }

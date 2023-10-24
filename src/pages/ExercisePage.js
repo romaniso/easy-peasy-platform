@@ -3,6 +3,9 @@ import { useParams } from "react-router-dom";
 import Panel from "../components/Panel";
 import ExerciseSet from "../components/ExerciseSet";
 import Cheetsheet from "../components/Cheetsheet";
+
+// Just for a template;
+import RelationshipsImg from "../assets/images/vocabulary/realtionships.jpg";
 //TODO: Here I will probably implement API request for data base where I get all content for cheetsheet md, exercises, instructions, etc based on path of URL and then send it to the Exercise component.
 
 function ExercisePage() {
@@ -191,55 +194,34 @@ function ExercisePage() {
   };
 
   //Vocabulary section
+  //TODO: consider how to fetch images for flashcards. I think of databases in a buffer format...
   const data = [
     { section: "vocabulary" },
     {
       instruction:
-        "Choose the correct or most appropriate future forms to complete the sentences below.",
-      title: "Will / be going to / present continuous for future",
-      type: "dropdown",
+        "Recall a proper word or phrase according to the definision on the card. When ready, flip a card and ckeck your answer",
+      title: "Words and phrases about relationships",
+      type: "flash-card",
       questions: [
         {
-          question: "I *** visit my grandmother tomorrow.",
-          options: [
-            { text: "will", isCorrect: false },
-            { text: "am going to", isCorrect: true },
-            { text: "am visiting", isCorrect: false },
-          ],
+          question: 'the same as "stay in contact"',
+          isCorrect: "keep in touch",
+          cardImage: RelationshipsImg,
         },
         {
-          question:
-            "They have tickets for the concert. They *** attend it tonight.",
-          options: [
-            { text: "will", isCorrect: false },
-            { text: "are going to", isCorrect: true },
-            { text: "are attending", isCorrect: false },
-          ],
+          question: 'the same as "stay in contact"',
+          isCorrect: "keep in touch",
+          cardImage: RelationshipsImg,
         },
         {
-          question: "I think it *** rain later, so don't forget your umbrella.",
-          options: [
-            { text: "will", isCorrect: true },
-            { text: "is going to", isCorrect: false },
-            { text: "is raining", isCorrect: false },
-          ],
+          question: 'the same as "stay in contact"',
+          isCorrect: "keep in touch",
+          cardImage: RelationshipsImg,
         },
         {
-          question: "She *** fly to Paris next week for a business meeting.",
-          options: [
-            { text: "will", isCorrect: false },
-            { text: "is going to", isCorrect: true },
-            { text: "is flying", isCorrect: false },
-          ],
-        },
-        {
-          question:
-            "We *** have a picnic at the park on Saturday if the weather is nice.",
-          options: [
-            { text: "will", isCorrect: false },
-            { text: "are going to", isCorrect: true },
-            { text: "are having", isCorrect: false },
-          ],
+          question: 'the same as "stay in contact"',
+          isCorrect: "keep in touch",
+          cardImage: RelationshipsImg,
         },
       ],
     },
@@ -323,9 +305,8 @@ function ExercisePage() {
     case "vocabulary":
       content = (
         <Panel className="bg-white flex h-[850px] !p-0">
-          Vocabulary
-          {/*<ExerciseSet data={data} />
-            <Cheetsheet
+          <ExerciseSet data={data} />
+          {/*<Cheetsheet
               topic={cheetsheet.topic}
               level={cheetsheet.level}
               content={cheetsheet.content}

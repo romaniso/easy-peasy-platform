@@ -49,6 +49,9 @@ function Exercise({
         break;
       case "fill-in":
       case "drag-&-drop":
+      case "flash-card":
+        // but actually flash-cards will not be validated
+        //TODO: think about new case for flashcards
         keySheet = questions.map((question) => question.isCorrect);
         break;
       default:
