@@ -2,6 +2,7 @@ import Button from "./Button";
 import ExerciseDraggable from "./ExerciseDraggable";
 import ExerciseDropdown from "./ExerciseDropdown";
 import ExerciseFill from "./ExerciseFill";
+import Flashcard from "./Flashcard";
 
 function ExerciseBody({
   onSubmit,
@@ -75,7 +76,17 @@ function ExerciseBody({
       );
       break;
     case "flash-card":
-      renderedExercise = <p>Flashcard</p>;
+      renderedExercise = (
+        <div className="flex justify-between flex-wrap gap-8">
+          {questions.map(({ question, isCorrect, cardImage }) => (
+            <Flashcard
+              question={question}
+              isCorrect={isCorrect}
+              cardImage={cardImage}
+            />
+          ))}
+        </div>
+      );
       break;
     default:
       throw new Error("There is no such an exercise type");

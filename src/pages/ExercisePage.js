@@ -223,6 +223,26 @@ function ExercisePage() {
           isCorrect: "keep in touch",
           cardImage: RelationshipsImg,
         },
+        {
+          question: 'the same as "stay in contact"',
+          isCorrect: "keep in touch",
+          cardImage: RelationshipsImg,
+        },
+        {
+          question: 'the same as "stay in contact"',
+          isCorrect: "keep in touch",
+          cardImage: RelationshipsImg,
+        },
+        {
+          question: 'the same as "stay in contact"',
+          isCorrect: "keep in touch",
+          cardImage: RelationshipsImg,
+        },
+        {
+          question: 'the same as "stay in contact"',
+          isCorrect: "keep in touch",
+          cardImage: RelationshipsImg,
+        },
       ],
     },
     // FIll-IN
@@ -304,7 +324,7 @@ function ExercisePage() {
       break;
     case "vocabulary":
       content = (
-        <Panel className="bg-white flex h-[850px] !p-0">
+        <Panel className="bg-white flex !p-0">
           <ExerciseSet data={data} />
           {/*<Cheetsheet
               topic={cheetsheet.topic}
