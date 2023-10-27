@@ -11,7 +11,7 @@ function ExerciseSet({ data }) {
       return (
         <Exercise
           key={exerciseNumber}
-          active={activeExercise === exerciseNumber ? true : false}
+          active={activeExercise === exerciseNumber}
           title={title}
           type={type}
           instruction={instruction}
