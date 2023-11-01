@@ -205,41 +205,25 @@ function ExercisePage() {
       questions: [
         {
           question: 'the same as "stay in contact"',
+          example: 'It\'s hard to ... with someone who doesn\'t want to be found',
           isCorrect: "keep in touch",
           cardImage: RelationshipsImg,
         },
         {
           question: 'the same as "stay in contact"',
+          example: 'It\'s hard to ... with someone who doesn\'t want to be found',
           isCorrect: "keep in touch",
           cardImage: RelationshipsImg,
         },
         {
           question: 'the same as "stay in contact"',
+          example: 'It\'s hard to ... with someone who doesn\'t want to be found',
           isCorrect: "keep in touch",
           cardImage: RelationshipsImg,
         },
         {
           question: 'the same as "stay in contact"',
-          isCorrect: "keep in touch",
-          cardImage: RelationshipsImg,
-        },
-        {
-          question: 'the same as "stay in contact"',
-          isCorrect: "keep in touch",
-          cardImage: RelationshipsImg,
-        },
-        {
-          question: 'the same as "stay in contact"',
-          isCorrect: "keep in touch",
-          cardImage: RelationshipsImg,
-        },
-        {
-          question: 'the same as "stay in contact"',
-          isCorrect: "keep in touch",
-          cardImage: RelationshipsImg,
-        },
-        {
-          question: 'the same as "stay in contact"',
+          example: 'It\'s hard to ... with someone who doesn\'t want to be found',
           isCorrect: "keep in touch",
           cardImage: RelationshipsImg,
         },
