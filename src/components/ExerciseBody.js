@@ -77,7 +77,7 @@ function ExerciseBody({
       break;
     case "flash-card":
       renderedExercise = (
-        <div className="flex justify-between flex-wrap gap-8">
+        <div className="flex flex-wrap gap-10">
           {questions.map(({ question, isCorrect, cardImage, example }) => (
             <Flashcard
               question={question}
