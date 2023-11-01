@@ -1,3 +1,6 @@
+import { useState, useEffect } from "react";
+import { useSpeechSynthesis } from "react-speech-kit";
+
 import Button from "./Button";
 import ExerciseDraggable from "./ExerciseDraggable";
 import ExerciseDropdown from "./ExerciseDropdown";
@@ -13,6 +16,16 @@ function ExerciseBody({
   selections,
   onSelect,
 }) {
+  const [generalAmericanVoice, setGeneralAmericanVoice] = useState(null);
+  const { voices, speak } = useSpeechSynthesis();
+
+  useEffect(() => {
+    if (voices && voices.length > 0) {
+      const voice = voices.find((v) => v.name === "Google US English");
+      setGeneralAmericanVoice(voice);
+    }
+  }, [voices]);
+
   const handleSelectChange = (index, event) => {
     const updatedValues = [...selections];
     updatedValues[index] =
@@ -78,14 +91,19 @@ function ExerciseBody({
     case "flash-card":
       renderedExercise = (
         <div className="flex flex-wrap gap-10">
-          {questions.map(({ question, isCorrect, cardImage, example }) => (
-            <Flashcard
-              question={question}
-              isCorrect={isCorrect}
-              cardImage={cardImage}
-              example={example}
-            />
-          ))}
+          {questions.map(
+            ({ question, isCorrect, cardImage, example }, index) => (
+              <Flashcard
+                question={question}
+                isCorrect={isCorrect}
+                cardImage={cardImage}
+                example={example}
+                voice={generalAmericanVoice}
+                speak={speak}
+                key={index}
+              />
+            )
+          )}
         </div>
       );
       break;

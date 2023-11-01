@@ -229,65 +229,6 @@ function ExercisePage() {
         },
       ],
     },
-    // FIll-IN
-    // {
-    //   instruction:
-    //     "Fill in the gaps with a correct or most appropriate future forms using a word in prompts to complete the sentences below.",
-    //   title: "Will / be going to / present continuous for future",
-    //   type: "fill-in",
-    //   questions: [
-    //     {
-    //       question: "I *** my grandmother tomorrow. (visit)",
-    //       isCorrect: "am going to visit",
-    //     },
-    //     {
-    //       question: "This year I *** to Italy (go).",
-    //       isCorrect: "am going to go",
-    //     },
-    //     {
-    //       question: "Maybe we *** a new car next year. (buy)",
-    //       isCorrect: "will buy",
-    //     },
-    //     {
-    //       question: "I think current Presindent *** reelected once again. (be)",
-    //       isCorrect: "will be",
-    //     },
-    //     {
-    //       question:
-    //         "Tomorrow morning John *** to Madrid for a business trip. (fly)",
-    //       isCorrect: "is flying",
-    //     },
-    //   ],
-    // },
-    // DRAG-&-DROP
-    // {
-    //   instruction:
-    //     "Drag an option of future tense and drop it into a fitting sentence to complete it.",
-    //   title: "Will / be going to / present continuous for future",
-    //   type: "drag-&-drop",
-    //   questions: [
-    //     {
-    //       question: "I *** my grandmother tomorrow.",
-    //       isCorrect: "am going to visit",
-    //     },
-    //     {
-    //       question: "This year I *** to Italy.",
-    //       isCorrect: "am going to go",
-    //     },
-    //     {
-    //       question: "Maybe we *** a new car next year.",
-    //       isCorrect: "will buy",
-    //     },
-    //     {
-    //       question: "I think current Presindent *** reelected once again.",
-    //       isCorrect: "will be",
-    //     },
-    //     {
-    //       question: "Tomorrow morning John *** to Madrid for a business trip.",
-    //       isCorrect: "is flying",
-    //     },
-    //   ],
-    // },
   ];
 
   const { section } = data[0];

@@ -7,6 +7,7 @@ function Tabs({ exercises, activeExercise, setSelection }) {
     const tabNumber = index + 1;
     return (
       <div
+        key={index}
         className={`px-6 text-indigo-900 font-bold py-3 shadow border-t-4 ${
           activeExercise === tabNumber
             ? "border-orange-400"
