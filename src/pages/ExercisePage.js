@@ -210,9 +210,9 @@ function ExercisePage() {
           cardImage: RelationshipsImg,
         },
         {
-          question: 'the same as "stay in contact"',
-          example: 'It\'s hard to ... with someone who doesn\'t want to be found',
-          isCorrect: "keep in touch",
+          question: 'the same as "stop being in contact"',
+          example: 'Unfortunately, we ... right after college graduation',
+          isCorrect: "lose touch",
           cardImage: RelationshipsImg,
         },
         {
