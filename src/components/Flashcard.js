@@ -16,7 +16,7 @@ function Flashcard({ question, isCorrect, cardImage, example, voice, speak }) {
 
   const cardClasses = `flex-grow flip-card ${
     isFlipped ? "flipped" : ""
-  } min-w-[250px] min-h-[300px] cursor-pointer`;
+  } min-w-[250px] min-h-[250px] cursor-pointer hover:scale-105 transition-all duration-700`;
 
   return (
     <div className={cardClasses} onClick={flipCard}>
@@ -25,7 +25,7 @@ function Flashcard({ question, isCorrect, cardImage, example, voice, speak }) {
           <div className="h-1/2 flex justify-center items-center">
             <p className="px-2 py-4 text-indigo-800 font-bold">{question}</p>
           </div>
-          <div className="bg-indigo-900 h-1/2 flex justify-center items-center rounded-b-md">
+          <div className="w-full bg-indigo-500 h-1/2 flex justify-center items-center rounded-b-md">
             <p className="px-2 py-4 text-white">{example}</p>
           </div>
         </div>
@@ -38,7 +38,7 @@ function Flashcard({ question, isCorrect, cardImage, example, voice, speak }) {
               className="flex items-center cursor-pointer hover:opacity-50 transition-all"
               onClick={playAudio}
             >
-              <p className="text-indigo-700 text-lg font-bold drop-shadow-md">
+              <p className="text-base md:text-lg text-indigo-700  font-bold drop-shadow-md">
                 {isCorrect}
               </p>
               <BsFillVolumeDownFill className="text-orange-500 ml-1 text-lg" />

@@ -73,7 +73,7 @@ function Exercise({
   };
 
   return (
-    <section className={active ? "px-12 py-10" : "hidden"}>
+    <section className={active ? "px-3 py-5 md:px-12 md:py-10" : "hidden"}>
       <ExerciseHeader title={title} instruction={instruction} />
       <ExerciseFeedback
         results={userResults}
