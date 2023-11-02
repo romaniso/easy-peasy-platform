@@ -1,6 +1,7 @@
 import {BsFillVolumeDownFill} from "react-icons/bs";
 import {LuCopyPlus} from "react-icons/lu";
 import {useState} from "react";
+import ToolTip from "./ToolTip";
 
 function Flashcard({question, isCorrect, cardImage, example, voice, speak}) {
     const [isFlipped, setIsFlipped] = useState(false);
@@ -23,7 +24,7 @@ function Flashcard({question, isCorrect, cardImage, example, voice, speak}) {
 
     const cardClasses = `flex-grow flip-card ${
         isFlipped ? "flipped" : ""
-    } min-w-[250px] min-h-[250px] cursor-pointer hover:scale-105 transition-all duration-700`;
+    } min-w-[250px] min-h-[280px] cursor-pointer hover:scale-105 transition-all duration-700`;
     const saveBtnClasses = `absolute text-2xl right-2 top-2 w-8 h-8 flex justify-center items-center rounded-md shadow-md transition-colors ${
         isSaved ? "bg-orange-600 hover:bg-orange-500" : "bg-black/30 hover:bg-black"
     }`
@@ -39,11 +40,13 @@ function Flashcard({question, isCorrect, cardImage, example, voice, speak}) {
                         <p className="px-2 py-4 text-white">{example}</p>
                     </div>
                 </div>
-                <div className="flip-card-back flex flex-col items-center overflow-hidden rounded-md relative">
+                <div className="flip-card-back flex flex-col items-center rounded-md relative">
                     <div className={saveBtnClasses} onClick={saveCard}>
-                        <LuCopyPlus className='text-white'/>
+                        <ToolTip tooltip={!isSaved && "Save the card to my Vocabulary"}>
+                            <LuCopyPlus className='text-white'/>
+                        </ToolTip>
                     </div>
-                    <img src={cardImage} alt="" className="w-full h-32 md:h-24 object-cover"/>
+                    <img src={cardImage} alt="" className="w-full h-24 md:h-28 object-cover"/>
                     <div className="basis-2/3 p-2 w-full flex flex-col justify-around items-start text-left">
                         <div
                             className="flex items-center cursor-pointer hover:opacity-50 transition-all"
