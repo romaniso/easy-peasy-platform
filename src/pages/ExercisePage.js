@@ -236,22 +236,22 @@ function ExercisePage() {
       type: "fill-box",
       words: [
         {
-          word: 'keep in touch"',
+          word: 'keep in touch',
           correctPlace: 3,
           correctForm: 'keep in touch',
         },
         {
-          word: 'lose touch"',
+          word: 'lose touch',
           correctPlace: 2,
           correctForm: 'lose touch',
         },
         {
-          word: 'get to know"',
+          word: 'get to know',
           correctPlace: 4,
           correctForm: 'get to know',
         },
         {
-          word: 'acquaintance"',
+          word: 'acquaintance',
           correctPlace: 5,
           correctForm: 'acquaintances',
         },
@@ -261,13 +261,12 @@ function ExercisePage() {
           correctForm: 'besties',
         },
       ],
-      text: 'In a quaint town, Sarah and Lisa were old ---. They shared secrets, adventures, and countless memories during their school years. However, life had its way of changing things, and after high school, they both moved to different cities, causing them to slowly ---.\n' +
+      text: 'In a quaint town, Sarah and Lisa were old ***. They shared secrets, adventures, and countless memories during their school years. However, life had its way of changing things, and after high school, they both moved to different cities, causing them to slowly ***.\n' +
           '\n' +
-          'One day, Sarah stumbled upon Lisa\'s social media profile. She saw Lisa\'s post about moving back to their hometown. Excited and eager to reconnect, Sarah sent her a message, saying, "It\'s been ages since we\'ve talked! Let\'s --- and catch up."\n' +
+          'One day, Sarah stumbled upon Lisa\'s social media profile. She saw Lisa\'s post about moving back to their hometown. Excited and eager to reconnect, Sarah sent her a message, saying, "It\'s been ages since we\'ve talked! Let\'s *** and catch up."\n' +
           '\n' +
-          'Lisa replied warmly, "I\'ve missed you too! I\'m back in town for good. We definitely need to --- each other again." They decided to meet up at a local café, where they reminisced about old times and shared stories about their lives in different cities. They realized they weren\'t just ---; they were best friends who had been apart for too long.\n' +
-          '\n' +
-          'Their friendship rekindled, and they promised to --keep in touch-- this time, to ensure they never --lost touch-- again. Sarah realized that even though they had been apart, the bond of friendship had remained strong. It was a heartwarming reminder of the enduring power of true friendship.\n'
+          'Lisa replied warmly, "I\'ve missed you too! I\'m back in town for good. We definitely need to *** each other again." They decided to meet up at a local café, where they reminisced about old times and shared stories about their lives in different cities. They realized they weren\'t just ***; they were best friends who had been apart for too long.\n' +
+          '\n'
     },
   ];
 
