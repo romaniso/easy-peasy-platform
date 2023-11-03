@@ -6,7 +6,7 @@ function ExerciseSet({ data }) {
   const [activeExercise, setActiveExercise] = useState(1);
   const [, ...exercises] = data;
   const renderedExercises = exercises.map(
-    ({ instruction, title, type, questions }, index) => {
+    ({ instruction, title, type, questions, words, text }, index) => {
       const exerciseNumber = index + 1;
       return (
         <Exercise
@@ -15,7 +15,8 @@ function ExerciseSet({ data }) {
           title={title}
           type={type}
           instruction={instruction}
-          questions={questions}
+          questions={questions || words}
+          text={text}
         />
       );
     }

@@ -46,7 +46,7 @@ function Flashcard({question, isCorrect, cardImage, example, voice, speak}) {
                             <LuCopyPlus className='text-white'/>
                         </ToolTip>
                     </div>
-                    <img src={cardImage} alt="" className="w-full h-24 md:h-28 object-cover"/>
+                    <img src={cardImage} alt="" className="w-full h-24 md:h-28 object-cover rounded-t-md"/>
                     <div className="basis-2/3 p-2 w-full flex flex-col justify-around items-start text-left">
                         <div
                             className="flex items-center cursor-pointer hover:opacity-50 transition-all"

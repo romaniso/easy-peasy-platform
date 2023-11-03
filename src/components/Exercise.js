@@ -10,6 +10,7 @@ function Exercise({
   instruction = "Choose the correct or most appropriate future forms to complete the sentences below.",
   title = "Will / be going to / present continuous for future",
   type = "dropdown",
+  text,
   questions = [
     {
       question: "I *** visit my grandmother tomorrow.",
@@ -83,6 +84,7 @@ function Exercise({
         onSubmit={handleSubmit}
         exerciseType={type}
         questions={questions}
+        text={text}
         results={userResults}
         selections={userSelections}
         onSelect={setUserSelections}
