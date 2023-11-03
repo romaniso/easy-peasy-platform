@@ -50,16 +50,21 @@ function Exercise({
         break;
       case "fill-in":
       case "drag-&-drop":
-      case "flash-card":
-        // but actually flash-cards will not be validated
-        //TODO: think about new case for flashcards
         keySheet = questions.map((question) => question.isCorrect);
+        break;
+      case "fill-box":
+        keySheet = questions.map((question) => [question.correctForm, question.correctPlace]).sort((a, b) => a[1] - b[1]);
         break;
       default:
         throw new Error("There is no such an exercise type");
     }
 
     const result = usersAnswers.map((answer, index) => {
+      if(type === 'fill-box'){
+        return answer.toLowerCase() === keySheet[index][0].toLowerCase()
+            ? "Same"
+            : "Different";
+      }
       return answer.toLowerCase() === keySheet[index].toLowerCase()
         ? "Same"
         : "Different";

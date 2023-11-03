@@ -24,6 +24,7 @@ function ExerciseBody({onSubmit, btnText = "Check out", exerciseType, questions,
         updatedValues[index] =
             exerciseType === "drag-&-drop" ? event : event.target.value;
         onSelect(updatedValues);
+        console.log(updatedValues);
     };
 
     let renderedExercise;
