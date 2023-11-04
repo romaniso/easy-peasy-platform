@@ -15,7 +15,7 @@ function Button({
     "flex items-center justify-center py-2 px-5 cursor-pointer transition-colors border shadow",
     {
       "bg-orange-400 text-white hover:bg-orange-500": primary,
-      "bg-stone-600 text-white hover:bg-stone-700": secondary,
+      "bg-stone-600 text-indigo-800 hover:bg-stone-700": secondary,
       "bg-green-500 text-fuchsia-900 hover:bg-green-600": success,
       "bg-yellow-500 text-fuchsia-900 hover:bg-yellow-600": warning,
       "bg-red-500 text-white hover:bg-red-600": danger,

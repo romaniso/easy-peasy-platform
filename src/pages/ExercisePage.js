@@ -1,135 +1,137 @@
 import useTop from "../hooks/useTop";
-import { useParams } from "react-router-dom";
+import {useParams} from "react-router-dom";
 import Panel from "../components/Panel";
 import ExerciseSet from "../components/ExerciseSet";
 import Cheetsheet from "../components/Cheetsheet";
 
 // Just for a template;
 import RelationshipsImg from "../assets/images/vocabulary/realtionships.jpg";
+
 //TODO: Here I will probably implement API request for data base where I get all content for cheetsheet md, exercises, instructions, etc based on path of URL and then send it to the Exercise component.
 
 function ExercisePage() {
-  useTop();
-  const { topic } = useParams();
-  //TODO: to be fetched from API/server and depending on a section type it will render a body conditionally
+    useTop();
+    const {topic} = useParams();
+    //TODO: to be fetched from API/server and depending on a section type it will render a body conditionally
 
-  //Grammar section
-  //  const data = [
-  //    { section: "grammar" },
-  //    {
-  //      instruction:
-  //        "Choose the correct or most appropriate future forms to complete the sentences below.",
-  //      title: "Will / be going to / present continuous for future",
-  //      type: "dropdown",
-  //      questions: [
-  //        {
-  //          question: "I *** visit my grandmother tomorrow.",
-  //          options: [
-  //            { text: "will", isCorrect: false },
-  //            { text: "am going to", isCorrect: true },
-  //            { text: "am visiting", isCorrect: false },
-  //          ],
-  //        },
-  //        {
-  //          question:
-  //            "They have tickets for the concert. They *** attend it tonight.",
-  //          options: [
-  //            { text: "will", isCorrect: false },
-  //            { text: "are going to", isCorrect: true },
-  //            { text: "are attending", isCorrect: false },
-  //          ],
-  //        },
-  //        {
-  //          question: "I think it *** rain later, so don't forget your umbrella.",
-  //          options: [
-  //            { text: "will", isCorrect: true },
-  //            { text: "is going to", isCorrect: false },
-  //            { text: "is raining", isCorrect: false },
-  //          ],
-  //        },
-  //        {
-  //          question: "She *** fly to Paris next week for a business meeting.",
-  //          options: [
-  //            { text: "will", isCorrect: false },
-  //            { text: "is going to", isCorrect: true },
-  //            { text: "is flying", isCorrect: false },
-  //          ],
-  //        },
-  //        {
-  //          question:
-  //            "We *** have a picnic at the park on Saturday if the weather is nice.",
-  //          options: [
-  //            { text: "will", isCorrect: false },
-  //            { text: "are going to", isCorrect: true },
-  //            { text: "are having", isCorrect: false },
-  //          ],
-  //        },
-  //      ],
-  //    },
-  //    // FIll-IN
-  //    {
-  //      instruction:
-  //        "Fill in the gaps with a correct or most appropriate future forms using a word in prompts to complete the sentences below.",
-  //      title: "Will / be going to / present continuous for future",
-  //      type: "fill-in",
-  //      questions: [
-  //        {
-  //          question: "I *** my grandmother tomorrow. (visit)",
-  //          isCorrect: "am going to visit",
-  //        },
-  //        {
-  //          question: "This year I *** to Italy (go).",
-  //          isCorrect: "am going to go",
-  //        },
-  //        {
-  //          question: "Maybe we *** a new car next year. (buy)",
-  //          isCorrect: "will buy",
-  //        },
-  //        {
-  //          question: "I think current Presindent *** reelected once again. (be)",
-  //          isCorrect: "will be",
-  //        },
-  //        {
-  //          question:
-  //            "Tomorrow morning John *** to Madrid for a business trip. (fly)",
-  //          isCorrect: "is flying",
-  //        },
-  //      ],
-  //    },
-  //    // DRAG-&-DROP
-  //    {
-  //      instruction:
-  //        "Drag an option of future tense and drop it into a fitting sentence to complete it.",
-  //      title: "Will / be going to / present continuous for future",
-  //      type: "drag-&-drop",
-  //      questions: [
-  //        {
-  //          question: "I *** my grandmother tomorrow.",
-  //          isCorrect: "am going to visit",
-  //        },
-  //        {
-  //          question: "This year I *** to Italy.",
-  //          isCorrect: "am going to go",
-  //        },
-  //        {
-  //          question: "Maybe we *** a new car next year.",
-  //          isCorrect: "will buy",
-  //        },
-  //        {
-  //          question: "I think current Presindent *** reelected once again.",
-  //          isCorrect: "will be",
-  //        },
-  //        {
-  //          question: "Tomorrow morning John *** to Madrid for a business trip.",
-  //          isCorrect: "is flying",
-  //        },
-  //      ],
-  //    },
-  //  ];
-  const cheetsheet = {
-    topic: "Future Tenses",
-    level: "B1",
-    content: `
+    //Grammar section
+    //  const data = [
+    //    { section: "grammar" },
+    //    // DROPDOWN
+    //    {
+    //      instruction:
+    //        "Choose the correct or most appropriate future forms to complete the sentences below.",
+    //      title: "Will / be going to / present continuous for future",
+    //      type: "dropdown",
+    //      questions: [
+    //        {
+    //          question: "I *** visit my grandmother tomorrow.",
+    //          options: [
+    //            { text: "will", isCorrect: false },
+    //            { text: "am going to", isCorrect: true },
+    //            { text: "am visiting", isCorrect: false },
+    //          ],
+    //        },
+    //        {
+    //          question:
+    //            "They have tickets for the concert. They *** attend it tonight.",
+    //          options: [
+    //            { text: "will", isCorrect: false },
+    //            { text: "are going to", isCorrect: true },
+    //            { text: "are attending", isCorrect: false },
+    //          ],
+    //        },
+    //        {
+    //          question: "I think it *** rain later, so don't forget your umbrella.",
+    //          options: [
+    //            { text: "will", isCorrect: true },
+    //            { text: "is going to", isCorrect: false },
+    //            { text: "is raining", isCorrect: false },
+    //          ],
+    //        },
+    //        {
+    //          question: "She *** fly to Paris next week for a business meeting.",
+    //          options: [
+    //            { text: "will", isCorrect: false },
+    //            { text: "is going to", isCorrect: true },
+    //            { text: "is flying", isCorrect: false },
+    //          ],
+    //        },
+    //        {
+    //          question:
+    //            "We *** have a picnic at the park on Saturday if the weather is nice.",
+    //          options: [
+    //            { text: "will", isCorrect: false },
+    //            { text: "are going to", isCorrect: true },
+    //            { text: "are having", isCorrect: false },
+    //          ],
+    //        },
+    //      ],
+    //    },
+    //    // FIll-IN
+    //    {
+    //      instruction:
+    //        "Fill in the gaps with a correct or most appropriate future forms using a word in prompts to complete the sentences below.",
+    //      title: "Will / be going to / present continuous for future",
+    //      type: "fill-in",
+    //      questions: [
+    //        {
+    //          question: "I *** my grandmother tomorrow. (visit)",
+    //          isCorrect: "am going to visit",
+    //        },
+    //        {
+    //          question: "This year I *** to Italy (go).",
+    //          isCorrect: "am going to go",
+    //        },
+    //        {
+    //          question: "Maybe we *** a new car next year. (buy)",
+    //          isCorrect: "will buy",
+    //        },
+    //        {
+    //          question: "I think current Presindent *** reelected once again. (be)",
+    //          isCorrect: "will be",
+    //        },
+    //        {
+    //          question:
+    //            "Tomorrow morning John *** to Madrid for a business trip. (fly)",
+    //          isCorrect: "is flying",
+    //        },
+    //      ],
+    //    },
+    //    // DRAG-&-DROP
+    //    {
+    //      instruction:
+    //        "Drag an option of future tense and drop it into a fitting sentence to complete it.",
+    //      title: "Will / be going to / present continuous for future",
+    //      type: "drag-&-drop",
+    //      questions: [
+    //        {
+    //          question: "I *** my grandmother tomorrow.",
+    //          isCorrect: "am going to visit",
+    //        },
+    //        {
+    //          question: "This year I *** to Italy.",
+    //          isCorrect: "am going to go",
+    //        },
+    //        {
+    //          question: "Maybe we *** a new car next year.",
+    //          isCorrect: "will buy",
+    //        },
+    //        {
+    //          question: "I think current Presindent *** reelected once again.",
+    //          isCorrect: "will be",
+    //        },
+    //        {
+    //          question: "Tomorrow morning John *** to Madrid for a business trip.",
+    //          isCorrect: "is flying",
+    //        },
+    //      ],
+    //    },
+    //  ];
+    const cheetsheet = {
+        topic: "Future Tenses",
+        level: "B1",
+        content: `
       <article>
          <p class="text-base text-orange-500 bg-stone-50 shadow-inner p-3 mb-5 rounded-lg">What tenses should I use to talk about future? Future simple or be going to or, maybe, present continuous will be enough? All! But it depends what you wanna say! Let break it down and see the difference.</p>
          
@@ -191,125 +193,180 @@ function ExercisePage() {
 
       </article>
       `,
-  };
+    };
 
-  //Vocabulary section
-  //TODO: consider how to fetch images for flashcards. I think of databases in a buffer format...
-  const data = [
-    { section: "vocabulary" },
-    {
-      instruction:
-        "Recall a proper word or phrase according to the definision on the card. When ready, flip a card and ckeck your answer",
-      title: "Words and phrases about relationships",
-      type: "flash-card",
-      questions: [
+    //Vocabulary section
+    //TODO: consider how to fetch images for flashcards. I think of databases in a buffer format...
+    const data = [
+        {section: "vocabulary"},
         {
-          question: 'the same as "stay in contact"',
-          example: 'It\'s hard to ... with someone who doesn\'t want to be found',
-          isCorrect: "keep in touch",
-          cardImage: RelationshipsImg,
+            instruction:
+                "Recall a proper word or phrase according to the definision on the card. When ready, flip a card and ckeck your answer",
+            title: "Words and phrases about relationships",
+            type: "flash-card",
+            questions: [
+                {
+                    question: 'the same as "stay in contact"',
+                    example: 'It\'s hard to ... with someone who doesn\'t want to be found',
+                    isCorrect: "keep in touch",
+                    cardImage: RelationshipsImg,
+                },
+                {
+                    question: 'the same as "stop being in contact"',
+                    example: 'Unfortunately, we ... right after college graduation',
+                    isCorrect: "lose touch",
+                    cardImage: RelationshipsImg,
+                },
+                {
+                    question: 'the same as "stay in contact"',
+                    example: 'It\'s hard to ... with someone who doesn\'t want to be found',
+                    isCorrect: "keep in touch",
+                    cardImage: RelationshipsImg,
+                },
+                {
+                    question: 'the same as "stay in contact"',
+                    example: 'It\'s hard to ... with someone who doesn\'t want to be found',
+                    isCorrect: "keep in touch",
+                    cardImage: RelationshipsImg,
+                },
+            ],
         },
         {
-          question: 'the same as "stop being in contact"',
-          example: 'Unfortunately, we ... right after college graduation',
-          isCorrect: "lose touch",
-          cardImage: RelationshipsImg,
+            instruction:
+                "Fill in the gaps with the words in the box below. When it is necessary, change the form according to a tense.",
+            title: "Words and phrases about relationships",
+            type: "fill-box",
+            words: [
+                {
+                    word: 'keep in touch',
+                    correctPlace: 3,
+                    correctForm: 'keep in touch',
+                },
+                {
+                    word: 'lose touch',
+                    correctPlace: 2,
+                    correctForm: 'lose touch',
+                },
+                {
+                    word: 'get to know',
+                    correctPlace: 4,
+                    correctForm: 'get to know',
+                },
+                {
+                    word: 'acquaintance',
+                    correctPlace: 5,
+                    correctForm: 'acquaintances',
+                },
+                {
+                    word: 'bestie',
+                    correctPlace: 1,
+                    correctForm: 'besties',
+                },
+            ],
+            text: 'In a quaint town, Sarah and Lisa were old ***. They shared secrets, adventures, and countless memories during their school years. However, life had its way of changing things, and after high school, they both moved to different cities, causing them to slowly ***.\n' +
+                '\n' +
+                'One day, Sarah stumbled upon Lisa\'s social media profile. She saw Lisa\'s post about moving back to their hometown. Excited and eager to reconnect, Sarah sent her a message, saying, "It\'s been ages since we\'ve talked! Let\'s *** and catch up."\n' +
+                '\n' +
+                'Lisa replied warmly, "I\'ve missed you too! I\'m back in town for good. We definitely need to *** each other again." They decided to meet up at a local café, where they reminisced about old times and shared stories about their lives in different cities. They realized they weren\'t just ***; they were best friends who had been apart for too long.\n' +
+                '\n'
         },
         {
-          question: 'the same as "stay in contact"',
-          example: 'It\'s hard to ... with someone who doesn\'t want to be found',
-          isCorrect: "keep in touch",
-          cardImage: RelationshipsImg,
+            instruction:
+                "Choose the appropriate word from the multiple options a, b, c, d.",
+            title: "Words and phrases about relationships",
+            type: "multiple-choice",
+            questions: [
+                {
+                    question: "I met my *** at a conference last year, and we've been good friends ever since.",
+                    options: [
+                        {text: "bestie", isCorrect: true},
+                        {text: "acquaintance", isCorrect: false},
+                        {text: "get to know", isCorrect: false},
+                        {text: "lose touch", isCorrect: false},
+                    ],
+                },
+                {
+                    question:
+                        "After graduating, I *** with most of my classmates from high school.",
+                    options: [
+                        {text: "bestie", isCorrect: false},
+                        {text: "acquaintance", isCorrect: false},
+                        {text: "get to know", isCorrect: false},
+                        {text: "lose touch", isCorrect: true},
+                    ],
+                },
+                {
+                    question: "I want to *** my new neighbors better, so I invited them for dinner.",
+                    options: [
+                        {text: "bestie", isCorrect: false},
+                        {text: "acquaintance", isCorrect: false},
+                        {text: "get to know", isCorrect: true},
+                        {text: "lose touch", isCorrect: false},
+                    ],
+                },
+                {
+                    question: "Sarah and I were *** in college, but we haven't seen each other for years.",
+                    options: [
+                        {text: "bestie", isCorrect: false},
+                        {text: "acquaintance", isCorrect: true},
+                        {text: "get to know", isCorrect: false},
+                        {text: "lose touch", isCorrect: false},
+                    ],
+                },
+                {
+                    question:
+                        "It's essential to *** with your friends, even if you live far away from each other.",
+                    options: [
+                        {text: "bestie", isCorrect: false},
+                        {text: "acquaintance", isCorrect: false},
+                        {text: "get to know", isCorrect: false},
+                        {text: "lose touch", isCorrect: true},
+                    ],
+                },
+            ],
         },
-        {
-          question: 'the same as "stay in contact"',
-          example: 'It\'s hard to ... with someone who doesn\'t want to be found',
-          isCorrect: "keep in touch",
-          cardImage: RelationshipsImg,
-        },
-      ],
-    },
-    {
-      instruction:
-        "Fill in the gaps with the words in the box below. When it is necessary, change the form according to a tense.",
-      title: "Words and phrases about relationships",
-      type: "fill-box",
-      words: [
-        {
-          word: 'keep in touch',
-          correctPlace: 3,
-          correctForm: 'keep in touch',
-        },
-        {
-          word: 'lose touch',
-          correctPlace: 2,
-          correctForm: 'lose touch',
-        },
-        {
-          word: 'get to know',
-          correctPlace: 4,
-          correctForm: 'get to know',
-        },
-        {
-          word: 'acquaintance',
-          correctPlace: 5,
-          correctForm: 'acquaintances',
-        },
-        {
-          word: 'bestie',
-          correctPlace: 1,
-          correctForm: 'besties',
-        },
-      ],
-      text: 'In a quaint town, Sarah and Lisa were old ***. They shared secrets, adventures, and countless memories during their school years. However, life had its way of changing things, and after high school, they both moved to different cities, causing them to slowly ***.\n' +
-          '\n' +
-          'One day, Sarah stumbled upon Lisa\'s social media profile. She saw Lisa\'s post about moving back to their hometown. Excited and eager to reconnect, Sarah sent her a message, saying, "It\'s been ages since we\'ve talked! Let\'s *** and catch up."\n' +
-          '\n' +
-          'Lisa replied warmly, "I\'ve missed you too! I\'m back in town for good. We definitely need to *** each other again." They decided to meet up at a local café, where they reminisced about old times and shared stories about their lives in different cities. They realized they weren\'t just ***; they were best friends who had been apart for too long.\n' +
-          '\n'
-    },
-  ];
+    ];
 
-  const { section } = data[0];
+    const {section} = data[0];
 
-  let content;
-  switch (section) {
-    case "grammar":
-      content = (
-        <Panel className="bg-white flex h-[850px] !p-0">
-          <ExerciseSet data={data} />
-          <Cheetsheet
-            topic={cheetsheet.topic}
-            level={cheetsheet.level}
-            content={cheetsheet.content}
-          />
-        </Panel>
-      );
-      break;
-    case "vocabulary":
-      content = (
-        <Panel className="bg-white flex !p-0">
-          <ExerciseSet data={data} />
-          {/*<Cheetsheet
+    let content;
+    switch (section) {
+        case "grammar":
+            content = (
+                <Panel className="bg-white flex h-[850px] !p-0">
+                    <ExerciseSet data={data}/>
+                    <Cheetsheet
+                        topic={cheetsheet.topic}
+                        level={cheetsheet.level}
+                        content={cheetsheet.content}
+                    />
+                </Panel>
+            );
+            break;
+        case "vocabulary":
+            content = (
+                <Panel className="bg-white flex !p-0">
+                    <ExerciseSet data={data}/>
+                    {/*<Cheetsheet
               topic={cheetsheet.topic}
               level={cheetsheet.level}
               content={cheetsheet.content}
             />*/}
-        </Panel>
-      );
-      break;
-    default:
-      throw new Error("There is no such an exercise section");
-  }
+                </Panel>
+            );
+            break;
+        default:
+            throw new Error("There is no such an exercise section");
+    }
 
-  return (
-    <div className="my-24 container mx-auto px-4">
-      <h1 className="text-4xl md:text-6xl text-center font-bold text-orange-500 drop-shadow mb-6 md:mb-8">
-        {topic}
-      </h1>
-      {content}
-    </div>
-  );
+    return (
+        <div className="my-24 container mx-auto px-4">
+            <h1 className="text-4xl md:text-6xl text-center font-bold text-orange-500 drop-shadow mb-6 md:mb-8">
+                {topic}
+            </h1>
+            {content}
+        </div>
+    );
 }
 
 export default ExercisePage;

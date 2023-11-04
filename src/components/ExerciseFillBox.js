@@ -38,7 +38,7 @@ function ExerciseFillBox({questions, text, results, onChange}) {
     return (
         <div>
             <div className="border rounded-md p-2 md:p-4 shadow mb-4 md:mb-6">{renderWords}</div>
-            <p className='text-base md:text-xl text-indigo-900 leading-loose mb-8 text-justify'>{renderText}</p>
+            <p className='text-base md:text-xl text-indigo-900 md:leading-loose mb-8 text-justify'>{renderText}</p>
         </div>
     );
 }
