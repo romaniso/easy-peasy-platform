@@ -43,6 +43,14 @@ function Exercise({
       case "drag-&-drop":
         keySheet = questions.map((question) => question.isCorrect);
         break;
+      case "multiple-choice":
+          keySheet = [];
+        questions.map((question) => question.options.filter((option) => {
+          if(option.isCorrect) {
+            keySheet.push(option.text);
+          }
+      }));
+        break;
       case "fill-box":
         keySheet = questions.map((question) => [question.correctForm, question.correctPlace]).sort((a, b) => a[1] - b[1]);
         break;

@@ -7,6 +7,7 @@ import ExerciseDropdown from "./ExerciseDropdown";
 import ExerciseFill from "./ExerciseFill";
 import Flashcard from "./Flashcard";
 import ExerciseFillBox from "./ExerciseFillBox";
+import ExerciseMultipleChoice from "./ExerciseMultipleChoice";
 
 function ExerciseBody({onSubmit, btnText = "Check out", exerciseType, questions, results, selections, onSelect, text}) {
     const [generalAmericanVoice, setGeneralAmericanVoice] = useState(null);
@@ -21,13 +22,30 @@ function ExerciseBody({onSubmit, btnText = "Check out", exerciseType, questions,
 
     const handleSelectChange = (index, event) => {
         const updatedValues = [...selections];
+
+        //@todo: Maybe SWITCH?
         updatedValues[index] =
-            exerciseType === "drag-&-drop" ? event : event.target.value;
+            exerciseType === "drag-&-drop" || exerciseType === 'multiple-choice' ? event : event.target.value;
         onSelect(updatedValues);
     };
 
     let renderedExercise;
     switch (exerciseType) {
+        case "multiple-choice":
+            renderedExercise = (
+                <form onSubmit={onSubmit}>
+                    <ExerciseMultipleChoice
+                        questions={questions}
+                        results={results}
+                        selections={selections}
+                        onChange={handleSelectChange}
+                    />
+                    <Button primary rounded className="w-full md:w-1/5" type="submit">
+                        {btnText}
+                    </Button>
+                </form>
+            );
+            break;
         case "dropdown":
             renderedExercise = (
                 <form onSubmit={onSubmit}>
