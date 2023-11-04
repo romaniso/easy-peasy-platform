@@ -12,7 +12,7 @@ function ExerciseMultipleChoice({questions, results, selections, onChange}) {
                         <FaRegThumbsDown className="inline-block ml-2 text-red-400"/>
                     ));
 
-                const choiceLetters = ['a', 'b', 'c', 'd', 'e'];
+                const choiceLetters = ['a', 'b', 'c', 'd', 'e', 'f', 'g'];
 
                 const renderedSentence = (
                     <div className="text-indigo-900 text-xl mb-4" key={index}>
@@ -23,10 +23,9 @@ function ExerciseMultipleChoice({questions, results, selections, onChange}) {
                             // Conditional Render
                             const emptyPart = (
                                 <>
-                  <span
-                      className="inline-block text-base md:text-xl h-6 w-32 md:h-8 md:w-40 p-1 mr-1 border rounded-md shadow-inner text-indigo-800 transition-colors duration-700 align-bottom"
-                      key={index}
-                  ></span>
+                                    <span
+                                        className="text-base md:text-xl h-6 w-32 md:h-8 md:w-40 mr-1 border rounded-md shadow-inner text-indigo-800 transition-colors duration-700 align-bottom p-1 inline-flex items-center font-bold"
+                                        key={index}>{selections[index]}</span>
                                     {part}
                                     {feedbackIcon}
                                 </>
@@ -41,7 +40,7 @@ function ExerciseMultipleChoice({questions, results, selections, onChange}) {
                 );
 
                 const renderedChoices = (
-                    <ul className="mb-8 ml-8 text-base md:text-lg text-orange-600">
+                    <ul className="mb-8 md:ml-8 text-base md:text-lg text-orange-600 md:flex md:gap-8">
                         {options.map((option, optionIndex) => {
                             if (optionIndex >= choiceLetters.length) {
                                 throw new Error("Too many options");
@@ -53,7 +52,7 @@ function ExerciseMultipleChoice({questions, results, selections, onChange}) {
                                     {choiceLetter}){" "}
                                     <span
                                         onClick={() => onChange(index, option.text)}
-                                        className="font-bold text-indigo-600 bg-indigo-50 shadow py-1 px-2 rounded-md hover:opacity-75 cursor-pointer">
+                                        className={` font-bold bg-indigo-50 py-1 px-2 rounded-md hover:opacity-75 cursor-pointer ${selections[index] === option.text ? 'border border-orange-300 shadow-inner text-indigo-400' : 'text-indigo-800 shadow'}`}>
                     {option.text}
                   </span>
                                 </li>

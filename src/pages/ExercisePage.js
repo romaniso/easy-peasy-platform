@@ -291,8 +291,8 @@ function ExercisePage() {
                     options: [
                         {text: "bestie", isCorrect: false},
                         {text: "acquaintance", isCorrect: false},
-                        {text: "get to know", isCorrect: false},
-                        {text: "lose touch", isCorrect: true},
+                        {text: "got to know", isCorrect: false},
+                        {text: "lost touch", isCorrect: true},
                     ],
                 },
                 {
@@ -307,8 +307,8 @@ function ExercisePage() {
                 {
                     question: "Sarah and I were *** in college, but we haven't seen each other for years.",
                     options: [
-                        {text: "bestie", isCorrect: false},
-                        {text: "acquaintance", isCorrect: true},
+                        {text: "besties", isCorrect: true},
+                        {text: "acquaintance", isCorrect: false},
                         {text: "get to know", isCorrect: false},
                         {text: "lose touch", isCorrect: false},
                     ],
@@ -320,7 +320,7 @@ function ExercisePage() {
                         {text: "bestie", isCorrect: false},
                         {text: "acquaintance", isCorrect: false},
                         {text: "get to know", isCorrect: false},
-                        {text: "lose touch", isCorrect: true},
+                        {text: "keep in touch", isCorrect: true},
                     ],
                 },
             ],
