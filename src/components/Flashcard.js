@@ -48,15 +48,17 @@ function Flashcard({question, isCorrect, cardImage, example, voice, speak}) {
                     </div>
                     <img src={cardImage} alt="" className="w-full h-24 md:h-28 object-cover rounded-t-md"/>
                     <div className="basis-2/3 p-2 w-full flex flex-col justify-around items-start text-left">
-                        <div
-                            className="flex items-center cursor-pointer hover:opacity-50 transition-all"
-                            onClick={playAudio}
-                        >
-                            <p className="text-base md:text-lg text-indigo-700  font-bold drop-shadow-md">
-                                {isCorrect}
-                            </p>
-                            <BsFillVolumeDownFill className="text-orange-500 ml-1 text-lg"/>
-                        </div>
+                        <ToolTip tooltip={"Listen to the pronunciation"}>
+                            <div
+                                className="flex items-center cursor-pointer hover:opacity-50 transition-all"
+                                onClick={playAudio}
+                            >
+                                <p className="text-base md:text-lg text-indigo-700  font-bold drop-shadow-md">
+                                    {isCorrect}
+                                </p>
+                                <BsFillVolumeDownFill className="text-orange-500 ml-1 text-lg"/>
+                            </div>
+                        </ToolTip>
                         <div>
                             <p className="mb-2">{question}</p>
                             <p className="text-sm italic text-indigo-500">{example}</p>

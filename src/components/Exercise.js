@@ -7,20 +7,11 @@ import ExerciseFeedback from "./ExerciseFeedback";
 
 function Exercise({
   active = false,
-  instruction = "Choose the correct or most appropriate future forms to complete the sentences below.",
-  title = "Will / be going to / present continuous for future",
-  type = "dropdown",
+  instruction,
+  title,
+  type,
   text,
-  questions = [
-    {
-      question: "I *** visit my grandmother tomorrow.",
-      options: [
-        { text: "will", isCorrect: false },
-        { text: "am going to", isCorrect: true },
-        { text: "am visiting", isCorrect: false },
-      ],
-    },
-  ],
+  questions
 }) {
   const [userSelections, setUserSelections] = useState(
     Array(questions.length).fill("")

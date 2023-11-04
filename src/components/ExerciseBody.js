@@ -24,7 +24,6 @@ function ExerciseBody({onSubmit, btnText = "Check out", exerciseType, questions,
         updatedValues[index] =
             exerciseType === "drag-&-drop" ? event : event.target.value;
         onSelect(updatedValues);
-        console.log(updatedValues);
     };
 
     let renderedExercise;
@@ -38,7 +37,7 @@ function ExerciseBody({onSubmit, btnText = "Check out", exerciseType, questions,
                         selections={selections}
                         onChange={handleSelectChange}
                     />
-                    <Button primary rounded className="w-1/5" type="submit">
+                    <Button primary rounded className="w-full md:w-1/5" type="submit">
                         {btnText}
                     </Button>
                 </form>
@@ -52,7 +51,7 @@ function ExerciseBody({onSubmit, btnText = "Check out", exerciseType, questions,
                         results={results}
                         onChange={handleSelectChange}
                     />
-                    <Button primary rounded className="w-1/5" type="submit">
+                    <Button primary rounded className="w-full md:w-1/5" type="submit">
                         {btnText}
                     </Button>
                 </form>
@@ -67,7 +66,7 @@ function ExerciseBody({onSubmit, btnText = "Check out", exerciseType, questions,
                         text={text}
                         onChange={handleSelectChange}
                     />
-                    <Button primary rounded className="w-1/5" type="submit">
+                    <Button primary rounded className="w-full md:w-1/5" type="submit">
                         {btnText}
                     </Button>
                 </form>
@@ -91,7 +90,7 @@ function ExerciseBody({onSubmit, btnText = "Check out", exerciseType, questions,
                             isFilled: null,
                         }))}
                     />
-                    <Button primary rounded className="w-1/5" onClick={onSubmit}>
+                    <Button primary rounded className="w-full md:w-1/5" onClick={onSubmit}>
                         {btnText}
                     </Button>
                 </div>
