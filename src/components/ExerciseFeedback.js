@@ -1,6 +1,6 @@
 function ExerciseFeedback({ results, questionsNumber }) {
   return results ? (
-    <p className="text-xl text-indigo-900 bg-stone-50 shadow-inner p-5 mb-4 rounded-lg inline-block">
+    <p className="text-lg md:text-xl text-indigo-900 bg-stone-50 shadow-inner p-2 md:p-5 mb-4 rounded-lg inline-block">
       Your score:{" "}
       <span
         className={

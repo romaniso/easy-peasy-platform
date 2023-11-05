@@ -24,7 +24,7 @@ function ExerciseMultipleChoice({questions, results, selections, onChange}) {
                             const emptyPart = (
                                 <>
                                     <span
-                                        className="text-base md:text-xl h-6 w-32 md:h-8 md:w-40 mr-1 border rounded-md shadow-inner text-indigo-800 transition-colors duration-700 align-bottom p-1 inline-flex items-center font-bold"
+                                        className="text-base md:text-xl h-6 min-w-[100px] md:h-8 md:min-w-[120px] mr-1 border rounded-md shadow-inner text-indigo-800 transition-colors duration-700 align-bottom p-1 inline-flex items-center font-bold"
                                         key={index}>{selections[index]}</span>
                                     {part}
                                     {feedbackIcon}
