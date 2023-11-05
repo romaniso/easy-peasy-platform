@@ -54,6 +54,9 @@ function Exercise({
       case "fill-box":
         keySheet = questions.map((question) => [question.correctForm, question.correctPlace]).sort((a, b) => a[1] - b[1]);
         break;
+      case "fill-in-letter":
+        keySheet = questions;
+        break;
       default:
         throw new Error("There is no such an exercise type");
     }

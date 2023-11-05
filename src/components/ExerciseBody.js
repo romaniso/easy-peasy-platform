@@ -2,12 +2,15 @@ import {useState, useEffect} from "react";
 import {useSpeechSynthesis} from "react-speech-kit";
 
 import Button from "./Button";
+
+// Exercise Types
 import ExerciseDraggable from "./ExerciseDraggable";
 import ExerciseDropdown from "./ExerciseDropdown";
 import ExerciseFill from "./ExerciseFill";
 import Flashcard from "./Flashcard";
 import ExerciseFillBox from "./ExerciseFillBox";
 import ExerciseMultipleChoice from "./ExerciseMultipleChoice";
+import ExerciseFillInLetter from "./ExerciseFillInLetter";
 
 function ExerciseBody({onSubmit, btnText = "Check out", exerciseType, questions, results, selections, onSelect, text}) {
     const [generalAmericanVoice, setGeneralAmericanVoice] = useState(null);
@@ -65,6 +68,20 @@ function ExerciseBody({onSubmit, btnText = "Check out", exerciseType, questions,
             renderedExercise = (
                 <form onSubmit={onSubmit}>
                     <ExerciseFill
+                        questions={questions}
+                        results={results}
+                        onChange={handleSelectChange}
+                    />
+                    <Button primary rounded className="w-full md:w-1/5" type="submit">
+                        {btnText}
+                    </Button>
+                </form>
+            );
+            break;
+        case "fill-in-letter":
+            renderedExercise = (
+                <form onSubmit={onSubmit}>
+                    <ExerciseFillInLetter
                         questions={questions}
                         results={results}
                         onChange={handleSelectChange}

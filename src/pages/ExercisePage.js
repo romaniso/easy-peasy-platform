@@ -201,7 +201,7 @@ function ExercisePage() {
         {section: "vocabulary"},
         {
             instruction:
-                "Recall a proper word or phrase according to the definision on the card. When ready, flip a card and ckeck your answer",
+                "Recall a proper word or phrase according to the definition on the card. When ready, flip a card and check your answer",
             title: "Words and phrases about relationships",
             type: "flash-card",
             questions: [
@@ -323,6 +323,19 @@ function ExercisePage() {
                         {text: "keep in touch", isCorrect: true},
                     ],
                 },
+            ],
+        },
+        {
+            instruction:
+                "Fill in missing letters to complete a word or a phrase.",
+            title: "Words and phrases about relationships",
+            type: "fill-in-letter",
+            words: [
+                "bestie",
+                "acquaintance",
+                "get to know",
+                "lose touch",
+                "keep in touch",
             ],
         },
     ];
