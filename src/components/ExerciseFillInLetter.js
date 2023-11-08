@@ -1,17 +1,28 @@
-import {useEffect, useState} from "react";
+import {useEffect, useRef, useState} from "react";
 
 function ExerciseFillInLetter({ questions, onChange, results }) {
     const [insertedWords, setInsertedWords] = useState([]);
+    const [activeInputIndexArr, setActiveInputIndexArr] = useState([0,0]);
+
+    const inputRef = useRef();
     const handleChange = ({target}, wordIndex, charIndex) => {
+        //updating insertedWords array
         const {value} = target;
-        console.log(value, wordIndex, charIndex);
+        const newWord = [...insertedWords[wordIndex]];
+        newWord[charIndex] = value.substring(value.length - 1);
+        const updatedInsertedWords = insertedWords;
+        updatedInsertedWords[wordIndex] = newWord;
+        setInsertedWords(updatedInsertedWords);
 
-
+        // const updatedActiveInputIndexArr = [...activeInputIndexArr];
+        // while (insertedWords[wordIndex][charIndex + 1] !== '*'){
+        //     updatedActiveInputIndexArr[1]++;
+        // }
+        // setActiveInputIndexArr(activeInputIndexArr);
         // if lastChar onChange up to selections
 
     }
 
-    //@todo: separate randomizing free spaces saving it on states as an array and then build html
     const randomizeIndex = (max) => Math.floor(Math.random() * max);
     const handleWord = (word, index) => {
         const arrWord = word.split("");
@@ -40,7 +51,7 @@ function ExerciseFillInLetter({ questions, onChange, results }) {
     };
 
     useEffect(() => {
-        questions.map((word, index) => handleWord(word, index))
+        questions.map((word, index) => handleWord(word, index));
     }, []);
 
     const renderedExercise = insertedWords.map((word, wordIndex) => (
@@ -53,6 +64,8 @@ function ExerciseFillInLetter({ questions, onChange, results }) {
                     if (word[charIndex] === "*") {
                         return (
                             <input
+                                //check if this is an active input
+                                ref={wordIndex === activeInputIndexArr[0] && charIndex === activeInputIndexArr[1] ? inputRef: null}
                                 key={charIndex}
                                 className="text-lg md:text-xl text-center md:p-1 border rounded-md shadow-inner text-indigo-800 font-bold outline-none w-6 md:w-8 hover:scale-105 focus:border-orange-300 hover:border-orange-300 transition-all duration-500"
                                 name="letter"

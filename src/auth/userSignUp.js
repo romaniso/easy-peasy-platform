@@ -1,4 +1,4 @@
-import { projectAuth } from "../firebase/config";
+  import { projectAuth } from "../firebase/config";
 
 let error = null;
 
