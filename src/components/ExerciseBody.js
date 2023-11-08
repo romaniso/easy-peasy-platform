@@ -26,10 +26,14 @@ function ExerciseBody({onSubmit, btnText = "Check out", exerciseType, questions,
     const handleSelectChange = (index, event) => {
         const updatedValues = [...selections];
 
+        console.log('Odpaliłem onChange', updatedValues);
+
         //@todo: Maybe SWITCH?
         updatedValues[index] =
-            exerciseType === "drag-&-drop" || exerciseType === 'multiple-choice' ? event : event.target.value;
+            exerciseType === "drag-&-drop" || exerciseType === 'multiple-choice' || exerciseType === 'fill-in-letter' ? event : event.target.value;
         onSelect(updatedValues);
+
+        console.log(updatedValues);
     };
 
     let renderedExercise;
