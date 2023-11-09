@@ -9,14 +9,26 @@ function FillInLetterUnit({wordIndex, word, onFill, insertedWord}) {
         if(word[newIndex] !== "*" || word[newIndex] === " "){
             updateInput(newIndex);
         } else {
-            console.log('Else')
             setActiveInputIndex(newIndex);
         }
+    }
 
+    const handleOnKeyDown = (e, inputIndex) => {
+        if(e.key === "Backspace") {
+            // e.preventDefault();
+            onFill("*", wordIndex, inputIndex);
+            let newIndex = inputIndex - 1;
+            while(newIndex >= 0 && word[newIndex] !== "*") {
+                console.log('Jump');
+                newIndex = newIndex - 1;
+            }
+            setActiveInputIndex(newIndex);
+        }
     }
 
     useEffect(() => {
         inputRef.current?.focus();
+        console.log("active index: ", activeInputIndex)
 
     }, [activeInputIndex]);
 
@@ -36,12 +48,14 @@ function FillInLetterUnit({wordIndex, word, onFill, insertedWord}) {
                             name="letter"
                             type="text"
                             autoComplete="off"
+                            maxLength={1}
+                            value={insertedWord[charIndex] !== "*" ? insertedWord[charIndex] : undefined}
+                            // onKeyDown={(e) => handleOnKeyDown(e, charIndex)}
                             onChange={(e) => {
                                 onFill(e, wordIndex, charIndex)
                                 updateInput(charIndex)
                             }}
-                            maxLength={1}
-                            value={insertedWord[charIndex] !== "*" ? insertedWord[charIndex] : undefined}
+                            onClick={() => setActiveInputIndex(charIndex)}
                         />
                     );
                 } else if (word[charIndex] === " ") {

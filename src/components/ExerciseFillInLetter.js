@@ -3,11 +3,16 @@ import FillInLetterUnit from "./FillInLetterUnit";
 
 function ExerciseFillInLetter({ questions, onChange, results }) {
     const [insertedWords, setInsertedWords] = useState([]);
-    const handleChange = ({target}, wordIndex, charIndex) => {
+    const handleChange = (e, wordIndex, charIndex) => {
         //updating insertedWords array
-        const {value} = target;
+        let value;
+        if(e.target){
+        value = e.target.value;
+        } else {
+            value = e;
+        }
         const newWord = [...insertedWords[wordIndex]];
-        newWord[charIndex] = value.substring(value.length - 1);
+        newWord[charIndex] = !value? '*' : value.substring(value.length - 1);
         const updatedInsertedWords = insertedWords;
         updatedInsertedWords[wordIndex] = newWord;
         setInsertedWords(updatedInsertedWords);
@@ -16,6 +21,8 @@ function ExerciseFillInLetter({ questions, onChange, results }) {
             const readyWord = insertedWords[wordIndex].join("");
             onChange(wordIndex, readyWord);
         }
+
+        console.log(insertedWords[wordIndex]);
     }
 
     const randomizeIndex = (max) => Math.floor(Math.random() * max);
