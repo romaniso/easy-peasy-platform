@@ -1,8 +1,31 @@
 import {useEffect, useRef, useState} from "react";
-function FillInLetterUnit({wordIndex, word, onFill, insertedWord}) {
+function FillInLetterUnit({wordIndex, word, onFill}) {
     const [activeInputIndex, setActiveInputIndex] = useState();
+    const [wordToComplete, setWord] = useState(word);
 
-    const inputRef = useRef();
+    const inputRefs = useRef([]);
+
+    const handleChange = ({target}, charIndex) => {
+        const {value} = target;
+        const newWord = [...wordToComplete];
+        newWord[charIndex] = !value? '*' : value.substring(value.length - 1);
+        setWord(newWord);
+    }
+
+    useEffect(() => {
+        if (activeInputIndex !== undefined) {
+            inputRefs.current[activeInputIndex]?.focus();
+        }
+
+        if(!wordToComplete.includes("*")){
+            console.log('Ready to send')
+            const readyWord = wordToComplete;
+            // console.log(readyWord);
+            onFill(wordIndex, readyWord);
+        }
+
+        // console.log("Updated: ", wordToComplete);
+    }, [activeInputIndex, wordToComplete]);
     const updateInput = (inputIndex) => {
         if(inputIndex === word.length - 1) return;
         let newIndex = inputIndex + 1;
@@ -14,23 +37,20 @@ function FillInLetterUnit({wordIndex, word, onFill, insertedWord}) {
     }
 
     const handleOnKeyDown = (e, inputIndex) => {
-        if(e.key === "Backspace") {
-            // e.preventDefault();
-            onFill("*", wordIndex, inputIndex);
+        if (e.key === "Backspace") {
+            e.preventDefault();
+
             let newIndex = inputIndex - 1;
-            while(newIndex >= 0 && word[newIndex] !== "*") {
-                console.log('Jump');
+            while (newIndex >= 0 && word[newIndex] !== "*") {
                 newIndex = newIndex - 1;
             }
+            console.log(wordToComplete);
+            const updatedWordWithRemovedChar = [...wordToComplete];
+            updatedWordWithRemovedChar[inputIndex] = "*"
+            setWord(updatedWordWithRemovedChar);
             setActiveInputIndex(newIndex);
         }
-    }
-
-    useEffect(() => {
-        inputRef.current?.focus();
-        console.log("active index: ", activeInputIndex)
-
-    }, [activeInputIndex]);
+    };
 
     return ( <div key={wordIndex}>
       <span className="mr-2 md:mr-4 bg-indigo-400 text-white py-[2px] md:py-1 px-2 md:px-2 rounded-lg text-sm md:text-base shadow">
@@ -42,18 +62,18 @@ function FillInLetterUnit({wordIndex, word, onFill, insertedWord}) {
                     return (
                         <input
                             //check if this is an active input
-                            ref={charIndex === activeInputIndex ? inputRef: null}
+                            ref={(el) => (inputRefs.current[charIndex] = el)}
                             key={charIndex}
                             className="text-lg md:text-xl text-center md:p-1 border rounded-md shadow-inner text-indigo-800 font-bold outline-none w-6 md:w-8 hover:scale-105 focus:border-orange-300 hover:border-orange-300 transition-all duration-500"
                             name="letter"
                             type="text"
                             autoComplete="off"
                             maxLength={1}
-                            value={insertedWord[charIndex] !== "*" ? insertedWord[charIndex] : undefined}
-                            // onKeyDown={(e) => handleOnKeyDown(e, charIndex)}
+                            value={wordToComplete[charIndex] !== "*" ? wordToComplete[charIndex] : ""}
+                            onKeyDown={(e) => handleOnKeyDown(e, charIndex)}
                             onChange={(e) => {
-                                onFill(e, wordIndex, charIndex)
                                 updateInput(charIndex)
+                                handleChange(e, charIndex)
                             }}
                             onClick={() => setActiveInputIndex(charIndex)}
                         />

@@ -26,6 +26,12 @@ function ExerciseBody({onSubmit, btnText = "Check out", exerciseType, questions,
     const handleSelectChange = (index, event) => {
         const updatedValues = [...selections];
 
+
+        if(exerciseType === 'fill-in-letter') {
+            updatedValues[index] = event.join('');
+            onSelect(updatedValues);
+            return;
+        }
         //@todo: Maybe SWITCH?
         updatedValues[index] =
             exerciseType === "drag-&-drop" || exerciseType === 'multiple-choice' || exerciseType === 'fill-in-letter' ? event : event.target.value;
