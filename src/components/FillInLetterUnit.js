@@ -16,15 +16,9 @@ function FillInLetterUnit({wordIndex, word, onFill}) {
         if (activeInputIndex !== undefined) {
             inputRefs.current[activeInputIndex]?.focus();
         }
-
         if(!wordToComplete.includes("*")){
-            console.log('Ready to send')
-            const readyWord = wordToComplete;
-            // console.log(readyWord);
-            onFill(wordIndex, readyWord);
+            onFill(wordIndex, wordToComplete);
         }
-
-        // console.log("Updated: ", wordToComplete);
     }, [activeInputIndex, wordToComplete]);
     const updateInput = (inputIndex) => {
         if(inputIndex === word.length - 1) return;
@@ -44,7 +38,6 @@ function FillInLetterUnit({wordIndex, word, onFill}) {
             while (newIndex >= 0 && word[newIndex] !== "*") {
                 newIndex = newIndex - 1;
             }
-            console.log(wordToComplete);
             const updatedWordWithRemovedChar = [...wordToComplete];
             updatedWordWithRemovedChar[inputIndex] = "*"
             setWord(updatedWordWithRemovedChar);
@@ -80,6 +73,8 @@ function FillInLetterUnit({wordIndex, word, onFill}) {
                     );
                 } else if (word[charIndex] === " ") {
                     return <span key={charIndex} className="w-4 md:w-6">{char}</span>;
+                // } else if(!word[charIndex].isAutoCompleted) {
+                //     return <span key={charIndex} className="text-indigo-900 text-lg md:text-xl">{word[charIndex]}</span>;
                 } else {
                     return <span key={charIndex} className="text-indigo-900 text-lg md:text-xl">{word[charIndex]}</span>;
                 }

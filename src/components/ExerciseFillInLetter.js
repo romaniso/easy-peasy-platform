@@ -1,30 +1,9 @@
 import {useEffect, useState} from "react";
 import FillInLetterUnit from "./FillInLetterUnit";
+import {FaRegThumbsDown, FaRegThumbsUp} from "react-icons/fa";
 
 function ExerciseFillInLetter({ questions, onChange, results }) {
     const [insertedWords, setInsertedWords] = useState([]);
-    // const handleChange = (e, wordIndex, charIndex) => {
-    //     //updating insertedWords array
-    //     let value;
-    //     if(e.target){
-    //     value = e.target.value;
-    //     } else {
-    //         value = e;
-    //     }
-    //     const newWord = [...insertedWords[wordIndex]];
-    //     newWord[charIndex] = !value? '*' : value.substring(value.length - 1);
-    //     const updatedInsertedWords = insertedWords;
-    //     updatedInsertedWords[wordIndex] = newWord;
-    //     setInsertedWords(updatedInsertedWords);
-    //
-    //     if(!insertedWords[wordIndex].includes("*")){
-    //         const readyWord = insertedWords[wordIndex].join("");
-    //         // onChange(wordIndex, readyWord);
-    //     }
-    //
-    //     // console.log(insertedWords[wordIndex]);
-    // }
-
     const randomizeIndex = (max) => Math.floor(Math.random() * max);
     const handleWord = (word, index) => {
         const arrWord = word.split("");
@@ -60,18 +39,24 @@ function ExerciseFillInLetter({ questions, onChange, results }) {
         newInsertedWords[wordIndex] = updatedWord;
         setInsertedWords(newInsertedWords);
         // Notify parent about the change
-
-        // console.log(insertedWords[wordIndex]);
         onChange(wordIndex, updatedWord);
     };
 
-    const renderedExercise = insertedWords.map((word, wordIndex) => (
-        <FillInLetterUnit key={wordIndex} word={word} wordIndex={wordIndex} onFill={handleSingleWordChange}/>
-    ));
+    const renderedExercise = insertedWords.map((word, wordIndex) => {
+        const feedbackIcon =
+        results &&
+        (results[wordIndex] === "Same" ? (
+            <FaRegThumbsUp className="inline-block text-green-500 ml-2" />
+        ) : (
+            <FaRegThumbsDown className="inline-block ml-2 text-red-400" />
+        ));
+        return <div className='flex items-baseline gap-2'>
+            <FillInLetterUnit key={wordIndex} word={word} wordIndex={wordIndex} onFill={handleSingleWordChange}/>
+            {feedbackIcon}
+        </div>
+    });
 
     return <div>{renderedExercise}</div>;
 }
 
 export default ExerciseFillInLetter;
-
-// return <input key={charIndex} className="text-lg md:text-xl text-center md:p-1 border rounded-md shadow-inner text-indigo-800 font-bold outline-none w-6 md:w-8 hover:scale-105 focus:border-orange-300 hover:border-orange-300 transition-all duration-500" value={wordToComplete[charIndex]} data-auto-filled={true}/>;
