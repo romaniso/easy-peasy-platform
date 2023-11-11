@@ -45,7 +45,6 @@ function ExerciseFillInLetter({ questions, onChange, results }) {
 
     useEffect(() => {
         questions.map((word, index) => handleWord(word, index));
-        // console.log(coveredIndexes);
     }, []);
     const handleSingleWordChange = (wordIndex, updatedWord) => {
         const newInsertedWords = [...insertedWords];
@@ -64,7 +63,7 @@ function ExerciseFillInLetter({ questions, onChange, results }) {
             <FaRegThumbsDown className="inline-block ml-2 text-red-400" />
         ));
         return <div className='flex items-baseline gap-2'>
-            <FillInLetterUnit key={wordIndex} word={word} wordIndex={wordIndex} onFill={handleSingleWordChange} coveredIndexes={coveredIndexes[wordIndex]}/>
+            <FillInLetterUnit key={wordIndex} word={word} wordIndex={wordIndex} onFill={handleSingleWordChange} coveredIndexes={coveredIndexes[wordIndex]} results={results}/>
             {feedbackIcon}
         </div>
     });

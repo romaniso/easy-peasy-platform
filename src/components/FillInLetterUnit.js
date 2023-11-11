@@ -1,5 +1,6 @@
 import {useEffect, useRef, useState} from "react";
-function FillInLetterUnit({wordIndex, word, onFill, coveredIndexes}) {
+import className from "classnames";
+function FillInLetterUnit({wordIndex, word, onFill, coveredIndexes, results}) {
     const [activeInputIndex, setActiveInputIndex] = useState();
     const [wordToComplete, setWord] = useState(word);
 
@@ -16,11 +17,9 @@ function FillInLetterUnit({wordIndex, word, onFill, coveredIndexes}) {
         if (activeInputIndex !== undefined) {
             inputRefs.current[activeInputIndex]?.focus();
         }
-        if(!wordToComplete.includes("*")){
-            onFill(wordIndex, wordToComplete);
-        }
-        console.log(coveredIndexes);
-    }, [activeInputIndex, wordToComplete]);
+        onFill(wordIndex, wordToComplete);
+        // console.log("Results from Unit: ", results);
+    }, [activeInputIndex, wordToComplete, results]);
     const updateInput = (inputIndex) => {
         if(inputIndex === word.length - 1) return;
         let newIndex = inputIndex + 1;
@@ -52,12 +51,19 @@ function FillInLetterUnit({wordIndex, word, onFill, coveredIndexes}) {
       </span>
         <div className="inline-flex items-center gap-1 mb-6 md:mb-8">
             {word.map((char, charIndex) => {
+                const inputClasses = className(
+                    "text-lg md:text-xl text-center md:p-1 border rounded-md shadow-inner text-indigo-800 font-bold outline-none w-6 md:w-8 hover:scale-105 focus:border-orange-300 hover:border-orange-300 transition-all duration-500",
+                    {
+                        "!bg-red-100": results && results[wordIndex].includes(charIndex),
+                        "!bg-green-100": results && !results[wordIndex].includes(charIndex),
+                    }
+                );
                 if (coveredIndexes.includes(charIndex)) {
                     return (
                         <input
                             ref={(el) => (inputRefs.current[charIndex] = el)}
                             key={charIndex}
-                            className="text-lg md:text-xl text-center md:p-1 border rounded-md shadow-inner text-indigo-800 font-bold outline-none w-6 md:w-8 hover:scale-105 focus:border-orange-300 hover:border-orange-300 transition-all duration-500"
+                            className={inputClasses}
                             name="letter"
                             type="text"
                             autoComplete="off"

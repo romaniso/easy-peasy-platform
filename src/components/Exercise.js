@@ -3,6 +3,9 @@ import ExerciseHeader from "./ExerciseHeader";
 import ExerciseBody from "./ExerciseBody";
 import ExerciseFeedback from "./ExerciseFeedback";
 
+// Utils
+import findDifferentIndexesInArrays from "../utils/findDifferentIndexesInArrays.";
+
 //TODO: Implement Conditional Rendering based on a type prop
 
 function Exercise({
@@ -55,17 +58,22 @@ function Exercise({
         keySheet = questions.map((question) => [question.correctForm, question.correctPlace]).sort((a, b) => a[1] - b[1]);
         break;
       case "fill-in-letter":
-        keySheet = questions;
+        keySheet = questions.map(question => question.split(''));
         break;
       default:
         throw new Error("There is no such an exercise type");
     }
 
     const result = usersAnswers.map((answer, index) => {
+      const arrAnswer = answer.split('');
       if(type === 'fill-box'){
         return answer.toLowerCase() === keySheet[index][0].toLowerCase()
             ? "Same"
             : "Different";
+      }
+      else if(type === 'fill-in-letter'){
+        const results = findDifferentIndexesInArrays(keySheet[index], arrAnswer);
+        return results.length ? results : 'Same';
       }
       return answer.toLowerCase() === keySheet[index].toLowerCase()
         ? "Same"
