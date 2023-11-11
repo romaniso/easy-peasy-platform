@@ -1,5 +1,5 @@
 import {useEffect, useRef, useState} from "react";
-function FillInLetterUnit({wordIndex, word, onFill}) {
+function FillInLetterUnit({wordIndex, word, onFill, coveredIndexes}) {
     const [activeInputIndex, setActiveInputIndex] = useState();
     const [wordToComplete, setWord] = useState(word);
 
@@ -19,11 +19,12 @@ function FillInLetterUnit({wordIndex, word, onFill}) {
         if(!wordToComplete.includes("*")){
             onFill(wordIndex, wordToComplete);
         }
+        console.log(coveredIndexes);
     }, [activeInputIndex, wordToComplete]);
     const updateInput = (inputIndex) => {
         if(inputIndex === word.length - 1) return;
         let newIndex = inputIndex + 1;
-        if(word[newIndex] !== "*" || word[newIndex] === " "){
+        if(!coveredIndexes.includes(newIndex) || word[newIndex] === " "){
             updateInput(newIndex);
         } else {
             setActiveInputIndex(newIndex);
@@ -35,7 +36,7 @@ function FillInLetterUnit({wordIndex, word, onFill}) {
             e.preventDefault();
 
             let newIndex = inputIndex - 1;
-            while (newIndex >= 0 && word[newIndex] !== "*") {
+            while (newIndex >= 0 && !coveredIndexes.includes(newIndex)) {
                 newIndex = newIndex - 1;
             }
             const updatedWordWithRemovedChar = [...wordToComplete];
@@ -51,10 +52,9 @@ function FillInLetterUnit({wordIndex, word, onFill}) {
       </span>
         <div className="inline-flex items-center gap-1 mb-6 md:mb-8">
             {word.map((char, charIndex) => {
-                if (word[charIndex] === "*") {
+                if (coveredIndexes.includes(charIndex)) {
                     return (
                         <input
-                            //check if this is an active input
                             ref={(el) => (inputRefs.current[charIndex] = el)}
                             key={charIndex}
                             className="text-lg md:text-xl text-center md:p-1 border rounded-md shadow-inner text-indigo-800 font-bold outline-none w-6 md:w-8 hover:scale-105 focus:border-orange-300 hover:border-orange-300 transition-all duration-500"
@@ -73,9 +73,7 @@ function FillInLetterUnit({wordIndex, word, onFill}) {
                     );
                 } else if (word[charIndex] === " ") {
                     return <span key={charIndex} className="w-4 md:w-6">{char}</span>;
-                // } else if(!word[charIndex].isAutoCompleted) {
-                //     return <span key={charIndex} className="text-indigo-900 text-lg md:text-xl">{word[charIndex]}</span>;
-                } else {
+                } else if(!coveredIndexes.includes(charIndex)) {
                     return <span key={charIndex} className="text-indigo-900 text-lg md:text-xl">{word[charIndex]}</span>;
                 }
             })}
