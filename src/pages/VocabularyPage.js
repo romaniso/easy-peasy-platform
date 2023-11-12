@@ -1,6 +1,7 @@
 import useTop from "../hooks/useTop";
 import Card from "../components/Card";
 import RelationshipsImg from "../assets/images/vocabulary/realtionships.jpg";
+import Breadcrumbs from "../components/Breadcrumbs";
 
 function VocabularyPage() {
   useTop();

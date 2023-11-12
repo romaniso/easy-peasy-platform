@@ -1,5 +1,4 @@
 function findDifferentIndexes(arr1, arr2) {
-    console.log(arr1, arr2);
     const differentIndexes = [];
 
     for (let i = 0; i < arr1.length; i++) {

@@ -6,6 +6,7 @@ import Cheetsheet from "../components/Cheetsheet";
 
 // Just for a template;
 import RelationshipsImg from "../assets/images/vocabulary/realtionships.jpg";
+import Breadcrumbs from "../components/Breadcrumbs";
 
 //TODO: Here I will probably implement API request for data base where I get all content for cheetsheet md, exercises, instructions, etc based on path of URL and then send it to the Exercise component.
 
@@ -377,6 +378,7 @@ function ExercisePage() {
             <h1 className="text-4xl md:text-6xl text-center font-bold text-orange-500 drop-shadow mb-6 md:mb-8">
                 {topic}
             </h1>
+            <Breadcrumbs/>
             {content}
         </div>
     );
