@@ -2,7 +2,6 @@ import useTop from "../hooks/useTop";
 import Card from "../components/Card";
 import FutureTensesImg from "../assets/images/exercises/future-tenses.jpg";
 import UsedToImg from "../assets/images/exercises/used-to.jpg";
-import Breadcrumbs from "../components/Breadcrumbs";
 
 function GrammarPage() {
   useTop();

@@ -23,7 +23,7 @@ function ExerciseSet({ data }) {
   );
 
   return (
-    <section className="flex-auto">
+    <section className="">
       <Tabs
         exercises={exercises}
         activeExercise={activeExercise}

@@ -2,11 +2,11 @@ import useTop from "../hooks/useTop";
 import {useParams} from "react-router-dom";
 import Panel from "../components/Panel";
 import ExerciseSet from "../components/ExerciseSet";
-import Cheetsheet from "../components/Cheetsheet";
+import Cheatsheet from "../components/Cheatsheet";
+import Breadcrumbs from "../components/Breadcrumbs";
 
 // Just for a template;
 import RelationshipsImg from "../assets/images/vocabulary/realtionships.jpg";
-import Breadcrumbs from "../components/Breadcrumbs";
 
 //TODO: Here I will probably implement API request for data base where I get all content for cheetsheet md, exercises, instructions, etc based on path of URL and then send it to the Exercise component.
 
@@ -129,7 +129,7 @@ function ExercisePage() {
     //      ],
     //    },
     //  ];
-    const cheetsheet = {
+    const cheatsheet = {
         topic: "Future Tenses",
         level: "B1",
         content: `
@@ -349,23 +349,19 @@ function ExercisePage() {
             content = (
                 <Panel className="bg-white flex h-[850px] !p-0">
                     <ExerciseSet data={data}/>
-                    <Cheetsheet
-                        topic={cheetsheet.topic}
-                        level={cheetsheet.level}
-                        content={cheetsheet.content}
+                    <Cheatsheet
+                        topic={cheatsheet.topic}
+                        level={cheatsheet.level}
+                        content={cheatsheet.content}
                     />
                 </Panel>
             );
             break;
         case "vocabulary":
             content = (
-                <Panel className="bg-white flex !p-0">
+                <Panel className="bg-white flex justify-between !p-0">
                     <ExerciseSet data={data}/>
-                    {/*<Cheetsheet
-              topic={cheetsheet.topic}
-              level={cheetsheet.level}
-              content={cheetsheet.content}
-            />*/}
+                    <Cheatsheet topic={cheatsheet.topic} level={cheatsheet.level} content={cheatsheet.content}/>
                 </Panel>
             );
             break;
