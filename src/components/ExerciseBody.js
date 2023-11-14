@@ -92,7 +92,7 @@ function ExerciseBody({onSubmit, btnText = "Check out", exerciseType, questions,
                         results={results}
                         onChange={handleSelectChange}
                     />
-                    <Button primary rounded className="w-full md:w-1/5" type="submit">
+                    <Button primary rounded className="w-full md:w-2/5" type="submit">
                         {btnText}
                     </Button>
                 </form>

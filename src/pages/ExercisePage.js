@@ -359,7 +359,7 @@ function ExercisePage() {
             break;
         case "vocabulary":
             content = (
-                <Panel className="bg-white flex justify-between !p-0">
+                <Panel className="bg-white flex flex-col lg:flex-row justify-between !p-0">
                     <ExerciseSet data={data}/>
                     <Cheatsheet topic={cheatsheet.topic} level={cheatsheet.level} content={cheatsheet.content}/>
                 </Panel>
