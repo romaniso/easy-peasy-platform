@@ -34,4 +34,8 @@ button > svg {
   .flip-card-back {
     transform: rotateY(180deg);
   }
+  .gradient-blur {
+    -webkit-mask-image: linear-gradient(to top,black 92%,transparent 98%);
+    mask-image: linear-gradient(to top,black 92%,transparent 98%);
+  }
 }
