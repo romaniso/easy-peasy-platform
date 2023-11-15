@@ -3,6 +3,7 @@ import { NavLink } from "react-router-dom";
 import Button from "./Button";
 import { HiMenu, HiX } from "react-icons/hi";
 import { CiCircleChevDown, CiCircleChevUp } from "react-icons/ci";
+import ThemeToggler from "./ThemeToggler";
 
 function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -172,6 +173,7 @@ function Navbar() {
           }`}
         >
           {renderedItems}
+          <ThemeToggler className='ml-5'/>
         </ul>
       </nav>
     </header>
