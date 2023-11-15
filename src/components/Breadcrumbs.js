@@ -11,8 +11,8 @@ function Breadcrumbs() {
         .map((crumb, index, arr) => {
             currentLink += `/${crumb}`
             return (
-                <div className='inline-flex items-center gap-1 mr-2 md:mr-4 text-indigo-800/75 text-base md:text-lg hover:text-orange-500 transition-opacity' key={crumb}>
-                    <Link className={index === arr.length - 1 && 'font-bold text-indigo-900 hover:text-orange-500 '} to={currentLink}>{crumb}</Link>
+                <div className='inline-flex items-center gap-1 mr-2 md:mr-4 text-indigo-800/75 dark:text-indigo-300/90 text-base md:text-lg hover:text-orange-500 transition-opacity' key={crumb}>
+                    <Link className={index === arr.length - 1 && 'font-bold text-indigo-900 hover:text-orange-500 dark:text-indigo-200'} to={currentLink}>{crumb}</Link>
                     {index !== arr.length - 1 && <BsChevronRight/>}
                 </div>
             )
@@ -20,7 +20,7 @@ function Breadcrumbs() {
 
     return (
         <div className='mb-2 md:mb-6 mt-4 container mx-auto'>
-            <section className='bg-white inline-block px-2 py-1 md:px-3 md:py-2 rounded-md shadow'>
+            <section className='bg-white dark:bg-stone-700 inline-block px-2 py-1 md:px-3 md:py-2 rounded-md shadow'>
                 {crumbs}
             </section>
         </div>

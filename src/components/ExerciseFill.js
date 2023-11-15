@@ -14,13 +14,13 @@ function ExerciseFill({ questions, results, onChange }) {
 
         const { question } = item;
         const renderedQuestion = (
-          <li className="text-indigo-900 text-xl mb-8" key={index}>
+          <li className="text-indigo-900 dark:text-indigo-200 text-xl mb-8" key={index}>
             {question.split("***").map((part, partIndex) => {
               //Conditional Render
               const inputPart = (
                 <>
                   <input
-                    className="text-xl p-1 border rounded-md shadow-inner text-indigo-800 outline-none"
+                    className="text-xl p-1 border rounded-md shadow-inner text-indigo-800 dark:text-indigo-200 outline-none"
                     key={index}
                     name="selection"
                     type="text"

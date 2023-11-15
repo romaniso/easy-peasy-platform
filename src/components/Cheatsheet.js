@@ -10,7 +10,7 @@ function Cheatsheet({ topic, level, content }) {
   return (
     <section className={`border-l transition-all duration-700 ${isExpanded ? 'lg:min-w-[750px] lg:max-w-[750px]' : 'lg:max-w-[400px]'}  relative`}>
         {/*<ToolTip tooltip={isExpanded ? 'Collapse' : 'Extend'}>*/}
-            <button onClick={() => setIsExpanded(!isExpanded)} className='invisible lg:visible text-lg border rounded shadow-md text-indigo-900 p-4 absolute -top-2 left-0 bg-white hover:bg-indigo-50 transition-colors -translate-x-1/2 z-10'>
+            <button onClick={() => setIsExpanded(!isExpanded)} className='invisible lg:visible text-lg border dark:border-stone-400 rounded shadow-md text-indigo-900 dark:text-indigo-200 p-4 absolute -top-2 left-0 bg-white dark:bg-stone-700 hover:bg-indigo-50 hover:dark:bg-orange-500 transition-colors -translate-x-1/2 z-10'>
                 {isExpanded ? <BsChevronCompactRight/> : <BsChevronCompactLeft/>}
             </button>
         {/*</ToolTip>*/}
