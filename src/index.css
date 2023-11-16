@@ -38,4 +38,37 @@ button > svg {
     -webkit-mask-image: linear-gradient(to top,black 92%,transparent 98%);
     mask-image: linear-gradient(to top,black 92%,transparent 98%);
   }
+
+  .progress-bar .outer {
+    box-shadow: 3px 3px 5px -0.5px rgba(0,0,0,0.15),
+    -3px -3px 5px -0.5px rgba(207, 213, 254, 0.3)
+  }
+  .progress-bar .inner {
+    box-shadow: inset 2px 2px 3px -0.5px rgb(0,0,0,0.2),
+    inset -2px -2px 3px -0.5px rgb(255,255,255,0.7),
+    -0.25px -0.25px 0px rgba(255,255,255,1),
+    0.25px 0.25px 0px rgba(0,0,0,0.15),
+    0px 6px 5px -5px rgba(0,0,0,0.05)
+  }
+  .progress-bar circle {
+    fill: none;
+    stroke: url(#GradientColor);
+    stroke-width: 10px;
+    stroke-dasharray: 236;
+    /*it should be changed according to a result*/
+    stroke-dashoffset: 236;
+    /*animation: animProgressBar 2s linear forwards;*/
+  }
+  .progress-bar svg {
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+
+  /*@keyframes animProgressBar {*/
+  /*  100% {*/
+  /*    !*it should be changed according to a result,e.g. result is 65% so  236(new) 472 - 472 + 0.65  *!*/
+  /*    stroke-dashoffset: 83;*/
+  /*  }*/
+  /*}*/
 }
