@@ -19,7 +19,7 @@ function Draggable({ id, title }) {
     <button ref={setNodeRef} style={style} {...listeners} {...attributes}>
       <div
         key={id}
-        className="border py-1 px-2 min-w-[180px] text-center rounded-md text-indigo-900 text-base shadow backdrop-blur flex justify-between items-center hover:shadow-lg transition-colors"
+        className="border py-1 px-2 min-w-[180px] text-center rounded-md text-indigo-900 dark:text-indigo-200 text-base shadow backdrop-blur flex justify-between items-center hover:shadow-lg  transition-colors"
       >
         <span>{title}</span>
 

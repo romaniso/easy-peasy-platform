@@ -20,7 +20,7 @@ function ThemeToggler({className}){
         setIsDarkTheme(!isDarkTheme);
     }
 
-    const toggleButtonClasses = `border rounded-md w-10 h-10 p-3 border-stone-700 text-stone-700 hover:text-indigo-300 hover:bg-stone-700 transition-colors duration-700 ${className}`
+    const toggleButtonClasses = `border border-indigo-900 dark:border-indigo-200 rounded-md w-10 h-10 p-3 border-stone-700 text-indigo-900 dark:text-orange-500 hover:text-indigo-300 hover:bg-stone-700 transition-colors duration-700 ${className}`
 
     return <button className={toggleButtonClasses} onClick={handleToggleTheme}>
         {isDarkTheme ? <BsFillSunFill/> : <BsFillMoonStarsFill/>}

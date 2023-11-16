@@ -14,13 +14,13 @@ function ExerciseDropdown({ questions, results, selections, onChange }) {
 
         const { question, options } = item;
         const renderedQuestion = (
-          <li className="text-indigo-900 text-xl mb-8" key={index}>
+          <li className="text-indigo-900 dark:text-indigo-200 text-xl mb-8" key={index}>
             {question.split("***").map((part, partIndex) => {
               //Conditional Render
               const inputPart = (
                 <>
                   <select
-                    className="text-xl p-1 border rounded-md shadow-inner text-indigo-800 cursor-pointer outline-none"
+                    className="text-xl p-1 border dark:bg-[#323232] dark:border-gray-500 rounded-md shadow-inner text-indigo-800 dark:text-indigo-200 cursor-pointer outline-none"
                     key={index}
                     onChange={(e) => onChange(index, e)}
                     value={selections[index] || ""}

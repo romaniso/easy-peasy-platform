@@ -49,7 +49,7 @@ function Navbar() {
         key={link.label}
         className={`${
           link.button ? "my-4" : "my-7 border-b md:border-none"
-        } md:ml-6 md:my-0 hover:text-orange-500 text-sky-700 font-semibold group`}
+        } md:ml-6 md:my-0 hover:text-orange-500 text-indigo-900 dark:text-indigo-200 font-semibold group`}
       >
         <NavLink
           to={link.path}
@@ -65,7 +65,8 @@ function Navbar() {
               secondary={link.secondary}
               outline
               rounded
-              className="py-1.5 px-4 text-sm w-full"
+              //@todo: restyle Button component so there will be only cosmetic styles
+              className="py-1.5 px-4 text-sm w-full dark:text-indigo-200 text-indigo-900 border-indigo-900 dark:border-indigo-200"
             >
               {link.label}
             </Button>
@@ -83,20 +84,20 @@ function Navbar() {
         </NavLink>
         {link.submenu && (
           <div
-            className={`md:absolute top-12 md:hidden group-hover:text-sky-700 group-hover:md:block hover:md:block ${
+            className={`md:absolute top-12 md:hidden group-hover:text-indigo-900 group-hover:dark:text-indigo-200 group-hover:md:block hover:md:block ${
               isCollapsed ? "block" : "hidden"
             }`}
           >
-            <ul className="bg-slate-50 py-3 px-6 shadow-md rounded-md">
+            <ul className="border bg-white dark:bg-[#323232] dark:border-gray-500 py-3 px-6 shadow-md rounded-md">
               {link.subpaths.map((subpath) => {
                 return (
                   <li
                     key={subpath.label}
-                    className="text-sm md:my-4 my-6 ml-2 md:ml-0 border-b opacity-90"
+                    className="text-sm md:my-4 my-6 ml-2 md:ml-0 border-b dark:border-gray-500 opacity-90"
                   >
                     <NavLink
                       to={subpath.path}
-                      className="hover:text-orange-300"
+                      className="hover:text-orange-500"
                     >
                       {subpath.label}
                     </NavLink>

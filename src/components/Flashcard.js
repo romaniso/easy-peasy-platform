@@ -31,13 +31,13 @@ function Flashcard({question, isCorrect, cardImage, example, voice, speak}) {
 
     return (
         <div className={cardClasses} onClick={flipCard}>
-            <div className="flip-card-inner shadow-md rounded-md border">
+            <div className="flip-card-inner shadow-md rounded-md border dark:border-gray-500">
                 <div className="flip-card-front text-center flex flex-col justify-between items-center">
                     <div className="h-1/2 flex justify-center items-center">
-                        <p className="px-2 py-4 text-indigo-800 font-bold">{question}</p>
+                        <p className="px-2 py-4 text-indigo-800 dark:text-indigo-200 font-bold">{question}</p>
                     </div>
-                    <div className="w-full bg-stone-700 h-1/2 flex justify-center items-center rounded-b-md">
-                        <p className="px-2 py-4 text-white">{example}</p>
+                    <div className="w-full bg-stone-700 dark:bg-[#202020] h-1/2 flex justify-center items-center rounded-b-md">
+                        <p className="px-2 py-4 text-white dark:text-orange-600">{example}</p>
                     </div>
                 </div>
                 <div className="flip-card-back flex flex-col items-center rounded-md relative">
@@ -53,15 +53,15 @@ function Flashcard({question, isCorrect, cardImage, example, voice, speak}) {
                                 className="flex items-center cursor-pointer hover:opacity-50 transition-all"
                                 onClick={playAudio}
                             >
-                                <p className="text-base md:text-lg text-indigo-700  font-bold drop-shadow-md">
+                                <p className="text-base md:text-lg text-indigo-700 dark:text-indigo-200 font-bold drop-shadow-md">
                                     {isCorrect}
                                 </p>
                                 <BsFillVolumeDownFill className="text-orange-500 ml-1 text-lg"/>
                             </div>
                         </ToolTip>
                         <div>
-                            <p className="mb-2">{question}</p>
-                            <p className="text-sm italic text-indigo-500">{example}</p>
+                            <p className="mb-2 text-indigo-900 dark:text-indigo-300">{question}</p>
+                            <p className="text-sm italic text-indigo-500 dark:text-indigo-400">{example}</p>
                         </div>
                     </div>
                 </div>

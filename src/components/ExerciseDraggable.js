@@ -64,7 +64,7 @@ function ExerciseDraggable({ draggables, droppables, onSelect, results }) {
       );
     return (
       <div
-        className="flex justify-start gap-2 items-center text-indigo-900 text-xl [&:not(:last-child)]:mb-8"
+        className="flex justify-start gap-2 items-center text-indigo-900 dark:text-indigo-200 text-xl [&:not(:last-child)]:mb-8"
         key={index}
       >
         {renderedQuestion}

@@ -52,7 +52,7 @@ function FillInLetterUnit({wordIndex, word, onFill, coveredIndexes, results}) {
         <div className="inline-flex items-center gap-1 mb-6 md:mb-8">
             {word.map((char, charIndex) => {
                 const inputClasses = className(
-                    "text-lg md:text-xl text-center md:p-1 border dark:border-orange-200 rounded-md shadow-inner text-indigo-800 dark:text-indigo-400 font-bold outline-none w-6 md:w-8 hover:scale-105 dark:bg-stone-600 focus:border-orange-300 focus:dark:border-orange-500 hover:border-orange-300 hover:dark:border-orange-500 transition-all duration-500",
+                    "text-lg md:text-xl text-center md:p-1 border dark:border-gray-500 rounded-md shadow-inner text-indigo-800 dark:text-indigo-400 font-bold outline-none w-6 md:w-8 hover:scale-105 dark:bg-[#323232] focus:border-orange-300 focus:dark:border-orange-500 hover:border-orange-300 hover:dark:border-orange-500 transition-all duration-500",
                     {
                         "!bg-red-100 dark:!bg-red-500/30": results && results[wordIndex].includes(charIndex),
                         "!bg-green-100 !bg-green-500/30": results && !results[wordIndex].includes(charIndex),
