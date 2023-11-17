@@ -14,7 +14,8 @@ function Exercise({
   title,
   type,
   text,
-  questions
+  questions,
+  activeExercise,
 }) {
   const [userSelections, setUserSelections] = useState(
     Array(questions.length).fill("")
@@ -47,33 +48,39 @@ function Exercise({
         keySheet = questions.map((question) => question.isCorrect);
         break;
       case "multiple-choice":
-          keySheet = [];
-        questions.map((question) => question.options.filter((option) => {
-          if(option.isCorrect) {
-            keySheet.push(option.text);
-          }
-      }));
+        keySheet = [];
+        questions.map((question) =>
+          question.options.filter((option) => {
+            if (option.isCorrect) {
+              keySheet.push(option.text);
+            }
+          })
+        );
         break;
       case "fill-box":
-        keySheet = questions.map((question) => [question.correctForm, question.correctPlace]).sort((a, b) => a[1] - b[1]);
+        keySheet = questions
+          .map((question) => [question.correctForm, question.correctPlace])
+          .sort((a, b) => a[1] - b[1]);
         break;
       case "fill-in-letter":
-        keySheet = questions.map(question => question.split(''));
+        keySheet = questions.map((question) => question.split(""));
         break;
       default:
         throw new Error("There is no such an exercise type");
     }
 
     const result = usersAnswers.map((answer, index) => {
-      const arrAnswer = answer.split('');
-      if(type === 'fill-box'){
+      const arrAnswer = answer.split("");
+      if (type === "fill-box") {
         return answer.toLowerCase() === keySheet[index][0].toLowerCase()
-            ? "Same"
-            : "Different";
-      }
-      else if(type === 'fill-in-letter'){
-        const results = findDifferentIndexesInArrays(keySheet[index], arrAnswer);
-        return results.length ? results : 'Same';
+          ? "Same"
+          : "Different";
+      } else if (type === "fill-in-letter") {
+        const results = findDifferentIndexesInArrays(
+          keySheet[index],
+          arrAnswer
+        );
+        return results.length ? results : "Same";
       }
       return answer.toLowerCase() === keySheet[index].toLowerCase()
         ? "Same"
@@ -94,6 +101,7 @@ function Exercise({
       <ExerciseFeedback
         results={userResults}
         questionsNumber={questions.length}
+        activeExercise={activeExercise}
       />
       <ExerciseBody
         onSubmit={handleSubmit}

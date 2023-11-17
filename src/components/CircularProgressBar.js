@@ -1,70 +1,127 @@
 import { useEffect, useRef, useState } from "react";
 
-function CircularProgressBar({ results }) {
-    const [result, setResult] = useState(null);
-    const [dashOffset, setDashOffset] = useState(null);
+function CircularProgressBar({ results, activeExercise }) {
+  const [result, setResult] = useState(null);
+  const [dashOffset, setDashOffset] = useState(null);
 
-    const calculateResultIntoPercentages = (results) => {
-        const numberOfPossibleAnswers = results.length;
-        const correctAnswers = results.filter((result) => result === "Same").length;
-        const percentage = (correctAnswers / numberOfPossibleAnswers) * 100;
+  const animateRef = useRef();
+  const resultRef = useRef();
+  const circleRef = useRef();
 
-        setResult(percentage);
-        setDashOffset(Math.floor(236 - (percentage / 100) * 236));
+  const calculateResultIntoPercentages = (results, result) => {
+    const numberOfPossibleAnswers = results.length;
+    const correctAnswers = results.filter((result) => result === "Same").length;
+    const percentage = (correctAnswers / numberOfPossibleAnswers) * 100;
 
-        return percentage;
+    setResult(percentage);
+    setDashOffset(Math.floor(243 - (percentage / 100) * 155));
+    return percentage;
+  };
+  const animateCircularBar = (htmlRef, animateRef, result) => {
+    // Reset counter
+    let counter = 0;
+    htmlRef.innerHTML = counter + "%";
+
+    const intervalId = setInterval(() => {
+      if (counter === result) {
+        clearInterval(intervalId);
+      } else {
+        counter++;
+        htmlRef.innerHTML = counter + "%";
+      }
+    }, 20);
+
+    // Update the animation when dashOffset changes
+    if (animateRef.current) {
+      animateRef.current.setAttribute("values", `243;${dashOffset}`);
+      animateRef.current.beginElement();
+    }
+
+    return intervalId;
+  }
+
+  useEffect(() => {
+    const currResult = calculateResultIntoPercentages(results, result);
+    console.log('==============================');
+    console.log("CircularProgressBar Mounted");
+
+    console.log("Results:", results);
+    console.log("Dash Offset:", dashOffset);
+    console.log("Active Exercise:", activeExercise);
+
+    const intervalId = animateCircularBar(resultRef.current, animateRef, currResult);
+
+    // Clean up the interval when the component unmounts
+    return () => {
+      console.log("CircularProgressBar Unmounted");
+
+      setDashOffset(null);
+      setResult(null);
+      clearInterval(intervalId);
     };
+  }, [results, dashOffset, activeExercise]);
 
-    console.log(results);
-    const resultRef = useRef();
+  // const fromValue = 236;
+  // const toValue = 236 - (result / 100) * 236;
 
-    useEffect(() => {
-        const result = calculateResultIntoPercentages(results);
-        const resultBar = resultRef.current;
-        let counter = 0;
-        const intervalId = setInterval(() => {
-            if (counter === result) {
-                // clearInterval(intervalId);
-            } else {
-                counter++;
-                resultBar.innerHTML = counter + "%";
-            }
-        }, 30);
+  const circleStyle = {
+    strokeDashoffset: dashOffset || 236,
+    transition: "stroke-dashoffset 1s linear",
+  };
 
-        // Clean up the interval when the component unmounts
-        return () => clearInterval(intervalId);
-    }, [results, dashOffset, result]);
-
-    return (
-        <div className="progress-bar w-20 h-20 relative">
-            <div className="outer h-20 w-20 rounded-full border p-2">
-                <div className="inner h-[60px] w-[60px] rounded-full flex items-center justify-center">
-                    <div className="font-bold text-indigo-900 text-md dark:text-indigo-200" ref={resultRef}>
-                        0%
-                    </div>
-                </div>
-            </div>
-
-            <svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="80px" height="80px">
-                <defs>
-                    <linearGradient id="GradientColor">
-                        <stop offset="0%" stopColor="#1ced54" />
-                        <stop offset="100%" stopColor="#3730a3" />
-                    </linearGradient>
-                </defs>
-                <circle cx="40" cy="40" r="35" strokeLinecap="square">
-                    <animate
-                        attributeName="stroke-dashoffset"
-                        values={`236;${dashOffset}`}
-                        dur="2s"
-                        keyTimes="0;1"
-                        repeatCount="1"
-                        fill="freeze"
-                    />
-                </circle>
-            </svg>
+  return (
+    <div className="progress-bar w-[65px] h-[65px] relative">
+      <div className="outer h-[65px] w-[65px] rounded-full border p-2">
+        <div className="inner h-[45px] w-[45px] rounded-full flex items-center justify-center">
+          {/* Percentage */}
+          <div
+            className="font-bold text-indigo-900 text-sm dark:text-indigo-200"
+            ref={resultRef}
+          >
+            0%
+          </div>
         </div>
-    );
+      </div>
+
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        version="1.1"
+        width="62px"
+        height="62px"
+        className='absolute top-0 left-0'
+      >
+        <defs>
+          <linearGradient id="GradientColor">
+            <stop offset="0%" stopColor="#1ced54" />
+            <stop offset="100%" stopColor="#818cf8" />
+          </linearGradient>
+        </defs>
+        <circle
+          ref={circleRef}
+          cx="32.5"
+          cy="32.5"
+          r="25"
+          strokeLinecap="square"
+          style={circleStyle}
+          stroke={`url(#GradientColor)`}
+          fill='none'
+          strokeWidth='8px'
+          strokeDasharray='243'
+        >
+          <animate
+            ref={animateRef}
+            attributeName="stroke-dashoffset"
+            // from={fromValue}
+            // to={toValue}
+            dur="1s"
+            keyTimes="0;1"
+            repeatCount="1"
+            fill="freeze"
+          />
+        </circle>
+      </svg>
+    </div>
+  );
 }
 
 export default CircularProgressBar;

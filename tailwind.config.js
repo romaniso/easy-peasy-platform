@@ -13,6 +13,7 @@ module.exports = {
             //     'progress-bar':'progress-bar 2s linear forwards'
             // }
         },
-        plugins: [require("tailwind-scrollbar")],
-    }
+
+    },
+    plugins: [require("tailwind-scrollbar")],
 }

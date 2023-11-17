@@ -15,7 +15,7 @@ function Cheatsheet({ topic, level, content }) {
             </button>
         {/*</ToolTip>*/}
 
-        <div className={`lg:gradient-blur px-3 lg:px-12 py-4 lg:py-10 lg:h-[1000px] transition-all overflow-y-auto ${!isExpanded && 'lg:blur-sm hover:blur-none'} scrollbar scrollbar-thin scrollbar-thumb-orange-300 dark:scrollbar-thumb-orange-500 scrollbar-track-indigo-50 dark:scrollbar-track-[#323232] w-full`}>
+        <div className={`lg:gradient-blur px-3 lg:px-12 py-4 lg:py-10 lg:h-[1200px] transition-all overflow-y-auto ${!isExpanded && 'lg:blur-sm hover:blur-none '} scrollbar scrollbar-thin scrollbar-thumb-orange-300 dark:scrollbar-thumb-orange-500 scrollbar-track-indigo-50 dark:scrollbar-track-[#323232] w-full`}>
             <header>
                 <h3 className="text-2xl md:text-xl font-bold text-indigo-800 dark:text-indigo-100 mb-3">Cheatsheet</h3>
                 <p className="text-2xl md:text-3xl font-bold text-indigo-400 dark:text-indigo-200 mb-3">{topic}</p>
