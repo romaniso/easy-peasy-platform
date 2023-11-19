@@ -61,12 +61,9 @@ function CircularProgressBar({ results, activeExercise }) {
     };
   }, [results, dashOffset, activeExercise]);
 
-  // const fromValue = 236;
-  // const toValue = 236 - (result / 100) * 236;
-
   const circleStyle = {
     strokeDashoffset: dashOffset || 236,
-    transition: "stroke-dashoffset 1s linear",
+    animation: `progressAnimation 1s linear forwards ${dashOffset || 236}px`, // Dynamic CSS animation
   };
 
   return (

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import {useState} from "react";
 import Exercise from "./Exercise";
 import Tabs from "./Tabs";
 
@@ -10,7 +10,7 @@ function ExerciseSet({ data }) {
       const exerciseNumber = index + 1;
       return (
         <Exercise
-          key={exerciseNumber}
+          key={index}
           active={activeExercise === exerciseNumber}
           title={title}
           type={type}
