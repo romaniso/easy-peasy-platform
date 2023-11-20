@@ -72,7 +72,7 @@ function Exercise({
     const result = usersAnswers.map((answer, index) => {
       const arrAnswer = answer.split("");
       if (type === "fill-box") {
-        return answer.toLowerCase() === keySheet[index][0].toLowerCase()
+        return answer.toLowerCase().trim() === keySheet[index][0].toLowerCase()
           ? "Same"
           : "Different";
       } else if (type === "fill-in-letter") {
