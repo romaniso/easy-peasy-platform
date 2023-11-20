@@ -29,10 +29,16 @@ function Hero() {
         </div>
       </div>
       <div className="w-full md:basis-1/2 flex justify-center md:justify-start">
-        <div className='relative w-full inline-block h-[380px] md:h-[470px] w-[450px]'>
-          <img src={HeroDecImg} alt="Decor image of a platform exercise" className="absolute top-[37%] left-[10%] w-[33%] z-20 rounded-md shadow-md shadow-black/30" />
-          <img src={HeroDecImg2} alt="Decor image of a platform exercise" className="absolute bottom-[15%] right-[12%] w-[44%] z-10 rounded-md shadow-md shadow-black/30" />
-          <img src={HeroDecImg3} alt="Decor image of a platform exercise" className="absolute top-[21%] right-[7%] w-[66%] rounded-md shadow-md shadow-black/30" />
+        <div className='relative w-full inline-block h-[380px] md:h-[470px] w-[450px] transition-all duration-700 hover:scale-105'>
+          <div className="absolute top-[37%] left-[10%] w-[33%] z-20 rounded-md shadow-md shadow-black/30 overflow-hidden shine-effect">
+            <img src={HeroDecImg} alt="Decor image of a platform exercise" className='w-full'/>
+          </div>
+         <div className="absolute bottom-[15%] right-[12%] w-[44%] z-10 rounded-md shadow-md shadow-black/30 overflow-hidden shine-effect">
+           <img src={HeroDecImg2} alt="Decor image of a platform exercise" className='w-full'/>
+         </div>
+          <div className="absolute top-[21%] right-[7%] w-[66%] rounded-md shadow-md shadow-black/30 overflow-hidden shine-effect">
+            <img src={HeroDecImg3} alt="Decor image of a platform exercise" className='w-full'/>
+          </div>
         </div>
       </div>
     </section>

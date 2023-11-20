@@ -72,10 +72,38 @@ button > svg {
   /*    stroke-dashoffset: 83;*/
   /*  }*/
   /*}*/
+
+  .shine-effect:before {
+    content: '';
+    position: absolute;
+    background: rgba(255, 255, 255, 0.3);
+    height: 130%;
+    width: 20%;
+    left: -30%;
+    transform: skewX(-30deg);
+    animation: slide 1s infinite;
+  }
+  .shine-effect:nth-child(2):before{
+    animation: slide 1s 1s infinite;
+  }
+  .shine-effect:nth-child(3):before{
+    animation: slide 1s 2s infinite;
+  }
+  /*.shine-effect:hover:before {*/
+  /*  animation: slide 1s;*/
+  /*}*/
+  @keyframes slide {
+    0%{
+      left: -30%;
+    }
+    100% {
+      left: 100%;
+    }
+  }
+
   @keyframes progressAnimation {
     to {
       stroke-dashoffset: 0;
     }
   }
-
 }
