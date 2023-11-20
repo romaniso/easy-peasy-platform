@@ -12,10 +12,10 @@ function Button({
 }) {
   const classes = className(
     rest.className,
-    "flex items-center justify-center py-2 px-5 cursor-pointer transition-colors border dark:border-gray-500 shadow",
+    "flex items-center justify-center py-2 px-5 cursor-pointer transition-colors border shadow",
     {
       "bg-orange-400 dark:bg-orange-500 text-white hover:bg-orange-500 hover:dark:bg-orange-600": primary,
-      "bg-stone-600 dark:bg-transparent text-indigo-800 dark:text-indigo-200 dark:border-indigo-200 hover:bg-stone-700 hover:dark:bg-indigo-600": secondary,
+      "bg-transparent border-indigo-800 text-indigo-800 dark:text-indigo-200 dark:border-indigo-200 hover:bg-indigo-700 hover:text-white hover:dark:bg-indigo-600": secondary,
       "bg-green-500 text-fuchsia-900 hover:bg-green-600": success,
       "bg-yellow-500 text-fuchsia-900 hover:bg-yellow-600": warning,
       "bg-red-500 text-white hover:bg-red-600": danger,
@@ -23,7 +23,7 @@ function Button({
       "rounded-md": rounded,
       "border-orange-400 text-orange-600 hover:text-stone-800 hover:bg-indigo-300 hover:border-indigo-300":
         outline && primary,
-      "border-stone-500 text-stone-700 hover:text-indigo-300":
+      "hover:text-indigo-300":
         outline && secondary,
       "border-green-500 text-green-500 hover:text-white": outline && success,
       "border-yellow-500 text-yellow-500 hover:text-white hover:bg-yellow-500":

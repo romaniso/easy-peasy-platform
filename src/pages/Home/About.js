@@ -7,7 +7,7 @@ import ListeningImg from "../../assets/images/listening.jpg";
 
 function About() {
   return (
-    <section className="py-24 px-4">
+    <section className="py-16 px-4">
       <div className="container mx-auto">
         <section
           className="flex flex-col justify-center items-center mb-16"
@@ -16,7 +16,7 @@ function About() {
           <h2 className="text-6xl text-center font-bold text-orange-500 drop-shadow mb-8">
             About us
           </h2>
-          <p className="text-2xl font-light text-indigo-900 text-center md:max-w-screen-lg drop-shadow">
+          <p className="text-2xl font-light text-indigo-700 dark:text-indigo-300 text-center md:max-w-screen-lg drop-shadow">
             We offer educational materials and practical exercises which will
             increase your English level. There are different learning modules
             that you can pick up from.

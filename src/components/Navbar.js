@@ -66,7 +66,7 @@ function Navbar() {
               outline
               rounded
               //@todo: restyle Button component so there will be only cosmetic styles
-              className="py-1.5 px-4 text-sm w-full dark:text-indigo-200 text-indigo-900 border-indigo-900 dark:border-indigo-200"
+              className="py-1.5 px-4 text-sm w-full"
             >
               {link.label}
             </Button>
