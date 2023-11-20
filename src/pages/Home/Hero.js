@@ -1,6 +1,8 @@
 import Button from "../../components/Button";
-import StatueImg from "../../assets/images/statue-of-liberty.png";
-import HeroImg from "../../assets/images/home-decor.png";
+// import StatueImg from "../../assets/images/statue-of-liberty.png";
+import HeroDecImg from "../../assets/images/home-dec.jpg";
+import HeroDecImg2 from "../../assets/images/home-dec-2.jpg";
+import HeroDecImg3 from "../../assets/images/home-dec-3.jpg";
 
 function Hero() {
   return (
@@ -26,8 +28,12 @@ function Hero() {
           </Button>
         </div>
       </div>
-      <div className="md:basis-1/2">
-        <img src={HeroImg} alt="Statue of Liberty" className="w-full" />
+      <div className="w-full md:basis-1/2 flex justify-center md:justify-start">
+        <div className='relative w-full inline-block h-[380px] md:h-[470px] w-[450px]'>
+          <img src={HeroDecImg} alt="Decor image of a platform exercise" className="absolute top-[37%] left-[10%] w-[33%] z-20 rounded-md shadow-md shadow-black/30" />
+          <img src={HeroDecImg2} alt="Decor image of a platform exercise" className="absolute bottom-[15%] right-[12%] w-[44%] z-10 rounded-md shadow-md shadow-black/30" />
+          <img src={HeroDecImg3} alt="Decor image of a platform exercise" className="absolute top-[21%] right-[7%] w-[66%] rounded-md shadow-md shadow-black/30" />
+        </div>
       </div>
     </section>
   );

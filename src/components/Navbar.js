@@ -112,7 +112,7 @@ function Navbar() {
   });
 
   return (
-    <header className="md:bg-transparent bg-indigo-50 dark:bg-stone-800 md:backdrop-blur-xl shadow-lg border-b-indigo-100 w-full fixed top-0 left-0 z-10">
+    <header className="md:bg-transparent bg-indigo-50 dark:bg-stone-800 md:backdrop-blur-xl shadow-lg border-b-indigo-100 w-full fixed top-0 left-0 z-50">
       <nav className="md:flex justify-between items-center py-2 md:px-10 px-7">
         {/* LOGO */}
         <NavLink to="/">
