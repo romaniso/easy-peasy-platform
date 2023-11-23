@@ -50,29 +50,9 @@ button > svg {
       0.25px 0.25px 0px rgba(0, 0, 0, 0.15),
       0px 6px 5px -5px rgba(0, 0, 0, 0.05);
   }
-  /*.progress-bar circle {*/
-    /*fill: none;*/
-    /*stroke: url(#GradientColor);*/
-    /*stroke: linear-gradient(to right, #1ced54, #818cf8);*/
-    /*stroke-width: 8px;*/
-    /*stroke-dasharray: 243;*/
-    /*it should be changed according to a result*/
-    /*stroke-dashoffset: 0;*/
-    /*animation: animProgressBar 2s linear forwards;*/
-  /*}*/
-  /*.progress-bar svg {*/
-    /*position: absolute;*/
-    /*top: 0;*/
-    /*left: 0;*/
-  /*}*/
-
-  /*@keyframes animProgressBar {*/
-  /*  100% {*/
-  /*    !*it should be changed according to a result,e.g. result is 65% so  236(new) 472 - 472 + 0.65  *!*/
-  /*    stroke-dashoffset: 83;*/
-  /*  }*/
-  /*}*/
-
+  .progress-bar circle {
+    stroke-dashoffset: 243;
+  }
   .shine-effect:before {
     content: '';
     position: absolute;
@@ -89,9 +69,6 @@ button > svg {
   .shine-effect:nth-child(3):before{
     animation: slide 1s 2s infinite;
   }
-  /*.shine-effect:hover:before {*/
-  /*  animation: slide 1s;*/
-  /*}*/
   @keyframes slide {
     0%{
       left: -30%;
@@ -101,9 +78,4 @@ button > svg {
     }
   }
 
-  @keyframes progressAnimation {
-    to {
-      stroke-dashoffset: 0;
-    }
-  }
 }
