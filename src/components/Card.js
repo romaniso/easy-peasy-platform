@@ -10,7 +10,7 @@ function Card({ title, text, image, buttonTxt, link }) {
           <img
             src={image}
             alt="decor of the card"
-            className="w-full h-full object-cover rounded-md dark:brightness-75"
+            className="w-full h-full object-cover rounded-md dark:brightness-95"
           />
         </div>
       )}

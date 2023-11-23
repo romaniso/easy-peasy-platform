@@ -101,7 +101,6 @@ function Exercise({
       <ExerciseFeedback
         results={userResults}
         questionsNumber={questions.length}
-        activeExercise={activeExercise}
       />
       <ExerciseBody
         onSubmit={handleSubmit}

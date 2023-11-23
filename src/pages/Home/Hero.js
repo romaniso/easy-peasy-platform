@@ -6,7 +6,7 @@ import HeroDecImg3 from "../../assets/images/home-dec-3.jpg";
 
 function Hero() {
   return (
-    <section className="flex flex-col md:flex-row justify-center items-center gap-4 my-24 md:my-28 container mx-auto px-4">
+    <section className="flex flex-col md:flex-row justify-center items-center gap-4 mt-24 mb-8 md:my-28 container mx-auto px-4">
       <div className="md:basis-1/2 flex flex-col justify-center md:items-end text-center md:text-right">
         <h1 className="text-6xl md:text-8xl font-bold text-orange-500 drop-shadow mb-8">
           Easy-Peasy

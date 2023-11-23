@@ -1,6 +1,24 @@
 import CircularProgressBar from "./CircularProgressBar";
+import {useCallback, useEffect, useState} from "react";
 
-function ExerciseFeedback({ results, questionsNumber, activeExercise }) {
+function ExerciseFeedback({ results, questionsNumber }) {
+    const [result, setResult] = useState(0);
+    const [offset, setOffset] = useState(243);
+    const calculateResultIntoPercentages = useCallback((results) => {
+        if(!results) return;
+        const numberOfPossibleAnswers = results.length;
+        const correctAnswers = results.filter((result) => result === "Same").length;
+        const percentage = (correctAnswers / numberOfPossibleAnswers) * 100;
+
+        setResult(percentage);
+        setOffset(Math.floor(243 - (percentage / 100) * 155));
+    }, []);
+
+  useEffect(() => {
+    calculateResultIntoPercentages(results);
+  }, [results, calculateResultIntoPercentages]);
+
+
   return results ? (
     <section className="flex gap-4 items-center mb-4">
       <p className="text-lg md:text-xl text-indigo-900 dark:text-indigo-200 bg-stone-50 dark:bg-[#484848] shadow-inner p-2 md:p-6 rounded-lg inline-block">
@@ -19,7 +37,7 @@ function ExerciseFeedback({ results, questionsNumber, activeExercise }) {
           {questionsNumber}
         </span>
       </p>
-      <CircularProgressBar results={results} activeExercise={activeExercise} />
+      <CircularProgressBar percentage={result} offset={offset}/>
     </section>
   ) : null;
 }
