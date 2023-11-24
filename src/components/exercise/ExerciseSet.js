@@ -1,6 +1,6 @@
 import {useState} from "react";
 import Exercise from "./Exercise";
-import Tabs from "./Tabs";
+import Tabs from "../Tabs";
 
 function ExerciseSet({ data }) {
   const [activeExercise, setActiveExercise] = useState(1);

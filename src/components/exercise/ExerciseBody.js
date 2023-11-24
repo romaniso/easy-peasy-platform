@@ -1,17 +1,16 @@
+//#region imports
 import {useState, useEffect} from "react";
 import {useSpeechSynthesis} from "react-speech-kit";
-
-import Button from "./Button";
-
+import Button from "../Button";
 // Exercise Types
 import ExerciseDraggable from "./ExerciseDraggable";
 import ExerciseDropdown from "./ExerciseDropdown";
 import ExerciseFill from "./ExerciseFill";
-import Flashcard from "./Flashcard";
+import Flashcard from "../Flashcard";
 import ExerciseFillBox from "./ExerciseFillBox";
 import ExerciseMultipleChoice from "./ExerciseMultipleChoice";
 import ExerciseFillInLetter from "./ExerciseFillInLetter";
-
+//#endregion
 function ExerciseBody({onSubmit, btnText = "Check out", exerciseType, questions, results, selections, onSelect, text}) {
     const [generalAmericanVoice, setGeneralAmericanVoice] = useState(null);
     const {voices, speak} = useSpeechSynthesis();

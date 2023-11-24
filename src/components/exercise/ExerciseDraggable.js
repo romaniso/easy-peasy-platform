@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import useShuffle from "../hooks/useShuffle";
+import useShuffle from "../../hooks/useShuffle";
 
-import Draggable from "./Draggable";
-import Droppable from "./Droppable";
+import Draggable from "../Draggable";
+import Droppable from "../Droppable";
 import { DndContext } from "@dnd-kit/core";
 
 //TODO: This component definitely requires a lot of refactoring. A user can currently dnd in one way but cannot drag a draggable component backwards.

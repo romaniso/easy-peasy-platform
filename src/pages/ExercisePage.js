@@ -2,7 +2,7 @@
 import useTop from "../hooks/useTop";
 import {useParams} from "react-router-dom";
 import Panel from "../components/Panel";
-import ExerciseSet from "../components/ExerciseSet";
+import ExerciseSet from "../components/exercise/ExerciseSet";
 import Cheatsheet from "../components/Cheatsheet";
 import Breadcrumbs from "../components/Breadcrumbs";
 
@@ -10,7 +10,6 @@ import Breadcrumbs from "../components/Breadcrumbs";
 import RelationshipsImg from "../assets/images/vocabulary/realtionships.jpg";
 import Recommended from "../components/Recommended";
 //#endregion
-
 //TODO: Here I will probably implement API request for data base where I get all content for cheetsheet md, exercises, instructions, etc based on path of URL and then send it to the Exercise component.
 
 function ExercisePage() {

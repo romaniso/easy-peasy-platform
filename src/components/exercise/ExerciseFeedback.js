@@ -1,4 +1,4 @@
-import CircularProgressBar from "./CircularProgressBar";
+import CircularProgressBar from "../CircularProgressBar";
 import {useCallback, useEffect, useState} from "react";
 
 function ExerciseFeedback({ results, questionsNumber }) {
