@@ -5,6 +5,7 @@ import ExerciseFeedback from "./ExerciseFeedback";
 
 // Utils
 import findDifferentIndexesInArrays from "../utils/findDifferentIndexesInArrays.";
+import generateKeySheet from "../utils/generateKeySheet";
 
 //TODO: Implement Conditional Rendering based on a type prop
 
@@ -15,13 +16,11 @@ function Exercise({
   type,
   text,
   questions,
-  activeExercise,
 }) {
   const [userSelections, setUserSelections] = useState(
     Array(questions.length).fill("")
   );
   const [userResults, setUserResults] = useState(null);
-  useEffect(() => {}, [userResults]);
 
   //TODO: It may be refactored as a hook, show info when a field is empty before submitting
   //FIXME: Refactor is so a user may input two possible values. Refactor is also required in data, e.g isCorrect not a string but array of two possible options
@@ -35,39 +34,7 @@ function Exercise({
       console.error("usersAnswers is not an array");
       return;
     }
-
-    let keySheet;
-    switch (type) {
-      case "dropdown":
-        keySheet = questions.map(
-          (question) => question.options.find((option) => option.isCorrect).text
-        );
-        break;
-      case "fill-in":
-      case "drag-&-drop":
-        keySheet = questions.map((question) => question.isCorrect);
-        break;
-      case "multiple-choice":
-        keySheet = [];
-        questions.map((question) =>
-          question.options.filter((option) => {
-            if (option.isCorrect) {
-              keySheet.push(option.text);
-            }
-          })
-        );
-        break;
-      case "fill-box":
-        keySheet = questions
-          .map((question) => [question.correctForm, question.correctPlace])
-          .sort((a, b) => a[1] - b[1]);
-        break;
-      case "fill-in-letter":
-        keySheet = questions.map((question) => question.split(""));
-        break;
-      default:
-        throw new Error("There is no such an exercise type");
-    }
+    const keySheet = generateKeySheet(type, questions);
 
     const result = usersAnswers.map((answer, index) => {
       const arrAnswer = answer.split("");

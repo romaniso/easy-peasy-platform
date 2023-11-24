@@ -17,7 +17,6 @@ function ExerciseSet({ data }) {
           instruction={instruction}
           questions={questions || words}
           text={text}
-          activeExercise={activeExercise}
         />
       );
     }
