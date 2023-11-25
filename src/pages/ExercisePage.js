@@ -18,7 +18,7 @@ function ExercisePage() {
     //TODO: to be fetched from API/server and depending on a section type it will render a body conditionally
 
     //Grammar section
-     const data2 = [
+    const data2 = [
        { section: "grammar" },
        // DROPDOWN
        {
@@ -200,7 +200,7 @@ function ExercisePage() {
 
     //Vocabulary section
     //TODO: consider how to fetch images for flashcards. I think of databases in a buffer format...
-    const data = [
+    const data3 = [
         {section: "vocabulary"},
         {
             instruction:
@@ -343,8 +343,124 @@ function ExercisePage() {
         },
     ];
 
+    //Reading section
+    const data = [
+        { section: "reading" },
+        // DROPDOWN
+        {
+            instruction:
+                "Choose the correct or most appropriate future forms to complete the sentences below.",
+            title: "Will / be going to / present continuous for future",
+            type: "dropdown",
+            questions: [
+                {
+                    question: "I *** visit my grandmother tomorrow.",
+                    options: [
+                        { text: "will", isCorrect: false },
+                        { text: "am going to", isCorrect: true },
+                        { text: "am visiting", isCorrect: false },
+                    ],
+                },
+                {
+                    question:
+                        "They have tickets for the concert. They *** attend it tonight.",
+                    options: [
+                        { text: "will", isCorrect: false },
+                        { text: "are going to", isCorrect: true },
+                        { text: "are attending", isCorrect: false },
+                    ],
+                },
+                {
+                    question: "I think it *** rain later, so don't forget your umbrella.",
+                    options: [
+                        { text: "will", isCorrect: true },
+                        { text: "is going to", isCorrect: false },
+                        { text: "is raining", isCorrect: false },
+                    ],
+                },
+                {
+                    question: "She *** fly to Paris next week for a business meeting.",
+                    options: [
+                        { text: "will", isCorrect: false },
+                        { text: "is going to", isCorrect: true },
+                        { text: "is flying", isCorrect: false },
+                    ],
+                },
+                {
+                    question:
+                        "We *** have a picnic at the park on Saturday if the weather is nice.",
+                    options: [
+                        { text: "will", isCorrect: false },
+                        { text: "are going to", isCorrect: true },
+                        { text: "are having", isCorrect: false },
+                    ],
+                },
+            ],
+        },
+        // FIll-IN
+        {
+            instruction:
+                "Fill in the gaps with a correct or most appropriate future forms using a word in prompts to complete the sentences below.",
+            title: "Will / be going to / present continuous for future",
+            type: "fill-in",
+            questions: [
+                {
+                    question: "I *** my grandmother tomorrow. (visit)",
+                    isCorrect: "am going to visit",
+                },
+                {
+                    question: "This year I *** to Italy (go).",
+                    isCorrect: "am going to go",
+                },
+                {
+                    question: "Maybe we *** a new car next year. (buy)",
+                    isCorrect: "will buy",
+                },
+                {
+                    question: "I think current Presindent *** reelected once again. (be)",
+                    isCorrect: "will be",
+                },
+                {
+                    question:
+                        "Tomorrow morning John *** to Madrid for a business trip. (fly)",
+                    isCorrect: "is flying",
+                },
+            ],
+        },
+        // DRAG-&-DROP
+        {
+            instruction:
+                "Drag an option of future tense and drop it into a fitting sentence to complete it.",
+            title: "Will / be going to / present continuous for future",
+            type: "drag-&-drop",
+            questions: [
+                {
+                    question: "I *** my grandmother tomorrow.",
+                    isCorrect: "am going to visit",
+                },
+                {
+                    question: "This year I *** to Italy.",
+                    isCorrect: "am going to go",
+                },
+                {
+                    question: "Maybe we *** a new car next year.",
+                    isCorrect: "will buy",
+                },
+                {
+                    question: "I think current Presindent *** reelected once again.",
+                    isCorrect: "will be",
+                },
+                {
+                    question: "Tomorrow morning John *** to Madrid for a business trip.",
+                    isCorrect: "is flying",
+                },
+            ],
+        },
+    ];
+
     const {section} = data[0];
 
+    //FIXME Do I actually need here conditional rendering? Only one thing which changes is min-h...
     let content;
     switch (section) {
         case "grammar":
@@ -363,9 +479,31 @@ function ExercisePage() {
             content = (
                 <Panel className="bg-white flex flex-col lg:flex-row justify-between !p-0">
                     <ExerciseSet data={data}/>
-                    <Cheatsheet topic={cheatsheet.topic} level={cheatsheet.level} content={cheatsheet.content}/>
+                    <Cheatsheet
+                        topic={cheatsheet.topic}
+                        level={cheatsheet.level}
+                        content={cheatsheet.content}/>
                 </Panel>
             );
+            break;
+        case 'reading':
+            content = (
+                <Panel className="bg-white flex flex-col lg:flex-row justify-between !p-0">
+                    <p>Title: Building and Maintaining Relationships
+
+                        Paragraph 1: Making Friends
+                        Hi there! Let me tell you about my friend, Sarah. We first met at work. Sarah was a colleague, and we started as acquaintances. We would say a quick "hello" in the office, but we didn't really know each other well. One day, we decided to grab lunch together, and that's when we started to get to know each other better. Soon, Sarah became my bestie, someone I could share everything with. It's amazing how friendships can grow from being colleagues to best friends.
+
+                        Paragraph 2: Keeping in Touch
+                        Life can get busy, and sometimes we lose touch with our friends. But it's essential to keep in touch to maintain a strong relationship. Even when Sarah and I changed jobs, we made a promise to keep in touch. We would regularly send messages, call each other, and make plans to hang out. It's important to make an effort to stay connected, especially when life gets busy.
+
+                        Paragraph 3: Unexpected Meetings
+                        One day, I bumped into Sarah at the supermarket. It was such a pleasant surprise! We hadn't seen each other for a while, and it was great to catch up. We decided to get together for coffee, and it felt like no time had passed since our last meeting. Sometimes, these unexpected encounters can bring back the joy of friendship.
+
+                        Paragraph 4: Friendship Forever
+                        In conclusion, building and maintaining relationships takes effort, but it's worth it. Whether it's getting to know someone at work, keeping in touch through messages and calls, or bumping into a friend unexpectedly, these experiences contribute to strong and lasting friendships. So, don't forget to reach out to your friends, make plans to hang out, and cherish the moments you spend together. After all, friends are there to support each other through thick and thin.</p>
+                </Panel>
+            )
             break;
         default:
             throw new Error("There is no such an exercise section");

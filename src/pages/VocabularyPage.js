@@ -11,13 +11,12 @@ function VocabularyPage() {
       </h1>
       <section className="flex justify-start flex-wrap items-stretch gap-12">
         <Card
-          title={"Relationships"}
-          text={
-            "People live among other people. Let's learn how to build relationships using the most common English phrases"
-          }
+          title="Relationships"
+          text="People live among other people. Let's learn how to build relationships using the most common English phrases"
           image={RelationshipsImg}
-          buttonTxt={"Let's learn"}
-          link={"/vocabulary/relationships"}
+          buttonTxt="Let's learn"
+          link="/vocabulary/relationships"
+          badge="A2"
         />
       </section>
     </div>

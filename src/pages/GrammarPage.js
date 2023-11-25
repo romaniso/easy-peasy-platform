@@ -12,20 +12,20 @@ function GrammarPage() {
       </h1>
       <section className="flex justify-start flex-wrap items-stretch gap-12">
         <Card
-          title={"Future Tenses"}
-          text={
-            "Let's learn how to talk about future. Will, be going to, present continuous"
-          }
+          title="Future Tenses"
+          text="Let's learn how to talk about future. Will, be going to, present continuous"
           image={FutureTensesImg}
-          buttonTxt={"Let's learn"}
-          link={"/grammar/future-tenses"}
+          buttonTxt="Let's learn"
+          link="/grammar/future-tenses"
+          badge="B1"
         />
         <Card
-          title={"Used to"}
-          text={`Did you have some past habits? I used to smoke! Shame on me!`}
+          title="Used to"
+          text="Did you have some past habits? I used to smoke! Shame on me!"
           image={UsedToImg}
-          buttonTxt={"Let's learn"}
-          link={"/grammar/used-to"}
+          buttonTxt="Let's learn"
+          link="/grammar/used-to"
+          badge="B1"
         />
       </section>
     </div>

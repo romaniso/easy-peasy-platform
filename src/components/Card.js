@@ -7,7 +7,7 @@ function Card({ title, text, image, buttonTxt, link, badge }) {
     <Panel className="bg-white shadow-lg flex flex-col md:max-w-xs transition-all duration-700 hover:scale-105">
       {image && (
         <div className="h-28 relative">
-            {badge && <div className='absolute text-2xl right-2 top-2 w-8 h-8 flex justify-center items-center rounded-md shadow-md bg-black/30 text-indigo-300 z-10'>{badge}</div>}
+            {badge && <div className='absolute text-2xl capitalize right-2 top-2 w-8 h-8 flex justify-center items-center rounded-md shadow-md bg-black/40 text-indigo-300 z-10'>{badge}</div>}
           <img
             src={image}
             alt="decor of the card"
