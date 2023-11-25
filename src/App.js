@@ -8,6 +8,7 @@ import PrivateRouteLayout from "./layouts/PrivateRouteLayout";
 import GrammarPage from "./pages/GrammarPage";
 import ExercisePage from "./pages/ExercisePage";
 import VocabularyPage from "./pages/VocabularyPage";
+import PreviewPage from "./pages/PreviewPage";
 
 function App() {
   return (
@@ -24,6 +25,10 @@ function App() {
           {/* Vocabulary */}
           <Route path="/vocabulary" element={<VocabularyPage />} />
           <Route path="/vocabulary/:topic" element={<ExercisePage />} />
+
+          {/*Reading using PreviewPage which is a desired component for the rest sections. When database is ready, I will implement it for the rest */}
+          <Route path="/reading" element={<PreviewPage />} />
+          <Route path="/reading/:topic" element={<ExercisePage />} />
 
           {/* private pages */}
           <Route element={<PrivateRouteLayout />}>
