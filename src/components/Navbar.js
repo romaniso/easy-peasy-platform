@@ -85,7 +85,7 @@ function Navbar() {
         </NavLink>
         {link.submenu && (
           <div
-            className={`md:absolute top-12 md:hidden group-hover:text-indigo-900 group-hover:dark:text-indigo-200 group-hover:md:block hover:md:block ${
+            className={`md:absolute top-12 md:p-3 md:-ml-5 md:top-10 md:hidden group-hover:text-indigo-900 group-hover:dark:text-indigo-200 group-hover:md:block hover:md:block ${
               isCollapsed ? "block" : "hidden"
             }`}
           >
