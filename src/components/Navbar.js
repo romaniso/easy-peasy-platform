@@ -89,7 +89,7 @@ function Navbar() {
               isCollapsed ? "block" : "hidden"
             }`}
           >
-            <ul className="border bg-white dark:bg-[#323232] dark:border-gray-500 py-3 px-6 shadow-md rounded-md">
+            <ul className="border bg-white dark:bg-stone-800 dark:border-gray-500 py-3 px-6 shadow-md rounded-md">
               {link.subpaths.map((subpath) => {
                 return (
                   <li
@@ -117,12 +117,12 @@ function Navbar() {
       <nav className="min-h-16 flex justify-between items-center py-2 md:px-10 px-7">
         {/* LOGO */}
         <NavLink to="/">
-          <img src={LogoImage} alt="logo" className='w-32'/>
+          <img src={LogoImage} alt="logo" className='w-32 hover:scale-105 transition-transform duration-500'/>
         </NavLink>
         {/* BURGER */}
         <div
           onClick={() => setIsOpen(!isOpen)}
-          className="absolute right-8 top-3 cursor-pointer md:hidden text-3xl text-sky-700 hover:text-orange-500"
+          className="absolute right-8 top-3 cursor-pointer md:hidden text-3xl text-indigo-800 dark:text-indigo-200 hover:text-orange-500"
         >
           {isOpen ? <HiX /> : <HiMenu />}
         </div>
