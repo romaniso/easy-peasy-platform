@@ -1,6 +1,6 @@
 function Reading({text, title, bgImage, level}){
     return <div className=''>
-        <header className='bg-cover bg-center bg-no-repeat h-[130px]' style={{backgroundImage: `url(${bgImage})`}}>
+        <header className='bg-cover bg-center bg-no-repeat min-h-[130px]' style={{backgroundImage: `url(${bgImage})`}}>
             <div className='w-full h-full py-2 px-6 backdrop-brightness-[35%]  flex flex-col justify-center gap-2'>
                 <h3 className='text-5xl font-bold text-orange-500 drop-shadow text-center tracking-widest'>
                     {title}
