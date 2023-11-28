@@ -5,7 +5,7 @@ import Panel from "../components/Panel";
 import ExerciseSet from "../components/exercise/ExerciseSet";
 import Cheatsheet from "../components/Cheatsheet";
 import Breadcrumbs from "../components/Breadcrumbs";
-import Reading from "../components/Reading";
+import Reading from "../components/exercise/Reading";
 
 // Just for a template;
 import RelationshipsImg from "../assets/images/vocabulary/realtionships.jpg";
