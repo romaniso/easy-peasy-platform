@@ -39,6 +39,7 @@ function PreviewPage() {
                         key={index}
                         image={RelationshipsImg}
                         buttonTxt="Let's learn"
+                        /* I need to create abstraction layer/object instance/model */
                         link={section.id}
                         badge={section.level}
                     />
