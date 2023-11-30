@@ -1,12 +1,16 @@
 const express = require('express');
-const {section} = require("./config/db");
+const {section, exerciseSet} = require("./config/db");
 
 const app = express();
 app.get('/section/:chosen', async (req, res) => {
-    const chosenSection = req.params;
-    // const sections = await section.find();
-    // console.log(await sections.toArray());
-    res.send("Backend side");
+    const chosenSection = req.params.chosen;
+    // I need to create a model object here according to active record pattern
+    const sectionId = (await section.findOne({name: chosenSection}))._id;
+    const exerciseSets = await (await exerciseSet.find({sectionId})).toArray();
+
+    console.log(exerciseSets);
+
+    res.json(exerciseSets);
     console.log('Section: ', chosenSection);
 })
 
