@@ -20,10 +20,10 @@ function App() {
           <Route path="*" element={<ErrorPage />} />
           <Route path="/auth" element={<AuthenticationPage />} />
           {/* Grammar */}
-          <Route path="/grammar" element={<GrammarPage />} />
+          <Route path="/grammar" element={<PreviewPage />} />
           <Route path="/grammar/:topic" element={<ExercisePage />} />
           {/* Vocabulary */}
-          <Route path="/vocabulary" element={<VocabularyPage />} />
+          <Route path="/vocabulary" element={<PreviewPage />} />
           <Route path="/vocabulary/:topic" element={<ExercisePage />} />
 
           {/*Reading using PreviewPage which is a desired component for the rest sections. When database is ready, I will implement it for the rest */}

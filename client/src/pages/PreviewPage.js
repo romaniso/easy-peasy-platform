@@ -3,12 +3,26 @@ import useTop from "../hooks/useTop";
 import Card from "../components/Card";
 import RelationshipsImg from "../assets/images/vocabulary/realtionships.jpg";
 import {useLocation} from "react-router-dom";
+import {useEffect} from "react";
+import axios from "axios";
 //#endregion
 function PreviewPage() {
-    useTop();
-
     const {pathname} = useLocation();
     let sectionName = pathname.charAt(1).toUpperCase() + pathname.slice(2);
+
+    useTop();
+    useEffect(  () => {
+        const getSectionSets = async () => {
+            try {
+                await axios.get(`/section/${pathname}`)
+            } catch (e){
+                throw new Error('There is no such a section');
+            }
+        }
+        getSectionSets();
+    }, []);
+
+
     return (
         <div className="my-24 container mx-auto px-4">
             <h1 className="text-6xl text-center font-bold text-orange-500 drop-shadow mb-8">
