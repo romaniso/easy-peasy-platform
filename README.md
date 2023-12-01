@@ -9,6 +9,9 @@ English learning platform
 - Redux-toolkit
 - Firebase
 - JS
+- Node.js
+- Express
+- MongoDB
 
 ## Todo list
 

@@ -6,6 +6,7 @@ class ExerciseSet {
         this.name = obj.name;
         this.level = obj.level;
         this.description = obj.description;
+        this.image = obj.imgBase64;
         this.sectionId = new ObjectId(obj.sectionId);
         // this._validate();
     }
@@ -22,6 +23,7 @@ class ExerciseSet {
             name: String(this.name),
             level: String(this.level),
             description: String(this.description),
+            image: String(this.image),
             sectionId: new ObjectId(this.sectionId),
 
         });

@@ -37,7 +37,7 @@ function PreviewPage() {
                         title={section.name}
                         text={section.description}
                         key={index}
-                        image={RelationshipsImg}
+                        image={section.image}
                         buttonTxt="Let's learn"
                         /* I need to create abstraction layer/object instance/model */
                         link={section.id}
