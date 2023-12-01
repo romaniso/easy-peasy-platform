@@ -4,9 +4,9 @@ import Tabs from "../Tabs";
 
 function ExerciseSet({ data }) {
   const [activeExercise, setActiveExercise] = useState(1);
-  const [, ...exercises] = data;
+  const exercises = data;
   const renderedExercises = exercises.map(
-    ({ instruction, title, type, questions, words, text }, index) => {
+    ({ instruction, title, type, data, text }, index) => {
       const exerciseNumber = index + 1;
       return (
         <Exercise
@@ -15,7 +15,7 @@ function ExerciseSet({ data }) {
           title={title}
           type={type}
           instruction={instruction}
-          questions={questions || words}
+          questions={data}
           text={text}
         />
       );

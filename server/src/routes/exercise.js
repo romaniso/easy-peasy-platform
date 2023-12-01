@@ -5,6 +5,7 @@ const exerciseRouter = express.Router();
 exerciseRouter
     .get('/exercise/:chosen', async (req, res) => {
         const exercises = await Exercise.findBySet(req.params.chosen);
+        console.log(exercises);
         res.json(exercises);
     })
 
