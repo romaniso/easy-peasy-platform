@@ -19,17 +19,14 @@ function App() {
           <Route exact path="/" element={<HomePage />} />
           <Route path="*" element={<ErrorPage />} />
           <Route path="/auth" element={<AuthenticationPage />} />
-          {/* Grammar */}
+          {/*Sections*/}
           <Route path="/grammar" element={<PreviewPage />} />
-          <Route path="/grammar/:topic" element={<ExercisePage />} />
-          {/* Vocabulary */}
           <Route path="/vocabulary" element={<PreviewPage />} />
-          <Route path="/vocabulary/:topic" element={<ExercisePage />} />
-
-          {/*Reading using PreviewPage which is a desired component for the rest sections. When database is ready, I will implement it for the rest */}
           <Route path="/reading" element={<PreviewPage />} />
-          <Route path="/reading/:topic" element={<ExercisePage />} />
-
+          {/*ExerciseSets*/}
+          <Route path="/grammar/:exercise" element={<ExercisePage />} />
+          <Route path="/vocabulary/:exercise" element={<ExercisePage />} />
+          <Route path="/reading/:exercise" element={<ExercisePage />} />
           {/* private pages */}
           <Route element={<PrivateRouteLayout />}>
             <Route path="/dashboard" element={<DashboardPage />} />

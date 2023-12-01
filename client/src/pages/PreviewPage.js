@@ -1,7 +1,6 @@
 //#region imports
 import useTop from "../hooks/useTop";
 import Card from "../components/Card";
-import RelationshipsImg from "../assets/images/vocabulary/realtionships.jpg";
 import {useLocation} from "react-router-dom";
 import {useEffect, useState} from "react";
 import axios from "axios";
@@ -33,6 +32,7 @@ function PreviewPage() {
             {/*A loader should be included*/}
             <section className="flex justify-start flex-wrap items-stretch gap-12">
                 {sets && sets.map((section, index) => {
+                    console.log(section._id);
                     return <Card
                         title={section.name}
                         text={section.description}
@@ -40,7 +40,7 @@ function PreviewPage() {
                         image={section.image}
                         buttonTxt="Let's learn"
                         /* I need to create abstraction layer/object instance/model */
-                        link={section.id}
+                        link={section.name}
                         badge={section.level}
                     />
                 })}
