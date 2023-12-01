@@ -1,5 +1,6 @@
 const {ObjectId} = require("mongodb");
 const {exerciseSet, exercise} = require("../../config/db");
+const {Section} = require("./section");
 class Exercise {
     constructor(obj) {
         this._id = new ObjectId(obj._id);
@@ -46,8 +47,9 @@ class Exercise {
         return resultArray.map(obj => new Exercise(obj));
     }
     static async findBySet(chosenSet){
-        const setId = (await exerciseSet.findOne({name: chosenSet}))._id;
-        return (await (await exercise.find({setId})).toArray()).map(obj => new Exercise(obj));
+        const {_id: setId, sectionId} = (await exerciseSet.findOne({name: chosenSet}));
+        // @fixme: refactor me please, it looks too robust
+        return {section: (await Section.findById(sectionId)).name, exercises: (await (await exercise.find({setId})).toArray()).map(obj => new Exercise(obj))};
     }
     static async findAllWithCursor() {
         return /*await*/ exercise.find();

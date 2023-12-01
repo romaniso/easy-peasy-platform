@@ -28,7 +28,7 @@ function ExercisePage() {
                 // const {data} = await axios.get(`/exercise${pathname}`);
                 const {data} = await axios.get(`/exercise/${setTitle}`);
                 console.log(data)
-                // setSet(data);
+                setSet(data);
             } catch (error) {
                 throw new Error('There is no such an exercise set');
             }
