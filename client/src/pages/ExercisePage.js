@@ -1,20 +1,42 @@
 //#region imports
 import useTop from "../hooks/useTop";
-import {useParams} from "react-router-dom";
+import {useLocation, useParams} from "react-router-dom";
 import Panel from "../components/Panel";
 import ExerciseSet from "../components/exercise/ExerciseSet";
 import Cheatsheet from "../components/Cheatsheet";
 import Breadcrumbs from "../components/Breadcrumbs";
 import Reading from "../components/exercise/Reading";
+import axios from "axios";
 
 // Just for a template;
 import RelationshipsImg from "../assets/images/vocabulary/realtionships.jpg";
 import Recommended from "../components/Recommended";
+import {useEffect, useState} from "react";
 //#endregion
 //TODO: Here I will probably implement API request for data base where I get all content for cheetsheet md, exercises, instructions, etc based on path of URL and then send it to the Exercise component.
 
 function ExercisePage() {
+    const [set, setSet] = useState(null);
+    const {pathname} = useLocation();
+    // let setName = pathname.charAt(1).toUpperCase() + pathname.slice(2);
+
     useTop();
+    useEffect(() => {
+        const setTitle = decodeURIComponent(pathname.split('/')[2]);
+        const getExerciseSet = async () => {
+            try {
+                // const {data} = await axios.get(`/exercise${pathname}`);
+                const {data} = await axios.get(`/exercise/${setTitle}`);
+                console.log(data)
+                // setSet(data);
+            } catch (error) {
+                throw new Error('There is no such an exercise set');
+            }
+        };
+        getExerciseSet();
+    }, [pathname]);
+
+
     const {topic} = useParams();
     //TODO: to be fetched from API/server and depending on a section type it will render a body conditionally
 

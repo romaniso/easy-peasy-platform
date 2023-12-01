@@ -32,7 +32,6 @@ function PreviewPage() {
             {/*A loader should be included*/}
             <section className="flex justify-start flex-wrap items-stretch gap-12">
                 {sets && sets.map((section, index) => {
-                    console.log(section._id);
                     return <Card
                         title={section.name}
                         text={section.description}
