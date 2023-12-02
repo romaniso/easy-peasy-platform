@@ -8,6 +8,7 @@ import Cheatsheet from "../components/Cheatsheet";
 import Breadcrumbs from "../components/Breadcrumbs";
 import axios from "axios";
 import Reading from "../components/exercise/Reading";
+import Skeleton from "react-loading-skeleton";
 
 // Just for a template;
 import Recommended from "../components/Recommended";

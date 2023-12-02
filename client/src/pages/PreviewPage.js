@@ -4,6 +4,7 @@ import Card from "../components/Card";
 import {useLocation} from "react-router-dom";
 import {useEffect, useState} from "react";
 import axios from "axios";
+import CardSkeleton from "../components/CardSkeleton";
 //#endregion
 function PreviewPage() {
     const [sets, setSets] = useState([]);
@@ -23,7 +24,7 @@ function PreviewPage() {
             }
         };
         getSectionSets();
-    }, [pathname]);
+    }, []);
 
 
     return (
@@ -31,20 +32,22 @@ function PreviewPage() {
             <h1 className="text-6xl text-center font-bold text-orange-500 drop-shadow mb-8">
                 {sectionName}
             </h1>
-            {/*A loader should be included*/}
             <section className="flex justify-start flex-wrap items-stretch gap-12">
-                {isLoading && <p>Loading...</p>}
+                {isLoading && <CardSkeleton cards={4}/>}
                 {sets.map((section, index) => {
-                    return <Card
-                        title={section.name}
-                        text={section.description}
-                        key={index}
-                        image={section.image}
-                        buttonTxt="Let's learn"
-                        /* I need to create abstraction layer/object instance/model */
-                        link={section.name}
-                        badge={section.level}
-                    />
+                    return <>
+                        <Card
+                            title={section.name}
+                            text={section.description}
+                            key={index}
+                            image={section.image}
+                            buttonTxt="Let's learn"
+                            /* I need to create abstraction layer/object instance/model */
+                            link={section.name}
+                            badge={section.level}
+                        />
+
+                    </>
                 })}
             </section>
         </div>
