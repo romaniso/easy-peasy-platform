@@ -4,7 +4,7 @@ import Card from "../components/Card";
 import {useLocation} from "react-router-dom";
 import {useEffect, useState} from "react";
 import axios from "axios";
-import CardSkeleton from "../components/CardSkeleton";
+import CustomSkeleton from "../components/Skeleton";
 //#endregion
 function PreviewPage() {
     const [sets, setSets] = useState([]);
@@ -33,7 +33,7 @@ function PreviewPage() {
                 {sectionName}
             </h1>
             <section className="flex justify-start flex-wrap items-stretch gap-12">
-                {isLoading && <CardSkeleton cards={4}/>}
+                {isLoading && <CustomSkeleton items={4} card/>}
                 {sets.map((section, index) => {
                     return <>
                         <Card

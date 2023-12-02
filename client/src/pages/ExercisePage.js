@@ -8,7 +8,7 @@ import Cheatsheet from "../components/Cheatsheet";
 import Breadcrumbs from "../components/Breadcrumbs";
 import axios from "axios";
 import Reading from "../components/exercise/Reading";
-import Skeleton from "react-loading-skeleton";
+import CustomSkeleton from "../components/Skeleton";
 
 // Just for a template;
 import Recommended from "../components/Recommended";
@@ -170,7 +170,7 @@ function ExercisePage() {
                 {topic}
             </h1>
             <Breadcrumbs/>
-            {isLoading ? <p>Loading...</p> : content}
+            {isLoading ? <CustomSkeleton items={1} exercise/> : content}
             <Recommended/>
         </div>
     );
