@@ -16,8 +16,9 @@ import {useEffect, useState} from "react";
 //TODO: Here I will probably implement API request for data base where I get all content for cheetsheet md, exercises, instructions, etc based on path of URL and then send it to the Exercise component.
 
 function ExercisePage() {
-    const [section, setSection] = useState(null);
-    const [set, setSet] = useState(null);
+    const [section, setSection] = useState("");
+    const [set, setSet] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
     const {pathname} = useLocation();
 
     useTop();
@@ -29,6 +30,7 @@ function ExercisePage() {
                 const {section, exercises} = data;
                 setSet(exercises);
                 setSection(section);
+                setIsLoading(false);
 
             } catch (error) {
                 throw new Error('There is no such an exercise set');
@@ -254,119 +256,119 @@ function ExercisePage() {
     ];
 
     //Reading section
-    const data = [
-        { section: "reading" },
-        // DROPDOWN
-        {
-            instruction:
-                "Choose the correct or most appropriate future forms to complete the sentences below.",
-            title: "Will / be going to / present continuous for future",
-            type: "dropdown",
-            questions: [
-                {
-                    question: "I *** visit my grandmother tomorrow.",
-                    options: [
-                        { text: "will", isCorrect: false },
-                        { text: "am going to", isCorrect: true },
-                        { text: "am visiting", isCorrect: false },
-                    ],
-                },
-                {
-                    question:
-                        "They have tickets for the concert. They *** attend it tonight.",
-                    options: [
-                        { text: "will", isCorrect: false },
-                        { text: "are going to", isCorrect: true },
-                        { text: "are attending", isCorrect: false },
-                    ],
-                },
-                {
-                    question: "I think it *** rain later, so don't forget your umbrella.",
-                    options: [
-                        { text: "will", isCorrect: true },
-                        { text: "is going to", isCorrect: false },
-                        { text: "is raining", isCorrect: false },
-                    ],
-                },
-                {
-                    question: "She *** fly to Paris next week for a business meeting.",
-                    options: [
-                        { text: "will", isCorrect: false },
-                        { text: "is going to", isCorrect: true },
-                        { text: "is flying", isCorrect: false },
-                    ],
-                },
-                {
-                    question:
-                        "We *** have a picnic at the park on Saturday if the weather is nice.",
-                    options: [
-                        { text: "will", isCorrect: false },
-                        { text: "are going to", isCorrect: true },
-                        { text: "are having", isCorrect: false },
-                    ],
-                },
-            ],
-        },
-        // FIll-IN
-        {
-            instruction:
-                "Fill in the gaps with a correct or most appropriate future forms using a word in prompts to complete the sentences below.",
-            title: "Will / be going to / present continuous for future",
-            type: "fill-in",
-            questions: [
-                {
-                    question: "I *** my grandmother tomorrow. (visit)",
-                    isCorrect: "am going to visit",
-                },
-                {
-                    question: "This year I *** to Italy (go).",
-                    isCorrect: "am going to go",
-                },
-                {
-                    question: "Maybe we *** a new car next year. (buy)",
-                    isCorrect: "will buy",
-                },
-                {
-                    question: "I think current Presindent *** reelected once again. (be)",
-                    isCorrect: "will be",
-                },
-                {
-                    question:
-                        "Tomorrow morning John *** to Madrid for a business trip. (fly)",
-                    isCorrect: "is flying",
-                },
-            ],
-        },
-        // DRAG-&-DROP
-        {
-            instruction:
-                "Drag an option of future tense and drop it into a fitting sentence to complete it.",
-            title: "Will / be going to / present continuous for future",
-            type: "drag-&-drop",
-            questions: [
-                {
-                    question: "I *** my grandmother tomorrow.",
-                    isCorrect: "am going to visit",
-                },
-                {
-                    question: "This year I *** to Italy.",
-                    isCorrect: "am going to go",
-                },
-                {
-                    question: "Maybe we *** a new car next year.",
-                    isCorrect: "will buy",
-                },
-                {
-                    question: "I think current Presindent *** reelected once again.",
-                    isCorrect: "will be",
-                },
-                {
-                    question: "Tomorrow morning John *** to Madrid for a business trip.",
-                    isCorrect: "is flying",
-                },
-            ],
-        },
-    ];
+    // const data = [
+    //     { section: "reading" },
+    //     // DROPDOWN
+    //     {
+    //         instruction:
+    //             "Choose the correct or most appropriate future forms to complete the sentences below.",
+    //         title: "Will / be going to / present continuous for future",
+    //         type: "dropdown",
+    //         questions: [
+    //             {
+    //                 question: "I *** visit my grandmother tomorrow.",
+    //                 options: [
+    //                     { text: "will", isCorrect: false },
+    //                     { text: "am going to", isCorrect: true },
+    //                     { text: "am visiting", isCorrect: false },
+    //                 ],
+    //             },
+    //             {
+    //                 question:
+    //                     "They have tickets for the concert. They *** attend it tonight.",
+    //                 options: [
+    //                     { text: "will", isCorrect: false },
+    //                     { text: "are going to", isCorrect: true },
+    //                     { text: "are attending", isCorrect: false },
+    //                 ],
+    //             },
+    //             {
+    //                 question: "I think it *** rain later, so don't forget your umbrella.",
+    //                 options: [
+    //                     { text: "will", isCorrect: true },
+    //                     { text: "is going to", isCorrect: false },
+    //                     { text: "is raining", isCorrect: false },
+    //                 ],
+    //             },
+    //             {
+    //                 question: "She *** fly to Paris next week for a business meeting.",
+    //                 options: [
+    //                     { text: "will", isCorrect: false },
+    //                     { text: "is going to", isCorrect: true },
+    //                     { text: "is flying", isCorrect: false },
+    //                 ],
+    //             },
+    //             {
+    //                 question:
+    //                     "We *** have a picnic at the park on Saturday if the weather is nice.",
+    //                 options: [
+    //                     { text: "will", isCorrect: false },
+    //                     { text: "are going to", isCorrect: true },
+    //                     { text: "are having", isCorrect: false },
+    //                 ],
+    //             },
+    //         ],
+    //     },
+    //     // FIll-IN
+    //     {
+    //         instruction:
+    //             "Fill in the gaps with a correct or most appropriate future forms using a word in prompts to complete the sentences below.",
+    //         title: "Will / be going to / present continuous for future",
+    //         type: "fill-in",
+    //         questions: [
+    //             {
+    //                 question: "I *** my grandmother tomorrow. (visit)",
+    //                 isCorrect: "am going to visit",
+    //             },
+    //             {
+    //                 question: "This year I *** to Italy (go).",
+    //                 isCorrect: "am going to go",
+    //             },
+    //             {
+    //                 question: "Maybe we *** a new car next year. (buy)",
+    //                 isCorrect: "will buy",
+    //             },
+    //             {
+    //                 question: "I think current Presindent *** reelected once again. (be)",
+    //                 isCorrect: "will be",
+    //             },
+    //             {
+    //                 question:
+    //                     "Tomorrow morning John *** to Madrid for a business trip. (fly)",
+    //                 isCorrect: "is flying",
+    //             },
+    //         ],
+    //     },
+    //     // DRAG-&-DROP
+    //     {
+    //         instruction:
+    //             "Drag an option of future tense and drop it into a fitting sentence to complete it.",
+    //         title: "Will / be going to / present continuous for future",
+    //         type: "drag-&-drop",
+    //         questions: [
+    //             {
+    //                 question: "I *** my grandmother tomorrow.",
+    //                 isCorrect: "am going to visit",
+    //             },
+    //             {
+    //                 question: "This year I *** to Italy.",
+    //                 isCorrect: "am going to go",
+    //             },
+    //             {
+    //                 question: "Maybe we *** a new car next year.",
+    //                 isCorrect: "will buy",
+    //             },
+    //             {
+    //                 question: "I think current Presindent *** reelected once again.",
+    //                 isCorrect: "will be",
+    //             },
+    //             {
+    //                 question: "Tomorrow morning John *** to Madrid for a business trip.",
+    //                 isCorrect: "is flying",
+    //             },
+    //         ],
+    //     },
+    // ];
 
     const text =  <>
         {/*<h3 className='text-3xl mb-3'>Building and Maintaining Relationships</h3>*/}
@@ -386,40 +388,42 @@ function ExercisePage() {
 
     //FIXME Do I actually need here conditional rendering? Only one thing which changes is min-h...
     let content;
-    if(!section) return;
-    switch (section) {
-        case "grammar":
-            content = (
-                <Panel className="bg-white flex flex-col lg:flex-row justify-between min-h-[850px] !p-0">
-                    <ExerciseSet data={set}/>
-                    <Cheatsheet
-                        topic={cheatsheet.topic}
-                        level={cheatsheet.level}
-                        content={cheatsheet.content}
-                    />
-                </Panel>
-            );
-            break;
-        case "vocabulary":
-            content = (
-                <Panel className="bg-white flex flex-col lg:flex-row justify-between !p-0">
-                    <ExerciseSet data={data}/>
-                    <Cheatsheet
-                        topic={cheatsheet.topic}
-                        level={cheatsheet.level}
-                        content={cheatsheet.content}/>
-                </Panel>
-            );
-            break;
-        case 'reading':
-            content = (
-                <Panel className="bg-white flex flex-col lg:flex-row justify-between !p-0">
-                    <Reading text={text} title='Building and Maintaining Relationships' bgImage={RelationshipsImg} level='A2'/>
-                </Panel>
-            )
-            break;
-        default:
-            throw new Error("There is no such an exercise section");
+    if(!isLoading){
+        switch (section) {
+            case "grammar":
+                content = (
+                    <Panel className="bg-white flex flex-col lg:flex-row justify-between min-h-[850px] !p-0">
+                        <ExerciseSet data={set}/>
+                        <Cheatsheet
+                            topic={cheatsheet.topic}
+                            level={cheatsheet.level}
+                            content={cheatsheet.content}
+                        />
+                    </Panel>
+                );
+                break;
+            case "vocabulary":
+                content = (
+                    <Panel className="bg-white flex flex-col lg:flex-row justify-between !p-0">
+                        <ExerciseSet data={set}/>
+                        <Cheatsheet
+                            topic={cheatsheet.topic}
+                            level={cheatsheet.level}
+                            content={cheatsheet.content}/>
+                    </Panel>
+                );
+                break;
+            case 'reading':
+                content = (
+                    <Panel className="bg-white flex flex-col lg:flex-row justify-between !p-0">
+                        <Reading text={text} title='Building and Maintaining Relationships' bgImage={RelationshipsImg}
+                                 level='A2'/>
+                    </Panel>
+                )
+                break;
+            default:
+                throw new Error("There is no such an exercise section");
+        }
     }
 
     return (
@@ -428,7 +432,7 @@ function ExercisePage() {
                 {topic}
             </h1>
             <Breadcrumbs/>
-            {content}
+            {isLoading ? <p>Loading...</p> : content}
             <Recommended/>
         </div>
     );
