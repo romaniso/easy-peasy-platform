@@ -5,9 +5,7 @@ import ErrorPage from "./pages/ErrorPage";
 import DashboardPage from "./pages/DashboardPage";
 import RootLayout from "./layouts/RootLayout";
 import PrivateRouteLayout from "./layouts/PrivateRouteLayout";
-import GrammarPage from "./pages/GrammarPage";
 import ExercisePage from "./pages/ExercisePage";
-import VocabularyPage from "./pages/VocabularyPage";
 import PreviewPage from "./pages/PreviewPage";
 
 function App() {
