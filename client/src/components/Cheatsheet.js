@@ -1,11 +1,10 @@
-import DOMPurify from "dompurify";
 import {BsChevronCompactLeft, BsChevronCompactRight} from 'react-icons/bs'
 import {useState} from "react";
+import ReactMarkdown from 'react-markdown';
 import ToolTip from "./ToolTip";
 
 function Cheatsheet({ topic, level, content }) {
     const [isExpanded, setIsExpanded] = useState(true);
-  const sanitizedHTML = DOMPurify.sanitize(content);
 
   return (
     <section className={`border-l dark:border-l-gray-500 transition-all duration-700 ${isExpanded ? 'lg:min-w-[600px] lg:w-1/2' : 'lg:max-w-[400px]'}  relative`}>
@@ -20,10 +19,7 @@ function Cheatsheet({ topic, level, content }) {
                 <h3 className="text-2xl md:text-xl font-bold text-indigo-800 dark:text-indigo-100 mb-3">Cheatsheet</h3>
                 <p className="text-2xl md:text-3xl font-bold text-indigo-400 dark:text-indigo-200 mb-3">{topic}</p>
             </header>
-            <div
-                className="text-indigo-900 dark:text-indigo-200 text-base md:text-lg"
-                dangerouslySetInnerHTML={{ __html: sanitizedHTML }}
-            />
+            <ReactMarkdown className='markdown-content'>{content}</ReactMarkdown>
         </div>
 
     </section>
