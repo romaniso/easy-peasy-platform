@@ -6,7 +6,7 @@ const db = client.db('easy-peasy-db');
 const section = db.collection('section');
 const exerciseSet = db.collection('exercise_set');
 const exercise = db.collection('exercise');
-const textual = db.collection('textual');
+const cheatsheet = db.collection('cheatsheet');
 
 module.exports = {
     db,
@@ -14,5 +14,5 @@ module.exports = {
     section,
     exerciseSet,
     exercise,
-    textual,
+    cheatsheet,
 };

@@ -26,11 +26,10 @@ function ExercisePage() {
         const getExerciseSet = async () => {
             try {
                 const {data} = await axios.get(`/exercise/${setTitle}`);
-                const {section, exercises} = data;
-                setSet(exercises);
-                setSection(section);
+                const {exercises, cheatsheet} = data;
+                setSet(exercises.exercises);
+                setSection(exercises.section);
                 setIsLoading(false);
-
             } catch (error) {
                 throw new Error('There is no such an exercise set');
             }
