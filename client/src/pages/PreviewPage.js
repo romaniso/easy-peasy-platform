@@ -20,6 +20,7 @@ function PreviewPage() {
                 setSets(data);
                 setIsLoading(false);
             } catch (error) {
+                console.error(error);
                 throw new Error('There is no such a section');
             }
         };
@@ -29,6 +30,7 @@ function PreviewPage() {
 
     return (
         <div className="my-24 container mx-auto px-4">
+            {/*Navigate back. Maybe, "see all categories"*/}
             <h1 className="text-6xl text-center font-bold text-orange-500 drop-shadow mb-8">
                 {sectionName}
             </h1>

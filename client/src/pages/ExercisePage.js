@@ -67,11 +67,12 @@ function ExercisePage() {
                 content = (
                     <Panel className="bg-white flex flex-col lg:flex-row justify-between min-h-[850px] !p-0">
                         <ExerciseSet data={set}/>
-                        <Cheatsheet
+                        {!!cheatsheet && <Cheatsheet
                             topic={cheatsheet.topic}
                             level={cheatsheet.level}
                             content={cheatsheet.markDown}
-                        />
+                        />}
+
                     </Panel>
                 );
                 break;
@@ -79,10 +80,11 @@ function ExercisePage() {
                 content = (
                     <Panel className="bg-white flex flex-col lg:flex-row justify-between !p-0">
                         <ExerciseSet data={set}/>
-                        <Cheatsheet
+                        {cheatsheet && <Cheatsheet
                             topic={cheatsheet.topic}
                             level={cheatsheet.level}
-                            content={cheatsheet.content}/>
+                            content={cheatsheet.markDown}
+                        />}
                     </Panel>
                 );
                 break;

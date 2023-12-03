@@ -33,9 +33,8 @@ class Cheatsheet {
     static async findBySet(chosenSet){
         console.log(chosenSet);
         const {_id: setId} = (await exerciseSet.findOne({name: chosenSet}));
-        console.log(setId);
-        // @fixme: refactor me please, it looks too robust
-        return new Cheatsheet (await cheatsheet.findOne({setId}));
+        const found = await cheatsheet.findOne({setId});
+        return found ? new Cheatsheet(found) : null;
     }
     static async findAllWithCursor() {
         return /*await*/ cheatsheet.find();
