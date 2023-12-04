@@ -1,8 +1,9 @@
 import findDifferentIndexesInArrays from "./findDifferentIndexesInArrays";
 
-function generateUserResults (results, keys, type) {
-    return results.map((answer, index) => {
-        const arrAnswer = answer.split("");
+//@fixme as a type I should use enum
+function generateUserResults (results: string[], keys: string[], type: string) {
+    return results.map((answer: string, index: number) => {
+        const arrAnswer: string[] = answer.split("");
         if (type === "fill-box") {
             return answer.toLowerCase().trim() === keys[index][0].toLowerCase()
                 ? "Same"

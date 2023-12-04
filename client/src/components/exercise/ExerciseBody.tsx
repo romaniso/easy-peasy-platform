@@ -1,5 +1,5 @@
 //#region imports
-import {useState, useEffect} from "react";
+import React, {useEffect, useState} from "react";
 import {useSpeechSynthesis} from "react-speech-kit";
 import Button from "../Button";
 // Exercise Types
@@ -10,8 +10,15 @@ import Flashcard from "../Flashcard";
 import ExerciseFillBox from "./ExerciseFillBox";
 import ExerciseMultipleChoice from "./ExerciseMultipleChoice";
 import ExerciseFillInLetter from "./ExerciseFillInLetter";
+import Exercises from "../../interfaces/Exercises";
+
 //#endregion
-function ExerciseBody({onSubmit, btnText = "Check out", exerciseType, questions, results, selections, onSelect, text}) {
+
+interface ExerciseBodyProps {
+    exerciseType: Exercises;
+}
+
+const ExerciseBody: React.FC<ExerciseBodyProps> = ({onSubmit, btnText = "Check out", exerciseType, questions, results, selections, onSelect, text}) => {
     const [generalAmericanVoice, setGeneralAmericanVoice] = useState(null);
     const {voices, speak} = useSpeechSynthesis();
 
@@ -39,7 +46,7 @@ function ExerciseBody({onSubmit, btnText = "Check out", exerciseType, questions,
 
     let renderedExercise;
     switch (exerciseType) {
-        case "multiple-choice":
+        case Exercises.MultipleChoice:
             renderedExercise = (
                 <form onSubmit={onSubmit}>
                     <ExerciseMultipleChoice
@@ -54,7 +61,7 @@ function ExerciseBody({onSubmit, btnText = "Check out", exerciseType, questions,
                 </form>
             );
             break;
-        case "dropdown":
+        case Exercises.Dropdown:
             renderedExercise = (
                 <form onSubmit={onSubmit}>
                     <ExerciseDropdown
@@ -69,7 +76,7 @@ function ExerciseBody({onSubmit, btnText = "Check out", exerciseType, questions,
                 </form>
             );
             break;
-        case "fill-in":
+        case Exercises.FillIn:
             renderedExercise = (
                 <form onSubmit={onSubmit}>
                     <ExerciseFill
@@ -83,7 +90,7 @@ function ExerciseBody({onSubmit, btnText = "Check out", exerciseType, questions,
                 </form>
             );
             break;
-        case "fill-in-letter":
+        case Exercises.FillInLetter:
             renderedExercise = (
                 <form onSubmit={onSubmit}>
                     <ExerciseFillInLetter
@@ -97,7 +104,7 @@ function ExerciseBody({onSubmit, btnText = "Check out", exerciseType, questions,
                 </form>
             );
             break;
-        case "fill-box":
+        case Exercises.FillBox:
             renderedExercise = (
                 <form onSubmit={onSubmit}>
                     <ExerciseFillBox
@@ -112,7 +119,7 @@ function ExerciseBody({onSubmit, btnText = "Check out", exerciseType, questions,
                 </form>
             );
             break;
-        case "drag-&-drop":
+        case Exercises.DragAndDrop:
             renderedExercise = (
                 <div>
                     <ExerciseDraggable
@@ -136,7 +143,7 @@ function ExerciseBody({onSubmit, btnText = "Check out", exerciseType, questions,
                 </div>
             );
             break;
-        case "flash-card":
+        case Exercises.Flashcard:
             renderedExercise = (
                 <div className="flex flex-wrap gap-10">
                     {questions.map(

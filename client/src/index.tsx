@@ -4,7 +4,7 @@ import ReactDOM from "react-dom/client";
 import App from "./App";
 import {Provider} from "./context/user";
 
-const el = document.getElementById("root");
+const el = document.getElementById("root") as Element;
 const root = ReactDOM.createRoot(el);
 
 root.render(<Provider><App /></Provider>);

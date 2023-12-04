@@ -8,13 +8,13 @@ import PrivateRouteLayout from "./layouts/PrivateRouteLayout";
 import ExercisePage from "./pages/ExercisePage";
 import PreviewPage from "./pages/PreviewPage";
 
-function App() {
+const App : React.FC = () => {
   return (
     <Router>
       <RootLayout>
         <Routes>
           {/* public pages */}
-          <Route exact path="/" element={<HomePage />} />
+          <Route path="/" element={<HomePage />} />
           <Route path="*" element={<ErrorPage />} />
           <Route path="/auth" element={<AuthenticationPage />} />
           {/*Sections*/}
