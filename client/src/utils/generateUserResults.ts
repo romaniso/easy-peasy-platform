@@ -1,4 +1,4 @@
-import findDifferentIndexesInArrays from "./findDifferentIndexesInArrays.";
+import findDifferentIndexesInArrays from "./findDifferentIndexesInArrays";
 
 function generateUserResults (results, keys, type) {
     return results.map((answer, index) => {
