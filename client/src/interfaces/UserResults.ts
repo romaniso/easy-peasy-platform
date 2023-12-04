@@ -1,0 +1,3 @@
+interface UserResults {
+    result: string,
+}

@@ -10,7 +10,7 @@ import Flashcard from "../Flashcard";
 import ExerciseFillBox from "./ExerciseFillBox";
 import ExerciseMultipleChoice from "./ExerciseMultipleChoice";
 import ExerciseFillInLetter from "./ExerciseFillInLetter";
-import Exercises from "../../interfaces/Exercises";
+import Exercises from "../../enums/Exercises";
 
 //#endregion
 
@@ -33,14 +33,14 @@ const ExerciseBody: React.FC<ExerciseBodyProps> = ({onSubmit, btnText = "Check o
         const updatedValues = [...selections];
 
 
-        if(exerciseType === 'fill-in-letter') {
+        if(exerciseType === Exercises.FillInLetter) {
             updatedValues[index] = event.join('');
             onSelect(updatedValues);
             return;
         }
         //@todo: Maybe SWITCH?
         updatedValues[index] =
-            exerciseType === "drag-&-drop" || exerciseType === 'multiple-choice' || exerciseType === 'fill-in-letter' ? event : event.target.value;
+            exerciseType === Exercises.DragAndDrop || Exercises.MultipleChoice || Exercises.FillInLetter ? event : event.target.value;
         onSelect(updatedValues);
     };
 
