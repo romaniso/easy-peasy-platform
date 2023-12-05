@@ -1,4 +1,4 @@
-import {ReactElement} from "react";
+import React, {ReactElement} from "react";
 import { Link } from "react-router-dom";
 import Button from "./Button";
 import Input from "./Input";
@@ -13,12 +13,11 @@ interface FooterMenuItem {
     links: SubmenuItem[]
 
 }
-
 interface SocialItem {
     icon: ReactElement;
     path: string;
 }
-function Footer() {
+const Footer: React.FC = () => {
     // const handleUserName = () => {};
 
     const menu: FooterMenuItem[] = [
@@ -95,6 +94,7 @@ function Footer() {
             <Link
                 className="p-2 cursor-pointer inline-flex items-center rounded-full bg-stone-600 hover:bg-orange-400 mx-2 text-xl duration-300"
                 key={index}
+                to={social.path}
             >
                 {social.icon}
             </Link>
