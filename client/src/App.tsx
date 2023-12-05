@@ -4,7 +4,7 @@ import HomePage from "./pages/HomePage";
 // import AuthenticationPage from "./pages/AuthenticationPage";
 // import ErrorPage from "./pages/ErrorPage";
 // import DashboardPage from "./pages/DashboardPage";
-// import RootLayout from "./layouts/RootLayout";
+import RootLayout from "./layouts/RootLayout";
 // import PrivateRouteLayout from "./layouts/PrivateRouteLayout";
 // import ExercisePage from "./pages/ExercisePage";
 // import PreviewPage from "./pages/PreviewPage";
@@ -12,7 +12,7 @@ import HomePage from "./pages/HomePage";
 const App : React.FC = () => {
     return (
         <Router>
-            {/*<RootLayout>*/}
+            <RootLayout>
                 <Routes>
                     {/* public pages */}
                     <Route path="/" element={<HomePage />} />
@@ -31,7 +31,7 @@ const App : React.FC = () => {
                     {/*    <Route path="/dashboard" element={<DashboardPage />} />*/}
                     {/*</Route>*/}
                 </Routes>
-            {/*</RootLayout>*/}
+            </RootLayout>
         </Router>
     );
 }
