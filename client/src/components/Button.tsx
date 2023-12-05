@@ -3,13 +3,13 @@ import className from "classnames";
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
     children: string;
-    primary: boolean;
-    secondary: boolean;
-    success: boolean;
-    warning: boolean;
-    danger: boolean;
-    outline: boolean;
-    rounded: boolean;
+    primary?: boolean;
+    secondary?: boolean;
+    success?: boolean;
+    warning?: boolean;
+    danger?: boolean;
+    outline?: boolean;
+    rounded?: boolean;
 }
 const Button: React.FC<ButtonProps> = ({
                     children,
