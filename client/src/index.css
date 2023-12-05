@@ -41,14 +41,14 @@ button > svg {
 
   .progress-bar .outer {
     box-shadow: 2px 2px 4px -0.5px rgba(0, 0, 0, 0.15),
-      -2px -2px 4px -0.5px rgba(207, 213, 254, 0.3);
+    -2px -2px 4px -0.5px rgba(207, 213, 254, 0.3);
   }
   .progress-bar .inner {
     box-shadow: inset 1px 1px 1px -0.5px rgb(0, 0, 0, 0.2),
-      inset -2px -2px 3px -0.5px rgb(255, 255, 255, 0.7),
-      -0.25px -0.25px 0px rgba(255, 255, 255, 1),
-      0.25px 0.25px 0px rgba(0, 0, 0, 0.15),
-      0px 6px 5px -5px rgba(0, 0, 0, 0.05);
+    inset -2px -2px 3px -0.5px rgb(255, 255, 255, 0.7),
+    -0.25px -0.25px 0px rgba(255, 255, 255, 1),
+    0.25px 0.25px 0px rgba(0, 0, 0, 0.15),
+    0px 6px 5px -5px rgba(0, 0, 0, 0.05);
   }
   .progress-bar circle {
     stroke-dashoffset: 243;
@@ -90,7 +90,7 @@ button > svg {
   .markdown-content h3 {
     @apply text-xl font-bold mb-1;
   }.markdown-content ul {
-    @apply mb-5 shadow-inner bg-stone-50 dark:bg-[#484848] px-3 py-2 rounded-md;
-  }
+     @apply mb-5 shadow-inner bg-stone-50 dark:bg-[#484848] px-3 py-2 rounded-md;
+   }
 
 }
