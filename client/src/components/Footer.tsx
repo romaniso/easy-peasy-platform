@@ -1,4 +1,4 @@
-import React, {ReactElement} from "react";
+import React, {ChangeEvent, ReactElement} from "react";
 import { Link } from "react-router-dom";
 import Button from "./Button";
 import Input from "./Input";
@@ -18,7 +18,9 @@ interface SocialItem {
     path: string;
 }
 const Footer: React.FC = () => {
-    // const handleUserName = () => {};
+    const handleUserName = (e: ChangeEvent) => {
+        console.log(e);
+    };
 
     const menu: FooterMenuItem[] = [
         {
@@ -118,7 +120,7 @@ const Footer: React.FC = () => {
                             outline
                             rounded
                             autoComplete="off"
-                            // onChange={handleUserName}
+                            onChange={handleUserName}
                             required
                             className="sm:w-84 w-full"
                         >

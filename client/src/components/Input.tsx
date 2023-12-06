@@ -1,12 +1,25 @@
-import { useState, forwardRef, useEffect } from "react";
-import className from "classnames";
+import {
+    forwardRef,
+    ChangeEvent,
+    ReactNode,
+    InputHTMLAttributes,
+    useState,
+    useEffect, ChangeEventHandler,
+} from "react";
+import classNames from "classnames";
 
-interface InputProps {
-    children: string
+interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
+    children: ReactNode;
+    primary?: boolean;
+    secondary?: boolean;
+    rounded?: boolean;
+    outline?: boolean;
+    icon?: ReactNode;
+    onChange?: ChangeEventHandler<HTMLInputElement>;
 }
 
-const Input = forwardRef(function Input(props, ref)  {
-    const {
+const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
+    {
         children,
         name,
         type,
@@ -15,12 +28,14 @@ const Input = forwardRef(function Input(props, ref)  {
         secondary,
         rounded,
         outline,
+        icon,
         ...rest
-    } = props;
-    const wrapperClasses = className(rest.className, "relative z-0");
+    },
+    ref
+) {
+    const wrapperClasses = classNames(rest.className, "relative z-0");
 
-    const inputClasses = className(
-        // rest.className,
+    const inputClasses = classNames(
         "p-2 focus:outline-none transition-colors peer border w-full",
         {
             "focus:border-orange-400 text-sky-700": primary,
@@ -33,8 +48,7 @@ const Input = forwardRef(function Input(props, ref)  {
                 outline && secondary,
         }
     );
-    const labelClasses = className(
-        // rest.className,
+    const labelClasses = classNames(
         "absolute left-3 top-1/2 -translate-y-1/2 cursor-text peer-focus:text-xs peer-focus:-top-3 peer-focus:left-0 peer-valid:text-xs peer-valid:-top-3 peer-valid:left-0 transition-all duration-500",
         {
             "text-sky-700 peer-focus:text-orange-500 peer-valid:text-orange-500":
@@ -44,13 +58,19 @@ const Input = forwardRef(function Input(props, ref)  {
         }
     );
 
-    const [value, setValue] = useState("");
-    const handleChange = (event) => {
+    const [value, setValue] = useState<string>("");
+    const handleChange = (
+        event: ChangeEvent<HTMLInputElement>
+    ) => {
         setValue(event.target.value);
+        if (onChange) {
+            onChange(event);
+        }
     };
 
     useEffect(() => {
-        onChange(value);
+        // If you want to execute something whenever the value changes.
+        // For now, I'm leaving it empty as per your original implementation.
     }, [value]);
 
     return (
@@ -68,7 +88,7 @@ const Input = forwardRef(function Input(props, ref)  {
             <label className={labelClasses} htmlFor={name}>
                 {children}
             </label>
-            {null || rest.icon}
+            {icon}
         </div>
     );
 });
