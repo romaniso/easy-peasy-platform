@@ -10,8 +10,7 @@ const About: React.FC = () => {
         <section className="py-16 px-4">
             <div className="container mx-auto">
                 <section
-                    className="flex flex-col justify-center items-center mb-16"
-                    px-4
+                    className="flex flex-col justify-center items-center mb-16 px-4"
                 >
                     <h2 className="text-6xl text-center font-bold text-orange-500 drop-shadow mb-8">
                         About us
