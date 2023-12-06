@@ -1,9 +1,9 @@
-// import useTop from "../../hooks/useTop";
+import useTop from "../hooks/useTop";
 import Hero from "./home/Hero";
 import About from "./home/About";
 
 const HomePage = () => {
-    // useTop();
+    useTop();
     return (
         <>
             <Hero />
