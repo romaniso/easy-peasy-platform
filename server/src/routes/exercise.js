@@ -1,6 +1,6 @@
 const express = require('express');
-const {Exercise} = require("../models/exercise");
-const {Cheatsheet} = require("../models/cheatsheet");
+const {Exercise} = require("../models/exercise.js");
+const {Cheatsheet} = require("../models/cheatsheet.js");
 const exerciseRouter = express.Router();
 
 exerciseRouter

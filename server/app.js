@@ -1,9 +1,11 @@
 const express = require('express');
+const cors = require('cors');
 const {sectionRouter} = require("./src/routes/section");
 const {exerciseRouter} = require("./src/routes/exercise");
 
 const app = express();
 
+app.use(cors());
 app.use(express.urlencoded({extended: false}));
 
 app.use('/section', sectionRouter);
