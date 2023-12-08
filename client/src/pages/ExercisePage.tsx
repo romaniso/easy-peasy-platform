@@ -16,6 +16,7 @@ import {ExerciseType} from "../types/exerciseType";
 // Just for a template;
 // import Recommended from "../components/Recommended";
 //#endregion
+//#region interfaces
 interface ExerciseUnit {
     question?: 'string';
     option?: {text: string, isCorrect: boolean}[];
@@ -49,8 +50,8 @@ interface ExerciseObject {
     exercises: SingleExercise[];
     section: Section;
 }
-
 const defaultExercises: SingleExercise[] = []
+//#endregion
 function ExercisePage() {
     const [section, setSection] = useState<Section | null>(null);
     const [exercises, setExercises] = useState<SingleExercise[]>(defaultExercises);
@@ -97,52 +98,52 @@ function ExercisePage() {
 
     //FIXME Do I actually need here conditional rendering? Only one thing which changes is min-h...
     let content;
-    if(!isLoading){
-        switch (section) {
-            case "grammar":
-                content = (
-                    <Panel className="bg-white flex flex-col lg:flex-row justify-between min-h-[850px] !p-0">
-                        <ExerciseSet data={exercises}/>
-                        {!!cheatsheet && <Cheatsheet
-                            topic={cheatsheet.topic}
-                            level={cheatsheet.level}
-                            content={cheatsheet.markDown}
-                        />}
-
-                    </Panel>
-                );
-                break;
-            case "vocabulary":
-                content = (
-                    <Panel className="bg-white flex flex-col lg:flex-row justify-between !p-0">
-                        <ExerciseSet data={exercises}/>
-                        {cheatsheet && <Cheatsheet
-                            topic={cheatsheet.topic}
-                            level={cheatsheet.level}
-                            content={cheatsheet.markDown}
-                        />}
-                    </Panel>
-                );
-                break;
-            case 'reading':
-                content = (
-                    <Panel className="bg-white flex flex-col lg:flex-row justify-between !p-0">
-                        {/*<Reading text={text} title='Building and Maintaining Relationships' bgImage={RelationshipsImg}*/}
-                        {/*         level='A2'/>*/}
-                    </Panel>
-                )
-                break;
-            default:
-                throw new Error("There is no such an exercise section");
-        }
-    }
+    // if(!isLoading){
+    //     switch (section) {
+    //         case "grammar":
+    //             content = (
+    //                 <Panel className="bg-white flex flex-col lg:flex-row justify-between min-h-[850px] !p-0">
+    //                     <ExerciseSet data={exercises}/>
+    //                     {!!cheatsheet && <Cheatsheet
+    //                         topic={cheatsheet.topic}
+    //                         level={cheatsheet.level}
+    //                         content={cheatsheet.markDown}
+    //                     />}
+    //
+    //                 </Panel>
+    //             );
+    //             break;
+    //         case "vocabulary":
+    //             content = (
+    //                 <Panel className="bg-white flex flex-col lg:flex-row justify-between !p-0">
+    //                     <ExerciseSet data={exercises}/>
+    //                     {cheatsheet && <Cheatsheet
+    //                         topic={cheatsheet.topic}
+    //                         level={cheatsheet.level}
+    //                         content={cheatsheet.markDown}
+    //                     />}
+    //                 </Panel>
+    //             );
+    //             break;
+    //         case 'reading':
+    //             content = (
+    //                 <Panel className="bg-white flex flex-col lg:flex-row justify-between !p-0">
+    //                     {/*<Reading text={text} title='Building and Maintaining Relationships' bgImage={RelationshipsImg}*/}
+    //                     {/*         level='A2'/>*/}
+    //                 </Panel>
+    //             )
+    //             break;
+    //         default:
+    //             throw new Error("There is no such an exercise section");
+    //     }
+    // }
 
     return (
         <div className="my-24 container mx-auto px-4">
             <h1 className="text-4xl md:text-6xl text-center font-bold text-orange-500 drop-shadow mb-6 md:mb-8">
                 {topic}
             </h1>
-            {/*<Breadcrumbs/>*/}
+            <Breadcrumbs/>
             {isLoading ? <CustomSkeleton items={1} exercise/> : content}
             {/*<Recommended/>*/}
         </div>
