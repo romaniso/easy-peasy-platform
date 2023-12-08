@@ -5,8 +5,8 @@ import useTop from "../hooks/useTop";
 import axios from "axios";
 import Card from "../components/Card";
 import Skeleton from "../components/Skeleton";
+import {Level} from "../types/level";
 
-type Level = 'A1' | 'A2' | 'B1' | 'B2' | 'C1' | 'C2';
 interface ExerciseSet {
     _id: string;
     name: string;

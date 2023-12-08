@@ -1,0 +1,1 @@
+export type ExerciseType = 'fill-box' | 'flashcard' | 'dropdown' | 'fill-in' | 'drag-&-drop' | 'multiple-choice' | 'fill-in-letter';

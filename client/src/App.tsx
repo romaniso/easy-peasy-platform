@@ -6,7 +6,7 @@ import HomePage from "./pages/HomePage";
 // import DashboardPage from "./pages/DashboardPage";
 import RootLayout from "./layouts/RootLayout";
 // import PrivateRouteLayout from "./layouts/PrivateRouteLayout";
-// import ExercisePage from "./pages/ExercisePage";
+import ExercisePage from "./pages/ExercisePage";
 import PreviewPage from "./pages/PreviewPage";
 
 const App : React.FC = () => {
@@ -23,9 +23,9 @@ const App : React.FC = () => {
                     <Route path="/vocabulary" element={<PreviewPage />} />
                     <Route path="/reading" element={<PreviewPage />} />
                     {/*ExerciseSets*/}
-                    {/*<Route path="/grammar/:exercise" element={<ExercisePage />} />*/}
-                    {/*<Route path="/vocabulary/:exercise" element={<ExercisePage />} />*/}
-                    {/*<Route path="/reading/:exercise" element={<ExercisePage />} />*/}
+                    <Route path="/grammar/:exercise" element={<ExercisePage />} />
+                    <Route path="/vocabulary/:exercise" element={<ExercisePage />} />
+                    <Route path="/reading/:exercise" element={<ExercisePage />} />
                     {/* private pages */}
                     {/*<Route element={<PrivateRouteLayout />}>*/}
                     {/*    <Route path="/dashboard" element={<DashboardPage />} />*/}
