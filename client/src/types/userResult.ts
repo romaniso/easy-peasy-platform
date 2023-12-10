@@ -1,0 +1,1 @@
+export type UserResult = 'Same' | 'Different' | number[];
