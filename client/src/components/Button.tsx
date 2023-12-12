@@ -1,4 +1,4 @@
-import React, {ButtonHTMLAttributes } from "react";
+import React, {ButtonHTMLAttributes, ReactEventHandler} from "react";
 import className from "classnames";
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
@@ -10,6 +10,7 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
     danger?: boolean;
     outline?: boolean;
     rounded?: boolean;
+    onClick?: ReactEventHandler;
 }
 const Button: React.FC<ButtonProps> = ({
                     children,
@@ -20,6 +21,7 @@ const Button: React.FC<ButtonProps> = ({
                     danger,
                     outline,
                     rounded,
+                    onClick,
                     ...rest
                 }) => {
     const classes = className(
@@ -44,7 +46,7 @@ const Button: React.FC<ButtonProps> = ({
         }
     );
     return (
-        <button {...rest} className={classes}>
+        <button {...rest} className={classes} onClick={onClick}>
             {children}
         </button>
     );

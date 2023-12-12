@@ -2,6 +2,7 @@ import React from "react";
 import { FaRegThumbsUp, FaRegThumbsDown } from "react-icons/fa";
 import {ExerciseUnit} from "../../interfaces/exerciseUnit";
 import {UserResult} from "../../types/userResult";
+import { v4 as uuid } from "uuid";
 
 interface ExerciseFillProps {
     questions: ExerciseUnit[];
@@ -26,7 +27,7 @@ const ExerciseFill: React.FC<ExerciseFillProps> = ({ questions, results, onChang
                         {question.split("***").map((part, partIndex) => {
                             //Conditional Render
                             const inputPart = (
-                                <>
+                                <span key={`${partIndex} ${index}`}>
                                     <input
                                         className="text-xl p-1 border dark:border-gray-500 dark:bg-[#323232] rounded-md shadow-inner text-indigo-800 dark:text-indigo-200 outline-none"
                                         key={index}
@@ -37,7 +38,7 @@ const ExerciseFill: React.FC<ExerciseFillProps> = ({ questions, results, onChang
                                     />
                                     {part}
                                     {feedbackIcon}
-                                </>
+                                </span>
                             );
                             return partIndex === 1 ? (
                                 inputPart

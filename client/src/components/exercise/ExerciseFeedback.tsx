@@ -3,7 +3,7 @@ import React, {useCallback, useEffect, useState} from "react";
 import {UserResult} from "../../types/userResult";
 
 interface ExerciseFeedbackProps {
-    results: UserResult[];
+    results: UserResult[] | null;
     questionsNumber: number;
 }
 const ExerciseFeedback: React.FC<ExerciseFeedbackProps> = ({ results, questionsNumber }) => {
@@ -20,7 +20,7 @@ const ExerciseFeedback: React.FC<ExerciseFeedbackProps> = ({ results, questionsN
     }, []);
 
     useEffect(() => {
-        calculateResultIntoPercentages(results);
+        calculateResultIntoPercentages(results as UserResult[]);
     }, [results, calculateResultIntoPercentages]);
 
 

@@ -63,7 +63,6 @@ const FillInLetterUnit: React.FC<FillInLetterUnitProps> = ({wordIndex, word, onF
         <div className="inline-flex items-center gap-1 mb-6 md:mb-8">
 
             {word.map((char: string, charIndex: number) => {
-                console.log(results);
                 const inputClasses = className(
                     "text-lg md:text-xl text-center md:p-1 border dark:border-gray-500 rounded-md shadow-inner text-indigo-800 dark:text-indigo-400 font-bold outline-none w-6 md:w-8 hover:scale-105 dark:bg-[#323232] focus:border-orange-300 focus:dark:border-orange-500 hover:border-orange-300 hover:dark:border-orange-500 transition-all duration-500",
                     {
