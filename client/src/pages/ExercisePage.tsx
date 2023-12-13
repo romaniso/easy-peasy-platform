@@ -1,58 +1,29 @@
 //#region imports
-import {useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import {useLocation, useParams} from "react-router-dom";
 import useTop from "../hooks/useTop";
 import Panel from "../components/Panel";
 import ExerciseSet from "../components/exercise/ExerciseSet";
-import Cheatsheet from "../components/Cheatsheet";
+// import Cheatsheet from "../components/Cheatsheet";
 import Breadcrumbs from "../components/Breadcrumbs";
 import axios from "axios";
 // import Reading from "../components/exercise/Reading";
 import CustomSkeleton from "../components/Skeleton";
 // Types
-import {Level} from "../types/level";
 import {Section} from "../types/section";
-import {ExerciseType} from "../types/exerciseType";
+import {SingleExercise} from "../interfaces/singleExercise";
+import {Cheatsheet} from "../interfaces/cheatsheet";
 // Just for a template;
 // import Recommended from "../components/Recommended";
 //#endregion
 //#region interfaces
-interface ExerciseUnit {
-    question?: 'string';
-    option?: {text: string, isCorrect: boolean}[];
-    word?: string;
-    correctPlace?: number;
-    correctForm?: string;
-    example?: string;
-    isCorrect?: string;
-    cardImage?: string;
-}
-interface Cheatsheet {
-    level: Level;
-    markDown: string;
-    setId: string;
-    topic: string;
-    _id: string;
-}
-interface SingleExercise {
-    data: {
-        units: (ExerciseUnit | string)[],
-        text?: string;
-    };
-    instruction: string;
-    setId: string;
-    title: string;
-    type: ExerciseType;
-    _id: string;
-    section: Section;
-}
 interface ExerciseObject {
     exercises: SingleExercise[];
     section: Section;
 }
 const defaultExercises: SingleExercise[] = []
 //#endregion
-function ExercisePage() {
+const ExercisePage: React.FC = () => {
     const [section, setSection] = useState<Section | null>(null);
     const [exercises, setExercises] = useState<SingleExercise[]>(defaultExercises);
     const [cheatsheet, setCheatsheet] = useState<Cheatsheet | null>(null);
@@ -68,7 +39,6 @@ function ExercisePage() {
                 const {exercises, cheatsheet} = data;
                 setExercises(exercises.exercises);
                 setSection(exercises.section);
-                console.log(data)
                 if(cheatsheet){
                     setCheatsheet(cheatsheet);
                 }
@@ -98,45 +68,45 @@ function ExercisePage() {
 
     //FIXME Do I actually need here conditional rendering? Only one thing which changes is min-h...
     let content;
-    // if(!isLoading){
-    //     switch (section) {
-    //         case "grammar":
-    //             content = (
-    //                 <Panel className="bg-white flex flex-col lg:flex-row justify-between min-h-[850px] !p-0">
-    //                     <ExerciseSet data={exercises}/>
-    //                     {!!cheatsheet && <Cheatsheet
-    //                         topic={cheatsheet.topic}
-    //                         level={cheatsheet.level}
-    //                         content={cheatsheet.markDown}
-    //                     />}
-    //
-    //                 </Panel>
-    //             );
-    //             break;
-    //         case "vocabulary":
-    //             content = (
-    //                 <Panel className="bg-white flex flex-col lg:flex-row justify-between !p-0">
-    //                     <ExerciseSet data={exercises}/>
-    //                     {cheatsheet && <Cheatsheet
-    //                         topic={cheatsheet.topic}
-    //                         level={cheatsheet.level}
-    //                         content={cheatsheet.markDown}
-    //                     />}
-    //                 </Panel>
-    //             );
-    //             break;
-    //         case 'reading':
-    //             content = (
-    //                 <Panel className="bg-white flex flex-col lg:flex-row justify-between !p-0">
-    //                     {/*<Reading text={text} title='Building and Maintaining Relationships' bgImage={RelationshipsImg}*/}
-    //                     {/*         level='A2'/>*/}
-    //                 </Panel>
-    //             )
-    //             break;
-    //         default:
-    //             throw new Error("There is no such an exercise section");
-    //     }
-    // }
+    if(!isLoading){
+        switch (section) {
+            case "grammar":
+                content = (
+                    <Panel className="bg-white flex flex-col lg:flex-row justify-between min-h-[850px] !p-0">
+                        <ExerciseSet exercises={exercises}/>
+                        {/*{!!cheatsheet && <Cheatsheet*/}
+                        {/*    topic={cheatsheet.topic}*/}
+                        {/*    level={cheatsheet.level}*/}
+                        {/*    content={cheatsheet.markDown}*/}
+                        {/*/>}*/}
+
+                    </Panel>
+                );
+                break;
+            case "vocabulary":
+                content = (
+                    <Panel className="bg-white flex flex-col lg:flex-row justify-between !p-0">
+                        <ExerciseSet exercises={exercises}/>
+                        {/*{cheatsheet && <Cheatsheet*/}
+                        {/*    topic={cheatsheet.topic}*/}
+                        {/*    level={cheatsheet.level}*/}
+                        {/*    content={cheatsheet.markDown}*/}
+                        {/*/>}*/}
+                    </Panel>
+                );
+                break;
+            case 'reading':
+                content = (
+                    <Panel className="bg-white flex flex-col lg:flex-row justify-between !p-0">
+                        {/*<Reading text={text} title='Building and Maintaining Relationships' bgImage={RelationshipsImg}*/}
+                        {/*         level='A2'/>*/}
+                    </Panel>
+                )
+                break;
+            default:
+                throw new Error("There is no such an exercise section");
+        }
+    }
 
     return (
         <div className="my-24 container mx-auto px-4">
