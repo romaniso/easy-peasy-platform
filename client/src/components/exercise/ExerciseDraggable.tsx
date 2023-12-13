@@ -1,5 +1,5 @@
 import React, {ReactElement, useEffect, useState} from "react";
-import useShuffle from "../../hooks/useShuffle";
+import {shuffleArray} from "../../utils/shuffleArray";
 
 import Draggable from "../Draggable";
 import Droppable from "../Droppable";
@@ -29,7 +29,6 @@ interface ExerciseDraggableProps {
 const ExerciseDraggable: React.FC<ExerciseDraggableProps> = ({ draggables, droppables, onSelect, results }) => {
     const [shuffledDrags, setShuffledDrags] = useState<draggable[]>([]);
     const [toDrops, setDroppables] = useState<droppable[]>(droppables);
-    const { shuffleArray } = useShuffle();
 
     useEffect(() => {
         const initialShuffledDrags: draggable[] = [...draggables];
