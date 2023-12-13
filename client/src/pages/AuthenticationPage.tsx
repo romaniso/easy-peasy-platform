@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import useTop from "../hooks/useTop";
-import Login from "../components/Login";
-import Signup from "../components/Signup";
+import Login from "../components/auth/Login";
+import Signup from "../components/auth/Signup";
 
 const AuthenticationPage: React.FC = () => {
     useTop();
