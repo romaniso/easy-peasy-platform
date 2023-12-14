@@ -4,7 +4,7 @@ import {useLocation, useParams} from "react-router-dom";
 import useTop from "../hooks/useTop";
 import Panel from "../components/Panel";
 import ExerciseSet from "../components/exercise/ExerciseSet";
-// import Cheatsheet from "../components/Cheatsheet";
+import Cheatsheet from "../components/Cheatsheet";
 import Breadcrumbs from "../components/Breadcrumbs";
 import axios from "axios";
 // import Reading from "../components/exercise/Reading";
@@ -12,9 +12,9 @@ import CustomSkeleton from "../components/Skeleton";
 // Types
 import {Section} from "../types/section";
 import {SingleExercise} from "../interfaces/singleExercise";
-import {Cheatsheet} from "../interfaces/cheatsheet";
+import {ICheatsheet} from "../interfaces/cheatsheet";
 // Just for a template;
-// import Recommended from "../components/Recommended";
+import Recommended from "../components/Recommended";
 //#endregion
 //#region interfaces
 interface ExerciseObject {
@@ -26,7 +26,7 @@ const defaultExercises: SingleExercise[] = []
 const ExercisePage: React.FC = () => {
     const [section, setSection] = useState<Section | null>(null);
     const [exercises, setExercises] = useState<SingleExercise[]>(defaultExercises);
-    const [cheatsheet, setCheatsheet] = useState<Cheatsheet | null>(null);
+    const [cheatsheet, setCheatsheet] = useState<ICheatsheet | null>(null);
     const [isLoading, setIsLoading] = useState<boolean>(true);
     const {pathname} = useLocation();
 
@@ -35,7 +35,7 @@ const ExercisePage: React.FC = () => {
         const setTitle = decodeURIComponent(pathname.split('/')[2]);
         const getExerciseSet = async () => {
             try {
-                const {data} = await axios.get<{exercises: ExerciseObject; cheatsheet: Cheatsheet}>(`http://localhost:5000/exercise/${setTitle}`);
+                const {data} = await axios.get<{exercises: ExerciseObject; cheatsheet: ICheatsheet}>(`http://localhost:5000/exercise/${setTitle}`);
                 const {exercises, cheatsheet} = data;
                 setExercises(exercises.exercises);
                 setSection(exercises.section);
@@ -74,11 +74,11 @@ const ExercisePage: React.FC = () => {
                 content = (
                     <Panel className="bg-white flex flex-col lg:flex-row justify-between min-h-[850px] !p-0">
                         <ExerciseSet exercises={exercises}/>
-                        {/*{!!cheatsheet && <Cheatsheet*/}
-                        {/*    topic={cheatsheet.topic}*/}
-                        {/*    level={cheatsheet.level}*/}
-                        {/*    content={cheatsheet.markDown}*/}
-                        {/*/>}*/}
+                        {!!cheatsheet && <Cheatsheet
+                            topic={cheatsheet.topic}
+                            level={cheatsheet.level}
+                            content={cheatsheet.markDown}
+                        />}
 
                     </Panel>
                 );
@@ -87,11 +87,11 @@ const ExercisePage: React.FC = () => {
                 content = (
                     <Panel className="bg-white flex flex-col lg:flex-row justify-between !p-0">
                         <ExerciseSet exercises={exercises}/>
-                        {/*{cheatsheet && <Cheatsheet*/}
-                        {/*    topic={cheatsheet.topic}*/}
-                        {/*    level={cheatsheet.level}*/}
-                        {/*    content={cheatsheet.markDown}*/}
-                        {/*/>}*/}
+                        {cheatsheet && <Cheatsheet
+                            topic={cheatsheet.topic}
+                            level={cheatsheet.level}
+                            content={cheatsheet.markDown}
+                        />}
                     </Panel>
                 );
                 break;
@@ -115,7 +115,7 @@ const ExercisePage: React.FC = () => {
             </h1>
             <Breadcrumbs/>
             {isLoading ? <CustomSkeleton items={1} exercise/> : content}
-            {/*<Recommended/>*/}
+            <Recommended/>
         </div>
     );
 }
