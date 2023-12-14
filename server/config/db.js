@@ -7,6 +7,7 @@ const section = db.collection('section');
 const exerciseSet = db.collection('exercise_set');
 const exercise = db.collection('exercise');
 const cheatsheet = db.collection('cheatsheet');
+const reading = db.collection('reading');
 
 module.exports = {
     db,
@@ -15,4 +16,5 @@ module.exports = {
     exerciseSet,
     exercise,
     cheatsheet,
+    reading,
 };
