@@ -1,6 +1,6 @@
 import {Level} from "../types/level";
 
-export interface Cheatsheet {
+export interface ICheatsheet {
     level: Level;
     markDown: string;
     setId: string;
