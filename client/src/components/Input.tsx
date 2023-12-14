@@ -1,21 +1,24 @@
 import {
     forwardRef,
-    ChangeEvent,
     ReactNode,
     InputHTMLAttributes,
     useState,
-    useEffect, ChangeEventHandler,
 } from "react";
 import classNames from "classnames";
 
-interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
+
+type InputRestProps = Omit<InputHTMLAttributes<HTMLInputElement>, 'children' | 'name' | 'type' | 'onChange' | 'primary' | 'secondary' | 'rounded' | 'outline'>;
+
+interface InputProps extends InputRestProps {
     children: ReactNode;
+    name: string;
+    type: string;
     primary?: boolean;
     secondary?: boolean;
     rounded?: boolean;
     outline?: boolean;
     icon?: ReactNode;
-    onChange?: ChangeEventHandler<HTMLInputElement>;
+    onChange: ((value: string) => void);
 }
 
 const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
@@ -33,12 +36,22 @@ const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
     },
     ref
 ) {
+    const [value, setValue] = useState<string>("");
+    const handleChange = (
+        value: string
+    ) => {
+        setValue(value);
+        if (onChange) {
+            onChange(value);
+        }
+    };
+
     const wrapperClasses = classNames(rest.className, "relative z-0");
 
     const inputClasses = classNames(
-        "p-2 focus:outline-none transition-colors peer border w-full",
+        "p-2 focus:outline-none transition-colors peer border w-full dark:border-indigo-300",
         {
-            "focus:border-orange-400 text-sky-700": primary,
+            "focus:border-orange-500 text-indigo-700 dark:text-indigo-300 dark:bg-transparent ": primary,
             "bg-stone-400 focus:border-indigo-300 text-indigo-300": secondary,
             "rounded-md": rounded,
             "bg-transparent": outline,
@@ -51,27 +64,13 @@ const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
     const labelClasses = classNames(
         "absolute left-3 top-1/2 -translate-y-1/2 cursor-text peer-focus:text-xs peer-focus:-top-3 peer-focus:left-0 peer-valid:text-xs peer-valid:-top-3 peer-valid:left-0 transition-all duration-500",
         {
-            "text-sky-700 peer-focus:text-orange-500 peer-valid:text-orange-500":
+            "text-indigo-700 dark:text-indigo-300 peer-focus:text-orange-500 peer-valid:text-orange-500":
             primary,
-            "text-orange-500 peer-focus:text-indigo-300 peer-valid:text-sky-500":
+            "text-orange-500 peer-focus:text-indigo-300 peer-valid:text-indigo-500":
             secondary,
+            "text-xs -top-3 -left-0 !text-orange-500": value.length > 0,
         }
     );
-
-    const [value, setValue] = useState<string>("");
-    const handleChange = (
-        event: ChangeEvent<HTMLInputElement>
-    ) => {
-        setValue(event.target.value);
-        if (onChange) {
-            onChange(event);
-        }
-    };
-
-    useEffect(() => {
-        // If you want to execute something whenever the value changes.
-        // For now, I'm leaving it empty as per your original implementation.
-    }, [value]);
 
     return (
         <div className={wrapperClasses}>
@@ -82,7 +81,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
                 name={name}
                 id={name}
                 value={value}
-                onChange={handleChange}
+                onChange={(e) => handleChange(e.target.value)}
                 ref={ref}
             />
             <label className={labelClasses} htmlFor={name}>
@@ -94,3 +93,4 @@ const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
 });
 
 export default Input;
+
