@@ -1,14 +1,28 @@
-import { useRef } from "react";
+import React, {InputHTMLAttributes, ReactNode, useRef} from "react";
 import Input from "../Input";
 
-function Password({
+type PasswordRestProps = Omit<InputHTMLAttributes<HTMLInputElement>, 'children' | 'showPassword' | 'onChange' | 'toggleShowPassword'>;
+
+interface PasswordProps extends PasswordRestProps{
+    children: ReactNode;
+    showPassword: boolean;
+    primary?: boolean;
+    secondary?: boolean;
+    rounded?: boolean;
+    outline?: boolean;
+    toggleShowPassword(): void;
+    onChange(value: string): void;
+
+}
+
+const Password: React.FC<PasswordProps> = ({
                       children,
                       showPassword,
                       toggleShowPassword,
                       onChange,
                       ...rest
-                  }) {
-    const inputRef = useRef(null);
+                  }) => {
+    const inputRef = useRef<HTMLInputElement>(null);
     const handleToggleShowPassword = () => {
         inputRef.current?.focus();
         toggleShowPassword();
@@ -25,7 +39,7 @@ function Password({
             xmlns="http://www.w3.org/2000/svg"
             width="16"
             height="16"
-            fill={showPassword ? "#EB7F00" : "#163A95"}
+            fill={showPassword ? "#EB7F00" : "#a5b4fc"}
             viewBox="0 0 16 16"
         >
           <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z" />
