@@ -92,5 +92,13 @@ button > svg {
   }.markdown-content ul {
      @apply mb-5 shadow-inner bg-stone-50 dark:bg-[#484848] px-3 py-2 rounded-md;
    }
-
+  .markdown-reading {
+    @apply px-3 lg:px-6 py-4 lg:py-10 text-indigo-900 dark:text-indigo-200 text-base md:text-lg
+  }
+  .markdown-reading h4 {
+    @apply text-xl font-bold mb-1;
+  }
+  .markdown-reading p{
+    @apply mb-5;
+  }
 }
