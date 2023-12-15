@@ -16,6 +16,7 @@ import {ICheatsheet} from "../interfaces/cheatsheet";
 import {IReading} from "../interfaces/reading";
 // Just for a template;
 import Recommended from "../components/Recommended";
+import DictionarySection from "../components/DictionarySection";
 //#endregion
 //#region interfaces
 interface ExerciseObject {
@@ -47,7 +48,6 @@ const ExercisePage: React.FC = () => {
                 if(reading){
                     setReading(reading);
                 }
-                console.log(reading)
                 setIsLoading(false);
             } catch (error) {
                 throw new Error('There is no such an exercise set');
@@ -91,10 +91,13 @@ const ExercisePage: React.FC = () => {
             case 'reading':
                 content = (
                     <Panel className="bg-white flex flex-col lg:flex-row justify-between !p-0">
-                        {!!reading && <Reading
-                            text={reading.markDown} title={reading.topic} level={reading.level} image={reading.image}
-                        />}
-                        
+                        <section className='basis-full md:basis-3/4 border-r dark:border-gray-500'>
+                            {!!reading && <Reading
+                                text={reading.markDown} title={reading.topic} level={reading.level} image={reading.image}
+                            />}
+                            <ExerciseSet exercises={exercises}/>
+                        </section>
+                        <DictionarySection/>
                     </Panel>
                 )
                 break;

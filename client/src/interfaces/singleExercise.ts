@@ -1,6 +1,6 @@
-import {ExerciseType} from "../types/exerciseType";
 import {Section} from "../types/section";
 import {ExerciseUnit} from "./exerciseUnit";
+import {ExerciseTypeName} from "../../enums/exercise";
 
 export interface SingleExercise {
     data: {
@@ -10,7 +10,7 @@ export interface SingleExercise {
     instruction: string;
     setId: string;
     title: string;
-    type: ExerciseType;
+    type: ExerciseTypeName;
     _id: string;
     section: Section;
 }

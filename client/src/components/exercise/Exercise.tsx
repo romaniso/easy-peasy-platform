@@ -3,12 +3,12 @@ import React, {useState} from "react";
 import ExerciseHeader from "./ExerciseHeader";
 import ExerciseBody from "./ExerciseBody";
 import ExerciseFeedback from "./ExerciseFeedback";
-import {ExerciseType} from "../../types/exerciseType";
 import {ExerciseUnit} from "../../interfaces/exerciseUnit";
 import {UserResult} from "../../types/userResult";
 // Utils
 import generateKeySheet from "../../utils/generateKeySheet";
 import generateUserResults from "../../utils/generateUserResults";
+import {ExerciseTypeName} from "../../../enums/exercise";
 //#endregion
 
 //#region interfaces
@@ -16,7 +16,7 @@ interface ExerciseProps {
     active: boolean;
     instruction: string;
     title: string;
-    type: ExerciseType;
+    type: ExerciseTypeName;
     text?: string;
     questions: (ExerciseUnit)[];
 }

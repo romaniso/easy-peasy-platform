@@ -96,9 +96,12 @@ button > svg {
     @apply px-3 lg:px-6 py-4 lg:py-10 text-indigo-900 dark:text-indigo-200 text-base md:text-lg
   }
   .markdown-reading h4 {
-    @apply text-xl font-bold mb-1;
+    @apply text-xl font-bold mb-1 text-indigo-500;
   }
   .markdown-reading p{
     @apply mb-5;
+  }
+  .markdown-reading strong{
+    @apply text-orange-500;
   }
 }

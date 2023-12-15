@@ -7,7 +7,6 @@ import ExerciseFillInLetter from "./ExerciseFillInLetter";
 import ExerciseFillBox from "./ExerciseFillBox";
 import ExerciseDraggable from "./ExerciseDraggable";
 import Flashcard from "../Flashcard";
-import { ExerciseType } from "../../types/exerciseType";
 import { ExerciseUnit } from "../../interfaces/exerciseUnit";
 import { UserResult } from "../../types/userResult";
 import {ExerciseTypeName} from "../../../enums/exercise";
@@ -15,7 +14,7 @@ import {ExerciseTypeName} from "../../../enums/exercise";
 interface ExerciseBodyProps {
     onSubmit(e: React.FormEvent<HTMLFormElement>): void;
     btnText?: string;
-    exerciseType: ExerciseType;
+    exerciseType: ExerciseTypeName;
     questions: ExerciseUnit[];
     results: UserResult[] | null;
     selections: string[];
