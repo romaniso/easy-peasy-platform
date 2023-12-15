@@ -1,11 +1,11 @@
 import findDifferentIndexesInArrays from "./findDifferentIndexesInArrays";
 import {UserResult} from "../types/userResult";
-import {ExerciseType} from "../types/exerciseType";
+import {ExerciseTypeName} from "../../enums/exercise";
 
-function generateUserResults (userAnswers: string[], keys: (string | string[])[], type: ExerciseType): UserResult[]  {
+function generateUserResults (userAnswers: string[], keys: (string | string[])[], type: ExerciseTypeName): UserResult[]  {
     return userAnswers.map((answer, index) => {
         const arrAnswer: string[] = answer.split("");
-        if (type === "fill-in-letter") {
+        if (type === ExerciseTypeName.FillInLetter) {
             const results: number[] = findDifferentIndexesInArrays(
                 keys[index] as string[],
                 arrAnswer
