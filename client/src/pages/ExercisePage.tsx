@@ -94,6 +94,7 @@ const ExercisePage: React.FC = () => {
                         {!!reading && <Reading
                             text={reading.markDown} title={reading.topic} level={reading.level} image={reading.image}
                         />}
+                        
                     </Panel>
                 )
                 break;

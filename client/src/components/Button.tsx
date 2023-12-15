@@ -2,7 +2,7 @@ import React, {ButtonHTMLAttributes, ReactElement, ReactEventHandler} from "reac
 import className from "classnames";
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-    children: ReactElement;
+    children: ReactElement | string;
     primary?: boolean;
     secondary?: boolean;
     success?: boolean;

@@ -10,6 +10,7 @@ import Flashcard from "../Flashcard";
 import { ExerciseType } from "../../types/exerciseType";
 import { ExerciseUnit } from "../../interfaces/exerciseUnit";
 import { UserResult } from "../../types/userResult";
+import {ExerciseTypeName} from "../../../enums/exercise";
 
 interface ExerciseBodyProps {
     onSubmit(e: React.FormEvent<HTMLFormElement>): void;
@@ -39,7 +40,7 @@ const ExerciseBody: React.FC<ExerciseBodyProps> = ({
         const updatedValues: (string | React.ChangeEvent<HTMLInputElement>)[] = [
             ...selections,
         ];
-        if (exerciseType === "fill-in-letter") {
+        if (exerciseType === ExerciseTypeName.FillInLetter) {
             updatedValues[index] = Array.isArray(event)
                 ? event.join("")
                 : (event as string);
@@ -55,7 +56,7 @@ const ExerciseBody: React.FC<ExerciseBodyProps> = ({
     let renderedExercise;
 
     switch (exerciseType) {
-        case "multiple-choice":
+        case ExerciseTypeName.MultipleChoice:
             renderedExercise = (
                 <form onSubmit={onSubmit}>
                     <ExerciseMultipleChoice
@@ -70,7 +71,7 @@ const ExerciseBody: React.FC<ExerciseBodyProps> = ({
                 </form>
             );
             break;
-        case "dropdown":
+        case ExerciseTypeName.Dropdown:
             renderedExercise = (
                 <form onSubmit={onSubmit}>
                     <ExerciseDropdown
@@ -85,7 +86,7 @@ const ExerciseBody: React.FC<ExerciseBodyProps> = ({
                 </form>
             );
             break;
-        case "fill-in":
+        case ExerciseTypeName.FillIn:
             renderedExercise = (
                 <form onSubmit={onSubmit}>
                     <ExerciseFill
@@ -99,7 +100,7 @@ const ExerciseBody: React.FC<ExerciseBodyProps> = ({
                 </form>
             );
             break;
-        case "fill-in-letter":
+        case ExerciseTypeName.FillInLetter:
             renderedExercise = (
                 <form onSubmit={onSubmit}>
                     <ExerciseFillInLetter
@@ -113,7 +114,7 @@ const ExerciseBody: React.FC<ExerciseBodyProps> = ({
                 </form>
             );
             break;
-        case "fill-box":
+        case ExerciseTypeName.FillBox:
             renderedExercise = (
                 <form onSubmit={onSubmit}>
                     <ExerciseFillBox
@@ -128,7 +129,7 @@ const ExerciseBody: React.FC<ExerciseBodyProps> = ({
                 </form>
             );
             break;
-        case "drag-&-drop":
+        case ExerciseTypeName.DragAndDrop:
             renderedExercise = (
                 <div>
                     <ExerciseDraggable
@@ -152,7 +153,7 @@ const ExerciseBody: React.FC<ExerciseBodyProps> = ({
                 </div>
             );
             break;
-        case "flash-card":
+        case ExerciseTypeName.FlashCard:
             renderedExercise = (
                 <div className="flex flex-wrap gap-10">
                     {questions.map(

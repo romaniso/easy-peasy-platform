@@ -8,9 +8,9 @@ interface ReadingProps {
     level: string;
 }
 const Reading: React.FC<ReadingProps> = ({text, title, image, level}) =>{
-    return <div className=''>
+    return <div className='flex flex-col'>
         <header className='bg-cover bg-center bg-no-repeat min-h-[10px] overflow-hidden rounded-t-md' style={{backgroundImage: `url(${image})`}}>
-            <div className='w-full h-full py-2 px-6 backdrop-brightness-[35%]  flex flex-col justify-center gap-2'>
+            <div className='w-full h-full py-2 px-6 backdrop-brightness-[40%]  flex flex-col justify-center gap-2'>
                 <h3 className='text-5xl font-bold text-orange-500 drop-shadow text-center tracking-widest'>
                     {title}
                 </h3>
