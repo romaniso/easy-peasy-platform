@@ -9,7 +9,7 @@ const ToolTip: React.FC<ToolTipProps> = ({children, tooltip}) => {
     const tooltipRef = useRef<HTMLSpanElement>(null);
     const container = useRef<HTMLDivElement>(null);
 
-    return <div ref={container} className='group relative inline-block z-50' onMouseEnter={({clientX}) => {
+    return <span ref={container} className='group relative inline-block z-50' onMouseEnter={({clientX}) => {
         if (!tooltipRef.current || !container.current) return;
         const {left} = container.current.getBoundingClientRect();
         tooltipRef.current.style.left = clientX - left + 'px';
@@ -20,7 +20,7 @@ const ToolTip: React.FC<ToolTipProps> = ({children, tooltip}) => {
             className='invisible group-hover:visible opacity-0 group-hover:opacity-100 transition duration-1000 bg-orange-500/80 text-white text-sm p-1 rounded absolute bottom-full mb-2 shadow'>
             {tooltip}
         </span>}
-    </div>
+    </span>
 }
 
 export default ToolTip;

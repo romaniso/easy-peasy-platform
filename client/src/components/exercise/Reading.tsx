@@ -1,7 +1,8 @@
-import React, {ReactNode, useEffect} from "react";
+import React, {ReactNode, useEffect, useState} from "react";
 import ReactMarkdown, { Components } from 'react-markdown';
 import {hasPunctuation} from "../../utils/hasPunctuationSign";
 import useLookUpWord from "../../hooks/useLookUpWord";
+import ToolTip from "../ToolTip";
 
 type Timeout = ReturnType<typeof setTimeout>;
 interface ReadingProps {
@@ -11,53 +12,76 @@ interface ReadingProps {
     level: string;
 }
 
+interface ParsedDictionaryData {
+    audio?: string;
+    transcription: string;
+    definitions: string[][];
+
+}
+
 const Reading: React.FC<ReadingProps> = ({ text, title, image, level }) => {
+    const [tooltipData, setTooltipData] = useState< string | null>(null);
     const {selectedWords, handleSelectedWords, getDictionaryData} = useLookUpWord();
 
     useEffect(() => {
         // Cleanup the timeout when the component unmounts
         return () => clearTimeout(hoverTimeout);
-    }, );
+    },[tooltipData]);
 
     let hoverTimeout: Timeout;
     const handleWordHover = (word: string) => {
         hoverTimeout = setTimeout(async () => {
-            console.log('Hovered over:', word);
             // handleSelectedWords(word);
-            const dictionaryData = await getDictionaryData(word);
-            console.log(dictionaryData);
-        }, 1500);
+            try {
+                const dictionaryData: ParsedDictionaryData = await getDictionaryData(word);
+                console.log(dictionaryData);
+                // getTooltipContent();
+                setTooltipData(dictionaryData.definitions[0][0]);
+            } catch (error) {
+                console.error("Error fetching dictionary data:", error);
+                // setTooltipData(null);
+            }
+        }, 200);
     };
-
     const handleMouseLeave = () => {
         clearTimeout(hoverTimeout);
+        setTooltipData(null);
     };
     const renderWord = (word: string, index: number): ReactNode => {
         if (hasPunctuation(word)) {
             const punctuationSign = word.slice(-1);
             const partWithoutPunctuationSign = word.slice(0, -1);
             return (
-                <span key={index}>
-                  <span
-                      className='hover:text-xl hover:text-indigo-500 hover:font-bold transition-all duration-200 cursor-pointer'
-                      onMouseEnter={() => handleWordHover(partWithoutPunctuationSign)}
-                      onMouseLeave={handleMouseLeave}
-                  >
-                    {partWithoutPunctuationSign}
-                  </span>
-                  <span>{punctuationSign}</span>{' '}
-                </span>
+                <ToolTip tooltip={tooltipData as string}>
+                    <span key={index}>
+                      <span
+                          className='hover:text-xl hover:text-indigo-500 hover:font-bold transition-all duration-200 cursor-pointer hover:-m-1.5 hover:bg-orange-300 dark:hover:bg-white z-10'
+                          onMouseEnter={() => handleWordHover(partWithoutPunctuationSign)}
+                          onMouseLeave={handleMouseLeave}
+                      >
+                        {partWithoutPunctuationSign}
+                      </span>
+
+                      <span>{punctuationSign}&nbsp;</span>
+                    </span>
+
+                </ToolTip>
             );
         } else {
             return (
-                <span
-                    key={index}
-                    className='hover:text-xl hover:text-indigo-500 hover:font-bold transition-all duration-200 cursor-pointer'
-                    onMouseEnter={() => handleWordHover(word)}
-                    onMouseLeave={handleMouseLeave}
-                >
-          {word}{' '}
-        </span>
+                <ToolTip tooltip={tooltipData as string}>
+                    <>
+                        <span
+                            key={index}
+                            className='hover:text-xl hover:text-indigo-500 hover:font-bold transition-all duration-200 cursor-pointer hover:-m-1.5 hover:bg-orange-300 dark:hover:bg-white z-10'
+                            onMouseEnter={() => handleWordHover(word)}
+                            onMouseLeave={handleMouseLeave}
+                        >
+                        {word}
+                        </span>
+                        <span>&nbsp;</span>
+                    </>
+                </ToolTip>
             );
         }
     };
@@ -69,13 +93,15 @@ const Reading: React.FC<ReadingProps> = ({ text, title, image, level }) => {
     const components: Partial<Components> = {
         p: ({ children }) => <p>{renderChildren(children)}</p>,
         strong: ({ children }) => (
-            <strong
-                onMouseEnter={() => handleWordHover(children as string)}
-                onMouseLeave={handleMouseLeave}
-                className='hover:text-xl hover:text-indigo-500 hover:font-bold transition-all duration-200 cursor-pointer'
-            >
-                {children}
-            </strong>
+            <ToolTip tooltip={tooltipData as string}>
+                <strong
+                    onMouseEnter={() => handleWordHover(children as string)}
+                    onMouseLeave={handleMouseLeave}
+                    className='hover:text-xl hover:text-indigo-500 hover:font-bold transition-all duration-200 cursor-pointer hover:-m-1.5 hover:bg-orange-300 dark:hover:bg-white z-10'
+                >
+                    {children}
+                </strong>
+            </ToolTip>
         ),
     };
 
@@ -89,7 +115,7 @@ const Reading: React.FC<ReadingProps> = ({ text, title, image, level }) => {
                     </section>
                 </div>
             </header>
-            <ReactMarkdown className='markdown-reading' components={components}>
+            <ReactMarkdown className='markdown-reading [word-spacing:7.5px]' components={components}>
                 {text}
             </ReactMarkdown>
         </div>
