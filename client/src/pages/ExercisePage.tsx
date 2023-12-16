@@ -97,7 +97,7 @@ const ExercisePage: React.FC = () => {
                             />}
                             <ExerciseSet exercises={exercises}/>
                         </section>
-                        <DictionarySection/>
+                        <DictionarySection units={[{word: 'word', definition: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Magni, nulla!'}, {word: 'phrase', definition: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Magni, nulla!'}, {word: 'longer idiom with a few words', definition: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Magni, nulla!'}]}/>
                     </Panel>
                 )
                 break;
