@@ -3,6 +3,7 @@ import ReactMarkdown, { Components } from 'react-markdown';
 import {hasPunctuation} from "../../utils/hasPunctuationSign";
 import useLookUpWord from "../../hooks/useLookUpWord";
 import ToolTip from "../ToolTip";
+import TranslationContent from "../TranslationContent";
 
 type Timeout = ReturnType<typeof setTimeout>;
 interface ReadingProps {
@@ -52,7 +53,7 @@ const Reading: React.FC<ReadingProps> = ({ text, title, image, level }) => {
             const punctuationSign = word.slice(-1);
             const partWithoutPunctuationSign = word.slice(0, -1);
             return (
-                <ToolTip tooltip={tooltipData as string}>
+                <ToolTip tooltip={<TranslationContent data={tooltipData}/>} translation key={index}>
                     <span key={index}>
                       <span
                           className='hover:text-xl hover:text-indigo-500 hover:font-bold transition-all duration-200 cursor-pointer hover:-m-1.5 hover:bg-orange-300 dark:hover:bg-white z-10'
@@ -69,7 +70,7 @@ const Reading: React.FC<ReadingProps> = ({ text, title, image, level }) => {
             );
         } else {
             return (
-                <ToolTip tooltip={tooltipData as string}>
+                <ToolTip tooltip={<TranslationContent/>} translation key={index}>
                     <>
                         <span
                             key={index}
@@ -93,7 +94,7 @@ const Reading: React.FC<ReadingProps> = ({ text, title, image, level }) => {
     const components: Partial<Components> = {
         p: ({ children }) => <p>{renderChildren(children)}</p>,
         strong: ({ children }) => (
-            <ToolTip tooltip={tooltipData as string}>
+            <ToolTip tooltip={<TranslationContent/>} translation>
                 <strong
                     onMouseEnter={() => handleWordHover(children as string)}
                     onMouseLeave={handleMouseLeave}
@@ -115,7 +116,7 @@ const Reading: React.FC<ReadingProps> = ({ text, title, image, level }) => {
                     </section>
                 </div>
             </header>
-            <ReactMarkdown className='markdown-reading [word-spacing:7.5px]' components={components}>
+            <ReactMarkdown className='markdown-reading' components={components}>
                 {text}
             </ReactMarkdown>
         </div>
