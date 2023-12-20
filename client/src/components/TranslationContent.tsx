@@ -1,17 +1,12 @@
 import {BsFillVolumeDownFill} from "react-icons/bs";
-import React, {useEffect, useState} from "react";
+import React from "react";
 import {TranslationContentData} from "../interfaces/TranslationContentData";
 
 interface TranslationContentProps {
     word: string;
-    fetchedData?: TranslationContentData
+    fetchedData: TranslationContentData
 }
 const TranslationContent: React.FC<TranslationContentProps> = ({word, fetchedData}) => {
-    // const [tooltipData, setTooltipData] = useState<TranslationContentData | null>(null);
-
-    // useEffect(() => {
-    //     setTooltipData(fetchedData as TranslationContentData);
-    // },[tooltipData])
     return <article>
         <header className='flex justify-between'>
             <h5>{word}</h5>

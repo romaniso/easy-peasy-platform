@@ -1,7 +1,6 @@
 import React, {ReactNode} from "react";
 import ReactMarkdown, { Components } from 'react-markdown';
 import {hasPunctuation} from "../../utils/hasPunctuationSign";
-import useLookUpWord from "../../hooks/useLookUpWord";
 import ToolTip from "../ToolTip";
 
 interface ReadingProps {
@@ -12,8 +11,6 @@ interface ReadingProps {
 }
 
 const Reading: React.FC<ReadingProps> = ({ text, title, image, level }) => {
-    const {selectedWords, handleSelectedWords, getDictionaryData} = useLookUpWord();
-
     const renderWord = (word: string, index: number): ReactNode => {
         if (hasPunctuation(word)) {
             const punctuationSign = word.slice(-1);
@@ -52,12 +49,13 @@ const Reading: React.FC<ReadingProps> = ({ text, title, image, level }) => {
     const renderChildren = (children: ReactNode | ReactNode[]) =>
         Array.isArray(children) ? children.map((el) => (typeof el === 'string' ? renderWords(el.split(' ')) : el)) : renderWords((children as string).split(' '));
 
+    // For React Markdown
     const components: Partial<Components> = {
         p: ({ children }) => <p>{renderChildren(children)}</p>,
         strong: ({ children }) => (
             <ToolTip tooltip={children as string} translation>
                 <strong
-                    className='hover:text-xl hover:text-indigo-500 hover:font-bold transition-all duration-200 cursor-pointer hover:-m-1.5 hover:bg-orange-300 dark:hover:bg-white z-10'
+                    className='hover:text-xl hover:text-indigo-500 hover:font-bold transition-all duration-200 cursor-pointer hover:-m-1.5 hover:bg-orange-300 dark:hover:bg-white z-10 whitespace-nowrap'
                 >
                     {children}
                 </strong>

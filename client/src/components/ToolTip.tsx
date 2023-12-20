@@ -15,16 +15,14 @@ interface ParsedDictionaryData {
 }
 type Timeout = ReturnType<typeof setTimeout>;
 const ToolTip: React.FC<ToolTipProps> = ({ children, tooltip, translation }) => {
-    console.log('Tooltip rerender')
     const tooltipRef = useRef<HTMLSpanElement>(null);
     const container = useRef<HTMLDivElement>(null);
-    const [isTooltipVisible, setTooltipVisible] = useState(false);
+    const [isTooltipVisible, setTooltipVisible] = useState<boolean>(false);
     const [tooltipData, setTooltipData] = useState<TranslationContentData | null>(null)
-
     let hoverTimeout: Timeout;
-
     const childrenComponents = useMemo(() => children, [children])
     const {getDictionaryData} = useLookUpWord()
+
     const handleMouseEnter = ({ clientX }: React.MouseEvent<HTMLSpanElement>) => {
         if(translation){
             hoverTimeout = setTimeout(async () => {
@@ -39,10 +37,10 @@ const ToolTip: React.FC<ToolTipProps> = ({ children, tooltip, translation }) => 
                 }
                 // Paint
                 const { left } = container.current.getBoundingClientRect();
-                tooltipRef.current.style.left = `${clientX - left}px`;
+                tooltipRef.current.style.left = `${clientX - left - 20}px`;
                 // Change state
                 setTooltipVisible(true)
-            }, 500);
+            }, 750);
         } else {
             if (!tooltipRef.current || !container.current) return;
             const { left } = container.current.getBoundingClientRect();
@@ -57,12 +55,10 @@ const ToolTip: React.FC<ToolTipProps> = ({ children, tooltip, translation }) => 
         }
         setTooltipVisible(false);
     };
-
-    const handleTooltipMouseEnter = () => {
-        setTooltipVisible(true);
-    };
-
     const handleTooltipMouseLeave = () => {
+        if(translation){
+            clearTimeout(hoverTimeout);
+        }
         setTooltipVisible(false);
     };
 
@@ -77,10 +73,9 @@ const ToolTip: React.FC<ToolTipProps> = ({ children, tooltip, translation }) => 
             {tooltip && (
                 <span
                     ref={tooltipRef}
-                    className={`${translation ? 'min-w-[200px] max-h-[150px] overflow-y-auto scrollbar scrollbar-thin scrollbar-thumb-orange-200 scrollbar-track-orange-400' : ''} ${
+                    className={`${translation ? 'min-w-[200px] max-h-[150px] overflow-y-auto scrollbar scrollbar-thin scrollbar-thumb-orange-200 scrollbar-track-orange-400 pb-5' : ''} ${
                         isTooltipVisible ? 'visible opacity-100' : 'invisible opacity-0'
-                    } transition duration-1000 bg-orange-500/80 text-white text-sm p-1 rounded absolute bottom-full mb-2 shadow`}
-                    onMouseEnter={handleTooltipMouseEnter}
+                    } transition duration-1000 bg-orange-500/80 text-white text-sm p-1 rounded absolute bottom-5 mb-2 shadow`}
                     onMouseLeave={handleTooltipMouseLeave}
                 >
           {translation ? <TranslationContent word={tooltip as string} fetchedData={tooltipData as TranslationContentData}/> : tooltip}
@@ -90,4 +85,4 @@ const ToolTip: React.FC<ToolTipProps> = ({ children, tooltip, translation }) => 
     );
 };
 
-export default memo(ToolTip);
+export default ToolTip;
