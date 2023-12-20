@@ -3,13 +3,14 @@ import className from "classnames";
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
     children: ReactElement | string;
-    primary?: boolean;
-    secondary?: boolean;
-    success?: boolean;
-    warning?: boolean;
-    danger?: boolean;
-    outline?: boolean;
-    rounded?: boolean;
+    primary?: true;
+    secondary?: true;
+    success?: true;
+    warning?: true;
+    danger?: true;
+    small?: true;
+    outline?: true;
+    rounded?: true;
     onClick?: ReactEventHandler;
 }
 const Button: React.FC<ButtonProps> = ({
@@ -19,6 +20,7 @@ const Button: React.FC<ButtonProps> = ({
                     success,
                     warning,
                     danger,
+                    small,
                     outline,
                     rounded,
                     onClick,
@@ -43,6 +45,7 @@ const Button: React.FC<ButtonProps> = ({
             "border-yellow-500 text-yellow-500 hover:text-white hover:bg-yellow-500":
                 outline && warning,
             "border-red-500 text-red-500 hover:text-white": outline && danger,
+            "py-0.5 px-1 text-sm capitalize text-indigo-50 border-indigo-50":  small,
         }
     );
     return (

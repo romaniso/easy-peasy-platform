@@ -58,7 +58,7 @@ const Flashcard: React.FC<FlashcardProps> = ({question, isCorrect, cardImage, ex
                 </div>
                 <div className="flip-card-back flex flex-col items-center rounded-md relative">
                     <div className={saveBtnClasses} onClick={saveCard}>
-                        <ToolTip tooltip={!isSaved && "Save the card to my Vocabulary"}>
+                        <ToolTip tooltip={(!isSaved && "Save the card to my Vocabulary") as string}>
                             <LuCopyPlus className='text-white'/>
                         </ToolTip>
                     </div>
