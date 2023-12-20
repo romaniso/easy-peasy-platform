@@ -7,15 +7,17 @@ interface SkeletonProps {
     items: number;
     card?: true;
     exercise?: true;
+    tooltip?: true;
     className?: string;
 }
-const Skeleton: React.FC<SkeletonProps> = ({items, card, exercise,  className}) => {
+const Skeleton: React.FC<SkeletonProps> = ({items, card, exercise, tooltip,  className})=> {
     const skeletonClasses = classNames(
         className,
         "p-3 border border-white dark:border-gray-500 rounded-md shadow-lg",
         {
             "md:max-w-xs w-full h-full" : card,
             "w-full h-[70vh] flex flex-col lg:flex-row justify-between gap-5" : exercise,
+            "w-full h-[150px] flex flex-col lg:flex-row justify-between border-none shadow-none" : tooltip,
         }
     );
     return (
@@ -44,6 +46,16 @@ const Skeleton: React.FC<SkeletonProps> = ({items, card, exercise,  className}) 
                                 <LbSkeleton count={12} className='mb-2'/>
                             </div>
 
+                        </SkeletonTheme>
+                    </div>
+                }
+                else if(tooltip) {
+                    return <div key={index} className={skeletonClasses}>
+                        <SkeletonTheme baseColor="#dcdcdc17" highlightColor="#9a9a9a38">
+                            <LbSkeleton height={30} className='mb-3'/>
+                            <LbSkeleton height={120} className='mb-3'/>
+                            <LbSkeleton count={8} className='mb-2'/>
+                            <LbSkeleton height={30}/>
                         </SkeletonTheme>
                     </div>
                 }

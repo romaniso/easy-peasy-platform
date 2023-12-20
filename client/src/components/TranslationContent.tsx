@@ -1,25 +1,30 @@
 import {BsFillVolumeDownFill} from "react-icons/bs";
-import React from "react";
+import React, {useEffect, useState} from "react";
+import {TranslationContentData} from "../interfaces/TranslationContentData";
 
 interface TranslationContentProps {
-    audio: string;
-    transcription: string;
-    definitions: string[][];
+    word: string;
+    fetchedData?: TranslationContentData
 }
-const TranslationContent: React.FC<TranslationContentProps> = ({audio, transcription, definitions}) => {
+const TranslationContent: React.FC<TranslationContentProps> = ({word, fetchedData}) => {
+    // const [tooltipData, setTooltipData] = useState<TranslationContentData | null>(null);
+
+    // useEffect(() => {
+    //     setTooltipData(fetchedData as TranslationContentData);
+    // },[tooltipData])
     return <article>
-        <header className='flex justify-between mb-1'>
-            <h5>Translation</h5>
+        <header className='flex justify-between'>
+            <h5>{word}</h5>
             <button className='cursor-pointer'><BsFillVolumeDownFill className='text-lg'/></button>
         </header>
-        <main className='flex flex-col justify-between items-start'>
-            <p className='opacity-60'><span>part of speech</span> <span>{transcription}</span></p>
-            <ul className=''>
-                <li>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</li>
-                <li>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</li>
-                <li>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</li>
-            </ul>
-        </main>
+        {fetchedData && <main className=''>
+            <p className='opacity-60'><span>{fetchedData.transcription}</span></p>
+            {fetchedData.definitions.map((definitionsArr, arrIndex) => {
+                return <ul className='border-b py-2' key={arrIndex}>{definitionsArr
+                    .map((definition, defIndex) => <li className='mb-2' key={defIndex}>{definition}</li>)
+                }</ul>
+            })}
+        </main>}
     </article>
 }
 

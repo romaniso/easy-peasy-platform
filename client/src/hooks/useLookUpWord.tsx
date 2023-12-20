@@ -1,5 +1,6 @@
-import {useState} from "react";
+import {useCallback, useState} from "react";
 import axios from "axios";
+import {TranslationContentData} from "../interfaces/TranslationContentData";
 
 type Phonetic = {
     text: string;
@@ -35,30 +36,37 @@ interface ParsedDictionaryData {
 
 const useLookUpWord = () => {
     const [selectedWords, setSelectedWords] = useState<string[]>([]);
+    const [fetchedData, setFetchedData] = useState<TranslationContentData>()
     const handleSelectedWords = (newSelectedWord: string): void => {
         if(selectedWords.includes(newSelectedWord)) return;
         const updatedSelectedWords = [...selectedWords, newSelectedWord]
         setSelectedWords(updatedSelectedWords);
     };
-    const getDictionaryData = async (selectedUnit: string): Promise<ParsedDictionaryData> => {
+    const getDictionaryData = useCallback(async (selectedUnit: string): Promise<ParsedDictionaryData> => {
         const url = 'https://api.dictionaryapi.dev/api/v2/entries/en/';
-        const res = await axios.get<WordData[]>(`${url}${selectedUnit}`)
-        const {data} = res
+        const res = await axios.get<WordData[]>(`${url}${selectedUnit}`);
+        const {data} = res;
         const {meanings, phonetics} = data[0];
         const allDefinitions: Array<string[]> = meanings.map((meaning) => meaning.definitions.map(({definition}) => definition));
         const {text, audio} = (phonetics as Phonetic[])[0];
+        setFetchedData({
+            audio,
+            transcription: text,
+            definitions: allDefinitions,
+        })
 
         return {
             audio,
             transcription: text,
             definitions: allDefinitions,
         };
-    }
+    },[fetchedData])
 
     return {
         selectedWords,
         handleSelectedWords,
         getDictionaryData,
+        fetchedData,
     };
 }
 
