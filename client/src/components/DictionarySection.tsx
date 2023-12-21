@@ -1,11 +1,8 @@
 import React from "react";
 import DictionaryUnit from "./DictionaryUnit";
 import { MdOutlineEditNote } from "react-icons/md";
+import {IDictionaryUnit} from "../interfaces/dictionaryUnit";
 
-interface IDictionaryUnit {
-    word: string;
-    definition: string;
-}
 interface DictionarySectionProps {
     units: IDictionaryUnit[];
 }

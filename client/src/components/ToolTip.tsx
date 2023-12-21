@@ -1,4 +1,4 @@
-import React, {ReactElement, useRef, useState, memo, useMemo} from "react";
+import React, {ReactElement, useRef, useState, useMemo} from "react";
 import TranslationContent from "./TranslationContent";
 import {TranslationContentData} from "../interfaces/TranslationContentData";
 import useLookUpWord from "../hooks/useLookUpWord";
@@ -73,10 +73,12 @@ const ToolTip: React.FC<ToolTipProps> = ({ children, tooltip, translation, secon
             {tooltip && (
                 <span
                     ref={tooltipRef}
-                    className={`${translation ? 'min-w-[200px] max-h-[150px] overflow-y-auto overflow-x-hidden scrollbar scrollbar-thin scrollbar-thumb-orange-200 scrollbar-track-orange-400 pb-5' : ''}
+                    className={`
                     ${secondary ? 'bg-white text-indigo-900 z-50 min-w-[120px]' : 'bg-orange-500/80 text-white'} 
                     ${isTooltipVisible ? 'visible opacity-100' : 'invisible opacity-0'} 
-                    transition duration-1000 bg-orange-500/80 text-sm p-1 rounded absolute bottom-5 mb-2 shadow`}
+                    transition duration-1000 bg-orange-500/80 text-sm p-1 rounded absolute mb-2 shadow
+                    ${translation ? 'min-w-[200px] max-h-[150px] overflow-y-auto overflow-x-hidden scrollbar scrollbar-thin scrollbar-thumb-orange-200 scrollbar-track-orange-400 pb-5 bottom-5' : 'bottom-full'}
+                    `}
                     onMouseLeave={handleTooltipMouseLeave}
                 >
           {translation ? <TranslationContent word={tooltip as string} fetchedData={tooltipData as TranslationContentData}/> : tooltip}
