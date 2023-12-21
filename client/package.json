@@ -23,7 +23,6 @@
     "react-markdown": "^9.0.1",
     "react-router-dom": "^6.13.0",
     "react-speech-kit": "^3.0.1",
-    "use-sound": "^4.0.1",
     "uuid": "^9.0.1"
   },
   "devDependencies": {

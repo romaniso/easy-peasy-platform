@@ -1,4 +1,4 @@
-import React, {useState, createContext, ReactNode} from "react";
+import React, {useState, createContext, useContext, ReactNode} from "react";
 import {IDictionaryUnit} from "../interfaces/dictionaryUnit";
 
 interface IDictionaryContext {
@@ -24,3 +24,6 @@ export const ReadingContextProvider: React.FC<ReadingContextProviderProps>  = ({
         {children}
     </ReadingContext.Provider>
 )
+
+export const useSelectedWords = () => useContext(ReadingContext as React.Context<IDictionaryContext>).selectedWords;
+export const useAddWordToDictionary = () => useContext(ReadingContext as React.Context<IDictionaryContext>).addWordToDictionary;

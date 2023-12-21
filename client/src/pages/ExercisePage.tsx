@@ -17,6 +17,7 @@ import {IReading} from "../interfaces/reading";
 // Just for a template;
 import Recommended from "../components/Recommended";
 import DictionarySection from "../components/DictionarySection";
+import {ReadingContextProvider} from "../context/ReadingContext";
 //#endregion
 //#region interfaces
 interface ExerciseObject {
@@ -91,13 +92,15 @@ const ExercisePage: React.FC = () => {
             case 'reading':
                 content = (
                     <Panel className="bg-white flex flex-col lg:flex-row justify-between !p-0">
-                        <section className='basis-full md:basis-3/4 border-r dark:border-gray-500'>
-                            {!!reading && <Reading
-                                text={reading.markDown} title={reading.topic} level={reading.level} image={reading.image}
-                            />}
-                            <ExerciseSet exercises={exercises}/>
-                        </section>
-                        <DictionarySection units={[{word: 'word', definition: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Magni, nulla!'}, {word: 'phrase', definition: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Magni, nulla!'}, {word: 'longer idiom with a few words', definition: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Magni, nulla!'}]}/>
+                        <ReadingContextProvider>
+                            <section className='basis-full md:basis-3/4 border-r dark:border-gray-500'>
+                                {!!reading && <Reading
+                                    text={reading.markDown} title={reading.topic} level={reading.level} image={reading.image}
+                                />}
+                                <ExerciseSet exercises={exercises}/>
+                            </section>
+                            <DictionarySection/>
+                        </ReadingContextProvider>
                     </Panel>
                 )
                 break;
