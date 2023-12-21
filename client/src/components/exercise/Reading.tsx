@@ -2,6 +2,7 @@ import React, {ReactNode} from "react";
 import ReactMarkdown, { Components } from 'react-markdown';
 import {hasPunctuation} from "../../utils/hasPunctuationSign";
 import ToolTip from "../ToolTip";
+import {useAddWordToDictionary} from "../../context/ReadingContext";
 
 interface ReadingProps {
     text: string;

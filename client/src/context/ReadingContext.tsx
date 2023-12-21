@@ -7,10 +7,21 @@ interface IDictionaryContext {
 }
 const useDictionary = (): IDictionaryContext => {
     const [selectedWords, setSelectedWords] = useState<IDictionaryUnit[]>([])
+    const addWordToDictionary = (newSelectedWord: IDictionaryUnit): void => {
+        const isWordAlreadyAdded = selectedWords.some(word =>
+            word.word === newSelectedWord.word && word.definition === newSelectedWord.definition
+        );
+
+        if (isWordAlreadyAdded) {
+            console.error('You have already added this word');
+        } else {
+            setSelectedWords([...selectedWords, newSelectedWord]);
+        }
+    };
 
     return {
         selectedWords,
-        addWordToDictionary: (newSelectedWord: IDictionaryUnit) => setSelectedWords([...selectedWords, newSelectedWord])
+        addWordToDictionary,
     }
 }
 
