@@ -1,6 +1,6 @@
-const {ObjectId} = require("mongodb");
-const {exerciseSet, reading} = require("../../config/db");
-class Reading {
+import {ObjectId} from "mongodb";
+import {exerciseSet, reading} from "../../config/db";
+export class Reading {
     constructor(obj) {
         this._id = new ObjectId(obj._id);
         this.topic = obj.topic;
@@ -42,7 +42,3 @@ class Reading {
     }
     async  update(){}
 }
-
-module.exports = {
-    Reading,
-};

@@ -1,7 +1,7 @@
-const {ObjectId} = require("mongodb");
-const {exerciseSet, exercise} = require("../../config/db");
-const {Section} = require("./section");
-class Exercise {
+import {ObjectId} from "mongodb";
+import {exerciseSet, exercise} from "../../config/db";
+import {Section} from "./section";
+export class Exercise {
     constructor(obj) {
         this._id = new ObjectId(obj._id);
         this.title = obj.title;
@@ -56,7 +56,3 @@ class Exercise {
     }
     async  update(){}
 }
-
-module.exports = {
-    Exercise,
-};

@@ -2,10 +2,10 @@
   "name": "easy-peasy-server",
   "version": "1.0.0",
   "description": "",
-  "main": "app.js",
+  "main": "app.ts",
   "scripts": {
-    "start": "node app.js",
-    "dev": "npx nodemon app.js"
+    "start": "node app.ts",
+    "dev": "npx nodemon app.ts"
   },
   "keywords": [],
   "author": "",

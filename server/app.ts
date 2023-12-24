@@ -1,7 +1,7 @@
-const express = require('express');
+import * as express from 'express';
 const cors = require('cors');
-const {sectionRouter} = require("./src/routes/section");
-const {exerciseRouter} = require("./src/routes/exercise");
+import {sectionRouter} from "./src/routes/section";
+import {exerciseRouter} from "./src/routes/exercise";
 
 const app = express();
 

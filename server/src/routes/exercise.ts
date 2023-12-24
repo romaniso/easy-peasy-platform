@@ -1,8 +1,8 @@
-const express = require('express');
-const {Exercise} = require("../models/exercise.ts");
-const {Cheatsheet} = require("../models/cheatsheet.ts");
-const {Reading} = require("../models/reading.ts");
-const exerciseRouter = express.Router();
+import * as express from 'express';
+import {Exercise} from "../models/exercise";
+import {Cheatsheet} from "../models/cheatsheet";
+import  {Reading} from "../models/reading";
+export const exerciseRouter = express.Router();
 
 exerciseRouter
     .get('/:chosen', async (req, res) => {
@@ -11,7 +11,3 @@ exerciseRouter
         const reading = await Reading.findBySet(req.params.chosen);
         res.json({exercises, cheatsheet, reading});
     })
-
-module.exports = {
-    exerciseRouter,
-}

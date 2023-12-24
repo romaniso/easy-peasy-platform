@@ -1,6 +1,6 @@
-const {ObjectId} = require("mongodb");
-const {section} = require("../../config/db");
-class Section {
+import {ObjectId} from "mongodb";
+import {section} from "../../config/db";
+export class Section {
     constructor(obj) {
         this._id = new ObjectId(obj._id);
         this.name = obj.name;
@@ -32,7 +32,3 @@ class Section {
     }
     async  update(){}
 }
-
-module.exports = {
-    Section,
-};

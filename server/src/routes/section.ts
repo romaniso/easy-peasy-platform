@@ -1,6 +1,6 @@
-const express = require('express');
-const {ExerciseSet} = require("../models/exerciseSet.ts");
-const sectionRouter = express.Router();
+import * as express from 'express';
+import {ExerciseSet} from "../models/exerciseSet";
+export const sectionRouter = express.Router();
 
 sectionRouter
     .get('/:chosen', async (req, res) => {
@@ -8,6 +8,3 @@ sectionRouter
         res.json(exerciseSets);
     })
 
-module.exports = {
-    sectionRouter,
-}
