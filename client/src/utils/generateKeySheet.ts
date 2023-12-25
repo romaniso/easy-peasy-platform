@@ -1,4 +1,4 @@
-import {ExerciseTypeName} from "../../enums/exercise";
+import {ExerciseTypeName} from "../enums/exercise";
 import {ExerciseUnit} from "../interfaces/exerciseUnit";
 
 function generateKeySheet (type: ExerciseTypeName, questions: (ExerciseUnit)[]): (string | string[])[] {

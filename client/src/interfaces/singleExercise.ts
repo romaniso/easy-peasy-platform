@@ -1,6 +1,6 @@
 import {Section} from "../types/section";
 import {ExerciseUnit} from "./exerciseUnit";
-import {ExerciseTypeName} from "../../enums/exercise";
+import {ExerciseTypeName} from "../enums/exercise";
 
 export interface SingleExercise {
     data: {

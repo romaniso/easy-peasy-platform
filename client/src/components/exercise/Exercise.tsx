@@ -8,7 +8,7 @@ import {UserResult} from "../../types/userResult";
 // Utils
 import generateKeySheet from "../../utils/generateKeySheet";
 import generateUserResults from "../../utils/generateUserResults";
-import {ExerciseTypeName} from "../../../enums/exercise";
+import {ExerciseTypeName} from "../../enums/exercise";
 //#endregion
 
 //#region interfaces

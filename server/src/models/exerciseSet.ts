@@ -1,12 +1,19 @@
 import {ObjectId} from "mongodb";
 import {exerciseSet, section} from "../../config/db";
 export class ExerciseSet {
-    constructor(obj) {
+    private readonly _id: ObjectId;
+    private name: string;
+    private level: string;
+    private description: string;
+    private image: string;
+    private imgBase64?: string;
+    private sectionId: ObjectId;
+    constructor(obj: ExerciseSet) {
         this._id = new ObjectId(obj._id);
         this.name = obj.name;
         this.level = obj.level;
         this.description = obj.description;
-        this.image = obj.imgBase64;
+        this.image = obj.imgBase64 as string;
         this.sectionId = new ObjectId(obj.sectionId);
         // this._validate();
     }
@@ -45,7 +52,7 @@ export class ExerciseSet {
         const resultArray = await result.toArray();
         return resultArray.map(obj => new ExerciseSet(obj));
     }
-    static async findBySection(chosenSection){
+    static async findBySection(chosenSection: string): Promise<ExerciseSet | null>{
         const sectionId = (await section.findOne({name: chosenSection}))._id;
         return (await (await exerciseSet.find({sectionId})).toArray()).map(obj => new ExerciseSet(obj));
     }

@@ -1,9 +1,10 @@
-import * as express from 'express';
-const cors = require('cors');
+import express from 'express';
+import {Application} from "express";
+import cors from 'cors';
 import {sectionRouter} from "./src/routes/section";
 import {exerciseRouter} from "./src/routes/exercise";
 
-const app = express();
+const app: Application = express();
 
 app.use(cors());
 app.use(express.urlencoded({extended: false}));

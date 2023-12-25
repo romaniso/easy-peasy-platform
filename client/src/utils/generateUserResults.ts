@@ -1,6 +1,6 @@
 import findDifferentIndexesInArrays from "./findDifferentIndexesInArrays";
 import {UserResult} from "../types/userResult";
-import {ExerciseTypeName} from "../../enums/exercise";
+import {ExerciseTypeName} from "../enums/exercise";
 
 function generateUserResults (userAnswers: string[], keys: (string | string[])[], type: ExerciseTypeName): UserResult[]  {
     return userAnswers.map((answer, index) => {
