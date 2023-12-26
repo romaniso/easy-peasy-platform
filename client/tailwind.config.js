@@ -8,6 +8,17 @@ export default {
   darkMode: 'class',
   theme: {
     extend: {
+      keyframes: {
+        slidein: {
+          '0%': {transform: 'translateX(100%)'},
+          '60%': {transform: 'translateX(-15%)'},
+          '80%': {transform: 'translateX(5%)'},
+          '100%': {transform: 'translateX(0%)'},
+        }
+      },
+      animation: {
+        'slidein-toast': 'slidein 0.4s linear forwards',
+      }
     },
 
   },
