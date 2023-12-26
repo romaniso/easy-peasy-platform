@@ -6,6 +6,7 @@ import {LuCopyPlus} from "react-icons/lu";
 import ToolTip from "./ToolTip";
 import {useAddWordToDictionary} from "../context/ReadingContext";
 import {useToast} from "../context/ToastContext";
+import {ToastType} from "../enums/toast";
 
 interface TranslationContentProps {
     word: string;
@@ -14,6 +15,11 @@ interface TranslationContentProps {
 const TranslationContent: React.FC<TranslationContentProps> = ({word, fetchedData}) => {
     const addWord = useAddWordToDictionary();
     const toast = useToast();
+
+    const handleClick = (selected: string) => {
+        const status: ToastType = addWord({word: selected, definition: fetchedData.definitions[0][0]});
+        toast?.open('Your word has been successfully added!', status);
+    }
     const handlePlay = async () => {
         if (fetchedData && fetchedData.audio) {
             const audio = new Audio(fetchedData.audio);
@@ -42,10 +48,7 @@ const TranslationContent: React.FC<TranslationContentProps> = ({word, fetchedDat
             })}
             <ToolTip secondary tooltip='Add to your vocabulary list if you are signed in.'>
                 <Button secondary outline small
-                        onClick={() => {
-                            addWord({word, definition: fetchedData.definitions[0][0]});
-                            toast?.open('Your word has been successfully added!');
-                        }}>
+                        onClick={() => handleClick(word)}>
                     <span>add<LuCopyPlus className='text-sm ml-2 inline align-baseline'/></span>
                 </Button>
             </ToolTip>
