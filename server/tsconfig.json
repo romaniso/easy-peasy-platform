@@ -3,6 +3,23 @@
     "esm": true,
     "experimentalSpecifierResolution": "node"
   },
+  "compilerOptions": {
+    "allowSyntheticDefaultImports": true,
+    "declaration": true,
+    "esModuleInterop": true,
+    "lib": [
+      "es2021"
+    ],
+    "module": "esnext",
+    "moduleResolution": "node",
+    "outDir": "dist",
+    "strict": true,
+    "target": "es2021"
+  },
+//  "outDir": "./dist",
+//  "rootDir": "./src",
   "extends": "../tsconfig.json",
-  "include": ["src/**/*.ts", "src/**/*.d.ts"]
+  "include": ["src"],
+  "exclude": ["node_modules", "dist/*"],
+  "lib": ["es6"],
 }

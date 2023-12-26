@@ -1,4 +1,4 @@
-import {Collection, Db, MongoClient} from 'mongodb';
+import {Collection, Db, MongoClient, Document} from 'mongodb';
 
 export const client: MongoClient = new MongoClient('mongodb://127.0.0.1:27017/');
 

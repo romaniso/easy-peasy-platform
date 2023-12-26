@@ -4,6 +4,7 @@ import cors from 'cors';
 import {sectionRouter} from "./src/routes/section";
 import {exerciseRouter} from "./src/routes/exercise";
 
+
 const app: Application = express();
 
 app.use(cors());

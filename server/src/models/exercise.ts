@@ -2,6 +2,7 @@ import {ObjectId} from "mongodb";
 import {exerciseSet, exercise} from "../../config/db";
 import {Section} from "./section";
 import {ExerciseTypeName} from "../enums/exercise";
+import {ExerciseSet} from "./exerciseSet";
 
 interface DbExerciseObject {
     _id: ObjectId;
@@ -18,7 +19,7 @@ export class Exercise {
     private type: ExerciseTypeName;
     private data: {} | [];
     private setId: ObjectId;
-    constructor(obj: DbExerciseObject) {
+    constructor(obj: Exercise) {
         this._id = new ObjectId(obj._id);
         this.title = obj.title;
         this.instruction = obj.instruction;
@@ -48,19 +49,22 @@ export class Exercise {
         //     _id: this._id,
         // })
     }
-    static async findById(id: ObjectId): Promise<Exercise | null>{
-        const item = await exercise.findOne({_id: new ObjectId(String(id))});
+    static async findById(id: string): Promise<Exercise | null>{
+        const item = await exercise.findOne<Exercise>({_id: new ObjectId(String(id))});
         return item === null ? null : new Exercise(item);
     }
-    static async findAll(){
-        const result = await exercise.find();
-        const resultArray = await result.toArray();
-        return resultArray.map(obj => new Exercise(obj));
-    }
+    // static async findAll(){
+    //     const result = await exercise.find();
+    //     const resultArray = await result.toArray();
+    //     return resultArray.map(obj => new Exercise(obj));
+    // }
     static async findBySet(chosenSet: string){
-        const {_id: setId, sectionId} = (await exerciseSet.findOne({name: chosenSet}));
+        const {_id: setId, sectionId} = (await exerciseSet.findOne<ExerciseSet>({name: chosenSet}) as ExerciseSet);
         // @fixme: refactor me please, it looks too robust
-        return {section: (await Section.findById(sectionId)).name, exercises: (await (await exercise.find({setId})).toArray()).map(obj => new Exercise(obj))};
+        return {
+            section: (await Section.findById(sectionId))?.name,
+            exercises: (await exercise.find<Exercise>({setId}).toArray()).map(obj => new Exercise(obj))
+        };
     }
     static async findAllWithCursor() {
         return /*await*/ exercise.find();
