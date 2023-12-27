@@ -1,12 +1,14 @@
 import {BsFillVolumeDownFill} from "react-icons/bs";
 import React from "react";
-import {TranslationContentData} from "../interfaces/TranslationContentData";
+import {TranslationContentData} from "../interfaces/translationContentData";
 import Button from "./Button";
 import {LuCopyPlus} from "react-icons/lu";
 import ToolTip from "./ToolTip";
 import {useAddWordToDictionary} from "../context/ReadingContext";
 import {useToast} from "../context/ToastContext";
 import {ToastType} from "../enums/toast";
+import {v4 as uuid} from 'uuid';
+import {playAudio} from "../utils/playAudio";
 
 interface TranslationContentProps {
     word: string;
@@ -16,18 +18,19 @@ const TranslationContent: React.FC<TranslationContentProps> = ({word, fetchedDat
     const addWord = useAddWordToDictionary();
     const toast = useToast();
 
-    const handleClick = (selected: string) => {
-        const status: ToastType = addWord({word: selected, definition: fetchedData.definitions[0][0]});
+    const handleClick = (selectedWord: string) => {
+        const addedWord = {
+            id: uuid(),
+            word: selectedWord,
+            definition:  fetchedData.definitions[0][0],
+            audio: fetchedData.audio,
+        }
+        const status: ToastType = addWord(addedWord);
         toast?.open('Your word has been successfully added!', status);
     }
     const handlePlay = async () => {
         if (fetchedData && fetchedData.audio) {
-            const audio = new Audio(fetchedData.audio);
-            try {
-                await audio.play();
-            } catch (err) {
-                console.error('Failed to play...' + err);
-            }
+            await playAudio(fetchedData.audio);
         }
     };
     return <article className='text-indigo-50'>

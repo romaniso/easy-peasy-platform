@@ -12,7 +12,7 @@ const DictionarySection: React.FC = () => {
             <MdOutlineEditNote className='text-indigo-500 text-2xl md:text-3xl drop-shadow'/>
         </header>
         <ul className='mt-2 md:mt-6'>
-            {!!selectedWord && selectedWord. map(({word, definition}, index) =>  <DictionaryUnit word={word} definition={definition} key={index}/>)}
+            {!!selectedWord && selectedWord. map(({id, word, definition, audio}) =>  <DictionaryUnit word={word} definition={definition} audio={audio} key={id} id={id}/>)}
         </ul>
     </aside>
 }

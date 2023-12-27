@@ -1,6 +1,6 @@
 import {useCallback, useState} from "react";
 import axios from "axios";
-import {TranslationContentData} from "../interfaces/TranslationContentData";
+import {TranslationContentData} from "../interfaces/translationContentData";
 
 type Phonetic = {
     text: string;
