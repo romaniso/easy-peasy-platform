@@ -3,13 +3,14 @@ import DictionaryUnit from "./DictionaryUnit";
 import { MdOutlineEditNote } from "react-icons/md";
 import {useSelectedWords} from "../context/ReadingContext";
 import {BsChevronCompactLeft, BsChevronCompactRight} from "react-icons/bs";
+import Button from "./Button";
 
 const DictionarySection: React.FC = () => {
-    const [isExpanded, setIsExpanded] = useState(true);
+    const [isExpanded, setIsExpanded] = useState(false);
     const selectedWord = useSelectedWords();
 
     return <aside className={`basis-full md:basis-1/4 px-3 lg:px-4 py-4 lg:py-4 relative transition-all duration-700 ${isExpanded ? 'lg:min-w-[600px] lg:w-1/2' : 'lg:max-w-[400px]'}`}>
-        <button onClick={() => setIsExpanded(!isExpanded)} className='invisible lg:visible text-lg border dark:border-gray-500 rounded shadow-md text-indigo-900 dark:text-indigo-200 p-4 absolute -top-2 left-0 bg-white dark:bg-[#323232] hover:bg-indigo-50 hover:dark:bg-[#202020] transition-colors -translate-x-1/2 z-10'>
+        <button onClick={() => setIsExpanded(!isExpanded)} className='invisible lg:visible text-lg border dark:border-gray-500 rounded shadow-md text-indigo-900 dark:text-indigo-200 p-4 absolute -top-2 left-0 bg-white dark:bg-stone-800 hover:bg-indigo-50 hover:dark:bg-[#202020] transition-colors -translate-x-1/2 z-10'>
             {isExpanded ? <BsChevronCompactRight/> : <BsChevronCompactLeft/>}
         </button>
         <header className='flex items-center justify-center gap-2'>
@@ -19,6 +20,9 @@ const DictionarySection: React.FC = () => {
         <ul className='mt-2 md:mt-6'>
             {!!selectedWord && selectedWord. map(({id, word, definition, audio}) =>  <DictionaryUnit word={word} definition={definition} audio={audio} key={id} id={id}/>)}
         </ul>
+        {selectedWord.length ? <div className='flex justify-end mt-5'>
+            <Button primary rounded small >Save to Your Dictionary</Button>
+        </div> : null}
     </aside>
 }
 

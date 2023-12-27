@@ -49,7 +49,7 @@ const TranslationContent: React.FC<TranslationContentProps> = ({word, fetchedDat
                     .map((definition, defIndex) => <li className='mb-2' key={defIndex}>{definition}</li>)
                 }</ul>
             })}
-            <ToolTip secondary tooltip='Add to your vocabulary list if you are signed in.'>
+            <ToolTip secondary tooltip='Add to Dictionary List'>
                 <Button secondary outline small
                         onClick={() => handleClick(word)}>
                     <span>add<LuCopyPlus className='text-sm ml-2 inline align-baseline'/></span>

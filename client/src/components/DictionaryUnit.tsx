@@ -31,7 +31,7 @@ const DictionaryUnit: React.FC<IDictionaryUnit> = ({word, definition, audio, id}
             <button className='absolute bottom-3 right-2.5 bg-indigo-400 p-0.5 w-6 h-6 rounded-full shadow hover:bg-orange-400 transition-colors' type='submit'><MdCheck className='text-lg text-indigo-50'/></button>
         </form>;
 
-    return <div className='flex justify-between items-start gap-2 [&:not(:last-of-type)]:border-b dark:border-gray-500 py-2'>
+    return <div className='flex justify-between items-start gap-2 [&:not(:last-of-type)]:border-b dark:border-gray-500 py-3'>
         <div className={`${isBeingEdited && 'flex basis-full'}`}>
             <ToolTip tooltip='Listen to the pronunciation'>
                 <p className='mr-2 text-sm font-bold text-orange-500 p-0.5 px-1 border dark:border-gray-500 rounded-md shadow cursor-pointer hover:opacity-75 hover:scale-105 transition-all duration-300' onClick={handlePlay}>{word}</p>
