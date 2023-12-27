@@ -5,7 +5,6 @@ import { RiAlarmWarningLine } from "react-icons/ri";
 import {FaCheck} from "react-icons/fa";
 import {ToastType} from "../enums/toast";
 import className from "classnames";
-import {IconType} from "react-icons";
 
 function useTimeout(callbackFunction: () => void) {
     const savedCallback = useRef(callbackFunction);
@@ -26,7 +25,7 @@ interface ToastProps {
 }
 const Toast: React.FC<ToastProps> = ({message, close, type}) => {
     const toastClasses = className(
-        "backdrop-blur bg-white/30 dark:bg-black/30 rounded-md w-[400px] py-2 px-2 border-l-8 shadow-md flex justify-between items-center duration-75 animate-slidein-toast",
+        "backdrop-blur bg-white/30 dark:bg-black/30 rounded-md w-full md:w-[400px] py-2 px-2 border-l-8 shadow-md flex justify-between items-center duration-75 animate-slidein-toast",
         {
             "border-green-600": type === ToastType.Success,
             "border-orange-400": type === ToastType.Warning,
@@ -101,7 +100,7 @@ export const ToastContextProvider: React.FC<ToastContextProviderProps>  = ({chil
 
     return (<ToastContext.Provider value={contextValue}>
         {children}
-        <div className='fixed bottom-10 right-10 flex flex-col gap-2'>
+        <div className='fixed bottom-2 right-2 md:bottom-10 md:right-10 flex flex-col gap-2'>
             {toasts && toasts.map(toast => {
                 return <Toast message={toast.message} key={toast.id} type={toast.type} close={() => closeToast(toast.id)}/>
             })}

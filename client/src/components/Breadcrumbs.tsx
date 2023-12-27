@@ -31,7 +31,7 @@ const Breadcrumbs: React.FC = () => {
 
     return (
         <div className='mb-2 md:mb-6 mt-4 container mx-auto'>
-            <section className='bg-white dark:bg-[#323232] inline-block px-2 py-1 md:px-3 md:py-2 rounded-md shadow'>
+            <section className='bg-white dark:bg-stone-800 inline-block px-2 py-1 md:px-3 md:py-2 rounded-md shadow'>
                 {crumbs}
             </section>
         </div>
