@@ -20,6 +20,7 @@ const DictionarySection: React.FC = () => {
         <ul className='mt-2 md:mt-6'>
             {!!selectedWord && selectedWord. map(({id, word, definition, audio}) =>  <DictionaryUnit word={word} definition={definition} audio={audio} key={id} id={id}/>)}
         </ul>
+        {selectedWord.length ? null : <p className='text-base text-orange-500 bg-stone-50 dark:bg-[#484848] shadow-inner p-3 mb-5 rounded-lg'>Add a word to Dictionary list by hovering on it and pressing "add" button. Then you will be able to save new words to Your Dictionary</p>}
         {selectedWord.length ? <div className='flex justify-end mt-5'>
             <Button primary rounded small >Save to Your Dictionary</Button>
         </div> : null}
