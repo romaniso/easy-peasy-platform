@@ -6,12 +6,13 @@ interface IDictionaryContext {
     selectedWords: IDictionaryUnit[];
     addWordToDictionary: (newSelectedWord: IDictionaryUnit) => ToastType;
     removeWordFromDictionary: (wordId: string) => void;
+    editWordInDictionary: (wordId: string, newValue: string) => void;
 }
 const useDictionary = (): IDictionaryContext => {
     const [selectedWords, setSelectedWords] = useState<IDictionaryUnit[]>([])
     const addWordToDictionary = (newSelectedWord: IDictionaryUnit): ToastType => {
         const isWordAlreadyAdded = selectedWords.some(word =>
-            word.word === newSelectedWord.word && word.definition === newSelectedWord.definition
+            word.word === newSelectedWord.word
         );
         if (isWordAlreadyAdded) {
             console.error('You have already added this word');
@@ -28,10 +29,20 @@ const useDictionary = (): IDictionaryContext => {
         setSelectedWords(updatedSelectedWords);
     }
 
+    const editWordInDictionary = (wordId: string, newValue: string): void => {
+        const {word, id, audio} = selectedWords.find((word) => word.id === wordId) as IDictionaryUnit;
+        const updatedSelectedWords: IDictionaryUnit[] = selectedWords.map((selectedWord) => {
+            if(selectedWord.id === wordId) return {word, id, audio, definition: newValue};
+            else return selectedWord;
+        })
+        setSelectedWords(updatedSelectedWords);
+    }
+
     return {
         selectedWords,
         addWordToDictionary,
         removeWordFromDictionary,
+        editWordInDictionary,
     }
 }
 
@@ -49,3 +60,4 @@ export const ReadingContextProvider: React.FC<ReadingContextProviderProps>  = ({
 export const useSelectedWords = () => useContext(ReadingContext as React.Context<IDictionaryContext>).selectedWords;
 export const useAddWordToDictionary = () => useContext(ReadingContext as React.Context<IDictionaryContext>).addWordToDictionary;
 export const useRemoveWordFromDictionary = () => useContext(ReadingContext as React.Context<IDictionaryContext>).removeWordFromDictionary;
+export const useEditWordInDictionary = () => useContext(ReadingContext as React.Context<IDictionaryContext>).editWordInDictionary;
