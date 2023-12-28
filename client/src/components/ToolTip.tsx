@@ -2,12 +2,14 @@ import React, {ReactElement, useRef, useState, useMemo} from "react";
 import TranslationContent from "./TranslationContent";
 import {TranslationContentData} from "../interfaces/translationContentData";
 import useLookUpWord from "../hooks/useLookUpWord";
+import {KeyWordObject} from "../interfaces/keyWord";
 
 interface ToolTipProps {
     children: ReactElement;
     tooltip: string | ReactElement;
     secondary?: true;
     translation?: true;
+    keyWord?: KeyWordObject;
 }
 interface ParsedDictionaryData {
     audio?: string;
@@ -15,7 +17,7 @@ interface ParsedDictionaryData {
     definitions: string[][];
 }
 type Timeout = ReturnType<typeof setTimeout>;
-const ToolTip: React.FC<ToolTipProps> = ({ children, tooltip, translation, secondary }) => {
+const ToolTip: React.FC<ToolTipProps> = ({ children, tooltip, translation, secondary, keyWord }) => {
     const tooltipRef = useRef<HTMLSpanElement>(null);
     const container = useRef<HTMLDivElement>(null);
     const [isTooltipVisible, setTooltipVisible] = useState<boolean>(false);
@@ -28,12 +30,38 @@ const ToolTip: React.FC<ToolTipProps> = ({ children, tooltip, translation, secon
         if(translation){
             hoverTimeout = setTimeout(async () => {
                 if (!tooltipRef.current || !container.current) return;
-                // Fetch
-                try {
-                    const dictionaryData: ParsedDictionaryData = await getDictionaryData(tooltip as string);
-                    setTooltipData(dictionaryData as TranslationContentData);
-                } catch (error) {
-                    console.error("Error fetching dictionary data:", error);
+
+                if(keyWord) {
+                    const {word, definitions} = keyWord;
+
+                    let KeyWordAudio: string | undefined = undefined;
+                    let KeyWordAudioTranscription: string | undefined = undefined;
+                    try {
+                        const data: ParsedDictionaryData | null = await getDictionaryData(word);
+                        if(data?.audio){
+                            KeyWordAudio = data.audio;
+                        }
+                        if(data?.transcription){
+                            KeyWordAudioTranscription = data.transcription;
+                        }
+                    }
+                    finally {
+                        const dictionaryData: TranslationContentData = {
+                            audio: KeyWordAudio,
+                            transcription: KeyWordAudioTranscription,
+                            definitions,
+                        }
+                        setTooltipData(dictionaryData);
+                    }
+
+                } else {
+                    // Fetch
+                    try {
+                        const dictionaryData: ParsedDictionaryData | null = await getDictionaryData(tooltip as string);
+                        setTooltipData(dictionaryData as TranslationContentData);
+                    } catch (error) {
+                        console.error("Error fetching dictionary data:", error);
+                    }
                 }
                 // Paint
                 const { left } = container.current.getBoundingClientRect();

@@ -3,6 +3,7 @@ import ReactMarkdown, { Components } from 'react-markdown';
 import {hasPunctuation} from "../../utils/hasPunctuationSign";
 import ToolTip from "../ToolTip";
 import {useAddWordToDictionary} from "../../context/ReadingContext";
+import {KeyWordObject} from "../../interfaces/keyWord";
 
 interface ReadingProps {
     text: string;
@@ -50,18 +51,40 @@ const Reading: React.FC<ReadingProps> = ({ text, title, image, level }) => {
     const renderChildren = (children: ReactNode | ReactNode[]) =>
         Array.isArray(children) ? children.map((el) => (typeof el === 'string' ? renderWords(el.split(' ')) : el)) : renderWords((children as string).split(' '));
 
+    const prepareKeyWordObject = (unit: string): KeyWordObject => {
+        const WORD_DIVIDER = '?';
+        const DEFINITION_DIVIDER = '=';
+        if(!unit.includes(WORD_DIVIDER) && !unit.includes(DEFINITION_DIVIDER)) throw new Error('Markdown must be edited. Strong element is created wrongly. It must include definitions and a bare form.');
+        const wordToDisplay: string = unit.split(WORD_DIVIDER)[0];
+        const word: string = unit.split(WORD_DIVIDER)[1]?.split(DEFINITION_DIVIDER)[0];
+        const definitions = (unit
+            .split(WORD_DIVIDER)[1]
+            .split(DEFINITION_DIVIDER)[1]
+            .split(';')
+            .map(definition => [definition]));
+
+        return {
+            wordToDisplay,
+            word,
+            definitions,
+        }
+
+    }
+
     // For React Markdown
     const components: Partial<Components> = {
         p: ({ children }) => <p>{renderChildren(children)}</p>,
-        strong: ({ children }) => (
-            <ToolTip tooltip={children as string} translation>
+        strong: ({ children }) => {
+            const keyWordObject = prepareKeyWordObject(children as string);
+
+            return <ToolTip tooltip={keyWordObject.word} translation keyWord={keyWordObject}>
                 <strong
                     className='hover:text-xl hover:text-indigo-500 hover:font-bold transition-all duration-200 cursor-pointer hover:-m-1.5 hover:bg-orange-300 dark:hover:bg-white z-10 whitespace-nowrap'
                 >
-                    {children}
+                    {keyWordObject.wordToDisplay}
                 </strong>
             </ToolTip>
-        ),
+        },
     };
 
     return (

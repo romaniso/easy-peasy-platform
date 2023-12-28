@@ -42,24 +42,29 @@ const useLookUpWord = () => {
         const updatedSelectedWords = [...selectedWords, newSelectedWord]
         setSelectedWords(updatedSelectedWords);
     };
-    const getDictionaryData = useCallback(async (selectedUnit: string): Promise<ParsedDictionaryData> => {
+    const getDictionaryData = useCallback(async (selectedUnit: string): Promise<ParsedDictionaryData | null> => {
         const url = 'https://api.dictionaryapi.dev/api/v2/entries/en/';
-        const res = await axios.get<WordData[]>(`${url}${selectedUnit}`);
-        const {data} = res;
-        const {meanings, phonetics} = data[0];
-        const allDefinitions: Array<string[]> = meanings.map((meaning) => meaning.definitions.map(({definition}) => definition));
-        const {text, audio} = (phonetics as Phonetic[])[0];
-        setFetchedData({
-            audio,
-            transcription: text,
-            definitions: allDefinitions,
-        })
+        try {
+            const res = await axios.get<WordData[]>(`${url}${selectedUnit}`);
+            const {data} = res;
+            const {meanings, phonetics} = data[0];
+            const allDefinitions: Array<string[]> = meanings.map((meaning) => meaning.definitions.map(({definition}) => definition));
+            const {text, audio} = (phonetics as Phonetic[])[0];
+            setFetchedData({
+                audio,
+                transcription: text,
+                definitions: allDefinitions,
+            })
 
-        return {
-            audio,
-            transcription: text,
-            definitions: allDefinitions,
-        };
+            return {
+                audio,
+                transcription: text,
+                definitions: allDefinitions,
+            };
+        } catch (err) {
+            console.error(err)
+            return null;
+        }
     },[fetchedData])
 
     return {

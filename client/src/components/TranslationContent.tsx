@@ -17,7 +17,6 @@ interface TranslationContentProps {
 const TranslationContent: React.FC<TranslationContentProps> = ({word, fetchedData}) => {
     const addWord = useAddWordToDictionary();
     const toast = useToast();
-
     const handleClick = (selectedWord: string) => {
         const addedWord = {
             id: uuid(),
