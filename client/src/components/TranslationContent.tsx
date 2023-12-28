@@ -32,21 +32,21 @@ const TranslationContent: React.FC<TranslationContentProps> = ({word, fetchedDat
             await playAudio(fetchedData.audio);
         }
     };
-    return <article className='text-indigo-50'>
-        <header className='flex justify-between'>
-            <h5>{word}{fetchedData &&<span className='opacity-60 ml-2'>{fetchedData.transcription}</span>}</h5>
+    return <span className='text-indigo-50'>
+        <span className='flex justify-between'>
+            <dt className='font-bold'>{word}{fetchedData &&<span className='opacity-80 ml-2 font-light'>{fetchedData.transcription}</span>}</dt>
             {fetchedData && fetchedData.audio && <button
                 className='cursor-pointer'
                 onClick={handlePlay}
             >
                 <BsFillVolumeDownFill className='text-lg'/>
             </button>}
-        </header>
-        {fetchedData && <main>
+        </span>
+        {fetchedData && <span>
             {fetchedData.definitions.map((definitionsArr, arrIndex) => {
-                return <ul className='[&:not(:last-of-type)]:border-b border-white/50 py-2' key={arrIndex}>{definitionsArr
-                    .map((definition, defIndex) => <li className='mb-2' key={defIndex}>{definition}</li>)
-                }</ul>
+                return <span className='block border-white/50 py-2' key={arrIndex}>{definitionsArr
+                    .map((definition, defIndex) => <dd className='block mb-2' key={defIndex}>{definition}</dd>)
+                }</span>
             })}
             <ToolTip secondary tooltip='Add to Dictionary List'>
                 <Button secondary outline small
@@ -54,8 +54,8 @@ const TranslationContent: React.FC<TranslationContentProps> = ({word, fetchedDat
                     <span>add<LuCopyPlus className='text-sm ml-2 inline align-baseline'/></span>
                 </Button>
             </ToolTip>
-        </main>}
-    </article>
+        </span>}
+    </span>
 }
 
 export default TranslationContent;
