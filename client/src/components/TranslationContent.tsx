@@ -33,7 +33,7 @@ const TranslationContent: React.FC<TranslationContentProps> = ({word, fetchedDat
         }
     };
     return <span className='text-indigo-50'>
-        <span className='flex justify-between'>
+        <span className='flex justify-between flex-wrap'>
             <dt className='font-bold'>{word}{fetchedData &&<span className='opacity-80 ml-2 font-light'>{fetchedData.transcription}</span>}</dt>
             {fetchedData && fetchedData.audio && <button
                 className='cursor-pointer'

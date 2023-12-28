@@ -30,7 +30,6 @@ const ToolTip: React.FC<ToolTipProps> = ({ children, tooltip, translation, secon
         if(translation){
             hoverTimeout = setTimeout(async () => {
                 if (!tooltipRef.current || !container.current) return;
-
                 if(keyWord) {
                     const {word, definitions} = keyWord;
 
@@ -55,7 +54,6 @@ const ToolTip: React.FC<ToolTipProps> = ({ children, tooltip, translation, secon
                     }
 
                 } else {
-                    // Fetch
                     try {
                         const dictionaryData: ParsedDictionaryData | null = await getDictionaryData(tooltip as string);
                         setTooltipData(dictionaryData as TranslationContentData);
@@ -63,10 +61,8 @@ const ToolTip: React.FC<ToolTipProps> = ({ children, tooltip, translation, secon
                         console.error("Error fetching dictionary data:", error);
                     }
                 }
-                // Paint
                 const { left } = container.current.getBoundingClientRect();
                 tooltipRef.current.style.left = `${clientX - left - 20}px`;
-                // Change state
                 setTooltipVisible(true)
             }, 750);
         } else {

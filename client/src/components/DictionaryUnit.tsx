@@ -34,9 +34,9 @@ const DictionaryUnit: React.FC<IDictionaryUnit> = ({word, definition, audio, id}
     return <div className='flex justify-between items-start gap-2 [&:not(:last-of-type)]:border-b dark:border-gray-500 py-3'>
         <div className={`${isBeingEdited && 'flex basis-full'}`}>
             <ToolTip tooltip='Listen to the pronunciation'>
-                <p className='mr-2 text-sm font-bold text-orange-500 p-0.5 px-1 border dark:border-gray-500 rounded-md shadow cursor-pointer hover:opacity-75 hover:scale-105 transition-all duration-300' onClick={handlePlay}>{word}</p>
+                <p className='mr-2 md:text-sm font-bold text-orange-500 p-0.5 px-1 border dark:border-gray-500 rounded-md shadow cursor-pointer hover:opacity-75 hover:scale-105 transition-all duration-300' onClick={handlePlay}>{word}</p>
             </ToolTip>
-            {isBeingEdited ? editionArea : <p className='inline text-indigo-900 dark:text-indigo-200 text-sm transition-all'>{definition}</p>}
+            {isBeingEdited ? editionArea : <p className='inline text-indigo-900 dark:text-indigo-200 md:text-sm transition-all'>{definition}</p>}
         </div>
         <div className='translate-y-0.5 flex border-l border-indigo-200 pl-2'>
             <ToolTip tooltip='Edit'>
