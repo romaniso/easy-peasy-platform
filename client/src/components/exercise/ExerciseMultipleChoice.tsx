@@ -58,11 +58,11 @@ const ExerciseMultipleChoice: React.FC<ExerciseMultipleChoiceProps> = ({ questio
 
                             const choiceLetter = choiceLetters[optionIndex];
                             return (
-                                <li key={`choice-${index}-${optionIndex}`}>
+                                <li key={`choice-${index}-${optionIndex}`} className='inline-flex gap-2 m-2 md:m-0'>
                                     {choiceLetter}){" "}
                                     <span
                                         onClick={() => onChange(index, option.text)}
-                                        className={` font-bold bg-indigo-50 dark:bg-[#484848] py-1 px-2 rounded-md hover:opacity-75 hover:dark:bg-[#323232] cursor-pointer ${
+                                        className={`block leading-6 font-bold bg-indigo-50 dark:bg-[#484848] py-1 px-2 rounded-md hover:opacity-75 hover:dark:bg-[#323232] cursor-pointer ${
                                             selections[index] === option.text
                                                 ? 'border border-orange-300 dark:border-orange-500 dark:text-orange-500 shadow-inner text-indigo-400'
                                                 : 'text-indigo-800 dark:text-orange-500  shadow'

@@ -41,6 +41,7 @@ const ExercisePage: React.FC = () => {
             try {
                 const {data} = await axios.get<{exercises: ExerciseObject; cheatsheet: ICheatsheet; reading: IReading}>(`http://localhost:5000/exercise/${setTitle}`);
                 const {exercises, cheatsheet, reading} = data;
+                console.log(exercises);
                 setExercises(exercises.exercises);
                 setSection(exercises.section);
                 if(cheatsheet){
@@ -91,17 +92,23 @@ const ExercisePage: React.FC = () => {
                 break;
             case 'reading':
                 content = (
-                    <Panel className="bg-white flex flex-col lg:flex-row justify-between !p-0">
-                        <ReadingContextProvider>
-                            <section className='basis-full md:basis-3/4 border-r dark:border-gray-500'>
-                                {!!reading && <Reading
-                                    text={reading.markDown} title={reading.topic} level={reading.level} image={reading.image}
-                                />}
-                                <ExerciseSet exercises={exercises}/>
-                            </section>
-                            <DictionarySection/>
-                        </ReadingContextProvider>
-                    </Panel>
+                    <>
+                        <Panel className="bg-white flex flex-col lg:flex-row justify-between !p-0">
+                            <ReadingContextProvider>
+                                <section className='basis-full md:basis-3/4 border-r dark:border-gray-500'>
+                                    {!!reading && <Reading
+                                        text={reading.markDown} title={reading.topic} level={reading.level} image={reading.image}
+                                    />}
+                                </section>
+                                <DictionarySection/>
+                            </ReadingContextProvider>
+                        </Panel>
+                        <Panel className='bg-white mt-5'>
+                            {/*<h3 className='text-3xl font-bold text-orange-500 drop-shadow p-5 tracking-widest'>Time to exercise</h3>*/}
+                            <ExerciseSet  exercises={exercises}/>
+                        </Panel>
+                    </>
+
                 )
                 break;
             default:
