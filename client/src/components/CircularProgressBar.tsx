@@ -15,7 +15,7 @@ const CircularProgressBar: React.FC<CircularProgressBarProps> = ({ percentage, o
             resultRef.current.innerHTML = counter + "%";
 
             const intervalId = setInterval(() => {
-                if (counter === percentage) {
+                if (counter === percentage || counter === 100) {
                     clearInterval(intervalId);
                 } else {
                     counter++;

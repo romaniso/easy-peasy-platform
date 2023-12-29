@@ -13,7 +13,8 @@ const ExerciseFeedback: React.FC<ExerciseFeedbackProps> = ({ results, questionsN
         if(!results) return;
         const numberOfPossibleAnswers: number = results.length;
         const correctAnswers: number = results.filter((result) => result === "Same").length;
-        const percentage: number = (correctAnswers / numberOfPossibleAnswers) * 100;
+        const percentage: number = Math.floor((correctAnswers / numberOfPossibleAnswers) * 100);
+        console.log(percentage);
 
         setResult(percentage);
         setOffset(Math.floor(243 - (percentage / 100) * 155));
