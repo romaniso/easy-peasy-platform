@@ -2,6 +2,7 @@ import React from 'react';
 import { FaRegThumbsDown, FaRegThumbsUp } from "react-icons/fa";
 import {ExerciseUnit} from "../../interfaces/exerciseUnit";
 import {UserResult} from "../../types/userResult";
+import OrderUnit from "../OrderUnit";
 interface ExerciseMultipleChoiceProps {
     questions: ExerciseUnit[];
     results: UserResult[] | null;
@@ -27,9 +28,7 @@ const ExerciseMultipleChoice: React.FC<ExerciseMultipleChoiceProps> = ({ questio
 
                 const renderedSentence = (
                     <div className="text-indigo-900 dark:text-indigo-200 text-xl mb-4" key={`sentence-${index}`}>
-            <span className="mr-1 bg-indigo-400 text-white py-[2px] md:py-1 px-2 md:px-2 rounded-lg text-base shadow" key={`number-${index}`}>
-              {index + 1}
-            </span>
+                        <OrderUnit orderNumber={index + 1}/>
                         {question.split("***").map((part, partIndex) => {
                             // Conditional Render
                             const emptyPart = (

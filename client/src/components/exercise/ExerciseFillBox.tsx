@@ -1,6 +1,7 @@
 import React from 'react';
 import {UserResult} from "../../types/userResult";
 import {ExerciseUnit} from "../../interfaces/exerciseUnit";
+import OrderUnit from "../OrderUnit";
 
 interface ExerciseFillBoxProps {
     questions: ExerciseUnit[];
@@ -20,7 +21,7 @@ const ExerciseFillBox: React.FC<ExerciseFillBoxProps> = ({questions, text, resul
                     <span>{part}</span>
                     {index !== arr.length - 1 && (
                         <span className='inline-block' key={`input-${index}`}>
-                            <span className='mr-1 bg-orange-400 dark:bg-orange-500 text-white py-[2px] md:py-1 px-2 md:px-3 rounded-lg text-base shadow'>{index + 1}</span>
+                            <OrderUnit orderNumber={index + 1} accent/>
                             <input
                                 className={`text-base md:text-xl h-6 w-28 md:h-8 md:w-36 p-1 mr-1 border dark:border-gray-500 dark:bg-[#323232] rounded-md shadow-inner text-indigo-800 dark:text-indigo-50 outline-none hover:border-orange-400 focus:border-orange-300 focus:dark:border-orange-500 hover:dark:border-orange-500 transition-colors duration-700 ${inputColor}`}
                                 key={`input-field-${index}`}

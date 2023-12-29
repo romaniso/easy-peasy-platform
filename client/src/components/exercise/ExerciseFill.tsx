@@ -3,6 +3,7 @@ import { FaRegThumbsUp, FaRegThumbsDown } from "react-icons/fa";
 import {ExerciseUnit} from "../../interfaces/exerciseUnit";
 import {UserResult} from "../../types/userResult";
 import { v4 as uuid } from "uuid";
+import OrderUnit from "../OrderUnit";
 
 interface ExerciseFillProps {
     questions: ExerciseUnit[];
@@ -24,6 +25,7 @@ const ExerciseFill: React.FC<ExerciseFillProps> = ({ questions, results, onChang
                 const { question } = item;
                 const renderedQuestion = (
                     <li className="text-indigo-900 dark:text-indigo-200 text-xl mb-8" key={index}>
+                        <OrderUnit orderNumber={index + 1}/>
                         {question.split("***").map((part, partIndex) => {
                             //Conditional Render
                             const inputPart = (
