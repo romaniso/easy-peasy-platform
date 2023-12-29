@@ -29,7 +29,7 @@ const ExerciseFill: React.FC<ExerciseFillProps> = ({ questions, results, onChang
                             const inputPart = (
                                 <span key={`${partIndex} ${index}`}>
                                     <input
-                                        className="text-xl p-1 border dark:border-gray-500 dark:bg-[#323232] rounded-md shadow-inner text-indigo-800 dark:text-indigo-200 outline-none"
+                                        className="text-xl p-1 border dark:border-gray-500 dark:bg-stone-800 rounded-md shadow-inner text-indigo-800 dark:text-indigo-200 outline-none"
                                         key={index}
                                         name="selection"
                                         type="text"

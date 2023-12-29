@@ -50,7 +50,7 @@ const ExerciseMultipleChoice: React.FC<ExerciseMultipleChoiceProps> = ({ questio
                 );
 
                 const renderedChoices = (
-                    <ul className="mb-8 md:ml-8 text-base md:text-lg text-orange-600 dark:text-indigo-200 md:flex md:gap-8" key={`choices-${index}`}>
+                    <ul className="mb-8 md:ml-8 text-base md:text-lg text-orange-600 dark:text-indigo-200 md:grid md:grid-cols-4 md:gap-8" key={`choices-${index}`}>
                         {options?.map((option, optionIndex) => {
                             if (optionIndex >= choiceLetters.length) {
                                 throw new Error("Too many options");
@@ -58,11 +58,11 @@ const ExerciseMultipleChoice: React.FC<ExerciseMultipleChoiceProps> = ({ questio
 
                             const choiceLetter = choiceLetters[optionIndex];
                             return (
-                                <li key={`choice-${index}-${optionIndex}`} className='inline-flex gap-2 m-2 md:m-0'>
+                                <li key={`choice-${index}-${optionIndex}`} className='flex gap-2 m-2 md:m-0'>
                                     {choiceLetter}){" "}
                                     <span
                                         onClick={() => onChange(index, option.text)}
-                                        className={`block leading-6 font-bold bg-indigo-50 dark:bg-[#484848] py-1 px-2 rounded-md hover:opacity-75 hover:dark:bg-[#323232] cursor-pointer ${
+                                        className={`w-full block leading-6 font-bold bg-indigo-50/50 dark:bg-stone-700  py-1 md:py-2 px-2 rounded-md hover:opacity-75 hover:dark:bg-[#323232] cursor-pointer ${
                                             selections[index] === option.text
                                                 ? 'border border-orange-300 dark:border-orange-500 dark:text-orange-500 shadow-inner text-indigo-400'
                                                 : 'text-indigo-800 dark:text-orange-500  shadow'

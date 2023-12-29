@@ -42,7 +42,7 @@ const ExerciseDropdown: React.FC<ExerciseDropdownProps> = ({
                                 partIndex === 1 ? (
                                     <React.Fragment key={uniqueKey}>
                                         <select
-                                            className="text-xl p-1 border dark:bg-[#323232] dark:border-gray-500 rounded-md shadow-inner text-indigo-800 dark:text-indigo-200 cursor-pointer outline-none"
+                                            className="text-xl p-1 border dark:bg-stone-800 dark:border-gray-500 rounded-md shadow-inner text-indigo-800 dark:text-indigo-200 cursor-pointer outline-none"
                                             onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
                                                 onChange(index, e.target.value)
                                             }
