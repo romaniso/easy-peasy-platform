@@ -44,7 +44,7 @@ const Toast: React.FC<ToastProps> = ({message, close, type}) => {
     switch (type) {
         case ToastType.Success:
             icon = <FaCheck className='text-indigo-50'/>;
-            displayedMessage = 'Your word has been successfully added!';
+            displayedMessage = `${message ? message :  'Your word has been successfully added!'}`;
             break;
         case ToastType.Warning:
             icon = <RiAlarmWarningLine className='text-indigo-50'/>;

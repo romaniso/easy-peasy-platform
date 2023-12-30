@@ -1,18 +1,34 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import { FaRegThumbsDown, FaRegThumbsUp } from "react-icons/fa";
 import {ExerciseUnit} from "../../interfaces/exerciseUnit";
 import {UserResult} from "../../types/userResult";
 import OrderUnit from "../OrderUnit";
+import {UserResultEnums} from "../../enums/userResult";
+import {useOpenHeadings} from "../../context/ReadingContext";
+import {ToastType} from "../../enums/toast";
+import {useToast} from "../../context/ToastContext";
 interface ExerciseMultipleChoiceProps {
     questions: ExerciseUnit[];
     results: UserResult[] | null;
     selections: string[];
+    matchHeadings?: true;
     onChange(
         index: number,
         event: React.ChangeEvent<HTMLInputElement> | string
     ): void;
 }
-const ExerciseMultipleChoice: React.FC<ExerciseMultipleChoiceProps> = ({ questions, results, selections, onChange }) => {
+const ExerciseMultipleChoice: React.FC<ExerciseMultipleChoiceProps> = ({ questions, results, selections, onChange, matchHeadings }) => {
+    const openHeadings = useOpenHeadings();
+    const toast = useToast();
+    useEffect(() => {
+        if (matchHeadings && results) {
+            const isAllHeadingsMatched = results.every((result) => result === UserResultEnums.Success);
+            if (isAllHeadingsMatched) {
+                openHeadings();
+                toast?.open('You have opened all headings!', ToastType.Success);
+            }
+        }
+    }, [results]);
     const renderedMultipleChoice = (
         <ul>
             {questions.map(({ question, options }, index) => {

@@ -89,7 +89,7 @@ const Reading: React.FC<ReadingProps> = ({ text, title, image, level }) => {
         h4: ({children}) => {
             return isHeadingsOpened
                 ? <h4>{children}</h4>
-                : <ToolTip tooltip='Complete fill-headings exercise to see the heading'><h4 className='blur cursor-help'>{children}</h4></ToolTip>
+                : <ToolTip tooltip='Complete the match-headings exercise to see the heading'><h4 className='blur cursor-help'>{children}</h4></ToolTip>
         }
     };
 

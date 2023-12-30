@@ -168,6 +168,22 @@ const ExerciseBody: React.FC<ExerciseBodyProps> = ({
                     )}
                 </div>);
             break;
+        case ExerciseTypeName.MatchHeadings:
+            renderedExercise = (
+                <form onSubmit={onSubmit}>
+                    <ExerciseMultipleChoice
+                        questions={questions}
+                        results={results}
+                        selections={selections}
+                        onChange={handleSelectChange}
+                        matchHeadings
+                    />
+                    <Button primary rounded className="w-full md:w-1/5" type="submit">
+                        {btnText}
+                    </Button>
+                </form>
+            );
+            break;
         default:
             throw new Error("There is no such an exercise type");
     }

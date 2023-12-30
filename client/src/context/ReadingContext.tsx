@@ -11,7 +11,7 @@ interface IDictionaryContext {
     openHeadings: () => void;
 }
 const useDictionary = (): IDictionaryContext => {
-    const [isHeadingsOpened, setIsHeadingsOpened] = useState(false);
+    const [isHeadingsOpened, setIsHeadingsOpened] = useState<boolean>(false);
     const [selectedWords, setSelectedWords] = useState<IDictionaryUnit[]>([])
     const addWordToDictionary = (newSelectedWord: IDictionaryUnit): ToastType => {
         const isWordAlreadyAdded = selectedWords.some(word =>
@@ -41,6 +41,7 @@ const useDictionary = (): IDictionaryContext => {
         setSelectedWords(updatedSelectedWords);
     }
     const openHeadings = (): void => {
+        console.log('open headings')
         setIsHeadingsOpened(true);
     }
 

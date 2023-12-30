@@ -6,4 +6,5 @@ export enum ExerciseTypeName {
     DragAndDrop = 'drag-&-drop',
     MultipleChoice = 'multiple-choice',
     FillInLetter = 'fill-in-letter',
+    MatchHeadings = 'match-headings',
 }

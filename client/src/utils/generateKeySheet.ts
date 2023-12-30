@@ -13,6 +13,7 @@ function generateKeySheet (type: ExerciseTypeName, questions: (ExerciseUnit)[]):
             return questions.map((question) => question.isCorrect?.toString() || "");
 
         case ExerciseTypeName.MultipleChoice:
+        case ExerciseTypeName.MatchHeadings:
             return questions.flatMap((question) =>
                 question.options?.filter((option) => option.isCorrect).map((option) => option.text) || []
             );
