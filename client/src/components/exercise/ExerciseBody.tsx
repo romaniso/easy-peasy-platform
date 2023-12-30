@@ -10,6 +10,7 @@ import Flashcard from "../Flashcard";
 import { ExerciseUnit } from "../../interfaces/exerciseUnit";
 import { UserResult } from "../../types/userResult";
 import {ExerciseTypeName} from "../../enums/exercise";
+import ExerciseMatchHeaders from "./ExerciseMatchHeaders";
 
 interface ExerciseBodyProps {
     onSubmit(e: React.FormEvent<HTMLFormElement>): void;
@@ -170,18 +171,19 @@ const ExerciseBody: React.FC<ExerciseBodyProps> = ({
             break;
         case ExerciseTypeName.MatchHeadings:
             renderedExercise = (
-                <form onSubmit={onSubmit}>
-                    <ExerciseMultipleChoice
-                        questions={questions}
-                        results={results}
-                        selections={selections}
-                        onChange={handleSelectChange}
-                        matchHeadings
-                    />
-                    <Button primary rounded className="w-full md:w-1/5" type="submit">
-                        {btnText}
-                    </Button>
-                </form>
+                <ExerciseMatchHeaders results={results}>
+                    <form onSubmit={onSubmit}>
+                        <ExerciseMultipleChoice
+                            questions={questions}
+                            results={results}
+                            selections={selections}
+                            onChange={handleSelectChange}
+                        />
+                        <Button primary rounded className="w-full md:w-1/5" type="submit">
+                            {btnText}
+                        </Button>
+                    </form>
+                </ExerciseMatchHeaders>
             );
             break;
         default:
