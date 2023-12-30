@@ -2,7 +2,7 @@ import React, {ReactNode} from "react";
 import ReactMarkdown, { Components } from 'react-markdown';
 import {hasPunctuation} from "../../utils/hasPunctuationSign";
 import ToolTip from "../ToolTip";
-import {useAddWordToDictionary} from "../../context/ReadingContext";
+import {useIsHeadingsOpened} from "../../context/ReadingContext";
 import {KeyWordObject} from "../../interfaces/keyWord";
 
 interface ReadingProps {
@@ -13,6 +13,7 @@ interface ReadingProps {
 }
 
 const Reading: React.FC<ReadingProps> = ({ text, title, image, level }) => {
+    const isHeadingsOpened = useIsHeadingsOpened()
     const renderWord = (word: string, index: number): ReactNode => {
         if (hasPunctuation(word)) {
             const punctuationSign = word.slice(-1);
@@ -85,6 +86,11 @@ const Reading: React.FC<ReadingProps> = ({ text, title, image, level }) => {
                 </strong>
             </ToolTip>
         },
+        h4: ({children}) => {
+            return isHeadingsOpened
+                ? <h4>{children}</h4>
+                : <ToolTip tooltip='Complete fill-headings exercise to see the heading'><h4 className='blur cursor-help'>{children}</h4></ToolTip>
+        }
     };
 
     return (
