@@ -5,6 +5,37 @@
 button > svg {
   margin-right: 5px;
 }
+:root {
+  --seek-before-width: 100px;
+}
+
+@layer components {
+  input[type=range] {
+    @apply appearance-none bg-indigo-200 shadow-inner rounded-md;
+  }
+  input[type=range]::before {
+    @apply w-[var(--seek-before-width)];
+  }
+
+  input[type=range]::-webkit-slider-runnable-track {
+    /*@apply appearance-none bg-indigo-200 shadow-inner rounded-md;*/
+  }
+  input[type=range]::-webkit-slider-thumb {
+    @apply  appearance-none h-[15px] w-[15px] rounded-full border-0 bg-white cursor-pointer relative z-20 box-border hover:scale-110 hover:bg-indigo-400 transition-all;
+  }
+  input[type=range]::-moz-range-track {
+    /*@apply bg-black/25 rounded-full;*/
+  }
+  input[type=range]::-moz-range-thumb {
+    @apply  appearance-none h-[15px] w-[15px] rounded-full border-transparent bg-white cursor-pointer relative -mt-0.5 z-20 box-border hover:scale-110 hover:bg-indigo-400 transition-all;
+  }
+
+  input[type=range]::-ms-track {
+    /*@apply bg-black/25 rounded-full;*/
+  }
+
+}
+
 
 @layer utilities {
   .flip-card {

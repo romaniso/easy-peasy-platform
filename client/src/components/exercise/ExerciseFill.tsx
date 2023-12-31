@@ -31,7 +31,7 @@ const ExerciseFill: React.FC<ExerciseFillProps> = ({ questions, results, onChang
                                 const HINT_DIVIDER = '(';
                                 if(part.includes(HINT_DIVIDER)){
                                     const partArr: string[] = part.split(HINT_DIVIDER);
-                                    renderedPart = <span key={'renderedPart-' + index}>{partArr[0]}<span className='italic ml-1 text-orange-500 font-thin leading-8'>({partArr[1]}</span></span>
+                                    renderedPart = <span key={'renderedPart-' + index}>{partArr[0]}<span className='italic ml-1 text-orange-500 font-thin leading-8'>{HINT_DIVIDER}{partArr[1]}</span></span>
                                 }
                             //Conditional Render
                             const inputPart = (
