@@ -11,10 +11,12 @@ function ThemeToggler({className}: {className: string}){
     useEffect(() => {
         if(isDarkTheme){
             document.querySelector('html')?.classList.add('dark');
-            document.querySelector('body')?.classList.add('scrollbar-track-stone-800');
+            document.querySelector('body')?.classList.remove('scrollbar-track-indigo-300');
+            document.querySelector('body')?.classList.add('scrollbar-track-stone-800', 'scrollbar-thumb-orange-500');
         } else {
             document.querySelector('html')?.classList.remove('dark');
             document.querySelector('body')?.classList.remove('scrollbar-track-stone-800');
+            document.querySelector('body')?.classList.add('scrollbar-thumb-orange-500', 'scrollbar-track-indigo-300');
         }
 
     }, [isDarkTheme]);
