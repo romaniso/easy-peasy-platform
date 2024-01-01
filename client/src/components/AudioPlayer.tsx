@@ -98,7 +98,7 @@ const AudioPlayer: React.FC = () => {
             </button>
             <div className='font-mono text-lg ml-3 text-indigo-700'>{calculateTime(currentTime)}</div>
             <div className=''>
-                <input type="range" className={`relative w-full h-3 mx-1 outline-0 before:content-[""] before:bg-orange-500 before:h-3 before:rounded-tl-md before:rounded-bl-md before:absolute before:top-0 before:left-0 before:z-10 before:cursor-pointer`} defaultValue={0} ref={progressBar} onChange={changeRange} />
+                <input type="range" className='relative cursor-pointer w-full h-3 mx-1 outline-0' defaultValue={0} ref={progressBar} onChange={changeRange} />
             </div>
             <div className='font-mono text-lg text-indigo-700 ml-2'>{renderedDuration}</div>
         </div>
