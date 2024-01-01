@@ -1,5 +1,5 @@
 //#region imports
-import React, {useState} from "react";
+import React, {useRef, useState} from "react";
 import ExerciseHeader from "./ExerciseHeader";
 import ExerciseBody from "./ExerciseBody";
 import ExerciseFeedback from "./ExerciseFeedback";
@@ -33,13 +33,13 @@ const Exercise: React.FC<ExerciseProps> = ({
         Array(questions.length).fill("")
     );
     const [userResults, setUserResults] = useState<UserResult[] | null>(null);
-
-    //FIXME: Refactor is so a user may input two possible values. Refactor is also required in data, e.g isCorrect not a string but array of two possible options. It may be refactored as a hook, show info when a field is empty before submitting
+    const feedbackRef = useRef<HTMLElement>(null);
     const validateUsersAnswers = (usersAnswers: string[]): void => {
         setUserResults(generateUserResults(usersAnswers, generateKeySheet(type, questions), type));
     };
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
+        feedbackRef.current?.scrollIntoView({behavior: 'smooth', block: 'start'});
         e.preventDefault();
         validateUsersAnswers(userSelections);
     };
@@ -52,7 +52,7 @@ const Exercise: React.FC<ExerciseProps> = ({
 
     return (
         <section className={active ? "px-3 py-5 md:px-12 md:py-10" : "hidden"}>
-            <ExerciseHeader title={title} instruction={instruction} />
+            <ExerciseHeader title={title} instruction={instruction} ref={feedbackRef}/>
             <ExerciseFeedback
                 results={userResults}
                 questionsNumber={questions.length}

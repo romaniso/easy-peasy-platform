@@ -1,16 +1,18 @@
 import CircularProgressBar from "../CircularProgressBar";
-import React, {useCallback, useEffect, useState} from "react";
-import {UserResult} from "../../types/userResult";
+import React, { useCallback, useEffect, useState } from "react";
+import { UserResult } from "../../types/userResult";
 
 interface ExerciseFeedbackProps {
     results: UserResult[] | null;
     questionsNumber: number;
 }
-const ExerciseFeedback: React.FC<ExerciseFeedbackProps> = ({ results, questionsNumber }) => {
+
+const ExerciseFeedback: React.FC<ExerciseFeedbackProps> = ({ results, questionsNumber}) => {
     const [result, setResult] = useState<number>(0);
     const [offset, setOffset] = useState<number>(243);
+
     const calculateResultIntoPercentages = useCallback((results: UserResult[]): void => {
-        if(!results) return;
+        if (!results) return;
         const numberOfPossibleAnswers: number = results.length;
         const correctAnswers: number = results.filter((result) => result === "Same").length;
         const percentage: number = Math.floor((correctAnswers / numberOfPossibleAnswers) * 100);
@@ -21,7 +23,6 @@ const ExerciseFeedback: React.FC<ExerciseFeedbackProps> = ({ results, questionsN
     useEffect(() => {
         calculateResultIntoPercentages(results as UserResult[]);
     }, [results, calculateResultIntoPercentages]);
-
 
     return results ? (
         <section className="flex gap-4 items-center mb-4">
@@ -41,9 +42,9 @@ const ExerciseFeedback: React.FC<ExerciseFeedbackProps> = ({ results, questionsN
           {questionsNumber}
         </span>
             </p>
-            <CircularProgressBar percentage={result} offset={offset}/>
+            <CircularProgressBar percentage={result} offset={offset} />
         </section>
     ) : null;
-}
+};
 
 export default ExerciseFeedback;

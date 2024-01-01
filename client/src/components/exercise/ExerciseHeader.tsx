@@ -1,11 +1,12 @@
-import React from "react";
+import React, {forwardRef} from "react";
 interface ExerciseHeader{
     title: string;
     instruction: string;
+    forwardedRef?: React.RefObject<HTMLElement>;
 }
-const ExerciseHeader: React.FC<ExerciseHeader> = ({ title, instruction }) => {
+const ExerciseHeader: React.FC<ExerciseHeader> = ({ title, instruction, forwardedRef }) => {
     return (
-        <header>
+        <header ref={forwardedRef}>
             <h2 className="text-2xl md:text-3xl font-bold text-indigo-800 dark:text-indigo-100 mb-2 md:mb-8">{title}</h2>
             <p className="text-lg md:text-2xl font-bold text-indigo-400 dark:text-indigo-200 mb-2 md:mb-4">
                 Task Description
@@ -17,4 +18,6 @@ const ExerciseHeader: React.FC<ExerciseHeader> = ({ title, instruction }) => {
     );
 }
 
-export default ExerciseHeader;
+export default forwardRef<HTMLElement, ExerciseHeader>((props, ref) => (
+    <ExerciseHeader {...props} forwardedRef={ref as React.RefObject<HTMLElement>} />
+));
