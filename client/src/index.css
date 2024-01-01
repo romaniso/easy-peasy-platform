@@ -6,8 +6,11 @@ button > svg {
   margin-right: 5px;
 }
 :root {
-  --seek-before-width: 100px;
+  --seek-before-width: 0px;
 }
+/*.container {*/
+/*  max-width: 1380px;*/
+/*}*/
 
 @layer components {
   input[type=range] {
