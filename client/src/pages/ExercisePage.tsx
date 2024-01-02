@@ -110,6 +110,13 @@ const ExercisePage: React.FC = () => {
                     </ReadingContextProvider>
                 )
                 break;
+            case SectionType.Listening:
+                content = (
+                    <Panel className="bg-white flex flex-col lg:flex-row justify-between !p-0">
+                        Listening Section
+                    </Panel>
+                )
+                break;
             default:
                 throw new Error("There is no such an exercise section");
         }

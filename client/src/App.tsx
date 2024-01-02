@@ -22,10 +22,12 @@ const App : React.FC = () => {
                     <Route path="/grammar" element={<PreviewPage />} />
                     <Route path="/vocabulary" element={<PreviewPage />} />
                     <Route path="/reading" element={<PreviewPage />} />
+                    <Route path="/listening" element={<PreviewPage />} />
                     {/*ExerciseSets*/}
                     <Route path="/grammar/:exercise" element={<ExercisePage />} />
                     <Route path="/vocabulary/:exercise" element={<ExercisePage />} />
                     <Route path="/reading/:exercise" element={<ExercisePage />} />
+                    <Route path="/listening/:exercise" element={<ExercisePage />} />
                     {/* private pages */}
                     {/*<Route element={<PrivateRouteLayout />}>*/}
                     <Route path="/dashboard" element={<DashboardPage />} />
