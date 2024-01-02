@@ -18,6 +18,7 @@ import {IReading} from "../interfaces/reading";
 import Recommended from "../components/Recommended";
 import DictionarySection from "../components/DictionarySection";
 import {ReadingContextProvider} from "../context/ReadingContext";
+import {SectionType} from "../enums/section";
 //#endregion
 //#region interfaces
 interface ExerciseObject {
@@ -64,7 +65,7 @@ const ExercisePage: React.FC = () => {
     let content;
     if(!isLoading){
         switch (section) {
-            case "grammar":
+            case SectionType.Grammar:
                 content = (
                     <Panel className="bg-white flex flex-col lg:flex-row justify-between min-h-[850px] !p-0">
                         <ExerciseSet exercises={exercises}/>
@@ -73,11 +74,10 @@ const ExercisePage: React.FC = () => {
                             level={cheatsheet.level}
                             content={cheatsheet.markDown}
                         />}
-
                     </Panel>
                 );
                 break;
-            case "vocabulary":
+            case SectionType.Vocabulary:
                 content = (
                     <Panel className="bg-white flex flex-col lg:flex-row justify-between !p-0">
                         <ExerciseSet exercises={exercises}/>
@@ -89,7 +89,7 @@ const ExercisePage: React.FC = () => {
                     </Panel>
                 );
                 break;
-            case 'reading':
+            case SectionType.Reading:
                 content = (
                     <ReadingContextProvider>
                         <Panel className="bg-white flex flex-col lg:flex-row justify-between !p-0">
@@ -105,7 +105,6 @@ const ExercisePage: React.FC = () => {
                                 <DictionarySection/>
                         </Panel>
                         <Panel className='bg-white mt-5'>
-                            {/*<h3 className='text-3xl font-bold text-orange-500 drop-shadow p-5 tracking-widest'>Time to exercise</h3>*/}
                             <ExerciseSet  exercises={exercises}/>
                         </Panel>
                     </ReadingContextProvider>
