@@ -7,4 +7,5 @@ export interface IReading {
     topic: string;
     _id: string;
     image: string;
+    audioUrl: string;
 }

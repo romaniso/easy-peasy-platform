@@ -2,9 +2,10 @@ import React, { useState, useRef, useEffect } from "react";
 import { FaPlay, FaPause } from "react-icons/fa";
 import {getCalculatedStringifiedTime} from "../utils/getCalculatedStringifiedTime";
 
-import AudioSampleURL from '../assets/Building-and-maintaining-relationships-transcript.mp3';
-
-const AudioPlayer: React.FC = () => {
+interface AudioPlayerProps {
+    audioUrl: string;
+}
+const AudioPlayer: React.FC<AudioPlayerProps> = ({audioUrl}) => {
     const [isPlaying, setIsPlaying] = useState<boolean>(false);
     const [duration, setDuration] = useState<number>(0);
     const [currentTime, setCurrentTime] = useState<number>(0);
@@ -70,7 +71,6 @@ const AudioPlayer: React.FC = () => {
     };
 
     const changePlayerCurrentTime = () => {
-        console.log(duration);
         if (progressBar.current) {
             const progressBarValue = (parseFloat(progressBar.current.value) / duration) * 100;
             progressBar.current.style.setProperty('--seek-before-width', `${progressBarValue}%`);
@@ -84,7 +84,7 @@ const AudioPlayer: React.FC = () => {
 
     return (
         <div className='flex bg-indigo-50/30 px-2 py-1 items-center rounded-xl'>
-            <audio src={AudioSampleURL} preload='metadata' ref={audioPlayer} />
+            <audio src={audioUrl} ref={audioPlayer} />
             <button onClick={togglePlayPause} className='mx-1 bg-orange-500 rounded-full w-10 h-10 text-xl text-indigo-50 flex justify-center items-center shadow-md hover:bg-indigo-300 transition-colors duration-300'>
                 {isPlaying ? <FaPause className='m-0' /> : <FaPlay className='m-0 relative left-[2px]' />}
             </button>

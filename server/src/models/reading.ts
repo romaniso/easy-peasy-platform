@@ -8,6 +8,7 @@ export class Reading {
     public setId: ObjectId;
     public image: string;
     public markDown: string;
+    public audioUrl: string;
     constructor(obj: Reading) {
         this._id = new ObjectId(obj._id);
         this.topic = obj.topic;
@@ -15,6 +16,7 @@ export class Reading {
         this.setId = new ObjectId(obj.setId);
         this.image = obj.image;
         this.markDown = obj.markDown;
+        this.audioUrl = obj.audioUrl;
         // this._validate();
     }
     _validate(){

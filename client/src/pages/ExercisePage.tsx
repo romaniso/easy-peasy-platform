@@ -95,7 +95,11 @@ const ExercisePage: React.FC = () => {
                         <Panel className="bg-white flex flex-col lg:flex-row justify-between !p-0">
                                 <section className='basis-full md:basis-3/4 border-r dark:border-gray-500'>
                                     {!!reading && <Reading
-                                        text={reading.markDown} title={reading.topic} level={reading.level} image={reading.image}
+                                        text={reading.markDown}
+                                        title={reading.topic}
+                                        level={reading.level}
+                                        image={reading.image}
+                                        audioUrl={reading.audioUrl}
                                     />}
                                 </section>
                                 <DictionarySection/>

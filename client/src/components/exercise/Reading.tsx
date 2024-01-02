@@ -11,9 +11,10 @@ interface ReadingProps {
     title: string;
     image: string;
     level: string;
+    audioUrl: string;
 }
 
-const Reading: React.FC<ReadingProps> = ({ text, title, image, level }) => {
+const Reading: React.FC<ReadingProps> = ({ text, title, image, level, audioUrl }) => {
     const isHeadingsOpened = useIsHeadingsOpened()
     const renderWord = (word: string, index: number): ReactNode => {
         if (hasPunctuation(word)) {
@@ -101,7 +102,7 @@ const Reading: React.FC<ReadingProps> = ({ text, title, image, level }) => {
                     <h1 className='text-5xl font-bold text-orange-500 drop-shadow text-center tracking-widest'>{title}</h1>
                     <section className='flex justify-between items-center mt-5 mb-2'>
                         <span className='border border-indigo-400 rounded-md text-indigo-400 text-2xl inline-block w-10 h-10 text-center'>{level}</span>
-                        <AudioPlayer/>
+                        <AudioPlayer audioUrl={audioUrl}/>
                     </section>
                 </div>
             </header>
