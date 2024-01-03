@@ -155,7 +155,7 @@ const ExerciseBody: React.FC<ExerciseBodyProps> = ({
             break;
         case ExerciseTypeName.FlashCard:
             renderedExercise = (
-                <div className="flex flex-wrap gap-10">
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-7">
                     {questions.map(
                         ({question, isCorrect, cardImage, example}, index) => (
                             <Flashcard

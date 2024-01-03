@@ -38,9 +38,9 @@ const Flashcard: React.FC<FlashcardProps> = ({question, isCorrect, cardImage, ex
         setIsSaved(!isSaved);
     }
 
-    const cardClasses = `flex-grow flip-card ${
+    const cardClasses = `flex-grow self-stretch flip-card ${
         isFlipped ? "flipped" : ""
-    } min-w-[250px] min-h-[280px] xl:max-w-[310px] cursor-pointer hover:scale-105 transition-all duration-700`;
+    } min-h-[280px] cursor-pointer hover:scale-105 transition-all duration-700`;
     const saveBtnClasses = `absolute text-2xl right-2 top-2 w-8 h-8 flex justify-center items-center rounded-md shadow-md transition-colors ${
         isSaved ? "bg-orange-600 hover:bg-orange-500" : "bg-black/30 hover:bg-black"
     }`

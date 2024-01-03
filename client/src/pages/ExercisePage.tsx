@@ -113,7 +113,7 @@ const ExercisePage: React.FC = () => {
                 break;
             case SectionType.Listening:
                 content = (
-                    <Panel className="bg-white flex flex-col gap-5">
+                    <Panel className="bg-white flex flex-col gap-5 !p-0">
                         <Listening/>
                     </Panel>
                 )

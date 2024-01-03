@@ -7,7 +7,7 @@ interface PanelProps {
 }
 const Panel: React.FC<PanelProps> = ({ children, className, ...rest }) => {
     const panelClasses = classNames(
-        "p-3 border border-white dark:border-gray-700 backdrop-blur-xl shadow-lg dark:bg-stone-800 rounded-md w-full",
+        "dark:bg-gradient-to-r dark:from-stone-800 dark:to-stone-900 p-3 border border-white dark:border-gray-700 backdrop-blur-xl shadow-lg dark:bg-stone-800 rounded-md w-full",
         className
     );
 

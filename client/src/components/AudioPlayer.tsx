@@ -87,11 +87,11 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({audioUrl, className}) => {
             <button onClick={togglePlayPause} className='mx-1 bg-orange-500 rounded-full w-10 h-10 text-xl text-indigo-50 flex justify-center items-center shadow-md hover:bg-indigo-300 transition-colors duration-300'>
                 {isPlaying ? <FaPause className='m-0' /> : <FaPlay className='m-0 relative left-[2px]' />}
             </button>
-            <div className='font-mono text-lg ml-3 text-indigo-700'>{getCalculatedStringifiedTime(currentTime)}</div>
+            <div className='font-mono text-lg ml-3 text-indigo-700 dark:text-indigo-400'>{getCalculatedStringifiedTime(currentTime)}</div>
             <div className='flex-auto'>
                 <input type="range" className='relative cursor-pointer w-full h-3 mx-1 outline-0' defaultValue={0} ref={progressBar} onChange={changeRange} />
             </div>
-            <div className='font-mono text-lg text-indigo-700 ml-2'>{renderedDuration}</div>
+            <div className='font-mono text-lg text-indigo-700 ml-2 dark:text-indigo-400'>{renderedDuration}</div>
         </div>
     );
 };
