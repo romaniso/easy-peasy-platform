@@ -19,6 +19,7 @@ import Recommended from "../components/Recommended";
 import DictionarySection from "../components/DictionarySection";
 import {ReadingContextProvider} from "../context/ReadingContext";
 import {SectionType} from "../enums/section";
+import Listening from "../components/exercise/Listening";
 //#endregion
 //#region interfaces
 interface ExerciseObject {
@@ -112,8 +113,8 @@ const ExercisePage: React.FC = () => {
                 break;
             case SectionType.Listening:
                 content = (
-                    <Panel className="bg-white flex flex-col lg:flex-row justify-between !p-0">
-                        Listening Section
+                    <Panel className="bg-white flex flex-col gap-5">
+                        <Listening/>
                     </Panel>
                 )
                 break;

@@ -4,8 +4,9 @@ import {getCalculatedStringifiedTime} from "../utils/getCalculatedStringifiedTim
 
 interface AudioPlayerProps {
     audioUrl: string;
+    className?: string;
 }
-const AudioPlayer: React.FC<AudioPlayerProps> = ({audioUrl}) => {
+const AudioPlayer: React.FC<AudioPlayerProps> = ({audioUrl, className}) => {
     const [isPlaying, setIsPlaying] = useState<boolean>(false);
     const [duration, setDuration] = useState<number>(0);
     const [currentTime, setCurrentTime] = useState<number>(0);
@@ -22,7 +23,6 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({audioUrl}) => {
                 progressBar.current.max = seconds.toString();
             }
         };
-
         const handleCanPlay = () => {
             if (!duration) {
                 handleLoadedMetadata();
@@ -69,7 +69,6 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({audioUrl}) => {
             changePlayerCurrentTime();
         }
     };
-
     const changePlayerCurrentTime = () => {
         if (progressBar.current) {
             const progressBarValue = (parseFloat(progressBar.current.value) / duration) * 100;
@@ -83,13 +82,13 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({audioUrl}) => {
         : getCalculatedStringifiedTime(duration);
 
     return (
-        <div className='flex bg-indigo-50/30 px-2 py-1 items-center rounded-xl'>
+        <div className={`flex items-center ${className}`}>
             <audio src={audioUrl} ref={audioPlayer} />
             <button onClick={togglePlayPause} className='mx-1 bg-orange-500 rounded-full w-10 h-10 text-xl text-indigo-50 flex justify-center items-center shadow-md hover:bg-indigo-300 transition-colors duration-300'>
                 {isPlaying ? <FaPause className='m-0' /> : <FaPlay className='m-0 relative left-[2px]' />}
             </button>
             <div className='font-mono text-lg ml-3 text-indigo-700'>{getCalculatedStringifiedTime(currentTime)}</div>
-            <div className=''>
+            <div className='flex-auto'>
                 <input type="range" className='relative cursor-pointer w-full h-3 mx-1 outline-0' defaultValue={0} ref={progressBar} onChange={changeRange} />
             </div>
             <div className='font-mono text-lg text-indigo-700 ml-2'>{renderedDuration}</div>

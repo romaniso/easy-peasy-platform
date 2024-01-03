@@ -131,7 +131,7 @@ const ExerciseBody: React.FC<ExerciseBodyProps> = ({
             break;
         case ExerciseTypeName.DragAndDrop:
             renderedExercise = (
-                <div>
+                <>
                     <ExerciseDraggable
                         onSelect={handleSelectChange}
                         selections={selections}
@@ -150,7 +150,7 @@ const ExerciseBody: React.FC<ExerciseBodyProps> = ({
                     <Button primary rounded className="w-full md:w-1/5" onClick={onSubmit}>
                         {btnText}
                     </Button>
-                </div>
+                </>
             );
             break;
         case ExerciseTypeName.FlashCard:

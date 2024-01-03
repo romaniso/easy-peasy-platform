@@ -51,7 +51,7 @@ const Exercise: React.FC<ExerciseProps> = ({
     };
 
     return (
-        <section className={active ? "px-3 py-5 md:px-12 md:py-10" : "hidden"}>
+        <section className={active ? "px-3 py-5 md:px-12 md:py-10 w-full" : "hidden"}>
             <ExerciseHeader title={title} instruction={instruction} ref={feedbackRef}/>
             <ExerciseFeedback
                 results={userResults}
