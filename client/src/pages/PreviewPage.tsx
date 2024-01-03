@@ -48,7 +48,7 @@ const PreviewPage: React.FC = () => {
             <h1 className="text-6xl text-center font-bold text-orange-500 drop-shadow mb-8">
                 {sectionName}
             </h1>
-            <section className="flex justify-start flex-wrap items-stretch gap-12">
+            <section className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10">
                 {isLoading && <Skeleton items={4} card/>}
                 {sets.map((section, index) => {
                     return <Card

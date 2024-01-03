@@ -21,7 +21,7 @@ const About: React.FC = () => {
                         that you can pick up from.
                     </p>
                 </section>
-                <section className="flex md:flex-row flex-wrap flex-col justify-between items-stretch md:gap-6 gap-y-16">
+                <section className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10">
                     <Card
                         title="Grammar"
                         text="It’s a good idea to start with basics and master the main grammar structures"
