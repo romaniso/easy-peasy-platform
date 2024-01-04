@@ -8,9 +8,10 @@ interface SkeletonProps {
     card?: true;
     exercise?: true;
     tooltip?: true;
+    soundWave?: true;
     className?: string;
 }
-const Skeleton: React.FC<SkeletonProps> = ({items, card, exercise, tooltip,  className})=> {
+const Skeleton: React.FC<SkeletonProps> = ({items, card, exercise, tooltip, soundWave,  className})=> {
     const skeletonClasses = classNames(
         className,
         "p-3 border border-white dark:border-gray-500 rounded-md shadow-lg",
@@ -18,6 +19,7 @@ const Skeleton: React.FC<SkeletonProps> = ({items, card, exercise, tooltip,  cla
             "md:max-w-xs w-full h-full" : card,
             "w-full h-[70vh] flex flex-col lg:flex-row justify-between gap-5" : exercise,
             "w-full h-[150px] flex flex-col lg:flex-row justify-between border-none shadow-none" : tooltip,
+            "w-full h-[50px] border-none shadow-none !p-0" : soundWave,
         }
     );
     return (
@@ -56,6 +58,13 @@ const Skeleton: React.FC<SkeletonProps> = ({items, card, exercise, tooltip,  cla
                             <LbSkeleton height={120} className='mb-3'/>
                             <LbSkeleton count={8} className='mb-2'/>
                             <LbSkeleton height={30}/>
+                        </SkeletonTheme>
+                    </div>
+                }
+                else if(soundWave){
+                    return <div key={index} className={skeletonClasses}>
+                        <SkeletonTheme baseColor="#dcdcdc17" highlightColor="#9a9a9a38">
+                            <LbSkeleton height={50}/>
                         </SkeletonTheme>
                     </div>
                 }

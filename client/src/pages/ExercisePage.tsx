@@ -20,6 +20,7 @@ import DictionarySection from "../components/DictionarySection";
 import {ReadingContextProvider} from "../context/ReadingContext";
 import {SectionType} from "../enums/section";
 import Listening from "../components/exercise/Listening";
+import {IListening} from "../interfaces/listening";
 //#endregion
 //#region interfaces
 interface ExerciseObject {
@@ -33,6 +34,7 @@ const ExercisePage: React.FC = () => {
     const [exercises, setExercises] = useState<SingleExercise[]>(defaultExercises);
     const [cheatsheet, setCheatsheet] = useState<ICheatsheet | null>(null);
     const [reading, setReading] = useState<IReading | null>(null);
+    const [listening, setListening] = useState<IListening | null>(null);
     const [isLoading, setIsLoading] = useState<boolean>(true);
     const {pathname} = useLocation();
 
@@ -41,15 +43,19 @@ const ExercisePage: React.FC = () => {
         const setTitle = decodeURIComponent(pathname.split('/')[2]);
         const getExerciseSet = async () => {
             try {
-                const {data} = await axios.get<{exercises: ExerciseObject; cheatsheet: ICheatsheet; reading: IReading}>(`http://localhost:5000/exercise/${setTitle}`);
-                const {exercises, cheatsheet, reading} = data;
+                const {data} = await axios.get<{exercises: ExerciseObject; cheatsheet: ICheatsheet; reading: IReading; listening: IListening}>(`http://localhost:5000/exercise/${setTitle}`);
+                const {exercises, cheatsheet, reading, listening} = data;
                 setExercises(exercises.exercises);
                 setSection(exercises.section);
+
                 if(cheatsheet){
                     setCheatsheet(cheatsheet);
                 }
                 if(reading){
                     setReading(reading);
+                }
+                if(listening){
+                    setListening(listening);
                 }
                 setIsLoading(false);
             } catch (error) {
@@ -114,7 +120,15 @@ const ExercisePage: React.FC = () => {
             case SectionType.Listening:
                 content = (
                     <Panel className="bg-white flex flex-col gap-5 !p-0">
-                        <Listening/>
+                        {listening &&  <Listening
+                            title={listening.topic}
+                            description={listening.description}
+                            // level={listening.level}
+                            image={listening.image}
+                            audioUrl={listening.audioUrl}
+                        />}
+
+                        <ExerciseSet exercises={exercises}/>
                     </Panel>
                 )
                 break;

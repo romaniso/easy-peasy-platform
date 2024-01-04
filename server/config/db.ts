@@ -8,3 +8,4 @@ export const exerciseSet: Collection<Document>  = db.collection('exercise_set');
 export const exercise: Collection<Document>  = db.collection('exercise');
 export const cheatsheet: Collection<Document>  = db.collection('cheatsheet');
 export const reading: Collection<Document>  = db.collection('reading');
+export const listening: Collection<Document>  = db.collection('listening');

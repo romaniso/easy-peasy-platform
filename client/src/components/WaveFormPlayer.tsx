@@ -2,13 +2,14 @@ import React, {useRef, useState, useEffect, LegacyRef} from 'react'
 import { FaPlay, FaPause } from "react-icons/fa";
 import WaveSurfer  from 'wavesurfer.js';
 import {getCalculatedStringifiedTime} from "../utils/getCalculatedStringifiedTime";
+import Skeleton from "./Skeleton";
 
 interface WaveFormPlayer {
     audioUrl: string;
     className? : string;
 }
-
 const  WaveForm: React.FC<WaveFormPlayer> = ({audioUrl, className}) => {
+    const [isLoading, setIsLoading] = useState<boolean>(true);
     const [isPlaying, setIsPlaying] = useState(false)
     const [duration, setDuration] = useState<string>("00:00");
     const [currentTime, setCurrentTime] = useState<string>("00:00");
@@ -19,7 +20,6 @@ const  WaveForm: React.FC<WaveFormPlayer> = ({audioUrl, className}) => {
     })
     const currentRef = useRef<HTMLDivElement | undefined>();
     const animationRef = useRef<number>(0);
-
 
     useEffect(() => {
         const waveSurfer = WaveSurfer.create({
@@ -38,11 +38,11 @@ const  WaveForm: React.FC<WaveFormPlayer> = ({audioUrl, className}) => {
         })
         waveSurfer.load(audioUrl);
         waveSurfer.on('ready', () => {
-             setDuration(getCalculatedStringifiedTime(waveSurfer.getDuration()));
+            setIsLoading(false)
+            setDuration(getCalculatedStringifiedTime(waveSurfer.getDuration()));
             (waveSurferRef.current as WaveSurfer) = waveSurfer
 
         });
-
 
         return () => {
             waveSurfer.destroy()
@@ -58,14 +58,12 @@ const  WaveForm: React.FC<WaveFormPlayer> = ({audioUrl, className}) => {
             cancelAnimationFrame(animationRef.current);
         }
     }
-
     const whilePlaying = () => {
         if (waveSurferRef?.current) {
             changePlayerCurrentTime();
             animationRef.current = requestAnimationFrame(whilePlaying);
         }
     };
-
     const changePlayerCurrentTime = () => {
         const currentTimeValue = (getCalculatedStringifiedTime((waveSurferRef.current as  WaveSurfer).getCurrentTime()));
         setCurrentTime(currentTimeValue);
@@ -77,7 +75,8 @@ const  WaveForm: React.FC<WaveFormPlayer> = ({audioUrl, className}) => {
         >{isPlaying ? <FaPause className='m-0'/> : <FaPlay className='m-0 relative left-[2px]'/>}
         </button>
         <div className='absolute left-11 -bottom-2 font-mono text-md text-indigo-300 dark:text-indigo-400 self-end dark:bg-white bg-stone-700/80 z-10 px-2 rounded-md shadow-md' ref={currentRef as LegacyRef<HTMLDivElement>}>{currentTime}</div>
-        <div ref={containerRef as LegacyRef<HTMLDivElement> | undefined} className='w-full'/>
+        {isLoading && <Skeleton items={1} soundWave className='w-full basis-full'/>}
+        <div ref={containerRef as LegacyRef<HTMLDivElement> | undefined} className={`w-full ${isLoading && 'basis-0 invisible'}`}/>
         <div className='absolute -right-2 -bottom-2 font-mono text-md text-indigo-300 dark:text-indigo-400 self-end dark:bg-white bg-stone-700/80 z-10 px-2 rounded-md shadow-md' >{duration}</div>
     </div>
 }
