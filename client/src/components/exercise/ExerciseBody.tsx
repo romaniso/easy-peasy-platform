@@ -7,10 +7,11 @@ import ExerciseFillInLetter from "./ExerciseFillInLetter";
 import ExerciseFillBox from "./ExerciseFillBox";
 import ExerciseDraggable from "./ExerciseDraggable";
 import Flashcard from "../Flashcard";
-import { ExerciseUnit } from "../../interfaces/exerciseUnit";
-import { UserResult } from "../../types/userResult";
+import {ExerciseUnit} from "../../interfaces/exerciseUnit";
+import {UserResult} from "../../types/userResult";
 import {ExerciseTypeName} from "../../enums/exercise";
 import ExerciseMatchHeaders from "./ExerciseMatchHeaders";
+import ExerciseListenAndType from "./ExerciseListenAndType";
 
 interface ExerciseBodyProps {
     onSubmit(e: React.FormEvent<HTMLFormElement>): void;
@@ -56,6 +57,20 @@ const ExerciseBody: React.FC<ExerciseBodyProps> = ({
     let renderedExercise;
 
     switch (exerciseType) {
+        case ExerciseTypeName.ListenAndType:
+            renderedExercise = (
+                <form onSubmit={onSubmit}>
+                    <ExerciseListenAndType
+                        questions={questions}
+                        results={results}
+                        onChange={handleSelectChange}
+                    />
+                    <Button primary rounded className="w-full md:w-1/5" type="submit">
+                        {btnText}
+                    </Button>
+                </form>
+            );
+            break;
         case ExerciseTypeName.MultipleChoice:
             renderedExercise = (
                 <form onSubmit={onSubmit}>

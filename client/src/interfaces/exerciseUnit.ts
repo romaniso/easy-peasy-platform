@@ -7,4 +7,5 @@ export interface ExerciseUnit {
     example?: string;
     isCorrect?: string;
     cardImage?: string;
+    audioUrl?: string;
 }

@@ -7,8 +7,10 @@ import Skeleton from "./Skeleton";
 interface WaveFormPlayer {
     audioUrl: string;
     className? : string;
+    indicators?: true;
+
 }
-const  WaveForm: React.FC<WaveFormPlayer> = ({audioUrl, className}) => {
+const  WaveForm: React.FC<WaveFormPlayer> = ({audioUrl, className, indicators}) => {
     const [isLoading, setIsLoading] = useState<boolean>(true);
     const [isPlaying, setIsPlaying] = useState(false)
     const [duration, setDuration] = useState<string>("00:00");
@@ -74,10 +76,18 @@ const  WaveForm: React.FC<WaveFormPlayer> = ({audioUrl, className}) => {
                 type="button" className='shrink-0 mr-4 bg-orange-500 rounded-full w-10 h-10 text-xl text-indigo-50 flex justify-center items-center shadow-md hover:bg-indigo-300 transition-colors duration-300'
         >{isPlaying ? <FaPause className='m-0'/> : <FaPlay className='m-0 relative left-[2px]'/>}
         </button>
-        <div className='absolute left-11 -bottom-2 font-mono text-md text-indigo-300 dark:text-indigo-400 self-end dark:bg-white bg-stone-700/80 z-10 px-2 rounded-md shadow-md' ref={currentRef as LegacyRef<HTMLDivElement>}>{currentTime}</div>
+        {indicators &&
+            <div
+                className='absolute left-11 -bottom-2 font-mono text-md text-indigo-300 dark:text-indigo-400 self-end dark:bg-white bg-stone-700/80 z-10 px-2 rounded-md shadow-md'
+                ref={currentRef as LegacyRef<HTMLDivElement>}>{currentTime}
+            </div>}
         {isLoading && <Skeleton items={1} soundWave className='w-full basis-full'/>}
         <div ref={containerRef as LegacyRef<HTMLDivElement> | undefined} className={`w-full ${isLoading && 'basis-0 invisible'}`}/>
-        <div className='absolute -right-2 -bottom-2 font-mono text-md text-indigo-300 dark:text-indigo-400 self-end dark:bg-white bg-stone-700/80 z-10 px-2 rounded-md shadow-md' >{duration}</div>
+        {indicators &&
+            <div
+                className='absolute -right-2 -bottom-2 font-mono text-md text-indigo-300 dark:text-indigo-400 self-end dark:bg-white bg-stone-700/80 z-10 px-2 rounded-md shadow-md' >{duration}
+            </div>
+        }
     </div>
 }
 export default WaveForm

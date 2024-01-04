@@ -2,6 +2,7 @@ import React from "react";
 import LbSkeleton, { SkeletonTheme } from "react-loading-skeleton";
 import 'react-loading-skeleton/dist/skeleton.css';
 import classNames from "classnames";
+import WaveSampleImg from "../assets/images/wave-sample.png";
 
 interface SkeletonProps {
     items: number;
@@ -14,7 +15,7 @@ interface SkeletonProps {
 const Skeleton: React.FC<SkeletonProps> = ({items, card, exercise, tooltip, soundWave,  className})=> {
     const skeletonClasses = classNames(
         className,
-        "p-3 border border-white dark:border-gray-500 rounded-md shadow-lg",
+        "p-3 border border-white dark:border-gray-500 rounded-md shadow-lg relative",
         {
             "md:max-w-xs w-full h-full" : card,
             "w-full h-[70vh] flex flex-col lg:flex-row justify-between gap-5" : exercise,
@@ -65,6 +66,7 @@ const Skeleton: React.FC<SkeletonProps> = ({items, card, exercise, tooltip, soun
                     return <div key={index} className={skeletonClasses}>
                         <SkeletonTheme baseColor="#dcdcdc17" highlightColor="#9a9a9a38">
                             <LbSkeleton height={50}/>
+                            <img src={WaveSampleImg} alt="Sound Wave" className='absolute top-0 left-0 w-full z-10 h-full opacity-5 sepia'/>
                         </SkeletonTheme>
                     </div>
                 }

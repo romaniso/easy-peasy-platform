@@ -7,4 +7,5 @@ export enum ExerciseTypeName {
     MultipleChoice = 'multiple-choice',
     FillInLetter = 'fill-in-letter',
     MatchHeadings = 'match-headings',
+    ListenAndType = 'listen-&-type'
 }

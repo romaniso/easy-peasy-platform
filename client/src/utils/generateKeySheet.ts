@@ -10,6 +10,7 @@ function generateKeySheet (type: ExerciseTypeName, questions: (ExerciseUnit)[]):
 
         case ExerciseTypeName.FillIn:
         case ExerciseTypeName.DragAndDrop:
+        case ExerciseTypeName.ListenAndType:
             return questions.map((question) => question.isCorrect?.toString() || "");
 
         case ExerciseTypeName.MultipleChoice:
