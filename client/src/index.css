@@ -9,7 +9,6 @@ button > svg {
 .container {
   max-width: 1360px;
 }
-
 @layer components {
   /*INPUT RANGE*/
   :root {
