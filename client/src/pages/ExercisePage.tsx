@@ -123,7 +123,7 @@ const ExercisePage: React.FC = () => {
                         {listening &&  <Listening
                             title={listening.topic}
                             description={listening.description}
-                            // level={listening.level}
+                            level={listening.level}
                             image={listening.image}
                             audioUrl={listening.audioUrl}
                         />}

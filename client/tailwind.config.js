@@ -8,6 +8,12 @@ export default {
   darkMode: 'class',
   theme: {
     extend: {
+      dropShadow: {
+        purpleGlow: [
+          "0 0px 10px rgba(165, 180, 252, 0.2)",
+          "0 10px 5px rgba(165, 180, 252, 0.2)"
+        ]
+      },
       keyframes: {
         slidein: {
           '0%': {transform: 'translateX(100%)'},
