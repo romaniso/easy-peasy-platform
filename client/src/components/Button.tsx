@@ -45,7 +45,8 @@ const Button: React.FC<ButtonProps> = ({
             "border-yellow-500 text-yellow-500 hover:text-white hover:bg-yellow-500":
                 outline && warning,
             "border-red-500 text-red-500 hover:text-white": outline && danger,
-            "py-0.5 px-1 !text-sm capitalize !text-white !border-white":  small,
+            "!py-0 !px-1.5 md:!py-1 md:!px-1.5 !text-sm capitalize text-white border-white":  small,
+            "!py-0 !px-1.5 md:!py-1 md:!px-1.5 !text-sm capitalize !border-indigo-800 !text-indigo-800 dark:!text-indigo-200 dark:!border-indigo-200 hover:bg-indigo-700 hover:!text-white hover:!dark:bg-indigo-600":  small && secondary,
         }
     );
     return (

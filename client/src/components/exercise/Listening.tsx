@@ -25,13 +25,13 @@ const Listening: React.FC<ListeningProps> = ({audioUrl, title, description, imag
                     <p className='text-sm md:tex-lg text-indigo-700 dark:text-indigo-300 mb-3 md:mb-5'>{description}</p>
                     <WaveFormPlayer audioUrl={audioUrl} indicators className='mr-2'/>
                     <div className='mt-4 md:mt-8 flex gap-2'>
-                        <Button secondary outline rounded>
+                        <Button secondary outline rounded small>
                             <span className='flex items-center gap-2'><FaRegThumbsUp/> Add</span>
                         </Button>
-                        <Button secondary outline rounded>
+                        <Button secondary outline rounded small>
                             <span className='flex items-center gap-2'><FaShare/> Share</span>
                         </Button>
-                        <Button secondary outline rounded className='ml-auto'>
+                        <Button secondary outline rounded small className='ml-auto'>
                             <span className='flex items-center gap-2'><FaDownload/> Download the script</span>
                         </Button>
                     </div>
