@@ -24,6 +24,7 @@ const  WaveForm: React.FC<WaveFormPlayer> = ({audioUrl, className, indicators}) 
     const animationRef = useRef<number>(0);
 
     useEffect(() => {
+        if(!containerRef.current) return;
         const waveSurfer = WaveSurfer.create({
             container: containerRef.current as HTMLElement,
             waveColor: '#a5b4fc',
@@ -37,13 +38,12 @@ const  WaveForm: React.FC<WaveFormPlayer> = ({audioUrl, className, indicators}) 
             barHeight: 20,
             barRadius: 20,
             barWidth: 3,
-        })
-        waveSurfer.load(audioUrl);
+            url: audioUrl,
+        });
+        (waveSurferRef.current as WaveSurfer) = waveSurfer;
         waveSurfer.on('ready', () => {
-            setIsLoading(false)
+            setIsLoading(false);
             setDuration(getCalculatedStringifiedTime(waveSurfer.getDuration()));
-            (waveSurferRef.current as WaveSurfer) = waveSurfer
-
         });
 
         return () => {
@@ -61,7 +61,7 @@ const  WaveForm: React.FC<WaveFormPlayer> = ({audioUrl, className, indicators}) 
         }
     }
     const whilePlaying = () => {
-        if (waveSurferRef?.current) {
+        if (waveSurferRef.current) {
             changePlayerCurrentTime();
             animationRef.current = requestAnimationFrame(whilePlaying);
         }
