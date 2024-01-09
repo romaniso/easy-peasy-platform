@@ -1,5 +1,5 @@
 import express, {Request, Response, Router} from 'express';
-import {ExerciseSet} from "../models/exerciseSet";
+import {ExerciseSet} from "../models/ExerciseSet";
 export const sectionRouter: Router = express.Router();
 
 sectionRouter

@@ -1,8 +1,8 @@
 import {ObjectId} from "mongodb";
 import {exerciseSet, exercise} from "../../config/db";
-import {Section} from "./section";
+import {Section} from "./Section";
 import {ExerciseTypeName} from "../enums/exercise";
-import {ExerciseSet} from "./exerciseSet";
+import {ExerciseSet} from "./ExerciseSet";
 
 interface DbExerciseObject {
     _id: ObjectId;

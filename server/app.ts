@@ -1,8 +1,9 @@
 import express from 'express';
 import {Application} from "express";
 import cors from 'cors';
-import {sectionRouter} from "./src/routes/section";
-import {exerciseRouter} from "./src/routes/exercise";
+import {sectionRouter} from "./src/routes/sectionRouter";
+import {exerciseRouter} from "./src/routes/exerciseRouter";
+import {authRouter} from "./src/routes/authRouter";
 // const PORT = process.env.PORT || 5000;
 
 
@@ -24,6 +25,7 @@ app.use(express.urlencoded({extended: false}));
 
 app.use('/section', sectionRouter);
 app.use('/exercise', exerciseRouter);
+app.use('/auth', authRouter);
 
 start();
 

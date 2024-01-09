@@ -1,6 +1,6 @@
 import {ObjectId} from "mongodb";
 import {exerciseSet, cheatsheet}  from "../../config/db";
-import {ExerciseSet} from "./exerciseSet";
+import {ExerciseSet} from "./ExerciseSet";
 export class Cheatsheet {
     private readonly _id: ObjectId;
     private topic: string;

@@ -1,8 +1,8 @@
 import express, {Request, Response, Router} from 'express';
-import {Exercise} from "../models/exercise";
-import {Cheatsheet} from "../models/cheatsheet";
-import  {Reading} from "../models/reading";
-import {Listening} from "../models/listening";
+import {Exercise} from "../models/Exercise";
+import {Cheatsheet} from "../models/Cheatsheet";
+import  {Reading} from "../models/Reading";
+import {Listening} from "../models/Listening";
 export const exerciseRouter: Router = express.Router();
 
 exerciseRouter
