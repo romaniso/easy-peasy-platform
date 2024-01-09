@@ -1,12 +1,11 @@
 // import userLogOut from "../auth/userLogOut";
 // import { useNavigate } from "react-router-dom";
 
-import React, {ReactElement, useState} from "react";
+import React, {useState} from "react";
 //TODO: Handle single collapse issue (maybe by using a separate Dropdown component), consider how to change content (NavLink, or state)
 
 import {
     BsArrowLeftShort,
-    BsBook,
     BsSearch,
     BsChevronDown,
     BsListTask,
@@ -15,11 +14,12 @@ import {
     BsCollectionPlay,
     BsCalendar3,
     BsGear,
+    BsBook,
     BsPersonFill,
     BsEnvelopeFill,
 } from "react-icons/bs";
 import { MdDashboard } from "react-icons/md";
-import {IconType} from "react-icons";
+import LogoImage from '../assets/images/small-logo.png';
 
 type SidemenuSubitem = {
     label: string;
@@ -73,9 +73,11 @@ const Sidebar: React.FC = () => {
             links: [
                 { label: "Articles", path: "resources/articles" },
                 { label: "Podcasts", path: "resources/podcasts" },
-                { label: "Books", path: "resources/books" },
-                { label: "Videos", path: "resources/videos" },
             ],
+        },
+        {
+            title: "Your Vocabulary",
+            icon: <BsBook />,
         },
 
         {
@@ -125,11 +127,11 @@ const Sidebar: React.FC = () => {
                 <li
                     key={index}
                     onClick={item.event || (() => handleExpand(index))}
-                    className={`text-orange-100 text-sm flex items-center gap-x-4 cursor-pointer p-2 hover:bg-indigo-900 rounded-md mt-2 duration-300 ${
+                    className={`group text-indigo-200 dark:text-indigo-900 text-sm flex items-center gap-x-4 cursor-pointer p-2 hover:bg-orange-500 hover:text-white dark:hover:text-white rounded-md mt-2 duration-300 ${
                         item.spacing ? "mt-9" : "mt-2"
                     }`}
                 >
-          <span className="text-2xl text-indigo-100 block float-left">
+          <span className="text-2xl group-hover:text-white text-indigo-200 dark:text-indigo-900 block float-left">
             {item.icon ? item.icon : <MdDashboard />}
           </span>
                     <span
@@ -148,7 +150,7 @@ const Sidebar: React.FC = () => {
                         {item.links.map((item, index) => (
                             <li
                                 key={index}
-                                className="text-orange-300 text-sm flex items-center gap-x-4 cursor-pointer p-2 px-5 hover:bg-indigo-900 rounded-md mt-2 duration-300"
+                                className="text-orange-500 hover:text-white text-sm flex items-center gap-x-4 cursor-pointer p-2 px-5 hover:bg-indigo-900 rounded-md mt-2 duration-300"
                             >
                                 {item.label}
                             </li>
@@ -161,32 +163,34 @@ const Sidebar: React.FC = () => {
 
     return (
         <aside
-            className={`bg-stone-800 h-screen p-5 pt-8 ${
+            className={`bg-stone-900 dark:bg-indigo-100 h-screen p-5 pt-8 ${
                 isSidebarOpenned ? "w-72" : "w-20"
             } relative duration-300 shadow`}
         >
             <BsArrowLeftShort
-                className={`bg-indigo-100 text-stone-800 text-3xl rounded-full absolute -right-3 top-9 border border-indigo-200 cursor-pointer ${
+                className={`bg-indigo-100  text-stone-800 text-3xl rounded-full absolute -right-3 top-9 border border-indigo-200 cursor-pointer ${
                     !isSidebarOpenned && "rotate-180"
                 }`}
                 onClick={() => setIsSidebarOpenned(!isSidebarOpenned)}
             />
-            <div className="inline-flex">
-                <BsBook
-                    className={`bg-indigo-100 text-4xl rounded p-1 cursor-pointer block float-left mr-2 duration-1000 ${
+            <div className="inline-flex items-center">
+                <img
+                    src={LogoImage}
+                    alt='easy-peasy logo'
+                    className={`w-10 cursor-pointer block float-left mr-1 duration-1000 ${
                         isSidebarOpenned && "rotate-[360deg]"
                     }`}
                 />
-                <h1
-                    className={`text-indigo-100 origin-left font-medium text-2xl duration-300 ${
+                <span
+                    className={`font-mono text-indigo-100 dark:text-indigo-900 drop-shadow origin-left font-medium text-2xl duration-300 ${
                         !isSidebarOpenned && "scale-0"
                     }`}
                 >
-                    Easy-Peasy
-                </h1>
+                    EASY-PEASY
+                </span>
             </div>
             <div
-                className={`flex items-center rounded-md bg-indigo-900 mt-6 px-4 ${
+                className={`flex items-center rounded-md bg-indigo-500 mt-6 px-4 ${
                     !isSidebarOpenned ? "px-2.5" : "px-4"
                 } p-2`}
             >
