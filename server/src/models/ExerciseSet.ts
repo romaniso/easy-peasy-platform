@@ -1,6 +1,6 @@
 import {ObjectId} from "mongodb";
 import {exerciseSet, section} from "../../config/db";
-import {Section} from "./Section";
+// import {Section} from "./Section";
 export class ExerciseSet {
     public _id: ObjectId;
     public name: string;
