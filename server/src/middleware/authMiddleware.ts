@@ -1,9 +1,9 @@
 import {NextFunction, Request, Response} from "express";
-import jwt from "jsonwebtoken";
+import jwt, {JwtPayload} from "jsonwebtoken";
 import {config} from '../../config/config';
 
 interface AuthenticatedRequest extends Request {
-    user?: any; // Modify the type based on your user data structure
+    user: JwtPayload | string; // Modify the type based on your user data structure
 }
 
 export const authMiddleware = (req: AuthenticatedRequest, res: Response, next: NextFunction) => {

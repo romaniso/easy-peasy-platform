@@ -1,3 +1,7 @@
+import dotenv from 'dotenv';
+
+dotenv.config();
+
 export const config = {
-    secret: 'SECRET_KEY_RANDOM'
-}
+    secret: process.env.SECRET_KEY || 'default_secret_key',
+};
