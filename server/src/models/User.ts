@@ -4,7 +4,7 @@ import {RoleName} from "../enums/role";
 interface IUser {
     username: string;
     password: string;
-    roles: RoleName;
+    roles: RoleName[];
 }
 
 const userSchema = new Schema<IUser>({
