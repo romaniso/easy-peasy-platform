@@ -54,7 +54,7 @@ const Register: React.FC<SignupProps> = ({ onToggleForm }) => {
         const result = PWD_REGEX.test(pwd);
         console.log(result);
         console.log(pwd);
-        setValidMatch(result);
+        setValidPwd(result);
         const match = pwd === matchPwd;
         setValidMatch(match);
     }, [pwd, matchPwd]);
@@ -151,9 +151,26 @@ const Register: React.FC<SignupProps> = ({ onToggleForm }) => {
                         rounded
                         autoComplete="off"
                         required
+                        aria-invalid={validPwd ? "false" : "true"}
+                        aria-describedby='pwdnote'
+                        onFocus={() => setPwdFocus(true)}
+                        onBlur={() => setPwdFocus(false)}
                     >
                         Password
+                        <span className={validPwd ? 'inline-block ml-1 text-green-500' : 'invisible absolute'}>
+                            <FaCheck/>
+                        </span>
+                        <span className={validPwd || !pwd ? 'invisible absolute' : 'inline-block ml-1 text-red-500'}>
+                            <FaTimes/>
+                        </span>
                     </Password>
+                    <p id='pwdnote' className={pwdFocus && !validPwd ? 'block bg-white rounded p-1 text-sm text-orange-500 opacity-100 transition-colors duration-500 -mt-5': 'invisible opacity-0 absolute'}>
+                        <IoIosInformationCircleOutline className='inline relative bottom-0.5 mr-1 text-lg'/>
+                        8 to 24 characters.<br/>
+                        Must include uppercase and lowercase letters, a number and a special character.<br/>
+                        Allowed special characters: <span aria-label='exclamation mark'>!</span>
+                        <span aria-label='at symbol'>@</span><span aria-label='hashtag'>#</span><span aria-label='percent'>%</span>
+                    </p>
                     <p ref={errRef} className={errMsg ? 'block' : 'invisible absolute'} aria-live='assertive'>{errMsg}</p>
                     {/*{errorMessage && (*/}
                     {/*    <Panel className="text-red-400 bg-white -mt-2 py-0.5 px-1.5">*/}
