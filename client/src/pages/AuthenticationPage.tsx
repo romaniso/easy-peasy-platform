@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import useTop from "../hooks/useTop";
 import Login from "../components/auth/Login";
-import Signup from "../components/auth/Signup";
+import Register from "../components/auth/Register";
 
 const AuthenticationPage: React.FC = () => {
     useTop();
@@ -15,7 +15,7 @@ const AuthenticationPage: React.FC = () => {
             {toggle ? (
                 <Login onToggleForm={handleToggle} />
             ) : (
-                <Signup onToggleForm={handleToggle} />
+                <Register onToggleForm={handleToggle} />
             )}
         </section>
     );
