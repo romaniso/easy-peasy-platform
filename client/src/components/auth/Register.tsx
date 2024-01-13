@@ -61,15 +61,11 @@ const Register: React.FC<SignupProps> = ({ onToggleForm }) => {
 
     useEffect(() => {
         const result = USER_REGEX.test(user);
-        // console.log(result);
-        // console.log(user);
         setValidName(result);
     }, [user]);
 
     useEffect(() => {
         const result = PWD_REGEX.test(pwd);
-        // console.log(result);
-        // console.log(pwd);
         setValidPwd(result);
         const match = pwd === matchPwd;
         setValidMatch(match);
@@ -88,15 +84,13 @@ const Register: React.FC<SignupProps> = ({ onToggleForm }) => {
                 return;
             }
             try {
-                const response = await axios.post<ApiResponse>(REGISTER_URL,{
+                const response = await axios.post<ApiResponse>(REGISTER_URL, JSON.stringify({
                 username: user,
                 password: pwd,
-                }, {
+                }), {
                     headers: {'Content-Type': 'application/json'},
                     withCredentials: true,
                 });
-                console.log(response.data);
-                // console.log(response.token);
                 setSuccess(true);
                 // Clear up
                 setUser("");
@@ -138,15 +132,15 @@ const Register: React.FC<SignupProps> = ({ onToggleForm }) => {
             : (
                 <Panel className="flex bg-indigo-50 justify-center max-w-3xl !p-0 m-4 overflow-hidden">
                     <section className="flex flex-col justify-center sm:w-1/2 p-10">
-                        <h1 className="font-bold text-2xl text-orange-500">Sign-Up</h1>
+                        <h1 className="font-bold text-3xl text-orange-500">Sign-Up</h1>
                         <p className="text-sm mt-4 text-indigo-700 dark:text-indigo-300">
                             Already have an account?{" "}
                             <span
                                 className="text-orange-500 cursor-pointer"
                                 onClick={onToggleForm}
                             >
-            Log in
-          </span>
+                                Log in
+                            </span>
                         </p>
                         <form className="mt-6 flex flex-col gap-6" onSubmit={handleSubmit}>
                             {/*USERNAME*/}
@@ -238,7 +232,7 @@ const Register: React.FC<SignupProps> = ({ onToggleForm }) => {
 
 
                             <p ref={errRef} className={errMsg ? 'block bg-red-500/10 dark:border dark:border-red-400 rounded p-1 text-sm font-bold text-red-500 opacity-100 transition-colors duration-500 -mt-5 shadow' : 'invisible absolute'} aria-live='assertive'>{errMsg}</p>
-                            <Button primary disabled={!validName || !validPwd || !validMatch} rounded type="submit" className={!validName || !validPwd || !validMatch ? 'mt-6 opacity-40 cursor-not-allowed' :`mt-6`}
+                            <Button primary disabled={!validName || !validPwd || !validMatch} rounded type="submit" className={!validName || !validPwd || !validMatch ? 'mt-6 opacity-40 !cursor-not-allowed' :`mt-6`}
                             >
                                 <>
                                     <CiLogin />
