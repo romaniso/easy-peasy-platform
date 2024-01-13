@@ -6,6 +6,7 @@ import cors from 'cors';
 import {sectionRouter} from "./src/routes/sectionRouter";
 import {exerciseRouter} from "./src/routes/exerciseRouter";
 import {authRouter} from "./src/routes/authRouter";
+import {allowedOrigins} from "./config/allowedOrigins";
 const PORT: number = parseInt(process.env.PORT as string, 10) || 5000;
 
 
@@ -30,7 +31,18 @@ const start = async () => {
 
 // MIDDLEWARES
 app.use(express.json());
-app.use(cors());
+app.use(cors({
+    origin: (requestOrigin, callback) => {
+        if (!requestOrigin || allowedOrigins.includes(requestOrigin)) {
+            callback(null, true);
+        } else {
+            callback(new Error('Not allowed by CORS'));
+        }
+    },
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    allowedHeaders: 'Content-Type,Authorization',
+    credentials: true,
+}));
 app.use(express.urlencoded({extended: false}));
 
 app.use('/section', sectionRouter);
