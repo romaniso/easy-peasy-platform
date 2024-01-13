@@ -10,9 +10,8 @@ import axios from "../../api/axios";
 import {AxiosError} from 'axios';
 import {UserRole} from "../../enums/userRole";
 import useAuth from "../../hooks/useAuth";
-// import {useLocation, useNavigate} from "react-router-dom";
+import {Link, useLocation, useNavigate} from "react-router-dom";
 
-// import { useNavigate, useLocation } from "react-router-dom";
 const LOGIN_URL = '/auth/login'
 interface SignupProps {
     onToggleForm(): void;
@@ -24,6 +23,11 @@ interface ApiResponse {
 }
 const Login: React.FC<SignupProps> = ({ onToggleForm }) => {
     const {setAuth} = useAuth();
+
+    const navigate = useNavigate();
+    const location = useLocation();
+    const from = location.state?.from.pathname || '/dashboard';
+
     const {
         showPassword,
         toggleShowPassword,
@@ -35,9 +39,6 @@ const Login: React.FC<SignupProps> = ({ onToggleForm }) => {
         setErrMsg,
         userRef,
         errRef,
-
-        success,
-        setSuccess
     } = useLoginRegister();
 
     useEffect(() => {
@@ -72,7 +73,7 @@ const Login: React.FC<SignupProps> = ({ onToggleForm }) => {
             setAuth({user, pwd, roles, accessToken});
             setUser("");
             setPwd("");
-            setSuccess(true)
+            navigate(from, { replace: true });
         } catch (err) {
             if(!(err instanceof AxiosError) || !err.response) {
                 setErrMsg('No Server Response');
@@ -88,81 +89,62 @@ const Login: React.FC<SignupProps> = ({ onToggleForm }) => {
     };
 
     return (
-        <>
-            {success ? (
-                <Panel className="flex bg-indigo-50 justify-center max-w-3xl !p-0 m-4 overflow-hidden">
-                    <section className="flex flex-col justify-center items-center gap-10 sm:w-1/2 p-10">
-                        <h1 className="font-bold text-4xl text-orange-500">Success!</h1>
-                        <p className='text-center text-base dark:text-indigo-400 text-indigo-800'>You are logged in!</p>
-                        <p>
-                            <Button primary rounded>
-                                Go to Home Page
-                            </Button>
-                        </p>
-                    </section>
-                    <div className="sm:block hidden w-1/2">
-                        <img src={LoginImage} alt="Decor" className='h-full w-full object-cover dark:invert'/>
-                    </div>
-                </Panel>
-            ): (
-                <Panel className="bg-indigo-50 flex justify-center max-w-3xl !p-0 m-4 overflow-hidden">
-                    <section className="flex flex-col justify-center sm:w-1/2 p-10">
-                        <h2 className="font-bold text-3xl text-orange-500">Login</h2>
-                        <p className="text-sm mt-4 text-indigo-700 dark:text-indigo-300">
-                            A New User?{" "}
-                            <span
-                                className="text-orange-500 cursor-pointer underline hover:text-indigo-500"
-                                onClick={onToggleForm}
-                            >
-                            Sign Up
-                          </span>
-                        </p>
-                        {/*<form className="mt-6 flex flex-col gap-6" onSubmit={handleFormSubmit}>*/}
-                        <form className="mt-6 flex flex-col gap-6" onSubmit={handleSubmit}>
-                            <Input
-                                name="username"
-                                type="text"
-                                primary
-                                rounded
-                                ref={userRef}
-                                autoComplete="off"
-                                onChange={setUser}
-                                required
-                            >
-                                Username
-                            </Input>
-                            <Password
-                                name="password"
-                                showPassword={showPassword}
-                                toggleShowPassword={toggleShowPassword}
-                                onChange={setPwd}
-                                primary
-                                rounded
-                                autoComplete="off"
-                                required
-                            >
-                                Password
-                            </Password>
-                            {/*<div className="mt-6">*/}
-                            {/*    <a className="text-sm mt-4 text-indigo-700 dark:text-indigo-300" href="/">*/}
-                            {/*        Forget Password?*/}
-                            {/*    </a>*/}
-                            {/*</div>*/}
-                            <p ref={errRef} className={errMsg ? 'block bg-red-500/10 dark:border dark:border-red-400 rounded p-1 text-sm font-bold text-red-500 opacity-100 transition-colors duration-500 -mt-5 shadow' : 'invisible absolute'} aria-live='assertive'>{errMsg}</p>
-                            <Button primary rounded type="submit">
-                                <>
-                                    <CiLogin />
-                                    Log in
-                                </>
-                            </Button>
-                        </form>
-                    </section>
-                    <div className="sm:block hidden w-1/2">
-                        <img src={LoginImage} alt="Decor" className='h-full w-full object-cover dark:invert'/>
-                    </div>
-                </Panel>
-            )}
-        </>
+            <Panel className="bg-indigo-50 flex justify-center max-w-3xl !p-0 m-4 overflow-hidden">
+                <section className="flex flex-col justify-center sm:w-1/2 p-10">
+                    <h2 className="font-bold text-3xl text-orange-500">Login</h2>
+                    <p className="text-sm mt-4 text-indigo-700 dark:text-indigo-300">
+                        A New User?{" "}
+                        <span
+                            className="text-orange-500 cursor-pointer underline hover:text-indigo-500"
+                            onClick={onToggleForm}
+                        >
+                        Sign Up
+                      </span>
+                    </p>
+                    {/*<form className="mt-6 flex flex-col gap-6" onSubmit={handleFormSubmit}>*/}
+                    <form className="mt-6 flex flex-col gap-6" onSubmit={handleSubmit}>
+                        <Input
+                            name="username"
+                            type="text"
+                            primary
+                            rounded
+                            ref={userRef}
+                            autoComplete="off"
+                            onChange={setUser}
+                            required
+                        >
+                            Username
+                        </Input>
+                        <Password
+                            name="password"
+                            showPassword={showPassword}
+                            toggleShowPassword={toggleShowPassword}
+                            onChange={setPwd}
+                            primary
+                            rounded
+                            autoComplete="off"
+                            required
+                        >
+                            Password
+                        </Password>
+                        {/*<div className="mt-6">*/}
+                        {/*    <a className="text-sm mt-4 text-indigo-700 dark:text-indigo-300" href="/">*/}
+                        {/*        Forget Password?*/}
+                        {/*    </a>*/}
+                        {/*</div>*/}
+                        <p ref={errRef} className={errMsg ? 'block bg-red-500/10 dark:border dark:border-red-400 rounded p-1 text-sm font-bold text-red-500 opacity-100 transition-colors duration-500 -mt-5 shadow' : 'invisible absolute'} aria-live='assertive'>{errMsg}</p>
+                        <Button primary rounded type="submit">
+                            <>
+                                <CiLogin />
+                                Log in
+                            </>
+                        </Button>
+                    </form>
+                </section>
+                <div className="sm:block hidden w-1/2">
+                    <img src={LoginImage} alt="Decor" className='h-full w-full object-cover dark:invert'/>
+                </div>
+            </Panel>
     );
 }
 

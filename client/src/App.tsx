@@ -8,6 +8,7 @@ import RootLayout from "./layouts/RootLayout";
 // import PrivateRouteLayout from "./layouts/PrivateRouteLayout";
 import ExercisePage from "./pages/ExercisePage";
 import PreviewPage from "./pages/PreviewPage";
+import RequireAuth from "./components/RequireAuth";
 
 const App : React.FC = () => {
     return (
@@ -28,7 +29,9 @@ const App : React.FC = () => {
                 <Route path="/reading/:exercise" element={<ExercisePage />} />
                 <Route path="/listening/:exercise" element={<ExercisePage />} />
                 {/*Protected Routes */}
-                <Route path="/dashboard" element={<DashboardPage />} />
+                <Route element={<RequireAuth/>}>
+                    <Route path="/dashboard" element={<DashboardPage />} />
+                </Route>
                 {/*Missing Path*/}
                 <Route path="*" element={<ErrorPage />} />
             </Route>
