@@ -23,18 +23,6 @@ function useLoginRegister() {
     const toggleShowPassword = ():void => {
         setShowPassword(!showPassword);
     };
-    const handleUserName = (value: string): void => {
-        setUser(value);
-    };
-    const handleValidUser = (): void => {
-        setValidName(!validName);
-    }
-    const handleUserFocus = (): void => {
-        setUserFocus(!userFocus);
-    }
-    const handleUserPassword = (value: string): void => {
-        setPwd(value);
-    };
     // const handleRememberMe = (): void => {
     //     setRememberMe(!rememberMe);
     // };
@@ -67,10 +55,6 @@ function useLoginRegister() {
         errRef,
 
         toggleShowPassword,
-        handleUserName,
-        handleValidUser,
-        handleUserFocus,
-        handleUserPassword,
         // handleRememberMe,
     };
 }
