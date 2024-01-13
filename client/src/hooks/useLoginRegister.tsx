@@ -6,8 +6,8 @@ function useLoginRegister() {
     const [validName, setValidName] = useState<boolean>(false)
     const [userFocus, setUserFocus] = useState<boolean>(false);
 
-    const userRef = useRef();
-    const errRef = useRef();
+    const userRef = useRef<HTMLInputElement>(null);
+    const errRef = useRef<HTMLParagraphElement>(null);
 
     const [pwd, setPwd] = useState<string>("");
     const [validPwd, setValidPwd] = useState<boolean>(false)

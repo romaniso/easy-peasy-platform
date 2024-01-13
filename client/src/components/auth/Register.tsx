@@ -1,3 +1,4 @@
+//#region imports
 import React, {useEffect} from "react";
 import useLoginRegister from "../../hooks/useLoginRegister";
 import Panel from "../Panel";
@@ -9,10 +10,14 @@ import {CiLogin} from "react-icons/ci";
 import { IoIosInformationCircleOutline } from "react-icons/io";
 import { FaCheck, FaTimes } from "react-icons/fa";
 import axios from "../../api/axios";
+import {AxiosError} from "axios";
+//#endregion
 
-// import {useLocation, useNavigate} from "react-router-dom";
-// import Toast from "../Toast";
-// import {ToastType} from "../../enums/toast";
+interface ApiResponse {
+    data: {
+        message: string;
+    }
+}
 
 interface SignupProps {
     onToggleForm(): void;
@@ -83,7 +88,7 @@ const Register: React.FC<SignupProps> = ({ onToggleForm }) => {
                 return;
             }
             try {
-                const response = await axios.post(REGISTER_URL,{
+                const response = await axios.post<ApiResponse>(REGISTER_URL,{
                 username: user,
                 password: pwd,
                 }, {
@@ -99,14 +104,14 @@ const Register: React.FC<SignupProps> = ({ onToggleForm }) => {
                 setMatchPwd("");
                 // navigate(from, { replace: true });
             } catch (err) {
-                if(!err?.response){
+                if(!(err instanceof AxiosError) || !err.response){
                     setErrMsg('No Server Response');
                 } else if(err.response?.status === 409) {
                     setErrMsg(err.response.data.message || "User name Taken");
                 } else {
                     setErrMsg("Registration Failed")
                 }
-                errRef.current.focus();
+                errRef.current?.focus();
 
             }
         };
