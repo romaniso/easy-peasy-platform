@@ -1,4 +1,4 @@
-import React, {useEffect, useRef, useState} from "react";
+import React, {useEffect} from "react";
 import useLoginRegister from "../../hooks/useLoginRegister";
 import Panel from "../Panel";
 import LoginImage from "../../assets/images/login-image.jpg";
@@ -8,9 +8,8 @@ import Button from "../Button";
 import {CiLogin} from "react-icons/ci";
 import { IoIosInformationCircleOutline } from "react-icons/io";
 import { FaCheck, FaTimes } from "react-icons/fa";
+import axios from "../../api/axios";
 
-
-// import axios from "axios";
 // import {useLocation, useNavigate} from "react-router-dom";
 // import Toast from "../Toast";
 // import {ToastType} from "../../enums/toast";
@@ -20,24 +19,36 @@ interface SignupProps {
 }
 const USER_REGEX = /^[a-zA-Z][a-zA-Z0-9-_]{3,23}$/;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
+const REGISTER_URL = '/auth/registration'
 const Register: React.FC<SignupProps> = ({ onToggleForm }) => {
-    const [user, setUser] = useState<string>("");
-    const [validName, setValidName] = useState<boolean>(false)
-    const [userFocus, setUserFocus] = useState<boolean>(false);
-
-    const userRef = useRef();
-    const errRef = useRef();
-
-    const [pwd, setPwd] = useState<string>("");
-    const [validPwd, setValidPwd] = useState<boolean>(false)
-    const [pwdFocus, setPwdFocus] = useState<boolean>(false);
-
-    const [matchPwd, setMatchPwd] = useState<string>("");
-    const [validMatch, setValidMatch] = useState<boolean>(false)
-    const [matchFocus, setMatchFocus] = useState<boolean>(false);
-
-    const [errMsg, setErrMsg] = useState<string>('');
-    const [success, setSuccess] = useState(false);
+    const {
+        showPassword,
+        toggleShowPassword,
+        user,
+        setUser,
+        validName,
+        setValidName,
+        userFocus,
+        setUserFocus,
+        pwd,
+        setPwd,
+        validPwd,
+        setValidPwd,
+        pwdFocus,
+        setPwdFocus,
+        matchPwd,
+        setMatchPwd,
+        validMatch,
+        setValidMatch,
+        matchFocus,
+        setMatchFocus,
+        errMsg,
+        setErrMsg,
+        success,
+        setSuccess,
+        userRef,
+        errRef,
+    } = useLoginRegister();
 
     useEffect(() => {
         userRef.current?.focus();
@@ -45,15 +56,15 @@ const Register: React.FC<SignupProps> = ({ onToggleForm }) => {
 
     useEffect(() => {
         const result = USER_REGEX.test(user);
-        console.log(result);
-        console.log(user);
+        // console.log(result);
+        // console.log(user);
         setValidName(result);
     }, [user]);
 
     useEffect(() => {
         const result = PWD_REGEX.test(pwd);
-        console.log(result);
-        console.log(pwd);
+        // console.log(result);
+        // console.log(pwd);
         setValidPwd(result);
         const match = pwd === matchPwd;
         setValidMatch(match);
@@ -62,145 +73,192 @@ const Register: React.FC<SignupProps> = ({ onToggleForm }) => {
     useEffect(() => {
        setErrMsg('');
     }, [user, pwd, matchPwd])
+        const handleSubmit = async (event: React.FormEvent) => {
+            event.preventDefault();
+            // Additional validation in case a button is enabled with JS hack
+            const v1 = USER_REGEX.test(user);
+            const  v2 = PWD_REGEX.test(pwd);
+            if(!v1 || !v2) {
+                setErrMsg('Invalid Entry');
+                return;
+            }
+            try {
+                const response = await axios.post(REGISTER_URL,{
+                username: user,
+                password: pwd,
+                }, {
+                    headers: {'Content-Type': 'application/json'},
+                    withCredentials: true,
+                });
+                console.log(response.data);
+                // console.log(response.token);
+                setSuccess(true);
+                // Clear up
+                setUser("");
+                setPwd("");
+                setMatchPwd("");
+                // navigate(from, { replace: true });
+            } catch (err) {
+                if(!err?.response){
+                    setErrMsg('No Server Response');
+                } else if(err.response?.status === 409) {
+                    setErrMsg(err.response.data.message || "User name Taken");
+                } else {
+                    setErrMsg("Registration Failed")
+                }
+                errRef.current.focus();
 
-
-        // const [errorMessage, setErrorMessage] = useState<string | null>(null);
-        const {
-            showPassword,
-            toggleShowPassword,
-            // handleUserName,
-            // handleValidUser,
-            // handleUserFocus,
-            // handleUserPassword,
-            // userName,
-            // userPassword,
-            // userRef,
-            // errRef,
-            // userFocus,
-        } = useLoginRegister();
-    //#oldcode
-        // const navigate = useNavigate();
-        // const location = useLocation();
-        // const from = location.state?.from?.path || "/dashboard";
-        // const handleFormSubmit = async (event: React.FormEvent) => {
-        //     event.preventDefault();
-        //     try {
-        //         await axios.post('http://localhost:5000/auth/registration', {
-        //         username: userName,
-        //         password: userPassword,
-        //         })
-        //         console.log('Success')
-        //         navigate(from, { replace: true });
-        //         handleUserName("");
-        //         handleUserPassword("");
-        //     } catch (err) {
-        //         const message: string = err.response.data.message;
-        //         setErrorMessage(message);
-        //     }
-        // };
-    //#endregion
+            }
+        };
 
     return (
-        <Panel className="flex bg-indigo-50 justify-center max-w-3xl !p-0 m-4 overflow-hidden">
-            <section className="flex flex-col justify-center sm:w-1/2 p-10">
-                <h1 className="font-bold text-2xl text-orange-500">Sign-Up</h1>
-                <p className="text-sm mt-4 text-indigo-700 dark:text-indigo-300">
-                    Already have an account?{" "}
-                    <span
-                        className="text-orange-500 cursor-pointer"
-                        onClick={onToggleForm}
-                    >
+        <>
+            {success ? (
+                <Panel className="flex bg-indigo-50 justify-center max-w-3xl !p-0 m-4 overflow-hidden">
+                    <section className="flex flex-col justify-center items-center gap-10 sm:w-1/2 p-10">
+                        <h1 className="font-bold text-4xl text-orange-500">Success!</h1>
+                        <p className='text-center text-base dark:text-indigo-400 text-indigo-800'>Your account has been successfully created. Please, log in now using the same username and password</p>
+                        <p>
+                            <Button primary rounded onClick={onToggleForm}>
+                                Log In
+                            </Button>
+
+                        </p>
+                    </section>
+                    <div className="sm:block hidden w-1/2">
+                        <img src={LoginImage} alt="Decor" className='h-full w-full object-cover dark:invert'/>
+                    </div>
+                </Panel>
+            )
+            : (
+                <Panel className="flex bg-indigo-50 justify-center max-w-3xl !p-0 m-4 overflow-hidden">
+                    <section className="flex flex-col justify-center sm:w-1/2 p-10">
+                        <h1 className="font-bold text-2xl text-orange-500">Sign-Up</h1>
+                        <p className="text-sm mt-4 text-indigo-700 dark:text-indigo-300">
+                            Already have an account?{" "}
+                            <span
+                                className="text-orange-500 cursor-pointer"
+                                onClick={onToggleForm}
+                            >
             Log in
           </span>
-                </p>
-                {/*<form className="mt-6 flex flex-col gap-6" onSubmit={handleFormSubmit}>*/}
-                <form className="mt-6 flex flex-col gap-6" >
-                    <Input
-                        name="username"
-                        type="text"
-                        primary
-                        rounded
-                        autoComplete="off"
-                        onChange={setUser}
-                        aria-invalid={validName ? "false" : "true"}
-                        aria-describedby='uidnote'
-                        onFocus={() => setUserFocus(true)}
-                        onBlur={() => setUserFocus(false)}
-                        required
-                        ref={userRef}
-                    >
-                        Username
-                        <span className={validName ? 'inline-block ml-1 text-green-500' : 'invisible absolute'}>
+                        </p>
+                        <form className="mt-6 flex flex-col gap-6" onSubmit={handleSubmit}>
+                            {/*USERNAME*/}
+                            <Input
+                                name="username"
+                                type="text"
+                                primary
+                                rounded
+                                autoComplete="off"
+                                onChange={setUser}
+                                aria-invalid={validName ? "false" : "true"}
+                                aria-describedby='uidnote'
+                                onFocus={() => setUserFocus(true)}
+                                onBlur={() => setUserFocus(false)}
+                                required
+                                ref={userRef}
+                            >
+                                Username
+                                <span className={validName ? 'inline-block ml-1 text-green-500' : 'invisible absolute'}>
                             <FaCheck/>
                         </span>
-                        <span className={validName || !user ? 'invisible absolute' : 'inline-block ml-1 text-red-500'}>
+                                <span className={validName || !user ? 'invisible absolute' : 'inline-block ml-1 text-red-500'}>
                             <FaTimes/>
                         </span>
-                    </Input>
-                    <p id='uidnote' className={userFocus && user && !validName ? 'block bg-white rounded p-1 text-sm text-orange-500 opacity-100 transition-colors duration-500 -mt-5': 'invisible opacity-0 absolute'}>
-                        <IoIosInformationCircleOutline className='inline relative bottom-0.5 mr-1 text-lg'/>
-                        4 to 24 characters<br/>
-                        Must begin with a letter.<br/>
-                        Letters, numbers, underscores, hyphens allowed.
-                    </p>
-                    <Password
-                        showPassword={showPassword}
-                        toggleShowPassword={toggleShowPassword}
-                        onChange={setPwd}
-                        primary
-                        rounded
-                        autoComplete="off"
-                        required
-                        aria-invalid={validPwd ? "false" : "true"}
-                        aria-describedby='pwdnote'
-                        onFocus={() => setPwdFocus(true)}
-                        onBlur={() => setPwdFocus(false)}
-                    >
-                        Password
-                        <span className={validPwd ? 'inline-block ml-1 text-green-500' : 'invisible absolute'}>
-                            <FaCheck/>
-                        </span>
-                        <span className={validPwd || !pwd ? 'invisible absolute' : 'inline-block ml-1 text-red-500'}>
-                            <FaTimes/>
-                        </span>
-                    </Password>
-                    <p id='pwdnote' className={pwdFocus && !validPwd ? 'block bg-white rounded p-1 text-sm text-orange-500 opacity-100 transition-colors duration-500 -mt-5': 'invisible opacity-0 absolute'}>
-                        <IoIosInformationCircleOutline className='inline relative bottom-0.5 mr-1 text-lg'/>
-                        8 to 24 characters.<br/>
-                        Must include uppercase and lowercase letters, a number and a special character.<br/>
-                        Allowed special characters: <span aria-label='exclamation mark'>!</span>
-                        <span aria-label='at symbol'>@</span><span aria-label='hashtag'>#</span><span aria-label='percent'>%</span>
-                    </p>
-                    <p ref={errRef} className={errMsg ? 'block' : 'invisible absolute'} aria-live='assertive'>{errMsg}</p>
-                    {/*{errorMessage && (*/}
-                    {/*    <Panel className="text-red-400 bg-white -mt-2 py-0.5 px-1.5">*/}
-                    {/*        {errorMessage}*/}
-                    {/*    </Panel>*/}
-                    {/*)}*/}
-                    <Button primary rounded type="submit" className="mt-6" //onClick={handleFormSubmit}
+                            </Input>
+                            <p id='uidnote' className={userFocus && user && !validName ? 'block bg-white dark:bg-transparent dark:border dark:border-orange-400 rounded p-1 text-sm text-orange-500 opacity-100 transition-colors duration-500 -mt-5 shadow': 'invisible opacity-0 absolute'}>
+                                <IoIosInformationCircleOutline className='inline relative bottom-0.5 mr-1 text-lg'/>
+                                4 to 24 characters<br/>
+                                Must begin with a letter.<br/>
+                                Letters, numbers, underscores, hyphens allowed.
+                            </p>
 
-                    >
-                        <>
-                            <CiLogin />
-                            Sign up
-                        </>
-                    </Button>
-                </form>
-                <p className="text-sm mt-4 text-indigo-700 dark:text-indigo-300">
-                    By creating your account, you agree to the{" "}
-                    <a className="underline" href="/">
-                        Terms of Service
-                    </a>{" "}
-                    and{" "}
-                    <a className="underline" href="/">
-                        Privacy Policy
-                    </a>
-                </p>
-            </section>
-            <div className="sm:block hidden w-1/2">
-                <img src={LoginImage} alt="Decor" className='h-full w-full object-cover dark:invert'/>
-            </div>
-        </Panel>
+                            {/*PASSWORD*/}
+                            <Password
+                                name='pwd'
+                                showPassword={showPassword}
+                                toggleShowPassword={toggleShowPassword}
+                                onChange={setPwd}
+                                primary
+                                rounded
+                                autoComplete="off"
+                                required
+                                aria-invalid={validPwd ? "false" : "true"}
+                                aria-describedby='pwdnote'
+                                onFocus={() => setPwdFocus(true)}
+                                onBlur={() => setPwdFocus(false)}
+                            >
+                                Password
+                                <span className={validPwd ? 'inline-block ml-1 text-green-500' : 'invisible absolute'}>
+                            <FaCheck/>
+                        </span>
+                                <span className={validPwd || !pwd ? 'invisible absolute' : 'inline-block ml-1 text-red-500'}>
+                            <FaTimes/>
+                        </span>
+                            </Password>
+                            <p id='pwdnote' className={pwdFocus && !validPwd ? 'block bg-white dark:bg-transparent dark:border dark:border-orange-400 rounded p-1 text-sm text-orange-500 opacity-100 transition-colors duration-500 -mt-5 shadow': 'invisible opacity-0 absolute'}>
+                                <IoIosInformationCircleOutline className='inline relative bottom-0.5 mr-1 text-lg'/>
+                                8 to 24 characters.<br/>
+                                Must include uppercase and lowercase letters, a number and a special character.<br/>
+                                Allowed special characters: <span aria-label='exclamation mark'>!</span>
+                                <span aria-label='at symbol'>@</span><span aria-label='hashtag'>#</span><span aria-label='percent'>%</span>
+                            </p>
+
+                            {/*CONFIRM PASSWORD*/}
+                            <Password
+                                name='confirm_pwd'
+                                onChange={setMatchPwd}
+                                primary
+                                rounded
+                                autoComplete="off"
+                                required
+                                aria-invalid={validMatch ? "false" : "true"}
+                                aria-describedby='confirmnote'
+                                onFocus={() => setMatchFocus(true)}
+                                onBlur={() => setMatchFocus(false)}
+                            >
+                                Confirm Password
+                                <span className={validMatch && matchPwd ? 'inline-block ml-1 text-green-500' : 'invisible absolute'}>
+                            <FaCheck/>
+                        </span>
+                                <span className={validMatch || !matchPwd ? 'invisible absolute' : 'inline-block ml-1 text-red-500'}>
+                            <FaTimes/>
+                        </span>
+                            </Password>
+                            <p id='confirmnote' className={matchFocus && !validMatch ? 'block bg-white dark:bg-transparent dark:border dark:border-orange-400 rounded p-1 text-sm text-orange-500 opacity-100 transition-colors duration-500 -mt-5 shadow': 'invisible opacity-0 absolute'}>
+                                <IoIosInformationCircleOutline className='inline relative bottom-0.5 mr-1 text-lg'/>
+                                Must match the first password input field.
+                            </p>
+
+
+                            <p ref={errRef} className={errMsg ? 'block bg-red-500/10 dark:border dark:border-red-400 rounded p-1 text-sm font-bold text-red-500 opacity-100 transition-colors duration-500 -mt-5 shadow' : 'invisible absolute'} aria-live='assertive'>{errMsg}</p>
+                            <Button primary disabled={!validName || !validPwd || !validMatch} rounded type="submit" className={!validName || !validPwd || !validMatch ? 'mt-6 opacity-40 cursor-not-allowed' :`mt-6`}
+                            >
+                                <>
+                                    <CiLogin />
+                                    Sign up
+                                </>
+                            </Button>
+                        </form>
+                        <p className="text-sm mt-4 text-indigo-700 dark:text-indigo-300">
+                            By creating your account, you agree to the{" "}
+                            <a className="underline" href="/">
+                                Terms of Service
+                            </a>{" "}
+                            and{" "}
+                            <a className="underline" href="/">
+                                Privacy Policy
+                            </a>
+                        </p>
+                    </section>
+                    <div className="sm:block hidden w-1/2">
+                        <img src={LoginImage} alt="Decor" className='h-full w-full object-cover dark:invert'/>
+                    </div>
+                </Panel>
+                )
+            }
+        </>
     );
 }
 

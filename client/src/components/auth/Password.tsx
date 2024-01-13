@@ -5,12 +5,13 @@ type PasswordRestProps = Omit<InputHTMLAttributes<HTMLInputElement>, 'children' 
 
 interface PasswordProps extends PasswordRestProps{
     children: ReactNode;
-    showPassword: boolean;
+    showPassword?: boolean;
     primary?: boolean;
     secondary?: boolean;
     rounded?: boolean;
     outline?: boolean;
-    toggleShowPassword(): void;
+    name: string;
+    toggleShowPassword?: () => void;
     onChange(value: string): void;
 
 }
@@ -19,16 +20,19 @@ const Password: React.FC<PasswordProps> = ({
                       children,
                       showPassword,
                       toggleShowPassword,
-                      onChange,
+                      onChange, name,
                       ...rest
                   }) => {
     const inputRef = useRef<HTMLInputElement>(null);
     const handleToggleShowPassword = () => {
         inputRef.current?.focus();
-        toggleShowPassword();
+        if(toggleShowPassword){
+            toggleShowPassword();
+        }
     };
 
-    const icon = (
+
+    const icon = toggleShowPassword ? (
         <button
             className="bi bi-eye-fill absolute top-1/2 right-3 -translate-y-1/2 cursor-pointer"
             type="button"
@@ -47,11 +51,11 @@ const Password: React.FC<PasswordProps> = ({
         </svg>
       </span>
         </button>
-    );
+    )  : null;
 
     return (
         <Input
-            name="userPassword"
+            name={name}
             type={showPassword ? "text" : "password"}
             onChange={onChange}
             icon={icon}

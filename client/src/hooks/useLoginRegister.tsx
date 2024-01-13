@@ -2,21 +2,29 @@ import { useState, useRef } from "react";
 
 function useLoginRegister() {
     const [showPassword, setShowPassword] = useState<boolean>(false);
-    const [userName, setUserName] = useState<string>("");
+    const [user, setUser] = useState<string>("");
     const [validName, setValidName] = useState<boolean>(false)
     const [userFocus, setUserFocus] = useState<boolean>(false);
 
-    const [userPassword, setUserPassword] = useState<string>("");
-    const [rememberMe, setRememberMe] = useState<boolean>(false);
+    const userRef = useRef();
+    const errRef = useRef();
 
-    const userRef = useRef<HTMLInputElement>();
-    const errRef = useRef<HTMLInputElement>();
+    const [pwd, setPwd] = useState<string>("");
+    const [validPwd, setValidPwd] = useState<boolean>(false)
+    const [pwdFocus, setPwdFocus] = useState<boolean>(false);
+
+    const [matchPwd, setMatchPwd] = useState<string>("");
+    const [validMatch, setValidMatch] = useState<boolean>(false)
+    const [matchFocus, setMatchFocus] = useState<boolean>(false);
+
+    const [errMsg, setErrMsg] = useState<string>('');
+    const [success, setSuccess] = useState(false);
 
     const toggleShowPassword = ():void => {
         setShowPassword(!showPassword);
     };
     const handleUserName = (value: string): void => {
-        setUserName(value);
+        setUser(value);
     };
     const handleValidUser = (): void => {
         setValidName(!validName);
@@ -25,27 +33,45 @@ function useLoginRegister() {
         setUserFocus(!userFocus);
     }
     const handleUserPassword = (value: string): void => {
-        setUserPassword(value);
+        setPwd(value);
     };
-    const handleRememberMe = (): void => {
-        setRememberMe(!rememberMe);
-    };
+    // const handleRememberMe = (): void => {
+    //     setRememberMe(!rememberMe);
+    // };
 
     return {
         showPassword,
-        userName,
+        user,
+        setUser,
         validName,
+        setValidName,
         userFocus,
-        userPassword,
-        rememberMe,
+        setUserFocus,
+        pwd,
+        setPwd,
+        validPwd,
+        setValidPwd,
+        pwdFocus,
+        setPwdFocus,
+        matchPwd,
+        setMatchPwd,
+        validMatch,
+        setValidMatch,
+        matchFocus,
+        setMatchFocus,
+        errMsg,
+        setErrMsg,
+        success,
+        setSuccess,
+        userRef,
+        errRef,
+
         toggleShowPassword,
         handleUserName,
         handleValidUser,
         handleUserFocus,
         handleUserPassword,
-        handleRememberMe,
-        userRef,
-        errRef,
+        // handleRememberMe,
     };
 }
 
