@@ -39,11 +39,13 @@ export class authController {
             if(!validPassword){
                 return res.status(400).json({message: 'Invalid password.'});
             }
-            const token = generateAccessToken(user._id, user.roles);
-            return res.json({token});
+            const accessToken = generateAccessToken(user._id, user.roles);
+            //@TODO: set token to cookie
+            // res.cookie('jwt', refreshToken, )
+            return res.json({accessToken, roles: user.roles});
         } catch (err) {
             console.error(err);
-            res.status(400).json({message: 'Login error'})
+            res.status(401).json({message: 'Login error'})
         }
     }
     async getUsers(req: Request, res: Response){
