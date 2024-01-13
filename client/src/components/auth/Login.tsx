@@ -1,4 +1,4 @@
-import React, {useEffect, useContext} from "react";
+import React, {useEffect} from "react";
 import useLoginRegister from "../../hooks/useLoginRegister";
 import { CiLogin } from "react-icons/ci";
 import Button from "../Button";
@@ -6,14 +6,12 @@ import LoginImage from "../../assets/images/login-image.jpg";
 import Password from "./Password";
 import Input from "../Input";
 import Panel from "../Panel";
-import AuthContext from "../../context/AuthContext";
 import axios from "../../api/axios";
 import {AxiosError} from 'axios';
 import {UserRole} from "../../enums/userRole";
-// import Checkbox from "../Checkbox";
+import useAuth from "../../hooks/useAuth";
 // import {useLocation, useNavigate} from "react-router-dom";
 
-// import userLogin from "../auth/userLogin";
 // import { useNavigate, useLocation } from "react-router-dom";
 const LOGIN_URL = '/auth/login'
 interface SignupProps {
@@ -25,7 +23,7 @@ interface ApiResponse {
     roles?: UserRole[];
 }
 const Login: React.FC<SignupProps> = ({ onToggleForm }) => {
-    const {setAuth} = useContext(AuthContext);
+    const {setAuth} = useAuth();
     const {
         showPassword,
         toggleShowPassword,
