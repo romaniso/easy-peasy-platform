@@ -136,7 +136,7 @@ const Register: React.FC<SignupProps> = ({ onToggleForm }) => {
                         <p className="text-sm mt-4 text-indigo-700 dark:text-indigo-300">
                             Already have an account?{" "}
                             <span
-                                className="text-orange-500 cursor-pointer"
+                                className="text-orange-500 cursor-pointer underline hover:text-indigo-500"
                                 onClick={onToggleForm}
                             >
                                 Log in
