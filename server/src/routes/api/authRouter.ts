@@ -14,3 +14,5 @@ authRouter
     ],controller.registration)
     .post('/login', controller.login)
     .get('/users', roleMiddleware([RoleName.Admin]), controller.getUsers)
+    .put('/edit', controller.editUser)
+    // .delete('/unsubscribe', controller.unsubscribe)
