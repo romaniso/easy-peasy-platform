@@ -5,7 +5,7 @@ import {Application} from "express";
 import cors from 'cors';
 import {sectionRouter} from "./src/routes/sectionRouter";
 import {exerciseRouter} from "./src/routes/exerciseRouter";
-import {authRouter} from "./src/routes/api/authRouter";
+import {authRouter} from "./src/routes/authRouter";
 import {corsOptions} from "./config/corsOptions";
 const PORT: number = parseInt(process.env.PORT as string, 10) || 5000;
 

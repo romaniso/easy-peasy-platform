@@ -9,10 +9,14 @@ const controller = new authController();
 
 authRouter
     .post('/registration', [
-        check('username', 'Username cannot be an empty string.').notEmpty(),
-        check('password', 'Password must contain al least 6 signs and maximum 20 signs').isLength({min: 6, max: 20})
+        check('username', 'Username cannot be an empty string. It must consist of 4 to 24 characters, begin with a letter. Letters, numbers, hyphens, underscores are allowed.')
+            .notEmpty()
+            .matches(/^[a-zA-Z][a-zA-Z0-9-_]{3,23}$/),
+        check('password', 'Password must contain at least 8 signs and maximum 24 signs, include uppercase and lowercase letters, a number and a special character')
+            .matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/)
     ],controller.registration)
     .post('/login', controller.login)
     .get('/users', roleMiddleware([RoleName.Admin]), controller.getUsers)
+    // .get('/:username', controller.getUserByUsername)
     .put('/edit', controller.editUser)
     // .delete('/unsubscribe', controller.unsubscribe)
