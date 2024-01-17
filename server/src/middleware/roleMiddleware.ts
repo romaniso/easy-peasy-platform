@@ -13,7 +13,7 @@ export function roleMiddleware(roles: RoleName[]){
             if(!token){
                 return res.status(403).json({message: "User is unauthorized"});
             }
-            const decodedData = jwt.verify(token, config.secret) as JwtPayload;
+            const decodedData = jwt.verify(token, config.secretToken) as JwtPayload;
 
             const { roles: userRoles } = decodedData;
             let hasRole = false;

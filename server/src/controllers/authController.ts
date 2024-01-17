@@ -48,7 +48,13 @@ export class authController {
             } else {
                 // create JWT and refresh token
                 const accessToken = generateAccessToken(foundUser._id, foundUser.roles);
-                return res.json({accessToken, roles: foundUser.roles});
+                const refreshToken = generateAccessToken(foundUser._id, foundUser.roles, true);
+                //save refreshToken to DB for this user
+                await User.updateOne({ _id: foundUser._id }, { $set: { refreshToken } });
+                //httpOnly prevents saving it in JS
+                res.cookie('jwt', refreshToken, {httpOnly: true, maxAge: 24 * 60 * 60 * 1000}) //one day
+                // res.json({accessToken, roles: foundUser.roles});
+                res.json({accessToken});
             }
         } catch (err) {
             console.error(err);

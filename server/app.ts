@@ -7,6 +7,7 @@ import {sectionRouter} from "./src/routes/sectionRouter";
 import {exerciseRouter} from "./src/routes/exerciseRouter";
 import {authRouter} from "./src/routes/authRouter";
 import {corsOptions} from "./config/corsOptions";
+// import cookieParser from "cookie-parser";
 const PORT: number = parseInt(process.env.PORT as string, 10) || 5000;
 
 
@@ -32,6 +33,7 @@ const start = async () => {
 // MIDDLEWARES
 app.use(express.json());
 app.use(cors(corsOptions));
+// app.use(cookieParser());
 app.use(express.urlencoded({extended: false}));
 
 app.use('/section', sectionRouter);
