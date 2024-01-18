@@ -12,6 +12,7 @@ import {userRouter} from "./src/routes/api/userRouter";
 import {verifyJWT} from "./src/middleware/verifyJWT";
 import cookieParser from "cookie-parser";
 import {refreshRouter} from "./src/routes/refreshRouter";
+import {logoutRouter} from "./src/routes/logoutRouter";
 const PORT: number = parseInt(process.env.PORT as string, 10) || 5000;
 
 
@@ -45,6 +46,7 @@ app.use('/exercise', exerciseRouter);
 app.use('/register', registerRouter);
 app.use('/auth', authRouter);
 app.use('/refresh', refreshRouter);
+app.use('/logout', logoutRouter);
 
 // verified routes
 app.use(verifyJWT);
