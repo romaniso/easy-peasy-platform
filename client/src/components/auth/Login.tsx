@@ -12,7 +12,7 @@ import {UserRole} from "../../enums/userRole";
 import useAuth from "../../hooks/useAuth";
 import {Link, useLocation, useNavigate} from "react-router-dom";
 
-const LOGIN_URL = '/auth/login'
+const LOGIN_URL = '/auth'
 interface SignupProps {
     onToggleForm(): void;
 }
