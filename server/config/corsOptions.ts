@@ -1,14 +1,8 @@
 import { CorsOptions } from 'cors';
-
-const whiteList = [
-    'http://localhost:5173',
-    'http://localhost:3000',
-    // "https://actualdomain.com",
-];
-
+import {allowedOrigins} from "./allowedOrigins";
 export const corsOptions: CorsOptions = {
     origin: (requestOrigin: string | undefined, callback: (error: Error | null, success?: boolean) => void) => {
-        if (!requestOrigin || whiteList.indexOf(requestOrigin) !== -1) {
+        if (!requestOrigin || allowedOrigins.indexOf(requestOrigin) !== -1) {
             callback(null, true);
         } else {
             callback(new Error('Not allowed by CORS'));

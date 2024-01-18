@@ -13,6 +13,7 @@ import {verifyJWT} from "./src/middleware/verifyJWT";
 import cookieParser from "cookie-parser";
 import {refreshRouter} from "./src/routes/refreshRouter";
 import {logoutRouter} from "./src/routes/logoutRouter";
+import {credentials} from "./src/middleware/credentials";
 const PORT: number = parseInt(process.env.PORT as string, 10) || 5000;
 
 
@@ -38,6 +39,7 @@ const start = async () => {
 // MIDDLEWARES
 app.use(express.json());
 app.use(cookieParser());
+app.use(credentials);
 app.use(cors(corsOptions));
 app.use(express.urlencoded({extended: false}));
 
