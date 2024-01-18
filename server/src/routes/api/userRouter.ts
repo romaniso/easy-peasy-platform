@@ -6,7 +6,7 @@ export const userRouter: Router = express.Router();
 const controller = new UserController();
 
 userRouter.route('/')
-    .get(verifyJWT, controller.getAllUsers)
+    .get(controller.getAllUsers)
     .post(controller.createNewUser)
     .put(controller.updateUser)
     .delete(controller.deleteUser)

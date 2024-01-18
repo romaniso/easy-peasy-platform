@@ -9,7 +9,9 @@ import {authRouter} from "./src/routes/authRouter";
 import {corsOptions} from "./config/corsOptions";
 import {registerRouter} from "./src/routes/registerRouter";
 import {userRouter} from "./src/routes/api/userRouter";
-// import cookieParser from "cookie-parser";
+import {verifyJWT} from "./src/middleware/verifyJWT";
+import cookieParser from "cookie-parser";
+import {refreshRouter} from "./src/routes/refreshRouter";
 const PORT: number = parseInt(process.env.PORT as string, 10) || 5000;
 
 
@@ -34,15 +36,20 @@ const start = async () => {
 
 // MIDDLEWARES
 app.use(express.json());
+app.use(cookieParser());
 app.use(cors(corsOptions));
-// app.use(cookieParser());
 app.use(express.urlencoded({extended: false}));
 
 app.use('/section', sectionRouter);
 app.use('/exercise', exerciseRouter);
 app.use('/register', registerRouter);
 app.use('/auth', authRouter);
-app.use('/users', userRouter)
+app.use('/refresh', refreshRouter);
+
+// verified routes
+app.use(verifyJWT);
+app.use('/users', userRouter);
+
 // 404
 app.all('*', (req,res) => {
     res.status(404);
