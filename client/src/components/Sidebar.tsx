@@ -1,6 +1,6 @@
 // import userLogOut from "../auth/userLogOut";
-// import { useNavigate } from "react-router-dom";
-
+import {Link, useNavigate} from "react-router-dom";
+import axios from '../api/axios';
 import React, {useState} from "react";
 //TODO: Handle single collapse issue (maybe by using a separate Dropdown component), consider how to change content (NavLink, or state)
 
@@ -20,6 +20,8 @@ import {
 } from "react-icons/bs";
 import { MdDashboard } from "react-icons/md";
 import LogoImage from '../assets/images/small-logo.png';
+import ThemeToggle from "./ThemeToggle";
+import useAuth from "../hooks/useAuth";
 
 type SidemenuSubitem = {
     label: string;
@@ -37,18 +39,16 @@ interface SidemenuItem {
 const Sidebar: React.FC = () => {
     const [isSidebarOpenned, setIsSidebarOpenned] = useState<boolean>(true);
     const [expandedSubmenuItem, setExpandedSubmenuItem] = useState<number | null>(null);
+    const navigate = useNavigate();
 
-    //Logout feature
-    // const navigate = useNavigate();
-    // const { error, logOut } = userLogOut();
-
-    // const handleLogOut = async () => {
-    //     await logOut();
-    //
-    //     if (!error) {
-    //         navigate("/");
-    //     }
-    // };
+    const handleLogout = async () => {
+        try {
+            await axios.get("http://localhost:5000/logout");
+            navigate("/auth");
+        } catch (error) {
+            console.error("Logout failed:", error);
+        }
+    };
 
     const menu: SidemenuItem[] = [
         {
@@ -60,10 +60,10 @@ const Sidebar: React.FC = () => {
             title: "Exercises",
             icon: <BsListTask />,
             links: [
-                { label: "Grammar", path: "exercises/grammar" },
-                { label: "Reading", path: "exercises/reading" },
-                { label: "Vocabulary", path: "exercises/vocabulary" },
-                { label: "Listening", path: "exercises/listening" },
+                { label: "Grammar", path: "/grammar" },
+                { label: "Reading", path: "/reading" },
+                { label: "Vocabulary", path: "/vocabulary" },
+                { label: "Listening", path: "/listening" },
             ],
             spacing: true,
         },
@@ -110,7 +110,7 @@ const Sidebar: React.FC = () => {
             title: "Log out",
             icon: <BsBoxArrowRight />,
             path: "/",
-            // event: handleLogOut,
+            event: handleLogout,
         },
     ];
 
@@ -127,11 +127,11 @@ const Sidebar: React.FC = () => {
                 <li
                     key={index}
                     onClick={item.event || (() => handleExpand(index))}
-                    className={`group text-indigo-200 dark:text-indigo-900 text-sm flex items-center gap-x-4 cursor-pointer p-2 hover:bg-orange-500 hover:text-white dark:hover:text-white rounded-md mt-2 duration-300 ${
+                    className={`group dark:text-indigo-300 text-indigo-900 text-sm flex items-center gap-x-4 cursor-pointer p-2 hover:bg-orange-500 hover:text-white dark:hover:text-white rounded-md mt-2 duration-300 ${
                         item.spacing ? "mt-9" : "mt-2"
                     }`}
                 >
-          <span className="text-2xl group-hover:text-white text-indigo-200 dark:text-indigo-900 block float-left">
+          <span className="text-2xl group-hover:text-white dark:text-indigo-300 text-indigo-900 block float-left">
             {item.icon ? item.icon : <MdDashboard />}
           </span>
                     <span
@@ -148,11 +148,13 @@ const Sidebar: React.FC = () => {
                 {item.links && isExpanded && isSidebarOpenned && (
                     <ul>
                         {item.links.map((item, index) => (
-                            <li
-                                key={index}
-                                className="text-orange-500 hover:text-white text-sm flex items-center gap-x-4 cursor-pointer p-2 px-5 hover:bg-indigo-900 rounded-md mt-2 duration-300"
-                            >
-                                {item.label}
+                            <li key={index}>
+                                <Link
+                                    className="dark:text-indigo-200 text-indigo-900 hover:text-white text-sm flex items-center gap-x-4 cursor-pointer p-2 px-5 hover:bg-indigo-900 rounded-md mt-2 duration-300"
+                                    to={item.path}
+                                >
+                                    {item.label}
+                                </Link>
                             </li>
                         ))}
                     </ul>
@@ -163,12 +165,12 @@ const Sidebar: React.FC = () => {
 
     return (
         <aside
-            className={`bg-stone-900 dark:bg-indigo-100 h-screen p-5 pt-8 ${
+            className={`dark:bg-gradient-to-r dark:from-stone-800 dark:to-stone-900 bg-indigo-100 h-screen p-5 pt-8 ${
                 isSidebarOpenned ? "w-72" : "w-20"
-            } relative duration-300 shadow`}
+            } relative duration-300 flex flex-col items-start shadow`}
         >
             <BsArrowLeftShort
-                className={`bg-indigo-100  text-stone-800 text-3xl rounded-full absolute -right-3 top-9 border border-indigo-200 cursor-pointer ${
+                className={`bg-indigo-100 text-stone-800 text-3xl rounded-full absolute -right-3 top-9 border border-indigo-200 cursor-pointer ${
                     !isSidebarOpenned && "rotate-180"
                 }`}
                 onClick={() => setIsSidebarOpenned(!isSidebarOpenned)}
@@ -182,7 +184,7 @@ const Sidebar: React.FC = () => {
                     }`}
                 />
                 <span
-                    className={`font-mono text-indigo-100 dark:text-indigo-900 drop-shadow origin-left font-medium text-2xl duration-300 ${
+                    className={`font-mono dark:text-indigo-300 text-indigo-900 drop-shadow origin-left font-medium text-2xl duration-300 ${
                         !isSidebarOpenned && "scale-0"
                     }`}
                 >
@@ -190,23 +192,26 @@ const Sidebar: React.FC = () => {
                 </span>
             </div>
             <div
-                className={`flex items-center rounded-md bg-indigo-500 mt-6 px-4 ${
-                    !isSidebarOpenned ? "px-2.5" : "px-4"
-                } p-2`}
+                className={`flex w-full items-center rounded-md bg-transparent border dark:border-indigo-300 border-indigo-400 mt-6 px-4 p-2 ${
+                    !isSidebarOpenned ? "!px-3" : "px-4"
+                }`}
             >
                 <BsSearch
-                    className={`text-indigo-100 text-lg block float-left cursor-pointer ${
+                    className={`dark:text-indigo-300 text-indigo-800 text-lg block float-left cursor-pointer ${
                         isSidebarOpenned && "mr-2"
                     }`}
                 />
                 <input
                     type={"search"}
-                    className={`text-base bg-transparent w-full text-white focus:outline-none ${
+                    className={`text-base bg-transparent w-full text-indigo-900 dark:text-white focus:outline-none ${
                         !isSidebarOpenned && "hidden"
                     }`}
                 />
             </div>
-            <ul className="pt-2">{renderedMenu}</ul>
+            <ul className="pt-2 w-full">{renderedMenu}</ul>
+            <span className={`mt-10 ml-2 ${!isSidebarOpenned && "hidden"}`}>
+                <ThemeToggle/>
+            </span>
         </aside>
     );
 }
