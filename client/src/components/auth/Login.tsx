@@ -10,7 +10,7 @@ import axios from "../../api/axios";
 import {AxiosError} from 'axios';
 import {UserRole} from "../../enums/userRole";
 import useAuth from "../../hooks/useAuth";
-import {Link, useLocation, useNavigate} from "react-router-dom";
+import {useLocation, useNavigate} from "react-router-dom";
 
 const LOGIN_URL = '/auth'
 interface SignupProps {
@@ -49,11 +49,6 @@ const Login: React.FC<SignupProps> = ({ onToggleForm }) => {
         setErrMsg("")
     }, [user, pwd]);
 
-    // const navigate = useNavigate();
-    // const location = useLocation();
-
-    // const from = location.state?.from?.path || "/dashboard";
-
     const handleSubmit = async (event: React.FormEvent) => {
         event.preventDefault();
         try {
@@ -66,8 +61,6 @@ const Login: React.FC<SignupProps> = ({ onToggleForm }) => {
                 },
                 withCredentials: true,
             });
-            console.log(JSON.stringify(response?.data));
-            // console.log(JSON.stringify(response));
             const accessToken = response?.data?.accessToken;
             const roles = response?.data?.roles;
             setAuth({user, pwd, roles, accessToken});

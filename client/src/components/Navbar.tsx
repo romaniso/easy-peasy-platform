@@ -5,11 +5,15 @@ import Button from "./Button";
 import { HiMenu, HiX } from "react-icons/hi";
 import ThemeToggle from "./ThemeToggle";
 import LogoImage from '../assets/images/small-logo.png';
+import useAuth from "../hooks/useAuth";
+import { FaUser  } from "react-icons/fa";
+import AvatarSample from '../assets/images/avatar.jpg'
 
 export interface SubmenuItem {
     label: string;
     path: string;
 }
+
 interface NavbarItem {
     label: string;
     path?: string;
@@ -17,10 +21,13 @@ interface NavbarItem {
     subPaths?: SubmenuItem[];
     primary?: true;
     secondary?: true;
-
+    profile?: true;
 }
+
 function Navbar() {
     const [isOpen, setIsOpen] = useState<boolean>(false);
+    // const { isAuthenticated, auth } = useAuth();
+
     const links: NavbarItem[] = [
         { label: "Home", path: "/" },
         {
@@ -41,46 +48,57 @@ function Navbar() {
                 { label: "Exercises", path: "/exercises" },
             ],
         },
+        // isAuthenticated()
+        //     ? { label: `Hi ${auth.user}!`, profile: true }
+        //     : { label: "Log in", path: "/auth", isButton: true, secondary: true },
         { label: "Log in", path: "/auth", isButton: true, secondary: true },
-        // { label: "Sign up", path: "/auth", button: true, primary: true },
     ];
 
-    const renderedItems = links.map((link: NavbarItem) => {
-        return (
-            <li
-                key={link.label}
-                className={`${
-                    link.isButton ? "my-4" : "my-7 border-b md:border-none"
-                } md:ml-6 md:my-0 hover:text-orange-500 text-indigo-900 dark:text-indigo-200 font-semibold group`}
-            >
-                {link.path &&
-                    <NavLink
-                        to={link.path}
-                        className={({ isActive }) =>
-                            isActive
-                                ? "text-orange-500 flex justify-between items-center"
-                                : "font-semibold md:inline-block flex justify-between items-center"
-                        }
-                    >
-                        {link.isButton
-                            ? (<Button
-                                    primary={link.primary}
-                                    secondary={link.secondary}
-                                    outline
-                                    rounded
-                                    //@todo: restyle Button component so there will be only cosmetic styles
-                                    className="py-1.5 px-4 text-sm w-full !rounded-full"
-                                >
-                                    {link.label}
-                                </Button>
-                            )
-                            : link.label}
-                    </NavLink>
-                }
-                {link.subPaths && <Dropdown label={link.label} content={link.subPaths}/>}
-            </li>
-        );
-    });
+    const renderedItems = links.map((link: NavbarItem) => (
+        <li
+            key={link.label}
+            className={`${
+                link.isButton ? "my-4" : "my-7 border-b md:border-none"
+            } md:ml-6 md:my-0 hover:text-orange-500 text-indigo-900 dark:text-indigo-200 font-semibold group`}
+        >
+            {link.path && (
+                <NavLink
+                    to={link.path}
+                    className={({ isActive }) =>
+                        isActive
+                            ? "text-orange-500 flex justify-between items-center"
+                            : "font-semibold md:inline-block flex justify-between items-center"
+                    }
+                >
+                    {link.isButton ? (
+                        <Button
+                            primary={link.primary}
+                            secondary={link.secondary}
+                            outline
+                            rounded
+                            className="py-1.5 px-4 text-sm w-full !rounded-full"
+                        >
+                            {link.label}
+                        </Button>
+                    ) :
+                        (
+                        link.label
+                    )}
+                </NavLink>
+            )}
+            {link.subPaths && <Dropdown label={link.label} content={link.subPaths} />}
+            {link.profile && (
+                <div className='flex items-center gap-2'>
+                    {link.label}
+                    <div className='bg-indigo-200 dark:bg-transparent border border-indigo-900 dark:border-indigo-200 rounded-md w-10 h-10 overflow-hidden'>
+                        {/*Check if there is an avatar*/}
+                        <img src={AvatarSample} alt="avatar" className='object-cover'/>
+                        {/*<FaUser className='dark:text-indigo-200 text-indigo-900'/>*/}
+                    </div>
+                </div>
+            )}
+        </li>
+    ));
 
     return (
         <header className="md:bg-transparent bg-indigo-50 dark:bg-stone-800 md:backdrop-blur-xl shadow-lg border-b-indigo-100 w-full fixed top-0 left-0 z-50">
