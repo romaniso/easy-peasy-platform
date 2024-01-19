@@ -15,10 +15,10 @@ const Modal: React.FC<ModalProps> = ({ onClose, children, actionBar }) => {
     return ReactDOM.createPortal(
         <section>
             <div
-                className="fixed inset-0 bg-gray-300 opacity-80"
+                className="fixed inset-0 backdrop-brightness-75 backdrop-blur-sm z-50"
                 onClick={onClose}
             ></div>
-            <Panel className="fixed inset-40 p-10 bg-white w-auto flex flex-col justify-between">
+            <Panel className="fixed inset-y-40 inset-x-80 p-10 shadow-md bg-white !w-auto flex flex-col justify-between z-50 rounded-md overflow-y-auto scrollbar scrollbar-thin scrollbar-thumb-orange-300 dark:scrollbar-thumb-orange-500 scrollbar-track-indigo-50 dark:scrollbar-track-[#323232]">
                 {children}
                 <div className="flex justify-end">{actionBar}</div>
             </Panel>
