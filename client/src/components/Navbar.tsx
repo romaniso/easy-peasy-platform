@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 import Dropdown from './Dropdown';
 import Button from "./Button";
 import { HiMenu, HiX } from "react-icons/hi";
-import ThemeToggler from "./ThemeToggler";
+import ThemeToggle from "./ThemeToggle";
 import LogoImage from '../assets/images/logo.png';
 
 export interface SubmenuItem {
@@ -103,7 +103,7 @@ function Navbar() {
                     }`}
                 >
                     {renderedItems}
-                    <ThemeToggler className='ml-5'/>
+                    <ThemeToggle className='ml-5'/>
                 </ul>
             </nav>
         </header>

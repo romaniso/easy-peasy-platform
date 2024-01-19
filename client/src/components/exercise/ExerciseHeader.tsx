@@ -29,7 +29,8 @@ const ExerciseHeader: React.FC<ExerciseHeader> = ({ title, instruction, forwarde
                 >
                     <span>
                         <h5 className='text-orange-500 text-xl font-bold mb-2 drop-shadow-sm'>Don't know what to do?</h5>
-                        <p className='text-indigo-800 dark:text-indigo-300 mb-4'>{instruction}</p>
+                        <hr/>
+                        <p className='text-indigo-800 dark:text-indigo-300 my-3 selection:bg-orange-500'>{instruction}</p>
                         {/*<img src={GiffSample} alt="Animation" className='mx-auto mb-4 w-full'/>*/}
                     </span>
                 </Modal>
