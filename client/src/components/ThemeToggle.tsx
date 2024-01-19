@@ -32,7 +32,7 @@ function ThemeToggle(){
             <div className="p-1">
                 <label className="relative inline-block w-11 h-6">
                     <input type="checkbox" className='opacity-0 w-0 h-0' onChange={handleToggleTheme} />
-                    <span className="absolute cursor-pointer inset-0 rounded-2xl border dark:border-stone-700 bg-indigo-300 dark:bg-stone-900 transition-all before:[content: ''] before:h-5 before:absolute before:w-5 before:inline-block before:rounded-full before:left-0.5 dark:before:translate-x-5 before:bottom-0.5 before:bg-white before:transition-all"></span>
+                    <span className="absolute cursor-pointer inset-0 rounded-2xl border dark:border-stone-700 bg-indigo-300 dark:bg-stone-900 transition-all before:[content: ''] before:h-5 before:absolute before:w-5 before:inline-block before:rounded-full before:left-[1px] dark:before:translate-x-5 before:bottom-[1px] before:bg-white dark:before:bg-indigo-200 before:transition-all"></span>
                 </label>
             </div>
             <span className="text-xl">
