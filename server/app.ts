@@ -1,6 +1,4 @@
 import express from 'express';
-import mongoose from 'mongoose';
-import * as dotenv from 'dotenv'
 import {Application} from "express";
 import cors from 'cors';
 import {sectionRouter} from "./src/routes/sectionRouter";
@@ -14,6 +12,7 @@ import cookieParser from "cookie-parser";
 import {refreshRouter} from "./src/routes/refreshRouter";
 import {logoutRouter} from "./src/routes/logoutRouter";
 import {credentials} from "./src/middleware/credentials";
+import {connectDB} from "./config/dbConn";
 const PORT: number = parseInt(process.env.PORT as string, 10) || 5000;
 
 
@@ -21,13 +20,7 @@ const app: Application = express();
 
 const start = async () => {
     try {
-        dotenv.config();
-        const mongodbUri = process.env.MONGODB_URI;
-        if (!mongodbUri) {
-            console.error('MONGODB_URI is missing in the environment variables.');
-            process.exit(1);
-        }
-        await mongoose.connect(mongodbUri);
+        await connectDB();
         app.listen(PORT, 'localhost', () => {
             console.log('Server listening on port http://localhost:5000');
         })
