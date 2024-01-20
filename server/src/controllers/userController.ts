@@ -21,15 +21,15 @@ export class UserController {
     }
     async createNewUser(req: Request, res: Response) {
         console.log('Add a new user');
-        // const newEmployee = {
-        //     firstname: req.body.firstname,
-        //     lastname: req.body.lastname
-        // }
-        //
-        // if (!newEmployee.firstname || !newEmployee.lastname) {
-        //     return res.status(400).json({ 'message': 'First and last names are required.' });
-        // }
-        res.status(201);
+        const newEmployee = {
+            firstname: req.body.firstname,
+            lastname: req.body.lastname
+        }
+
+        if (!newEmployee.firstname || !newEmployee.lastname) {
+            return res.status(400).json({ 'message': 'First and last names are required.' });
+        }
+        res.status(201).json(newEmployee);
     }
     async deleteUser(req: Request, res: Response) {
         console.log('Delete a user');
@@ -40,6 +40,7 @@ export class UserController {
         // const filteredArray = data.employees.filter(emp => emp.id !== parseInt(req.body.id));
         // data.setEmployees([...filteredArray]);
         // res.json(data.employees);
+        res.json({message: "Delete method"})
     }
     async updateUser(req: Request, res: Response) {
         try {
@@ -48,6 +49,7 @@ export class UserController {
             if(!user) {
                 return res.status(400).json({message: `Username ${username} was not found`})
             }
+            console.log('Update User')
             // Edition logic
             return res.status(200).json(user);
         } catch (err) {

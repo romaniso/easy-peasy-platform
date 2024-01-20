@@ -27,7 +27,7 @@ export class LogoutController {
                 secure: true,
                 maxAge: 24 * 60 * 60 * 1000
             });
-            res.status(204);
+            res.sendStatus(204);
 
         } catch (err) {
             console.error(err);

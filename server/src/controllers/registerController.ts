@@ -23,7 +23,11 @@ export class RegisterController {
                 // encrypt the password
                 const hashedPassword = await bcrypt.hash(password, 10);
                 const userRole = await Role.findOne({value: RoleName.User});
-                const newUser = new User({username, password: hashedPassword, roles: [userRole?.value]})
+                const newUser = new User({
+                    username,
+                    password: hashedPassword,
+                    roles: [userRole?.value]
+                })
                 await newUser.save();
                 return res.status(201).json({message: `New user ${username} has been successfully signed in.`});
             }

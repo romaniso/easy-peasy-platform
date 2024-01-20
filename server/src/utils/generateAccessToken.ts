@@ -1,16 +1,22 @@
 import { RoleName } from '../enums/role';
 import jwt from 'jsonwebtoken';
 import { config } from '../../config/config';
-import { ObjectId } from 'mongodb';
+// import { ObjectId } from 'mongodb';
 
 export const generateAccessToken = (
-    id: ObjectId,
+    // id: ObjectId,
+    username: string,
     roles: RoleName[],
     refresh?: true
 ): string => {
-    const payload = {
-        id, // Convert ObjectId to string if needed
-        roles,
+    const payload = refresh
+        ? {username}
+        : {
+        'UserInfo': {
+            // id, // Convert ObjectId to string if needed
+            username,
+            roles,
+        }
     };
 
     try {

@@ -17,8 +17,8 @@ export class AuthController {
                 return res.status(401).json({message: 'Invalid password.'});
             } else {
                 // create JWT and refresh token
-                const accessToken = generateAccessToken(foundUser._id, foundUser.roles);
-                const refreshToken = generateAccessToken(foundUser._id, foundUser.roles, true);
+                const accessToken = generateAccessToken(foundUser.username, foundUser.roles);
+                const refreshToken = generateAccessToken(foundUser.username, foundUser.roles, true);
                 //save refreshToken to DB for this user
                 await User.updateOne({ _id: foundUser._id }, { $set: { refreshToken } });
                 //httpOnly prevents saving it in JS

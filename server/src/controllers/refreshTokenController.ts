@@ -21,9 +21,10 @@ export class RefreshTokenController {
                     if (err) {
                         console.error('JWT Verification Error:', err.message);
                         return res.sendStatus(403); // invalid token
+                    } else {
+                        const accessToken = generateAccessToken((decoded as jwt.JwtPayload).username, (decoded as jwt.JwtPayload).roles);
+                        res.json({accessToken, roles: foundUser.roles});
                     }
-                    const accessToken = generateAccessToken(foundUser._id, foundUser.roles);
-                    res.json({accessToken, roles: foundUser.roles});
                 }
             )
 

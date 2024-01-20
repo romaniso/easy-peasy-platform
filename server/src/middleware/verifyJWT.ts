@@ -1,9 +1,11 @@
 import { NextFunction, Request, Response, RequestHandler } from 'express';
 import jwt, { JwtPayload } from 'jsonwebtoken';
 import { config } from '../../config/config';
+import {RoleName} from "../enums/role";
 
-interface AuthenticatedRequest extends Request {
+export interface AuthenticatedRequest extends Request {
     user: JwtPayload;
+    roles: RoleName[];
 }
 
 export const verifyJWT= (
@@ -11,8 +13,8 @@ export const verifyJWT= (
     res: Response,
     next: NextFunction
 ) => {
-    const authHeader = req.headers['authorization'];
-    if (!authHeader) return res.sendStatus(401);
+    const authHeader = req.headers.authorization;
+    if (!authHeader?.startsWith('Bearer ')) return res.sendStatus(401);
     try {
         const token = authHeader.split(' ')[1];
         jwt.verify(
@@ -23,7 +25,8 @@ export const verifyJWT= (
                     console.error('JWT Verification Error:', err.message);
                     return res.sendStatus(403); // invalid token
                 }
-                (req as AuthenticatedRequest).user = (decoded as jwt.JwtPayload).id;
+                (req as AuthenticatedRequest).user = (decoded as jwt.JwtPayload).UserInfo.username;
+                (req as AuthenticatedRequest).roles = (decoded as jwt.JwtPayload).UserInfo.roles;
                 next();
             }
         );
