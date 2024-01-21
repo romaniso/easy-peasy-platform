@@ -1,11 +1,15 @@
-import {useState, useEffect} from "react";
+import React, {useState, useEffect} from "react";
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 import {User} from "../../interfaces/user";
+import {Link, useNavigate, useLocation} from "react-router-dom";
+import {AxiosError} from "axios";
 
 const GET_USERS_URL = '/users'
 const Users = () => {
     const [users, setUsers] = useState<[User]>();
     const axiosPrivate = useAxiosPrivate();
+    const navigate = useNavigate();
+    const location = useLocation();
 
     useEffect(() => {
         let isMounted = true;
@@ -19,7 +23,13 @@ const Users = () => {
                 console.log(response.data);
                 isMounted && setUsers(response.data);
             } catch (err) {
-                console.error(err);
+                const errType = (err as AxiosError).name;
+                if (errType === 'CanceledError') {
+                    console.log('Request canceled:', err);
+                } else {
+                    console.error(err);
+                    navigate('/auth', { state: { from: location }, replace: true });
+                }
             }
         }
         getUsers();
@@ -40,6 +50,7 @@ const Users = () => {
                     </ul>
                 ) : <p>No users to display</p>
             }
+            <Link to='/'>Home</Link>
         </article>
     )
 }
