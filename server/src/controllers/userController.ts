@@ -12,27 +12,26 @@ export class UserController {
         }
     }
     async getAllUsers(req: Request, res: Response){
+        const users = await User.find();
+        if(!users) return res.status(204).json({message: "No users found"});
+        res.json(users);
+    }
+    async createNewUser(req: Request, res: Response) {
+        if(!req.body?.firstname || !req?.body?.lastname){
+            return res.status(400).json({message: 'First and last names are required'})
+        }
         try {
-            const users = await User.find();
-            res.json(users);
+            // const result = await User.create({
+            //
+            // })
+            console.log('Add a new user. Mock method');
+            res.status(201).json({message: "Mock create method"});
         } catch (err) {
             console.error(err);
         }
     }
-    async createNewUser(req: Request, res: Response) {
-        console.log('Add a new user');
-        const newEmployee = {
-            firstname: req.body.firstname,
-            lastname: req.body.lastname
-        }
-
-        if (!newEmployee.firstname || !newEmployee.lastname) {
-            return res.status(400).json({ 'message': 'First and last names are required.' });
-        }
-        res.status(201).json(newEmployee);
-    }
     async deleteUser(req: Request, res: Response) {
-        console.log('Delete a user');
+        console.log('Delete a user. Mock method');
         // const employee = data.employees.find(emp => emp.id === parseInt(req.body.id));
         // if (!employee) {
         //     return res.status(400).json({ "message": `Employee ID ${req.body.id} not found` });
@@ -40,7 +39,7 @@ export class UserController {
         // const filteredArray = data.employees.filter(emp => emp.id !== parseInt(req.body.id));
         // data.setEmployees([...filteredArray]);
         // res.json(data.employees);
-        res.json({message: "Delete method"})
+        res.json({message: "Delete method. Mock method"})
     }
     async updateUser(req: Request, res: Response) {
         try {
@@ -49,7 +48,7 @@ export class UserController {
             if(!user) {
                 return res.status(400).json({message: `Username ${username} was not found`})
             }
-            console.log('Update User')
+            console.log('Update User. Mock method');
             // Edition logic
             return res.status(200).json(user);
         } catch (err) {

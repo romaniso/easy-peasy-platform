@@ -11,7 +11,7 @@ export class RefreshTokenController {
             if(!cookies?.jwt) return res.sendStatus(401);
             const refreshToken: string = cookies.jwt;
 
-            const foundUser = await User.findOne({refreshToken});
+            const foundUser = await User.findOne({refreshToken}).exec();
             if(!foundUser) return res.sendStatus(403);
             // evaluate jwt
             jwt.verify(

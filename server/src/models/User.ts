@@ -5,6 +5,7 @@ interface IUser {
     username: string;
     password: string;
     roles: RoleName[];
+    avatar?: string;
     refreshToken?: string;
 }
 
@@ -12,7 +13,8 @@ const userSchema = new Schema<IUser>({
     username: {type: String, unique: true, required: true},
     password: {type: String, required: true},
     roles: [{type: String, ref: 'Role'}],
-    refreshToken: {type: String, unique: true},
+    avatar: String,
+    refreshToken: String,
 })
 
 export const User =  model<IUser>('User', userSchema);

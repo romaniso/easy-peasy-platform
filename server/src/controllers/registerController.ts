@@ -14,7 +14,7 @@ export class RegisterController {
             }
             const {username, password} = req.body;
             // Check for duplicate in the db
-            const duplicate = await User.findOne({username});
+            const duplicate = await User.findOne({username}).exec();
             if (duplicate){
                 // Conflict
                 return res.sendStatus(409).json({message: 'This user name already exists. Please, insert something different.'})
@@ -22,6 +22,7 @@ export class RegisterController {
                 // Register a new user
                 // encrypt the password
                 const hashedPassword = await bcrypt.hash(password, 10);
+                // Create and Store a new user
                 const userRole = await Role.findOne({value: RoleName.User});
                 const newUser = new User({
                     username,
