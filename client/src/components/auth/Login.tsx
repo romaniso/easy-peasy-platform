@@ -63,6 +63,7 @@ const Login: React.FC<SignupProps> = ({ onToggleForm }) => {
             });
             const accessToken = response?.data?.accessToken;
             const roles = response?.data?.roles;
+            console.log({roles, accessToken});
             setAuth({user, pwd, roles, accessToken});
             setUser("");
             setPwd("");
