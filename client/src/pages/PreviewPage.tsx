@@ -6,6 +6,7 @@ import axios from "axios";
 import Card from "../components/Card";
 import Skeleton from "../components/Skeleton";
 import {Level} from "../types/level";
+import Button from "../components/Button";
 
 interface ExerciseSet {
     _id: string;
@@ -21,6 +22,7 @@ const defaultExerciseSets:ExerciseSet[] = [];
 const PreviewPage: React.FC = () => {
     const [sets, setSets] = useState<ExerciseSet[]>(defaultExerciseSets);
     const [isLoading, setIsLoading] = useState<boolean>(true);
+    const [sortedLevel, setSortedLevel] = useState<Level | null>(null);
     const {pathname} = useLocation();
     const sectionName: string = pathname.charAt(1).toUpperCase() + pathname.slice(2);
 
@@ -41,6 +43,7 @@ const PreviewPage: React.FC = () => {
         getSectionSets();
     }, [pathname]);
 
+    const contentBeforeMapping = sortedLevel ? sets.filter(set => set.level === sortedLevel) : sets;
 
     return (
         <div className="my-24 container mx-auto px-4">
@@ -48,9 +51,17 @@ const PreviewPage: React.FC = () => {
             <h1 className="text-6xl text-center font-bold text-orange-500 drop-shadow mb-8">
                 {sectionName}
             </h1>
+            <section className='flex justify-end gap-1 mb-2'>
+                <Button primary outline rounded small onClick={() => setSortedLevel('A1')}>A1</Button>
+                <Button primary outline rounded small onClick={() => setSortedLevel('A2')}>A2</Button>
+                <Button primary outline rounded small onClick={() => setSortedLevel('B1')}>B1</Button>
+                <Button primary outline rounded small onClick={() => setSortedLevel('B2')}>B2</Button>
+                <Button primary outline rounded small onClick={() => setSortedLevel('C1')}>C1</Button>
+                <Button primary outline rounded small onClick={() => setSortedLevel('C2')}>C2</Button>
+            </section>
             <section className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10">
                 {isLoading && <Skeleton items={4} card/>}
-                {sets.map((section, index) => {
+                {contentBeforeMapping.map((section, index) => {
                     return <Card
                                 title={section.name}
                                 text={section.description}
