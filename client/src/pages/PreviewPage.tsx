@@ -52,6 +52,7 @@ const PreviewPage: React.FC = () => {
                 {sectionName}
             </h1>
             <section className='flex justify-end gap-1 mb-2'>
+                <Button primary outline rounded small onClick={() => setSortedLevel(null)}>all</Button>
                 <Button primary outline rounded small onClick={() => setSortedLevel('A1')}>A1</Button>
                 <Button primary outline rounded small onClick={() => setSortedLevel('A2')}>A2</Button>
                 <Button primary outline rounded small onClick={() => setSortedLevel('B1')}>B1</Button>
