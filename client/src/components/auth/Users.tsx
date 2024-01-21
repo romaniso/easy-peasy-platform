@@ -1,18 +1,19 @@
 import {useState, useEffect} from "react";
-import axios from '../../api/axios';
-import useRefreshToken from "../../hooks/useRefreshToken";
+import useAxiosPrivate from "../../hooks/useAxiosPrivate";
+import {User} from "../../interfaces/user";
 
-const GET_USERS_URL = '/auth/users'
+const GET_USERS_URL = '/users'
 const Users = () => {
-    const [users, setUsers] = useState();
-    const refresh = useRefreshToken()
+    const [users, setUsers] = useState<[User]>();
+    const axiosPrivate = useAxiosPrivate();
+
     useEffect(() => {
         let isMounted = true;
         const controller = new AbortController();
 
         const getUsers = async () => {
             try {
-                const response = await axios.get(GET_USERS_URL,{
+                const response = await axiosPrivate.get(GET_USERS_URL,{
                     signal: controller.signal
                 })
                 console.log(response.data);
@@ -39,8 +40,6 @@ const Users = () => {
                     </ul>
                 ) : <p>No users to display</p>
             }
-            <button onClick={() => refresh()}>Refresh</button>
-            <br/>
         </article>
     )
 }
