@@ -27,14 +27,14 @@ const PersistLogin = () => {
 
     useEffect(() => {
         console.log(`isLoading: ${isLoading}`)
-        console.log(`aT: ${JSON.stringify(auth?.accessToken)}`);
+        // console.log(`aT: ${JSON.stringify(auth?.accessToken)}`);
     }, [isLoading]);
 
     return (
         <>
             {!persist
                 ? <Outlet/>
-                : isLoading
+                : isLoading // @TODO: add custom loader, maybe spinner
                 ? <p>Loading...</p>
                 : <Outlet/>
             }

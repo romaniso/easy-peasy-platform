@@ -1,6 +1,5 @@
 // import userLogOut from "../auth/userLogOut";
 import {Link, useNavigate} from "react-router-dom";
-import axios from '../api/axios';
 import React, {useState} from "react";
 //TODO: Handle single collapse issue (maybe by using a separate Dropdown component), consider how to change content (NavLink, or state)
 
@@ -21,7 +20,6 @@ import {
 import { MdDashboard } from "react-icons/md";
 import LogoImage from '../assets/images/small-logo.png';
 import ThemeToggle from "./ThemeToggle";
-import useAuth from "../hooks/useAuth";
 import useLogout from "../hooks/useLogout";
 
 type SidemenuSubitem = {

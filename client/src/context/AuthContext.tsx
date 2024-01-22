@@ -1,4 +1,4 @@
-import React, { useState, createContext, ReactNode, Dispatch, SetStateAction } from "react";
+import React, {useState, createContext, ReactNode, Dispatch, SetStateAction} from "react";
 
 interface AuthContextProps {
     auth: {
@@ -35,11 +35,6 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     const [auth, setAuth] = useState({});
     const [persist, setPersist] = useState(JSON.parse((localStorage.getItem('persist') as string)) || false);
 
-    // @TODO: DOESN"T LOOK OK, better to use state
-    // const isAuthenticated = () => {
-    //     // Add your authentication logic here, e.g., check if accessToken exists
-    //     return Boolean(auth.accessToken);
-    // };
     return (
         <AuthContext.Provider value={{ auth, setAuth, persist, setPersist}}>
             {children}

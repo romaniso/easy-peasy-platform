@@ -1,13 +1,13 @@
-import { useState } from "react";
-import { NavLink } from "react-router-dom";
+import {useEffect, useState} from "react";
+import {Link, NavLink} from "react-router-dom";
 import Dropdown from './Dropdown';
 import Button from "./Button";
 import { HiMenu, HiX } from "react-icons/hi";
 import ThemeToggle from "./ThemeToggle";
 import LogoImage from '../assets/images/small-logo.png';
 import useAuth from "../hooks/useAuth";
-import { FaUser  } from "react-icons/fa";
 import AvatarSample from '../assets/images/avatar.jpg'
+import DropdownAvatar from "./DropdownAvatar";
 
 export interface SubmenuItem {
     label: string;
@@ -17,16 +17,23 @@ export interface SubmenuItem {
 interface NavbarItem {
     label: string;
     path?: string;
-    isButton?: true;
     subPaths?: SubmenuItem[];
-    primary?: true;
-    secondary?: true;
-    profile?: true;
 }
 
 function Navbar() {
     const [isOpen, setIsOpen] = useState<boolean>(false);
-    // const { isAuthenticated, auth } = useAuth();
+    const [isLogged, setIsLogged] = useState<boolean>(false);
+    const { auth } = useAuth();
+
+    useEffect(() => {
+        console.log('Auth changed: ', auth);
+        if(auth?.user) {
+            setIsLogged(true);
+        } else {
+            setIsLogged(false);
+        }
+
+    }, [auth]);
 
     const links: NavbarItem[] = [
         { label: "Home", path: "/" },
@@ -48,18 +55,12 @@ function Navbar() {
                 { label: "Exercises", path: "/exercises" },
             ],
         },
-        // isAuthenticated()
-        //     ? { label: `Hi ${auth.user}!`, profile: true }
-        //     : { label: "Log in", path: "/auth", isButton: true, secondary: true },
-        { label: "Log in", path: "/auth", isButton: true, secondary: true },
     ];
 
     const renderedItems = links.map((link: NavbarItem) => (
         <li
             key={link.label}
-            className={`${
-                link.isButton ? "my-4" : "my-7 border-b md:border-none"
-            } md:ml-6 md:my-0 hover:text-orange-500 text-indigo-900 dark:text-indigo-200 font-semibold group`}
+            className="my-7 border-b md:border-none md:ml-6 md:my-0 hover:text-orange-500 text-indigo-900 dark:text-indigo-200 font-semibold group"
         >
             {link.path && (
                 <NavLink
@@ -70,33 +71,10 @@ function Navbar() {
                             : "font-semibold md:inline-block flex justify-between items-center"
                     }
                 >
-                    {link.isButton ? (
-                        <Button
-                            primary={link.primary}
-                            secondary={link.secondary}
-                            outline
-                            rounded
-                            className="py-1.5 px-4 text-sm w-full !rounded-full"
-                        >
-                            {link.label}
-                        </Button>
-                    ) :
-                        (
-                        link.label
-                    )}
+                    {link.label}
                 </NavLink>
             )}
             {link.subPaths && <Dropdown label={link.label} content={link.subPaths} />}
-            {link.profile && (
-                <div className='flex items-center gap-2'>
-                    {link.label}
-                    <div className='bg-indigo-200 dark:bg-transparent border border-indigo-900 dark:border-indigo-200 rounded-md w-10 h-10 overflow-hidden'>
-                        {/*Check if there is an avatar*/}
-                        <img src={AvatarSample} alt="avatar" className='object-cover'/>
-                        {/*<FaUser className='dark:text-indigo-200 text-indigo-900'/>*/}
-                    </div>
-                </div>
-            )}
         </li>
     ));
 
@@ -126,6 +104,21 @@ function Navbar() {
                     }`}
                 >
                     {renderedItems}
+
+                    {
+                        isLogged
+                            ? <DropdownAvatar username={auth.user as string} />
+                            : <Link to='/auth' className="ml-4">
+                                <Button
+                                    secondary
+                                    outline
+                                    rounded
+                                    className="py-1.5 px-4 text-sm w-full !rounded-full"
+                                >
+                                    Log in
+                                </Button>
+                            </Link>
+                    }
                 </ul>
             </nav>
         </header>
