@@ -14,7 +14,7 @@ function Hero() {
                     Your platform for learning English{" "}
                 </h2>
                 <p className="text-2xl font-light text-indigo-900 dark:text-indigo-300 max-w-xl drop-shadow">
-                    Here you can learn English with a banch of educational materials
+                    Here you can learn English with a bunch of educational materials
                     prepared for students of different level. You will find something
                     useful for yourself!
                 </p>

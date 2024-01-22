@@ -11,6 +11,7 @@ import {AxiosError} from 'axios';
 import {UserRole} from "../../enums/userRole";
 import useAuth from "../../hooks/useAuth";
 import {useLocation, useNavigate} from "react-router-dom";
+import Checkbox from "../Checkbox";
 
 const LOGIN_URL = '/auth'
 interface SignupProps {
@@ -22,7 +23,7 @@ interface ApiResponse {
     roles?: UserRole[];
 }
 const Login: React.FC<SignupProps> = ({ onToggleForm }) => {
-    const {setAuth} = useAuth();
+    const {setAuth, persist, setPersist} = useAuth();
 
     const navigate = useNavigate();
     const location = useLocation();
@@ -81,6 +82,12 @@ const Login: React.FC<SignupProps> = ({ onToggleForm }) => {
             errRef.current?.focus();
         }
     };
+    const togglePersist = () => {
+        setPersist(prev => !prev);
+    }
+    useEffect(() => {
+        localStorage.setItem('persist', JSON.stringify(persist));
+    }, [persist]);
 
     return (
             <Panel className="bg-indigo-50 flex justify-center max-w-3xl !p-0 m-4 overflow-hidden">
@@ -121,11 +128,9 @@ const Login: React.FC<SignupProps> = ({ onToggleForm }) => {
                         >
                             Password
                         </Password>
-                        {/*<div className="mt-6">*/}
-                        {/*    <a className="text-sm mt-4 text-indigo-700 dark:text-indigo-300" href="/">*/}
-                        {/*        Forget Password?*/}
-                        {/*    </a>*/}
-                        {/*</div>*/}
+                        <Checkbox checked={persist} name='persist' onChange={togglePersist}>
+                            Remember me?
+                        </Checkbox>
                         <p ref={errRef} className={errMsg ? 'block bg-red-500/10 dark:border dark:border-red-400 rounded p-1 text-sm font-bold text-red-500 opacity-100 transition-colors duration-500 -mt-5 shadow' : 'invisible absolute'} aria-live='assertive'>{errMsg}</p>
                         <Button primary rounded type="submit">
                             <>
