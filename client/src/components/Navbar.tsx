@@ -1,4 +1,4 @@
-import {useEffect, useState} from "react";
+import {ReactElement, useEffect, useState} from "react";
 import {Link, NavLink} from "react-router-dom";
 import Dropdown from './Dropdown';
 import Button from "./Button";
@@ -6,12 +6,12 @@ import { HiMenu, HiX } from "react-icons/hi";
 import ThemeToggle from "./ThemeToggle";
 import LogoImage from '../assets/images/small-logo.png';
 import useAuth from "../hooks/useAuth";
-import AvatarSample from '../assets/images/avatar.jpg'
 import DropdownAvatar from "./DropdownAvatar";
 
 export interface SubmenuItem {
     label: string;
     path: string;
+    icon?: ReactElement;
 }
 
 interface NavbarItem {
@@ -84,7 +84,8 @@ function Navbar() {
                 {/* LOGO */}
                 <div className='flex flex-col md:flex-row items-center gap-3'>
                     <NavLink to="/" className='flex items-center group'>
-                        <img src={LogoImage} alt="logo" className='w-8 group-hover:scale-110 transition-transform duration-500'/> <span className='text-lg font-semibold dark:text-indigo-300 text-indigo-800'>EASY-PEASY</span>
+                        <img src={LogoImage} alt="logo" className='w-8 group-hover:scale-110 transition-transform duration-500'/>
+                        <span className='text-lg font-semibold dark:text-indigo-300 text-indigo-800 group-hover:drop-shadow-purpleGlow transition-all duration-500'>EASY&nbsp;-&nbsp;PEASY</span>
                     </NavLink>
                     <p className='text-indigo-800/70 dark:text-orange-500/80 text-sm invisible absolute md:visible md:static selection:bg-orange-500'>#1 English learning platform</p>
                     <ThemeToggle />
@@ -113,7 +114,7 @@ function Navbar() {
                                     secondary
                                     outline
                                     rounded
-                                    className="py-1.5 px-4 text-sm w-full !rounded-full"
+                                    className="py-1.5 px-4 text-sm w-full !rounded-full whitespace-nowrap"
                                 >
                                     Log in
                                 </Button>

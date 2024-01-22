@@ -41,14 +41,16 @@ const Dropdown: React.FC<Dropdown> = ({label, content, avatar}) => {
                 <div className={`block md:absolute top-full w-full md:w-32 mt-4 md:-mt-2 md:-ml-3 dark:md:bg-stone-900/80 md:bg-white rounded-md md:shadow-md overflow-hidden ${avatar && 'md:-ml-11'}`}>
                     <ul>
                         {content.map((subItem) =>
-                            (subItem as AvatarItem).eventHandler ?
-                                <li className={`text-indigo-600 dark:text-indigo-300 md:px-4 py-3 md:py-2 border-indigo-50/20 border-b hover:bg-orange-100 dark:hover:bg-indigo-950 transition-colors duration-300 flex items-center gap-1 ${(subItem as AvatarItem).isLogoutBtn && 'bg-red-500/20 hover:bg-red-500/40'}`} onClick={(subItem as AvatarItem).eventHandler} key={subItem.label}
-                                >{(subItem as AvatarItem).icon}{subItem.label}
-                                </li>
+                            (subItem as AvatarItem).eventHandler
+                                ? (
+                                    <li className={`text-indigo-600 dark:text-indigo-300 md:px-4 py-3 md:py-2 border-indigo-50/20 border-b hover:bg-indigo-50 dark:hover:bg-indigo-950 transition-colors duration-300 flex items-center gap-1 ${(subItem as AvatarItem).isLogoutBtn && 'bg-red-500/20 hover:bg-red-500/40'}`} onClick={(subItem as AvatarItem).eventHandler} key={subItem.label}
+                                    >{subItem.icon}{subItem.label}
+                                    </li>
+                                )
                             : (
-                            <NavLink key={subItem.label} to={subItem.path as string}>
-                            <li className={`text-indigo-600 dark:text-indigo-300 md:px-4 py-3 md:py-2 border-indigo-50/20 border-b hover:bg-orange-100 dark:hover:bg-indigo-950 transition-colors duration-300 flex items-center gap-1 ${(subItem as AvatarItem).isLogoutBtn && 'bg-red-500/20 hover:bg-red-500/40'}`}>{(subItem as AvatarItem).icon}{subItem.label}</li>
-                            </NavLink>
+                                <NavLink key={subItem.label} to={subItem.path as string}>
+                                    <li className={`text-indigo-600 dark:text-indigo-300 md:px-4 py-3 md:py-2 border-indigo-50/20 border-b hover:bg-indigo-50 dark:hover:bg-indigo-950 transition-colors duration-300 flex items-center gap-1 ${(subItem as AvatarItem).isLogoutBtn && 'bg-red-500/20 hover:bg-red-500/40'}`}>{subItem.icon}{subItem.label}</li>
+                                </NavLink>
                             )
                         )}
                     </ul>
