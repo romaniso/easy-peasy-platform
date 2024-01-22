@@ -22,6 +22,7 @@ import { MdDashboard } from "react-icons/md";
 import LogoImage from '../assets/images/small-logo.png';
 import ThemeToggle from "./ThemeToggle";
 import useAuth from "../hooks/useAuth";
+import useLogout from "../hooks/useLogout";
 
 type SidemenuSubitem = {
     label: string;
@@ -40,14 +41,11 @@ const Sidebar: React.FC = () => {
     const [isSidebarOpenned, setIsSidebarOpenned] = useState<boolean>(true);
     const [expandedSubmenuItem, setExpandedSubmenuItem] = useState<number | null>(null);
     const navigate = useNavigate();
+    const logout = useLogout();
 
-    const handleLogout = async () => {
-        try {
-            await axios.get("http://localhost:5000/logout");
-            navigate("/auth");
-        } catch (error) {
-            console.error("Logout failed:", error);
-        }
+    const signOut = async () => {
+        await logout();
+        navigate('/')
     };
 
     const menu: SidemenuItem[] = [
@@ -110,7 +108,7 @@ const Sidebar: React.FC = () => {
             title: "Log out",
             icon: <BsBoxArrowRight />,
             path: "/",
-            event: handleLogout,
+            event: signOut,
         },
     ];
 

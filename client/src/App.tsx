@@ -10,6 +10,7 @@ import PreviewPage from "./pages/PreviewPage";
 import RequireAuth from "./components/RequireAuth";
 import UnauthorizedPage from "./pages/UnauthorizedPage";
 import {UserRole} from "./enums/userRole";
+import PersistLogin from "./components/auth/PersistLogin";
 import AdminPage from "./pages/AdminPage";
 
 const App : React.FC = () => {
@@ -32,13 +33,15 @@ const App : React.FC = () => {
                 <Route path="/reading/:exercise" element={<ExercisePage />} />
                 <Route path="/listening/:exercise" element={<ExercisePage />} />
                 {/*Protected Routes */}
-                {/*USER ROLE*/}
-                <Route element={<RequireAuth allowedRoles={[UserRole.User]}/>}>
-                    <Route path="/dashboard" element={<DashboardPage />} />
-                </Route>
-                {/*ADMIN ROLE*/}
-                <Route element={<RequireAuth allowedRoles={[UserRole.Admin]}/>}>
-                    <Route path="/admin" element={<AdminPage />} />
+                <Route element={<PersistLogin/>}>
+                    {/*USER ROLE*/}
+                    <Route element={<RequireAuth allowedRoles={[UserRole.User]}/>}>
+                        <Route path="/dashboard" element={<DashboardPage />} />
+                    </Route>
+                    {/*ADMIN ROLE*/}
+                    <Route element={<RequireAuth allowedRoles={[UserRole.Admin]}/>}>
+                        <Route path="/admin" element={<AdminPage />} />
+                    </Route>
                 </Route>
                 {/*Missing Path*/}
                 <Route path="*" element={<ErrorPage />} />
