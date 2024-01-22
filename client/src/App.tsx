@@ -12,6 +12,8 @@ import UnauthorizedPage from "./pages/UnauthorizedPage";
 import {UserRole} from "./enums/userRole";
 import PersistLogin from "./components/auth/PersistLogin";
 import AdminPage from "./pages/AdminPage";
+import ProfilePage from "./pages/ProfilePage";
+import SettingsPage from "./pages/SettingsPage";
 
 const App : React.FC = () => {
     return (
@@ -37,6 +39,12 @@ const App : React.FC = () => {
                     {/*USER ROLE*/}
                     <Route element={<RequireAuth allowedRoles={[UserRole.User]}/>}>
                         <Route path="/dashboard" element={<DashboardPage />} />
+                    </Route>
+                    <Route element={<RequireAuth allowedRoles={[UserRole.User]}/>}>
+                        <Route path="/profile" element={<ProfilePage />} />
+                    </Route>
+                    <Route element={<RequireAuth allowedRoles={[UserRole.User]}/>}>
+                        <Route path="/settings" element={<SettingsPage />} />
                     </Route>
                     {/*ADMIN ROLE*/}
                     <Route element={<RequireAuth allowedRoles={[UserRole.Admin]}/>}>
