@@ -18,6 +18,7 @@ interface InputProps extends InputRestProps {
     rounded?: boolean;
     outline?: boolean;
     icon?: ReactNode;
+    lg?: true;
     onChange: ((value: string) => void);
 }
 
@@ -32,6 +33,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
         rounded,
         outline,
         icon,
+        lg,
         ...rest
     },
     ref
@@ -66,9 +68,10 @@ const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
         {
             "text-indigo-700 dark:text-indigo-300 peer-focus:text-orange-500 peer-valid:text-orange-500":
             primary,
-            "text-orange-500 peer-focus:text-indigo-300 peer-valid:text-indigo-500":
+            "text-indigo-800 dark:peer-focus:text-indigo-300 peer-focus:text-orange-500 peer-valid:text-indigo-500":
             secondary,
             "text-xs -top-3 -left-0 !text-orange-500": value.length > 0,
+            '!text-lg': lg,
         }
     );
 
