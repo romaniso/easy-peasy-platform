@@ -3,7 +3,7 @@ import {SubmenuItem} from "./Navbar";
 import { FaChevronDown, FaChevronUp } from "react-icons/fa";
 
 import {NavLink} from "react-router-dom";
-import {AvatarItem} from "./DropdownAvatar";
+import {AvatarItem} from "./ProfilePreview";
 
 interface Dropdown {
     label: string;
