@@ -2,6 +2,7 @@ import {Outlet} from "react-router-dom";
 import {useState, useEffect} from "react";
 import useRefreshToken from "../../hooks/useRefreshToken";
 import useAuth from "../../hooks/useAuth";
+import Logo from '../../assets/images/small-logo.png'
 
 const PersistLogin = () => {
     const [isLoading, setIsLoading] = useState(true);
@@ -35,7 +36,9 @@ const PersistLogin = () => {
             {!persist
                 ? <Outlet/>
                 : isLoading // @TODO: add custom loader, maybe spinner
-                ? <p>Loading...</p>
+                ? <div className='w-screen h-screen bg-gradient-to-r from-[#F5F3FF] dark:from-[#202020] via-[#FAE8FF] dark:via-[#3b4058] to-[#C7D2FE] dark:to-[#202020] flex justify-center items-center'>
+                        <img src={Logo} alt="" className='w-[100px] animate-bounce'/>
+                    </div>
                 : <Outlet/>
             }
         </>
