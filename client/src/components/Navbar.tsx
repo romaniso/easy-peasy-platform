@@ -33,7 +33,7 @@ function Navbar() {
             setIsLogged(false);
         }
 
-    }, [auth]);
+    }, [JSON.stringify(auth)]);
 
     const links: NavbarItem[] = [
         { label: "Home", path: "/" },

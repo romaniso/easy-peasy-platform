@@ -20,39 +20,39 @@ const App : React.FC = () => {
         // <RootLayout>
         <Routes>
             {/* public pages */}
-            <Route path="/" element={<RootLayout />}>
-                <Route path="/" element={<HomePage />} />
-                <Route path="/auth" element={<AuthenticationPage />} />
-                <Route path='/unauthorized' element={<UnauthorizedPage/>} />
-                {/*Sections*/}
-                <Route path="/grammar" element={<PreviewPage />} />
-                <Route path="/vocabulary" element={<PreviewPage />} />
-                <Route path="/reading" element={<PreviewPage />} />
-                <Route path="/listening" element={<PreviewPage />} />
-                {/*ExerciseSets*/}
-                <Route path="/grammar/:exercise" element={<ExercisePage />} />
-                <Route path="/vocabulary/:exercise" element={<ExercisePage />} />
-                <Route path="/reading/:exercise" element={<ExercisePage />} />
-                <Route path="/listening/:exercise" element={<ExercisePage />} />
-                {/*Protected Routes */}
-                <Route element={<PersistLogin/>}>
-                    {/*USER ROLE*/}
-                    <Route element={<RequireAuth allowedRoles={[UserRole.User]}/>}>
-                        <Route path="/dashboard" element={<DashboardPage />} />
-                    </Route>
-                    <Route element={<RequireAuth allowedRoles={[UserRole.User]}/>}>
-                        <Route path="/profile" element={<ProfilePage />} />
-                    </Route>
-                    <Route element={<RequireAuth allowedRoles={[UserRole.User]}/>}>
-                        <Route path="/settings" element={<SettingsPage />} />
-                    </Route>
-                    {/*ADMIN ROLE*/}
-                    <Route element={<RequireAuth allowedRoles={[UserRole.Admin]}/>}>
-                        <Route path="/admin" element={<AdminPage />} />
-                    </Route>
+            <Route element={<PersistLogin/>}>
+                <Route path="/" element={<RootLayout />}>
+                    <Route path="/" element={<HomePage />} />
+                    <Route path="/auth" element={<AuthenticationPage />} />
+                    <Route path='/unauthorized' element={<UnauthorizedPage/>} />
+                    {/*Sections*/}
+                    <Route path="/grammar" element={<PreviewPage />} />
+                    <Route path="/vocabulary" element={<PreviewPage />} />
+                    <Route path="/reading" element={<PreviewPage />} />
+                    <Route path="/listening" element={<PreviewPage />} />
+                    {/*ExerciseSets*/}
+                    <Route path="/grammar/:exercise" element={<ExercisePage />} />
+                    <Route path="/vocabulary/:exercise" element={<ExercisePage />} />
+                    <Route path="/reading/:exercise" element={<ExercisePage />} />
+                    <Route path="/listening/:exercise" element={<ExercisePage />} />
+                    {/*Protected Routes */}
+                        {/*USER ROLE*/}
+                        <Route element={<RequireAuth allowedRoles={[UserRole.User]}/>}>
+                            <Route path="/dashboard" element={<DashboardPage />} />
+                        </Route>
+                        <Route element={<RequireAuth allowedRoles={[UserRole.User]}/>}>
+                            <Route path="/profile" element={<ProfilePage />} />
+                        </Route>
+                        <Route element={<RequireAuth allowedRoles={[UserRole.User]}/>}>
+                            <Route path="/settings" element={<SettingsPage />} />
+                        </Route>
+                        {/*ADMIN ROLE*/}
+                        <Route element={<RequireAuth allowedRoles={[UserRole.Admin]}/>}>
+                            <Route path="/admin" element={<AdminPage />} />
+                        </Route>
+                    {/*Missing Path*/}
+                    <Route path="*" element={<ErrorPage />} />
                 </Route>
-                {/*Missing Path*/}
-                <Route path="*" element={<ErrorPage />} />
             </Route>
         </Routes>
         // </RootLayout>

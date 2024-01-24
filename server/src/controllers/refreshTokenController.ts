@@ -13,6 +13,8 @@ export class RefreshTokenController {
 
             const foundUser = await User.findOne({refreshToken}).exec();
             if(!foundUser) return res.sendStatus(403);
+
+            console.log(foundUser);
             // evaluate jwt
             jwt.verify(
                 refreshToken,
@@ -23,7 +25,7 @@ export class RefreshTokenController {
                         return res.sendStatus(403); // invalid token
                     } else {
                         const accessToken = generateAccessToken((decoded as jwt.JwtPayload).username, (decoded as jwt.JwtPayload).roles);
-                        res.json({accessToken, roles: foundUser.roles});
+                        res.json({user: foundUser.username, accessToken, roles: foundUser.roles});
                     }
                 }
             )
