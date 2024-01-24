@@ -6,7 +6,7 @@ import { HiMenu, HiX } from "react-icons/hi";
 import ThemeToggle from "./ThemeToggle";
 import LogoImage from '../assets/images/small-logo.png';
 import useAuth from "../hooks/useAuth";
-import DropdownAvatar from "./DropdownAvatar";
+import ProfilePreview from "./ProfilePreview";
 
 export interface SubmenuItem {
     label: string;
@@ -108,7 +108,7 @@ function Navbar() {
 
                     {
                         isLogged
-                            ? <DropdownAvatar username={auth.user as string} />
+                            ? <ProfilePreview username={auth.user as string} dropdown />
                             : <Link to='/auth' className="ml-4">
                                 <Button
                                     secondary
