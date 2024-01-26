@@ -48,7 +48,7 @@ const Dropdown: React.FC<Dropdown> = ({label, content, avatar}) => {
                                     </li>
                                 )
                             : (
-                                <NavLink key={subItem.label} to={subItem.path as string}>
+                                <NavLink key={subItem.label} to={subItem.path as string} onClick={() => setIsCollapsed(!isCollapsed)}>
                                     <li className={`text-indigo-600 dark:text-indigo-300 md:px-4 py-3 md:py-2 border-indigo-50/20 border-b hover:bg-indigo-50 dark:hover:bg-indigo-950 transition-colors duration-300 flex items-center gap-1 ${(subItem as AvatarItem).isLogoutBtn && 'bg-red-500/20 hover:bg-red-500/40'}`}>{subItem.icon}{subItem.label}</li>
                                 </NavLink>
                             )
