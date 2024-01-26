@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import {SingleExercise} from "../../interfaces/singleExercise";
 import Exercise from "./Exercise";
-import Tabs from "../Tabs";
+import OrderTabs from "../OrderTabs";
 interface ExerciseSetProps {
     exercises: SingleExercise[];
 }
@@ -28,7 +28,7 @@ const ExerciseSet: React.FC<ExerciseSetProps> = ({ exercises }) => {
 
     return (
         <section>
-            <Tabs
+            <OrderTabs
                 items={exercises.length}
                 activeExercise={activeExercise}
                 setActiveItem={setActiveExercise}

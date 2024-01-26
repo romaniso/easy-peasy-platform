@@ -1,10 +1,10 @@
 import React from "react";
-interface TabsProps {
+interface OrderTabsProps {
     items: number;
     activeExercise: number;
     setActiveItem: (tab: number) => void;
 }
-const Tabs: React.FC<TabsProps> = ({ items, activeExercise, setActiveItem }) => {
+const OrderTabs: React.FC<OrderTabsProps> = ({ items, activeExercise, setActiveItem }) => {
     const handleTab = (tab: number): void => {
         setActiveItem(tab);
     };
@@ -36,4 +36,4 @@ const Tabs: React.FC<TabsProps> = ({ items, activeExercise, setActiveItem }) => 
     );
 }
 
-export default Tabs;
+export default OrderTabs;
