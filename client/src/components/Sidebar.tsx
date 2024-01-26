@@ -21,6 +21,8 @@ import ThemeToggle from "./ThemeToggle";
 import useLogout from "../hooks/useLogout";
 import useAuth from "../hooks/useAuth";
 import MiniAvatar from "./MiniAvatar";
+import {useToast} from "../context/ToastContext";
+import {ToastType} from "../enums/toast";
 
 type SidemenuSubitem = {
     label: string;
@@ -43,10 +45,11 @@ const Sidebar: React.FC = () => {
     const {auth} = useAuth();
     const navigate = useNavigate();
     const logout = useLogout();
-
+    const toast = useToast();
     const signOut = async () => {
         await logout();
         navigate("/");
+        toast?.open('You have been successfully logged out', ToastType.Success);
     };
 
     const menu: SidemenuItem[] = [
@@ -167,9 +170,9 @@ const Sidebar: React.FC = () => {
 
     return (
         <aside
-            className={`dark:bg-gradient-to-r dark:from-stone-800 dark:to-stone-900 bg-gradient-to-r from-indigo-50/20 to-white h-min-screen px-5 pt-2 pb-1 flex flex-col justify-between ${
-                isSidebarOpened ? "w-72" : "w-20 justify-around"
-            } relative duration-300 shadow`}
+            className={`flex-shrink-1 dark:bg-gradient-to-r dark:from-stone-800 dark:to-stone-900 bg-gradient-to-r from-indigo-50/20 to-white h-min-screen px-5 pt-2 pb-1 flex flex-col justify-between ${
+                isSidebarOpened ? "max-w-72" : "max-w-20 justify-around"
+            } relative duration-300 shadow z-10`}
         >
             <BsArrowLeftShort
                 className={`bg-indigo-50 text-stone-800 dark:bg-stone-900 dark:text-indigo-300 text-3xl rounded-full absolute -right-3 top-9 border border-indigo-200 cursor-pointer ${
