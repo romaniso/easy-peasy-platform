@@ -170,9 +170,9 @@ const Sidebar: React.FC = () => {
 
     return (
         <aside
-            className={`flex-shrink-1 dark:bg-gradient-to-r dark:from-stone-800 dark:to-stone-900 bg-gradient-to-r from-indigo-50/20 to-white h-min-screen px-5 pt-2 pb-1 flex flex-col justify-between ${
-                isSidebarOpened ? "max-w-72" : "max-w-20 justify-around"
-            } relative duration-300 shadow z-10`}
+            className={`flex-shrink-1 dark:bg-gradient-to-r dark:from-stone-800 dark:to-stone-900 bg-gradient-to-r from-indigo-50 to-white h-min-screen px-5 pt-2 pb-1 flex flex-col justify-between ${
+                isSidebarOpened ? "max-w-72 -mr-[185px] md:mr-0" : "max-w-20 justify-around"
+            } relative duration-300 shadow z-50 transition-all`}
         >
             <BsArrowLeftShort
                 className={`bg-indigo-50 text-stone-800 dark:bg-stone-900 dark:text-indigo-300 text-3xl rounded-full absolute -right-3 top-9 border border-indigo-200 cursor-pointer ${
