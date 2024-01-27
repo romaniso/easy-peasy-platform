@@ -2,6 +2,7 @@
 import Button from "../Button";
 import {FaSave} from "react-icons/fa";
 import React, {ReactElement} from "react";
+import RadioButton from "../RadioButton";
 
 export type MotivationItem = {
     text: string,
@@ -21,19 +22,7 @@ const MotivationForm: React.FC<MotivationFormProps> = ({items}) => {
             <div className='flex-shrink w-full grid grid-cols-1 md:grid-cols-2 gap-3'>
                 {items.map(item => {
                     return (
-                        <label
-                            key={item.text}
-                            htmlFor={item.text}
-                            className='relative inline-block w-full h-full rounded-xl shadow-md cursor-pointer group overflow-hidden'
-                        >
-                            <input type="radio" id={item.text} name={item.text} value={item.text} className='absolute inset-0 w-full h-full inline-block appearance-none rounded-xl outline-0 transition-colors cursor-pointer peer'/>
-                            <div className='flex justify-start items-center h-full relative z-10 gap-3 py-2 px-4 lg:py-4 lg:px-4 text-indigo-800 dark:text-indigo-200 bg-indigo-50 dark:bg-stone-800 group-hover:bg-indigo-100 dark:group-hover:bg-stone-900 peer-checked:bg-indigo-100 dark:peer-checked:bg-black/30 peer-checked:text-orange-500'>
-                                <span className='text-xl lg:text-2xl'>
-                                    {item.icon}
-                                </span>
-                                <span className='font-semibold lg:text-lg'>{item.text}</span>
-                            </div>
-                        </label>
+                        <RadioButton item={item} key={item.text}/>
                     )
                 })}
             </div>
