@@ -38,7 +38,7 @@ const Dropdown: React.FC<Dropdown> = ({label, content, avatar}) => {
                 <span>{icon}</span>
             </div>
             {isCollapsed && (
-                <div className={`block md:absolute top-full w-full md:w-32 mt-4 md:-mt-2 md:-ml-3 dark:md:bg-stone-900/80 md:bg-white rounded-md md:shadow-md overflow-hidden ${avatar && 'md:-ml-11'}`}>
+                <div className={`block md:absolute top-full w-full md:w-32 mt-4 md:-mt-2 md:-ml-3 dark:md:bg-stone-900/80 md:bg-white rounded-md md:shadow-md overflow-hidden ${avatar && 'md:-ml-12'}`}>
                     <ul>
                         {content.map((subItem) =>
                             (subItem as AvatarItem).eventHandler
