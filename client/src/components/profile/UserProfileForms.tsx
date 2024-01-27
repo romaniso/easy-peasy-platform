@@ -1,13 +1,19 @@
 import React, {ReactElement, useState} from "react";
 import IconsTabBar from "../IconsTabBar";
-import { MdFamilyRestroom, MdOutlineWorkOutline, MdOutlineSelfImprovement } from "react-icons/md";
-import { CiViewList, CiTrophy, CiFootball  } from "react-icons/ci";
-import { GiRoad } from "react-icons/gi";
-import { FaSchool, FaUmbrellaBeach, FaFlagUsa } from "react-icons/fa";
+import { MdFamilyRestroom, MdOutlineWorkOutline, MdOutlineSelfImprovement, MdOutlineSportsFootball, MdOutlineScience, MdForest } from "react-icons/md";
+import { CiViewList, CiTrophy, CiFootball, CiMusicNote1, CiLaptop } from "react-icons/ci";
+import { GiRoad, GiFlowerHat, GiAncientColumns, GiReceiveMoney, GiCat, GiButterfly, GiCook } from "react-icons/gi";
+import { TiPen } from "react-icons/ti";
+import { TbMickey } from "react-icons/tb";
+import { SlSocialInstagram } from "react-icons/sl";
+import { IoIosFitness } from "react-icons/io";
+import { FaSchool, FaUmbrellaBeach, FaFlagUsa, FaFilm, FaBookReader, FaPaintBrush,FaGamepad } from "react-icons/fa";
+import { RiMedicineBottleFill } from "react-icons/ri";
 import { PiExamBold } from "react-icons/pi";
+import { HiOutlineSpeakerphone } from "react-icons/hi";
 import PersonalInformationForm from "./PersonalInformationForm";
 import MotivationForm, {MotivationItem} from "./MotivationForm";
-import InterestsForm from "./InterestsForm";
+import InterestsForm, {InterestItem} from "./InterestsForm";
 
 
 const UserProfileForms = () => {
@@ -27,6 +33,32 @@ const UserProfileForms = () => {
         {text: 'Emigration', icon: <GiRoad/>},
         {text: 'Culture Interest', icon: <FaFlagUsa/>},
     ]
+    const interestItems: InterestItem[] = [
+        {text: 'Music', icon: <CiMusicNote1/>},
+        {text: 'Films', icon: <FaFilm/>},
+        {text: 'Reading', icon: <FaBookReader/>},
+        {text: 'Art', icon: <FaPaintBrush/>},
+        {text: 'Sports', icon: <MdOutlineSportsFootball/>},
+        {text: 'Gaming', icon: <FaGamepad/>},
+        {text: 'IT', icon: <CiLaptop/>},
+        {text: 'Fashion', icon: <GiFlowerHat/>},
+        {text: 'Science', icon: <MdOutlineScience/>},
+        {text: 'History', icon: <GiAncientColumns/>},
+        {text: 'Economics', icon: <GiReceiveMoney/>},
+        {text: 'Nature', icon: <MdForest/>},
+        {text: 'Animals', icon: <GiCat />},
+        {text: 'Beauty', icon: <GiButterfly/>},
+        {text: 'Marketing', icon: <HiOutlineSpeakerphone/>},
+        {text: 'Social Media', icon: <SlSocialInstagram />},
+        {text: 'Travelling', icon: <FaUmbrellaBeach/>},
+        {text: 'Cultures', icon: <FaFlagUsa/>},
+        {text: 'Cooking', icon: <GiCook/>},
+        {text: 'Content Making', icon: <TiPen/>},
+        {text: 'Medicine', icon: <RiMedicineBottleFill/>},
+        {text: 'Fitness', icon: <IoIosFitness/>},
+        {text: 'Cartoons', icon: <TbMickey/>},
+    ]
+
     let content: ReactElement | null = null;
 
     switch (activeTab) {
@@ -37,7 +69,7 @@ const UserProfileForms = () => {
             content = <MotivationForm items={motivationItems}/>
             break;
         case 'interests':
-            content = <InterestsForm/>
+            content = <InterestsForm items={interestItems}/>
             break;
     }
 
