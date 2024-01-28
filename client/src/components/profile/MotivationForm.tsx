@@ -2,7 +2,7 @@
 import Button from "../Button";
 import {FaSave} from "react-icons/fa";
 import React, {ReactElement} from "react";
-import RadioButton from "../RadioButton";
+import CheckboxButton from "../CheckboxButton";
 
 export type MotivationItem = {
     text: string,
@@ -22,7 +22,7 @@ const MotivationForm: React.FC<MotivationFormProps> = ({items}) => {
             <div className='flex-shrink w-full grid grid-cols-1 md:grid-cols-2 gap-3'>
                 {items.map(item => {
                     return (
-                        <RadioButton item={item} key={item.text}/>
+                        <CheckboxButton item={item} key={item.text}/>
                     )
                 })}
             </div>

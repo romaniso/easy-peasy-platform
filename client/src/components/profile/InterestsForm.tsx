@@ -1,7 +1,7 @@
 import Button from "../Button";
 import {FaSave} from "react-icons/fa";
 import React, {ReactElement} from "react";
-import RadioButton from "../RadioButton";
+import CheckboxButton from "../CheckboxButton";
 
 export type InterestItem = {
     text: string,
@@ -20,7 +20,7 @@ const InterestsForm: React.FC<InterestsFormProps> = ({items}) => {
             <div className='flex-shrink w-full flex flex-wrap gap-2 lg:gap-4'>
                 {items.map(item => {
                     return (
-                        <RadioButton item={item} key={item.text} small/>
+                        <CheckboxButton item={item} key={item.text} small/>
                     )
                 })}
             </div>
