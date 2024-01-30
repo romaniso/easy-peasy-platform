@@ -1,30 +1,33 @@
-import React, { useState } from 'react';
+import React, {DragEvent, useState} from 'react';
 import className from 'classnames';
 import { FaUpload } from 'react-icons/fa';
 import { useDroppable } from '@dnd-kit/core';
 
-const ImageDropZone = ({ onImageDrop }) => {
+interface ImageDropZoneProps  {
+    onImageDrop:  (files: FileList) => void;
+}
+const ImageDropZone: React.FC<ImageDropZoneProps> = ({ onImageDrop }) => {
     const [isDragging, setIsDragging] = useState(false);
     const { setNodeRef } = useDroppable({ id: 'image-drop-zone' });
 
-    const handleOver = (event) => {
+    const handleOver = (event: DragEvent<HTMLDivElement>) => {
         event.preventDefault();
-        console.log('Over');
         setIsDragging(true);
     };
-    const handleLeave = (event) => {
+    const handleLeave = (event: DragEvent<HTMLDivElement>) => {
         event.preventDefault();
-        console.log('Exit');
         setIsDragging(false);
     }
-    const handleDrop = (event) => {
+    const handleDrop = (event: DragEvent<HTMLDivElement>) => {
         event.preventDefault();
         const files = event.dataTransfer.files;
         onImageDrop(files);
     };
-    const handleFileInputChange = (event) => {
+    const handleFileInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const files = event.target.files;
-        onImageDrop(files);
+        if(files){
+            onImageDrop(files);
+        }
     };
 
     const imageDropZoneClasses = className(
