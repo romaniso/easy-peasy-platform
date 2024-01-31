@@ -22,9 +22,15 @@ const useAxiosPrivate = () => {
                 const prevRequest = error?.config;
                 if(error?.response?.status === 403 && !prevRequest?.sent) {
                     prevRequest.sent = true;
-                    const newAccessToken = await refresh();
-                    prevRequest.headers['Authorization'] = `Bearer ${newAccessToken}`;
-                    return axiosPrivate(prevRequest);
+                    try {
+                        const newAccessToken = await refresh();
+                        prevRequest.headers['Authorization'] = `Bearer ${newAccessToken}`;
+                        return axiosPrivate(prevRequest);
+                    } catch (refreshError) {
+                        console.error('Error refreshing access token:', refreshError);
+                        // Handle refresh error gracefully
+                        return Promise.reject(error);
+                    }
                 }
                 return Promise.reject(error);
             }

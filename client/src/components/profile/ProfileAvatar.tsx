@@ -1,44 +1,88 @@
 import ToolTip from "../ToolTip";
 import {SlPicture} from "react-icons/sl";
-import React, {useState} from "react";
+import React, {useEffect, useRef, useState} from "react";
 import Modal from "../Modal";
 import Button from "../Button";
 import ImageDropZone from "../ImageDropZone";
-import axios from "../../api/axios";
+import {AxiosError} from "axios";
+// import axios from '../../api/axios'
+import useAxiosPrivate from "../../hooks/useAxiosPrivate";
+// import useAuth from "../../hooks/useAuth";
 
+const AVATAR_UPLOAD_URL = '/users/upload'
 const ProfileAvatar: React.FC = () => {
     const [showModal, setShowModal] = useState(false);
-    const [selectedImage, setSelectedImage] = useState(null);
+    const [selectedImage, setSelectedImage] = useState<File | null>(null);
+    const [isLoading, setIsLoading] = useState(false);
+    const [errMsg, setErrMsg] = useState<string>('');
+    const axiosPrivate = useAxiosPrivate();
+    // const {auth} = useAuth();
 
-    const handleImageDrop = async (files) => {
-        // Assuming only one file is dropped
-        const imageFile = files[0];
+    const errRef = useRef<HTMLParagraphElement>(null);
 
-        // Optional: Show a preview of the dropped image
-        const imageUrl = URL.createObjectURL(imageFile);
-        setSelectedImage(imageUrl);
-        setShowModal(false);
+    const validateAvatarImage = (imageFile: File) => {
+        const allowedFormats = ["image/jpeg", "image/jpg", "image/png", "image/svg+xml", "image/webp"];
+        if (!allowedFormats.includes(imageFile.type)) {
+            const errMessage: string = "Invalid file format. Please upload a valid image."
+            setErrMsg(errMessage);
+            throw new Error(errMessage);
+        }
+        // Check file size
+        const maxSize = 5 * 1024 * 1024; // 10 MB in bytes
+        if (imageFile.size > maxSize) {
+            const errMessage = "File size exceeds the maximum allowed size (5 MB).";
+            setErrMsg(errMessage);
+            throw new Error(errMessage);
+        }
+    }
 
-        console.log(imageFile);
-
-        // TODO: Add your logic to save the image file (e.g., using axios)
+    const handleImageDrop = async (file: File) => {
+        setIsLoading(true);
+        validateAvatarImage(file);
         try {
             const formData = new FormData();
-            formData.append('image', imageFile);
-
-            console.log(formData);
-            // Replace 'YOUR_UPLOAD_ENDPOINT' with your actual upload endpoint
-            // const response = await axios.post('YOUR_UPLOAD_ENDPOINT', formData);
-
-            // console.log('Image uploaded successfully:', response.data);
-        } catch (error) {
-            console.error('Error uploading image:', error);
+            formData.append('avatar', file);
+            const response = await axiosPrivate.post(AVATAR_UPLOAD_URL, formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                },
+            });
+            // Optional: Show a preview of the dropped image
+            setSelectedImage(file);
+            setIsLoading(false);
+            setShowModal(false);
+            console.log('Image uploaded successfully:', response.data);
+        } catch (err) {
+            if(!(err instanceof AxiosError) || !err.response) {
+                setErrMsg('No Server Response');
+            }
+            //@TODO: handle error types message
+            // else if (err.response?.status === 400) {
+            //     setErrMsg('Image upload failed. Please, try again.');
+            //     // setErrMsg(err.response.data.message || 'Missing Username or Password');
+            // } else if (err.response?.status === 401) {
+            //     setErrMsg('Image upload failed. Please, try again.');
+            //     // setErrMsg(err.response.data.message || 'Unauthorized');
+            // }
+            else {
+                setErrMsg('Image upload failed. Please, try again.');
+            }
+            errRef.current?.focus();
+            setIsLoading(false);
         }
     };
 
+    useEffect(() => {
+
+        // Reset error message
+        setErrMsg("")
+        // setSelectedImage(null);
+        setIsLoading(false);
+    }, [showModal]);
+
     return (
         <div className='w-[100px] h-[100px] md:w-[230px] md:h-[230px] overflow-hidden rounded-full flex-shrink-0 relative shadow-md border border-indigo-200 dark:border-indigo-800 group'>
-            <img src={selectedImage ? selectedImage : "https://avatar.iran.liara.run/public/boy"} alt="" className='w-full h-full object-cover group-hover:brightness-50 transition-all duration-300'/>
+            <img src={selectedImage ? URL.createObjectURL(selectedImage) : "https://avatar.iran.liara.run/public/boy"} alt="" className='w-full h-full object-cover group-hover:brightness-50 transition-all duration-300'/>
             <button className='absolute bottom-0 inset-x-0 h-1/4 bg-black/50 flex justify-center items-center group-hover:h-[80px] transition-all duration-300 group-hover:bg-black/70' onClick={() => setShowModal(!showModal)}>
                 <ToolTip tooltip='Upload your photo'>
                     <SlPicture className='text-2xl text-indigo-200'/>
@@ -47,18 +91,32 @@ const ProfileAvatar: React.FC = () => {
             {showModal
                 && <Modal
                     onClose={() => setShowModal(false)}
-                    size='w-2/6 h-3/6'
-                    actionBar={<Button primary rounded onClick={() => setShowModal(false)}>Got It</Button>}
+                    size='!w-2/6 h-3/6'
+                    actionBar={
+                    errMsg
+                        ? <div className='flex items-center gap-2'>
+                            <Button secondary rounded onClick={() => setShowModal(false)}>Go back</Button>
+                            <Button className='!bg-green-500 hover:!bg-green-600' primary rounded onClick={() => setErrMsg('')}>Try again</Button>
+                        </div>
+                        : <Button secondary rounded onClick={() => setShowModal(false)}>Go Back</Button>
+                }
                 >
                     <div className='h-full'>
                         <h5 className='text-orange-500 text-xl font-bold mb-2 drop-shadow-sm'>Upload your photo
                         </h5>
                         <div className='mx-auto h-5/6'>
-                            <ImageDropZone onImageDrop={handleImageDrop} />
+                            {/*Err*/}
+                            <p ref={errRef} className={errMsg ? 'h-full flex justify-center text-center items-center p-2 bg-red-500/10 dark:border dark:border-red-400 rounded p-1 text-sm font-bold text-red-500 opacity-100 transition-colors duration-500 shadow' : 'invisible absolute'} aria-live='assertive'>{errMsg}</p>
+                            {/*Content*/}
+                            {errMsg.length === 0 && <ImageDropZone onImageDrop={handleImageDrop} />}
                         </div>
                     </div>
                 </Modal>
             }
+            {/*@TODO: TEMPORAL*/}
+            {isLoading && <div className='absolute top-0 left-0 w-full h-full backdrop-blur-md rounded-full overflow-hidden text-white flex justify-center items-center z-50'>
+                Loading...
+            </div>}
         </div>
     )
 }

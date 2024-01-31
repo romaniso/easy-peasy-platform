@@ -4,7 +4,7 @@ import { FaUpload } from 'react-icons/fa';
 import { useDroppable } from '@dnd-kit/core';
 
 interface ImageDropZoneProps  {
-    onImageDrop:  (files: FileList) => void;
+    onImageDrop:  (files: File) => void;
 }
 const ImageDropZone: React.FC<ImageDropZoneProps> = ({ onImageDrop }) => {
     const [isDragging, setIsDragging] = useState(false);
@@ -20,13 +20,13 @@ const ImageDropZone: React.FC<ImageDropZoneProps> = ({ onImageDrop }) => {
     }
     const handleDrop = (event: DragEvent<HTMLDivElement>) => {
         event.preventDefault();
-        const files = event.dataTransfer.files;
-        onImageDrop(files);
+        const file = event.dataTransfer.files[0];
+        onImageDrop(file);
     };
     const handleFileInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        const files = event.target.files;
-        if(files){
-            onImageDrop(files);
+        const file = (event.target.files as FileList)[0];
+        if(file){
+            onImageDrop(file);
         }
     };
 
@@ -46,20 +46,20 @@ const ImageDropZone: React.FC<ImageDropZoneProps> = ({ onImageDrop }) => {
         >
             <p>Drag and drop your image here</p>
             <label
-                htmlFor="avatar"
+                htmlFor="image"
                 className="underline cursor-pointer text-center hover:text-orange-500 transition-colors"
             >
                 <FaUpload className="text-3xl mx-auto mb-3" /> or choose a profile picture
                 <input
                     type="file"
-                    id="avatar"
-                    name="avatar"
+                    id="image"
+                    name="image"
                     accept="image/*"
                     className="opacity-0 absolute -z-10"
                     onChange={handleFileInputChange}
                 />
             </label>
-            <p>Max size is 130 MB</p>
+            <p>Max size is 5 MB</p>
         </div>
     );
 };

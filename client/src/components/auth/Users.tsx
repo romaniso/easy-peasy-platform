@@ -20,7 +20,6 @@ const Users = () => {
                 const response = await axiosPrivate.get(GET_USERS_URL,{
                     signal: controller.signal
                 })
-                console.log(response.data);
                 isMounted && setUsers(response.data);
             } catch (err) {
                 const errType = (err as AxiosError).name;
