@@ -43,16 +43,31 @@ export class UserController {
     }
     async updateUser(req: Request, res: Response) {
         try {
-            const {username} = req.body;
-            const user = await User.findOne({username});
-            if(!user) {
-                return res.status(400).json({message: `Username ${username} was not found`})
+            const { username } = req.body;
+            const user = await User.findOne({ username });
+            if (!user) {
+                return res.status(400).json({ message: `Username ${username} was not found` });
             }
-            console.log('Update User. Mock method');
             // Edition logic
+            console.log('Update User. Mock method');
             return res.status(200).json(user);
         } catch (err) {
             console.error(err);
+            return res.status(500).json({ error: 'Error updating user' });
+        }
+    }
+    async uploadAvatar(req: Request, res: Response) {
+        try {
+            console.log(req.file);
+            if(req.file){
+                console.log('Successfully uploaded')
+                return res.status(200).json('Uploaded.')
+            } else {
+                return res.status(400).json('Bad client request.')
+            }
+        } catch (err) {
+            console.error(err);
+            return res.status(500).json({error: 'Error uploading avatar.'})
         }
     }
 }

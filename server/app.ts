@@ -13,6 +13,7 @@ import {refreshRouter} from "./src/routes/refreshRouter";
 import {logoutRouter} from "./src/routes/logoutRouter";
 import {credentials} from "./src/middleware/credentials";
 import {connectDB} from "./config/dbConn";
+import {config} from "./config/config";
 const PORT: number = parseInt(process.env.PORT as string, 10) || 5000;
 
 

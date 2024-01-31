@@ -15,7 +15,8 @@
     "moduleResolution": "node",
     "outDir": "dist",
     "strict": true,
-    "target": "es2021"
+    "target": "es2021",
+    "experimentalDecorators": true,
   },
 //  "outDir": "./dist",
 //  "rootDir": "./src",

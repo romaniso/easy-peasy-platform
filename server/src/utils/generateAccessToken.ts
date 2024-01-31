@@ -9,9 +9,7 @@ export const generateAccessToken = (
     roles: RoleName[],
     refresh?: true
 ): string => {
-    const payload = refresh
-        ? {username}
-        : {
+    const payload = {
         'UserInfo': {
             // id, // Convert ObjectId to string if needed
             username,
