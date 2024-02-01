@@ -5,18 +5,17 @@ import Modal from "../Modal";
 import Button from "../Button";
 import ImageDropZone from "../ImageDropZone";
 import {AxiosError} from "axios";
-// import axios from '../../api/axios'
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
-// import useAuth from "../../hooks/useAuth";
+import useAuth from "../../hooks/useAuth";
 
 const AVATAR_UPLOAD_URL = '/users/upload'
 const ProfileAvatar: React.FC = () => {
     const [showModal, setShowModal] = useState(false);
-    const [selectedImage, setSelectedImage] = useState<File | null>(null);
+    const [selectedImageUrl, setSelectedImageUrl] = useState<string | null>(null);
     const [isLoading, setIsLoading] = useState(false);
     const [errMsg, setErrMsg] = useState<string>('');
     const axiosPrivate = useAxiosPrivate();
-    // const {auth} = useAuth();
+    const {auth, setAuth} = useAuth();
 
     const errRef = useRef<HTMLParagraphElement>(null);
 
@@ -42,15 +41,25 @@ const ProfileAvatar: React.FC = () => {
         try {
             const formData = new FormData();
             formData.append('avatar', file);
+            formData.append('userName', auth.user as string);
             const response = await axiosPrivate.post(AVATAR_UPLOAD_URL, formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                 },
             });
+            const {imagePath} = response.data;
+            console.log(response.data)
+
+            setAuth(prev => {
+                return {
+                    ...prev,
+                    avatar: imagePath
+                }
+            })
             // Optional: Show a preview of the dropped image
-            setSelectedImage(file);
-            setIsLoading(false);
+            setSelectedImageUrl(imagePath);
             setShowModal(false);
+            setIsLoading(false);
             console.log('Image uploaded successfully:', response.data);
         } catch (err) {
             if(!(err instanceof AxiosError) || !err.response) {
@@ -73,7 +82,7 @@ const ProfileAvatar: React.FC = () => {
     };
 
     useEffect(() => {
-
+        console.log(auth);
         // Reset error message
         setErrMsg("")
         // setSelectedImage(null);
@@ -82,7 +91,8 @@ const ProfileAvatar: React.FC = () => {
 
     return (
         <div className='w-[100px] h-[100px] md:w-[230px] md:h-[230px] overflow-hidden rounded-full flex-shrink-0 relative shadow-md border border-indigo-200 dark:border-indigo-800 group'>
-            <img src={selectedImage ? URL.createObjectURL(selectedImage) : "https://avatar.iran.liara.run/public/boy"} alt="" className='w-full h-full object-cover group-hover:brightness-50 transition-all duration-300'/>
+            {/*@TODO: should be fetched from user.avatar not from fetch response*/}
+            <img src={auth.avatar ? auth.avatar : "https://avatar.iran.liara.run/public/boy"} alt="" className='w-full h-full object-cover group-hover:brightness-50 transition-all duration-300'/>
             <button className='absolute bottom-0 inset-x-0 h-1/4 bg-black/50 flex justify-center items-center group-hover:h-[80px] transition-all duration-300 group-hover:bg-black/70' onClick={() => setShowModal(!showModal)}>
                 <ToolTip tooltip='Upload your photo'>
                     <SlPicture className='text-2xl text-indigo-200'/>

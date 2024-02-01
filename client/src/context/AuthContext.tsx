@@ -1,4 +1,4 @@
-import React, {useState, createContext, ReactNode, Dispatch, SetStateAction} from "react";
+import React, {useState, createContext, ReactNode, Dispatch, SetStateAction, useEffect} from "react";
 
 interface AuthContextProps {
     auth: {
@@ -6,6 +6,7 @@ interface AuthContextProps {
         pwd?: string;
         roles?: string[];
         accessToken?: string;
+        avatar?: string;
     };
     setAuth: Dispatch<SetStateAction<{
         user?: string;

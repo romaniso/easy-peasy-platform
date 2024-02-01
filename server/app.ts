@@ -14,6 +14,7 @@ import {logoutRouter} from "./src/routes/logoutRouter";
 import {credentials} from "./src/middleware/credentials";
 import {connectDB} from "./config/dbConn";
 import {config} from "./config/config";
+import {getFileStream} from "./src/services/s3";
 const PORT: number = parseInt(process.env.PORT as string, 10) || 5000;
 
 
@@ -47,6 +48,12 @@ app.use('/logout', logoutRouter);
 // verified routes
 app.use(verifyJWT);
 app.use('/users', userRouter);
+app.get('/avatars/:key', (req, res) => {
+    const key = req.params.key;
+    const readSteam = getFileStream(key);
+
+    readSteam.pipe(res)
+})
 
 // 404
 app.all('*', (req,res) => {

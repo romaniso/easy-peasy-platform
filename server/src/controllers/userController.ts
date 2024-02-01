@@ -1,5 +1,7 @@
 import {Request, Response} from "express";
 import {User} from "../models/User";
+import {uploadFile} from "../services/s3";
+import {unlink} from 'fs/promises';
 
 export class UserController {
     async getUser(req: Request, res: Response) {
@@ -58,10 +60,16 @@ export class UserController {
     }
     async uploadAvatar(req: Request, res: Response) {
         try {
-            console.log(req.file);
             if(req.file){
-                console.log('Successfully uploaded')
-                return res.status(200).json('Uploaded.')
+
+                //@TODO: optimization of size before landing of S3
+                const avatarUrl = await uploadFile(req.file);
+                await unlink(req.file.path);
+
+                // Updating User document
+                const {userName} = req.body;
+                await User.updateOne({ username: userName }, { $set: { avatar:  avatarUrl} });
+                return res.status(200).json({imagePath: avatarUrl})
             } else {
                 return res.status(400).json('Bad client request.')
             }
