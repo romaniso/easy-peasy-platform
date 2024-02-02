@@ -24,10 +24,23 @@ export async function uploadFile(file: Express.Multer.File) {
     }
     await s3.upload(uploadParams).promise();
 
-    // Construct the URL based on the bucket name and file key
-    const imageUrl = `https://${config.awsAvatarsBucketName}.s3.amazonaws.com/${file.filename}`;
+    return `https://${config.awsAvatarsBucketName}.s3.amazonaws.com/${file.filename}`;
+}
 
-    return imageUrl;
+export async function deleteObjectByUrl(url: string) {
+    const urlParts = url.split('/');
+    const fileKey = urlParts[urlParts.length - 1];
+
+    const params = {
+        Bucket: config.awsAvatarsBucketName as string,
+        Key: fileKey,
+    };
+    try {
+        await s3.deleteObject(params).promise();
+        console.log(`Object deleted successfully from ${config.awsAvatarsBucketName}`);
+    } catch (error) {
+        console.error(`Error deleting object: ${error}`);
+    }
 }
 
 export function getFileStream(fileKey: Key) {
@@ -37,4 +50,3 @@ export function getFileStream(fileKey: Key) {
     }
     return s3.getObject(downloadParams).createReadStream();
 }
-//downloads a file from s3
