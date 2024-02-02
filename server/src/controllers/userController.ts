@@ -1,6 +1,6 @@
 import {Request, Response} from "express";
 import {User} from "../models/User";
-import {uploadFile} from "../services/s3";
+import {deleteObjectByUrl, uploadFile} from "../services/s3";
 import {unlink} from 'fs/promises';
 
 export class UserController {
@@ -60,22 +60,20 @@ export class UserController {
     }
     async uploadAvatar(req: Request, res: Response) {
         try {
-            if(req.file){
-
-                //@TODO: optimization of size before landing of S3
-                const avatarUrl = await uploadFile(req.file);
-                await unlink(req.file.path);
-
-                // Updating User document
-                const {userName} = req.body;
-                await User.updateOne({ username: userName }, { $set: { avatar:  avatarUrl} });
-                return res.status(200).json({imagePath: avatarUrl})
-            } else {
-                return res.status(400).json('Bad client request.')
+            if (!req.file) {
+                return res.status(400).json('Bad client request.');
             }
+            const { userName, prevAvatar } = req.body;
+            const avatarUrl = await uploadFile(req.file);
+            await unlink(req.file.path);
+            if (prevAvatar) {
+                await deleteObjectByUrl(prevAvatar);
+            }
+            await User.updateOne({ username: userName }, { $set: { avatar: avatarUrl } });
+            return res.status(200).json({ imagePath: avatarUrl });
         } catch (err) {
             console.error(err);
-            return res.status(500).json({error: 'Error uploading avatar.'})
+            return res.status(500).json({ error: 'Error uploading avatar.' });
         }
     }
 }
