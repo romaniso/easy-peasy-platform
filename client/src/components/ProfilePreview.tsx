@@ -5,6 +5,7 @@ import useLogout from "../hooks/useLogout";
 import MiniAvatar from "./MiniAvatar";
 import {useToast} from "../context/ToastContext";
 import {ToastType} from "../enums/toast";
+import useUser from "../hooks/useUser";
 
 
 export interface AvatarItem {
@@ -15,11 +16,10 @@ export interface AvatarItem {
     eventHandler?: () => void;
 }
 interface DropdownAvatarProps {
-    username: string
-    userAvatar?: string;
     dropdown?: true;
 }
-const ProfilePreview: React.FC<DropdownAvatarProps>  = ({username, userAvatar, dropdown}) => {
+const ProfilePreview: React.FC<DropdownAvatarProps>  = ({ dropdown}) => {
+    const {user} = useUser();
     const logout = useLogout();
     const toast = useToast();
 
@@ -29,15 +29,15 @@ const ProfilePreview: React.FC<DropdownAvatarProps>  = ({username, userAvatar, d
     }
     return (
         <div className='flex md:items-center gap-1 md:ml-4 md:rounded-full md:border border-indigo-300 md:shadow md:pr-2 cursor-pointer hover:bg-white/40 dark:hover:bg-black/40 transition-colors duration-200 dark:text-indigo-200 text-indigo-900 font-semibold'>
-            <MiniAvatar userAvatar={userAvatar}/>
+            <MiniAvatar/>
             {dropdown
-                ? <Dropdown avatar label={username} content={[
+                ? <Dropdown avatar label={user.username as string} content={[
                 { icon: <CiUser className='text-xl'/>, label: "Profile", path: "/profile" },
                 { icon: <CiSettings className='text-xl'/>, label: "Settings", path: "/settings" },
                 { icon: <CiLogout className='text-xl'/>, label: "Log out", eventHandler: handleLogout, isLogoutBtn: true },
                 ]}
                 />
-                : <span className='px-1'>{username}</span>
+                : <span className='px-1'>{user.username as string}</span>
             }
 
         </div>

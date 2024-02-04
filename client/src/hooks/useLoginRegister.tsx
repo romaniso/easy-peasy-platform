@@ -23,9 +23,6 @@ function useLoginRegister() {
     const toggleShowPassword = ():void => {
         setShowPassword(!showPassword);
     };
-    // const handleRememberMe = (): void => {
-    //     setRememberMe(!rememberMe);
-    // };
 
     return {
         showPassword,
@@ -53,9 +50,7 @@ function useLoginRegister() {
         setSuccess,
         userRef,
         errRef,
-
         toggleShowPassword,
-        // handleRememberMe,
     };
 }
 
