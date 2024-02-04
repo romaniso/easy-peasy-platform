@@ -2,7 +2,7 @@ import React, {useEffect, useState} from "react";
 import {RiMoonLine, RiSunLine} from "react-icons/ri";
 
 
-const ThemeToggle: React.FC<{className: string}> = ({className}) =>{
+const ThemeToggle: React.FC<{className?: string}> = ({className}) =>{
     const [isDarkTheme, setIsDarkTheme] = useState<boolean>(() => {
         return window.matchMedia('(prefers-color-scheme: dark)').matches;
 

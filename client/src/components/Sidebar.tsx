@@ -155,7 +155,7 @@ const Sidebar: React.FC = () => {
                         {item.links.map((item, index) => (
                             <li key={index}>
                                 <Link
-                                    className="dark:text-indigo-200 text-indigo-900 hover:text-white text-sm flex items-center gap-x-3 cursor-pointer py-1 px-5 hover:bg-indigo-400 rounded-md duration-300"
+                                    className="dark:text-indigo-200 text-indigo-900 hover:text-white flex items-center gap-x-3 cursor-pointer py-1 px-5 hover:bg-indigo-400 rounded-md duration-300"
                                     to={item.path}
                                 >
                                     {item.label}
@@ -170,13 +170,15 @@ const Sidebar: React.FC = () => {
 
     return (
         <aside
-            className={`flex-shrink-1 dark:bg-gradient-to-r dark:from-stone-800 dark:to-stone-900 bg-gradient-to-r from-indigo-50 to-white h-min-screen px-5 pt-2 pb-1 flex flex-col justify-between ${
-                isSidebarOpened ? "max-w-72 -mr-[185px] md:mr-0" : "max-w-20 justify-around"
+            className={`flex-shrink-1 dark:bg-gradient-to-r dark:from-stone-800 dark:to-stone-900 bg-gradient-to-r from-indigo-50 to-white h-min-screen pt-2 pb-1 flex flex-col justify-between ${
+                isSidebarOpened 
+                    ? "max-w-72 px-3 -mr-[185px] md:mr-0 overflow-x-hidden overflow-y-auto scrollbar scrollbar-thin scrollbar-thumb-indigo-100 dark:scrollbar-thumb-stone-800 scrollbar-track-white dark:scrollbar-track-stone-900" 
+                    : " max-w-20 justify-around px-5"
             } relative duration-300 shadow z-50 transition-all`}
         >
             <BsArrowLeftShort
-                className={`bg-indigo-50 text-stone-800 dark:bg-stone-900 dark:text-indigo-300 text-3xl rounded-full absolute -right-3 top-9 border border-indigo-200 cursor-pointer ${
-                    !isSidebarOpened && "rotate-180"
+                className={`bg-indigo-50 hover:bg-indigo-100 text-stone-800 dark:bg-stone-900 dark:text-indigo-300 text-3xl absolute top-9 border border-indigo-200 rounded-lg cursor-pointer ${
+                    isSidebarOpened ? 'right-3' : "rotate-180 -right-3"
                 }`}
                 onClick={() => setIsSidebarOpened(!isSidebarOpened)}
             />
