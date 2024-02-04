@@ -1,10 +1,9 @@
-import {UserRole} from "../enums/userRole";
-
-export interface User {
-    password: string;
-    refreshToken?: string;
-    roles: UserRole[];
-    username: string;
-    __v: number;
-    _id: string;
+export type User = {
+    username?: string;
+    avatar?: string;
+    firstName?: string;
+    lastName?: string;
+    birthday?: Date;
+    likes?:[string];
+    motivations?:[string];
 }

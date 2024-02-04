@@ -48,12 +48,6 @@ app.use('/logout', logoutRouter);
 // verified routes
 app.use(verifyJWT);
 app.use('/users', userRouter);
-app.get('/avatars/:key', (req, res) => {
-    const key = req.params.key;
-    const readSteam = getFileStream(key);
-
-    readSteam.pipe(res)
-})
 
 // 404
 app.all('*', (req,res) => {

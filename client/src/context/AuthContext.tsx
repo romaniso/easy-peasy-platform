@@ -1,4 +1,4 @@
-import React, {useState, createContext, ReactNode, Dispatch, SetStateAction, useEffect} from "react";
+import React, {useState, createContext, ReactNode, Dispatch, SetStateAction} from "react";
 
 interface AuthContextProps {
     auth: {
@@ -6,7 +6,6 @@ interface AuthContextProps {
         pwd?: string;
         roles?: string[];
         accessToken?: string;
-        avatar?: string;
     };
     setAuth: Dispatch<SetStateAction<{
         user?: string;
@@ -25,7 +24,6 @@ const AuthContext = createContext<AuthContextProps>({
     setAuth: () => {},
     persist: false,
     setPersist: () => {},
-    // isAuthenticated: () => false,
 });
 
 interface AuthProviderProps {

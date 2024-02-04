@@ -7,7 +7,7 @@ import DashboardPage from "./pages/DashboardPage";
 import RootLayout from "./layouts/RootLayout";
 import ExercisePage from "./pages/ExercisePage";
 import PreviewPage from "./pages/PreviewPage";
-import RequireAuth from "./components/RequireAuth";
+import RequireAuth from "./components/auth/RequireAuth";
 import UnauthorizedPage from "./pages/UnauthorizedPage";
 import {UserRole} from "./enums/userRole";
 import PersistLogin from "./components/auth/PersistLogin";

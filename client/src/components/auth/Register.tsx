@@ -29,8 +29,8 @@ const Register: React.FC<SignupProps> = ({ onToggleForm }) => {
     const {
         showPassword,
         toggleShowPassword,
-        user,
-        setUser,
+        userName,
+        setUserName,
         validName,
         setValidName,
         userFocus,
@@ -60,9 +60,9 @@ const Register: React.FC<SignupProps> = ({ onToggleForm }) => {
     }, []);
 
     useEffect(() => {
-        const result = USER_REGEX.test(user);
+        const result = USER_REGEX.test(userName);
         setValidName(result);
-    }, [user]);
+    }, [userName]);
 
     useEffect(() => {
         const result = PWD_REGEX.test(pwd);
@@ -73,11 +73,11 @@ const Register: React.FC<SignupProps> = ({ onToggleForm }) => {
 
     useEffect(() => {
        setErrMsg('');
-    }, [user, pwd, matchPwd])
+    }, [userName, pwd, matchPwd])
         const handleSubmit = async (event: React.FormEvent) => {
             event.preventDefault();
             // Additional validation in case a button is enabled with JS hack
-            const v1 = USER_REGEX.test(user);
+            const v1 = USER_REGEX.test(userName);
             const  v2 = PWD_REGEX.test(pwd);
             if(!v1 || !v2) {
                 setErrMsg('Invalid Entry');
@@ -85,7 +85,7 @@ const Register: React.FC<SignupProps> = ({ onToggleForm }) => {
             }
             try {
                 const response = await axios.post<ApiResponse>(REGISTER_URL, JSON.stringify({
-                username: user,
+                username: userName,
                 password: pwd,
                 }), {
                     headers: {'Content-Type': 'application/json'},
@@ -93,7 +93,7 @@ const Register: React.FC<SignupProps> = ({ onToggleForm }) => {
                 });
                 setSuccess(true);
                 // Clear up
-                setUser("");
+                setUserName("");
                 setPwd("");
                 setMatchPwd("");
                 // navigate(from, { replace: true });
@@ -101,7 +101,7 @@ const Register: React.FC<SignupProps> = ({ onToggleForm }) => {
                 if(!(err instanceof AxiosError) || !err.response){
                     setErrMsg('No Server Response');
                 } else if(err.response?.status === 409) {
-                    setErrMsg(err.response.data.message || "User name Taken");
+                    setErrMsg(err.response.data.message || "Auth name Taken");
                 } else {
                     setErrMsg("Registration Failed")
                 }
@@ -150,7 +150,7 @@ const Register: React.FC<SignupProps> = ({ onToggleForm }) => {
                                 primary
                                 rounded
                                 autoComplete="off"
-                                onChange={setUser}
+                                onChange={setUserName}
                                 aria-invalid={validName ? "false" : "true"}
                                 aria-describedby='uidnote'
                                 onFocus={() => setUserFocus(true)}
@@ -162,11 +162,11 @@ const Register: React.FC<SignupProps> = ({ onToggleForm }) => {
                                 <span className={validName ? 'inline-block ml-1 text-green-500' : 'invisible absolute'}>
                             <FaCheck/>
                         </span>
-                                <span className={validName || !user ? 'invisible absolute' : 'inline-block ml-1 text-red-500'}>
+                                <span className={validName || !userName ? 'invisible absolute' : 'inline-block ml-1 text-red-500'}>
                             <FaTimes/>
                         </span>
                             </Input>
-                            <p id='uidnote' className={userFocus && user && !validName ? 'block bg-white dark:bg-transparent dark:border dark:border-orange-400 rounded p-1 text-sm text-orange-500 opacity-100 transition-colors duration-500 -mt-5 shadow': 'invisible opacity-0 absolute'}>
+                            <p id='uidnote' className={userFocus && userName && !validName ? 'block bg-white dark:bg-transparent dark:border dark:border-orange-400 rounded p-1 text-sm text-orange-500 opacity-100 transition-colors duration-500 -mt-5 shadow': 'invisible opacity-0 absolute'}>
                                 <IoIosInformationCircleOutline className='inline relative bottom-0.5 mr-1 text-lg'/>
                                 4 to 24 characters<br/>
                                 Must begin with a letter.<br/>

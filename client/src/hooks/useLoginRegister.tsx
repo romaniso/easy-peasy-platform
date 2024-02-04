@@ -2,7 +2,7 @@ import { useState, useRef } from "react";
 
 function useLoginRegister() {
     const [showPassword, setShowPassword] = useState<boolean>(false);
-    const [user, setUser] = useState<string>("");
+    const [userName, setUserName] = useState<string>("");
     const [validName, setValidName] = useState<boolean>(false)
     const [userFocus, setUserFocus] = useState<boolean>(false);
 
@@ -29,8 +29,8 @@ function useLoginRegister() {
 
     return {
         showPassword,
-        user,
-        setUser,
+        userName,
+        setUserName,
         validName,
         setValidName,
         userFocus,

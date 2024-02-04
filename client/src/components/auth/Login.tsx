@@ -10,6 +10,7 @@ import axios from "../../api/axios";
 import {AxiosError} from 'axios';
 import {UserRole} from "../../enums/userRole";
 import useAuth from "../../hooks/useAuth";
+import useUser from "../../hooks/useUser";
 import {useLocation, useNavigate} from "react-router-dom";
 import Checkbox from "../Checkbox";
 
@@ -24,6 +25,7 @@ interface ApiResponse {
 }
 const Login: React.FC<SignupProps> = ({ onToggleForm }) => {
     const {setAuth, persist, setPersist} = useAuth();
+    const {setUser} = useUser();
 
     const navigate = useNavigate();
     const location = useLocation();
@@ -32,8 +34,8 @@ const Login: React.FC<SignupProps> = ({ onToggleForm }) => {
     const {
         showPassword,
         toggleShowPassword,
-        user,
-        setUser,
+        userName,
+        setUserName,
         pwd,
         setPwd,
         errMsg,
@@ -48,13 +50,13 @@ const Login: React.FC<SignupProps> = ({ onToggleForm }) => {
 
     useEffect(() => {
         setErrMsg("")
-    }, [user, pwd]);
+    }, [userName, pwd]);
 
     const handleSubmit = async (event: React.FormEvent) => {
         event.preventDefault();
         try {
             const response = await axios.post<ApiResponse>(LOGIN_URL, ({
-                username: user,
+                username: userName,
                 password: pwd,
             }), {
                 headers: {
@@ -64,9 +66,16 @@ const Login: React.FC<SignupProps> = ({ onToggleForm }) => {
             });
             const accessToken = response?.data?.accessToken;
             const roles = response?.data?.roles;
-            console.log({roles, accessToken});
-            setAuth({user, pwd, roles, accessToken});
-            setUser("");
+
+            // setAuth Context
+            setAuth({user: userName, pwd, roles, accessToken});
+
+            // setUserContext
+            // fetch to get user info and store it in context
+            setUser({
+                username: userName,
+            })
+            setUserName("");
             setPwd("");
             navigate(from, { replace: true });
         } catch (err) {
@@ -111,7 +120,7 @@ const Login: React.FC<SignupProps> = ({ onToggleForm }) => {
                             rounded
                             ref={userRef}
                             autoComplete="off"
-                            onChange={setUser}
+                            onChange={setUserName}
                             required
                         >
                             Username

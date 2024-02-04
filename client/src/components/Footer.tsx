@@ -114,7 +114,7 @@ const Footer: React.FC = () => {
                     {/* Mini-form */}
                     <div className="flex md:flex-row gap-4 items-center justify-between flex-col">
                         <Input
-                            name="user"
+                            name="userName"
                             type="email"
                             secondary
                             outline

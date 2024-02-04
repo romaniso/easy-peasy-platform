@@ -6,7 +6,7 @@ import Button from "../Button";
 import ImageDropZone from "../ImageDropZone";
 import {AxiosError} from "axios";
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
-import useAuth from "../../hooks/useAuth";
+import useUser from "../../hooks/useUser";
 
 const AVATAR_UPLOAD_URL = '/users/upload'
 const ProfileAvatar: React.FC = () => {
@@ -15,7 +15,7 @@ const ProfileAvatar: React.FC = () => {
     const [isLoading, setIsLoading] = useState(false);
     const [errMsg, setErrMsg] = useState<string>('');
     const axiosPrivate = useAxiosPrivate();
-    const {auth, setAuth} = useAuth();
+    const {user, setUser} = useUser();
 
     const errRef = useRef<HTMLParagraphElement>(null);
 
@@ -41,17 +41,17 @@ const ProfileAvatar: React.FC = () => {
         try {
             const formData = new FormData();
             formData.append('avatar', file);
-            if(auth.avatar){
-                formData.append('prevAvatar', auth.avatar);
+            if(user.avatar){
+                formData.append('prevAvatar', user.avatar);
             }
-            formData.append('userName', auth.user as string);
+            formData.append('userName', user.username as string);
             const response = await axiosPrivate.post(AVATAR_UPLOAD_URL, formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                 },
             });
             const {imagePath} = response.data;
-            setAuth(prev => {
+            setUser(prev => {
                 return {
                     ...prev,
                     avatar: imagePath
@@ -83,7 +83,7 @@ const ProfileAvatar: React.FC = () => {
     };
 
     useEffect(() => {
-        console.log(auth);
+        console.log(user);
         // Reset error message
         setErrMsg("")
         // setSelectedImage(null);
@@ -93,7 +93,7 @@ const ProfileAvatar: React.FC = () => {
     return (
         <div className='w-[100px] h-[100px] md:w-[230px] md:h-[230px] overflow-hidden rounded-full flex-shrink-0 relative shadow-md border border-indigo-200 dark:border-indigo-800 group'>
             {/*@TODO: should be fetched from user.avatar not from fetch response*/}
-            <img src={auth.avatar ? auth.avatar : "https://avatar.iran.liara.run/public/boy"} alt="" className='w-full h-full object-cover group-hover:brightness-50 transition-all duration-300'/>
+            <img src={user.avatar ? user.avatar : "https://avatar.iran.liara.run/public/boy"} alt="" className='w-full h-full object-cover group-hover:brightness-50 transition-all duration-300'/>
             <button className='absolute bottom-0 inset-x-0 h-1/4 bg-black/50 flex justify-center items-center group-hover:h-[80px] transition-all duration-300 group-hover:bg-black/70' onClick={() => setShowModal(!showModal)}>
                 <ToolTip tooltip='Upload your photo'>
                     <SlPicture className='text-2xl text-indigo-200'/>

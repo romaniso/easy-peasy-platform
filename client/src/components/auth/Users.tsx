@@ -1,12 +1,12 @@
 import React, {useState, useEffect} from "react";
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
-import {User} from "../../interfaces/user";
+import {Auth} from "../../interfaces/auth";
 import {Link, useNavigate, useLocation} from "react-router-dom";
 import {AxiosError} from "axios";
 
 const GET_USERS_URL = '/users'
 const Users = () => {
-    const [users, setUsers] = useState<[User]>();
+    const [users, setUsers] = useState<[Auth]>();
     const axiosPrivate = useAxiosPrivate();
     const navigate = useNavigate();
     const location = useLocation();
