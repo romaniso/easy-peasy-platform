@@ -4,7 +4,7 @@ export type User = {
     email?: string;
     firstName?: string;
     lastName?: string;
-    birthday?: Date;
+    birthday?: string;
     likes?:string[];
     motivations?:string[];
 }

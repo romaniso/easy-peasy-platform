@@ -10,7 +10,7 @@ const controller = new UserController();
 userRouter.route('/')
     .get(controller.getAllUsers)
     .post(verifyRoles([RoleName.Admin]), controller.createNewUser)
-    .put(verifyRoles([RoleName.Admin, RoleName.Tutor]), controller.updateUser)
+    .put(verifyRoles([RoleName.Admin, RoleName.Tutor, RoleName.User]), controller.updateUser)
     .delete(verifyRoles([RoleName.Admin]),controller.deleteUser)
 
 userRouter.route('/upload')

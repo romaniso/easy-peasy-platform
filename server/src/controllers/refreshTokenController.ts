@@ -29,6 +29,7 @@ export class RefreshTokenController {
                             avatar: foundUser.avatar,
                             firstName: foundUser.firstName,
                             lastName: foundUser.lastName,
+                            email: foundUser.email,
                             birthday: foundUser.birthday,
                             likes: foundUser.likes,
                             motivations: foundUser.motivations,

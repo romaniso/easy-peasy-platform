@@ -27,9 +27,6 @@ export const verifyJWT= (
                 }
                 (req as AuthenticatedRequest).user = (decoded as jwt.JwtPayload).UserInfo.username;
                 (req as AuthenticatedRequest).roles = (decoded as jwt.JwtPayload).UserInfo.roles;
-                console.log((decoded as jwt.JwtPayload))
-                console.log((decoded as jwt.JwtPayload).UserInfo.username)
-                console.log((decoded as jwt.JwtPayload).UserInfo.roles)
                 next();
             }
         );

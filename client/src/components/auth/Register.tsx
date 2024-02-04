@@ -160,11 +160,11 @@ const Register: React.FC<SignupProps> = ({ onToggleForm }) => {
                             >
                                 Username
                                 <span className={validName ? 'inline-block ml-1 text-green-500' : 'invisible absolute'}>
-                            <FaCheck/>
-                        </span>
+                                    <FaCheck/>
+                                </span>
                                 <span className={validName || !userName ? 'invisible absolute' : 'inline-block ml-1 text-red-500'}>
-                            <FaTimes/>
-                        </span>
+                                    <FaTimes/>
+                                </span>
                             </Input>
                             <p id='uidnote' className={userFocus && userName && !validName ? 'block bg-white dark:bg-transparent dark:border dark:border-orange-400 rounded p-1 text-sm text-orange-500 opacity-100 transition-colors duration-500 -mt-5 shadow': 'invisible opacity-0 absolute'}>
                                 <IoIosInformationCircleOutline className='inline relative bottom-0.5 mr-1 text-lg'/>
@@ -190,11 +190,11 @@ const Register: React.FC<SignupProps> = ({ onToggleForm }) => {
                             >
                                 Password
                                 <span className={validPwd ? 'inline-block ml-1 text-green-500' : 'invisible absolute'}>
-                            <FaCheck/>
-                        </span>
+                                    <FaCheck/>
+                                </span>
                                 <span className={validPwd || !pwd ? 'invisible absolute' : 'inline-block ml-1 text-red-500'}>
-                            <FaTimes/>
-                        </span>
+                                    <FaTimes/>
+                                </span>
                             </Password>
                             <p id='pwdnote' className={pwdFocus && !validPwd ? 'block bg-white dark:bg-transparent dark:border dark:border-orange-400 rounded p-1 text-sm text-orange-500 opacity-100 transition-colors duration-500 -mt-5 shadow': 'invisible opacity-0 absolute'}>
                                 <IoIosInformationCircleOutline className='inline relative bottom-0.5 mr-1 text-lg'/>
@@ -219,20 +219,23 @@ const Register: React.FC<SignupProps> = ({ onToggleForm }) => {
                             >
                                 Confirm Password
                                 <span className={validMatch && matchPwd ? 'inline-block ml-1 text-green-500' : 'invisible absolute'}>
-                            <FaCheck/>
-                        </span>
+                                    <FaCheck/>
+                                </span>
                                 <span className={validMatch || !matchPwd ? 'invisible absolute' : 'inline-block ml-1 text-red-500'}>
-                            <FaTimes/>
-                        </span>
+                                    <FaTimes/>
+                                </span>
                             </Password>
                             <p id='confirmnote' className={matchFocus && !validMatch ? 'block bg-white dark:bg-transparent dark:border dark:border-orange-400 rounded p-1 text-sm text-orange-500 opacity-100 transition-colors duration-500 -mt-5 shadow': 'invisible opacity-0 absolute'}>
                                 <IoIosInformationCircleOutline className='inline relative bottom-0.5 mr-1 text-lg'/>
                                 Must match the first password input field.
                             </p>
-
-
                             <p ref={errRef} className={errMsg ? 'block bg-red-500/10 dark:border dark:border-red-400 rounded p-1 text-sm font-bold text-red-500 opacity-100 transition-colors duration-500 -mt-5 shadow' : 'invisible absolute'} aria-live='assertive'>{errMsg}</p>
-                            <Button primary disabled={!validName || !validPwd || !validMatch} rounded type="submit" className={!validName || !validPwd || !validMatch ? 'mt-6 opacity-40 !cursor-not-allowed' :`mt-6`}
+                            <Button
+                                primary
+                                disabled={!validName || !validPwd || !validMatch}
+                                rounded
+                                type="submit"
+                                className={!validName || !validPwd || !validMatch ? 'mt-6 opacity-40 !cursor-not-allowed' :`mt-6`}
                             >
                                 <>
                                     <CiLogin />

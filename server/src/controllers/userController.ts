@@ -1,5 +1,5 @@
 import {Request, Response} from "express";
-import {User} from "../models/User";
+import {IUser, User} from "../models/User";
 import {deleteObjectByUrl, uploadFile} from "../services/s3";
 import {unlink} from 'fs/promises';
 
@@ -45,13 +45,23 @@ export class UserController {
     }
     async updateUser(req: Request, res: Response) {
         try {
-            const { username } = req.body;
+            const { username, ...requestObj } = req.body;
             const user = await User.findOne({ username });
             if (!user) {
                 return res.status(400).json({ message: `Username ${username} was not found` });
             }
-            // Edition logic
-            console.log('Update User. Mock method');
+            if (!requestObj) {
+                return res.status(400).json('Bad client request.');
+            }
+            // Find out which value was updated
+            const updatedUser: Partial<IUser> = {};
+            for (const value in requestObj ){
+                if(requestObj[value]){
+                    updatedUser[value] = requestObj[value] as string;
+                }
+            }
+            await User.updateOne({ username: username }, { $set: updatedUser });
+            console.log(updatedUser);
             return res.status(200).json(user);
         } catch (err) {
             console.error(err);

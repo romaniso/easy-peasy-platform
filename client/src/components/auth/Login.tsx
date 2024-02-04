@@ -13,6 +13,7 @@ import useAuth from "../../hooks/useAuth";
 import useUser from "../../hooks/useUser";
 import {useLocation, useNavigate} from "react-router-dom";
 import Checkbox from "../Checkbox";
+import {User} from "../../interfaces/user";
 
 const LOGIN_URL = '/auth'
 interface SignupProps {
@@ -22,6 +23,7 @@ interface SignupProps {
 interface ApiResponse {
     accessToken?: string;
     roles?: UserRole[];
+    user?: User;
 }
 const Login: React.FC<SignupProps> = ({ onToggleForm }) => {
     const {setAuth, persist, setPersist} = useAuth();
@@ -69,10 +71,10 @@ const Login: React.FC<SignupProps> = ({ onToggleForm }) => {
 
             // setAuth Context
             setAuth({user: userName, pwd, roles, accessToken});
-
             // setUserContext
             // fetch to get user info and store it in context
             setUser({
+                ...response.data.user,
                 username: userName,
             })
             setUserName("");

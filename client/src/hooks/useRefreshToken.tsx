@@ -11,7 +11,6 @@ const useRefreshToken = () => {
             withCredentials: true
         });
         const {user, username, accessToken, roles} = response.data;
-
         setAuth(prev => {
             return {
                 ...prev,
@@ -20,8 +19,6 @@ const useRefreshToken = () => {
                 accessToken
             };
         });
-
-        console.log("REFRESH: ",user);
 
         //@TODO: set User Context
         setUser(
