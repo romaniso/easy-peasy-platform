@@ -1,6 +1,6 @@
 import {useLocation, Navigate, Outlet} from "react-router-dom";
-import useAuth from "../hooks/useAuth";
-import {UserRole} from "../enums/userRole";
+import useAuth from "../../hooks/useAuth";
+import {UserRole} from "../../enums/userRole";
 import React from "react";
 
 interface RequireAuthProps {
