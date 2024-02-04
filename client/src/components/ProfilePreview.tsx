@@ -28,7 +28,7 @@ const ProfilePreview: React.FC<DropdownAvatarProps>  = ({username, userAvatar, d
         toast?.open('You have been successfully logged out', ToastType.Success);
     }
     return (
-        <div className='flex items-center gap-1 ml-4 border rounded-full border-indigo-300 shadow pr-2 cursor-pointer hover:bg-white/40 dark:hover:bg-black/40 transition-colors duration-200 dark:text-indigo-200 text-indigo-900 font-semibold'>
+        <div className='flex md:items-center gap-1 md:ml-4 md:rounded-full md:border border-indigo-300 md:shadow md:pr-2 cursor-pointer hover:bg-white/40 dark:hover:bg-black/40 transition-colors duration-200 dark:text-indigo-200 text-indigo-900 font-semibold'>
             <MiniAvatar userAvatar={userAvatar}/>
             {dropdown
                 ? <Dropdown avatar label={username} content={[

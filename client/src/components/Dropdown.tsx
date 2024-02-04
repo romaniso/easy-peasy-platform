@@ -33,17 +33,17 @@ const Dropdown: React.FC<Dropdown> = ({label, content, avatar}) => {
     );
     return (
         <div ref={dropdownRef}>
-            <div className={`cursor-pointer flex justify-between items-center gap-2 relative ${avatar && 'gap-0.5'}`} onClick={() => setIsCollapsed(!isCollapsed)}>
+            <div className={`cursor-pointer flex justify-between items-center gap-2 relative ${avatar && 'w-[25vw] md:w-auto gap-0.5'}`} onClick={() => setIsCollapsed(!isCollapsed)}>
                 <span>{label}</span>
                 <span>{icon}</span>
             </div>
             {isCollapsed && (
-                <div className={`block md:absolute top-full w-full md:w-32 mt-4 md:-mt-2 md:-ml-3 dark:md:bg-stone-900/80 md:bg-white rounded-md md:shadow-md overflow-hidden ${avatar && 'md:-ml-10'}`}>
+                <div className={`block md:absolute top-full w-full md:w-32 mt-4 md:-mt-2 md:-ml-3 dark:md:bg-stone-900/80 md:bg-white rounded-md md:shadow-md overflow-hidden ${avatar && '-ml-14 md:!-ml-10'}`}>
                     <ul>
                         {content.map((subItem) =>
                             (subItem as AvatarItem).eventHandler
                                 ? (
-                                    <li className={`text-indigo-600 dark:text-indigo-300 md:px-4 py-3 md:py-2 border-indigo-50/20 border-b hover:bg-indigo-50 dark:hover:bg-indigo-950 transition-colors duration-300 flex items-center gap-1 ${(subItem as AvatarItem).isLogoutBtn && 'bg-red-500/20 hover:bg-red-500/40'}`} onClick={(subItem as AvatarItem).eventHandler} key={subItem.label}
+                                    <li className={`text-indigo-600 dark:text-indigo-300 md:px-4 py-3 md:py-2 border-indigo-50/20 border-b hover:bg-indigo-50 dark:hover:bg-indigo-950 transition-colors duration-300 flex items-center gap-1 ${(subItem as AvatarItem).isLogoutBtn && 'text-red-700 md:bg-red-500/20 hover:bg-red-500/40'}`} onClick={(subItem as AvatarItem).eventHandler} key={subItem.label}
                                     >{subItem.icon}{subItem.label}
                                     </li>
                                 )

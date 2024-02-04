@@ -2,7 +2,7 @@ import React, {useEffect, useState} from "react";
 import {RiMoonLine, RiSunLine} from "react-icons/ri";
 
 
-function ThemeToggle(){
+const ThemeToggle: React.FC<{className: string}> = ({className}) =>{
     const [isDarkTheme, setIsDarkTheme] = useState<boolean>(() => {
         return window.matchMedia('(prefers-color-scheme: dark)').matches;
 
@@ -25,7 +25,7 @@ function ThemeToggle(){
     };
 
     return (
-        <div className="flex justify-center items-center">
+        <div className={`flex justify-center items-center ${className}`}>
         <span className="text-xl">
           <RiSunLine className='text-orange-500 dark:text-indigo-400'/>
         </span>
