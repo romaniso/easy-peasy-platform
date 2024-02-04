@@ -44,12 +44,12 @@ const ImageDropZone: React.FC<ImageDropZoneProps> = ({ onImageDrop }) => {
             onDragOver={handleOver}
             onDragLeave={handleLeave}
         >
-            <p>Drag and drop your image here</p>
+            <p className='hidden md:block'>Drag and drop your image here</p>
             <label
                 htmlFor="image"
                 className="underline cursor-pointer text-center hover:text-orange-500 transition-colors"
             >
-                <FaUpload className="text-3xl mx-auto mb-3" /> or choose a profile picture
+                <FaUpload className="text-3xl mx-auto mb-3" /> choose a profile picture
                 <input
                     type="file"
                     id="image"

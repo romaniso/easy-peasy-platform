@@ -41,6 +41,9 @@ const ProfileAvatar: React.FC = () => {
         try {
             const formData = new FormData();
             formData.append('avatar', file);
+            if(auth.avatar){
+                formData.append('prevAvatar', auth.avatar);
+            }
             formData.append('userName', auth.user as string);
             const response = await axiosPrivate.post(AVATAR_UPLOAD_URL, formData, {
                 headers: {
@@ -48,8 +51,6 @@ const ProfileAvatar: React.FC = () => {
                 },
             });
             const {imagePath} = response.data;
-            console.log(response.data)
-
             setAuth(prev => {
                 return {
                     ...prev,
@@ -101,12 +102,12 @@ const ProfileAvatar: React.FC = () => {
             {showModal
                 && <Modal
                     onClose={() => setShowModal(false)}
-                    size='!w-2/6 h-3/6'
+                    size='!w-[95vw] h-1/2 md:!w-2/6 md:h-3/6'
                     actionBar={
                     errMsg
                         ? <div className='flex items-center gap-2'>
                             <Button secondary rounded onClick={() => setShowModal(false)}>Go back</Button>
-                            <Button className='!bg-green-500 hover:!bg-green-600' primary rounded onClick={() => setErrMsg('')}>Try again</Button>
+                            <Button success rounded onClick={() => setErrMsg('')}>Try again</Button>
                         </div>
                         : <Button secondary rounded onClick={() => setShowModal(false)}>Go Back</Button>
                 }
