@@ -29,8 +29,18 @@ export class AuthController {
                     secure: true,
                     maxAge: 24 * 60 * 60 * 1000
                 }) //one day
-                // res.json({accessToken, roles: foundUser.roles});
-                res.json({accessToken, roles: foundUser.roles});
+
+                const user = {
+                    avatar: foundUser.avatar,
+                    firstName: foundUser.firstName,
+                    lastName: foundUser.lastName,
+                    birthday: foundUser.birthday,
+                    likes: foundUser.likes,
+                    motivations: foundUser.motivations,
+                }
+
+                //@TODO: send user object for user context (non-sensitive data)
+                res.json({accessToken, roles: foundUser.roles, user});
             }
         } catch (err) {
             console.error(err);

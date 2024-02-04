@@ -24,7 +24,18 @@ export class RefreshTokenController {
                         return res.sendStatus(403); // invalid token
                     } else {
                         const accessToken = generateAccessToken((decoded as jwt.JwtPayload).UserInfo.username, (decoded as jwt.JwtPayload).UserInfo.roles);
-                        res.json({user: foundUser.username, accessToken, roles: foundUser.roles});
+
+                        const user = {
+                            avatar: foundUser.avatar,
+                            firstName: foundUser.firstName,
+                            lastName: foundUser.lastName,
+                            birthday: foundUser.birthday,
+                            likes: foundUser.likes,
+                            motivations: foundUser.motivations,
+                        }
+
+                        //@TODO: send user object for user context (non-sensitive data)
+                        res.json({username: foundUser.username, accessToken, roles: foundUser.roles, user});
                     }
                 }
             )
