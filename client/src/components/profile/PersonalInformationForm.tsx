@@ -131,8 +131,13 @@ const PersonalInformationForm: React.FC = () => {
         }
     }
 
+    const handleNextForm = (event: SyntheticEvent) => {
+        event.preventDefault();
+        console.log('Next Form');
+    }
+
     return (
-        <form className='mx-auto flex-grow flex flex-col justify-between items-center md:py-5 md:px-7 px-3 py-5 w-full md:max-w-[600px] lr:max-w-[750px]'>
+        <form className='mx-auto flex-grow flex flex-col justify-between items-center md:py-5 md:px-7 px-3 py-5 w-full md:max-w-[600px] lr:max-w-[750px]' onSubmit={handleSubmit}>
             <h3 className='text-indigo-500 dark:text-indigo-200 font-bold text-center drop-shadow text-2xl md:text-3xl'>Personal Information</h3>
             <div className='flex-shrink flex flex-col gap-10 w-full'>
                 <p ref={errRef} className={errMsg ? 'block bg-red-500/10 dark:border dark:border-red-400 rounded p-1 text-sm font-bold text-red-500 opacity-100 transition-colors duration-500 -mt-5 shadow' : 'invisible absolute'} aria-live='assertive'>{errMsg}</p>
@@ -231,8 +236,7 @@ const PersonalInformationForm: React.FC = () => {
                 <Button
                     primary
                     rounded
-                    type='submit'
-                    onClick={handleSubmit}
+                    submit
                     disabled={!validFirstName || !validLastName || !validUserEmail || !validBirthday }
                     className={!validFirstName || !validLastName || !validUserEmail || !validBirthday ? 'opacity-40 !cursor-not-allowed basis-1/2' :"basis-1/2"}
                 >
@@ -241,7 +245,12 @@ const PersonalInformationForm: React.FC = () => {
                             <FaSave className='inline ml-2'/>
                         </span>
                 </Button>
-                <Button secondary rounded className='basis-1/2'>
+                <Button
+                    secondary
+                    rounded
+                    className='basis-1/2'
+                    onClick={handleNextForm}
+                >
                     Next
                 </Button>
             </div>

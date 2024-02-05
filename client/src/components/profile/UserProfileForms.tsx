@@ -15,6 +15,7 @@ import PersonalInformationForm from "./PersonalInformationForm";
 import MotivationForm, {MotivationItem} from "./MotivationForm";
 import InterestsForm, {InterestItem} from "./InterestsForm";
 import {MotivationItemText} from "../../enums/motivationItem";
+import {InterestItemText} from "../../enums/interestItem";
 
 
 
@@ -36,29 +37,29 @@ const UserProfileForms = () => {
         {text: MotivationItemText.Culture, icon: <FaFlagUsa/>},
     ]
     const interestItems: InterestItem[] = [
-        {text: 'Music', icon: <CiMusicNote1/>},
-        {text: 'Films', icon: <FaFilm/>},
-        {text: 'IT', icon: <CiLaptop/>},
-        {text: 'Reading', icon: <FaBookReader/>},
-        {text: 'Art', icon: <FaPaintBrush/>},
-        {text: 'Gaming', icon: <FaGamepad/>},
-        {text: 'Sports', icon: <MdOutlineSportsFootball/>},
-        {text: 'Fashion', icon: <GiFlowerHat/>},
-        {text: 'Science', icon: <MdOutlineScience/>},
-        {text: 'Nature', icon: <MdForest/>},
-        {text: 'History', icon: <GiAncientColumns/>},
-        {text: 'Economics', icon: <GiReceiveMoney/>},
-        {text: 'Marketing', icon: <HiOutlineSpeakerphone/>},
-        {text: 'Beauty', icon: <GiButterfly/>},
-        {text: 'Animals', icon: <GiCat />},
-        {text: 'Social Media', icon: <SlSocialInstagram />},
-        {text: 'Cultures', icon: <FaFlagUsa/>},
-        {text: 'Travelling', icon: <FaUmbrellaBeach/>},
-        {text: 'Medicine', icon: <RiMedicineBottleFill/>},
-        {text: 'Cooking', icon: <GiCook/>},
-        {text: 'Fitness', icon: <IoIosFitness/>},
-        {text: 'Content Making', icon: <TiPen/>},
-        {text: 'Cartoons', icon: <TbMickey/>},
+        {text: InterestItemText.Music, icon: <CiMusicNote1/>},
+        {text: InterestItemText.Films, icon: <FaFilm/>},
+        {text: InterestItemText.IT, icon: <CiLaptop/>},
+        {text: InterestItemText.Reading, icon: <FaBookReader/>},
+        {text: InterestItemText.Art, icon: <FaPaintBrush/>},
+        {text: InterestItemText.Gaming, icon: <FaGamepad/>},
+        {text: InterestItemText.Sports, icon: <MdOutlineSportsFootball/>},
+        {text: InterestItemText.Fashion, icon: <GiFlowerHat/>},
+        {text: InterestItemText.Science, icon: <MdOutlineScience/>},
+        {text: InterestItemText.Nature, icon: <MdForest/>},
+        {text: InterestItemText.History, icon: <GiAncientColumns/>},
+        {text: InterestItemText.Economics, icon: <GiReceiveMoney/>},
+        {text: InterestItemText.Marketing, icon: <HiOutlineSpeakerphone/>},
+        {text: InterestItemText.Beauty, icon: <GiButterfly/>},
+        {text: InterestItemText.Animals, icon: <GiCat />},
+        {text: InterestItemText.SocialMedia, icon: <SlSocialInstagram />},
+        {text: InterestItemText.Cultures, icon: <FaFlagUsa/>},
+        {text: InterestItemText.Travelling, icon: <FaUmbrellaBeach/>},
+        {text: InterestItemText.Medicine, icon: <RiMedicineBottleFill/>},
+        {text: InterestItemText.Cooking, icon: <GiCook/>},
+        {text: InterestItemText.Fitness, icon: <IoIosFitness/>},
+        {text: InterestItemText.ContentMaking, icon: <TiPen/>},
+        {text: InterestItemText.Cartoons, icon: <TbMickey/>},
     ]
 
     let content: ReactElement | null = null;

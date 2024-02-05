@@ -1,4 +1,5 @@
 import {MotivationItemText} from "../enums/motivationItem";
+import {InterestItemText} from "../enums/interestItem";
 
 export type User = {
     username?: string;
@@ -7,6 +8,6 @@ export type User = {
     firstName?: string;
     lastName?: string;
     birthday?: string;
-    likes?: string[];
+    likes?: InterestItemText[];
     motivations?: MotivationItemText[];
 }

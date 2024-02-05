@@ -1,5 +1,7 @@
 import React, {ButtonHTMLAttributes, ReactElement, ReactEventHandler} from "react";
 import className from "classnames";
+import {Simulate} from "react-dom/test-utils";
+import submit = Simulate.submit;
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
     children: ReactElement | string;
@@ -12,6 +14,7 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
     outline?: true;
     rounded?: true;
     onClick?: ReactEventHandler;
+    submit?: true;
 }
 const Button: React.FC<ButtonProps> = ({
                     children,
@@ -22,7 +25,7 @@ const Button: React.FC<ButtonProps> = ({
                     danger,
                     small,
                     outline,
-                    rounded,
+                    rounded, submit,
                     onClick,
                     ...rest
                 }) => {
@@ -50,7 +53,11 @@ const Button: React.FC<ButtonProps> = ({
         }
     );
     return (
-        <button {...rest} className={classes} onClick={onClick}>
+        <button
+                {...rest}
+                className={classes}
+                onClick={onClick}
+                type={submit ? "submit" : rest.type}>
             {children}
         </button>
     );
