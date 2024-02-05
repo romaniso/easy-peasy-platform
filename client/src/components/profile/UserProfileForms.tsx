@@ -14,6 +14,8 @@ import { HiOutlineSpeakerphone } from "react-icons/hi";
 import PersonalInformationForm from "./PersonalInformationForm";
 import MotivationForm, {MotivationItem} from "./MotivationForm";
 import InterestsForm, {InterestItem} from "./InterestsForm";
+import {MotivationItemText} from "../../enums/motivationItem";
+
 
 
 const UserProfileForms = () => {
@@ -24,14 +26,14 @@ const UserProfileForms = () => {
         {label: 'interests', content: 'Your Interests',  icon: <CiFootball/>},
     ]
     const motivationItems: MotivationItem[] = [
-        {text: 'Family and Relationship', icon: <MdFamilyRestroom/>},
-        {text: 'Career', icon: <MdOutlineWorkOutline/>},
-        {text: 'School', icon: <FaSchool/>},
-        {text: 'Travelling', icon: <FaUmbrellaBeach/>},
-        {text: 'Exams and Certificates', icon: <PiExamBold/>},
-        {text: 'Self-development', icon: <MdOutlineSelfImprovement/>},
-        {text: 'Emigration', icon: <GiRoad/>},
-        {text: 'Culture Interest', icon: <FaFlagUsa/>},
+        {text: MotivationItemText.Family, icon: <MdFamilyRestroom/>},
+        {text: MotivationItemText.Career, icon: <MdOutlineWorkOutline/>},
+        {text: MotivationItemText.School, icon: <FaSchool/>},
+        {text: MotivationItemText.Travelling, icon: <FaUmbrellaBeach/>},
+        {text: MotivationItemText.Exams, icon: <PiExamBold/>},
+        {text: MotivationItemText.SelfDevelopment, icon: <MdOutlineSelfImprovement/>},
+        {text: MotivationItemText.Emigration, icon: <GiRoad/>},
+        {text: MotivationItemText.Culture, icon: <FaFlagUsa/>},
     ]
     const interestItems: InterestItem[] = [
         {text: 'Music', icon: <CiMusicNote1/>},

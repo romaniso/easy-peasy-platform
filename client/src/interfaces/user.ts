@@ -1,3 +1,5 @@
+import {MotivationItemText} from "../enums/motivationItem";
+
 export type User = {
     username?: string;
     avatar?: string;
@@ -5,6 +7,6 @@ export type User = {
     firstName?: string;
     lastName?: string;
     birthday?: string;
-    likes?:string[];
-    motivations?:string[];
+    likes?: string[];
+    motivations?: MotivationItemText[];
 }

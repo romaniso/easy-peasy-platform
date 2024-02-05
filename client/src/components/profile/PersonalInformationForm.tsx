@@ -14,7 +14,8 @@ const EMAIL_REGEX = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
 // @TODO: break it down to hook, before sending req validate it, show info with Toast
 const PersonalInformationForm: React.FC = () => {
-    const {user} = useUser();
+    const {auth} = useAuth();
+    const { setUser, user} = useUser();
 
     const [firstName, setFirstName]= useState<string>("");
     const [validFirstName, setValidFirstName] = useState<boolean>(false)
@@ -36,9 +37,6 @@ const PersonalInformationForm: React.FC = () => {
     const [birthdayFocus, setBirthdayFocus] = useState<boolean>(false);
 
     const [errMsg, setErrMsg] = useState<string>('');
-
-    const {auth} = useAuth();
-    const { setUser} = useUser();
 
     const firstNameRef = useRef<HTMLInputElement>(null);
     const lastNameRef = useRef<HTMLInputElement>(null)
