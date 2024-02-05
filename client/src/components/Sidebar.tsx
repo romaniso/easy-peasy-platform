@@ -177,7 +177,7 @@ const Sidebar: React.FC = () => {
             } relative duration-300 shadow z-50 transition-all`}
         >
             <BsArrowLeftShort
-                className={`bg-indigo-50 hover:bg-indigo-100 text-stone-800 dark:bg-stone-900 dark:text-indigo-300 text-3xl absolute top-9 border border-indigo-200 rounded-lg cursor-pointer ${
+                className={`dark:bg-gradient-to-r dark:from-stone-800 dark:to-stone-900 bg-gradient-to-r from-indigo-50 to-white transition hover:brightness-110 text-indigo-900 dark:text-indigo-300 text-3xl absolute top-9 border border-indigo-300 rounded-lg cursor-pointer ${
                     isSidebarOpened ? 'right-3' : "rotate-180 -right-3"
                 }`}
                 onClick={() => setIsSidebarOpened(!isSidebarOpened)}
