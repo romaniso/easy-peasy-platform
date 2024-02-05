@@ -35,6 +35,8 @@ const PersonalInformationForm: React.FC = () => {
     const [validBirthday, setValidBirthday] = useState<boolean>(false)
     const [birthdayFocus, setBirthdayFocus] = useState<boolean>(false);
 
+    const [errMsg, setErrMsg] = useState<string>('');
+
     const {auth} = useAuth();
     const { setUser} = useUser();
 
@@ -96,6 +98,15 @@ const PersonalInformationForm: React.FC = () => {
     const handleSubmit = async (event: SyntheticEvent) => {
         event.preventDefault();
 
+        // Additional validation in case a button is enabled with JS hack
+        const v1 = LASTNAME_REGEX.test(lastName);
+        const  v2 = FIRSTNAME_REGEX.test(firstName);
+        const  v3 = EMAIL_REGEX.test(userEmail);
+        if((!v1 && lastName.length > 0) || (!v2 && firstName.length > 0) || (!v3 && userEmail.length > 0) || !validUserEmail) {
+            setErrMsg('Invalid Entry');
+            return;
+        }
+
         const updatedUser: User = {
             username: auth.user,
             firstName,
@@ -109,10 +120,6 @@ const PersonalInformationForm: React.FC = () => {
                     withCredentials: true
                 }
             )
-            // setFirstName("");
-            // setLastName("");
-            // setUserEmail("");
-            // setBirthday("");
             if(response.status === 200) {
                 setUser((prev) => {
                     return {
@@ -130,6 +137,7 @@ const PersonalInformationForm: React.FC = () => {
         <form className='mx-auto flex-grow flex flex-col justify-between items-center md:py-5 md:px-7 px-3 py-5 w-full md:max-w-[600px] lr:max-w-[750px]'>
             <h3 className='text-indigo-500 dark:text-indigo-200 font-bold text-center drop-shadow text-2xl md:text-3xl'>Personal Information</h3>
             <div className='flex-shrink flex flex-col gap-10 w-full'>
+                <p ref={errRef} className={errMsg ? 'block bg-red-500/10 dark:border dark:border-red-400 rounded p-1 text-sm font-bold text-red-500 opacity-100 transition-colors duration-500 -mt-5 shadow' : 'invisible absolute'} aria-live='assertive'>{errMsg}</p>
                 <Input
                     className=''
                     name='firstName'

@@ -11,7 +11,7 @@ export interface IUser {
     firstName?: string;
     lastName?: string;
     email?: string;
-    birthday?: Date;
+    birthday?: string;
     likes?:string[];
     motivations?:string[];
     [key: string]: string | string[] | Date | undefined;
@@ -26,7 +26,7 @@ const userSchema = new Schema<IUser>({
     firstName: {type: String, required: false},
     lastName: {type: String, required: false},
     email: {type: String, required: false},
-    birthday: {type: Date, required: false},
+    birthday: {type: String, required: false},
     motivations: [{type: String, required: false}],
     likes: [{type: String, required: false}],
 

@@ -1,4 +1,5 @@
 import {Request, Response} from "express";
+import {parseISO, isValid, format} from 'date-fns';
 import {IUser, User} from "../models/User";
 import {deleteObjectByUrl, uploadFile} from "../services/s3";
 import {unlink} from 'fs/promises';
@@ -45,7 +46,7 @@ export class UserController {
     }
     async updateUser(req: Request, res: Response) {
         try {
-            const { username, ...requestObj } = req.body;
+            const { username, birthday, ...requestObj } = req.body;
             const user = await User.findOne({ username });
             if (!user) {
                 return res.status(400).json({ message: `Username ${username} was not found` });
@@ -55,12 +56,24 @@ export class UserController {
             }
             // Find out which value was updated
             const updatedUser: Partial<IUser> = {};
-            for (const value in requestObj ){
-                if(requestObj[value]){
-                    updatedUser[value] = requestObj[value] as string;
+            for (const key in requestObj) {
+                if (requestObj[key]) {
+                    updatedUser[key] = requestObj[key] as string;
+                }
+            }
+
+            // Convert birthday to a JavaScript Date object
+            if (birthday) {
+                const parsedBirthday = parseISO(birthday);
+
+                if (isValid(parsedBirthday)) {
+                    updatedUser['birthday'] = format(parsedBirthday, 'yyyy-MM-dd');
+                } else {
+                    return res.status(400).json({ message: 'Invalid birthday format' });
                 }
             }
             await User.updateOne({ username: username }, { $set: updatedUser });
+
             console.log(updatedUser);
             return res.status(200).json(user);
         } catch (err) {
