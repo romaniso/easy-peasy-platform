@@ -34,8 +34,6 @@ const Login: React.FC<SignupProps> = ({ onToggleForm }) => {
     const from = location.state?.from.pathname || '/dashboard';
 
     const {
-        showPassword,
-        toggleShowPassword,
         userName,
         setUserName,
         pwd,
@@ -129,8 +127,7 @@ const Login: React.FC<SignupProps> = ({ onToggleForm }) => {
                         </Input>
                         <Password
                             name="password"
-                            showPassword={showPassword}
-                            toggleShowPassword={toggleShowPassword}
+                            previewEnabled
                             onChange={setPwd}
                             primary
                             rounded

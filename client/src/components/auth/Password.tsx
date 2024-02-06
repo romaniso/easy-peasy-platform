@@ -1,49 +1,50 @@
-import React, {InputHTMLAttributes, ReactNode, useRef} from "react";
+import React, {InputHTMLAttributes, ReactNode, useRef, useState} from "react";
 import Input from "../Input";
 
 type PasswordRestProps = Omit<InputHTMLAttributes<HTMLInputElement>, 'children' | 'showPassword' | 'onChange' | 'toggleShowPassword'>;
 
 interface PasswordProps extends PasswordRestProps{
     children: ReactNode;
-    showPassword?: boolean;
     primary?: boolean;
     secondary?: boolean;
     rounded?: boolean;
     outline?: boolean;
     name: string;
-    toggleShowPassword?: () => void;
+    previewEnabled?: true;
     onChange(value: string): void;
-
 }
 
 const Password: React.FC<PasswordProps> = ({
                       children,
-                      showPassword,
-                      toggleShowPassword,
-                      onChange, name,
+                      // showPassword,
+                      // toggleShowPassword,
+                      onChange, name, previewEnabled,
                       ...rest
                   }) => {
+    const [isPreviewed, setIsPreviewed] = useState<boolean>(false);
     const inputRef = useRef<HTMLInputElement>(null);
     const handleToggleShowPassword = () => {
         inputRef.current?.focus();
-        if(toggleShowPassword){
-            toggleShowPassword();
+        if(previewEnabled){
+            setIsPreviewed((prev) => {
+                return !prev;
+            })
         }
     };
 
-
-    const icon = toggleShowPassword ? (
+    const icon = previewEnabled ? (
         <button
             className="bi bi-eye-fill absolute top-1/2 right-3 -translate-y-1/2 cursor-pointer"
             type="button"
-            onClick={handleToggleShowPassword}
+            onMouseDown={handleToggleShowPassword}
+            onMouseUp={handleToggleShowPassword}
         >
       <span>
         <svg
             xmlns="http://www.w3.org/2000/svg"
             width="16"
             height="16"
-            fill={showPassword ? "#EB7F00" : "#a5b4fc"}
+            fill={isPreviewed ? "#EB7F00" : "#a5b4fc"}
             viewBox="0 0 16 16"
         >
           <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z" />
@@ -56,11 +57,14 @@ const Password: React.FC<PasswordProps> = ({
     return (
         <Input
             name={name}
-            type={showPassword ? "text" : "password"}
+            type={isPreviewed ? "text" : "password"}
             onChange={onChange}
             icon={icon}
             {...rest}
-            ref={inputRef}
+            ref={inputRef => inputRef && inputRef.focus()}
+            onFocus={
+                (e)=>e.currentTarget.setSelectionRange(e.currentTarget.value.length, e.currentTarget.value.length)
+            }
         >
             {children}
         </Input>

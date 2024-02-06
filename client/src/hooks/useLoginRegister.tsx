@@ -1,7 +1,6 @@
 import { useState, useRef } from "react";
 
 function useLoginRegister() {
-    const [showPassword, setShowPassword] = useState<boolean>(false);
     const [userName, setUserName] = useState<string>("");
     const [validName, setValidName] = useState<boolean>(false)
     const [userFocus, setUserFocus] = useState<boolean>(false);
@@ -20,12 +19,7 @@ function useLoginRegister() {
     const [errMsg, setErrMsg] = useState<string>('');
     const [success, setSuccess] = useState(false);
 
-    const toggleShowPassword = ():void => {
-        setShowPassword(!showPassword);
-    };
-
     return {
-        showPassword,
         userName,
         setUserName,
         validName,
@@ -50,7 +44,6 @@ function useLoginRegister() {
         setSuccess,
         userRef,
         errRef,
-        toggleShowPassword,
     };
 }
 

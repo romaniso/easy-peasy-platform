@@ -27,8 +27,6 @@ const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
 const REGISTER_URL = '/register'
 const Register: React.FC<SignupProps> = ({ onToggleForm }) => {
     const {
-        showPassword,
-        toggleShowPassword,
         userName,
         setUserName,
         validName,
@@ -176,8 +174,7 @@ const Register: React.FC<SignupProps> = ({ onToggleForm }) => {
                             {/*PASSWORD*/}
                             <Password
                                 name='pwd'
-                                showPassword={showPassword}
-                                toggleShowPassword={toggleShowPassword}
+                                previewEnabled
                                 onChange={setPwd}
                                 primary
                                 rounded
