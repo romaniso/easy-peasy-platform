@@ -1,5 +1,7 @@
 import {Schema, model} from 'mongoose';
 import {RoleName} from "../enums/role";
+import {InterestItemText} from "../enums/interestItem";
+import {MotivationItemText} from "../enums/motivationItem";
 
 export interface IUser {
     username: string;
@@ -12,8 +14,8 @@ export interface IUser {
     lastName?: string;
     email?: string;
     birthday?: string;
-    likes?:string[];
-    motivations?:string[];
+    likes?: InterestItemText[];
+    motivations?: MotivationItemText[];
     [key: string]: string | string[] | Date | undefined;
 }
 
