@@ -8,6 +8,7 @@ import {axiosPrivate} from "../../api/axios";
 import useAuth from "../../hooks/useAuth";
 import useUser from "../../hooks/useUser";
 import {MotivationItemText} from "../../enums/motivationItem";
+import { IoIosArrowForward } from "react-icons/io";
 
 export type MotivationItem = {
     text: MotivationItemText,
@@ -15,11 +16,12 @@ export type MotivationItem = {
 }
 interface MotivationFormProps {
     items: MotivationItem[];
+    switchForm: React.Dispatch<React.SetStateAction<number>>;
 }
 
 const UPDATE_URL = '/users';
 
-const MotivationForm: React.FC<MotivationFormProps> = ({items}) => {
+const MotivationForm: React.FC<MotivationFormProps> = ({items, switchForm}) => {
     const {auth} = useAuth();
     const { setUser, user} = useUser();
     const [selectedItems, setSelectedItems] = useState<MotivationItemText[]>(user.motivations || []);
@@ -33,11 +35,6 @@ const MotivationForm: React.FC<MotivationFormProps> = ({items}) => {
             }
         });
     };
-
-    const handleNextForm = (event: SyntheticEvent) => {
-        event.preventDefault();
-        console.log('Next Form');
-    }
 
     const handleSubmit = async (event: SyntheticEvent) => {
         event.preventDefault();
@@ -62,6 +59,13 @@ const MotivationForm: React.FC<MotivationFormProps> = ({items}) => {
         } catch (err) {
             console.error(err);
         }
+    }
+
+    const handleNextForm = (event: SyntheticEvent) => {
+        event.preventDefault();
+        switchForm(prev => {
+            return prev + 1;
+        })
     }
 
     return (
@@ -95,7 +99,10 @@ const MotivationForm: React.FC<MotivationFormProps> = ({items}) => {
                         </span>
                 </Button>
                 <Button secondary rounded className='basis-1/2' onClick={handleNextForm}>
-                    Next
+                    <span className='flex items-center gap-2'>
+                        Next
+                        <IoIosArrowForward />
+                    </span>
                 </Button>
             </div>
         </form>

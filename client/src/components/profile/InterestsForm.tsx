@@ -7,6 +7,7 @@ import useAuth from "../../hooks/useAuth";
 import useUser from "../../hooks/useUser";
 import {User} from "../../interfaces/user";
 import {axiosPrivate} from "../../api/axios";
+import {IoIosArrowBack } from "react-icons/io";
 
 export type InterestItem = {
     text: InterestItemText,
@@ -14,10 +15,11 @@ export type InterestItem = {
 }
 interface InterestsFormProps {
     items:  InterestItem[];
+    switchForm: React.Dispatch<React.SetStateAction<number>>;
 }
 
 const UPDATE_URL = '/users';
-const InterestsForm: React.FC<InterestsFormProps> = ({items}) => {
+const InterestsForm: React.FC<InterestsFormProps> = ({items, switchForm}) => {
     const {auth} = useAuth();
     const { setUser, user} = useUser();
     const [selectedItems, setSelectedItems] = useState<InterestItemText[]>(user.likes || []);
@@ -57,6 +59,13 @@ const InterestsForm: React.FC<InterestsFormProps> = ({items}) => {
         }
     }
 
+    const handlePrevForm = (event: SyntheticEvent) => {
+        event.preventDefault();
+        switchForm(prev => {
+            return prev - 1;
+        })
+    }
+
     return (
         <form className='mx-auto flex-grow flex flex-col justify-between items-center md:py-5 md:px-7 px-3 py-5 w-full md:max-w-[600px] lr:max-w-[750px]' onSubmit={handleSubmit}>
             <div>
@@ -77,6 +86,12 @@ const InterestsForm: React.FC<InterestsFormProps> = ({items}) => {
                 })}
             </div>
             <div className='md:self-start flex justify-end w-full gap-4'>
+                <Button secondary rounded className='basis-1/2' onClick={handlePrevForm}>
+                    <span className='flex items-center gap-2'>
+                        <IoIosArrowBack  />
+                        Previous
+                    </span>
+                </Button>
                 <Button
                     submit
                     primary

@@ -5,13 +5,13 @@ interface IconTabBarProps {
         content: string,
         icon: ReactElement
     }[];
-    activeTab: string;
-    setActiveTab: (tab: string) => void;
+    activeTab: number;
+    setActiveTab: (tab: number) => void;
     className? : string;
 }
 
 const IconsTabBar: React.FC<IconTabBarProps> = ({ items, activeTab, setActiveTab, className}) => {
-    const handleTab = (tab: string): void => {
+    const handleTab = (tab: number): void => {
         console.log(tab);
         setActiveTab(tab);
     };
@@ -23,16 +23,16 @@ const IconsTabBar: React.FC<IconTabBarProps> = ({ items, activeTab, setActiveTab
                 ${index !== (items.length - 1) && 'after:absolute after:w-1/2 after:top-1/2 after:right-0 after:h-1 after:-translate-y-5 z-0'}
                 ${index !== 0 && 'before:absolute before:w-1/2 before:top-1/2 before:left-0 before:h-1 before:-translate-y-5'}
                 
-                ${(item.label === activeTab) ? 'after:bg-orange-500' : 'after:bg-indigo-400'}
-                ${(items[index - 1]?.label === activeTab) ? 'before:bg-orange-500' : 'before:bg-indigo-400'}
+                ${(index === activeTab) ? 'after:bg-orange-500' : 'after:bg-indigo-400'}
+                ${(index - 1 === activeTab) ? 'before:bg-orange-500' : 'before:bg-indigo-400'}
                 `}
                  key={item.label}
             >
                 <div className={`
                     p-1.5 lg:p-2 rounded-full lg:text-xl text-indigo-50 shadow-md cursor-pointer hover:bg-orange-400 hover:scale-105 transition-all duration-300 z-10 relative
-                    ${item.label === activeTab ? 'bg-orange-500' : 'bg-indigo-400'}
+                    ${index === activeTab ? 'bg-orange-500' : 'bg-indigo-400'}
                     `}
-                     onClick={() => handleTab(item.label)}
+                     onClick={() => handleTab(index)}
                 >
                     {item.icon}
                 </div>

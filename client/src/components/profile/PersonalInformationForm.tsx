@@ -6,6 +6,7 @@ import useAuth from "../../hooks/useAuth";
 import {axiosPrivate} from "../../api/axios";
 import useUser from "../../hooks/useUser";
 import {User} from "../../interfaces/user";
+import {IoIosArrowForward} from "react-icons/io";
 
 const UPDATE_URL = '/users'
 const FIRSTNAME_REGEX = /^[a-zA-Z][a-zA-Z\s'-]{1,50}$/;
@@ -13,7 +14,7 @@ const LASTNAME_REGEX = /^[a-zA-Z][a-zA-Z\s'-]{1,50}$/;
 const EMAIL_REGEX = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
 // @TODO: break it down to hook, before sending req validate it, show info with Toast
-const PersonalInformationForm: React.FC = () => {
+const PersonalInformationForm: React.FC<{switchForm: React.Dispatch<React.SetStateAction<number>>}> = ({switchForm}) => {
     const {auth} = useAuth();
     const { setUser, user} = useUser();
 
@@ -133,7 +134,10 @@ const PersonalInformationForm: React.FC = () => {
 
     const handleNextForm = (event: SyntheticEvent) => {
         event.preventDefault();
-        console.log('Next Form');
+
+        switchForm(prev => {
+            return prev + 1;
+        })
     }
 
     return (
@@ -251,7 +255,10 @@ const PersonalInformationForm: React.FC = () => {
                     className='basis-1/2'
                     onClick={handleNextForm}
                 >
-                    Next
+                    <span className='flex items-center gap-2'>
+                        Next
+                        <IoIosArrowForward />
+                    </span>
                 </Button>
             </div>
         </form>

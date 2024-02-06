@@ -20,7 +20,7 @@ import {InterestItemText} from "../../enums/interestItem";
 
 
 const UserProfileForms = () => {
-    const [activeTab, setActiveTab] = useState<string>('personal');
+    const [activeTab, setActiveTab] = useState<number>(0);
     const userForms =  [
         {label: 'personal', content: 'Personal information',  icon: <CiViewList/>},
         {label: 'motivation', content: 'Your motivation',  icon: <CiTrophy/>},
@@ -62,17 +62,17 @@ const UserProfileForms = () => {
         {text: InterestItemText.Cartoons, icon: <TbMickey/>},
     ]
 
-    let content: ReactElement | null = null;
+    let content: ReactElement | null = null
 
     switch (activeTab) {
-        case 'personal':
-            content = <PersonalInformationForm/>
+        case 0:
+            content = <PersonalInformationForm switchForm={setActiveTab}/>
             break;
-        case 'motivation':
-            content = <MotivationForm items={motivationItems}/>
+        case 1:
+            content = <MotivationForm items={motivationItems} switchForm={setActiveTab}/>
             break;
-        case 'interests':
-            content = <InterestsForm items={interestItems}/>
+        case 2:
+            content = <InterestsForm items={interestItems} switchForm={setActiveTab}/>
             break;
     }
 
