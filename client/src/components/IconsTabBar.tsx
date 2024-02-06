@@ -12,8 +12,12 @@ interface IconTabBarProps {
 
 const IconsTabBar: React.FC<IconTabBarProps> = ({ items, activeTab, setActiveTab, className}) => {
     const handleTab = (tab: number): void => {
-        console.log(tab);
-        setActiveTab(tab);
+        if(tab >= 0 && tab <= items.length - 1){
+            setActiveTab(tab);
+        } else {
+            console.error('Incorrect tab order number');
+        }
+
     };
 
     const renderedTabs = items.map((item, index) => {

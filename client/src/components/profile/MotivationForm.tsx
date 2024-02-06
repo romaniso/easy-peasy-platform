@@ -16,7 +16,7 @@ export type MotivationItem = {
 }
 interface MotivationFormProps {
     items: MotivationItem[];
-    switchForm: React.Dispatch<React.SetStateAction<number>>;
+    switchForm: (tab: -1 | 1) => void;
 }
 
 const UPDATE_URL = '/users';
@@ -63,9 +63,7 @@ const MotivationForm: React.FC<MotivationFormProps> = ({items, switchForm}) => {
 
     const handleNextForm = (event: SyntheticEvent) => {
         event.preventDefault();
-        switchForm(prev => {
-            return prev + 1;
-        })
+        switchForm(1);
     }
 
     return (

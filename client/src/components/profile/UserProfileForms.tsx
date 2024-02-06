@@ -62,17 +62,29 @@ const UserProfileForms = () => {
         {text: InterestItemText.Cartoons, icon: <TbMickey/>},
     ]
 
+    const switchForm = (tab: -1 | 1): void => {
+        const switchedTab = activeTab + tab;
+        if(switchedTab >= 0 && switchedTab <= userForms.length - 1){
+            setActiveTab(prev => {
+                return prev + (tab);
+            });
+        } else {
+            console.error('Incorrect tab order number');
+        }
+
+    };
+
     let content: ReactElement | null = null
 
     switch (activeTab) {
         case 0:
-            content = <PersonalInformationForm switchForm={setActiveTab}/>
+            content = <PersonalInformationForm switchForm={switchForm}/>
             break;
         case 1:
-            content = <MotivationForm items={motivationItems} switchForm={setActiveTab}/>
+            content = <MotivationForm items={motivationItems} switchForm={switchForm}/>
             break;
         case 2:
-            content = <InterestsForm items={interestItems} switchForm={setActiveTab}/>
+            content = <InterestsForm items={interestItems} switchForm={switchForm}/>
             break;
     }
 

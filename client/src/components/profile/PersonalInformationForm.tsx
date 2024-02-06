@@ -14,7 +14,7 @@ const LASTNAME_REGEX = /^[a-zA-Z][a-zA-Z\s'-]{1,50}$/;
 const EMAIL_REGEX = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
 // @TODO: break it down to hook, before sending req validate it, show info with Toast
-const PersonalInformationForm: React.FC<{switchForm: React.Dispatch<React.SetStateAction<number>>}> = ({switchForm}) => {
+const PersonalInformationForm: React.FC<{switchForm: (tab: -1 | 1) => void}> = ({switchForm}) => {
     const {auth} = useAuth();
     const { setUser, user} = useUser();
 
@@ -135,9 +135,7 @@ const PersonalInformationForm: React.FC<{switchForm: React.Dispatch<React.SetSta
     const handleNextForm = (event: SyntheticEvent) => {
         event.preventDefault();
 
-        switchForm(prev => {
-            return prev + 1;
-        })
+        switchForm(1);
     }
 
     return (
