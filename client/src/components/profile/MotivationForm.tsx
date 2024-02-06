@@ -90,12 +90,8 @@ const MotivationForm: React.FC<MotivationFormProps> = ({items, switchForm}) => {
                     primary
                     rounded
                     className='basis-1/2'
-                >
-                        <span className='text-lg'>
-                            Save
-                            <FaSave className='inline ml-2'/>
-                        </span>
-                </Button>
+                    save
+               />
                 <Button secondary rounded className='basis-1/2' onClick={handleNextForm}>
                     <span className='flex items-center gap-2'>
                         Next

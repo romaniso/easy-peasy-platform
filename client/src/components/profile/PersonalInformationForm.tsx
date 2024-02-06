@@ -241,12 +241,8 @@ const PersonalInformationForm: React.FC<{switchForm: (tab: -1 | 1) => void}> = (
                     submit
                     disabled={!validFirstName || !validLastName || !validUserEmail || !validBirthday }
                     className={!validFirstName || !validLastName || !validUserEmail || !validBirthday ? 'opacity-40 !cursor-not-allowed basis-1/2' :"basis-1/2"}
-                >
-                        <span className='text-lg'>
-                            Save
-                            <FaSave className='inline ml-2'/>
-                        </span>
-                </Button>
+                    save
+                />
                 <Button
                     secondary
                     rounded

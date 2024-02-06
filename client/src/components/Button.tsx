@@ -1,10 +1,9 @@
 import React, {ButtonHTMLAttributes, ReactElement, ReactEventHandler} from "react";
 import className from "classnames";
-import {Simulate} from "react-dom/test-utils";
-import submit = Simulate.submit;
+import {FaSave} from "react-icons/fa";
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-    children: ReactElement | string;
+    children?: ReactElement | string;
     primary?: true;
     secondary?: true;
     success?: true;
@@ -15,6 +14,7 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
     rounded?: true;
     onClick?: ReactEventHandler;
     submit?: true;
+    save?: true;
 }
 const Button: React.FC<ButtonProps> = ({
                     children,
@@ -25,7 +25,7 @@ const Button: React.FC<ButtonProps> = ({
                     danger,
                     small,
                     outline,
-                    rounded, submit,
+                    rounded, submit, save,
                     onClick,
                     ...rest
                 }) => {
@@ -58,7 +58,13 @@ const Button: React.FC<ButtonProps> = ({
                 className={classes}
                 onClick={onClick}
                 type={submit ? "submit" : rest.type}>
-            {children}
+            {
+                save
+                    ? (<span className='text-lg'>
+                            Save
+                            <FaSave className='inline ml-2'/>
+                        </span>)
+                    : children}
         </button>
     );
 }

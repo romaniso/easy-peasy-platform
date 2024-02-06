@@ -95,12 +95,8 @@ const InterestsForm: React.FC<InterestsFormProps> = ({items, switchForm}) => {
                     primary
                     rounded
                     className='basis-1/2'
-                >
-                        <span className='text-lg'>
-                            Save
-                            <FaSave className='inline ml-2'/>
-                        </span>
-                </Button>
+                    save
+                />
             </div>
         </form>
     )
