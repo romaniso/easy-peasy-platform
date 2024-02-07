@@ -7,14 +7,13 @@ import {authRouter} from "./src/routes/authRouter";
 import {corsOptions} from "./config/corsOptions";
 import {registerRouter} from "./src/routes/registerRouter";
 import {userRouter} from "./src/routes/api/userRouter";
+import {settingsRouter} from "./src/routes/settingsRouter";
 import {verifyJWT} from "./src/middleware/verifyJWT";
 import cookieParser from "cookie-parser";
 import {refreshRouter} from "./src/routes/refreshRouter";
 import {logoutRouter} from "./src/routes/logoutRouter";
 import {credentials} from "./src/middleware/credentials";
 import {connectDB} from "./config/dbConn";
-import {config} from "./config/config";
-import {getFileStream} from "./src/services/s3";
 const PORT: number = parseInt(process.env.PORT as string, 10) || 5000;
 
 
@@ -48,6 +47,7 @@ app.use('/logout', logoutRouter);
 // verified routes
 app.use(verifyJWT);
 app.use('/users', userRouter);
+app.use('/settings', settingsRouter);
 
 // 404
 app.all('*', (req,res) => {

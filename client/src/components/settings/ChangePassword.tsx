@@ -4,8 +4,11 @@ import React, {useEffect, useState} from "react";
 import Password from "../auth/Password";
 import {IoIosInformationCircleOutline} from "react-icons/io";
 import {FaCheck, FaTimes} from "react-icons/fa";
-import {axiosPrivate} from "../../api/axios";
+import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 import {AxiosError} from "axios";
+import useAuth from "../../hooks/useAuth";
+import {ToastType} from "../../enums/toast";
+import {useToast} from "../../context/ToastContext";
 
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
 const SETTINGS_URL = '/settings'
@@ -20,9 +23,14 @@ const ChangePassword = () => {
     const [newPwdFocus, setNewPwdFocus] = useState<boolean>(false);
     const [matchFocus, setMatchFocus] = useState<boolean>(false);
 
+    const {auth} = useAuth();
+    const axiosPrivate = useAxiosPrivate();
+
+    const toast = useToast();
+
     // const newPwdFocus = useRef<HTMLInputElement>(null);
     useEffect(() => {
-        if(newPwd === prevPwd) {
+        if(prevPwd && newPwd === prevPwd) {
             console.error('Previous password and new password must be different.')
             return;
         }
@@ -36,22 +44,29 @@ const ChangePassword = () => {
 
     const handleSubmit = async (event: React.FormEvent) => {
         event.preventDefault();
+        const {user} = auth;
+
         // Additional validation in case a button is enabled with JS hack
         const  v1 = PWD_REGEX.test(newPwd);
         if(!v1) {
+            console.error('Invalid Entry');
             // setErrMsg('Invalid Entry');
             return;
         }
         try {
-            const response = await axiosPrivate.post(SETTINGS_URL, {
-                // username: userName,
-                // password: pwd,
+            const response = await axiosPrivate.post(SETTINGS_URL + '/password', {
+                username: user,
+                password: prevPwd,
+                newPassword: newPwd,
             }, {
                 headers: {'Content-Type': 'application/json'},
-                withCredentials: true,
+                // withCredentials: true,
             });
+
+            console.log(response.data);
             // setSuccess(true);
             // Clear up
+            toast?.open('You have successfully changed your password', ToastType.Success);
             setPrevPwd("");
             setNewPwd("");
             setMatchPwd("");
@@ -65,9 +80,10 @@ const ChangePassword = () => {
             } else {
                 // setErrMsg("Registration Failed")
                 console.error('Registration Failed');
+                console.log(err.response.data);
             }
+            toast?.open('Oops something went wrong. Try again', ToastType.Failure);
             // errRef.current?.focus();
-
         }
     };
 
