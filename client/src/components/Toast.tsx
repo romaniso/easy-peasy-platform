@@ -2,6 +2,7 @@ import React, {useEffect, useMemo, useRef, useState} from "react";
 import {ToastContext} from "../context/ToastContext";
 import {IoIosCloseCircle} from "react-icons/io";
 import { RiAlarmWarningLine } from "react-icons/ri";
+import { FaExclamationCircle } from "react-icons/fa";
 import {FaCheck} from "react-icons/fa";
 import {ToastType} from "../enums/toast";
 import className from "classnames";
@@ -29,6 +30,7 @@ const Toast: React.FC<ToastProps> = ({message, close, type}) => {
         {
             "border-green-600": type === ToastType.Success,
             "border-orange-400": type === ToastType.Warning,
+            "border-red-400": type === ToastType.Failure,
         }
     );
     const iconClasses = className(
@@ -36,19 +38,20 @@ const Toast: React.FC<ToastProps> = ({message, close, type}) => {
         {
             "bg-green-600": type === ToastType.Success,
             "bg-orange-400": type === ToastType.Warning,
+            "bg-red-400": type === ToastType.Failure,
         }
     );
     let icon: React.ReactElement | null = null;
-    let displayedMessage: string | null = null;
 
     switch (type) {
         case ToastType.Success:
             icon = <FaCheck className='text-indigo-50'/>;
-            displayedMessage = `${message ? message :  'Your word has been successfully added!'}`;
             break;
         case ToastType.Warning:
             icon = <RiAlarmWarningLine className='text-indigo-50'/>;
-            displayedMessage = 'You have already added this word.';
+            break;
+        case ToastType.Failure:
+            icon= <FaExclamationCircle className='text-indigo-50'/>
             break;
     }
 
@@ -60,7 +63,7 @@ const Toast: React.FC<ToastProps> = ({message, close, type}) => {
             <div className={iconClasses}>
                 {icon}
             </div>
-            <p className='text-indigo-900 dark:text-indigo-50'>{displayedMessage}</p>
+            <p className='text-indigo-900 dark:text-indigo-50'>{message}</p>
         </div>
         <button className='' onClick={close}><IoIosCloseCircle className='text-2xl text-indigo-900 dark:text-indigo-50'/></button>
     </div>

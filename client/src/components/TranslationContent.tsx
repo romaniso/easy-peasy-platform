@@ -25,7 +25,11 @@ const TranslationContent: React.FC<TranslationContentProps> = ({word, fetchedDat
             audio: fetchedData.audio,
         }
         const status: ToastType = addWord(addedWord);
-        toast?.open('Your word has been successfully added!', status);
+        if(status === ToastType.Success){
+            toast?.open('Your word has been successfully added!', status);
+        } else if(status === ToastType.Failure) {
+            toast?.open('You have already added this word!', status);
+        }
     }
     const handlePlay = async () => {
         if (fetchedData && fetchedData.audio) {

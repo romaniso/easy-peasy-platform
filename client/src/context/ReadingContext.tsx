@@ -19,7 +19,7 @@ const useDictionary = (): IDictionaryContext => {
         );
         if (isWordAlreadyAdded) {
             console.error('You have already added this word');
-            return ToastType.Warning;
+            return ToastType.Failure;
         } else {
             setSelectedWords([...selectedWords, newSelectedWord]);
             console.log(selectedWords);
