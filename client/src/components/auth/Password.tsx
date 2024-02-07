@@ -1,4 +1,4 @@
-import React, {InputHTMLAttributes, ReactNode, useRef, useState} from "react";
+import React, {InputHTMLAttributes, ReactNode, useCallback, useEffect, useRef, useState} from "react";
 import Input from "../Input";
 
 type PasswordRestProps = Omit<InputHTMLAttributes<HTMLInputElement>, 'children' | 'showPassword' | 'onChange' | 'toggleShowPassword'>;
@@ -23,14 +23,26 @@ const Password: React.FC<PasswordProps> = ({
                   }) => {
     const [isPreviewed, setIsPreviewed] = useState<boolean>(false);
     const inputRef = useRef<HTMLInputElement>(null);
-    const handleToggleShowPassword = () => {
-        inputRef.current?.focus();
+    const handleToggleShowPassword = useCallback(() => {
         if(previewEnabled){
             setIsPreviewed((prev) => {
                 return !prev;
             })
+            inputRef.current?.focus();
         }
-    };
+    }, []);
+
+    // const onToggle = useCallback(() => {
+    //     setType(current => type === 'text' ? 'password' : 'text');
+    //     // Setting focus here
+    //     inputRef.current.focus();
+    // }, []);
+    useEffect(() => {
+        // Moving cursor to the end
+        if(!inputRef.current) return;
+        inputRef.current.selectionStart = inputRef.current.value.length;
+        inputRef.current.selectionEnd = inputRef.current.value.length;
+    }, [isPreviewed]);
 
     const icon = previewEnabled ? (
         <button
@@ -61,10 +73,9 @@ const Password: React.FC<PasswordProps> = ({
             onChange={onChange}
             icon={icon}
             {...rest}
-            ref={inputRef => inputRef && inputRef.focus()}
-            onFocus={
-                (e)=>e.currentTarget.setSelectionRange(e.currentTarget.value.length, e.currentTarget.value.length)
-            }
+            // ref={inputRef => inputRef && inputRef.focus()}
+            // onFocus={(e)=>e.currentTarget.setSelectionRange(e.currentTarget.value.length, e.currentTarget.value.length)}
+            ref={inputRef}
         >
             {children}
         </Input>

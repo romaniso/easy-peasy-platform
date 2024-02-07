@@ -86,7 +86,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
         {
             "text-indigo-700 dark:text-indigo-300 peer-focus:text-orange-500 peer-valid:text-orange-500":
             primary,
-            "text-indigo-800 dark:peer-focus:text-orange-500 peer-focus:text-orange-500 peer-valid:text-indigo-500":
+            "text-indigo-800 dark:text-indigo-400 dark:peer-focus:text-orange-500 peer-focus:text-orange-500 peer-valid:text-indigo-500":
             secondary,
             'peer-valid:text-lg peer-valid:text-indigo-700 dark:peer-valid:text-indigo-300 peer-focus:text-lg -translate-y-2/3': lg && secondary,
             "text-xs -top-3 -left-0 !text-orange-500": value.length > 0,
