@@ -8,6 +8,8 @@ import useUser from "../../hooks/useUser";
 import {User} from "../../interfaces/user";
 import {axiosPrivate} from "../../api/axios";
 import {IoIosArrowBack } from "react-icons/io";
+import {useToast} from "../../context/ToastContext";
+import {ToastType} from "../../enums/toast";
 
 export type InterestItem = {
     text: InterestItemText,
@@ -23,6 +25,8 @@ const InterestsForm: React.FC<InterestsFormProps> = ({items, switchForm}) => {
     const {auth} = useAuth();
     const { setUser, user} = useUser();
     const [selectedItems, setSelectedItems] = useState<InterestItemText[]>(user.likes || []);
+
+    const toast = useToast();
 
     const handleCheckboxChange = (itemText: InterestItemText) => {
         setSelectedItems((prevSelectedItems) => {
@@ -53,9 +57,11 @@ const InterestsForm: React.FC<InterestsFormProps> = ({items, switchForm}) => {
                         ...updatedUser
                     }
                 })
+                toast?.open('Yor profile has been successfully updated.', ToastType.Success);
             }
         } catch (err) {
             console.error(err);
+            toast?.open('Oops. Something went wrong. Try again..', ToastType.Failure);
         }
     }
 

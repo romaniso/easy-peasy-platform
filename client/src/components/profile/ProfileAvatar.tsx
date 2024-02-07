@@ -7,6 +7,8 @@ import ImageDropZone from "../ImageDropZone";
 import {AxiosError} from "axios";
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 import useUser from "../../hooks/useUser";
+import {useToast} from "../../context/ToastContext";
+import {ToastType} from "../../enums/toast";
 
 const AVATAR_UPLOAD_URL = '/users/upload'
 const ProfileAvatar: React.FC = () => {
@@ -16,6 +18,8 @@ const ProfileAvatar: React.FC = () => {
     const [errMsg, setErrMsg] = useState<string>('');
     const axiosPrivate = useAxiosPrivate();
     const {user, setUser} = useUser();
+
+    const toast = useToast();
 
     const errRef = useRef<HTMLParagraphElement>(null);
 
@@ -62,6 +66,7 @@ const ProfileAvatar: React.FC = () => {
             setShowModal(false);
             setIsLoading(false);
             console.log('Image uploaded successfully:', response.data);
+            toast?.open('Yor profile has been successfully updated.', ToastType.Success);
         } catch (err) {
             if(!(err instanceof AxiosError) || !err.response) {
                 setErrMsg('No Server Response');

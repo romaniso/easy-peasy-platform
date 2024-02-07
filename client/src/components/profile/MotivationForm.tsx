@@ -9,6 +9,8 @@ import useAuth from "../../hooks/useAuth";
 import useUser from "../../hooks/useUser";
 import {MotivationItemText} from "../../enums/motivationItem";
 import { IoIosArrowForward } from "react-icons/io";
+import {ToastType} from "../../enums/toast";
+import {useToast} from "../../context/ToastContext";
 
 export type MotivationItem = {
     text: MotivationItemText,
@@ -25,6 +27,8 @@ const MotivationForm: React.FC<MotivationFormProps> = ({items, switchForm}) => {
     const {auth} = useAuth();
     const { setUser, user} = useUser();
     const [selectedItems, setSelectedItems] = useState<MotivationItemText[]>(user.motivations || []);
+
+    const toast = useToast();
 
     const handleCheckboxChange = (itemText: MotivationItemText) => {
         setSelectedItems((prevSelectedItems) => {
@@ -55,9 +59,11 @@ const MotivationForm: React.FC<MotivationFormProps> = ({items, switchForm}) => {
                         ...updatedUser
                     }
                 })
+                toast?.open('Yor profile has been successfully updated.', ToastType.Success);
             }
         } catch (err) {
             console.error(err);
+            toast?.open('Oops. Something went wrong. Try again..', ToastType.Failure);
         }
     }
 

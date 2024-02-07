@@ -7,6 +7,8 @@ import {axiosPrivate} from "../../api/axios";
 import useUser from "../../hooks/useUser";
 import {User} from "../../interfaces/user";
 import {IoIosArrowForward} from "react-icons/io";
+import {ToastType} from "../../enums/toast";
+import {useToast} from "../../context/ToastContext";
 
 const UPDATE_URL = '/users'
 const FIRSTNAME_REGEX = /^[a-zA-Z][a-zA-Z\s'-]{1,50}$/;
@@ -42,6 +44,8 @@ const PersonalInformationForm: React.FC<{switchForm: (tab: -1 | 1) => void}> = (
     const firstNameRef = useRef<HTMLInputElement>(null);
     const lastNameRef = useRef<HTMLInputElement>(null)
     const errRef = useRef<HTMLParagraphElement>(null);
+
+    const toast = useToast();
 
     const validateBirthday = (stringDate: string): boolean => {
         const parsedDate = stringDate ? new Date(stringDate) : undefined;
@@ -126,9 +130,11 @@ const PersonalInformationForm: React.FC<{switchForm: (tab: -1 | 1) => void}> = (
                         ...updatedUser
                     }
                 })
+                toast?.open('Yor profile has been successfully updated.', ToastType.Success);
             }
         } catch (err) {
             console.error(err);
+            toast?.open('Oops. Something went wrong. Try again..', ToastType.Failure);
         }
     }
 
