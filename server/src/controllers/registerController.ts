@@ -17,7 +17,7 @@ export class RegisterController {
             const duplicate = await User.findOne({username}).exec();
             if (duplicate){
                 // Conflict
-                return res.sendStatus(409).json({message: 'This user name already exists. Please, insert something different.'})
+                return res.status(409).json({message: 'This user name already exists. Please, insert something different.'})
             } else {
                 // Register a new user
                 // encrypt the password
