@@ -9,7 +9,7 @@ export class AuthController {
             const {username, password} = req.body;
             const foundUser = await User.findOne({username});
             if(!foundUser){
-                return res.sendStatus(401).json({message: 'User with this username was not found. Try with a different user name.'})
+                return res.status(401).json({message: 'User with this username was not found. Try with a different user name.'})
             }
             // evaluate password
             const match = bcrypt.compareSync(password, foundUser.password);
