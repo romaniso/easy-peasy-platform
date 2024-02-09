@@ -3,6 +3,7 @@ import Panel from "../components/Panel";
 import { IoLanguage, IoMoonOutline } from "react-icons/io5";
 import { BsExclamationDiamondFill } from "react-icons/bs";
 import ChangePassword from "../components/settings/ChangePassword";
+import LanguageSwitcher from "../components/settings/LanguageSwitcher";
 
 const SettingsPage: React.FC = () => {
     return (
@@ -13,9 +14,7 @@ const SettingsPage: React.FC = () => {
                 </header>
                 <main className='py-3 px-3 md:px-5 grid grid-cols-1 md:grid-cols-2 gap-8'>
                     <ChangePassword/>
-                    <section>
-                        <h2 className='text-lg md:text-2xl text-indigo-500 dark:text-indigo-200 font-bold drop-shadow flex items-center gap-1'>Choose your default language <IoLanguage/></h2>
-                    </section>
+                    <LanguageSwitcher/>
                     <section className='md:col-span-2'>
                         <h2 className='text-lg md:text-2xl text-indigo-500 dark:text-indigo-200 font-bold drop-shadow flex items-center gap-1'>Change Theme <IoMoonOutline/></h2>
                     </section>
