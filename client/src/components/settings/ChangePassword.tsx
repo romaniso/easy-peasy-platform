@@ -89,9 +89,9 @@ const ChangePassword = () => {
 
     return (
         <section>
-        <h2 className='text-lg md:text-2xl text-indigo-500 dark:text-indigo-200 font-bold drop-shadow flex items-center gap-1'>Change Password <RiLockPasswordLine/></h2>
+            <h2 className='text-lg md:text-2xl text-indigo-500 dark:text-indigo-200 font-bold drop-shadow flex items-center gap-1 mb-3.5 md:mb-6'>Change Password <RiLockPasswordLine/></h2>
             <form onSubmit={handleSubmit}>
-                <div className='mt-4 md:mt-6 mb-5 flex flex-col gap-5 md:gap-6'>
+                <div className='mb-5 flex flex-col gap-5 md:gap-6'>
                     <Password
                         onChange={setPrevPwd}
                         secondary

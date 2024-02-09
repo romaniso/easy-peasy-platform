@@ -123,7 +123,7 @@ const Navbar: React.FC = () => {
                         isLogged
                             ? (
                                 <div className='flex justify-between items-start'>
-                                    <ProfilePreview username={auth.user as string} dropdown />
+                                    <ProfilePreview dropdown />
                                     <ThemeToggle className='inline-flex md:hidden'/>
                                 </div>
                             )
