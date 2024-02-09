@@ -9,16 +9,18 @@ interface SelectItem<T> {
 interface SelectProps<T> {
     options: SelectItem<T>[];
     onChange?: (option: T) => void;
+    defaultOption?: SelectItem<T>;
+    defaultText: string;
 }
-const Select = <T,>({ options, onChange }: SelectProps<T>) => {
-    const [selectedOption, setSelectedOption] = useState<SelectItem<T> | null>(null);
+const Select = <T,>({ options, onChange, defaultOption, defaultText }: SelectProps<T>) => {
+    const [selectedOption, setSelectedOption] = useState<SelectItem<T> | null>(defaultOption || null);
     const [isOpen, setIsOpen] = useState(false);
 
     const selectRef = useRef<HTMLDivElement>(null);
 
     const handleSelectOption = (option: SelectItem<T>) => {
-        setSelectedOption(option);
         setIsOpen(false);
+        setSelectedOption(option);
         if(onChange) {
             onChange(option.value);
         }
@@ -53,7 +55,7 @@ const Select = <T,>({ options, onChange }: SelectProps<T>) => {
                 ) : (
                     <>
                         <span>
-                            Select an option
+                            {defaultText}
                         </span>
                         <PiCaretUpDownLight/>
                     </>

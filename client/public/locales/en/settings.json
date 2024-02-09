@@ -1,0 +1,19 @@
+{
+  "header": {
+    "mainHeader": "Settings"
+  },
+  "subheadings": {
+    "changePassword": "Change Password",
+    "defaultLanguage": "Choose default language",
+    "changeTheme": "Change Theme",
+    "deleteAccount": "Delete Account"
+  },
+  "languages": {
+    "en": "English(default)",
+    "ua": "Ukrainian",
+    "pl": "Polish"
+  },
+  "selectLanguage": {
+    "selectInputText": "Choose the language"
+  }
+}

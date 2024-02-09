@@ -6,19 +6,22 @@ import {BrowserRouter as Router, Routes, Route} from "react-router-dom";
 import {ToastContextProvider} from "./components/Toast";
 import {AuthProvider} from "./context/AuthContext";
 import {UserProvider} from "./context/UserContext";
+import './services/i18n';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-      <Router>
-          <AuthProvider>
-              <UserProvider>
-                  <ToastContextProvider>
-                      <Routes>
-                        <Route path='/*' element={<App />}/>
-                      </Routes>
-                  </ToastContextProvider>
-              </UserProvider>
-          </AuthProvider>
-      </Router>
+      <React.Suspense fallback={<div>Loading...</div>}>
+          <Router>
+              <AuthProvider>
+                  <UserProvider>
+                      <ToastContextProvider>
+                          <Routes>
+                            <Route path='/*' element={<App />}/>
+                          </Routes>
+                      </ToastContextProvider>
+                  </UserProvider>
+              </AuthProvider>
+          </Router>
+      </React.Suspense>
   </React.StrictMode>,
 )

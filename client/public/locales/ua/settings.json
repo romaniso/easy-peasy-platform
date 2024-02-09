@@ -1,0 +1,19 @@
+{
+  "header": {
+    "mainHeader": "Налаштування"
+  },
+  "subheadings": {
+    "changePassword": "Змінити пароль",
+    "defaultLanguage": "Виберіть мову за замовчуванням",
+    "changeTheme": "Змінити тему",
+    "deleteAccount": "Видалити обліковий запис"
+  },
+  "languages": {
+    "en": "Англійська(за замовчуванням)",
+    "ua": "Українська",
+    "pl": "Польська"
+  },
+  "selectLanguage": {
+    "selectInputText": "Виберіть потрібну мову"
+  }
+}
