@@ -14,6 +14,16 @@
     "pl": "Польська"
   },
   "selectLanguage": {
-    "selectInputText": "Виберіть потрібну мову"
+    "selectInputText": "Виберіть потрібну мову",
+    "toastMessage": "Мова змінена."
+  },
+  "changePassword": {
+    "prevPassword": "Попередній пароль",
+    "newPassword": "Новий пароль",
+    "confirmPassword": "Підтвердіть пароль"
+  },
+  "validation": {
+    "validationMessage_one": "Мусить відрізнятися від попереднього.",
+    "validationMessage_two": "8 до 24 символів.<1/>Має включати великі та малі літери, цифру та спеціальний символ.<1/> Дозволені спеціальні символи: "
   }
 }
