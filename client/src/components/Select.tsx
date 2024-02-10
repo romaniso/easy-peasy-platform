@@ -44,12 +44,12 @@ const Select = <T,>({ options, onChange, defaultOption, defaultText }: SelectPro
     return (
         <div className="relative" ref={selectRef}>
             <div
-                className="border border-indigo-100 dark:border-indigo-500/50 rounded px-4 py-2 flex items-center justify-between cursor-pointer text-indigo-800 dark:text-indigo-400 hover:bg-indigo-50 dark:hover:bg-indigo-500/10"
+                className="border border-indigo-100 dark:border-indigo-500/50 rounded px-2 md:px-4 py-2 flex items-center justify-between cursor-pointer text-indigo-800 dark:text-indigo-400 hover:bg-indigo-50 dark:hover:bg-indigo-500/10"
                 onClick={() => setIsOpen(!isOpen)}
             >
                 {selectedOption ? (
                     <>
-                        {selectedOption.label}
+                        {defaultText}
                         {selectedOption.icon && selectedOption.icon}
                     </>
                 ) : (
@@ -66,7 +66,7 @@ const Select = <T,>({ options, onChange, defaultOption, defaultText }: SelectPro
                     {options.map((option) => (
                         <div
                             key={option.label}
-                            className="px-4 py-2 cursor-pointer flex w-full justify-between items-center text-indigo-800 dark:text-indigo-400 hover:bg-indigo-50 dark:hover:bg-indigo-500/10"
+                            className="px-2 md:px-4 py-2 cursor-pointer flex w-full justify-between items-center text-indigo-800 dark:text-indigo-400 hover:bg-indigo-50 dark:hover:bg-indigo-500/10"
                             onClick={() => handleSelectOption(option)}
                         >
                             {option.label}
