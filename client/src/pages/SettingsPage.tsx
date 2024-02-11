@@ -5,6 +5,7 @@ import ChangePassword from "../components/settings/ChangePassword";
 import LanguageSwitcher from "../components/settings/LanguageSwitcher";
 import {useTranslation} from "react-i18next";
 import {ChangeTheme} from "../components/settings/ChangeTheme";
+import {DeleteAccount} from "../components/settings/DeleteAccount";
 
 const SettingsPage: React.FC = () => {
     const {t} = useTranslation('settings');
@@ -21,12 +22,7 @@ const SettingsPage: React.FC = () => {
                     <ChangePassword/>
                     <LanguageSwitcher/>
                     <ChangeTheme/>
-                    <section className='md:col-span-2'>
-                        <h2 className='text-lg md:text-2xl text-indigo-500 dark:text-indigo-200 font-bold drop-shadow flex items-center gap-1'>
-                            {t('subheadings.deleteAccount')}
-                            <BsExclamationDiamondFill/>
-                        </h2>
-                    </section>
+                    <DeleteAccount/>
                 </main>
             </Panel>
         </div>

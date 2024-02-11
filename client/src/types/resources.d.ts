@@ -163,7 +163,7 @@ interface Resources {
       "deleteAccount": "Delete Account"
     },
     "languages": {
-      "en": "English(default)",
+      "en": "English (default)",
       "ua": "Ukrainian",
       "pl": "Polish"
     },
@@ -183,6 +183,10 @@ interface Resources {
     },
     "changeTheme": {
       "switcherDescription": "It will toggle between dark and light modes for the app's visual style."
+    },
+    "deleteAccount": {
+      "btnText": "Delete account",
+      "deleteAccountDescription": "Click here if you want to permanently delete your account from the app."
     }
   }
 }

@@ -9,7 +9,7 @@
     "deleteAccount": "Usuń konto"
   },
   "languages": {
-    "en": "Angielski(domyślnie)",
+    "en": "Angielski (domyślnie)",
     "ua": "Ukraiński",
     "pl": "Polski"
   },
@@ -29,5 +29,9 @@
   },
   "changeTheme": {
     "switcherDescription": "Kliknij jeśli chcesz przełyć się między trybami ciemnym i jasnym dla wizualnego stylu aplikacji."
+  },
+  "deleteAccount": {
+    "btnText": "Usuń konto",
+    "deleteAccountDescription": "Kliknij tutaj, jeśli chcesz trwale usunąć swoje konto z aplikacji."
   }
 }

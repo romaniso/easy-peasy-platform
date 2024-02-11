@@ -4,7 +4,7 @@ import {useTranslation} from "react-i18next";
 import ThemeToggle from "../ThemeToggle";
 
 
-export const ChangeTheme = () => {
+export const ChangeTheme: React.FC = () => {
     const {t} = useTranslation('settings');
     return (
         <section className='border-t border-indigo-50 dark:border-indigo-500/50 pt-5 md:col-span-2 flex justify-between items-center'>
