@@ -32,6 +32,18 @@
   },
   "deleteAccount": {
     "btnText": "Usuń konto",
-    "deleteAccountDescription": "Kliknij tutaj, jeśli chcesz trwale usunąć swoje konto z aplikacji."
+    "deleteAccountDescription": "Kliknij tutaj, jeśli chcesz trwale usunąć swoje konto z aplikacji.",
+    "toastMessage": {
+      "success": "Twoje konto zostało pomyślnie usunięte. Mamy nadzieję, że zobaczymy Cię ponownie.",
+      "failure": "Ups. Coś poszło nie tak. Twoje konto nie zostało usunięte. Proszę, spróbuj ponownie."
+    },
+    "warning": {
+      "heading": "Usuń Moje Konto",
+      "warningText": "Usunięcie Twojego konta spowoduje usunięcie wszystkich informacji z naszych baz danych. Stracisz swój postęp oraz listę słówek. Ta czynność nie może zostać cofnięta w przyszłości. Czy na pewno chcesz kontynuować?",
+      "buttons": {
+        "proceed": "Tak, Usuń Moje Konto",
+        "cancel": "Anuluj"
+      }
+    }
   }
 }

@@ -32,6 +32,18 @@
   },
   "deleteAccount": {
     "btnText": "Delete account",
-    "deleteAccountDescription": "Click here if you want to permanently delete your account from the app."
+    "deleteAccountDescription": "Click here if you want to permanently delete your account from the app.",
+    "toastMessage": {
+      "success": "Your account has successfully been  changed deleted. Hope to see you again",
+      "failure": "Oops. Something went wrong. Your account hasn't been deleted. Please, try again."
+    },
+    "warning": {
+      "heading": "Delete My Account",
+      "warningText": "Deleting your account will remove all of your information from our databases. You will lose your progress and vocabulary list. This action cannot be undone in the future. Are you sure?",
+      "buttons": {
+        "proceed": "Yes, Delete My Account",
+        "cancel": "Cancel"
+      }
+    }
   }
 }
