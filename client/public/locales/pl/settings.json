@@ -24,6 +24,7 @@
   },
   "validation": {
     "validationMessage_one": "musi się różnić od poprzedniego.",
-    "validationMessage_two": "8 do 24 znaków.<1/>Musi zawierać duże i małe litery, cyfrę i znak specjalny.<1/> Dozwolone znaki specjalne: "
+    "validationMessage_two": "8 do 24 znaków.<1/>Musi zawierać duże i małe litery, cyfrę i znak specjalny.<1/> Dozwolone znaki specjalne: ",
+    "validationMessage_three": "Musi być takie same jak powyżej."
   }
 }

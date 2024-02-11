@@ -172,7 +172,7 @@ const ChangePassword = () => {
                     </Password>
                     <p id='confirmnote' className={matchFocus && !validMatch ? 'block bg-white dark:bg-stone-900 dark:border dark:border-orange-400 rounded p-1 text-sm text-orange-500 opacity-100 transition-colors duration-500 -mt-5 -mb-8 shadow z-10': 'invisible opacity-0 absolute'}>
                         <IoIosInformationCircleOutline className='inline relative bottom-0.5 mr-1 text-lg'/>
-                        Must match the first password input field.
+                        {t('validation.validationMessage_three')}
                     </p>
                 </div>
                 <Button
