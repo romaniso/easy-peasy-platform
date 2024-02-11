@@ -7,6 +7,56 @@ interface Resources {
       "save": "Save",
       "prev": "Previous",
       "next": "Next"
+    },
+    "mode": "Mode",
+    "sidebar": {
+      "greeting": "Hi! {{user}}",
+      "salutation": "Nice to see you!",
+      "toastMessage": {
+        "success": "You have been successfully logged out.",
+        "failure": "Oops. Something went wrong. Please, try again."
+      },
+      "dashboard": {
+        "text": "Dashboard"
+      },
+      "exercises": {
+        "text": "Exercises",
+        "links": {
+          "grammar": "Grammar",
+          "reading": "Reading",
+          "vocabulary": "Vocabulary",
+          "listening": "Listening"
+        }
+      },
+      "resources": {
+        "text": "Resources",
+        "links": {
+          "articles": "Articles",
+          "podcasts": "Podcasts"
+        }
+      },
+      "vocabulary": {
+        "text": "Your Vocabulary"
+      },
+      "tutoring": {
+        "text": "Tutoring",
+        "links": {
+          "tutors": "Find a tutor",
+          "online-class": "Order a class"
+        }
+      },
+      "inbox": {
+        "text": "Inbox"
+      },
+      "profile": {
+        "text": "Profile"
+      },
+      "settings": {
+        "text": "Settings"
+      },
+      "logout": {
+        "text": "Log out"
+      }
     }
   },
   "home": {

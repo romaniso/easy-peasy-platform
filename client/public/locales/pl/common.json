@@ -6,5 +6,55 @@
     "save": "Zapisz",
     "prev": "Cofnij",
     "next": "Dalej"
+  },
+  "mode": "Tryb",
+  "sidebar": {
+    "greeting": "Hej! {{user}}",
+    "salutation": "Miło Cię widzieć!",
+    "toastMessage": {
+      "success": "Zostałeś pomyślnie wylogowany.",
+      "failure": "Ups. Coś poszło nie tak. Spróbuj ponownie."
+    },
+    "dashboard": {
+      "text": "Panel główny"
+    },
+    "exercises": {
+      "text": "Ćwiczenia",
+      "links": {
+        "grammar": "Gramatyka",
+        "reading": "Czytanie",
+        "vocabulary": "Słownictwo",
+        "listening": "Słuchanie"
+      }
+    },
+    "resources": {
+      "text": "Zasoby",
+      "links": {
+        "articles": "Artykuły",
+        "podcasts": "Podcasty"
+      }
+    },
+    "vocabulary": {
+      "text": "Twoje słownictwo"
+    },
+    "tutoring": {
+      "text": "Korepetycje",
+      "links": {
+        "tutors": "Znajdź korepetytora",
+        "online-class": "Zamów lekcję online"
+      }
+    },
+    "inbox": {
+      "text": "Skrzynka odbiorcza"
+    },
+    "profile": {
+      "text": "Profil"
+    },
+    "settings": {
+      "text": "Ustawienia"
+    },
+    "logout": {
+      "text": "Wyloguj się"
+    }
   }
 }

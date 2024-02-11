@@ -23,6 +23,7 @@ import useAuth from "../hooks/useAuth";
 import MiniAvatar from "./MiniAvatar";
 import {useToast} from "../context/ToastContext";
 import {ToastType} from "../enums/toast";
+import {useTranslation} from "react-i18next";
 
 type SidemenuSubitem = {
     label: string;
@@ -46,70 +47,71 @@ const Sidebar: React.FC = () => {
     const navigate = useNavigate();
     const logout = useLogout();
     const toast = useToast();
+    const {t} = useTranslation("common")
     const signOut = async () => {
         await logout();
         navigate("/");
-        toast?.open('You have been successfully logged out', ToastType.Success);
+        toast?.open(t('sidebar.toastMessage.success'), ToastType.Success);
     };
 
     const menu: SidemenuItem[] = [
         {
-            title: "Dashboard",
+            title: t('sidebar.dashboard.text'),
             icon: <BsReverseLayoutTextWindowReverse />,
             path: "/dashboard",
         },
         {
-            title: "Exercises",
+            title: t('sidebar.exercises.text'),
             icon: <BsListTask />,
             links: [
-                { label: "Grammar", path: "/grammar" },
-                { label: "Reading", path: "/reading" },
-                { label: "Vocabulary", path: "/vocabulary" },
-                { label: "Listening", path: "/listening" },
+                { label: t('sidebar.exercises.links.grammar'), path: "/grammar" },
+                { label: t('sidebar.exercises.links.reading'), path: "/reading" },
+                { label: t('sidebar.exercises.links.vocabulary'), path: "/vocabulary" },
+                { label: t('sidebar.exercises.links.listening'), path: "/listening" },
             ],
             spacing: true,
         },
         {
-            title: "Resources",
+            title: t('sidebar.resources.text'),
             icon: <BsCollectionPlay />,
             links: [
-                { label: "Articles", path: "/articles" },
-                { label: "Podcasts", path: "/podcasts" },
+                { label: t('sidebar.resources.links.articles'), path: "/articles" },
+                { label: t('sidebar.resources.links.podcasts'), path: "/podcasts" },
             ],
         },
         {
-            title: "Your Vocabulary",
+            title: t('sidebar.vocabulary.text'),
             icon: <BsBook />,
         },
 
         {
-            title: "Tutoring",
+            title: t('sidebar.tutoring.text'),
             icon: <BsCalendar3 />,
             links: [
-                { label: "Find a tutor", path: "tutors" },
-                { label: "Order a class", path: "online-class" },
-                { label: "How it works", path: "docs/classes" },
-                { label: "Pricing", path: "docs/pricing" },
+                { label: t('sidebar.tutoring.links.tutors'), path: "tutors" },
+                { label: t('sidebar.tutoring.links.online-class'), path: "online-class" },
+                // { label: "How it works", path: "docs/classes" },
+                // { label: "Pricing", path: "docs/pricing" },
             ],
         },
         {
-            title: "Inbox",
+            title: t('sidebar.inbox.text'),
             icon: <BsEnvelopeFill />,
             path: "/inbox",
         },
         {
-            title: "Profile",
+            title: t('sidebar.profile.text'),
             icon: <BsPersonFill />,
             path: "/profile",
             spacing: true,
         },
         {
-            title: "Settings",
+            title: t('sidebar.settings.text'),
             icon: <BsGear />,
             path: "/settings",
         },
         {
-            title: "Log out",
+            title: t('sidebar.logout.text'),
             icon: <BsBoxArrowRight />,
             path: "/",
             event: signOut,
@@ -203,8 +205,12 @@ const Sidebar: React.FC = () => {
                     <MiniAvatar/>
                     {isSidebarOpened && (
                         <div>
-                            <p className='text-sm dark:text-indigo-200 text-indigo-900 font-semibold'>Hi {auth.user}!</p>
-                            <small className='text-indigo-700 dark:text-indigo-300'>Nice to see you!</small>
+                            <p className='text-sm dark:text-indigo-200 text-indigo-900 font-semibold'>
+                                {t('sidebar.greeting', {user: auth.user})}
+                            </p>
+                            <small className='text-indigo-700 dark:text-indigo-300'>
+                                {t('sidebar.salutation')}
+                            </small>
                         </div>
                     )}
                 </div>
@@ -226,7 +232,9 @@ const Sidebar: React.FC = () => {
             </div>
             <ul className="w-full">{renderedMenu}</ul>
             <div className={`mt-5 bg-indigo-50 dark:bg-stone-800 w-full flex justify-between px-2 py-1 rounded-md ${!isSidebarOpened && "hidden"}`}>
-                <span className='text-base text-indigo-900 dark:text-indigo-300 font-semibold'>Mode</span>
+                <span className='text-base text-indigo-900 dark:text-indigo-300 font-semibold'>
+                    {t('mode')}
+                </span>
                 <ThemeToggle />
             </div>
         </aside>

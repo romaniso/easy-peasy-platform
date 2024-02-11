@@ -6,5 +6,55 @@
     "save": "Зберегти",
     "prev": "Назад",
     "next": "Далі"
+  },
+  "mode": "Тема",
+  "sidebar": {
+    "greeting": "Привіт! {{user}}",
+    "salutation": "Радий тебе бачити!",
+    "toastMessage": {
+      "success": "Ви успішно вийшли.",
+      "failure": "Ой. Щось пішло не так. Будь ласка, спробуйте знову."
+    },
+    "dashboard": {
+      "text": "інформаційна панель"
+    },
+    "exercises": {
+      "text": "Вправи",
+      "links": {
+        "grammar": "Граматика",
+        "reading": "Читання",
+        "vocabulary": "Словник",
+        "listening": "Слухання"
+      }
+    },
+    "resources": {
+      "text": "Ресурси",
+      "links": {
+        "articles": "Статті",
+        "podcasts": "Подкасти"
+      }
+    },
+    "vocabulary": {
+      "text": "Твій словник"
+    },
+    "tutoring": {
+      "text": "Репетиторство",
+      "links": {
+        "tutors": "Знайти репетитора",
+        "online-class": "Замовити онлайн-урок"
+      }
+    },
+    "inbox": {
+      "text": "Вхідні повідомлення"
+    },
+    "profile": {
+      "text": "Профіль"
+    },
+    "settings": {
+      "text": "Налаштування"
+    },
+    "logout": {
+      "text": "Вийти"
+    }
   }
 }
