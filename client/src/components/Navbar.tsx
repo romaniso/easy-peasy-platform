@@ -105,7 +105,7 @@ const Navbar: React.FC = () => {
                     <p className='text-indigo-800/70 dark:text-orange-500/80 text-sm invisible absolute lg:visible md:static selection:bg-orange-500'>
                         {t('navbar.moto')}
                     </p>
-                    <ThemeToggle className='hidden md:inline-flex'/>
+                    <ThemeToggle className='hidden md:inline-flex' icons/>
                 </div>
 
                 {/* BURGER */}

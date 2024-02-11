@@ -180,6 +180,9 @@ interface Resources {
       "validationMessage_one": "must be different than your previous password.",
       "validationMessage_two": "8 to 24 characters.<1/>Must include uppercase and lowercase letters, a number and a special character.<1/> Allowed special characters: ",
       "validationMessage_three": "Must match the first password input field."
+    },
+    "changeTheme": {
+      "switcherDescription": "It will toggle between dark and light modes for the app's visual style."
     }
   }
 }

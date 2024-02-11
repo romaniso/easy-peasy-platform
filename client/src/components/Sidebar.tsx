@@ -235,7 +235,7 @@ const Sidebar: React.FC = () => {
                 <span className='text-base text-indigo-900 dark:text-indigo-300 font-semibold'>
                     {t('mode')}
                 </span>
-                <ThemeToggle />
+                <ThemeToggle icons/>
             </div>
         </aside>
     );

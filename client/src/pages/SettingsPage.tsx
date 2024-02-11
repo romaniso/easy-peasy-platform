@@ -1,10 +1,10 @@
 import React from "react";
 import Panel from "../components/common/Panel";
-import { IoMoonOutline } from "react-icons/io5";
 import { BsExclamationDiamondFill } from "react-icons/bs";
 import ChangePassword from "../components/settings/ChangePassword";
 import LanguageSwitcher from "../components/settings/LanguageSwitcher";
 import {useTranslation} from "react-i18next";
+import {ChangeTheme} from "../components/settings/ChangeTheme";
 
 const SettingsPage: React.FC = () => {
     const {t} = useTranslation('settings');
@@ -20,12 +20,7 @@ const SettingsPage: React.FC = () => {
                 <main className='py-3 px-3 md:px-5 grid grid-cols-1 md:grid-cols-2 gap-8'>
                     <ChangePassword/>
                     <LanguageSwitcher/>
-                    <section className='md:col-span-2'>
-                        <h2 className='text-lg md:text-2xl text-indigo-500 dark:text-indigo-200 font-bold drop-shadow flex items-center gap-1'>
-                            {t('subheadings.changeTheme')}
-                            <IoMoonOutline/>
-                        </h2>
-                    </section>
+                    <ChangeTheme/>
                     <section className='md:col-span-2'>
                         <h2 className='text-lg md:text-2xl text-indigo-500 dark:text-indigo-200 font-bold drop-shadow flex items-center gap-1'>
                             {t('subheadings.deleteAccount')}

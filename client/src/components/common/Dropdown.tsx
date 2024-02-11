@@ -50,7 +50,7 @@ const Dropdown: React.FC<Dropdown> = ({label, content, avatar, block}) => {
                     block md:absolute top-full 
                     ${block ? 'md:w-full p-2' : 'md:w-32 md:-ml-3'} 
                     mt-2.5 dark:md:bg-stone-900/80 md:bg-white rounded-md md:shadow-md overflow-hidden 
-                    ${avatar && '-ml-14 md:!-ml-10'}`
+                    ${avatar && '-ml-14 md:!-ml-10 !w-[150%]'}`
                 }>
                     <ul>
                         {content.map((subItem) =>
@@ -59,11 +59,20 @@ const Dropdown: React.FC<Dropdown> = ({label, content, avatar, block}) => {
                                     <li className={`
                                         text-indigo-600 dark:text-indigo-300 md:px-4 py-3 md:py-2 border-indigo-50/20 border-b hover:bg-indigo-50 dark:hover:bg-indigo-950 transition-colors duration-300 flex items-center gap-1 
                                         ${(subItem as AvatarItem).isLogoutBtn && 'text-red-700 md:bg-red-500/20 hover:bg-red-500/40'}
+                                        ${avatar && '!px-1'}
                                         `}
                                         onClick={(subItem as AvatarItem).eventHandler}
                                         key={subItem.label}
                                     >
-                                        {subItem.icon}{subItem.label}
+                                        {subItem.icon && (
+                                            <span className='min-w-3'>
+                                                {subItem.icon}
+                                            </span>
+                                        )}
+                                        <span>
+                                            {subItem.label}
+                                        </span>
+
                                     </li>
                                 )
                             : (
@@ -71,9 +80,18 @@ const Dropdown: React.FC<Dropdown> = ({label, content, avatar, block}) => {
                                     <li className={`
                                         text-indigo-600 dark:text-indigo-300 md:px-4 py-3 md:py-2 border-indigo-50/20 border-b hover:bg-indigo-50 dark:hover:bg-indigo-950 transition-colors duration-300 flex items-center gap-1 
                                         ${(subItem as AvatarItem).isLogoutBtn && 'bg-red-500/20 hover:bg-red-500/40'} 
-                                        ${block && 'flex justify-between flex-row-reverse'}`
+                                        ${block && 'flex justify-between flex-row-reverse'}
+                                        ${avatar && '!px-1'}
+                                        `
                                     }>
-                                        {subItem.icon}{subItem.label}
+                                        {subItem.icon && (
+                                            <span className='min-w-3'>
+                                                {subItem.icon}
+                                            </span>
+                                        )}
+                                        <span>
+                                            {subItem.label}
+                                        </span>
                                     </li>
                                 </NavLink>
                             )
