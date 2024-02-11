@@ -1,5 +1,10 @@
 {
   "inputs": {
     "select": "Select an option"
+  },
+  "buttons": {
+    "save": "Save",
+    "prev": "Previous",
+    "next": "Next"
   }
 }

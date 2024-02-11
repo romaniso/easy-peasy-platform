@@ -2,6 +2,7 @@ import React, {DragEvent, useState} from 'react';
 import className from 'classnames';
 import { FaUpload } from 'react-icons/fa';
 import { useDroppable } from '@dnd-kit/core';
+import {useTranslation} from "react-i18next";
 
 interface ImageDropZoneProps  {
     onImageDrop:  (files: File) => void;
@@ -9,6 +10,7 @@ interface ImageDropZoneProps  {
 const ImageDropZone: React.FC<ImageDropZoneProps> = ({ onImageDrop }) => {
     const [isDragging, setIsDragging] = useState(false);
     const { setNodeRef } = useDroppable({ id: 'image-drop-zone' });
+    const {t} = useTranslation('profile');
 
     const handleOver = (event: DragEvent<HTMLDivElement>) => {
         event.preventDefault();
@@ -44,12 +46,14 @@ const ImageDropZone: React.FC<ImageDropZoneProps> = ({ onImageDrop }) => {
             onDragOver={handleOver}
             onDragLeave={handleLeave}
         >
-            <p className='hidden md:block'>Drag and drop your image here</p>
+            <p className='hidden md:block'>
+                {t('profileAvatar.instructions.instruction_dragAndDrop')}
+            </p>
             <label
                 htmlFor="image"
                 className="underline cursor-pointer text-center hover:text-orange-500 transition-colors"
             >
-                <FaUpload className="text-3xl mx-auto mb-3" /> choose a profile picture
+                <FaUpload className="text-3xl mx-auto mb-3" /> {t('profileAvatar.instructions.instruction_choose')}
                 <input
                     type="file"
                     id="image"
@@ -59,7 +63,7 @@ const ImageDropZone: React.FC<ImageDropZoneProps> = ({ onImageDrop }) => {
                     onChange={handleFileInputChange}
                 />
             </label>
-            <p>Max size is 5 MB</p>
+            <p>{t('profileAvatar.instructions.instruction_size')}</p>
         </div>
     );
 };

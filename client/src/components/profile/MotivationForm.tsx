@@ -1,7 +1,6 @@
 // import Input from "../Input";
 import Button from "../common/Button";
-import {FaSave} from "react-icons/fa";
-import React, {ReactElement, SyntheticEvent, useEffect, useState} from "react";
+import React, {ReactElement, SyntheticEvent, useState} from "react";
 import CheckboxButton from "../common/CheckboxButton";
 import {User} from "../../interfaces/user";
 import {axiosPrivate} from "../../api/axios";
@@ -11,6 +10,7 @@ import {MotivationItemText} from "../../enums/motivationItem";
 import { IoIosArrowForward } from "react-icons/io";
 import {ToastType} from "../../enums/toast";
 import {useToast} from "../../context/ToastContext";
+import {useTranslation} from "react-i18next";
 
 export type MotivationItem = {
     text: MotivationItemText,
@@ -29,6 +29,8 @@ const MotivationForm: React.FC<MotivationFormProps> = ({items, switchForm}) => {
     const [selectedItems, setSelectedItems] = useState<MotivationItemText[]>(user.motivations || []);
 
     const toast = useToast();
+    const {t} = useTranslation('profile');
+    const tCommon = useTranslation('common').t;
 
     const handleCheckboxChange = (itemText: MotivationItemText) => {
         setSelectedItems((prevSelectedItems) => {
@@ -59,11 +61,11 @@ const MotivationForm: React.FC<MotivationFormProps> = ({items, switchForm}) => {
                         ...updatedUser
                     }
                 })
-                toast?.open('Yor profile has been successfully updated.', ToastType.Success);
+                toast?.open(t('motivation.toastMessage.success'), ToastType.Success);
             }
         } catch (err) {
             console.error(err);
-            toast?.open('Oops. Something went wrong. Try again..', ToastType.Failure);
+            toast?.open(t('motivation.toastMessage.failure'), ToastType.Failure);
         }
     }
 
@@ -72,17 +74,15 @@ const MotivationForm: React.FC<MotivationFormProps> = ({items, switchForm}) => {
         switchForm(1);
     }
 
-    // useEffect(() => {
-    //     return () => {
-    //         setSelectedItems([]);
-    //     }
-    // }, []);
-
     return (
         <form className='mx-auto flex-grow flex flex-col justify-between items-center md:py-5 md:px-7 px-3 py-5 w-full md:max-w-[600px] lr:max-w-[750px]' onSubmit={handleSubmit}>
             <div>
-                <h3 className='text-indigo-500 dark:text-indigo-200 font-bold text-center drop-shadow text-xl md:text-3xl mb-1 md:mb-3'>Your Motivation</h3>
-                <p className='text-indigo-900 dark:text-indigo-300 font-semibold'>What motivates you to learn English?</p>
+                <h3 className='text-indigo-500 dark:text-indigo-200 font-bold text-center drop-shadow text-xl md:text-3xl mb-1 md:mb-3'>
+                    {t('headers.motivationHeader')}
+                </h3>
+                <p className='text-indigo-900 dark:text-indigo-300 font-semibold text-center'>
+                    {t('subheadings.motivationSubheading')}
+                </p>
             </div>
             <div className='flex-shrink w-full grid grid-cols-1 md:grid-cols-2 gap-3'>
                 {items.map(item => {
@@ -106,7 +106,7 @@ const MotivationForm: React.FC<MotivationFormProps> = ({items, switchForm}) => {
                />
                 <Button secondary rounded className='basis-1/2' onClick={handleNextForm}>
                     <span className='flex items-center gap-2'>
-                        Next
+                        {tCommon('buttons.next')}
                         <IoIosArrowForward />
                     </span>
                 </Button>

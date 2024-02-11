@@ -10,6 +10,7 @@ import {axiosPrivate} from "../../api/axios";
 import {IoIosArrowBack } from "react-icons/io";
 import {useToast} from "../../context/ToastContext";
 import {ToastType} from "../../enums/toast";
+import {useTranslation} from "react-i18next";
 
 export type InterestItem = {
     text: InterestItemText,
@@ -27,6 +28,8 @@ const InterestsForm: React.FC<InterestsFormProps> = ({items, switchForm}) => {
     const [selectedItems, setSelectedItems] = useState<InterestItemText[]>(user.likes || []);
 
     const toast = useToast();
+    const {t} = useTranslation('profile');
+    const tCommon = useTranslation('common').t;
 
     const handleCheckboxChange = (itemText: InterestItemText) => {
         setSelectedItems((prevSelectedItems) => {
@@ -57,11 +60,11 @@ const InterestsForm: React.FC<InterestsFormProps> = ({items, switchForm}) => {
                         ...updatedUser
                     }
                 })
-                toast?.open('Yor profile has been successfully updated.', ToastType.Success);
+                toast?.open(t('interests.toastMessage.success'), ToastType.Success);
             }
         } catch (err) {
             console.error(err);
-            toast?.open('Oops. Something went wrong. Try again..', ToastType.Failure);
+            toast?.open(t('interests.toastMessage.failure'), ToastType.Failure);
         }
     }
 
@@ -70,16 +73,15 @@ const InterestsForm: React.FC<InterestsFormProps> = ({items, switchForm}) => {
         switchForm(-1);
     }
 
-    // useEffect(() => {
-    //     return () => {
-    //         setSelectedItems([]);
-    //     }
-    // }, []);
     return (
         <form className='mx-auto flex-grow flex flex-col justify-between items-center md:py-5 md:px-7 px-3 py-5 w-full md:max-w-[600px] lr:max-w-[750px]' onSubmit={handleSubmit}>
             <div>
-                <h3 className='text-indigo-500 dark:text-indigo-200 font-bold text-center drop-shadow text-xl md:text-3xl mb-1 md:mb-3'>Your Interests</h3>
-                <p className='text-indigo-900 dark:text-indigo-300 font-semibold'>What are you interested in?</p>
+                <h3 className='text-indigo-500 dark:text-indigo-200 font-bold text-center drop-shadow text-xl md:text-3xl mb-1 md:mb-3'>
+                    {t('headers.interestsHeader')}
+                </h3>
+                <p className='text-indigo-900 dark:text-indigo-300 font-semibold text-center'>
+                    {t('subheadings.interestsSubheading')}
+                </p>
             </div>
             <div className='flex-shrink w-full flex flex-wrap gap-2 lg:gap-4'>
                 {items.map(item => {
@@ -98,7 +100,7 @@ const InterestsForm: React.FC<InterestsFormProps> = ({items, switchForm}) => {
                 <Button secondary rounded className='basis-1/2' onClick={handlePrevForm}>
                     <span className='flex items-center gap-2'>
                         <IoIosArrowBack  />
-                        Previous
+                        {tCommon('buttons.prev')}
                     </span>
                 </Button>
                 <Button

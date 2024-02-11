@@ -9,6 +9,7 @@ import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 import useUser from "../../hooks/useUser";
 import {useToast} from "../../context/ToastContext";
 import {ToastType} from "../../enums/toast";
+import {useTranslation} from "react-i18next";
 
 const AVATAR_UPLOAD_URL = '/users/upload'
 const ProfileAvatar: React.FC = () => {
@@ -20,20 +21,21 @@ const ProfileAvatar: React.FC = () => {
     const {user, setUser} = useUser();
 
     const toast = useToast();
+    const {t} = useTranslation('profile');
 
     const errRef = useRef<HTMLParagraphElement>(null);
 
     const validateAvatarImage = (imageFile: File) => {
         const allowedFormats = ["image/jpeg", "image/jpg", "image/png", "image/svg+xml", "image/webp"];
         if (!allowedFormats.includes(imageFile.type)) {
-            const errMessage: string = "Invalid file format. Please upload a valid image."
+            const errMessage: string = t('profileAvatar.validation.validationMessage_format')
             setErrMsg(errMessage);
             throw new Error(errMessage);
         }
         // Check file size
         const maxSize = 5 * 1024 * 1024; // 10 MB in bytes
         if (imageFile.size > maxSize) {
-            const errMessage = "File size exceeds the maximum allowed size (5 MB).";
+            const errMessage =  t('profileAvatar.validation.validationMessage_size');
             setErrMsg(errMessage);
             throw new Error(errMessage);
         }
@@ -65,11 +67,10 @@ const ProfileAvatar: React.FC = () => {
             setSelectedImageUrl(imagePath);
             setShowModal(false);
             setIsLoading(false);
-            console.log('Image uploaded successfully:', response.data);
-            toast?.open('Yor profile has been successfully updated.', ToastType.Success);
+            toast?.open(t('personalInfo.toastMessage.success'), ToastType.Success);
         } catch (err) {
             if(!(err instanceof AxiosError) || !err.response) {
-                setErrMsg('No Server Response');
+                setErrMsg(t('profileAvatar.validation.validationMessage_server'));
             }
             //@TODO: handle error types message
             // else if (err.response?.status === 400) {
@@ -80,7 +81,7 @@ const ProfileAvatar: React.FC = () => {
             //     // setErrMsg(err.response.data.message || 'Unauthorized');
             // }
             else {
-                setErrMsg('Image upload failed. Please, try again.');
+                setErrMsg(t('profileAvatar.validation.validationMessage_default'));
             }
             errRef.current?.focus();
             setIsLoading(false);
@@ -110,14 +111,15 @@ const ProfileAvatar: React.FC = () => {
                     actionBar={
                     errMsg
                         ? <div className='flex items-center gap-2'>
-                            <Button secondary rounded onClick={() => setShowModal(false)}>Go back</Button>
-                            <Button success rounded onClick={() => setErrMsg('')}>Try again</Button>
+                            <Button secondary rounded onClick={() => setShowModal(false)}>{t('profileAvatar.buttons.goBack')}</Button>
+                            <Button success rounded onClick={() => setErrMsg('')}>{t('profileAvatar.buttons.tryAgain')}</Button>
                         </div>
-                        : <Button secondary rounded onClick={() => setShowModal(false)}>Go Back</Button>
+                        : <Button secondary rounded onClick={() => setShowModal(false)}>{t('profileAvatar.buttons.goBack')}</Button>
                 }
                 >
                     <div className='h-full'>
-                        <h5 className='text-orange-500 text-xl font-bold mb-2 drop-shadow-sm'>Upload your photo
+                        <h5 className='text-orange-500 text-xl font-bold mb-2 drop-shadow-sm'>
+                            {t('profileAvatar.heading')}
                         </h5>
                         <div className='mx-auto h-5/6'>
                             {/*Err*/}

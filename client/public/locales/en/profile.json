@@ -1,0 +1,58 @@
+{
+  "headers": {
+    "personalInfoHeader": "Personal Information",
+    "motivationHeader": "Your Motivation",
+    "interestsHeader": "Your Interests"
+  },
+  "subheadings": {
+    "personalInfoSubheading": "Let's keep in touch",
+    "motivationSubheading": "What motivates you to learn English?",
+    "interestsSubheading": "What are you interested in?"
+  },
+  "proverb": {
+    "content": "As many languages you know, as many times you are a human being.",
+    "author": "Johann Wolfgang von Goethe"
+  },
+  "personalInfo": {
+    "firstName": "First name",
+    "lastName": "Last name",
+    "email": "Your E-mail",
+    "birthday": "Your Birthday",
+    "toastMessage": {
+      "success": "Yor profile has been successfully updated.",
+      "failure": "Oops. Something went wrong. Try again.."
+    }
+  },
+  "motivation": {
+    "family": "Family",
+    "toastMessage": {
+      "success": "Yor profile has been successfully updated.",
+      "failure": "Oops. Something went wrong. Try again.."
+    }
+  },
+  "interests": {
+    "Music": "Music",
+    "toastMessage": {
+      "success": "Yor profile has been successfully updated.",
+      "failure": "Oops. Something went wrong. Try again.."
+    }
+  },
+  "profileAvatar": {
+    "heading": "Upload your photo",
+    "buttons": {
+      "goBack": "Go back",
+      "tryAgain": "Try again"
+    },
+    "instructions": {
+      "instruction_dragAndDrop": "Drag and drop your image here",
+      "instruction_choose": "choose a profile picture",
+      "instruction_size": "Max size is 5 MB"
+    },
+    "validation": {
+      "validationMessage_size": "File size exceeds the maximum allowed size (5 MB).",
+      "validationMessage_server": "No Server Response.",
+      "validationMessage_default": "Image upload failed. Please, try again.",
+      "validationMessage_format": "Invalid file format. Please upload a valid image."
+    }
+  }
+}

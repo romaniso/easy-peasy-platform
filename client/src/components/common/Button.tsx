@@ -1,6 +1,7 @@
 import React, {ButtonHTMLAttributes, ReactElement, ReactEventHandler} from "react";
 import className from "classnames";
 import {FaSave} from "react-icons/fa";
+import {useTranslation} from "react-i18next";
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
     children?: ReactElement | string;
@@ -29,6 +30,7 @@ const Button: React.FC<ButtonProps> = ({
                     onClick,
                     ...rest
                 }) => {
+    const {t} = useTranslation('common');
     const classes = className(
         rest.className,
         "flex items-center justify-center cursor-pointer transition-colors border shadow",
@@ -61,7 +63,7 @@ const Button: React.FC<ButtonProps> = ({
             {
                 save
                     ? (<span>
-                            Save
+                            {t('buttons.save')}
                             <FaSave className='inline ml-1.5'/>
                         </span>)
                     : children}

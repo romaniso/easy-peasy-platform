@@ -16,15 +16,18 @@ import MotivationForm, {MotivationItem} from "./MotivationForm";
 import InterestsForm, {InterestItem} from "./InterestsForm";
 import {MotivationItemText} from "../../enums/motivationItem";
 import {InterestItemText} from "../../enums/interestItem";
+import {useTranslation} from "react-i18next";
 
 
 
 const UserProfileForms = () => {
     const [activeTab, setActiveTab] = useState<number>(0);
+    const {t} = useTranslation('profile');
+
     const userForms =  [
-        {label: 'personal', content: 'Personal information',  icon: <CiViewList/>},
-        {label: 'motivation', content: 'Your motivation',  icon: <CiTrophy/>},
-        {label: 'interests', content: 'Your Interests',  icon: <CiFootball/>},
+        {label: 'personal', content: t('headers.personalInfoHeader'),  icon: <CiViewList/>},
+        {label: 'motivation', content: t('headers.motivationHeader'),  icon: <CiTrophy/>},
+        {label: 'interests', content: t('headers.interestsHeader'),  icon: <CiFootball/>},
     ]
     const motivationItems: MotivationItem[] = [
         {text: MotivationItemText.Family, icon: <MdFamilyRestroom/>},

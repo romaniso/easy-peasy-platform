@@ -1,0 +1,58 @@
+{
+  "headers": {
+    "personalInfoHeader": "Особиста інформація",
+    "motivationHeader": "Ваша мотивація",
+    "interestsHeader": "Ваші інтереси"
+  },
+  "subheadings": {
+    "personalInfoSubheading": "Залишаймося на зв'язку",
+    "motivationSubheading": "Що мотивує вас вивчати англійську мову?",
+    "interestsSubheading": "У чому ви зацікавлені?"
+  },
+  "proverb": {
+    "content": "Скільки мов ти знаєш – стільки разів ти людина!",
+    "author": "Йоганн Вольфганг фон Гете"
+  },
+  "personalInfo": {
+    "firstName": "Ім'я",
+    "lastName": "Прізвище",
+    "email": "Ваша електронна пошта",
+    "birthday": "Ваш день народження",
+    "toastMessage": {
+      "success": "Ваш профіль успішно оновлено.",
+      "failure": "Ой. Виникла помилка. Спробуйте ще раз."
+    }
+  },
+  "motivation": {
+    "family": "Родина",
+    "toastMessage": {
+      "success": "Ваш профіль успішно оновлено.",
+      "failure": "Ой. Виникла помилка. Спробуйте ще раз."
+    }
+  },
+  "interests": {
+    "Music": "Музика",
+    "toastMessage": {
+      "success": "Ваш профіль успішно оновлено.",
+      "failure": "Ой. Щось пішло не так. Спробуйте ще раз."
+    }
+  },
+  "profileAvatar": {
+    "heading": "Завантажити своє фото",
+    "buttons": {
+      "goBack": "Повернутися",
+      "tryAgain": "Повторити"
+    },
+    "instructions": {
+      "instruction_dragAndDrop": "Перетягніть і розмістіть своє зображення сюди",
+      "instruction_choose": "виберіть фотографію профілю",
+      "instruction_size": "Максимальний розмір - 5 МБ"
+    },
+    "validation": {
+      "validationMessage_size": "Розмір файлу перевищує максимальний допустимий розмір (5 МБ).",
+      "validationMessage_server": "Немає відповіді від сервера.",
+      "validationMessage_default": "Помилка завантаження зображення. Будь ласка, спробуйте ще раз.",
+      "validationMessage_format": "Неправельний формат зображення. Будь ласка, спробуйте ще раз.."
+    }
+  }
+}

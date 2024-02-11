@@ -1,0 +1,58 @@
+{
+  "headers": {
+    "personalInfoHeader": "Informacje osobiste",
+    "motivationHeader": "Twoja motywacja",
+    "interestsHeader": "Twoje zainteresowania"
+  },
+  "subheadings": {
+    "personalInfoSubheading": "Zostańmy w kontakcie",
+    "motivationSubheading": "Co motywuje cię do nauki angielskiego?",
+    "interestsSubheading": "W czym jesteś zainteresowany?"
+  },
+  "proverb": {
+    "content": "Iloma językami mówisz, tylekroć jesteś człowiekiem.",
+    "author": "Johann Wolfgang von Goethe"
+  },
+  "personalInfo": {
+    "firstName": "Imię",
+    "lastName": "Nazwisko",
+    "email": "Twój adres e-mail",
+    "birthday": "Twój dzień urodzenia",
+    "toastMessage": {
+      "success": "Twój profil został pomyślnie zaktualizowany.",
+      "failure": "Ups. Coś poszło nie tak. Spróbuj ponownie."
+    }
+  },
+  "motivation": {
+    "family": "Rodzina",
+    "toastMessage": {
+      "success": "Twój profil został pomyślnie zaktualizowany.",
+      "failure": "Ups. Coś poszło nie tak. Spróbuj ponownie."
+    }
+  },
+  "interests": {
+    "Music": "Music",
+    "toastMessage": {
+      "success": "Twój profil został pomyślnie zaktualizowany.",
+      "failure": "Ups. Coś poszło nie tak. Spróbuj ponownie."
+    }
+  },
+  "profileAvatar": {
+    "heading": "Dodaj swoje zdjęcie",
+    "buttons": {
+      "goBack": "Wróć",
+      "tryAgain": "Spróbuj ponownie"
+    },
+    "instructions": {
+      "instruction_dragAndDrop": "Przeciągnij i upuść swoje zdjęcie tutaj",
+      "instruction_choose": "wybierz zdjęcie profilowe",
+      "instruction_size": "Maksymalny rozmiar to 5 MB"
+    },
+    "validation": {
+      "validationMessage_size": "Rozmiar pliku przekracza maksymalny dozwolony rozmiar (5 MB).",
+      "validationMessage_server": "Brak odpowiedzi serwera.",
+      "validationMessage_default": "Wystąpił błąd podczas przesyłania obrazu. Proszę spróbować ponownie.",
+      "validationMessage_format": "Nieprawidłowy format pliku. Proszę spróbować ponownie."
+    }
+  }
+}

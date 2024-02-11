@@ -1,6 +1,6 @@
 import Input from "../common/Input";
 import Button from "../common/Button";
-import {FaCheck, FaSave, FaTimes} from "react-icons/fa";
+import {FaCheck, FaTimes} from "react-icons/fa";
 import React, {SyntheticEvent, useEffect, useRef, useState} from "react";
 import useAuth from "../../hooks/useAuth";
 import {axiosPrivate} from "../../api/axios";
@@ -9,6 +9,7 @@ import {User} from "../../interfaces/user";
 import {IoIosArrowForward} from "react-icons/io";
 import {ToastType} from "../../enums/toast";
 import {useToast} from "../../context/ToastContext";
+import {useTranslation} from "react-i18next";
 
 const UPDATE_URL = '/users'
 const FIRSTNAME_REGEX = /^[a-zA-Z][a-zA-Z\s'-]{1,50}$/;
@@ -46,6 +47,8 @@ const PersonalInformationForm: React.FC<{switchForm: (tab: -1 | 1) => void}> = (
     const errRef = useRef<HTMLParagraphElement>(null);
 
     const toast = useToast();
+    const {t} = useTranslation('profile');
+    const tCommon = useTranslation('common').t;
 
     const validateBirthday = (stringDate: string): boolean => {
         const parsedDate = stringDate ? new Date(stringDate) : undefined;
@@ -88,7 +91,6 @@ const PersonalInformationForm: React.FC<{switchForm: (tab: -1 | 1) => void}> = (
         setValidUserEmail(result);
     }, [userEmail]);
     //PRE Validation - B-DAY
-    //PRE Validation - B-DAY
     useEffect(() => {
         if (!birthday) {
             // Skip validation for undefined birthday
@@ -130,11 +132,11 @@ const PersonalInformationForm: React.FC<{switchForm: (tab: -1 | 1) => void}> = (
                         ...updatedUser
                     }
                 })
-                toast?.open('Yor profile has been successfully updated.', ToastType.Success);
+                toast?.open(t('personalInfo.toastMessage.success'), ToastType.Success);
             }
         } catch (err) {
             console.error(err);
-            toast?.open('Oops. Something went wrong. Try again..', ToastType.Failure);
+            toast?.open(t('personalInfo.toastMessage.failure'), ToastType.Failure);
         }
     }
 
@@ -146,7 +148,14 @@ const PersonalInformationForm: React.FC<{switchForm: (tab: -1 | 1) => void}> = (
 
     return (
         <form className='mx-auto flex-grow flex flex-col justify-between items-center md:py-5 md:px-7 px-3 py-5 w-full md:max-w-[600px] lr:max-w-[750px]' onSubmit={handleSubmit}>
-            <h3 className='text-indigo-500 dark:text-indigo-200 font-bold text-center drop-shadow text-2xl md:text-3xl'>Personal Information</h3>
+            <div>
+                <h3 className='text-indigo-500 dark:text-indigo-200 font-bold text-center drop-shadow text-xl md:text-3xl mb-1 md:mb-3'>
+                    {t('headers.personalInfoHeader')}
+                </h3>
+                <p className='text-indigo-900 dark:text-indigo-300 font-semibold text-center'>
+                    {t('subheadings.personalInfoSubheading')}
+                </p>
+            </div>
             <div className='flex-shrink flex flex-col gap-10 w-full'>
                 <p ref={errRef} className={errMsg ? 'block bg-red-500/10 dark:border dark:border-red-400 rounded p-1 text-sm font-bold text-red-500 opacity-100 transition-colors duration-500 -mt-5 shadow' : 'invisible absolute'} aria-live='assertive'>{errMsg}</p>
                 <Input
@@ -164,7 +173,7 @@ const PersonalInformationForm: React.FC<{switchForm: (tab: -1 | 1) => void}> = (
                     onBlur={() => setFirstNameFocus(false)}
                     ref={firstNameRef}
                 >
-                    First name
+                    {t('personalInfo.firstName')}
                     <span className={validFirstName && firstName ? 'inline-block ml-1 text-green-500' : 'invisible absolute'}>
                         <FaCheck/>
                     </span>
@@ -187,7 +196,7 @@ const PersonalInformationForm: React.FC<{switchForm: (tab: -1 | 1) => void}> = (
                     onChange={setLastName}
                     ref={lastNameRef}
                 >
-                    Last name
+                    {t('personalInfo.lastName')}
                     <span className={validLastName && lastName ? 'inline-block ml-1 text-green-500' : 'invisible absolute'}>
                         <FaCheck/>
                     </span>
@@ -209,7 +218,7 @@ const PersonalInformationForm: React.FC<{switchForm: (tab: -1 | 1) => void}> = (
                     onFocus={() => setUserEmailFocus(true)}
                     onBlur={() => setUserEmailFocus(false)}
                 >
-                    Your E-mail
+                    {t('personalInfo.email')}
                     <span className={validUserEmail && userEmail ? 'inline-block ml-1 text-green-500' : 'invisible absolute'}>
                         <FaCheck/>
                     </span>
@@ -231,7 +240,7 @@ const PersonalInformationForm: React.FC<{switchForm: (tab: -1 | 1) => void}> = (
                     onFocus={() => setBirthdayFocus(true)}
                     onBlur={() => setBirthdayFocus(false)}
                 >
-                    Your Birthday
+                    {t('personalInfo.birthday')}
                     <span className={validBirthday && birthday ? 'inline-block ml-1 text-green-500' : 'invisible absolute'}>
                         <FaCheck/>
                     </span>
@@ -256,7 +265,7 @@ const PersonalInformationForm: React.FC<{switchForm: (tab: -1 | 1) => void}> = (
                     onClick={handleNextForm}
                 >
                     <span className='flex items-center gap-2'>
-                        Next
+                        {tCommon('buttons.next')}
                         <IoIosArrowForward />
                     </span>
                 </Button>
