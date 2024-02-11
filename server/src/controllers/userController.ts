@@ -34,15 +34,27 @@ export class UserController {
         }
     }
     async deleteUser(req: Request, res: Response) {
-        console.log('Delete a user. Mock method');
-        // const employee = data.employees.find(emp => emp.id === parseInt(req.body.id));
-        // if (!employee) {
-        //     return res.status(400).json({ "message": `Employee ID ${req.body.id} not found` });
-        // }
-        // const filteredArray = data.employees.filter(emp => emp.id !== parseInt(req.body.id));
-        // data.setEmployees([...filteredArray]);
-        // res.json(data.employees);
-        res.json({message: "Delete method. Mock method"})
+        const userToBeDeleted = req.params.username;
+
+        const user = await User.findOne({ username: userToBeDeleted });
+        if (!user) {
+            return res.status(400).json({ message: `Username ${userToBeDeleted} was not found` });
+        }
+
+        try {
+            await User.deleteOne({ username: userToBeDeleted });
+            return res
+                .clearCookie('jwt', {
+                    httpOnly: true,
+                    secure: true,
+                    maxAge: 24 * 60 * 60 * 1000
+                })
+                .status(200)
+                .json({message: `User ${userToBeDeleted} has been successfully deleted`});
+        } catch (err) {
+            console.error(err);
+            return res.status(400).json({message: `Something went wrong. User ${userToBeDeleted} wasn't deleted`});
+        }
     }
     async updateUser(req: Request, res: Response) {
         try {

@@ -11,7 +11,6 @@ userRouter.route('/')
     .get(controller.getAllUsers)
     .post(verifyRoles([RoleName.Admin]), controller.createNewUser)
     .put(verifyRoles([RoleName.Admin, RoleName.Tutor, RoleName.User]), controller.updateUser)
-    .delete(verifyRoles([RoleName.Admin]),controller.deleteUser)
 
 userRouter.route('/upload')
     .post(
@@ -22,3 +21,6 @@ userRouter.route('/upload')
 
 userRouter.route('/:id')
     .get(controller.getUser)
+
+userRouter.route('/:username')
+    .delete(verifyRoles([RoleName.Admin, RoleName.Tutor, RoleName.User]),controller.deleteUser)
