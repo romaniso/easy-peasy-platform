@@ -7,24 +7,29 @@ interface ThemeToggleProps {
 }
 const ThemeToggle: React.FC<ThemeToggleProps> = ({className, icons}) =>{
     const [isDarkTheme, setIsDarkTheme] = useState<boolean>(() => {
-        return window.matchMedia('(prefers-color-scheme: dark)').matches;
+        return window.matchMedia('(prefers-color-scheme: dark)').matches || localStorage.getItem('themeMode') !== 'dark';
 
     });
 
     useEffect(() => {
         if(isDarkTheme){
             document.querySelector('html')?.classList.add('dark');
-            document.querySelector('body')?.classList.remove('scrollbar-track-indigo-300');
-            document.querySelector('body')?.classList.add('scrollbar-track-stone-800', 'scrollbar-thumb-orange-500');
+            // document.querySelector('body')?.classList.remove('scrollbar-track-indigo-300');
+            // document.querySelector('body')?.classList.add('scrollbar-track-stone-800', 'scrollbar-thumb-orange-500');
         } else {
             document.querySelector('html')?.classList.remove('dark');
-            document.querySelector('body')?.classList.remove('scrollbar-track-stone-800');
-            document.querySelector('body')?.classList.add('scrollbar-thumb-orange-500', 'scrollbar-track-indigo-300');
+            // document.querySelector('body')?.classList.remove('scrollbar-track-stone-800');
+            // document.querySelector('body')?.classList.add('scrollbar-thumb-orange-500', 'scrollbar-track-indigo-300');
         }
 
     }, [isDarkTheme]);
     const handleToggleTheme = () => {
         setIsDarkTheme((prevIsDarkTheme) => !prevIsDarkTheme);
+        if(isDarkTheme){
+            localStorage.setItem('themeMode', 'dark');
+        } else {
+            localStorage.setItem('themeMode', 'light');
+        }
     };
 
     return (
