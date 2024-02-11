@@ -1,7 +1,7 @@
-import Button from "../Button";
+import Button from "../common/Button";
 import {FaSave} from "react-icons/fa";
-import React, {ReactElement, SyntheticEvent, useState} from "react";
-import CheckboxButton from "../CheckboxButton";
+import React, {ReactElement, SyntheticEvent, useEffect, useState} from "react";
+import CheckboxButton from "../common/CheckboxButton";
 import {InterestItemText} from "../../enums/interestItem";
 import useAuth from "../../hooks/useAuth";
 import useUser from "../../hooks/useUser";
@@ -70,6 +70,11 @@ const InterestsForm: React.FC<InterestsFormProps> = ({items, switchForm}) => {
         switchForm(-1);
     }
 
+    // useEffect(() => {
+    //     return () => {
+    //         setSelectedItems([]);
+    //     }
+    // }, []);
     return (
         <form className='mx-auto flex-grow flex flex-col justify-between items-center md:py-5 md:px-7 px-3 py-5 w-full md:max-w-[600px] lr:max-w-[750px]' onSubmit={handleSubmit}>
             <div>

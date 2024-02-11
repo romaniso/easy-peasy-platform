@@ -1,6 +1,6 @@
 import React, {forwardRef, useState} from "react";
-import Button from "../Button";
-import Modal from "../Modal";
+import Button from "../common/Button";
+import Modal from "../common/Modal";
 import { FaQuestionCircle } from "react-icons/fa";
 import GiffSample from '../../assets/images/fill-box-giff.gif'
 interface ExerciseHeader{

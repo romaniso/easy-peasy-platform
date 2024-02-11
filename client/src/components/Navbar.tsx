@@ -1,7 +1,7 @@
 import React, {ReactElement, useEffect, useRef, useState} from "react";
 import {Link, NavLink} from "react-router-dom";
-import Dropdown from './Dropdown';
-import Button from "./Button";
+import Dropdown from './common/Dropdown';
+import Button from "./common/Button";
 import { HiMenu, HiX } from "react-icons/hi";
 import ThemeToggle from "./ThemeToggle";
 import LogoImage from '../assets/images/small-logo.png';

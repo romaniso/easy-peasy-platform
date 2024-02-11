@@ -1,7 +1,7 @@
 import React from 'react';
 import {UserResult} from "../../types/userResult";
 import {ExerciseUnit} from "../../interfaces/exerciseUnit";
-import OrderUnit from "../OrderUnit";
+import OrderUnit from "../common/OrderUnit";
 
 interface ExerciseFillBoxProps {
     questions: ExerciseUnit[];

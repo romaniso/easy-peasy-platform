@@ -1,7 +1,7 @@
 import React, {ChangeEvent, ReactElement} from "react";
 import { Link } from "react-router-dom";
-import Button from "./Button";
-import Input from "./Input";
+import Button from "./common/Button";
+import Input from "./common/Input";
 import { FaFacebook, FaInstagram, FaTiktok } from "react-icons/fa";
 
 type SubmenuItem = {

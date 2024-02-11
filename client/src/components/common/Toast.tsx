@@ -1,10 +1,10 @@
 import React, {useEffect, useMemo, useRef, useState} from "react";
-import {ToastContext} from "../context/ToastContext";
+import {ToastContext} from "../../context/ToastContext";
 import {IoIosCloseCircle} from "react-icons/io";
 import { RiAlarmWarningLine } from "react-icons/ri";
 import { FaExclamationCircle } from "react-icons/fa";
 import {FaCheck} from "react-icons/fa";
-import {ToastType} from "../enums/toast";
+import {ToastType} from "../../enums/toast";
 import className from "classnames";
 
 function useTimeout(callbackFunction: () => void) {

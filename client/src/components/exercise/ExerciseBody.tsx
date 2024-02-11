@@ -1,5 +1,5 @@
 import React from "react";
-import Button from "../Button";
+import Button from "../common/Button";
 import ExerciseMultipleChoice from "./ExerciseMultipleChoice";
 import ExerciseDropdown from "./ExerciseDropdown";
 import ExerciseFill from "./ExerciseFill";

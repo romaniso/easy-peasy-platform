@@ -1,7 +1,7 @@
 import React, {ReactElement, useEffect} from "react";
 import ReactDOM from "react-dom";
 import Panel from "./Panel";
-import ImageDropZone from "./ImageDropZone";
+import ImageDropZone from "../ImageDropZone";
 
 interface ModalProps {
     onClose(): void;

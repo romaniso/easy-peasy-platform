@@ -1,5 +1,5 @@
-import Input from "../Input";
-import Button from "../Button";
+import Input from "../common/Input";
+import Button from "../common/Button";
 import {FaCheck, FaSave, FaTimes} from "react-icons/fa";
 import React, {SyntheticEvent, useEffect, useRef, useState} from "react";
 import useAuth from "../../hooks/useAuth";

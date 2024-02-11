@@ -1,10 +1,10 @@
 import React, {ReactNode} from "react";
 import ReactMarkdown, { Components } from 'react-markdown';
 import {hasPunctuation} from "../../utils/hasPunctuationSign";
-import ToolTip from "../ToolTip";
+import ToolTip from "../common/ToolTip";
 import {useIsHeadingsOpened} from "../../context/ReadingContext";
 import {KeyWordObject} from "../../interfaces/keyWord";
-import AudioPlayer from "../AudioPlayer";
+import AudioPlayer from "../common/AudioPlayer";
 
 interface ReadingProps {
     text: string;

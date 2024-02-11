@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import ToolTip from "./ToolTip";
+import ToolTip from "./common/ToolTip";
 import {IDictionaryUnit} from "../interfaces/dictionaryUnit";
 import { RiDeleteBinFill } from "react-icons/ri";
 import { RiEditFill } from "react-icons/ri";

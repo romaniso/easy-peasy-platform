@@ -3,9 +3,11 @@ import React, {ReactElement, useState} from "react";
 import PolandFlag from '../../assets/images/poland.png';
 import UsaFlag from '../../assets/images/usa.png';
 import UkraineFlag from '../../assets/images/ukraine.png';
-import Select from "../Select";
+import Select from "../common/Select";
 import {Language} from "../../enums/lang";
 import {useTranslation} from "react-i18next";
+import {ToastType} from "../../enums/toast";
+import {useToast} from "../../context/ToastContext";
 
 interface LanguageSwitcherItem {
     value: Language;
@@ -13,14 +15,15 @@ interface LanguageSwitcherItem {
     icon: ReactElement;
 }
 const LanguageSwitcher: React.FC = () => {
-    const [selectedLanguage, setSelectedLanguage] = useState<Language>((localStorage.getItem('i18nextLng') as Language) || Language.English);
+    const [, setSelectedLanguage] = useState<Language>((localStorage.getItem('i18nextLng') as Language) || Language.English);
+    const toast = useToast();
+
     const {i18n} = useTranslation();
 
     const {t} = useTranslation('settings');
     const {defaultLanguage} = t('subheadings');
     const {en, ua, pl} = t('languages');
     const {selectInputText} = t('selectLanguage');
-
     const languages: LanguageSwitcherItem[] = [
         { value: Language.English, label: en, icon: <img src={UsaFlag} alt='American flag' className='w-7'/> },
         { value: Language.Polish, label: pl, icon:  <img src={PolandFlag} alt='Polish flag' className='w-7'/> },
@@ -30,6 +33,10 @@ const LanguageSwitcher: React.FC = () => {
     const handleSwitchLanguage = (lang: Language) => {
         i18n.changeLanguage(lang);
         setSelectedLanguage(lang);
+        const {toastMessage} = t('selectLanguage');
+        if(toastMessage){
+            toast?.open(toastMessage, ToastType.Success);
+        }
     }
 
     return (

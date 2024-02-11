@@ -1,9 +1,9 @@
 import React, {ReactElement, useEffect, useRef, useState} from "react";
-import {SubmenuItem} from "./Navbar";
+import {SubmenuItem} from "../Navbar";
 import { FaChevronDown, FaChevronUp } from "react-icons/fa";
 
 import {NavLink} from "react-router-dom";
-import {AvatarItem} from "./ProfilePreview";
+import {AvatarItem} from "../ProfilePreview";
 
 interface Dropdown {
     label: string;

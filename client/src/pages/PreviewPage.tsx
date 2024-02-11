@@ -3,10 +3,10 @@ import React, {useEffect, useState} from "react";
 import {useLocation} from "react-router-dom";
 import useTop from "../hooks/useTop";
 import axios from "axios";
-import Card from "../components/Card";
-import Skeleton from "../components/Skeleton";
+import Card from "../components/common/Card";
+import Skeleton from "../components/common/Skeleton";
 import {Level} from "../types/level";
-import Button from "../components/Button";
+import Button from "../components/common/Button";
 
 interface ExerciseSet {
     _id: string;

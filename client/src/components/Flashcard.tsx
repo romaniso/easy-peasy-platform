@@ -1,7 +1,7 @@
 import React, {SyntheticEvent, useEffect, useState} from "react";
 import {BsFillVolumeDownFill} from "react-icons/bs";
 import {LuCopyPlus} from "react-icons/lu";
-import ToolTip from "./ToolTip";
+import ToolTip from "./common/ToolTip";
 import { useSpeechSynthesis, SpeechSynthesisVoice } from "react-speech-kit";
 
 interface FlashcardProps {

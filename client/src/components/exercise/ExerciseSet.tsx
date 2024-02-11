@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import {SingleExercise} from "../../interfaces/singleExercise";
 import Exercise from "./Exercise";
-import OrderTabs from "../OrderTabs";
+import OrderTabs from "../common/OrderTabs";
 interface ExerciseSetProps {
     exercises: SingleExercise[];
 }

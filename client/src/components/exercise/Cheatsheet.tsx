@@ -1,7 +1,7 @@
 import {BsChevronCompactLeft, BsChevronCompactRight} from 'react-icons/bs'
 import React, {useState} from "react";
 import ReactMarkdown from 'react-markdown';
-import {Level} from "../types/level";
+import {Level} from "../../types/level";
 
 interface CheatsheetProps {
     topic: string;

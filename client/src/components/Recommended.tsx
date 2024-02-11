@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import Panel from "./Panel";
+import Panel from "./common/Panel";
 import RelationshipsImg from "../assets/images/grammar.jpg";
 
 // @fixme: create and implement RecommendedItem Interface and types

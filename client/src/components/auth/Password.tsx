@@ -1,5 +1,5 @@
 import React, {InputHTMLAttributes, ReactNode, useCallback, useEffect, useRef, useState} from "react";
-import Input from "../Input";
+import Input from "../common/Input";
 
 type PasswordRestProps = Omit<InputHTMLAttributes<HTMLInputElement>, 'children' | 'showPassword' | 'onChange' | 'toggleShowPassword'>;
 

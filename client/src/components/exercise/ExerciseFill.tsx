@@ -2,7 +2,7 @@ import React from "react";
 import { FaRegThumbsUp, FaRegThumbsDown } from "react-icons/fa";
 import {ExerciseUnit} from "../../interfaces/exerciseUnit";
 import {UserResult} from "../../types/userResult";
-import OrderUnit from "../OrderUnit";
+import OrderUnit from "../common/OrderUnit";
 import FillInUnit from "./FillInUnit";
 
 interface ExerciseFillProps {

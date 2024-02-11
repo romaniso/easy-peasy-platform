@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import { FaPlay, FaPause } from "react-icons/fa";
-import {getCalculatedStringifiedTime} from "../utils/getCalculatedStringifiedTime";
+import {getCalculatedStringifiedTime} from "../../utils/getCalculatedStringifiedTime";
 
 interface AudioPlayerProps {
     audioUrl: string;

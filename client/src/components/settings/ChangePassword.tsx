@@ -1,5 +1,5 @@
 import {RiLockPasswordLine} from "react-icons/ri";
-import Button from "../Button";
+import Button from "../common/Button";
 import React, {useEffect, useState} from "react";
 import Password from "../auth/Password";
 import {IoIosInformationCircleOutline} from "react-icons/io";
@@ -9,6 +9,7 @@ import {AxiosError} from "axios";
 import useAuth from "../../hooks/useAuth";
 import {ToastType} from "../../enums/toast";
 import {useToast} from "../../context/ToastContext";
+import {Trans, useTranslation} from "react-i18next";
 
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
 const SETTINGS_URL = '/settings'
@@ -27,6 +28,9 @@ const ChangePassword = () => {
     const axiosPrivate = useAxiosPrivate();
 
     const toast = useToast();
+
+    const {t} = useTranslation('settings');
+    // const {validationMessage_one, validationMessage_two} = t('validation');
 
     // const newPwdFocus = useRef<HTMLInputElement>(null);
     useEffect(() => {
@@ -89,7 +93,10 @@ const ChangePassword = () => {
 
     return (
         <section>
-            <h2 className='text-lg md:text-2xl text-indigo-500 dark:text-indigo-200 font-bold drop-shadow flex items-center gap-1 mb-3.5 md:mb-6'>Change Password <RiLockPasswordLine/></h2>
+            <h2 className='text-lg md:text-2xl text-indigo-500 dark:text-indigo-200 font-bold drop-shadow flex items-center gap-1 mb-3.5 md:mb-6'>
+                {t('subheadings.changePassword')}
+                <RiLockPasswordLine/>
+            </h2>
             <form onSubmit={handleSubmit}>
                 <div className='mb-5 flex flex-col gap-5 md:gap-6'>
                     <Password
@@ -102,7 +109,7 @@ const ChangePassword = () => {
                         name='prevPwd'
                         outline
                     >
-                        Previous password
+                        {t('changePassword.prevPassword')}
                     </Password>
                     <Password
                         onChange={setNewPwd}
@@ -117,7 +124,7 @@ const ChangePassword = () => {
                         onFocus={() => setNewPwdFocus(true)}
                         onBlur={() => setNewPwdFocus(false)}
                     >
-                        New password
+                        {t('changePassword.newPassword')}
                         <span className={validNewPwd ? 'inline-block ml-1 text-green-500' : 'invisible absolute'}>
                             <FaCheck/>
                         </span>
@@ -129,13 +136,15 @@ const ChangePassword = () => {
                             newPwd === prevPwd
                                 ? <span>
                                     <IoIosInformationCircleOutline className='inline relative bottom-0.5 mr-1 text-lg'/>
-                                    must be different than your previous password.
+                                    {t('validation.validationMessage_one')}
                                     </span>
                                 : <span>
                                     <IoIosInformationCircleOutline className='inline relative bottom-0.5 mr-1 text-lg'/>
-                                    8 to 24 characters.<br/>
-                                    Must include uppercase and lowercase letters, a number and a special character.<br/>
-                                    Allowed special characters: <span aria-label='exclamation mark'>!</span>
+                                    <Trans
+                                        defaults={t('validation.validationMessage_two')}
+                                        components={{1: <br />}}
+                                    />
+                                    <span aria-label='exclamation mark'>!</span>
                                     <span aria-label='at symbol'>@</span><span aria-label='hashtag'>#</span><span aria-label='percent'>%</span>
                                 </span>
                         }
@@ -153,7 +162,7 @@ const ChangePassword = () => {
                         onFocus={() => setMatchFocus(true)}
                         onBlur={() => setMatchFocus(false)}
                     >
-                        Confirm new password
+                        {t('changePassword.confirmPassword')}
                         <span className={validMatch && matchPwd ? 'inline-block ml-1 text-green-500' : 'invisible absolute'}>
                             <FaCheck/>
                         </span>

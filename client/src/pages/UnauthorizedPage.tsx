@@ -1,7 +1,7 @@
 import React from "react";
 import useTop from "../hooks/useTop";
 import {useNavigate} from "react-router-dom";
-import Button from "../components/Button";
+import Button from "../components/common/Button";
 
 const UnauthorizedPage: React.FC = () =>{
     const navigate = useNavigate();

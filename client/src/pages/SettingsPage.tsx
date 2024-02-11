@@ -1,5 +1,5 @@
 import React from "react";
-import Panel from "../components/Panel";
+import Panel from "../components/common/Panel";
 import { IoMoonOutline } from "react-icons/io5";
 import { BsExclamationDiamondFill } from "react-icons/bs";
 import ChangePassword from "../components/settings/ChangePassword";
@@ -8,11 +8,8 @@ import {useTranslation} from "react-i18next";
 
 const SettingsPage: React.FC = () => {
     const {t} = useTranslation('settings');
-
     const {changeTheme, deleteAccount} = t('subheadings');
     const {mainHeader} = t('header');
-
-    console.log(mainHeader)
 
     return (
         <div className='h-full md:p-12'>

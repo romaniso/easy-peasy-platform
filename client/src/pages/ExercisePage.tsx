@@ -2,13 +2,13 @@
 import React, {useEffect, useState} from "react";
 import {useLocation, useParams} from "react-router-dom";
 import useTop from "../hooks/useTop";
-import Panel from "../components/Panel";
+import Panel from "../components/common/Panel";
 import ExerciseSet from "../components/exercise/ExerciseSet";
-import Cheatsheet from "../components/Cheatsheet";
-import Breadcrumbs from "../components/Breadcrumbs";
+import Cheatsheet from "../components/exercise/Cheatsheet";
+import Breadcrumbs from "../components/common/Breadcrumbs";
 import axios from "axios";
 import Reading from "../components/exercise/Reading";
-import CustomSkeleton from "../components/Skeleton";
+import CustomSkeleton from "../components/common/Skeleton";
 // Types
 import {Section} from "../types/section";
 import {SingleExercise} from "../interfaces/singleExercise";

@@ -2,7 +2,7 @@ import React from "react";
 import LbSkeleton, { SkeletonTheme } from "react-loading-skeleton";
 import 'react-loading-skeleton/dist/skeleton.css';
 import classNames from "classnames";
-import WaveSampleImg from "../assets/images/wave-sample.png";
+import WaveSampleImg from "../../assets/images/wave-sample.png";
 
 interface SkeletonProps {
     items: number;

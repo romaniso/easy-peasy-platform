@@ -3,7 +3,7 @@ import DictionaryUnit from "./DictionaryUnit";
 import { MdOutlineEditNote } from "react-icons/md";
 import {useSelectedWords} from "../context/ReadingContext";
 import {BsChevronCompactLeft, BsChevronCompactRight} from "react-icons/bs";
-import Button from "./Button";
+import Button from "./common/Button";
 
 const DictionarySection: React.FC = () => {
     const [isExpanded, setIsExpanded] = useState(false);

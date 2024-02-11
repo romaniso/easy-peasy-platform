@@ -1,7 +1,7 @@
 import React, {useRef, useState, useEffect, LegacyRef} from 'react'
 import { FaPlay, FaPause } from "react-icons/fa";
 import WaveSurfer  from 'wavesurfer.js';
-import {getCalculatedStringifiedTime} from "../utils/getCalculatedStringifiedTime";
+import {getCalculatedStringifiedTime} from "../../utils/getCalculatedStringifiedTime";
 import Skeleton from "./Skeleton";
 
 interface WaveFormPlayer {

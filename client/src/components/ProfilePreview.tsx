@@ -1,5 +1,5 @@
 import React, {ReactElement} from "react";
-import Dropdown from "./Dropdown";
+import Dropdown from "./common/Dropdown";
 import {CiLogout, CiSettings, CiUser} from "react-icons/ci";
 import useLogout from "../hooks/useLogout";
 import MiniAvatar from "./MiniAvatar";

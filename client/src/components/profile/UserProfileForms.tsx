@@ -1,5 +1,5 @@
 import React, {ReactElement, useState} from "react";
-import IconsTabBar from "../IconsTabBar";
+import IconsTabBar from "../common/IconsTabBar";
 import { MdFamilyRestroom, MdOutlineWorkOutline, MdOutlineSelfImprovement, MdOutlineSportsFootball, MdOutlineScience, MdForest } from "react-icons/md";
 import { CiViewList, CiTrophy, CiFootball, CiMusicNote1, CiLaptop } from "react-icons/ci";
 import { GiRoad, GiFlowerHat, GiAncientColumns, GiReceiveMoney, GiCat, GiButterfly, GiCook } from "react-icons/gi";
