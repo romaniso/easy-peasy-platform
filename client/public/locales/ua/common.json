@@ -56,5 +56,35 @@
     "logout": {
       "text": "Вийти"
     }
+  },
+  "navbar": {
+    "moto": "#1 Платформа для вивчення англійської мови",
+    "home": {
+      "text": "Головна"
+    },
+    "exercises": {
+      "text": "Вправи",
+      "links": {
+        "grammar": "Граматика",
+        "reading": "Читання",
+        "vocabulary": "Словник",
+        "listening": "Аудіювання"
+      }
+    },
+    "resources": {
+      "text": "Ресурси",
+      "links": {
+        "articles": "Статті",
+        "podcasts": "Подкасти"
+      }
+    },
+    "cta": {
+      "login": "Увійти"
+    },
+    "profile": {
+      "profile": "Профіль",
+      "settings": "Налаштування",
+      "logout": "Вийти"
+    }
   }
 }

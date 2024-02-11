@@ -7,6 +7,7 @@ import ThemeToggle from "./ThemeToggle";
 import LogoImage from '../assets/images/small-logo.png';
 import useAuth from "../hooks/useAuth";
 import ProfilePreview from "./ProfilePreview";
+import {useTranslation} from "react-i18next";
 
 export interface SubmenuItem {
     label: string;
@@ -25,6 +26,7 @@ const Navbar: React.FC = () => {
     const { auth } = useAuth();
 
     const navbarRef = useRef<HTMLElement>(null);
+    const {t} = useTranslation('common');
 
     useEffect(() => {
         const handleOutsideClick = (event: MouseEvent) => {
@@ -49,23 +51,23 @@ const Navbar: React.FC = () => {
     }, [JSON.stringify(auth)]);
 
     const links: NavbarItem[] = [
-        { label: "Home", path: "/" },
+        { label: t('navbar.home.text'), path: "/" },
         {
-            label: "Exercises",
+            label: t('navbar.exercises.text'),
             subPaths: [
-                { label: "Grammar", path: "/grammar" },
-                { label: "Reading", path: "/reading" },
-                { label: "Vocabulary", path: "/vocabulary" },
-                { label: "Listening", path: "/listening" },
+                { label: t('navbar.exercises.links.grammar'), path: "/grammar" },
+                { label: t('navbar.exercises.links.reading'), path: "/reading" },
+                { label: t('navbar.exercises.links.vocabulary'), path: "/vocabulary" },
+                { label: t('navbar.exercises.links.listening'), path: "/listening" },
             ],
         },
         {
-            label: "Resources",
+            label: t('navbar.resources.text'),
             subPaths: [
-                { label: "Articles", path: "/articles" },
-                { label: "Podcasts", path: "/podcast" },
-                { label: "Books", path: "/books" },
-                { label: "Exercises", path: "/exercises" },
+                { label: t('navbar.resources.links.articles'), path: "/articles" },
+                { label: t('navbar.resources.links.podcasts'), path: "/podcast" },
+                // { label: "Books", path: "/books" },
+                // { label: "Exercises", path: "/exercises" },
             ],
         },
     ];
@@ -100,7 +102,9 @@ const Navbar: React.FC = () => {
                         <img src={LogoImage} alt="logo" className='w-8 group-hover:scale-110 transition-transform duration-500'/>
                         <span className='text-lg font-semibold dark:text-indigo-300 text-indigo-800 group-hover:drop-shadow-purpleGlow transition-all duration-500 whitespace-nowrap'>EASY-PEASY</span>
                     </NavLink>
-                    <p className='text-indigo-800/70 dark:text-orange-500/80 text-sm invisible absolute lg:visible md:static selection:bg-orange-500'>#1 English learning platform</p>
+                    <p className='text-indigo-800/70 dark:text-orange-500/80 text-sm invisible absolute lg:visible md:static selection:bg-orange-500'>
+                        {t('navbar.moto')}
+                    </p>
                     <ThemeToggle className='hidden md:inline-flex'/>
                 </div>
 
@@ -134,7 +138,7 @@ const Navbar: React.FC = () => {
                                     rounded
                                     className="py-1.5 px-4 text-sm w-full !rounded-full whitespace-nowrap"
                                 >
-                                    Log in
+                                    {t('navbar.cta.login')}
                                 </Button>
                             </Link>
                     }

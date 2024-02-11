@@ -56,5 +56,35 @@
     "logout": {
       "text": "Wyloguj się"
     }
+  },
+  "navbar": {
+    "moto": "#1 Platforma do nauki języka angielskiego",
+    "home": {
+      "text": "Strona główna"
+    },
+    "exercises": {
+      "text": "Ćwiczenia",
+      "links": {
+        "grammar": "Gramatyka",
+        "reading": "Czytanie",
+        "vocabulary": "Słownictwo",
+        "listening": "Słuchanie"
+      }
+    },
+    "resources": {
+      "text": "Zasoby",
+      "links": {
+        "articles": "Artykuły",
+        "podcasts": "Podcasty"
+      }
+    },
+    "cta": {
+      "login": "Zaloguj się"
+    },
+    "profile": {
+      "profile": "Konto",
+      "settings": "Ustawienia",
+      "logout": "Wyloguj się"
+    }
   }
 }

@@ -57,6 +57,36 @@ interface Resources {
       "logout": {
         "text": "Log out"
       }
+    },
+    "navbar": {
+      "moto": "#1 English learning platform",
+      "home": {
+        "text": "Home"
+      },
+      "exercises": {
+        "text": "Exercises",
+        "links": {
+          "grammar": "Grammar",
+          "reading": "Reading",
+          "vocabulary": "Vocabulary",
+          "listening": "Listening"
+        }
+      },
+      "resources": {
+        "text": "Resources",
+        "links": {
+          "articles": "Articles",
+          "podcasts": "Podcasts"
+        }
+      },
+      "cta": {
+        "login": "Log in"
+      },
+      "profile": {
+        "profile": "Profile",
+        "settings": "Settings",
+        "logout": "Log out"
+      }
     }
   },
   "home": {
