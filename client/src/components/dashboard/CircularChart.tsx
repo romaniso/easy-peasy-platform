@@ -15,10 +15,10 @@ export const CircularChart: React.FC<CircularChartProps> = ({title, percentage, 
     };
 
     return (
-        <article className='bg-white dark:bg-black/20 dark:border dark:border-stone-900 rounded-md p-3 shadow-lg h-full flex flex-col md:flex-row gap-1'>
+        <article className='bg-white dark:bg-black/40 dark:border dark:border-stone-900 rounded-md p-3 shadow-lg h-full flex flex-col md:flex-row gap-1 hover:scale-105 transition-transform duration-300'>
             <div className='basis-1/3 flex-1 flex flex-col md:gap-2 justify-between md:justify-evenly items-center'>
                 <h4 className='text-orange-500 font-bold text-xl md:text-3xl text-center'>{title}</h4>
-                <p className="text-2xl md:text-5xl text-indigo-500 drop-shadow font-bold">
+                <p className="text-3xl md:text-5xl text-indigo-500 drop-shadow font-bold">
                     <span>{percentage}</span>
                 </p>
                 {maxNumber && (
