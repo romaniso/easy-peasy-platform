@@ -1,6 +1,6 @@
 import React from "react";
 import Panel from "../components/common/Panel";
-import {FiguresChart} from "../components/dashboard/FiguresChart";
+import {CircularChart} from "../components/dashboard/CircularChart";
 
 const DashboardPage: React.FC = () => {
     return (
@@ -14,16 +14,16 @@ const DashboardPage: React.FC = () => {
                 </header>
                 <main className='flex flex-wrap h-full py-1 md:py-2 px-2 mdpx-1.5 overflow-y-auto scrollbar scrollbar-thin scrollbar-thumb-indigo-100 dark:scrollbar-thumb-stone-800 scrollbar-track-white dark:scrollbar-track-stone-900'>
                     <div className='py-1 md:py-2 px-0 md:px-1.5 flex-1 basis-full md:basis-1/3 md:h-1/2'>
-                        <FiguresChart title='Added Words' figure={10} unitNameInPlural='words' maxNumber={1000}/>
+                        <CircularChart title='Added Words' percentage={10} unitNameInPlural='words' maxNumber={1000}/>
                     </div>
                     <div className='py-1 md:py-2 px-0 md:px-1.5 flex-1 basis-full md:basis-1/3 md:h-1/2'>
-                        <FiguresChart title='Added Cards' figure={50} unitNameInPlural='cards' maxNumber={1000}/>
+                        {/*<CircularChart title='Added Cards' percentage={50} unitNameInPlural='cards' maxNumber={1000}/>*/}
                     </div>
                     <div className='py-1 md:py-2 px-0 md:px-1.5 flex-1 basis-full md:basis-1/3 md:h-1/2'>
-                        <FiguresChart title='Added Users' figure={30} unitNameInPlural='users' maxNumber={1000}/>
+                        {/*<CircularChart title='Added Users' percentage={30} unitNameInPlural='users' maxNumber={1000}/>*/}
                     </div>
                     <div className='py-1 md:py-2 px-0 md:px-1.5 flex-grow basis-full md:h-1/2'>
-                        <FiguresChart title='Added Words' figure={10} unitNameInPlural='words' maxNumber={1000}/>
+                        {/*<CircularChart title='Added Words' percentage={10} unitNameInPlural='words' maxNumber={1000}/>*/}
                     </div>
                 </main>
             </Panel>

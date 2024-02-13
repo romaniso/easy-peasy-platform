@@ -4,9 +4,10 @@ import CircleAnimation from './CircleAnimation';
 interface CircularProgressBarProps {
     percentage: number;
     offset: number;
+    lg?: true;
 }
 
-const CircularProgressBar: React.FC<CircularProgressBarProps> = ({ percentage, offset }) => {
+const CircularProgressBar: React.FC<CircularProgressBarProps> = ({ percentage, offset, lg }) => {
     const resultRef = useRef<HTMLDivElement>(null);
 
     const animatePercentage: React.EffectCallback = useCallback(() => {
@@ -32,7 +33,7 @@ const CircularProgressBar: React.FC<CircularProgressBarProps> = ({ percentage, o
     useEffect(animatePercentage, [animatePercentage]);
 
     return (
-        <div className="progress-bar w-[65px] h-[65px] relative">
+        <div className={`progress-bar w-[65px] h-[65px] relative ${lg && 'scale-150'}`}>
             <div className="outer h-[65px] w-[65px] rounded-full border p-2">
                 <div className="inner h-[45px] w-[45px] rounded-full flex items-center justify-center">
                     <div
