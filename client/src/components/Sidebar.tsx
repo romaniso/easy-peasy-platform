@@ -172,7 +172,7 @@ const Sidebar: React.FC = () => {
 
     return (
         <aside
-            className={`flex-shrink-1 dark:bg-gradient-to-r dark:from-stone-800 dark:to-stone-900 bg-gradient-to-r from-indigo-50 to-white h-min-screen pt-2 pb-1 flex flex-col justify-between ${
+            className={`flex-shrink-1 bg-gradient h-min-screen pt-2 pb-1 flex flex-col justify-between ${
                 isSidebarOpened 
                     ? "max-w-72 px-3 -mr-[185px] md:mr-0 overflow-x-hidden overflow-y-auto scrollbar scrollbar-thin scrollbar-thumb-indigo-100 dark:scrollbar-thumb-stone-800 scrollbar-track-white dark:scrollbar-track-stone-900" 
                     : " max-w-20 justify-around px-5"
