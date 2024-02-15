@@ -89,6 +89,29 @@ interface Resources {
       }
     }
   },
+  "dashboard": {
+    "header": {
+      "mainHeader": "Dashboard"
+    },
+    "subheadings": {
+      "addedWords": "Added Words",
+      "yourMarks": "Your Marks",
+      "yourGoals": "Set your goals",
+      "dailyActivity": "Your Daily Activity"
+    },
+    "addedWords": {
+      "line1": "Limit is {{limit}} words",
+      "line2": "Your words limit is {{percentage}}% full",
+      "button": "Increase limit"
+    },
+    "yourMarks": {
+      "explanation": "This is the average result of all the <1>exercises</1> you have completed, represented in percentages."
+    },
+    "dailyActivity": {
+      "explanation": "*How many activities have you completed this month? Let's see.",
+      "tooltipText": "completed exercises."
+    }
+  },
   "home": {
     "inputs": {
       "select": "Select an option"

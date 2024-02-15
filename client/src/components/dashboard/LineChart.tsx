@@ -7,15 +7,22 @@ import {
     Area,
     Tooltip,
     CartesianGrid,
+    TooltipProps
 } from 'recharts';
+import {
+    ValueType,
+    NameType,
+} from 'recharts/types/component/DefaultTooltipContent';
 import {format, parseISO, subDays} from "date-fns";
+import {useTranslation} from "react-i18next";
 interface LineChartProps {
-    // title: string;
+    title: string;
+    explanation?: string;
     // percentage: number;
     // put a unit in a plural form, e.g. words, users, kilograms.
     // unitNameInPlural: string;
 }
-export const LineChart: React.FC<LineChartProps> = () => {
+export const LineChart: React.FC<LineChartProps> = ({title, explanation}) => {
     const data = [];
     for(let num = 30; num >= 0; num--){
         data.push({
@@ -31,8 +38,12 @@ export const LineChart: React.FC<LineChartProps> = () => {
     return (
         <article className='bg-white dark:bg-black/40 dark:border dark:border-stone-900 rounded-md py-2 md:py-3 px-1 md:px-4 shadow-lg h-full flex flex-col transition-transform duration-300'>
             <div className='px-3 md:px-10'>
-                <h4 className='text-orange-500 font-bold text-xl drop-shadow md:text-3xl mb-1 md:mb-2'>Your Daily Activity</h4>
-                <p className='hidden md:block text-indigo-900 dark:text-indigo-400 font-thin text-sm mb-2'>*How many activities have you completed this month? Let's see.</p>
+                <h4 className='text-orange-500 font-bold text-xl drop-shadow md:text-3xl mb-1 md:mb-2'>
+                    {title}
+                </h4>
+                <p className='hidden md:block text-indigo-900 dark:text-indigo-400 font-thin text-sm mb-2'>
+                    {explanation}
+                </p>
             </div>
             <div className='h-full w-full'>
                 <ResponsiveContainer width='100%' height="100%" style={{marginLeft: "-22px"}}>
@@ -89,13 +100,16 @@ export const LineChart: React.FC<LineChartProps> = () => {
     )
 }
 
-const CustomToolTip = ({active, payload, label}) => {
-    if(active) {
+const CustomToolTip = ({active, payload, label} : TooltipProps<ValueType, NameType>) => {
+    const {t} = useTranslation('dashboard');
+    if(active && payload && payload.length) {
         return <div className='bg-white dark:bg-stone-900 shadow-md text-indigo-900 dark:text-indigo-200 rounded-md p-2'>
-            <h4>{format(parseISO(label), "eee, d, MMM")}</h4>
+            <h4 className='text-orange-500 font-semibold'>{format(parseISO(label), "eee, d, MMM")}</h4>
             <p className='text-xs'>
-                {payload[0].value.toFixed(2)}
-                {" "} completed exercises this day.
+                <span className='font-bold'>
+                    {payload[0]?.value}
+                </span>
+                {" "} {t('dailyActivity.tooltipText')}
             </p>
         </div>
     }

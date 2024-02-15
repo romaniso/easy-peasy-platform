@@ -1,0 +1,23 @@
+{
+  "header": {
+    "mainHeader": "Panel główny"
+  },
+  "subheadings": {
+    "addedWords": "Dodane słowa",
+    "yourMarks": "Twoje oceny",
+    "yourGoals": "Ustaw swoje cele",
+    "dailyActivity": "Twoja codzienna aktywność"
+  },
+  "addedWords": {
+    "line1": "Limit to {{limit}} słów",
+    "line2": "Twój limit słów wynosi {{percentage}}% pełny",
+    "button": "Zwiększ limit"
+  },
+  "yourMarks": {
+    "explanation": "To jest średni wynik wszystkich <1>ćwiczeń</1>, które ukończyłeś, wyrażony w procentach."
+  },
+  "dailyActivity": {
+    "explanation": "*Ile zadań udało ci się zrealizować w tym miesiącu? Zobaczmy.",
+    "tooltipText": "wykonanych ćwiczeń."
+  }
+}
