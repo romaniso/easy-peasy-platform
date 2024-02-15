@@ -2,9 +2,9 @@ import React, {ReactElement, useEffect, useRef, useState} from "react";
 import { PiCaretUpDownLight } from "react-icons/pi";
 
 interface SelectItem<T> {
-    label: string;
+    label: string | number;
     value: T;
-    icon: ReactElement;
+    icon?: ReactElement;
 }
 interface SelectProps<T> {
     options: SelectItem<T>[];
@@ -66,7 +66,7 @@ const Select = <T,>({ options, onChange, defaultOption, defaultText }: SelectPro
                     {options.map((option) => (
                         <div
                             key={option.label}
-                            className="px-2 md:px-4 py-2 cursor-pointer flex w-full justify-between items-center text-indigo-800 dark:text-indigo-400 hover:bg-indigo-50 dark:hover:bg-indigo-500/10"
+                            className="px-2 md:px-4 py-2 cursor-pointer flex w-full justify-between items-center text-indigo-800 dark:text-indigo-400 bg-white dark:bg-stone-900 hover:bg-indigo-50 dark:hover:bg-indigo-500/10"
                             onClick={() => handleSelectOption(option)}
                         >
                             {option.label}

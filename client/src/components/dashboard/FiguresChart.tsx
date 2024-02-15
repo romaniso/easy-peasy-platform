@@ -13,8 +13,8 @@ export const FiguresChart: React.FC<FiguresChartProps> = ({title, percentage, un
 
 
     return (
-        <article className='bg-white dark:bg-black/40 dark:border dark:border-stone-900 rounded-md p-3 shadow-lg h-full flex flex-col justify-between items-center gap-1 hover:scale-105 transition-transform duration-300'>
-            <div className='text-orange-500 dark:text-orange-500 font-bold text-xl md:text-3xl flex justify-center items-center gap-2'>
+        <article className='bg-white dark:bg-black/40 dark:border dark:border-stone-900 rounded-md p-3 shadow-lg h-full flex flex-col justify-between items-center gap-1'>
+            <div className='text-orange-500 dark:text-orange-500 font-bold text-xl md:text-3xl flex justify-center items-center gap-2 drop-shadow'>
                 <h4>{title}</h4>
                 <GrAchievement/>
             </div>
