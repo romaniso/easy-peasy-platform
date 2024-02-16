@@ -51,8 +51,8 @@ const userSchema = new Schema<IUser>({
   likes: [{ type: String, required: false }],
   goals: { type: Object, required: false },
   vocabularyLimit: { type: Number, required: true },
-  addedVocabulary: [{ type: Object }],
-  completedActivities: [{ type: Object }],
+  addedVocabulary: [{ type: Object, required: false }],
+  completedActivities: [{ type: Object, required: false }],
 });
 
 export const User = model<IUser>("User", userSchema);
