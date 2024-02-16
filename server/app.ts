@@ -14,6 +14,7 @@ import {refreshRouter} from "./src/routes/refreshRouter";
 import {logoutRouter} from "./src/routes/logoutRouter";
 import {credentials} from "./src/middleware/credentials";
 import {connectDB} from "./config/dbConn";
+import {statsRouter} from "./src/routes/statsRouter";
 const PORT: number = parseInt(process.env.PORT as string, 10) || 5000;
 
 
@@ -48,6 +49,7 @@ app.use('/logout', logoutRouter);
 app.use(verifyJWT);
 app.use('/users', userRouter);
 app.use('/settings', settingsRouter);
+app.use('/stats', statsRouter);
 
 // 404
 app.all('*', (req,res) => {
