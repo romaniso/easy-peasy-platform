@@ -28,6 +28,10 @@ userRouter
   .route("/add")
   .post(verifyRoles([RoleName.User, RoleName.Tutor]), controller.addWord);
 
+userRouter
+  .route("/save")
+  .post(verifyRoles([RoleName.User]), controller.recordActivity);
+
 userRouter.route("/:id").get(controller.getUser);
 
 userRouter

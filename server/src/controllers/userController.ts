@@ -1,9 +1,10 @@
 import { Request, Response } from "express";
-import { parseISO, isValid, format } from "date-fns";
+import { parseISO, isValid, format, addMonths, parse } from "date-fns";
 import { IUser, User } from "../models/User";
 import { deleteObjectByUrl, uploadFile } from "../services/s3";
 import { unlink } from "fs/promises";
 import { WordEntity } from "../types/wordEntity";
+import { CompletedActivityEntity } from "../types/completedActivityEntity";
 
 export class UserController {
   async getUser(req: Request, res: Response) {
@@ -159,6 +160,47 @@ export class UserController {
     } catch (err) {
       console.error(err);
       return res.status(500).json({ error: "Error adding word." });
+    }
+  }
+  async recordActivity(req: Request, res: Response) {
+    try {
+      const { result, username } = req.body;
+      if (result === undefined || result === null) {
+        return res.status(400).json({ message: "Bad client request." });
+      }
+      const user = await User.findOne({ username });
+      if (!user) {
+        return res
+          .status(400)
+          .json({ message: `Username ${username} was not found` });
+      }
+      if (!user.completedActivities) {
+        user.completedActivities = [];
+      }
+      const currentDate = new Date();
+      const twoMonthsAgo = addMonths(currentDate, -3);
+
+      // Filter out activities older than two months
+      user.completedActivities = user.completedActivities.filter((activity) => {
+        const activityDate = parse(activity.date, "yyyy-MM-dd", new Date());
+        return activityDate >= twoMonthsAgo;
+      });
+
+      const newActivity: CompletedActivityEntity = {
+        result,
+        date: format(currentDate, "yyyy-MM-dd"),
+      };
+      user.completedActivities?.push(newActivity);
+      await user.save();
+
+      console.log(user);
+
+      return res.status(201).json({
+        message: "Activity has been successully completed and recorded",
+      });
+    } catch (err) {
+      console.error(err);
+      return res.status(500).json({ error: "Error completing activity." });
     }
   }
 }
