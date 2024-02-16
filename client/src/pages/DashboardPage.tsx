@@ -1,13 +1,33 @@
-import React from "react";
+import React, {useEffect} from "react";
 import Panel from "../components/common/Panel";
 import {CircularChart} from "../components/dashboard/CircularChart";
 import {FiguresChart} from "../components/dashboard/FiguresChart";
 import {GoalsWidget} from "../components/dashboard/GoalsWidget";
 import {LineChart} from "../components/dashboard/LineChart";
 import {useTranslation} from "react-i18next";
+import useAxiosPrivate from "../hooks/useAxiosPrivate";
+import useUser from "../hooks/useUser";
 
+const STATS_URL = '/stats';
 const DashboardPage: React.FC = () => {
+    const axiosPrivate = useAxiosPrivate();
+    const {user} = useUser();
+
     const {t} = useTranslation('dashboard');
+
+    useEffect(() => {
+        const url = `${STATS_URL}/${user.username}`;
+        (async () => {
+            try {
+                const response = await axiosPrivate.get(url, {
+                    withCredentials: true
+                });
+            } catch (err) {
+                console.error(err);
+            }
+        })()
+    }, []);
+
     return (
         <div className='h-full md:p-12'>
             <Panel className='bg-gradient flex flex-col !p-0 rounded-none md:rounded-md overflow-hidden h-full w-full'>
