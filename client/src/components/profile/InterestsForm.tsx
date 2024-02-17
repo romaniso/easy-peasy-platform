@@ -1,11 +1,5 @@
 import Button from "../common/Button";
-import { FaSave } from "react-icons/fa";
-import React, {
-  ReactElement,
-  SyntheticEvent,
-  useEffect,
-  useState,
-} from "react";
+import React, { ReactElement, SyntheticEvent, useState } from "react";
 import CheckboxButton from "../common/CheckboxButton";
 import { InterestItemText } from "../../enums/interestItem";
 import useAuth from "../../hooks/useAuth";

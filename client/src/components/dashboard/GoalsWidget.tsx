@@ -2,7 +2,15 @@ import React, { SyntheticEvent, useState } from "react";
 import { GoGoal } from "react-icons/go";
 import { RadioGroup } from "../common/RadioGroup";
 import Button from "../common/Button";
+import useAxiosPrivate from "../../hooks/useAxiosPrivate";
+import { User } from "../../interfaces/user";
+import { GoalsObj } from "../../types/goalsObj";
+import useUser from "../../hooks/useUser";
+import { useToast } from "../../context/ToastContext";
+import { ToastType } from "../../enums/toast";
+import { useTranslation } from "react-i18next";
 
+const UPDATE_URL = "/users";
 interface GoalsWidgetProps {
   title: string;
 }
@@ -13,6 +21,11 @@ export const GoalsWidget: React.FC<GoalsWidgetProps> = ({ title }) => {
   const [tasksPerWeekValue, setTasksPerWeek] = useState<string | "more" | null>(
     null
   );
+
+  const { user, setUser } = useUser();
+  const axiosPrivate = useAxiosPrivate();
+  const toast = useToast();
+  const { t } = useTranslation("profile");
 
   const wordsPerWeekItems = [
     { name: "10 words", value: 10 },
@@ -27,8 +40,37 @@ export const GoalsWidget: React.FC<GoalsWidgetProps> = ({ title }) => {
     { name: "more tasks", value: "more" },
   ];
 
-  const handleSubmit = (event: SyntheticEvent) => {
+  const handleSubmit = async (event: SyntheticEvent) => {
     event.preventDefault();
+    const goals = {
+      wordsPerWeek:
+        wordsPerWeekValue === "more" ? "more" : Number(wordsPerWeekValue),
+      tasksPerWeek:
+        tasksPerWeekValue === "more" ? "more" : Number(tasksPerWeekValue),
+    };
+
+    const updatedUser: Partial<User> = {
+      username: user.username,
+      goals: goals as GoalsObj,
+    };
+
+    try {
+      const response = await axiosPrivate.put(UPDATE_URL, updatedUser, {
+        withCredentials: true,
+      });
+      if (response.status === 200) {
+        setUser((prev) => {
+          return {
+            ...prev,
+            ...updatedUser,
+          };
+        });
+        toast?.open(t("personalInfo.toastMessage.success"), ToastType.Success);
+      }
+    } catch (err) {
+      console.error(err);
+      toast?.open(t("personalInfo.toastMessage.failure"), ToastType.Failure);
+    }
   };
   return (
     <article className="bg-white dark:bg-black/40 dark:border dark:border-stone-900 rounded-md px-3 py-2 shadow-lg h-full">

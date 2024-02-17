@@ -5,6 +5,7 @@ import { deleteObjectByUrl, uploadFile } from "../services/s3";
 import { unlink } from "fs/promises";
 import { WordEntity } from "../types/wordEntity";
 import { CompletedActivityEntity } from "../types/completedActivityEntity";
+import { GoalsObj } from "../types/goals";
 
 export class UserController {
   async getUser(req: Request, res: Response) {
@@ -68,7 +69,7 @@ export class UserController {
   }
   async updateUser(req: Request, res: Response) {
     try {
-      const { username, birthday, ...requestObj } = req.body;
+      const { username, birthday, goals, ...requestObj } = req.body;
       const user = await User.findOne({ username });
       if (!user) {
         return res
@@ -96,9 +97,13 @@ export class UserController {
           return res.status(400).json({ message: "Invalid birthday format" });
         }
       }
+
+      if (goals) {
+        updatedUser.goals = goals as GoalsObj;
+      }
+
       await User.updateOne({ username: username }, { $set: updatedUser });
 
-      console.log(updatedUser);
       return res.status(200).json(user);
     } catch (err) {
       console.error(err);
