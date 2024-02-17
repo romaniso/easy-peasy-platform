@@ -21,7 +21,7 @@ export const calculateActivityCountMonthly = (
     // Push an object containing the date and the number of completed activities to the array
     lastMonthActivitiesCount.push({
       date: formattedDate,
-      completedActivities: completedActivitiesCount,
+      value: completedActivitiesCount,
     });
   }
 

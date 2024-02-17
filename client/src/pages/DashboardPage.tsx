@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Panel from "../components/common/Panel";
 import { CircularChart } from "../components/dashboard/CircularChart";
 import { FiguresChart } from "../components/dashboard/FiguresChart";
@@ -7,9 +7,19 @@ import { LineChart } from "../components/dashboard/LineChart";
 import { useTranslation } from "react-i18next";
 import useAxiosPrivate from "../hooks/useAxiosPrivate";
 import useUser from "../hooks/useUser";
+import { ActivityStatsEntity } from "../types/lastMonthActivitiesEntity";
 
 const STATS_URL = "/stats";
 const DashboardPage: React.FC = () => {
+  const [averageMark, setAverageMark] = useState<number | null>(null);
+  const [addedWords, setAddedWords] = useState<number | null>(null);
+  const [vocabularyLimit, setVocabularyLimit] = useState<number | null>(null);
+  const [lastMonthActivitiesCount, setLastMonthActivitiesCount] = useState<
+    ActivityStatsEntity[] | null
+  >(null);
+  const [vocabularyListUsedStorage, setVocabularyListUsedStorage] = useState<
+    number | null
+  >(null);
   const axiosPrivate = useAxiosPrivate();
   const { user } = useUser();
 
@@ -22,6 +32,20 @@ const DashboardPage: React.FC = () => {
         const response = await axiosPrivate.get(url, {
           withCredentials: true,
         });
+
+        const {
+          averageMark,
+          addedWords,
+          vocabularyLimit,
+          lastMonthActivitiesCount,
+          vocabularyListUsedStorage,
+        } = response.data.stats;
+
+        setAverageMark(averageMark);
+        setAddedWords(addedWords);
+        setVocabularyLimit(vocabularyLimit);
+        setLastMonthActivitiesCount(lastMonthActivitiesCount);
+        setVocabularyListUsedStorage(vocabularyListUsedStorage);
       } catch (err) {
         console.error(err);
       }
@@ -40,15 +64,16 @@ const DashboardPage: React.FC = () => {
           <div className="py-1 md:py-2 px-0 md:px-1.5 flex-1 basis-full md:basis-1/4 md:h-1/2">
             <CircularChart
               title={t("subheadings.addedWords")}
-              percentage={78}
+              percentage={vocabularyListUsedStorage as number}
               unitNameInPlural="words"
-              maxNumber={1000}
+              maxNumber={vocabularyLimit as number}
+              usedUnits={addedWords as number}
             />
           </div>
           <div className="py-1 md:py-2 px-0 md:px-1.5 flex-1 basis-full md:basis-1/4 md:h-1/2">
             <FiguresChart
               title={t("subheadings.yourMarks")}
-              percentage={77}
+              percentage={averageMark as number}
               unitNameInPlural="exercises"
             />
           </div>
@@ -59,6 +84,7 @@ const DashboardPage: React.FC = () => {
             <LineChart
               title={t("subheadings.dailyActivity")}
               explanation={t("dailyActivity.explanation")}
+              data={lastMonthActivitiesCount as ActivityStatsEntity[]}
             />
           </div>
         </main>

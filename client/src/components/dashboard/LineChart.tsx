@@ -13,26 +13,19 @@ import {
   ValueType,
   NameType,
 } from "recharts/types/component/DefaultTooltipContent";
-import { format, parseISO, subDays } from "date-fns";
+import { format, parseISO } from "date-fns";
 import { useTranslation } from "react-i18next";
+import { ActivityStatsEntity } from "../../types/lastMonthActivitiesEntity";
 interface LineChartProps {
   title: string;
   explanation?: string;
-  // percentage: number;
-  // put a unit in a plural form, e.g. words, users, kilograms.
-  // unitNameInPlural: string;
+  data: ActivityStatsEntity[];
 }
-export const LineChart: React.FC<LineChartProps> = ({ title, explanation }) => {
-  const data = [];
-  for (let num = 30; num >= 0; num--) {
-    data.push({
-      // this one is perfect: days in a month
-      date: subDays(new Date(), num).toISOString().substring(0, 10),
-      //@TODO: here I need to provide a number of completed exercises and read articles
-      value: Math.round(Math.random() * 10),
-    });
-  }
-
+export const LineChart: React.FC<LineChartProps> = ({
+  title,
+  explanation,
+  data,
+}) => {
   return (
     <article className="bg-white dark:bg-black/40 dark:border dark:border-stone-900 rounded-md py-2 md:py-3 px-1 md:px-4 shadow-lg h-full flex flex-col transition-transform duration-300">
       <div className="px-3 md:px-10">
@@ -87,8 +80,6 @@ export const LineChart: React.FC<LineChartProps> = ({ title, explanation }) => {
               axisLine={false}
               tickLine={false}
               tickCount={6}
-              // tickSize={6}
-              // tickFormatter={number => `$${number.toFixed(2)}`}
             />
 
             <Tooltip content={<CustomToolTip />} />
