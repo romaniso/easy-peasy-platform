@@ -137,6 +137,7 @@ export class UserController {
       // @TODO: consider securing username only for that user, not other platform memmbers, cause now it is possible to insert any change user only possessing valid JWT
 
       // @TODO: validate if a word already exists in the user's vocab list
+      // @TODO: validate if words limit is not full
       const user = await User.findOne({ username });
       if (!user) {
         return res
@@ -171,6 +172,7 @@ export class UserController {
   }
   async addMultipleWords(req: Request, res: Response) {
     // @TODO: validate if a word already exists in the user's vocab list
+    // @TODO: validate if words limit is not full
     try {
       const { words, username } = req.body;
       const user = await User.findOne({ username });
