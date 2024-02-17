@@ -131,7 +131,7 @@ export class UserController {
       return res.status(500).json({ error: "Error uploading avatar." });
     }
   }
-  async addWord(req: Request, res: Response) {
+  async addSingleWord(req: Request, res: Response) {
     try {
       const { wordEntity, username } = req.body;
       // @TODO: consider securing username only for that user, not other platform memmbers, cause now it is possible to insert any change user only possessing valid JWT
@@ -149,7 +149,7 @@ export class UserController {
       if (typeof word !== "string" || definition.length === 0) {
         return res.status(400).json({
           message:
-            "Invalid word or definition provided. Word must be a string, and the definition must be an array with at least one element.",
+            "Invalid word or definition provided. Word and definition must be a string.",
         });
       }
       const newWord: WordEntity = { word, definition, audio };
@@ -165,6 +165,44 @@ export class UserController {
     } catch (err) {
       console.error(err);
       return res.status(500).json({ error: "Error adding word." });
+    }
+  }
+  async addMultipleWords(req: Request, res: Response) {
+    try {
+      const { words, username } = req.body;
+      const user = await User.findOne({ username });
+      if (!user) {
+        return res
+          .status(400)
+          .json({ message: `Username ${username} was not found` });
+      }
+      if (words.length === 0) {
+        return res.status(400).json({ message: "Bad client request." });
+      }
+
+      for (const wordEntity of words) {
+        const { word, definition, audio } = wordEntity;
+
+        if (typeof word !== "string" || definition.length === 0) {
+          return res.status(400).json({
+            message:
+              "Invalid word or definition provided. Word and definition must be a string.",
+          });
+        }
+        const newWord: WordEntity = { word, definition, audio };
+
+        if (!user.addedVocabulary) {
+          user.addedVocabulary = [];
+        }
+        user.addedVocabulary?.push(newWord);
+      }
+      await user.save();
+      return res
+        .status(200)
+        .json({ message: `Words have been successfully added.` });
+    } catch (err) {
+      console.error(err);
+      return res.status(500).json({ error: "Error adding words." });
     }
   }
   async recordActivity(req: Request, res: Response) {

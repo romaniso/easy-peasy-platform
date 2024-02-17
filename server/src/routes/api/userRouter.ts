@@ -26,7 +26,14 @@ userRouter
 
 userRouter
   .route("/add")
-  .post(verifyRoles([RoleName.User, RoleName.Tutor]), controller.addWord);
+  .post(verifyRoles([RoleName.User, RoleName.Tutor]), controller.addSingleWord);
+
+userRouter
+  .route("/add-multiple")
+  .post(
+    verifyRoles([RoleName.User, RoleName.Tutor]),
+    controller.addMultipleWords
+  );
 
 userRouter
   .route("/save")

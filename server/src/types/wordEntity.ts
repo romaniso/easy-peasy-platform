@@ -1,5 +1,5 @@
 export type WordEntity = {
   word: string;
-  definition: string[];
+  definition: string;
   audio?: string;
 };
