@@ -23,7 +23,7 @@ export class StatsController {
       const { vocabularyLimit } = foundUser;
       const vocabularyListUsedStorage = addedWords
         ? calculateRestInPercentage(vocabularyLimit, addedWords)
-        : 100;
+        : 0;
       const lastMonthActivitiesCount = foundUser.completedActivities
         ? calculateActivityCountMonthly(foundUser.completedActivities)
         : calculateActivityCountMonthly([]);

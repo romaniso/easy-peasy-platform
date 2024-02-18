@@ -14,25 +14,25 @@ button > svg {
   :root {
     --seek-before-width: 0px;
   }
-  input[type=range] {
+  input[type="range"] {
     @apply appearance-none bg-indigo-200 shadow-inner rounded-md;
   }
-  input[type=range]::before {
+  input[type="range"]::before {
     @apply w-[var(--seek-before-width)] content-[""] bg-orange-500 h-3 rounded-tl-md rounded-bl-md absolute top-0 left-0 z-10 cursor-pointer;
   }
-  input[type=range]::-moz-range-progress {
+  input[type="range"]::-moz-range-progress {
     @apply w-[var(--seek-before-width)] content-[""] bg-orange-500 h-3 rounded-tl-md rounded-bl-md absolute top-0 left-0 z-10 cursor-pointer;
   }
-  input[type=range]::-webkit-slider-thumb {
-    @apply  appearance-none h-[15px] w-[15px] rounded-full border-0 bg-red-300 cursor-pointer relative z-20 box-border hover:scale-110 hover:bg-indigo-400 transition-all;
+  input[type="range"]::-webkit-slider-thumb {
+    @apply appearance-none h-[15px] w-[15px] rounded-full border-0 bg-red-300 cursor-pointer relative z-20 box-border hover:scale-110 hover:bg-indigo-400 transition-all;
   }
-  input[type=range]::-moz-range-track {
+  input[type="range"]::-moz-range-track {
     @apply appearance-none bg-indigo-200 shadow-inner rounded-md;
   }
-  input[type=range]::-moz-range-thumb {
-    @apply  appearance-none h-[15px] w-[15px] rounded-full border-transparent bg-red-300 cursor-pointer relative -mt-0.5 z-20 box-border hover:scale-110 hover:bg-indigo-400 transition-all;
+  input[type="range"]::-moz-range-thumb {
+    @apply appearance-none h-[15px] w-[15px] rounded-full border-transparent bg-red-300 cursor-pointer relative -mt-0.5 z-20 box-border hover:scale-110 hover:bg-indigo-400 transition-all;
   }
-  input[type=range]::-ms-track {
+  input[type="range"]::-ms-track {
     @apply appearance-none bg-indigo-200 shadow-inner rounded-md;
   }
 }
@@ -72,20 +72,20 @@ button > svg {
 
   .progress-bar .outer {
     box-shadow: 2px 2px 4px -0.5px rgba(0, 0, 0, 0.15),
-    -2px -2px 4px -0.5px rgba(207, 213, 254, 0.3);
+      -2px -2px 4px -0.5px rgba(207, 213, 254, 0.3);
   }
   .progress-bar .inner {
     box-shadow: inset 1px 1px 1px -0.5px rgb(0, 0, 0, 0.2),
-    inset -2px -2px 3px -0.5px rgb(255, 255, 255, 0.7),
-    -0.25px -0.25px 0px rgba(255, 255, 255, 1),
-    0.25px 0.25px 0px rgba(0, 0, 0, 0.15),
-    0px 6px 5px -5px rgba(0, 0, 0, 0.05);
+      inset -2px -2px 3px -0.5px rgb(255, 255, 255, 0.7),
+      -0.25px -0.25px 0px rgba(255, 255, 255, 1),
+      0.25px 0.25px 0px rgba(0, 0, 0, 0.15),
+      0px 6px 5px -5px rgba(0, 0, 0, 0.05);
   }
   .progress-bar circle {
     stroke-dashoffset: 243;
   }
   .shine-effect:before {
-    content: '';
+    content: "";
     position: absolute;
     background: rgba(255, 255, 255, 0.3);
     height: 130%;
@@ -94,14 +94,14 @@ button > svg {
     transform: skewX(-30deg);
     animation: slide 1s infinite;
   }
-  .shine-effect:nth-child(2):before{
+  .shine-effect:nth-child(2):before {
     animation: slide 1s 1s infinite;
   }
-  .shine-effect:nth-child(3):before{
+  .shine-effect:nth-child(3):before {
     animation: slide 1s 2s infinite;
   }
   @keyframes slide {
-    0%{
+    0% {
       left: -30%;
     }
     100% {
@@ -114,7 +114,7 @@ button > svg {
   .markdown-content {
     @apply text-indigo-900 dark:text-indigo-200 text-base md:text-lg;
   }
-  .markdown-content p{
+  .markdown-content p {
     @apply text-base text-orange-500 bg-stone-50 dark:bg-[#484848] shadow-inner p-3 mb-5 rounded-lg;
   }
   .markdown-content h2 {
@@ -122,19 +122,20 @@ button > svg {
   }
   .markdown-content h3 {
     @apply text-xl font-bold mb-1;
-  }.markdown-content ul {
-     @apply mb-5 shadow-inner bg-stone-50 dark:bg-[#484848] px-3 py-2 rounded-md;
-   }
+  }
+  .markdown-content ul {
+    @apply mb-5 shadow-inner bg-stone-50 dark:bg-[#484848] px-3 py-2 rounded-md;
+  }
   .markdown-reading {
     @apply px-3 lg:px-6 py-4 lg:py-10 text-indigo-900 dark:text-indigo-200 text-base md:text-lg;
   }
   .markdown-reading h4 {
     @apply text-xl font-bold mb-1 text-indigo-500 tracking-wide;
   }
-  .markdown-reading p{
+  .markdown-reading p {
     @apply mb-5;
   }
-  .markdown-reading strong{
+  .markdown-reading strong {
     @apply text-orange-500;
   }
 }

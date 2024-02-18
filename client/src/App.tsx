@@ -21,8 +21,9 @@ const App: React.FC = () => {
     <Routes>
       {/* public pages */}
       <Route element={<PersistLogin />}>
+        {/* TODO: refactor it using different Routes and layouts, not only one: https://www.youtube.com/watch?v=5s57C7leXc4&list=PL4cUxeGkcC9iVKmtNuCeIswnQ97in2GGf&index=3&ab_channel=NetNinja */}
         <Route path="/" element={<RootLayout />}>
-          <Route path="/" element={<HomePage />} />
+          <Route index element={<HomePage />} />
           <Route path="/auth" element={<AuthenticationPage />} />
           <Route path="/unauthorized" element={<UnauthorizedPage />} />
           {/*Sections*/}

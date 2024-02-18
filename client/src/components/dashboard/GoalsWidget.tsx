@@ -1,4 +1,4 @@
-import React, { SyntheticEvent, useState } from "react";
+import React, { SyntheticEvent, useEffect, useState } from "react";
 import { GoGoal } from "react-icons/go";
 import { RadioGroup } from "../common/RadioGroup";
 import Button from "../common/Button";
@@ -72,6 +72,10 @@ export const GoalsWidget: React.FC<GoalsWidgetProps> = ({ title }) => {
       toast?.open(t("personalInfo.toastMessage.failure"), ToastType.Failure);
     }
   };
+
+  useEffect(() => {
+    //@TODO: fetch already chosen goals if they exist
+  }, []);
   return (
     <article className="bg-white dark:bg-black/40 dark:border dark:border-stone-900 rounded-md px-3 py-2 shadow-lg h-full">
       <div className="text-orange-500 dark:text-orange-500 font-bold text-xl md:text-3xl flex items-center gap-2 drop-shadow mb-1">
