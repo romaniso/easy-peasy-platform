@@ -74,7 +74,12 @@ export const GoalsWidget: React.FC<GoalsWidgetProps> = ({ title }) => {
   };
 
   useEffect(() => {
-    //@TODO: fetch already chosen goals if they exist
+    if (user.goals?.tasksPerWeek) {
+      setTasksPerWeek(user.goals.tasksPerWeek.toString());
+    }
+    if (user.goals?.wordsPerWeek) {
+      setWordsPerWeek(user.goals.wordsPerWeek.toString());
+    }
   }, []);
   return (
     <article className="bg-white dark:bg-black/40 dark:border dark:border-stone-900 rounded-md px-3 py-2 shadow-lg h-full">

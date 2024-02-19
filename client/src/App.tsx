@@ -24,32 +24,33 @@ const App: React.FC = () => {
         {/* TODO: refactor it using different Routes and layouts, not only one: https://www.youtube.com/watch?v=5s57C7leXc4&list=PL4cUxeGkcC9iVKmtNuCeIswnQ97in2GGf&index=3&ab_channel=NetNinja */}
         <Route path="/" element={<RootLayout />}>
           <Route index element={<HomePage />} />
-          <Route path="/auth" element={<AuthenticationPage />} />
-          <Route path="/unauthorized" element={<UnauthorizedPage />} />
+          <Route path="auth" element={<AuthenticationPage />} />
+          <Route path="unauthorized" element={<UnauthorizedPage />} />
           {/*Sections*/}
-          <Route path="/grammar" element={<PreviewPage />} />
-          <Route path="/vocabulary" element={<PreviewPage />} />
-          <Route path="/reading" element={<PreviewPage />} />
-          <Route path="/listening" element={<PreviewPage />} />
+          <Route path="grammar" element={<PreviewPage />} />
+          <Route path="vocabulary" element={<PreviewPage />} />
+          <Route path="reading" element={<PreviewPage />} />
+          <Route path="listening" element={<PreviewPage />} />
           {/*ExerciseSets*/}
-          <Route path="/grammar/:exercise" element={<ExercisePage />} />
-          <Route path="/vocabulary/:exercise" element={<ExercisePage />} />
-          <Route path="/reading/:exercise" element={<ExercisePage />} />
-          <Route path="/listening/:exercise" element={<ExercisePage />} />
+          {/* TODO: consider route nesting: https://www.youtube.com/watch?v=l8CS9AMBSIQ&list=PL4cUxeGkcC9iVKmtNuCeIswnQ97in2GGf&index=4&ab_channel=NetNinja */}
+          <Route path="grammar/:exercise" element={<ExercisePage />} />
+          <Route path="vocabulary/:exercise" element={<ExercisePage />} />
+          <Route path="reading/:exercise" element={<ExercisePage />} />
+          <Route path="listening/:exercise" element={<ExercisePage />} />
           {/*Protected Routes */}
           {/*USER ROLE*/}
           <Route element={<RequireAuth allowedRoles={[UserRole.User]} />}>
-            <Route path="/dashboard" element={<DashboardPage />} />
+            <Route path="dashboard" element={<DashboardPage />} />
           </Route>
           <Route element={<RequireAuth allowedRoles={[UserRole.User]} />}>
-            <Route path="/profile" element={<ProfilePage />} />
+            <Route path="profile" element={<ProfilePage />} />
           </Route>
           <Route element={<RequireAuth allowedRoles={[UserRole.User]} />}>
-            <Route path="/settings" element={<SettingsPage />} />
+            <Route path="settings" element={<SettingsPage />} />
           </Route>
           {/*ADMIN ROLE*/}
           <Route element={<RequireAuth allowedRoles={[UserRole.Admin]} />}>
-            <Route path="/admin" element={<AdminPage />} />
+            <Route path="admin" element={<AdminPage />} />
           </Route>
           {/*Missing Path*/}
           <Route path="*" element={<ErrorPage />} />
