@@ -83,6 +83,7 @@ const Sidebar: React.FC = () => {
     {
       title: t("sidebar.vocabulary.text"),
       icon: <BsBook />,
+      path: "/glossary",
     },
 
     {

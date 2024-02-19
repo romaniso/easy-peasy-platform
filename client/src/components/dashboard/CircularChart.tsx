@@ -51,9 +51,10 @@ export const CircularChart: React.FC<CircularChartProps> = ({
             Your {unitNameInPlural} limit is
             <span className="font-bold"> {percentage}%</span> full
           </p>
-          <span className="bg-indigo-500/70 rounded-md p-1 text-xs text-white hover:brightness-125 cursor-pointer transition-colors">
+          {/* TODO: implement it in the future, so a user can extend paid word limit */}
+          {/*<span className="bg-indigo-500/70 rounded-md p-1 text-xs text-white hover:brightness-125 cursor-pointer transition-colors">
             Increase limit
-          </span>
+          </span>*/}
           {/*<Button small secondary rounded  className='bg-indigo-500/70 text-xs'>*/}
           {/*    Increase the limit*/}
           {/*</Button>*/}

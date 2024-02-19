@@ -14,6 +14,7 @@ import PersistLogin from "./components/auth/PersistLogin";
 import AdminPage from "./pages/AdminPage";
 import ProfilePage from "./pages/ProfilePage";
 import SettingsPage from "./pages/SettingsPage";
+import { GlossaryPage } from "./pages/GlossaryPage";
 
 const App: React.FC = () => {
   return (
@@ -47,6 +48,9 @@ const App: React.FC = () => {
           </Route>
           <Route element={<RequireAuth allowedRoles={[UserRole.User]} />}>
             <Route path="settings" element={<SettingsPage />} />
+          </Route>
+          <Route element={<RequireAuth allowedRoles={[UserRole.User]} />}>
+            <Route path="glossary" element={<GlossaryPage />} />
           </Route>
           {/*ADMIN ROLE*/}
           <Route element={<RequireAuth allowedRoles={[UserRole.Admin]} />}>
