@@ -48,7 +48,7 @@ export const GlossaryPage: React.FC = () => {
             Glossary <PiBookOpenTextBold />
           </h1>
         </header>
-        <main className="flex flex-col gap-4 py-3 px-3 md:px-5 h-[80%]">
+        <main className="flex flex-col gap-4 py-3 px-3 md:px-5 h-[90%]  md:h-[80%]">
           <GlossaryHeader />
           <GlossaryBody />
         </main>

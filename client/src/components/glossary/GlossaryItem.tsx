@@ -2,12 +2,11 @@ import React from "react";
 import { PiMusicNotesFill } from "react-icons/pi";
 import { MdEdit } from "react-icons/md";
 import { FaRegTrashCan, FaStar } from "react-icons/fa6";
-import { CiStar } from "react-icons/ci";
-import { HiDotsVertical, HiOutlineDotsVertical } from "react-icons/hi";
+import { HiOutlineDotsVertical } from "react-icons/hi";
 
 export const GlossaryItem: React.FC = () => {
   return (
-    <div className="flex-1 flex flex-wrap gap-2 border boder-indigo-50 dark:bg-black/40 dark:border-indigo-500/50 rounded-md py-2 px-3">
+    <div className="flex-1 flex flex-wrap gap-2 border boder-indigo-50 dark:bg-black/40 dark:border-indigo-500/50 rounded-md py-2 px-3 shadow-sm">
       <div className="basis-full md:basis-1/6 flex flex-col relative">
         <strong className="text-lg text-orange-600 drop-shadow-sm flex items-center gap-1">
           placeholder
