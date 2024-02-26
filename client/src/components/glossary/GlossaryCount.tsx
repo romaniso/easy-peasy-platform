@@ -23,7 +23,7 @@ export const GlossaryCount: React.FC = () => {
     })();
   }, []);
   return (
-    <div className="text-lg bg-indigo-50 shadow-inner p-2 rounded-md text-indigo-900 dark:text-indigo-300 dark:bg-black/40">
+    <div className="text-lg shadow-inner p-2 rounded-md text-indigo-900 dark:text-indigo-300 border dark:bg-stone-900 dark:border-indigo-500/50 border-indigo-100">
       <span>{addedWordCount} </span>/<span> {glossaryLimit}</span>
     </div>
   );

@@ -6,7 +6,7 @@ import { HiOutlineDotsVertical } from "react-icons/hi";
 
 export const GlossaryItem: React.FC = () => {
   return (
-    <div className="flex-1 flex flex-wrap gap-2 border boder-indigo-50 dark:bg-black/40 dark:border-indigo-500/50 rounded-md py-2 px-3 shadow-sm">
+    <div className="flex-1 flex flex-wrap gap-2 border boder-indigo-50 dark:bg-stone-900 dark:border-indigo-500/50 rounded-md py-2 px-3 shadow-sm">
       <div className="basis-full md:basis-1/6 flex flex-col relative">
         <strong className="text-lg text-orange-600 drop-shadow-sm flex items-center gap-1">
           placeholder
@@ -59,13 +59,13 @@ export const GlossaryItem: React.FC = () => {
         </ol>
       </div>
       <div className="flex-shrink basis-1/6 hidden md:flex justify-between items-start gap-1">
-        <button className="flex items-center bg-red-500 text-white text-sm p-1 rounded-md shadow-sm gap-1">
+        <button className="flex items-center bg-red-500 hover:opacity-80 text-white text-sm p-1 rounded-md shadow-sm gap-1">
           Remove <FaRegTrashCan />
         </button>
-        <button className="flex items-center bg-indigo-500 text-white text-sm p-1 rounded-md shadow-sm gap-1">
+        <button className="flex items-center bg-indigo-500 hover:opacity-80 text-white text-sm p-1 rounded-md shadow-sm gap-1">
           Edit <MdEdit />
         </button>
-        <button className="flex items-center bg-orange-500 text-white text-sm p-1 rounded-md shadow-sm gap-1">
+        <button className="flex items-center bg-orange-500 hover:opacity-80 text-white text-sm p-1 rounded-md shadow-sm gap-1">
           Star <FaStar />
         </button>
         {/*<button className="">
