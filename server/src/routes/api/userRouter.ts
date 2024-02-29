@@ -36,6 +36,10 @@ userRouter
   );
 
 userRouter
+  .route("/words/:username")
+  .get(verifyRoles([RoleName.User, RoleName.Tutor]), controller.getAllWords);
+
+userRouter
   .route("/save")
   .post(verifyRoles([RoleName.User]), controller.recordActivity);
 

@@ -131,6 +131,8 @@ export class UserController {
       return res.status(500).json({ error: "Error uploading avatar." });
     }
   }
+  //Glossary Logics
+  //@TODO: maybe decompose it into a separate route/controller...
   async addSingleWord(req: Request, res: Response) {
     try {
       const { wordEntity, username } = req.body;
@@ -208,6 +210,21 @@ export class UserController {
     } catch (err) {
       console.error(err);
       return res.status(500).json({ error: "Error adding words." });
+    }
+  }
+  async getAllWords(req: Request, res: Response) {
+    try {
+      const { username } = req.params;
+      const user = await User.findOne({ username });
+      if (!user) {
+        return res
+          .status(400)
+          .json({ message: `Username ${username} was not found` });
+      }
+      return res.status(200).json(user.addedVocabulary);
+    } catch (err) {
+      console.error(err);
+      return res.status(500).json({ error: "Error getting words." });
     }
   }
   async recordActivity(req: Request, res: Response) {
