@@ -1,4 +1,5 @@
 import React from "react";
+import { BsChevronRight, BsChevronLeft } from "react-icons/bs";
 
 interface PaginationProps {
   totalCount: number;
@@ -32,17 +33,23 @@ export const Pagination: React.FC<PaginationProps> = ({
   };
 
   return (
-    <div>
+    <div className="flex items-center text-lg gap-2 text-indigo-900 dark:text-indigo-300">
       <button
+        className={`${currentPage === 1 && "opacity-50"}`}
         onClick={() => handlePageChange(currentPage - 1)}
         disabled={currentPage === 1}
       >
-        Previous
+        <BsChevronLeft />
       </button>
       {pages.map((page) => (
         <button
           key={page}
           onClick={() => handlePageChange(page)}
+          className={`px-2 rounded-md ${
+            currentPage === page
+              ? "bg-indigo-500/10 dark:text-orange-500"
+              : "hover:bg-indigo-500/10"
+          }`}
           disabled={currentPage === page}
         >
           {page}
@@ -52,7 +59,7 @@ export const Pagination: React.FC<PaginationProps> = ({
         onClick={() => handlePageChange(currentPage + 1)}
         disabled={currentPage === totalPages}
       >
-        Next
+        <BsChevronRight />
       </button>
     </div>
   );
