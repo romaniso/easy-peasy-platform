@@ -47,8 +47,8 @@ export const Pagination: React.FC<PaginationProps> = ({
           onClick={() => handlePageChange(page)}
           className={`px-2 rounded-md transition-colors duration-200 ${
             currentPage === page
-              ? "bg-indigo-500/10 dark:text-orange-500 px-2 rounded-md"
-              : "hover:bg-indigo-500/10"
+              ? "bg-indigo-500/10 dark:bg-black/30 dark:border dark:border-indigo-500/50 dark:text-orange-500 px-2 rounded-md"
+              : "hover:bg-indigo-500/10 dark:hover:bg-black/30"
           }`}
           disabled={currentPage === page}
         >
@@ -56,6 +56,7 @@ export const Pagination: React.FC<PaginationProps> = ({
         </button>
       ))}
       <button
+        className={`${currentPage === totalPages && "opacity-50"}`}
         onClick={() => handlePageChange(currentPage + 1)}
         disabled={currentPage === totalPages}
       >

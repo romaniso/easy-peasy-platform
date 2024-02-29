@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import { PiMusicNotesFill } from "react-icons/pi";
 import { MdEdit } from "react-icons/md";
 import { FaRegTrashCan, FaStar } from "react-icons/fa6";
 import { HiOutlineDotsVertical } from "react-icons/hi";
+import { playAudio } from "../../utils/playAudio";
 
 interface GlossaryItemProps {
   word: string;
@@ -15,6 +16,15 @@ export const GlossaryItem: React.FC<GlossaryItemProps> = ({
   definition,
   audio,
 }) => {
+  const [isBeingEdited, setIsBeingEdited] = useState<boolean>(false);
+  const [editedValue, setEditedValue] = useState(definition);
+
+  const handlePlay = async () => {
+    if (audio) {
+      await playAudio(audio);
+    }
+  };
+
   return (
     <div className="flex-1 flex flex-wrap gap-2 border boder-indigo-50 dark:bg-stone-900 dark:border-indigo-500/50 rounded-md py-2 px-3 shadow-sm">
       <div className="basis-full md:basis-1/6 flex flex-col relative">
@@ -26,15 +36,22 @@ export const GlossaryItem: React.FC<GlossaryItemProps> = ({
         {/*<span className="text-sm text-indigo-900 dark:text-indigo-300">
           /ˈpleɪsˌhoʊl.dɚ/
         </span>*/}
-        {/* @TODO: with UK */}
-        <div className="flex gap-2 text-sm">
-          <span className="flex items-center gap-0.5 font-semibold text-indigo-900 dark:text-indigo-300 cursor-pointer hover:scale-110 transition-transform">
-            UK <PiMusicNotesFill />
-          </span>
-          <span className="flex items-center gap-0.5 font-semibold text-indigo-900 dark:text-indigo-300 cursor-pointer hover:scale-110 transition-transform">
-            US <PiMusicNotesFill />
-          </span>
-        </div>
+        {audio && (
+          <div className="flex gap-2 text-sm">
+            <span
+              className="flex items-center gap-0.5 font-semibold text-indigo-900 dark:text-indigo-300 cursor-pointer hover:scale-110 transition-transform"
+              onClick={handlePlay}
+            >
+              UK <PiMusicNotesFill />
+            </span>
+            <span
+              className="flex items-center gap-0.5 font-semibold text-indigo-900 dark:text-indigo-300 cursor-pointer hover:scale-110 transition-transform"
+              onClick={handlePlay}
+            >
+              US <PiMusicNotesFill />
+            </span>
+          </div>
+        )}
         <button className="absolute right-0 top-0 translate-y-1/2 text-lg md:hidden text-orange-500">
           <HiOutlineDotsVertical />
         </button>

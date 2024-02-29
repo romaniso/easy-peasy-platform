@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { GlossaryList } from "./GlossaryList";
 import { GlossaryCount } from "./GlossaryCount";
 import { Pagination } from "../common/Pagination";
@@ -29,6 +29,8 @@ export const GlossaryBody: React.FC = () => {
         if (response.status === 200) {
           setData(response.data);
           setTotalCount(response.data.length);
+
+          console.log(response.data);
         }
       } catch (err) {
         console.error(err);
@@ -40,6 +42,8 @@ export const GlossaryBody: React.FC = () => {
     const firstPageIndex = (currentPage - 1) * pageSize;
     const lastPageIndex = firstPageIndex + pageSize;
     setCurrentData(data.slice(firstPageIndex, lastPageIndex));
+
+    console.log(currentData);
   }, [currentPage, data]);
 
   return (
