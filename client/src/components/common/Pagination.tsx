@@ -45,9 +45,9 @@ export const Pagination: React.FC<PaginationProps> = ({
         <button
           key={page}
           onClick={() => handlePageChange(page)}
-          className={`px-2 rounded-md ${
+          className={`px-2 rounded-md transition-colors duration-200 ${
             currentPage === page
-              ? "bg-indigo-500/10 dark:text-orange-500"
+              ? "bg-indigo-500/10 dark:text-orange-500 px-2 rounded-md"
               : "hover:bg-indigo-500/10"
           }`}
           disabled={currentPage === page}
