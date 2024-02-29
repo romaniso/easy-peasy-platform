@@ -10,9 +10,10 @@ import { Glossaryitem } from "../../enums/glossaryItem";
 const GLOSSARY_URL = "users/words";
 export const GlossaryBody: React.FC = () => {
   const [data, setData] = useState<Glossaryitem[]>([]);
+  const [currentData, setCurrentData] = useState<Glossaryitem[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalCount, setTotalCount] = useState<number>(0);
-  const pageSize = 5;
+  const pageSize = 10;
   //  const { start, end } = usePagination({ totalCount, pageSize, currentPage });
 
   const axiosPrivate = useAxiosPrivate();
@@ -35,11 +36,12 @@ export const GlossaryBody: React.FC = () => {
     })();
   }, []);
 
-  const currentData = useMemo(() => {
+  useEffect(() => {
     const firstPageIndex = (currentPage - 1) * pageSize;
     const lastPageIndex = firstPageIndex + pageSize;
-    return data.slice(firstPageIndex, lastPageIndex);
+    setCurrentData(data.slice(firstPageIndex, lastPageIndex));
   }, [currentPage, data]);
+
   return (
     <div className="!overflow-y-auto flex-grow flex flex-col gap-4 items-stretch">
       <div className="flex justify-between">
