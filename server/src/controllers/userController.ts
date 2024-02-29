@@ -6,6 +6,7 @@ import { unlink } from "fs/promises";
 import { WordEntity } from "../types/wordEntity";
 import { CompletedActivityEntity } from "../types/completedActivityEntity";
 import { GoalsObj } from "../types/goals";
+import { v4 as uuid } from "uuid";
 
 export class UserController {
   async getUser(req: Request, res: Response) {
@@ -149,7 +150,7 @@ export class UserController {
       if (!wordEntity) {
         return res.status(400).json({ message: "Bad client request." });
       }
-      const { word, definition, audio } = wordEntity;
+      const { word, definition, audio, id } = wordEntity;
 
       if (typeof word !== "string" || definition.length === 0) {
         return res.status(400).json({
@@ -157,7 +158,7 @@ export class UserController {
             "Invalid word or definition provided. Word and definition must be a string.",
         });
       }
-      const newWord: WordEntity = { word, definition, audio };
+      const newWord: WordEntity = { word, definition, audio, id: id ?? uuid() };
 
       if (!user.addedVocabulary) {
         user.addedVocabulary = [];
@@ -187,8 +188,10 @@ export class UserController {
         return res.status(400).json({ message: "Bad client request." });
       }
 
+      console.log(words);
+
       for (const wordEntity of words) {
-        const { word, definition, audio } = wordEntity;
+        const { word, definition, audio, id } = wordEntity;
 
         if (typeof word !== "string" || definition.length === 0) {
           return res.status(400).json({
@@ -196,7 +199,12 @@ export class UserController {
               "Invalid word or definition provided. Word and definition must be a string.",
           });
         }
-        const newWord: WordEntity = { word, definition, audio };
+        const newWord: WordEntity = {
+          word,
+          definition,
+          audio,
+          id: id ?? uuid(),
+        };
 
         if (!user.addedVocabulary) {
           user.addedVocabulary = [];
