@@ -28,8 +28,8 @@ export const GlossaryPage: React.FC = () => {
           </h1>
         </header>
         <main className="flex flex-col gap-4 py-3 px-3 md:px-5 h-[90%]  md:h-[80%]">
-          <GlossaryHeader onSort={setSorted} />
-          <GlossaryBody sorted={sorted} />
+          <GlossaryHeader onSort={setSorted} onSearh={setSearchPhrase} />
+          <GlossaryBody sorted={sorted} search={searchPhrase} />
         </main>
       </Panel>
     </div>

@@ -9,10 +9,14 @@ import { Glossaryitem } from "../../enums/glossaryItem";
 
 interface GlossaryBodyProps {
   sorted?: null | string;
+  search?: null | string;
 }
 
 const GLOSSARY_URL = "users/words";
-export const GlossaryBody: React.FC<GlossaryBodyProps> = ({ sorted }) => {
+export const GlossaryBody: React.FC<GlossaryBodyProps> = ({
+  sorted,
+  search,
+}) => {
   const [data, setData] = useState<Glossaryitem[]>([]);
   //Pagination
   const [currentData, setCurrentData] = useState<Glossaryitem[]>([]);
@@ -74,6 +78,7 @@ export const GlossaryBody: React.FC<GlossaryBodyProps> = ({ sorted }) => {
 
   useEffect(() => {
     if (sorted) {
+      setCurrentData(data);
       switch (sorted) {
         case "abc":
           sortByAlphabet();
@@ -88,10 +93,25 @@ export const GlossaryBody: React.FC<GlossaryBodyProps> = ({ sorted }) => {
     }
   }, [sorted]);
 
+  useEffect(() => {
+    if (search) {
+      const matchedData = data.filter((word) => {
+        return word.word.toLowerCase().includes(search.toLowerCase());
+      });
+      setCurrentData(matchedData);
+    }
+  }, [search]);
+
   return (
     <div className="!overflow-y-auto flex-grow flex flex-col gap-4 items-stretch">
       <div className="flex justify-between">
-        <GlossaryCount />
+        {currentData.length > 0 ? (
+          <GlossaryCount />
+        ) : (
+          <p className="text-lg text-red-600 dark:text-red-300">
+            No words have been found. Sorry, try to type something else.
+          </p>
+        )}
         <Pagination
           totalCount={totalCount as number}
           currentPage={currentPage}
