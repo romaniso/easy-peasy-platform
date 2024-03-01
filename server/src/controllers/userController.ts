@@ -158,7 +158,13 @@ export class UserController {
             "Invalid word or definition provided. Word and definition must be a string.",
         });
       }
-      const newWord: WordEntity = { word, definition, audio, id: id ?? uuid() };
+      const newWord: WordEntity = {
+        word,
+        definition,
+        audio,
+        id: id ?? uuid(),
+        marked: false,
+      };
 
       if (!user.addedVocabulary) {
         user.addedVocabulary = [];
@@ -204,6 +210,7 @@ export class UserController {
           definition,
           audio,
           id: id ?? uuid(),
+          marked: false,
         };
 
         if (!user.addedVocabulary) {

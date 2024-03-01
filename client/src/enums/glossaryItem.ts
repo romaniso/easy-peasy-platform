@@ -3,4 +3,5 @@ export type Glossaryitem = {
   word: string;
   definition: string;
   audio?: string;
+  marked: boolean;
 };

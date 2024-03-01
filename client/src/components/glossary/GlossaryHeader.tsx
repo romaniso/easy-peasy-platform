@@ -1,7 +1,30 @@
 import React from "react";
 import { BsSearch } from "react-icons/bs";
+import Select from "../common/Select";
+import { MdSort } from "react-icons/md";
+import { FaSortAlphaDown } from "react-icons/fa";
+import { PiClockCountdownLight } from "react-icons/pi";
+import { FaStar } from "react-icons/fa6";
 
 export const GlossaryHeader: React.FC = () => {
+  const sortibles = [
+    {
+      value: "alphabet",
+      label: "A-Z",
+      icon: <FaSortAlphaDown />,
+    },
+    {
+      value: "recent",
+      label: "Recent",
+      icon: <PiClockCountdownLight />,
+    },
+    {
+      value: "star",
+      label: "Marked",
+      icon: <FaStar />,
+    },
+  ];
+
   return (
     <div className="flex flex-wrap justify-between">
       <div className="basis-full md:basis-1/4">
@@ -14,7 +37,15 @@ export const GlossaryHeader: React.FC = () => {
           />
         </div>
       </div>
-      <div className="bg-gray-400">Filter bar</div>
+      <Select
+        defaultText={
+          <span className="flex items-center gap-1">
+            Sort by
+            <MdSort />
+          </span>
+        }
+        options={sortibles}
+      />
     </div>
   );
 };
