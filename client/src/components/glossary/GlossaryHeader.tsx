@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { BsSearch } from "react-icons/bs";
 import Select from "../common/Select";
 import { MdSort } from "react-icons/md";
@@ -6,10 +6,14 @@ import { FaSortAlphaDown } from "react-icons/fa";
 import { PiClockCountdownLight } from "react-icons/pi";
 import { FaStar } from "react-icons/fa6";
 
-export const GlossaryHeader: React.FC = () => {
+interface GlossaryHeaderProps {
+  onSort: (sortable: string) => void;
+}
+
+export const GlossaryHeader: React.FC<GlossaryHeaderProps> = ({ onSort }) => {
   const sortibles = [
     {
-      value: "alphabet",
+      value: "abc",
       label: "A-Z",
       icon: <FaSortAlphaDown />,
     },
@@ -19,7 +23,7 @@ export const GlossaryHeader: React.FC = () => {
       icon: <PiClockCountdownLight />,
     },
     {
-      value: "star",
+      value: "marked",
       label: "Marked",
       icon: <FaStar />,
     },
@@ -45,6 +49,7 @@ export const GlossaryHeader: React.FC = () => {
           </span>
         }
         options={sortibles}
+        onChange={onSort}
       />
     </div>
   );

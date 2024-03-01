@@ -13,6 +13,7 @@ export const GlossaryList: React.FC<GlossaryListProps> = ({ data }) => {
       word={item.word}
       definition={item.definition}
       audio={item.audio}
+      marked={item.marked}
     />
   ));
 

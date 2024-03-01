@@ -9,35 +9,14 @@ import { PiBookOpenTextBold } from "react-icons/pi";
 
 //const STATS_URL = "/glossary";
 export const GlossaryPage: React.FC = () => {
-  const axiosPrivate = useAxiosPrivate();
-  const { user } = useUser();
+  //Sort by
+  //@TODO: turn strings into enums
+  const [sorted, setSorted] = useState<null | string>(null);
+
+  //Search
+  const [searchPhrase, setSearchPhrase] = useState("");
 
   //  const { t } = useTranslation("dashboard");
-
-  useEffect(() => {
-    // const url = `${STATS_URL}/${user.username}`;
-    // (async () => {
-    //   try {
-    //     const response = await axiosPrivate.get(url, {
-    //       withCredentials: true,
-    //     });
-    //     const {
-    //       averageMark,
-    //       addedWords,
-    //       vocabularyLimit,
-    //       lastMonthActivitiesCount,
-    //       vocabularyListUsedStorage,
-    //     } = response.data.stats;
-    //     setAverageMark(averageMark);
-    //     setAddedWords(addedWords);
-    //     setVocabularyLimit(vocabularyLimit);
-    //     setLastMonthActivitiesCount(lastMonthActivitiesCount);
-    //     setVocabularyListUsedStorage(vocabularyListUsedStorage);
-    //   } catch (err) {
-    //     console.error(err);
-    //   }
-    // })();
-  }, []);
 
   return (
     <div className="h-full md:p-12">
@@ -49,8 +28,8 @@ export const GlossaryPage: React.FC = () => {
           </h1>
         </header>
         <main className="flex flex-col gap-4 py-3 px-3 md:px-5 h-[90%]  md:h-[80%]">
-          <GlossaryHeader />
-          <GlossaryBody />
+          <GlossaryHeader onSort={setSorted} />
+          <GlossaryBody sorted={sorted} />
         </main>
       </Panel>
     </div>

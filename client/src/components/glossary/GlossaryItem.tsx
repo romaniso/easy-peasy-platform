@@ -9,12 +9,14 @@ interface GlossaryItemProps {
   word: string;
   definition: string;
   audio?: string;
+  marked: boolean;
 }
 
 export const GlossaryItem: React.FC<GlossaryItemProps> = ({
   word,
   definition,
   audio,
+  marked,
 }) => {
   const [isBeingEdited, setIsBeingEdited] = useState<boolean>(false);
   const [editedValue, setEditedValue] = useState(definition);
@@ -29,8 +31,9 @@ export const GlossaryItem: React.FC<GlossaryItemProps> = ({
     <div className="flex-1 flex flex-wrap gap-2 border boder-indigo-50 dark:bg-stone-900 dark:border-indigo-500/50 rounded-md py-2 px-3 shadow-sm">
       <div className="basis-full md:basis-1/6 flex flex-col relative">
         <div className="text-lg text-orange-600 drop-shadow-sm flex gap-1">
-          {/*@TODO: If it is marked with a star */}
-          {/*<FaStar className="text-orange-300 flex-shrink-0 mt-1.5" />*/}
+          {marked && (
+            <FaStar className="text-orange-300 flex-shrink-0 mt-1.5" />
+          )}
           <span className="">{word}</span>
         </div>
         {/*<span className="text-sm text-indigo-900 dark:text-indigo-300">
@@ -99,9 +102,6 @@ export const GlossaryItem: React.FC<GlossaryItemProps> = ({
         <button className="flex items-center bg-orange-500 hover:opacity-80 text-white text-sm p-1 rounded-md shadow-sm gap-1">
           Star <FaStar />
         </button>
-        {/*<button className="">
-          <HiDotsVertical />
-        </button>*/}
       </div>
     </div>
   );

@@ -7,8 +7,12 @@ import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 import useUser from "../../hooks/useUser";
 import { Glossaryitem } from "../../enums/glossaryItem";
 
+interface GlossaryBodyProps {
+  sorted?: null | string;
+}
+
 const GLOSSARY_URL = "users/words";
-export const GlossaryBody: React.FC = () => {
+export const GlossaryBody: React.FC<GlossaryBodyProps> = ({ sorted }) => {
   const [data, setData] = useState<Glossaryitem[]>([]);
   //Pagination
   const [currentData, setCurrentData] = useState<Glossaryitem[]>([]);
@@ -16,34 +20,32 @@ export const GlossaryBody: React.FC = () => {
   const [totalCount, setTotalCount] = useState<number>(0);
   const pageSize = 10;
 
-  //Sort by
-  //@TODO: turn strings into enums
-  const [sorted, setSorted] = useState<null | "abc" | "marked" | "recent">(
-    null
-  );
-
-  //Search
-  const [searchPhrase, setSearchPhrase] = useState("");
   //  const { start, end } = usePagination({ totalCount, pageSize, currentPage });
 
   const axiosPrivate = useAxiosPrivate();
   const { user } = useUser();
 
   const sortByAlphabet = (): void => {
-    const words = [...data];
-    words.sort((wordA, wordB) => {
+    const newData = [...data];
+    newData.sort((wordA, wordB) => {
       if (wordA.word.toLowerCase() < wordB.word.toLowerCase()) return -1;
       if (wordA.word.toLowerCase() > wordB.word.toLowerCase()) return 1;
       return 0;
     });
 
-    setCurrentData(words);
+    setCurrentData(newData);
   };
 
   const sortByMarked = (): void => {
-    const words = [...data];
+    const newData = [...data];
 
-    setCurrentData(words.filter((word) => word.marked));
+    setCurrentData(newData.filter((word) => word.marked));
+  };
+
+  const sortByRecent = (): void => {
+    const newData = [...data];
+
+    setCurrentData(newData.reverse());
   };
 
   useEffect(() => {
@@ -70,11 +72,25 @@ export const GlossaryBody: React.FC = () => {
     setCurrentData(data.slice(firstPageIndex, lastPageIndex));
   }, [currentPage, data]);
 
+  useEffect(() => {
+    if (sorted) {
+      switch (sorted) {
+        case "abc":
+          sortByAlphabet();
+          break;
+        case "recent":
+          sortByRecent();
+          break;
+        case "marked":
+          sortByMarked();
+          break;
+      }
+    }
+  }, [sorted]);
+
   return (
     <div className="!overflow-y-auto flex-grow flex flex-col gap-4 items-stretch">
       <div className="flex justify-between">
-        <button onClick={sortByAlphabet}>SORT ABC</button>
-        <button onClick={sortByMarked}>SORT MARKED</button>
         <GlossaryCount />
         <Pagination
           totalCount={totalCount as number}
