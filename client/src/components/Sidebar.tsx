@@ -10,11 +10,11 @@ import {
   BsBoxArrowRight,
   BsReverseLayoutTextWindowReverse,
   BsCollectionPlay,
-  BsCalendar3,
+  //  BsCalendar3,
   BsGear,
   BsBook,
   BsPersonFill,
-  BsEnvelopeFill,
+  //  BsEnvelopeFill,
 } from "react-icons/bs";
 import LogoImage from "../assets/images/small-logo.png";
 import ThemeToggle from "./ThemeToggle";
@@ -86,24 +86,24 @@ const Sidebar: React.FC = () => {
       path: "/glossary",
     },
 
-    {
-      title: t("sidebar.tutoring.text"),
-      icon: <BsCalendar3 />,
-      links: [
-        { label: t("sidebar.tutoring.links.tutors"), path: "tutors" },
-        {
-          label: t("sidebar.tutoring.links.online-class"),
-          path: "online-class",
-        },
-        // { label: "How it works", path: "docs/classes" },
-        // { label: "Pricing", path: "docs/pricing" },
-      ],
-    },
-    {
-      title: t("sidebar.inbox.text"),
-      icon: <BsEnvelopeFill />,
-      path: "/inbox",
-    },
+    // {
+    //   title: t("sidebar.tutoring.text"),
+    //   icon: <BsCalendar3 />,
+    //   links: [
+    //     { label: t("sidebar.tutoring.links.tutors"), path: "tutors" },
+    //     {
+    //       label: t("sidebar.tutoring.links.online-class"),
+    //       path: "online-class",
+    //     },
+    //     // { label: "How it works", path: "docs/classes" },
+    //     // { label: "Pricing", path: "docs/pricing" },
+    //   ],
+    // },
+    // {
+    //   title: t("sidebar.inbox.text"),
+    //   icon: <BsEnvelopeFill />,
+    //   path: "/inbox",
+    // },
     {
       title: t("sidebar.profile.text"),
       icon: <BsPersonFill />,
