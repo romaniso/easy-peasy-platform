@@ -18,6 +18,7 @@ export const GlossaryBody: React.FC<GlossaryBodyProps> = ({
   search,
 }) => {
   const [data, setData] = useState<Glossaryitem[]>([]);
+
   //Pagination
   const [currentData, setCurrentData] = useState<Glossaryitem[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
@@ -99,6 +100,8 @@ export const GlossaryBody: React.FC<GlossaryBodyProps> = ({
         return word.word.toLowerCase().includes(search.toLowerCase());
       });
       setCurrentData(matchedData);
+    } else {
+      setCurrentData(data);
     }
   }, [search]);
 
