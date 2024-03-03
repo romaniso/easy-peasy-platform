@@ -10,7 +10,7 @@ import { useToast } from "../context/ToastContext";
 import { ToastType } from "../enums/toast";
 //import { useTranslation } from "react-i18next";
 
-const ADD_MULTIPLE_WORDS_URL = "users/add-multiple";
+const ADD_MULTIPLE_WORDS_URL = "glossary/add-multiple";
 
 const DictionarySection: React.FC = () => {
   const [isExpanded, setIsExpanded] = useState(false);

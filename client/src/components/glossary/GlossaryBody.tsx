@@ -12,7 +12,7 @@ interface GlossaryBodyProps {
   search?: null | string;
 }
 
-const GLOSSARY_URL = "users/words";
+const GLOSSARY_URL = "glossary/words";
 export const GlossaryBody: React.FC<GlossaryBodyProps> = ({
   sorted,
   search,
