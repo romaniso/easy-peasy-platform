@@ -26,5 +26,9 @@ glossaryRouter
   .patch(verifyRoles([RoleName.User, RoleName.Tutor]), controller.toggleMark);
 
 glossaryRouter
+  .route("/edit/:username/:wordId")
+  .patch(verifyRoles([RoleName.User, RoleName.Tutor]), controller.editWord);
+
+glossaryRouter
   .route("/words/:username")
   .get(verifyRoles([RoleName.User, RoleName.Tutor]), controller.getAllWords);

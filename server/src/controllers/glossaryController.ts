@@ -145,6 +145,41 @@ export class GlossaryController {
       return res.status(500).json({ error: "Error removing word." });
     }
   }
+  async editWord(req: Request, res: Response) {
+    try {
+      const { username, wordId } = req.params;
+      const { definition } = req.body;
+      const user = await User.findOne({ username });
+      if (!user) {
+        return res
+          .status(400)
+          .json({ message: `Username ${username} was not found` });
+      }
+      if (!wordId) {
+        return res.status(400).json({ message: "Bad client request." });
+      }
+      const wordIndex = user.addedVocabulary?.findIndex(
+        (word) => word.id === wordId
+      );
+      if (user.addedVocabulary) {
+        if (wordIndex === -1) {
+          return res.status(404).json({
+            message: `Word with ID ${wordId} was not found in the vocabulary.`,
+          });
+        } else {
+          user.addedVocabulary[wordIndex as number].definition = definition;
+          user.markModified("addedVocabulary"); // Mark the array as modified
+          await user.save();
+        }
+      }
+      return res.status(200).json({
+        message: `Word with ID ${wordId} has been successfully edited.`,
+      });
+    } catch (err) {
+      console.error(err);
+      return res.status(500).json({ error: "Error editing word." });
+    }
+  }
 
   async toggleMark(req: Request, res: Response) {
     try {

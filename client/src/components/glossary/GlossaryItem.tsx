@@ -43,7 +43,7 @@ export const GlossaryItem: React.FC<GlossaryItemProps> = ({
         const response = await axiosPrivate.patch(
           url,
           {
-            editedValue,
+            definition: editedValue,
           },
           {
             withCredentials: true,
