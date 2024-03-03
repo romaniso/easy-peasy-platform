@@ -71,7 +71,7 @@ export const GlossaryBody: React.FC<GlossaryBodyProps> = ({
   };
   useEffect(() => {
     fetchGlossaryData();
-  }, [data]);
+  }, []);
 
   useEffect(() => {
     const firstPageIndex = (currentPage - 1) * pageSize;

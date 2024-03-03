@@ -22,5 +22,9 @@ glossaryRouter
   .delete(verifyRoles([RoleName.User, RoleName.Tutor]), controller.removeWord);
 
 glossaryRouter
+  .route("/mark/:username/:wordId")
+  .patch(verifyRoles([RoleName.User, RoleName.Tutor]), controller.toggleMark);
+
+glossaryRouter
   .route("/words/:username")
   .get(verifyRoles([RoleName.User, RoleName.Tutor]), controller.getAllWords);

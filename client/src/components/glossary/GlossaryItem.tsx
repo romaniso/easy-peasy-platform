@@ -6,7 +6,6 @@ import { HiOutlineDotsVertical } from "react-icons/hi";
 import { playAudio } from "../../utils/playAudio";
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 import useUser from "../../hooks/useUser";
-import { Glossaryitem } from "../../enums/glossaryItem";
 
 interface GlossaryItemProps {
   id: string;
@@ -57,6 +56,22 @@ export const GlossaryItem: React.FC<GlossaryItemProps> = ({
   };
   const handleMark = async () => {
     console.log("Mark: ", id);
+    (async () => {
+      const url = `${GLOSSARY_URL}/mark/${user.username}/${id}`;
+      try {
+        const response = await axiosPrivate.patch(url, {
+          withCredentials: true,
+        });
+        if (response.status === 200) {
+          updateData();
+          console.log(
+            `Mark of word with ID ${id} has been successfully toggled.`
+          );
+        }
+      } catch (err) {
+        console.error(err);
+      }
+    })();
   };
 
   return (
