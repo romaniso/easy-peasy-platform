@@ -18,5 +18,9 @@ glossaryRouter
   );
 
 glossaryRouter
+  .route("/remove/:wordId")
+  .delete(verifyRoles([RoleName.User, RoleName.Tutor]), controller.removeWord);
+
+glossaryRouter
   .route("/words/:username")
   .get(verifyRoles([RoleName.User, RoleName.Tutor]), controller.getAllWords);
