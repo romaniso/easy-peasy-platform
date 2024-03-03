@@ -53,10 +53,9 @@ export const GlossaryBody: React.FC<GlossaryBodyProps> = ({
     setCurrentData(newData.reverse());
   };
 
-  useEffect(() => {
-    const url = `${GLOSSARY_URL}/${user.username}`;
-
+  const fetchGlossaryData = async () => {
     (async () => {
+      const url = `${GLOSSARY_URL}/${user.username}`;
       try {
         const response = await axiosPrivate.get(url, {
           withCredentials: true,
@@ -69,7 +68,10 @@ export const GlossaryBody: React.FC<GlossaryBodyProps> = ({
         console.error(err);
       }
     })();
-  }, []);
+  };
+  useEffect(() => {
+    fetchGlossaryData();
+  }, [data]);
 
   useEffect(() => {
     const firstPageIndex = (currentPage - 1) * pageSize;
@@ -109,7 +111,7 @@ export const GlossaryBody: React.FC<GlossaryBodyProps> = ({
     <div className="!overflow-y-auto flex-grow flex flex-col gap-4 items-stretch">
       <div className="flex justify-between">
         {currentData.length > 0 ? (
-          <GlossaryCount />
+          <GlossaryCount count={totalCount} />
         ) : (
           <p className="text-lg text-red-600 dark:text-red-300">
             No words have been found. Sorry, try to type something else.
@@ -122,7 +124,7 @@ export const GlossaryBody: React.FC<GlossaryBodyProps> = ({
           onPageChange={setCurrentPage}
         />
       </div>
-      <GlossaryList data={currentData} />
+      <GlossaryList data={currentData} updateData={fetchGlossaryData} />
     </div>
   );
 };

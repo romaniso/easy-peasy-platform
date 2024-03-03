@@ -4,27 +4,59 @@ import { MdEdit } from "react-icons/md";
 import { FaRegTrashCan, FaStar } from "react-icons/fa6";
 import { HiOutlineDotsVertical } from "react-icons/hi";
 import { playAudio } from "../../utils/playAudio";
+import useAxiosPrivate from "../../hooks/useAxiosPrivate";
+import useUser from "../../hooks/useUser";
+import { Glossaryitem } from "../../enums/glossaryItem";
 
 interface GlossaryItemProps {
+  id: string;
   word: string;
   definition: string;
   audio?: string;
   marked: boolean;
+  updateData: () => void;
 }
-
+const GLOSSARY_URL = "glossary/";
 export const GlossaryItem: React.FC<GlossaryItemProps> = ({
+  id,
   word,
   definition,
   audio,
   marked,
+  updateData,
 }) => {
   const [isBeingEdited, setIsBeingEdited] = useState<boolean>(false);
   const [editedValue, setEditedValue] = useState(definition);
+
+  const axiosPrivate = useAxiosPrivate();
+  const { user } = useUser();
 
   const handlePlay = async () => {
     if (audio) {
       await playAudio(audio);
     }
+  };
+  const handleEdit = async () => {
+    console.log("Edit: ", id);
+  };
+  const handleRemove = async () => {
+    (async () => {
+      const url = `${GLOSSARY_URL}/remove/${user.username}/${id}`;
+      try {
+        const response = await axiosPrivate.delete(url, {
+          withCredentials: true,
+        });
+        if (response.status === 200) {
+          updateData();
+          console.log(`Word with ID ${id} was removed.`);
+        }
+      } catch (err) {
+        console.error(err);
+      }
+    })();
+  };
+  const handleMark = async () => {
+    console.log("Mark: ", id);
   };
 
   return (
@@ -93,13 +125,22 @@ export const GlossaryItem: React.FC<GlossaryItemProps> = ({
         </ol>*/}
       </div>
       <div className="flex-shrink basis-1/6 hidden md:flex justify-between items-start gap-1">
-        <button className="flex items-center bg-red-500 hover:opacity-80 text-white text-sm p-1 rounded-md shadow-sm gap-1">
+        <button
+          className="flex items-center bg-red-500 hover:opacity-80 text-white text-sm p-1 rounded-md shadow-sm gap-1"
+          onClick={handleRemove}
+        >
           Remove <FaRegTrashCan />
         </button>
-        <button className="flex items-center bg-indigo-500 hover:opacity-80 text-white text-sm p-1 rounded-md shadow-sm gap-1">
+        <button
+          className="flex items-center bg-indigo-500 hover:opacity-80 text-white text-sm p-1 rounded-md shadow-sm gap-1"
+          onClick={handleEdit}
+        >
           Edit <MdEdit />
         </button>
-        <button className="flex items-center bg-orange-500 hover:opacity-80 text-white text-sm p-1 rounded-md shadow-sm gap-1">
+        <button
+          className="flex items-center bg-orange-500 hover:opacity-80 text-white text-sm p-1 rounded-md shadow-sm gap-1"
+          onClick={handleMark}
+        >
           Star <FaStar />
         </button>
       </div>

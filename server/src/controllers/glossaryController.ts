@@ -114,8 +114,7 @@ export class GlossaryController {
   }
   async removeWord(req: Request, res: Response) {
     try {
-      const { username } = req.body;
-      const { wordId } = req.params;
+      const { username, wordId } = req.params;
 
       const user = await User.findOne({ username });
       if (!user) {

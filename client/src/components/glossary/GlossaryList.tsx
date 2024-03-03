@@ -4,16 +4,22 @@ import { Glossaryitem } from "../../enums/glossaryItem";
 
 interface GlossaryListProps {
   data: Glossaryitem[];
+  updateData: () => void;
 }
 
-export const GlossaryList: React.FC<GlossaryListProps> = ({ data }) => {
+export const GlossaryList: React.FC<GlossaryListProps> = ({
+  data,
+  updateData,
+}) => {
   const renderedGlossaryItems = data.map((item) => (
     <GlossaryItem
       key={item.id}
+      id={item.id}
       word={item.word}
       definition={item.definition}
       audio={item.audio}
       marked={item.marked}
+      updateData={updateData}
     />
   ));
 
