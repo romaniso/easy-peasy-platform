@@ -114,7 +114,7 @@ export const GlossaryBody: React.FC<GlossaryBodyProps> = ({
           <GlossaryCount count={totalCount} />
         ) : (
           <p className="text-lg text-red-600 dark:text-red-300">
-            No words have been found. Sorry, try to type something else.
+            No words have been found.
           </p>
         )}
         <Pagination

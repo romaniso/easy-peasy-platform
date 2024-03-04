@@ -2,10 +2,10 @@ import React, { FormEvent, useState } from "react";
 import { PiMusicNotesFill } from "react-icons/pi";
 import { MdCheck, MdEdit } from "react-icons/md";
 import { FaRegTrashCan, FaStar } from "react-icons/fa6";
-import { HiOutlineDotsVertical } from "react-icons/hi";
 import { playAudio } from "../../utils/playAudio";
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 import useUser from "../../hooks/useUser";
+import GlossaryAction from "./GlossaryAction";
 
 interface GlossaryItemProps {
   id: string;
@@ -94,6 +94,9 @@ export const GlossaryItem: React.FC<GlossaryItemProps> = ({
       }
     })();
   };
+  const toggleIsBeingEdited = () => {
+    setIsBeingEdited(!isBeingEdited);
+  };
 
   const editionArea: React.ReactElement = (
     <form className="basis-full relative" onSubmit={handleEdit}>
@@ -144,9 +147,13 @@ export const GlossaryItem: React.FC<GlossaryItemProps> = ({
             </span>
           </div>
         )}
-        <button className="absolute right-0 top-0 translate-y-1/2 text-lg md:hidden text-orange-500">
-          <HiOutlineDotsVertical />
-        </button>
+        <div className="absolute right-0 top-0 translate-y-1/2">
+          <GlossaryAction
+            onEdit={toggleIsBeingEdited}
+            onMark={handleMark}
+            onRemove={handleRemove}
+          />
+        </div>
       </div>
       <div className="flex-1">
         {isBeingEdited ? (

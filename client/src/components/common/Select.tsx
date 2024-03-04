@@ -51,7 +51,7 @@ const Select = <T,>({
   return (
     <div className="relative w-full" ref={selectRef}>
       <div
-        className="border border-indigo-100 dark:border-indigo-500/50 rounded px-2 md:px-4 py-2 flex items-center justify-between cursor-pointer text-indigo-800 dark:text-indigo-400 hover:bg-indigo-50 dark:hover:bg-indigo-500/10"
+        className="border border-indigo-100 dark:bg-transparent dark:border-indigo-500/50 rounded px-2 md:px-4 py-2 flex items-center justify-between cursor-pointer text-indigo-800 dark:text-indigo-400 hover:bg-indigo-50 dark:hover:bg-indigo-500/10"
         onClick={() => setIsOpen(!isOpen)}
       >
         {selectedOption ? (
