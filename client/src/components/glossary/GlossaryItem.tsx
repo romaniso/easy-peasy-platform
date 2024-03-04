@@ -120,7 +120,7 @@ export const GlossaryItem: React.FC<GlossaryItemProps> = ({
   );
 
   return (
-    <div className="flex-1 flex flex-wrap gap-2 border boder-indigo-50 dark:bg-stone-900 dark:border-indigo-500/50 rounded-md py-2 px-3 shadow-sm">
+    <div className="flex-shrink flex flex-wrap gap-2 border boder-indigo-50 dark:bg-stone-900 dark:border-indigo-500/50 rounded-md py-2 px-3 shadow-sm">
       <div className="basis-full md:basis-1/6 flex flex-col relative">
         <div className="text-lg text-orange-600 drop-shadow-sm flex gap-1">
           {marked && (
