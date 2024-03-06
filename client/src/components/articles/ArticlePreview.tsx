@@ -8,12 +8,12 @@ interface Props {
   imgSrc: string;
 }
 
-export default function ArticlePreview({
+export const ArticlePreview = ({
   title,
   introduction,
   link,
   imgSrc,
-}: Props) {
+}: Props) => {
   return (
     <article className="basis-1/4 flex-shrink group hover:scale-95 transition-transform duration-200">
       <Link to={link}>
@@ -28,4 +28,4 @@ export default function ArticlePreview({
       </Link>
     </article>
   );
-}
+};

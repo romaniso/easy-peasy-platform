@@ -6,7 +6,7 @@ import axios from "axios";
 import Card from "../components/common/Card";
 import Skeleton from "../components/common/Skeleton";
 import { Level } from "../types/level";
-import Button from "../components/common/Button";
+import {LevelsButtons} from "../components/common/LevelsButtons";
 
 interface ExerciseSet {
   _id: string;
@@ -22,7 +22,7 @@ const defaultExerciseSets: ExerciseSet[] = [];
 const PreviewPage: React.FC = () => {
   const [sets, setSets] = useState<ExerciseSet[]>(defaultExerciseSets);
   const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [sortedLevel, setSortedLevel] = useState<Level | null>(null);
+  const [selectedLevel, setSelectedLevel] = useState<Level | null>(null);
   //@TODO: maybe refactor for useParams?
   const { pathname } = useLocation();
   const sectionName: string =
@@ -47,8 +47,8 @@ const PreviewPage: React.FC = () => {
     getSectionSets();
   }, [pathname]);
 
-  const contentBeforeMapping = sortedLevel
-    ? sets.filter((set) => set.level === sortedLevel)
+  const contentBeforeMapping = selectedLevel
+    ? sets.filter((set) => set.level === selectedLevel)
     : sets;
 
   return (
@@ -57,71 +57,10 @@ const PreviewPage: React.FC = () => {
       <h1 className="text-6xl text-center font-bold text-orange-500 drop-shadow mb-8">
         {sectionName}
       </h1>
-      <section className="flex justify-end gap-1 mb-2">
-        <Button
-          primary
-          outline
-          rounded
-          small
-          onClick={() => setSortedLevel(null)}
-        >
-          all
-        </Button>
-        <Button
-          primary
-          outline
-          rounded
-          small
-          onClick={() => setSortedLevel("A1")}
-        >
-          A1
-        </Button>
-        <Button
-          primary
-          outline
-          rounded
-          small
-          onClick={() => setSortedLevel("A2")}
-        >
-          A2
-        </Button>
-        <Button
-          primary
-          outline
-          rounded
-          small
-          onClick={() => setSortedLevel("B1")}
-        >
-          B1
-        </Button>
-        <Button
-          primary
-          outline
-          rounded
-          small
-          onClick={() => setSortedLevel("B2")}
-        >
-          B2
-        </Button>
-        <Button
-          primary
-          outline
-          rounded
-          small
-          onClick={() => setSortedLevel("C1")}
-        >
-          C1
-        </Button>
-        <Button
-          primary
-          outline
-          rounded
-          small
-          onClick={() => setSortedLevel("C2")}
-        >
-          C2
-        </Button>
-      </section>
+      <LevelsButtons
+          onSelect={setSelectedLevel}
+          selectedLevel={selectedLevel}
+      />
       <section className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10">
         {isLoading && <Skeleton items={4} card />}
         {contentBeforeMapping.map((section, index) => {

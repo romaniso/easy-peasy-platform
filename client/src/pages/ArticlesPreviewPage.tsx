@@ -1,7 +1,10 @@
-import LevelsButtons from "../components/common/LevelsButtons";
-import ArticlePreview from "../components/articles/ArticlePreview";
+import { LevelsButtons } from "../components/common/LevelsButtons";
+import { ArticlePreview } from "../components/articles/ArticlePreview";
+import { useState } from "react";
+import { Level } from "../types/level";
 
 export const ArticlesPreviewPage = () => {
+  const [selectedLevel, setSelectedLevel] = useState<Level | null>(null);
   return (
     <div className="my-24 container mx-auto px-4">
       <h1 className="text-6xl text-center font-bold text-orange-500 drop-shadow mb-6">
@@ -13,7 +16,10 @@ export const ArticlesPreviewPage = () => {
             <h2 className="text-2xl font-semibold w-full flex items-center justify-center text-indigo-700 dark:text-indigo-300 relative after:[content: ''] after:flex-grow after:basis-10 after:h-1 after:bg-white dark:after:bg-stone-900 after:ml-2 after:mt-[5px] mb-1">
               Grammar
             </h2>
-            <LevelsButtons />
+            <LevelsButtons
+              onSelect={setSelectedLevel}
+              selectedLevel={selectedLevel}
+            />
             {/* Slider / Swiper*/}
             <div className="flex justify-between gap-4 mb-4">
               <ArticlePreview
