@@ -6,7 +6,7 @@ import axios from "axios";
 import Card from "../components/common/Card";
 import Skeleton from "../components/common/Skeleton";
 import { Level } from "../types/level";
-import {LevelsButtons} from "../components/common/LevelsButtons";
+import { LevelsButtons } from "../components/common/LevelsButtons";
 
 interface ExerciseSet {
   _id: string;
@@ -22,7 +22,7 @@ const defaultExerciseSets: ExerciseSet[] = [];
 const PreviewPage: React.FC = () => {
   const [sets, setSets] = useState<ExerciseSet[]>(defaultExerciseSets);
   const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [selectedLevel, setSelectedLevel] = useState<Level | null>(null);
+  const [selectedLevel, setSelectedLevel] = useState<Level>("All");
   //@TODO: maybe refactor for useParams?
   const { pathname } = useLocation();
   const sectionName: string =
@@ -47,9 +47,10 @@ const PreviewPage: React.FC = () => {
     getSectionSets();
   }, [pathname]);
 
-  const contentBeforeMapping = selectedLevel
-    ? sets.filter((set) => set.level === selectedLevel)
-    : sets;
+  const contentBeforeMapping =
+    selectedLevel !== "All"
+      ? sets.filter((set) => set.level === selectedLevel)
+      : sets;
 
   return (
     <div className="my-24 container mx-auto px-4">
@@ -58,8 +59,8 @@ const PreviewPage: React.FC = () => {
         {sectionName}
       </h1>
       <LevelsButtons
-          onSelect={setSelectedLevel}
-          selectedLevel={selectedLevel}
+        onSelect={setSelectedLevel}
+        selectedLevel={selectedLevel}
       />
       <section className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10">
         {isLoading && <Skeleton items={4} card />}

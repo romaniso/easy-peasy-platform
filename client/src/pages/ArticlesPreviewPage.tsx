@@ -4,7 +4,12 @@ import { useState } from "react";
 import { Level } from "../types/level";
 
 export const ArticlesPreviewPage = () => {
-  const [selectedLevel, setSelectedLevel] = useState<Level | null>(null);
+  const [selectedLevel, setSelectedLevel] = useState<Level>("All");
+
+  //  const contentBeforeMapping =
+  //    selectedLevel !== "All"
+  //      ? sets.filter((set) => set.level === selectedLevel)
+  //      : sets;
   return (
     <div className="my-24 container mx-auto px-4">
       <h1 className="text-6xl text-center font-bold text-orange-500 drop-shadow mb-6">
