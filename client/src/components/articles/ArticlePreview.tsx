@@ -17,7 +17,7 @@ export const ArticlePreview = ({
   return (
     <article className="w-full group transition-transform duration-200 text-center">
       <Link to={link}>
-        <div className="w-full h-40 rounded-md shadow-sm overflow-hidden group-hover:opacity-85">
+        <div className="w-full h-40 rounded-md shadow-sm overflow-hidden transition-all duration-200 group-hover:opacity-85">
           <img src={imgSrc} alt="" className="w-full h-full object-cover" />
         </div>
         <div className="px-2 py-1.5">
