@@ -1,4 +1,3 @@
-import React from "react";
 import { Link } from "react-router-dom";
 
 interface Props {
@@ -8,26 +7,20 @@ interface Props {
   imgSrc: string;
 }
 
-export const ArticlePreview = ({
-  title,
-  introduction,
-  link,
-  imgSrc,
-}: Props) => {
+export const RecentPreview = ({ title, introduction, link, imgSrc }: Props) => {
   return (
-    <article className="w-full group transition-transform duration-200 text-center">
-      <Link to={link}>
-        <div className="w-full h-40 rounded-md shadow-sm overflow-hidden group-hover:opacity-85">
+    <article className="group transition-transform duration-200 hover:scale-95">
+      <Link to={link} className="flex gap-2">
+        <div className="basis-3/5 flex-1 h-28 rounded-md shadow-sm overflow-hidden">
           <img src={imgSrc} alt="" className="w-full h-full object-cover" />
         </div>
-        <div className="px-2 py-1.5">
+        <div className="basis-2/5 flex-1">
           <h3 className="text-lg text-indigo-700 dark:text-indigo-400 font-semibold mb-1">
             {title}
           </h3>
           <p className="text-sm text-indigo-900 dark:text-indigo-200 mb-2 group-hover:underline">
             {introduction}
           </p>
-          <p className="text-orange-500 text-lg underline">Read</p>
         </div>
       </Link>
     </article>

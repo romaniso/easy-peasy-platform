@@ -52,7 +52,7 @@ export const ArticlesSection = ({ title }: Props) => {
             <ArticlePreview
               title="Future Tenses"
               introduction="Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quaerat, ratione."
-              link="/articles"
+              link="/"
               imgSrc="https://picsum.photos/200"
             />
           </SwiperSlide>
