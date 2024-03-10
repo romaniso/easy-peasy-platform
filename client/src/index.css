@@ -70,6 +70,51 @@ button > svg {
     mask-image: linear-gradient(to top, black 92%, transparent 98%);
   }
 
+  .swiper .swiper-button-prev {
+    height: 100%;
+    top: 0;
+    width: 6%;
+    left: 0;
+    color: #ff8d3c;
+    border-radius: 6px 0 0 6px;
+    background: linear-gradient(
+      90deg,
+      rgba(29, 4, 89, 0.15) 0%,
+      rgba(255, 255, 255, 0) 100%
+    );
+    margin-top: 0;
+  }
+  .swiper .swiper-button-next {
+    height: 100%;
+    top: 0;
+    width: 6%;
+    right: 0;
+    color: #ff8d3c;
+    border-radius: 0px 6px 6px 0;
+    background: linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0) 0%,
+      rgba(29, 4, 89, 0.15) 100%
+    );
+    margin-top: 0;
+  }
+  .dark .swiper .swiper-button-prev {
+    color: white;
+    background: linear-gradient(
+      90deg,
+      rgba(0, 0, 0, 0.5) 0%,
+      rgba(255, 255, 255, 0) 100%
+    );
+  }
+  .dark .swiper .swiper-button-next {
+    color: white;
+    background: linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0) 0%,
+      rgba(0, 0, 0, 0.5) 100%
+    );
+  }
+
   .progress-bar .outer {
     box-shadow: 2px 2px 4px -0.5px rgba(0, 0, 0, 0.15),
       -2px -2px 4px -0.5px rgba(207, 213, 254, 0.3);
