@@ -16,6 +16,7 @@ import { logoutRouter } from "./src/routes/logoutRouter";
 import { credentials } from "./src/middleware/credentials";
 import { connectDB } from "./config/dbConn";
 import { statsRouter } from "./src/routes/statsRouter";
+import { articleRouter } from "./src/routes/api/articleRouter";
 const PORT: number = parseInt(process.env.PORT as string, 10) || 5000;
 
 const app: Application = express();
@@ -44,6 +45,7 @@ app.use("/register", registerRouter);
 app.use("/auth", authRouter);
 app.use("/refresh", refreshRouter);
 app.use("/logout", logoutRouter);
+app.use("/articles", articleRouter);
 
 // verified routes
 app.use(verifyJWT);

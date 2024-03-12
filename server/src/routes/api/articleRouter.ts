@@ -1,0 +1,7 @@
+import express, { Router } from "express";
+import { ArticleController } from "../../controllers/articleController";
+
+export const articleRouter: Router = express.Router();
+const controller = new ArticleController();
+
+articleRouter.route("/").get(controller.getAllArticles);
