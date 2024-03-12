@@ -25,4 +25,4 @@ const articleSchema = new Schema<IArticle>({
   setId: { type: Schema.Types.ObjectId, required: false },
 });
 
-export const Article = model<IArticle>("User", articleSchema);
+export const Article = model<IArticle>("Article", articleSchema);
