@@ -12,6 +12,7 @@ export interface IArticle {
   readingTime?: number;
   data: string;
   setId?: ObjectId;
+  imgBase64: string;
 }
 
 const articleSchema = new Schema<IArticle>({
@@ -23,6 +24,7 @@ const articleSchema = new Schema<IArticle>({
   readingTime: { type: Number, required: false },
   data: { type: String, required: true },
   setId: { type: Schema.Types.ObjectId, required: false },
+  imgBase64: { type: String, required: true },
 });
 
 export const Article = model<IArticle>("Article", articleSchema);

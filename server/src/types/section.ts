@@ -1,1 +1,6 @@
-export type Section = "vocabulary" | "grammar" | "reading" | "listening";
+export type Section =
+  | "vocabulary"
+  | "grammar"
+  | "reading"
+  | "listening"
+  | "pronunciation";

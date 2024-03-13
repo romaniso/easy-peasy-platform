@@ -15,10 +15,10 @@ export const RecentPreview = ({ title, introduction, link, imgSrc }: Props) => {
           <img src={imgSrc} alt="" className="w-full h-full object-cover" />
         </div>
         <div className="basis-2/5 flex-1">
-          <h3 className="text-lg text-indigo-700 dark:text-indigo-400 font-semibold mb-1">
+          <h3 className="text-lg text-indigo-700 dark:text-indigo-400 font-semibold mb-0.5">
             {title}
           </h3>
-          <p className="text-sm text-indigo-900 dark:text-indigo-200 mb-2 group-hover:underline">
+          <p className="text-sm text-indigo-900 dark:text-indigo-200 mb-2 group-hover:underline leading-tight">
             {introduction}
           </p>
         </div>
