@@ -3,4 +3,5 @@ export type Section =
   | "grammar"
   | "reading"
   | "listening"
-  | "pronunciation";
+  | "pronunciation"
+  | "recent";

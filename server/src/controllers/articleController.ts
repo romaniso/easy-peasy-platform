@@ -20,7 +20,7 @@ export class ArticleController {
           title,
           level,
           introduction,
-          section,
+          // section,
           img: imgBase64,
         };
       }
@@ -28,7 +28,6 @@ export class ArticleController {
 
     const data: PreviewSectionData[] = [];
     for (const section of sections) {
-      console.log(section);
       const sectionData: PreviewSectionData = {
         section,
         data: previewArticles.filter((article) => article.section === section),
@@ -36,6 +35,25 @@ export class ArticleController {
 
       data.push(sectionData);
     }
+    const recentArticles = await Article.find({})
+      .sort({ createdAt: -1 })
+      .limit(4);
+
+    data.push({
+      section: "recent",
+      data: recentArticles.map(
+        ({ _id, title, level, introduction, section, imgBase64 }) => {
+          return {
+            id: _id.toString(),
+            title,
+            level,
+            introduction,
+            //section,
+            img: imgBase64,
+          };
+        }
+      ),
+    });
 
     res.status(200).json(data);
   }
