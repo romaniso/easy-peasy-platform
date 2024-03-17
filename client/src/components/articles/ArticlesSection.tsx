@@ -4,22 +4,12 @@ import { LevelsButtons } from "../common/LevelsButtons";
 import { ArticlePreview } from "./ArticlePreview";
 
 import { Swiper, SwiperSlide } from "swiper/react";
-
 import { Navigation } from "swiper/modules";
 
 // Import Swiper styles
 import "swiper/css";
 import "swiper/css/navigation";
-import { Section } from "../../types/section";
-
-type PreviewArticle = {
-  id: string;
-  title: string;
-  level: Level;
-  introduction: string;
-  section: Section;
-  img: string;
-};
+import { PreviewArticle } from "../../types/previewArticle";
 
 interface Props {
   title: string;

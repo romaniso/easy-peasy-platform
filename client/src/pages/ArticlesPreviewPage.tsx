@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { ArticlesSection } from "../components/articles/ArticlesSection";
-import { RecentPreview } from "../components/articles/RecentPreview";
 import axios from "../api/axios";
+import { RecentSection } from "../components/articles/RecentSection";
 
 const ARTICLES_URL = "/articles";
 
@@ -43,30 +43,9 @@ export const ArticlesPreviewPage = () => {
           {isLoading ? (
             <p>Loading...</p>
           ) : (
-            data.map(({ section }) => {
+            data.map(({ section, data }) => {
               if (section === "recent")
-                return (
-                  <section className="flex flex-col gap-2">
-                    <RecentPreview
-                      title="Future Tenses"
-                      introduction="Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quaerat, ratione."
-                      link="/"
-                      imgSrc="https://picsum.photos/200"
-                    />
-                    <RecentPreview
-                      title="Future Tenses"
-                      introduction="Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quaerat, ratione."
-                      link="/"
-                      imgSrc="https://picsum.photos/200"
-                    />
-                    <RecentPreview
-                      title="Future Tenses"
-                      introduction="Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quaerat, ratione."
-                      link="/"
-                      imgSrc="https://picsum.photos/200"
-                    />
-                  </section>
-                );
+                return <RecentSection key={section} data={data} />;
             })
           )}
         </aside>
