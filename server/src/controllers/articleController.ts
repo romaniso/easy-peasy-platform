@@ -20,7 +20,7 @@ export class ArticleController {
           title,
           level,
           introduction,
-          // section,
+          section,
           img: imgBase64,
         };
       }
@@ -48,7 +48,7 @@ export class ArticleController {
             title,
             level,
             introduction,
-            //section,
+            section,
             img: imgBase64,
           };
         }

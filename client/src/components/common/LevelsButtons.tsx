@@ -18,6 +18,7 @@ export const LevelsButtons = ({ selectedLevel, onSelect }: Props) => {
           if (index === levels.length - 1)
             return (
               <button
+                key={level}
                 className={`
                   ${
                     selectedLevel === level

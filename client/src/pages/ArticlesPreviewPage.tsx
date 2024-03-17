@@ -1,17 +1,21 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { ArticlesSection } from "../components/articles/ArticlesSection";
 import { RecentPreview } from "../components/articles/RecentPreview";
+import axios from "../api/axios";
+
+const ARTICLES_URL = "/articles";
 
 export const ArticlesPreviewPage = () => {
-  const data = [
-    { section: "Grammar" },
-    { section: "Pronunciation" },
-    { section: "Vocabulary" },
-    // { section: "Recent" },
-  ];
+  const [data, setData] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    console.log("Fetching data from BE");
+    (async () => {
+      const data = (await axios.get(ARTICLES_URL)).data;
+      setData(data);
+      setIsLoading(false);
+      console.log(data);
+    })();
   }, []);
 
   return (
@@ -21,34 +25,50 @@ export const ArticlesPreviewPage = () => {
       </h1>
       <div className="flex gap-5 flex-wrap md:flex-nowrap">
         <main className="flex-1 basis-full md:basis-3/4 overflow-hidden">
-          {data.map(({ section }) => {
-            return <ArticlesSection title={section} />;
-          })}
+          {isLoading ? (
+            <p>Loading...</p>
+          ) : (
+            data.map(({ section, data }) => {
+              if (section !== "recent")
+                return (
+                  <ArticlesSection title={section} data={data} key={section} />
+                );
+            })
+          )}
         </main>
         <aside className="flex-1 basis-full md:basis-1/4">
           <h3 className="text-2xl font-bold text-orange-500 drop-shadow mb-2">
             Recent Articles
           </h3>
-          <section className="flex flex-col gap-2">
-            <RecentPreview
-              title="Future Tenses"
-              introduction="Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quaerat, ratione."
-              link="/"
-              imgSrc="https://picsum.photos/200"
-            />
-            <RecentPreview
-              title="Future Tenses"
-              introduction="Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quaerat, ratione."
-              link="/"
-              imgSrc="https://picsum.photos/200"
-            />
-            <RecentPreview
-              title="Future Tenses"
-              introduction="Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quaerat, ratione."
-              link="/"
-              imgSrc="https://picsum.photos/200"
-            />
-          </section>
+          {isLoading ? (
+            <p>Loading...</p>
+          ) : (
+            data.map(({ section }) => {
+              if (section === "recent")
+                return (
+                  <section className="flex flex-col gap-2">
+                    <RecentPreview
+                      title="Future Tenses"
+                      introduction="Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quaerat, ratione."
+                      link="/"
+                      imgSrc="https://picsum.photos/200"
+                    />
+                    <RecentPreview
+                      title="Future Tenses"
+                      introduction="Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quaerat, ratione."
+                      link="/"
+                      imgSrc="https://picsum.photos/200"
+                    />
+                    <RecentPreview
+                      title="Future Tenses"
+                      introduction="Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quaerat, ratione."
+                      link="/"
+                      imgSrc="https://picsum.photos/200"
+                    />
+                  </section>
+                );
+            })
+          )}
         </aside>
       </div>
     </div>

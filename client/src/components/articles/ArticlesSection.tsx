@@ -1,5 +1,5 @@
 import { Level } from "../../types/level";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { LevelsButtons } from "../common/LevelsButtons";
 import { ArticlePreview } from "./ArticlePreview";
 
@@ -10,36 +10,50 @@ import { Navigation } from "swiper/modules";
 // Import Swiper styles
 import "swiper/css";
 import "swiper/css/navigation";
+import { Section } from "../../types/section";
+
+type PreviewArticle = {
+  id: string;
+  title: string;
+  level: Level;
+  introduction: string;
+  section: Section;
+  img: string;
+};
 
 interface Props {
   title: string;
+  data: PreviewArticle[];
 }
 
-export const ArticlesSection = ({ title }: Props) => {
+export const ArticlesSection = ({ title, data }: Props) => {
   const [selectedLevel, setSelectedLevel] = useState<Level>("All");
-  //  const contentBeforeMapping =
-  //    selectedLevel !== "All"
-  //      ? sets.filter((set) => set.level === selectedLevel)
-  //      : sets;
+  const [selectedData, setSelectedData] = useState(data);
+  useEffect(() => {
+    const contentBeforeMapping =
+      selectedLevel !== "All"
+        ? data.filter((set) => set.level === selectedLevel)
+        : data;
+    setSelectedData(contentBeforeMapping);
+  }, [selectedLevel, data]);
+
   return (
     <section className="mb-3">
       <h2 className="text-2xl font-semibold w-full flex items-center justify-center text-indigo-700 dark:text-indigo-300 relative after:[content: ''] after:flex-grow after:basis-10 after:h-1 after:bg-white dark:after:bg-stone-900 after:ml-2 after:mt-[5px] mb-1">
-        {title}
+        {title[0].toUpperCase() + title.substring(1)}
       </h2>
       <LevelsButtons
         onSelect={setSelectedLevel}
         selectedLevel={selectedLevel}
       />
-      {/* Slider / Swiper*/}
-
       <div className="mb-4 overflow-hidden rounded-md">
         <Swiper
           modules={[Navigation]}
           spaceBetween={20}
           slidesPerView={1}
           navigation={true}
-          onSlideChange={() => console.log("slide change")}
-          onSwiper={(swiper) => console.log(swiper)}
+          // onSlideChange={() => console.log("slide change")}
+          // onSwiper={(swiper) => console.log(swiper)}
           breakpoints={{
             // when window width is >= 768px
             768: {
@@ -48,54 +62,20 @@ export const ArticlesSection = ({ title }: Props) => {
             },
           }}
         >
-          <SwiperSlide>
-            <ArticlePreview
-              title="Future Tenses"
-              introduction="Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quaerat, ratione."
-              link="/"
-              imgSrc="https://picsum.photos/200"
-            />
-          </SwiperSlide>
-          <SwiperSlide>
-            <ArticlePreview
-              title="Future Tenses"
-              introduction="Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quaerat, ratione."
-              link="/articles"
-              imgSrc="https://picsum.photos/200"
-            />
-          </SwiperSlide>
-          <SwiperSlide>
-            <ArticlePreview
-              title="Future Tenses"
-              introduction="Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quaerat, ratione."
-              link="/articles"
-              imgSrc="https://picsum.photos/200"
-            />
-          </SwiperSlide>
-          <SwiperSlide>
-            <ArticlePreview
-              title="Future Tenses"
-              introduction="Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quaerat, ratione."
-              link="/articles"
-              imgSrc="https://picsum.photos/200"
-            />
-          </SwiperSlide>
-          <SwiperSlide>
-            <ArticlePreview
-              title="Future Tenses"
-              introduction="Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quaerat, ratione."
-              link="/articles"
-              imgSrc="https://picsum.photos/200"
-            />
-          </SwiperSlide>
-          <SwiperSlide>
-            <ArticlePreview
-              title="Future Tenses"
-              introduction="Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quaerat, ratione."
-              link="/articles"
-              imgSrc="https://picsum.photos/200"
-            />
-          </SwiperSlide>
+          {selectedData.map(
+            ({ id, img, introduction, level, section, title }) => {
+              return (
+                <SwiperSlide key={id}>
+                  <ArticlePreview
+                    title={title}
+                    introduction={introduction}
+                    link="/"
+                    imgSrc={img}
+                  />
+                </SwiperSlide>
+              );
+            }
+          )}
         </Swiper>
       </div>
     </section>

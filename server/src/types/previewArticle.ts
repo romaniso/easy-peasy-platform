@@ -6,6 +6,6 @@ export type PreviewArticle = {
   title: string;
   level: Level;
   introduction: string;
-  //  section: Section;
+  section: Section;
   img: string;
 };
