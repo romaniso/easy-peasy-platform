@@ -11,10 +11,14 @@ export const ArticlesPreviewPage = () => {
 
   useEffect(() => {
     (async () => {
-      const data = (await axios.get(ARTICLES_URL)).data;
-      setData(data);
-      setIsLoading(false);
-      console.log(data);
+      try {
+        const data = (await axios.get(ARTICLES_URL)).data;
+        setData(data);
+      } catch (err) {
+        console.error(err);
+      } finally {
+        setIsLoading(false);
+      }
     })();
   }, []);
 

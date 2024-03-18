@@ -59,7 +59,7 @@ export const ArticlesSection = ({ title, data }: Props) => {
                   <ArticlePreview
                     title={title}
                     introduction={introduction}
-                    link="/"
+                    link={title}
                     imgSrc={img}
                   />
                 </SwiperSlide>

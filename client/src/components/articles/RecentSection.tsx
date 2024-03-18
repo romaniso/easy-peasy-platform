@@ -14,7 +14,7 @@ export const RecentSection = ({ data }: Props) => {
             key={id}
             title={title}
             introduction={introduction}
-            link="/"
+            link={title}
             imgSrc={img}
           />
         );
