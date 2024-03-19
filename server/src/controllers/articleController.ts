@@ -57,4 +57,22 @@ export class ArticleController {
 
     res.status(200).json(data);
   }
+  async getArticle(req: Request, res: Response) {
+    try {
+      const targetId = req.params.id;
+
+      if (!targetId)
+        return res.status(404).send({ message: "No ID was provided" });
+      const article = await Article.findOne({ apiId: targetId });
+
+      if (!article)
+        return res
+          .status(404)
+          .send({ message: `Article with ID ${targetId} was not found` });
+      return res.status(200).json({ article });
+    } catch (err) {
+      console.error("Error retrieving article:", err); // Log the error for debugging
+      res.status(500).json({ message: "Bad Request" });
+    }
+  }
 }

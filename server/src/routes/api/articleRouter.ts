@@ -5,3 +5,4 @@ export const articleRouter: Router = express.Router();
 const controller = new ArticleController();
 
 articleRouter.route("/").get(controller.getAllArticles);
+articleRouter.route("/:id").get(controller.getArticle);
