@@ -10,6 +10,7 @@ import { Navigation } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import { PreviewArticle } from "../../types/previewArticle";
+import { decodeAndFormatURL } from "../../utils/decodeAndFormatUrl";
 
 interface Props {
   title: string;
@@ -52,20 +53,20 @@ export const ArticlesSection = ({ title, data }: Props) => {
             },
           }}
         >
-          {selectedData.map(
-            ({ id, img, introduction, level, section, title }) => {
-              return (
-                <SwiperSlide key={id}>
-                  <ArticlePreview
-                    title={title}
-                    introduction={introduction}
-                    link={title}
-                    imgSrc={img}
-                  />
-                </SwiperSlide>
-              );
-            }
-          )}
+          {selectedData.map(({ id, img, introduction, level, title }) => {
+            return (
+              <SwiperSlide key={id}>
+                <ArticlePreview
+                  title={title}
+                  introduction={introduction}
+                  link={`${decodeAndFormatURL(level)}/${decodeAndFormatURL(
+                    title
+                  )}`}
+                  imgSrc={img}
+                />
+              </SwiperSlide>
+            );
+          })}
         </Swiper>
       </div>
     </section>

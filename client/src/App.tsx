@@ -36,7 +36,7 @@ const App: React.FC = () => {
           <Route path="listening" element={<PreviewPage />} />
           {/* Articles */}
           <Route path="articles" element={<ArticlesPreviewPage />} />
-          <Route path="articles/:article" element={<ArticlePage />} />
+          <Route path="articles/:level/:article" element={<ArticlePage />} />
           {/*ExerciseSets*/}
           {/* TODO: consider route nesting: https://www.youtube.com/watch?v=l8CS9AMBSIQ&list=PL4cUxeGkcC9iVKmtNuCeIswnQ97in2GGf&index=4&ab_channel=NetNinja */}
           <Route path="grammar/:exercise" element={<ExercisePage />} />
