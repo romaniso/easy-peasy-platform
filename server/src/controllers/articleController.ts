@@ -63,7 +63,7 @@ export class ArticleController {
 
       if (!targetId)
         return res.status(404).send({ message: "No ID was provided" });
-      const article = await Article.findOne({ apiId: targetId });
+      const article = await Article.findOne({ apiKey: targetId });
 
       if (!article)
         return res

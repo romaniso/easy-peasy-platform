@@ -9,10 +9,11 @@ export interface IArticle {
   introduction: string;
   level: Level;
   section: Section;
-  readingTime?: number;
+  readTime?: number;
   data: string;
   setId?: ObjectId;
   imgBase64: string;
+  apiKey: string;
 }
 
 const articleSchema = new Schema<IArticle>({
@@ -21,10 +22,11 @@ const articleSchema = new Schema<IArticle>({
   introduction: { type: String, required: true },
   level: { type: String, required: true },
   section: { type: String, required: true },
-  readingTime: { type: Number, required: false },
+  readTime: { type: Number, required: false },
   data: { type: String, required: true },
   setId: { type: Schema.Types.ObjectId, required: false },
   imgBase64: { type: String, required: true },
+  apiKey: { type: String, required: true },
 });
 
 export const Article = model<IArticle>("Article", articleSchema);
