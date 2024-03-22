@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, NavLink } from "react-router-dom";
 import React, { useState } from "react";
 //TODO: Handle single collapse issue (maybe by using a separate Dropdown component), consider how to change content (NavLink, or state)
 
@@ -24,7 +24,6 @@ import MiniAvatar from "./MiniAvatar";
 import { useToast } from "../context/ToastContext";
 import { ToastType } from "../enums/toast";
 import { useTranslation } from "react-i18next";
-import { NavLink } from "react-router-dom";
 
 type SidemenuSubitem = {
   label: string;
@@ -203,22 +202,25 @@ const Sidebar: React.FC = () => {
         onClick={() => setIsSidebarOpened(!isSidebarOpened)}
       />
       <div className="flex flex-col gap-3">
-        <div className="inline-flex items-center mb-3">
-          <img
-            src={LogoImage}
-            alt="easy-peasy logo"
-            className={`w-8 cursor-pointer block float-left mr-1 duration-1000 ${
-              isSidebarOpened && "rotate-[360deg]"
-            }`}
-          />
-          <span
-            className={`font-mono dark:text-indigo-300 text-indigo-900 drop-shadow origin-left font-medium text-xl duration-300 ${
-              !isSidebarOpened && "scale-0"
-            }`}
-          >
-            EASY-PEASY
-          </span>
-        </div>
+        <NavLink to="/">
+          <div className="inline-flex items-center mb-3">
+            <img
+              src={LogoImage}
+              alt="easy-peasy logo"
+              className={`w-8 cursor-pointer block float-left mr-1 duration-1000 ${
+                isSidebarOpened && "rotate-[360deg]"
+              }`}
+            />
+            <span
+              className={`font-mono dark:text-indigo-300 text-indigo-900 drop-shadow origin-left font-medium text-xl duration-300 ${
+                !isSidebarOpened && "scale-0"
+              }`}
+            >
+              EASY-PEASY
+            </span>
+          </div>
+        </NavLink>
+
         <div className="flex gap-2 items-center">
           <MiniAvatar />
           {isSidebarOpened && (
