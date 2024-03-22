@@ -38,15 +38,15 @@ export const ArticlePage = () => {
       <img
         src={data?.imgBase64}
         alt=""
-        className="absolute inset-0 w-full h-[360px] object-cover dark:brightness-50 opacity-20"
+        className="absolute inset-0 w-full h-[250px] md:h-[360px] object-cover dark:brightness-50 opacity-20"
       />
-      <div className="py-24 container mx-auto px-4 flex gap-5 flex-wrap md:flex-nowrap relative z-10">
+      <div className="py-16 md:py-24 container mx-auto px-4 flex gap-5 flex-wrap md:flex-nowrap relative z-10">
         <main className="flex-1 basis-full md:basis-3/4 overflow-hidden">
           <Breadcrumbs />
           <h1 className="text-4xl md:text-6xl text-center md:text-left font-bold text-orange-500 drop-shadow mb-6 md:mb-8">
             {data?.title}
           </h1>
-          <section className="flex gap-2 items-center">
+          <section className="flex gap-2 items-center justify-center md:justify-start">
             <Badge accent>{data?.level as string}</Badge>
             <Badge>{data?.section as string}</Badge>
             <p className="ml-2 text-sm text-indigo-900 dark:text-indigo-200">
@@ -54,7 +54,7 @@ export const ArticlePage = () => {
               <strong>{data?.readTime} min</strong>
             </p>
           </section>
-          <section className="mt-8 flex flex-col items-center">
+          <section className="md:mt-8 flex flex-col items-center">
             <ReactMarkdown className="markdown-content">
               {data?.data}
             </ReactMarkdown>
