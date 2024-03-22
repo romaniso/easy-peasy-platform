@@ -194,16 +194,19 @@ button > svg {
     @apply text-indigo-900 dark:text-indigo-200 text-base md:text-lg;
   }
   .markdown-content p {
-    @apply text-base text-orange-500 bg-stone-50 dark:bg-[#484848] shadow-inner p-3 mb-5 rounded-lg;
+    @apply text-base text-orange-500 bg-stone-50 dark:bg-black/30 shadow-inner p-3 mb-5 rounded-lg;
   }
   .markdown-content h2 {
-    @apply text-2xl font-bold text-indigo-400 mb-3;
+    @apply text-3xl font-bold text-indigo-400 mb-5 mt-12;
   }
   .markdown-content h3 {
     @apply text-xl font-bold mb-1;
   }
   .markdown-content ul {
-    @apply mb-5 shadow-inner bg-stone-50 dark:bg-[#484848] px-3 py-2 rounded-md;
+    @apply mb-5 shadow-inner bg-stone-50 dark:bg-black/30 px-3 py-2 rounded-md;
+  }
+  .markdown-content img {
+    @apply opacity-80 hover:opacity-100 transition-opacity duration-150;
   }
   .markdown-reading {
     @apply px-3 lg:px-6 py-4 lg:py-10 text-indigo-900 dark:text-indigo-200 text-base md:text-lg;
