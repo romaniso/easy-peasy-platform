@@ -4,6 +4,7 @@ import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import AuthLayout from "./AuthLayout";
 import useAuth from "../hooks/useAuth";
+import ScrollToTop from "../components/common/ScrollToTop";
 
 const MODIFIED_PATHS_BY_AUTH = new Set([
   "/dashboard",
@@ -27,6 +28,7 @@ const RootLayout: React.FC = () => {
           <Outlet />
         </main>
         <Footer />
+        <ScrollToTop />
       </div>
     );
   }
