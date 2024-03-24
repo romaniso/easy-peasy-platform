@@ -2,12 +2,15 @@ import { useEffect, useState } from "react";
 import { ArticlesSection } from "../components/articles/ArticlesSection";
 import axios from "../api/axios";
 import { RecentSection } from "../components/articles/RecentSection";
+import useTop from "../hooks/useTop";
 
 const ARTICLES_URL = "/articles";
 
 export const ArticlesPreviewPage = () => {
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+
+  useTop();
 
   useEffect(() => {
     (async () => {
