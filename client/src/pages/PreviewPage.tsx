@@ -7,6 +7,7 @@ import Card from "../components/common/Card";
 import Skeleton from "../components/common/Skeleton";
 import { Level } from "../types/level";
 import { LevelsButtons } from "../components/common/LevelsButtons";
+import { decodeAndFormatURL } from "../utils/decodeAndFormatUrl";
 
 interface ExerciseSet {
   _id: string;
@@ -65,6 +66,11 @@ const PreviewPage: React.FC = () => {
       <section className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10">
         {isLoading && <Skeleton items={4} card />}
         {contentBeforeMapping.map((section, index) => {
+          const apiKey = `${decodeAndFormatURL(
+            section.level
+          )}/${decodeAndFormatURL(section.name)}`;
+          console.log(apiKey);
+
           return (
             <Card
               title={section.name}

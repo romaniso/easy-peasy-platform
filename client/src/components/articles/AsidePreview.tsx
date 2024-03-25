@@ -7,7 +7,7 @@ interface Props {
   imgSrc: string;
 }
 
-export const RecentPreview = ({ title, introduction, link, imgSrc }: Props) => {
+export const AsidePreview = ({ title, introduction, link, imgSrc }: Props) => {
   return (
     <article className="group transition-transform duration-200 hover:scale-95">
       <Link to={link} className="flex gap-2">
