@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { ArticlesSection } from "../components/articles/ArticlesSection";
 import axios from "../api/axios";
-import { RecentSection } from "../components/articles/RecentSection";
 import useTop from "../hooks/useTop";
+import { AsideSection } from "../components/articles/AsideSection";
 
 const ARTICLES_URL = "/articles";
 
@@ -43,19 +43,12 @@ export const ArticlesPreviewPage = () => {
             })
           )}
         </main>
-        <aside className="flex-1 basis-full md:basis-1/4">
-          <h3 className="text-2xl font-bold text-orange-500 drop-shadow mb-2">
-            Recent Articles
-          </h3>
-          {isLoading ? (
-            <p>Loading...</p>
-          ) : (
-            data.map(({ section, data }) => {
-              if (section === "recent")
-                return <RecentSection key={section} data={data} />;
-            })
-          )}
-        </aside>
+        {data.map(({ section, data }) => {
+          if (section === "recent")
+            return (
+              <AsideSection key={section} data={data} title="Recent Articles" />
+            );
+        })}
       </div>
     </div>
   );
