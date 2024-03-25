@@ -13,7 +13,7 @@ const ScrollToTop = () => {
     };
 
     window.addEventListener("scroll", onScroll);
-    return window.removeEventListener("scroll", onScroll);
+    // return window.removeEventListener("scroll", onScroll);
   }, []);
   const goToTop = () => {
     window.scrollTo({

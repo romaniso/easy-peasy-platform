@@ -11,10 +11,14 @@ import { Link } from "react-router-dom";
 import { ShareButtons } from "../components/common/ShareButtons";
 import { decodeAndFormatURL } from "../utils/decodeAndFormatUrl";
 import { AsideSection } from "../components/articles/AsideSection";
+import { PreviewArticle } from "../types/previewArticle";
 
 const ARTICLE_URL = "/articles";
 export const ArticlePage = () => {
   const [articleData, setArticleData] = useState<Article | null>(null);
+  const [relatedArticles, setRelatedArticles] = useState<
+    PreviewArticle[] | null
+  >(null);
   const [isLoading, setIsLoading] = useState(true);
 
   useTop();
@@ -23,28 +27,33 @@ export const ArticlePage = () => {
   const currentPageUrl = window.location.href;
 
   useEffect(() => {
-    (async () => {
+    const fetchArticle = async () => {
       try {
         const articleId = `${level}-${article}`;
         const url = `${ARTICLE_URL}/${articleId}`;
         const res = (await axios.get(url)).data;
         setArticleData(res.article);
-
-        const relatedUrl = `${ARTICLE_URL}/related?title=${decodeAndFormatURL(
-          articleData?.title as string
-        )}&section=${articleData?.section}`;
-        console.log(relatedUrl);
-
-        const relatedArticles = (await axios.get(relatedUrl)).data;
-
-        console.log(relatedArticles);
+        setIsLoading(false);
       } catch (err) {
         console.error(err);
-      } finally {
-        setIsLoading(false);
       }
-    })();
-  }, []);
+    };
+
+    fetchArticle();
+  }, [article, level]);
+
+  useEffect(() => {
+    const fetchRelatedArticles = async () => {
+      const relatedUrl = `${ARTICLE_URL}/related?title=${decodeAndFormatURL(
+        articleData?.title as string
+      )}&section=${articleData?.section}`;
+
+      const { relatedArticles } = (await axios.get(relatedUrl)).data;
+      setRelatedArticles(relatedArticles);
+    };
+
+    fetchRelatedArticles();
+  }, [articleData]);
   return (
     <div className="relative">
       <img
@@ -54,7 +63,6 @@ export const ArticlePage = () => {
       />
       <div className="py-16 md:py-24 container mx-auto px-4 flex gap-5 flex-wrap md:flex-nowrap relative z-10">
         <main className="flex-1 basis-full md:basis-3/4">
-          {/*<main className="w-full md:w-3/4 overflow-hidden">*/}
           <Breadcrumbs />
           <h1 className="text-4xl md:text-6xl text-center md:text-left font-bold text-orange-500 drop-shadow mb-6 md:mb-8">
             {articleData?.title}
@@ -83,7 +91,9 @@ export const ArticlePage = () => {
             </Link>
           </section>
         </main>
-        <AsideSection title="Related Articles" />
+        {relatedArticles && (
+          <AsideSection title="Related Articles" data={relatedArticles} />
+        )}
       </div>
     </div>
   );
