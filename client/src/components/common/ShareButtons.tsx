@@ -18,17 +18,17 @@ export const ShareButtons = ({ currentUrl }: Props) => {
         Share:
       </p>
       <FacebookShareButton url={currentUrl} hashtag="#easy-peasy-english">
-        <span className="bg-blue-500 p-1.5 text-center rounded-md inline-flex justify-center items-center hover:px-5 transition-all duration-150">
+        <span className="bg-blue-500 p-1.5 text-center rounded-md inline-flex justify-center items-center hover:px-5 transition-all duration-150 shadow-md">
           <LiaFacebookF className="text-white text-xl m-0" />
         </span>
       </FacebookShareButton>
       <TwitterShareButton url={currentUrl}>
-        <span className="bg-black p-1.5 text-center rounded-md inline-flex justify-center items-center hover:px-5 transition-all duration-150">
+        <span className="bg-black p-1.5 text-center rounded-md inline-flex justify-center items-center hover:px-5 transition-all duration-150 shadow-md">
           <FaXTwitter className="text-white text-xl m-0" />
         </span>
       </TwitterShareButton>
       <WhatsappShareButton url={currentUrl}>
-        <span className="bg-green-500 p-1.5 text-center rounded-md inline-flex justify-center items-center hover:px-5 transition-all duration-150">
+        <span className="bg-green-500 p-1.5 text-center rounded-md inline-flex justify-center items-center hover:px-5 transition-all duration-150 shadow-md">
           <FaWhatsapp className="text-white text-xl m-0" />
         </span>
       </WhatsappShareButton>

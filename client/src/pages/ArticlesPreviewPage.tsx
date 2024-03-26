@@ -7,7 +7,8 @@ import { AsideSection } from "../components/articles/AsideSection";
 const ARTICLES_URL = "/articles";
 
 export const ArticlesPreviewPage = () => {
-  const [data, setData] = useState([]);
+  //@TODO: Where is types? PreviewSectionData
+  const [data, setData] = useState<[] | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
   useTop();
@@ -35,7 +36,7 @@ export const ArticlesPreviewPage = () => {
           {isLoading ? (
             <p>Loading...</p>
           ) : (
-            data.map(({ section, data }) => {
+            data?.map(({ section, data }) => {
               if (section !== "recent")
                 return (
                   <ArticlesSection title={section} data={data} key={section} />
@@ -43,7 +44,7 @@ export const ArticlesPreviewPage = () => {
             })
           )}
         </main>
-        {data.map(({ section, data }) => {
+        {data?.map(({ section, data }) => {
           if (section === "recent")
             return (
               <AsideSection key={section} data={data} title="Recent Articles" />
