@@ -59,31 +59,39 @@ export class ArticleController {
     res.status(200).json(data);
   }
   async getRelatedArticles(req: Request, res: Response) {
+    //  @TODO:consider implementing filter logic for DB query, not for BE App
     try {
       const { title, section } = req.query;
+      const maxNumber = 4;
 
       if (!title || !section)
-        return res.status(404).send({
+        return res.status(400).send({
           message: "No title or section query parameter was provided",
         });
 
-      // Fetch all articles first
-      const articles = await Article.find();
+      // Construct query to fetch relevant articles based on title and section
+      const articles = await Article.find({
+        section: { $eq: (section as string).toLowerCase() },
+      });
 
       if (!articles.length) {
         return res.status(404).send({ message: "No articles were found" });
       }
 
+      // Decode title if it contains hyphens
       const decodedTitle = (title as string).replaceAll("-", " ");
+
       // Filter articles based on common words in title and section
-      const filteredArticles = articles.filter((article) => {
-        if (
-          section &&
-          article.section.toLowerCase() !== (section as string).toLowerCase()
-        ) {
+      const filteredArticles = articles.filter((article, index) => {
+        const isSectionEqual =
+          article.section.toLowerCase() === (section as string).toLowerCase();
+        const isWithinLimit = index + 1 !== maxNumber;
+
+        if (isSectionEqual && isWithinLimit) {
+          return haveCommonWord(article.title, decodedTitle) || isSectionEqual;
+        } else {
           return false;
         }
-        return haveCommonWord(article.title, decodedTitle);
       });
 
       if (!filteredArticles.length) {
