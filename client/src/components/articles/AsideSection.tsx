@@ -5,9 +5,10 @@ import { PreviewArticle } from "../../types/previewArticle";
 interface Props {
   data: PreviewArticle[];
   title: string;
+  pathRoot?: string;
 }
 
-export const AsideSection = ({ data, title }: Props) => {
+export const AsideSection = ({ data, title, pathRoot }: Props) => {
   return (
     <aside className="flex-1 basis-full md:basis-1/4">
       <h3 className="text-2xl font-bold text-orange-500 drop-shadow mb-2">
@@ -15,12 +16,15 @@ export const AsideSection = ({ data, title }: Props) => {
       </h3>
       <section className="flex flex-col gap-2">
         {data.map(({ id, title, introduction, img, level }) => {
+          const link = `${pathRoot ? pathRoot : ""}${decodeAndFormatURL(
+            level
+          )}/${decodeAndFormatURL(title)}`;
           return (
             <AsidePreview
               key={id}
               title={title}
               introduction={introduction}
-              link={`${decodeAndFormatURL(level)}/${decodeAndFormatURL(title)}`}
+              link={link}
               imgSrc={img}
             />
           );

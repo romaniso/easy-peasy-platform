@@ -92,7 +92,11 @@ export const ArticlePage = () => {
           </section>
         </main>
         {relatedArticles && (
-          <AsideSection title="Related Articles" data={relatedArticles} />
+          <AsideSection
+            title="Related Articles"
+            data={relatedArticles}
+            pathRoot="../articles/"
+          />
         )}
       </div>
     </div>

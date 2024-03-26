@@ -12,7 +12,10 @@ const Breadcrumbs: React.FC = () => {
     .filter((crumb) => crumb !== "")
     .map((crumb, index, arr) => {
       //const decodedCrumb: string = decodeURIComponent(crumb);
-      const decodedCrumb: string = decodeURIComponent(crumb).replace("-", " ");
+      const decodedCrumb: string = decodeURIComponent(crumb).replaceAll(
+        "-",
+        " "
+      );
       currentLink += `/${crumb}`;
 
       return (
