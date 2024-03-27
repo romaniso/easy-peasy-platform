@@ -63,7 +63,7 @@ export const ArticlePage = () => {
       />
       <div className="py-16 md:py-24 container mx-auto px-4 flex gap-5 flex-wrap md:flex-nowrap relative z-10">
         <main className="flex-1 basis-full md:basis-3/4">
-          <Breadcrumbs />
+          <Breadcrumbs withoutLevels />
           <h1 className="text-4xl md:text-6xl text-center md:text-left font-bold text-orange-500 drop-shadow mb-6 md:mb-8">
             {articleData?.title}
           </h1>

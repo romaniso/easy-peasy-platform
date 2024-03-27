@@ -2,14 +2,27 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import { BsChevronRight } from "react-icons/bs";
+import { Level } from "../../enums/level";
 
-const Breadcrumbs: React.FC = () => {
+interface Props {
+  withoutLevels?: true;
+}
+
+const Breadcrumbs = ({ withoutLevels }: Props) => {
   const { pathname } = useLocation();
   let currentLink: string = "";
 
+  const excludedPaths: string[] = Object.values(Level).map((item) =>
+    item.toLowerCase()
+  );
+
   const crumbs: JSX.Element[] = pathname
     .split("/")
-    .filter((crumb) => crumb !== "")
+    .filter((crumb) => {
+      if (withoutLevels) {
+        return crumb !== "" && !excludedPaths.includes(crumb.toLowerCase());
+      } else return crumb !== "";
+    })
     .map((crumb, index, arr) => {
       //const decodedCrumb: string = decodeURIComponent(crumb);
       const decodedCrumb: string = decodeURIComponent(crumb).replaceAll(
