@@ -1,10 +1,7 @@
-import express, {Request, Response, Router} from 'express';
-import {ExerciseSet} from "../models/ExerciseSet";
+import express, { Router } from "express";
+import { SectionController } from "../controllers/sectionController";
+
 export const sectionRouter: Router = express.Router();
+const controller = new SectionController();
 
-sectionRouter
-    .get('/:chosen', async (req: Request, res: Response) => {
-        const exerciseSets = await ExerciseSet.findBySection(req.params.chosen);
-        res.json(exerciseSets);
-    })
-
+sectionRouter.route("/:section").get(controller.getSetsBySection);
