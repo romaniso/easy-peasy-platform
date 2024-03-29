@@ -14,7 +14,7 @@ import cookieParser from "cookie-parser";
 import { refreshRouter } from "./src/routes/refreshRouter";
 import { logoutRouter } from "./src/routes/logoutRouter";
 import { credentials } from "./src/middleware/credentials";
-import { connectDB } from "./config/dbConn";
+import { connectDB } from "./config/db";
 import { statsRouter } from "./src/routes/statsRouter";
 import { articleRouter } from "./src/routes/api/articleRouter";
 const PORT: number = parseInt(process.env.PORT as string, 10) || 5000;
