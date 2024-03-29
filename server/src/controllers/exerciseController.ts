@@ -15,11 +15,12 @@ export class ExerciseController {
       })) as IExerciseSet;
       const { name: section } = (await Section.findById(sectionId)) as ISection; //section
       const exercises = await Exercise.find({ setId }); // exercises
-      //const cheatsheet = await Cheatsheet.findBySetName(set);
+      const cheatsheet = await Cheatsheet.findOne({ setId }); //cheatsheet
+
       //const reading = await Reading.findBySet(set);
       //const listening = await Listening.findBySet(set);
       //res.json({ exercises, cheatsheet, reading, listening });
-      res.json({ exercises, section });
+      res.json({ exercises, section, cheatsheet });
     } catch (err) {
       return res.status(500).json({ error: "Error finding exercise set." });
     }
