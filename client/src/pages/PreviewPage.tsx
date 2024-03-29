@@ -15,7 +15,7 @@ interface ExerciseSet {
   description: string;
   level: Level;
   sectionId: string;
-  image: string;
+  imgBase64: string;
 }
 const defaultExerciseSets: ExerciseSet[] = [];
 
@@ -33,16 +33,15 @@ const PreviewPage: React.FC = () => {
   useEffect(() => {
     const getSectionSets = async (): Promise<void> => {
       try {
-        const { data, status } = await axios.get<ExerciseSet[]>(
+        const { data } = await axios.get<ExerciseSet[]>(
           `http://localhost:5000/section${pathname}`
         );
-        console.log("response status is: ", status);
+        console.log("response data is: ", data);
         setSets(data);
         setIsLoading(false);
       } catch (error) {
         // Consider writing a custom errorHandler
         console.error(error);
-        throw new Error("There is no such a section");
       }
     };
     getSectionSets();
@@ -68,7 +67,7 @@ const PreviewPage: React.FC = () => {
         {contentBeforeMapping.map((section, index) => {
           const apiKey = `${decodeAndFormatURL(
             section.level
-          )}/${decodeAndFormatURL(section.name)}`;
+          )}-${decodeAndFormatURL(section.name)}`;
           console.log(apiKey);
 
           return (
@@ -76,9 +75,9 @@ const PreviewPage: React.FC = () => {
               title={section.name}
               text={section.description}
               key={index}
-              image={section.image}
+              image={section.imgBase64}
               buttonTxt="Let's learn"
-              link={section.name}
+              link={apiKey}
               badge={section.level}
             />
           );
