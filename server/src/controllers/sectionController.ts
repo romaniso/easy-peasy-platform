@@ -7,7 +7,9 @@ export class SectionController {
     try {
       const { section } = req.params;
       const sectionId = (await Section.findOne({ name: section }))?._id;
-      const exerciseSets = await ExerciseSet.find({ sectionId });
+      const exerciseSets: IExerciseSet[] = await ExerciseSet.find({
+        sectionId,
+      });
 
       if (!exerciseSets)
         return res.status(404).json({ error: "No exercise sets were found." });
