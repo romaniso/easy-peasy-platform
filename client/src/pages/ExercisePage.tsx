@@ -1,6 +1,6 @@
 //#region imports
 import React, { useEffect, useState } from "react";
-import { useLocation, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import useTop from "../hooks/useTop";
 import Panel from "../components/common/Panel";
 import ExerciseSet from "../components/exercise/ExerciseSet";
@@ -33,6 +33,8 @@ const ExercisePage: React.FC = () => {
   const { pathname } = useLocation();
 
   useTop();
+  const navigate = useNavigate();
+
   useEffect(() => {
     const setApiKey = decodeURIComponent(pathname.split("/")[2]);
     const getExerciseSet = async () => {
@@ -60,6 +62,7 @@ const ExercisePage: React.FC = () => {
         setIsLoading(false);
       } catch (error) {
         console.error("There is no such an exercise set");
+        navigate("*");
       }
     };
     getExerciseSet();
