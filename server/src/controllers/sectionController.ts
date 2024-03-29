@@ -10,7 +10,6 @@ export class SectionController {
       const exerciseSets: IExerciseSet[] = await ExerciseSet.find({
         sectionId,
       });
-
       if (!exerciseSets)
         return res.status(404).json({ error: "No exercise sets were found." });
       return res.status(200).json(exerciseSets);

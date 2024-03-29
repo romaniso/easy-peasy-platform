@@ -14,7 +14,7 @@ const cheatsheetSchema = new Schema<ICheatsheet>({
   _id: { type: Schema.Types.ObjectId, unique: true, required: true },
   topic: { type: String, required: true },
   level: { type: String, required: true },
-  setId: { type: Schema.Types.ObjectId, unique: true, required: true },
+  setId: { type: Schema.Types.ObjectId, required: true },
   markDown: { type: String, required: true },
 });
 

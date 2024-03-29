@@ -17,7 +17,7 @@ const listeningSchema = new Schema<IListening>({
   topic: { type: String, required: true },
   level: { type: String, required: true },
   description: { type: String, required: true },
-  setId: { type: Schema.Types.ObjectId, unique: true, required: true },
+  setId: { type: Schema.Types.ObjectId, required: true },
   image: { type: String, required: false },
   audioUrl: { type: String, required: false },
 });

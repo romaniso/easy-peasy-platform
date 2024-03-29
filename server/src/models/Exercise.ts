@@ -4,6 +4,7 @@ import { Level } from "../types/level";
 import { ExerciseTypeName } from "../enums/exercise";
 
 type ExerciseDataType = {
+  //@TODO: type units
   units: [];
   text?: string;
 };
@@ -22,7 +23,7 @@ const exerciseSchema = new Schema<IExercise>({
   title: { type: String, required: true },
   instruction: { type: String, required: true },
   type: { type: String, required: true },
-  setId: { type: Schema.Types.ObjectId, unique: true, required: true },
+  setId: { type: Schema.Types.ObjectId, required: true },
   data: { type: Object, required: true },
 });
 

@@ -16,7 +16,7 @@ const readingSchema = new Schema<IReading>({
   _id: { type: Schema.Types.ObjectId, unique: true, required: true },
   topic: { type: String, required: true },
   level: { type: String, required: true },
-  setId: { type: Schema.Types.ObjectId, unique: true, required: true },
+  setId: { type: Schema.Types.ObjectId, required: true },
   image: { type: String, required: false },
   markDown: { type: String, required: true },
   audioUrl: { type: String, required: false },
