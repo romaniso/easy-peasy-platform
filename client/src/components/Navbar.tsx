@@ -75,7 +75,7 @@ const Navbar: React.FC = () => {
   const renderedItems = links.map((link: NavbarItem) => (
     <li
       key={link.label}
-      className="my-7 border-b border-indigo-200 md:border-none md:ml-6 md:my-0 hover:text-orange-500 text-indigo-800 dark:text-indigo-200 font-semibold group py-2 md:py-0"
+      className="my-7 border-b border-indigo-200 md:border-none md:ml-6 md:my-0 hover:text-orange-500 text-indigo-800 dark:text-indigo-400 hover:dark:text-indigo-200 font-semibold group py-2 md:py-0"
     >
       {link.path && (
         <NavLink
