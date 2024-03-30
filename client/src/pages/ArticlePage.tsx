@@ -84,7 +84,7 @@ export const ArticlePage = () => {
             <ReactMarkdown className="markdown-content">
               {articleData?.data}
             </ReactMarkdown>
-            <Link to="/">
+            <Link to={`../${articleData?.section}/${articleData?.apiKey}`}>
               <Button primary rounded>
                 Practice
               </Button>
