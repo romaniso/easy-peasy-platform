@@ -50,14 +50,9 @@ export class ExerciseController {
           .status(404)
           .send({ message: "No recommended exercise sets were found" });
       }
-
-      console.log(sets);
-
       // Decode title if it contains hyphens
       const decodedTitle = (key as string).split("-").slice(1).join(" ");
       const decodedLevel = (key as string).split("-").shift()?.toLowerCase();
-      console.log("title: ", decodedTitle);
-      console.log("level: ", decodedLevel);
 
       // Filter articles based on common words in title and section
       const filteredSets = sets.filter((set, index) => {
@@ -82,7 +77,6 @@ export class ExerciseController {
           .send({ message: "No recommended exercise sets were found" });
       }
 
-      //console.log(filteredSets);
       const previewRecommendedSets = filteredSets.map(
         ({ _id, name, level, imgBase64, apiKey }) => {
           return {
@@ -90,13 +84,13 @@ export class ExerciseController {
             name,
             level,
             img: imgBase64,
+            section,
             apiKey,
           };
         }
       );
 
-      res.status(200).json({ recommendedSets: previewRecommendedSets });
-      return res.status(200).json({ message: "OK" });
+      return res.status(200).json({ recommendedSets: previewRecommendedSets });
     } catch (err) {
       return res
         .status(500)
