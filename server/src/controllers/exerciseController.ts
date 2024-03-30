@@ -20,7 +20,11 @@ export class ExerciseController {
       const reading = await Reading.findOne({ setId });
       const listening = await Listening.findOne({ setId });
 
-      res.json({ exercises, section, cheatsheet, reading, listening });
+      if (exercises.length) {
+        res.json({ exercises, section, cheatsheet, reading, listening });
+      } else {
+        res.json({ exercises: null, section, cheatsheet, reading, listening });
+      }
     } catch (err) {
       return res.status(500).json({ error: "Error finding exercise set." });
     }

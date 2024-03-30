@@ -2,7 +2,6 @@ import React from "react";
 import useTop from "../hooks/useTop";
 import { Link } from "react-router-dom";
 import NotFoundImg from "../assets/images/not-found.png";
-import Panel from "../components/common/Panel";
 
 const ErrorPage: React.FC = () => {
   useTop();
