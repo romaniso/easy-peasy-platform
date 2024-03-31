@@ -61,15 +61,16 @@ const Navbar: React.FC = () => {
         { label: t("navbar.exercises.links.listening"), path: "/listening" },
       ],
     },
-    {
-      label: t("navbar.resources.text"),
-      subPaths: [
-        { label: t("navbar.resources.links.articles"), path: "/articles" },
-        { label: t("navbar.resources.links.podcasts"), path: "/podcast" },
-        // { label: "Books", path: "/books" },
-        // { label: "Exercises", path: "/exercises" },
-      ],
-    },
+    { label: t("navbar.resources.links.articles"), path: "/articles" },
+    // {
+    //   label: t("navbar.resources.text"),
+    //   subPaths: [
+    //     { label: t("navbar.resources.links.articles"), path: "/articles" },
+    //       { label: t("navbar.resources.links.podcasts"), path: "/podcast" },
+    //      { label: "Books", path: "/books" },
+    //      { label: "Exercises", path: "/exercises" },
+    //   ],
+    // },
   ];
 
   const renderedItems = links.map((link: NavbarItem) => (

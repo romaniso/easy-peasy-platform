@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import Button from "./common/Button";
 import Input from "./common/Input";
 import { FaFacebook, FaInstagram, FaTiktok } from "react-icons/fa";
+import { Logo } from "./common/Logo";
 
 type SubmenuItem = {
   label: string;
@@ -25,38 +26,39 @@ const Footer: React.FC = () => {
     {
       title: "Exercises",
       links: [
-        { label: "Grammar", path: "exercises/grammar" },
-        { label: "Reading", path: "exercises/reading" },
-        { label: "Vocabulary", path: "exercises/vocabulary" },
-        { label: "Listening", path: "exercises/listening" },
+        { label: "Grammar", path: "grammar" },
+        { label: "Reading", path: "reading" },
+        { label: "Vocabulary", path: "vocabulary" },
+        { label: "Listening", path: "listening" },
+      ],
+    },
+    // {
+    //   title: "Tutoring",
+    //   links: [
+    //     { label: "Find a tutor", path: "tutors" },
+    //     { label: "Order a class", path: "online-class" },
+    //     { label: "How it works", path: "docs/classes" },
+    //     { label: "Pricing", path: "docs/pricing" },
+    //   ],
+    // },
+    {
+      title: "Student",
+      links: [
+        { label: "Dashboard", path: "dashboard" },
+        { label: "Vocabulary list", path: "glossary" },
+        //  { label: "Buy learning hours", path: "learning-hours" },
+        //  { label: "FAQ", path: "docs/faq" },
+        { label: "Profile", path: "profile" },
+        { label: "Settings", path: "settings" },
       ],
     },
     {
       title: "Resources",
       links: [
-        { label: "Articles", path: "resources/articles" },
-        { label: "Podcasts", path: "resources/podcasts" },
-        { label: "Books", path: "resources/books" },
-        { label: "Exercises", path: "resources/exercises" },
-      ],
-    },
-
-    {
-      title: "Tutoring",
-      links: [
-        { label: "Find a tutor", path: "tutors" },
-        { label: "Order a class", path: "online-class" },
-        { label: "How it works", path: "docs/classes" },
-        { label: "Pricing", path: "docs/pricing" },
-      ],
-    },
-    {
-      title: "Student",
-      links: [
-        { label: "Dashboard", path: "dashboard" },
-        { label: "Your progress", path: "progress" },
-        { label: "Buy learning hours", path: "learning-hours" },
-        { label: "FAQ", path: "docs/faq" },
+        { label: "Articles", path: "articles" },
+        //  { label: "Podcasts", path: "resources/podcasts" },
+        //  { label: "Books", path: "resources/books" },
+        //  { label: "Exercises", path: "resources/exercises" },
       ],
     },
   ];
@@ -76,9 +78,9 @@ const Footer: React.FC = () => {
   const renderedMenu = menu.map((category: FooterMenuItem, index: number) => {
     return (
       <section className="mb-4 tracking-wide" key={index}>
-        <h4 className="text-white font-medium mb-1">{category.title}</h4>
+        <h4 className="text-indigo-300 font-medium mb-1">{category.title}</h4>
         <ul
-          className="text-white font-light text-sm opacity-75 leading-6"
+          className="text-indigo-50 font-light text-sm opacity-75 leading-6"
           key={index}
         >
           {category.links.map((link: SubmenuItem, index: number) => (
@@ -107,15 +109,16 @@ const Footer: React.FC = () => {
   });
 
   return (
-    <footer className="bg-stone-800">
+    <footer className="bg-gradient-to-r from-stone-800 to-stone-900">
       <div className="container mx-auto py-10 px-4">
-        <section className="md:flex md:justify-between md:items-center border-b md:pb-16 pb-8">
-          <h3 className="lg:text-4xl text-3xl md:mb-0 mb-6 lg:leading-normal font-light md:w-2/5 text-white">
-            It is <span className="text-indigo-300 font-medium">never</span> too
+        <section className="flex flex-col md:flex-row md:justify-between items-center gap-8 border-b border-indigo-100/30 md:pb-16 pb-8">
+          <Logo className="scale-150 md:ml-6" />
+          <h3 className="lg:text-3xl text-2xl md:text-right md:mb-0 mb-6 lg:leading-normal font-light md:w-2/5 text-indigo-100">
+            It is <span className="text-indigo-400 font-medium">never</span> too
             late to learn English!
           </h3>
           {/* Mini-form */}
-          <div className="flex md:flex-row gap-4 items-center justify-between flex-col">
+          {/*<div className="flex md:flex-row gap-4 items-center justify-between flex-col">
             <Input
               name="userName"
               type="email"
@@ -137,13 +140,13 @@ const Footer: React.FC = () => {
             >
               Sign up
             </Button>
-          </div>
+          </div>*/}
         </section>
-        <section className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-4 gap-6 md:py-16 py-8">
+        <section className="grid grid-cols-1 sm:grid-cols-3 gap-6 md:py-16 py-8">
           {renderedMenu}
         </section>
-        <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 text-center pt-2 text-white opacity-75 text-sm pb-8">
-          <small>&copy; 2023 Easy-Peasy English. All rights reserved.</small>
+        <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 text-center pt-2 text-indigo-100 opacity-75 text-sm pb-8">
+          <small>&copy; 2024 Easy-Peasy English. All rights reserved.</small>
           <small>Terms &#x2022; Privacy Policy</small>
           <div>{renderedSocials}</div>
         </section>
