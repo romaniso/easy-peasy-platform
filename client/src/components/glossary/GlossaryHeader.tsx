@@ -4,6 +4,7 @@ import { FaSortAlphaDown } from "react-icons/fa";
 import { PiClockCountdownLight } from "react-icons/pi";
 import { FaStar } from "react-icons/fa6";
 import { SearchBar } from "../common/SearchBar";
+import { useTranslation } from "react-i18next";
 
 interface GlossaryHeaderProps {
   onSort: (sortable: string) => void;
@@ -14,20 +15,21 @@ export const GlossaryHeader: React.FC<GlossaryHeaderProps> = ({
   onSort,
   onSearh,
 }) => {
+  const { t } = useTranslation("glossary");
   const sortibles = [
     {
       value: "abc",
-      label: "A-Z",
+      label: t("sortBar.abc"),
       icon: <FaSortAlphaDown />,
     },
     {
       value: "recent",
-      label: "Recent",
+      label: t("sortBar.recent"),
       icon: <PiClockCountdownLight />,
     },
     {
       value: "marked",
-      label: "Marked",
+      label: t("sortBar.marked"),
       icon: <FaStar />,
     },
   ];
@@ -35,10 +37,17 @@ export const GlossaryHeader: React.FC<GlossaryHeaderProps> = ({
   return (
     <div className="flex md:justify-between gap-5">
       <div className="flex-shrink md:flex-grow-0 md:basis-1/4">
-        <SearchBar placeholder="Search words" onChange={onSearh} />
+        <SearchBar
+          placeholder={t("searchBar.placeholder")}
+          onChange={onSearh}
+        />
       </div>
       <div className="basis-1/2 md:basis-auto">
-        <Select defaultText="Sort by" options={sortibles} onChange={onSort} />
+        <Select
+          defaultText={t("sortBar.placeholder")}
+          options={sortibles}
+          onChange={onSort}
+        />
       </div>
     </div>
   );

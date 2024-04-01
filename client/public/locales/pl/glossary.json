@@ -1,0 +1,19 @@
+{
+  "header": {
+    "mainHeader": "Słowniczek"
+  },
+  "searchBar": {
+    "placeholder": "Wyszukaj słowa"
+  },
+  "sortBar": {
+    "placeholder": "Sortuj według",
+    "abc": "A-Z",
+    "recent": "Ostatnie",
+    "marked": "Zaznaczone"
+  },
+  "actions": {
+    "remove": "Usuń",
+    "edit": "Edytuj",
+    "star": "Oznacz"
+  }
+}

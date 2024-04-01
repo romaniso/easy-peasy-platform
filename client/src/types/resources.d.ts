@@ -116,6 +116,25 @@ interface Resources {
       "line2": "Exercises per week you want to do:"
     }
   },
+  "glossary": {
+    "header": {
+      "mainHeader": "Glossary"
+    },
+    "searchBar": {
+      "placeholder": "Search Words"
+    },
+    "sortBar": {
+      "placeholder": "Sort by",
+      "abc": "A-Z",
+      "recent": "Recent",
+      "marked": "Marked"
+    },
+    "actions": {
+      "remove": "Remove",
+      "edit": "Edit",
+      "star": "Star"
+    }
+  },
   "home": {
     "inputs": {
       "select": "Select an option"

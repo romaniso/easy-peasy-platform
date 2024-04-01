@@ -1,0 +1,19 @@
+{
+  "header": {
+    "mainHeader": "Словник"
+  },
+  "searchBar": {
+    "placeholder": "Пошук слів"
+  },
+  "sortBar": {
+    "placeholder": "Сортувати за",
+    "abc": "А-Я",
+    "recent": "Останні",
+    "marked": "Позначені"
+  },
+  "actions": {
+    "remove": "Видалити",
+    "edit": "Редагувати",
+    "star": "Позначити"
+  }
+}

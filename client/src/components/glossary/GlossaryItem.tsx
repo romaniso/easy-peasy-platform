@@ -6,6 +6,7 @@ import { playAudio } from "../../utils/playAudio";
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 import useUser from "../../hooks/useUser";
 import GlossaryAction from "./GlossaryAction";
+import { useTranslation } from "react-i18next";
 
 interface GlossaryItemProps {
   id: string;
@@ -24,6 +25,7 @@ export const GlossaryItem: React.FC<GlossaryItemProps> = ({
   marked,
   updateData,
 }) => {
+  const { t } = useTranslation("glossary");
   const [isBeingEdited, setIsBeingEdited] = useState<boolean>(false);
   const [editedValue, setEditedValue] = useState(definition);
 
@@ -198,19 +200,19 @@ export const GlossaryItem: React.FC<GlossaryItemProps> = ({
           className="flex items-center bg-red-500 hover:opacity-80 text-white text-sm p-1 rounded-md shadow-sm gap-1"
           onClick={handleRemove}
         >
-          Remove <FaRegTrashCan />
+          {t("actions.remove")} <FaRegTrashCan />
         </button>
         <button
           className="flex items-center bg-indigo-500 hover:opacity-80 text-white text-sm p-1 rounded-md shadow-sm gap-1"
           onClick={() => setIsBeingEdited(!isBeingEdited)}
         >
-          Edit <MdEdit />
+          {t("actions.edit")} <MdEdit />
         </button>
         <button
           className="flex items-center bg-orange-500 hover:opacity-80 text-white text-sm p-1 rounded-md shadow-sm gap-1"
           onClick={handleMark}
         >
-          Star <FaStar />
+          {t("actions.star")} <FaStar />
         </button>
       </div>
     </div>

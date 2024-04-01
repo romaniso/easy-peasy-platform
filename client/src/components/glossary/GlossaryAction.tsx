@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { FaStar } from "react-icons/fa";
 import { FaRegTrashCan } from "react-icons/fa6";
 import { HiOutlineDotsVertical } from "react-icons/hi";
@@ -15,6 +16,7 @@ export default function GlossaryAction({
   onMark,
   onEdit,
 }: GlossaryActionProps) {
+  const { t } = useTranslation("glossary");
   const [isOpened, setIsOpened] = useState<boolean>(false);
 
   const glossaryActionRef = useRef<HTMLDivElement>(null);
@@ -59,19 +61,20 @@ export default function GlossaryAction({
             className="flex items-center text-indigo-950 dark:text-white text-sm gap-1 mb-1"
             onClick={handleRemove}
           >
-            Remove <FaRegTrashCan />
+            {t("actions.remove")}
+            <FaRegTrashCan />
           </button>
           <button
             className="flex items-center text-indigo-950 dark:text-white text-sm gap-1 mb-1"
             onClick={handleEdit}
           >
-            Edit <MdEdit />
+            {t("actions.edit")} <MdEdit />
           </button>
           <button
             className="flex items-center text-indigo-950 dark:text-white text-sm gap-1 mb-1"
             onClick={handleMark}
           >
-            Star <FaStar />
+            {t("actions.star")} <FaStar />
           </button>
         </div>
       )}
