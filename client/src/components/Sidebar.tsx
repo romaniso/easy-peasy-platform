@@ -196,7 +196,7 @@ const Sidebar: React.FC = () => {
     <aside
       className={`flex-shrink-1 bg-gradient h-min-screen pt-2 pb-1 flex flex-col justify-between ${
         isSidebarOpened
-          ? "max-w-72 px-3 -mr-[185px] md:mr-0 overflow-x-hidden overflow-y-auto scrollbar scrollbar-thin scrollbar-thumb-indigo-100 dark:scrollbar-thumb-stone-800 scrollbar-track-white dark:scrollbar-track-stone-900"
+          ? "w-72 px-3 -mr-[185px] md:mr-0 overflow-x-hidden overflow-y-auto scrollbar scrollbar-thin scrollbar-thumb-indigo-100 dark:scrollbar-thumb-stone-800 scrollbar-track-white dark:scrollbar-track-stone-900"
           : " max-w-20 justify-around px-5"
       } relative duration-300 shadow z-50 transition-all`}
     >
@@ -239,7 +239,7 @@ const Sidebar: React.FC = () => {
             </div>
           )}
         </div>
-        <div className="flex w-full items-center rounded-md bg-transparent border dark:border-indigo-300 border-indigo-300 py-1.5 px-3">
+        {/*<div className="flex w-full items-center rounded-md bg-transparent border dark:border-indigo-300 border-indigo-300 py-1.5 px-3">
           <BsSearch
             className={`dark:text-indigo-300 text-indigo-800 text-lg block float-left cursor-pointer ${
               isSidebarOpened && "mr-2"
@@ -251,9 +251,11 @@ const Sidebar: React.FC = () => {
               !isSidebarOpened && "hidden"
             }`}
           />
-        </div>
+        </div>*/}
       </div>
-      <ul className="w-full">{renderedMenu}</ul>
+      <ul className="my-16 md:my-12 w-full h-full flex flex-col justify-evenly">
+        {renderedMenu}
+      </ul>
       <div
         className={`mt-5 bg-indigo-50 dark:bg-stone-800 w-full flex justify-between px-2 py-1 rounded-md ${
           !isSidebarOpened && "hidden"
