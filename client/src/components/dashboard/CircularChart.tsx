@@ -1,6 +1,6 @@
 import CircularProgressBar from "../CircularProgressBar";
 import React from "react";
-// import Button from "../common/Button";
+import { Trans, useTranslation } from "react-i18next";
 
 interface CircularChartProps {
   title: string;
@@ -14,9 +14,10 @@ export const CircularChart: React.FC<CircularChartProps> = ({
   title,
   percentage,
   maxNumber,
-  unitNameInPlural,
+  //  unitNameInPlural,
   usedUnits,
 }) => {
+  const { t } = useTranslation("dashboard");
   const calculateOffsetWithPercentage = (percentage: number): number => {
     return Math.floor(243 - (percentage / 100) * 147);
   };
@@ -32,8 +33,10 @@ export const CircularChart: React.FC<CircularChartProps> = ({
         </p>
         {maxNumber && (
           <p className="text-sm text-indigo-900 dark:text-indigo-300 md:text-center md:mb-2">
-            Limit is <span className="font-bold">{maxNumber}</span>{" "}
-            {unitNameInPlural}
+            <Trans
+              defaults={t("addedWords.line1", { limit: maxNumber })}
+              components={{ 1: <strong /> }}
+            />
           </p>
         )}
       </div>
@@ -48,8 +51,10 @@ export const CircularChart: React.FC<CircularChartProps> = ({
         </div>
         <div className="flex md:flex-col items-center justify-center gap-1">
           <p className="text-xs md:text-sm text-indigo-900/50 dark:text-indigo-300 text-center md:mb-2">
-            Your {unitNameInPlural} limit is
-            <span className="font-bold"> {percentage}%</span> full
+            <Trans
+              defaults={t("addedWords.line2", { percentage: percentage })}
+              components={{ 1: <strong /> }}
+            />
           </p>
           {/* TODO: implement it in the future, so a user can extend paid word limit */}
           {/*<span className="bg-indigo-500/70 rounded-md p-1 text-xs text-white hover:brightness-125 cursor-pointer transition-colors">

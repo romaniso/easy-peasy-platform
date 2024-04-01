@@ -9,8 +9,8 @@
     "dailyActivity": "Twoja codzienna aktywność"
   },
   "addedWords": {
-    "line1": "Limit to {{limit}} słów",
-    "line2": "Twój limit słów wynosi {{percentage}}% pełny",
+    "line1": "Limit to <1>{{limit}}</1> słów",
+    "line2": "Twój limit słów wynosi <1>{{percentage}}%</1> pełny",
     "button": "Zwiększ limit"
   },
   "yourMarks": {
@@ -19,5 +19,9 @@
   "dailyActivity": {
     "explanation": "*Ile zadań udało ci się zrealizować w tym miesiącu? Zobaczmy.",
     "tooltipText": "wykonanych ćwiczeń."
+  },
+  "setYourGoals": {
+    "line1": "Słów tygodniowo, które chcesz się nauczyć:",
+    "line2": "Ćwiczeń tygodniowo, które chcesz wykonać:"
   }
 }

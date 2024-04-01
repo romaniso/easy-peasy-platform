@@ -100,8 +100,8 @@ interface Resources {
       "dailyActivity": "Your Daily Activity"
     },
     "addedWords": {
-      "line1": "Limit is {{limit}} words",
-      "line2": "Your words limit is {{percentage}}% full",
+      "line1": "Limit is <1>{{limit}}</1> words",
+      "line2": "Your words limit is <1>{{percentage}}%</1> full",
       "button": "Increase limit"
     },
     "yourMarks": {
@@ -110,6 +110,10 @@ interface Resources {
     "dailyActivity": {
       "explanation": "*How many activities have you completed this month? Let's see.",
       "tooltipText": "completed exercises."
+    },
+    "setYourGoals": {
+      "line1": "Words per week you want to learn:",
+      "line2": "Exercises per week you want to do:"
     }
   },
   "home": {

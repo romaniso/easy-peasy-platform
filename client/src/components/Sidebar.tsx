@@ -72,13 +72,18 @@ const Sidebar: React.FC = () => {
       spacing: true,
     },
     {
-      title: t("sidebar.resources.text"),
+      title: t("sidebar.resources.links.articles"),
       icon: <BsCollectionPlay />,
-      links: [
-        { label: t("sidebar.resources.links.articles"), path: "/articles" },
-        { label: t("sidebar.resources.links.podcasts"), path: "/podcasts" },
-      ],
+      path: "/articles",
     },
+    // {
+    //   title: t("sidebar.resources.text"),
+    //   icon: <BsCollectionPlay />,
+    //   links: [
+    //     { label: t("sidebar.resources.links.articles"), path: "/articles" },
+    //     { label: t("sidebar.resources.links.podcasts"), path: "/podcasts" },
+    //   ],
+    // },
     {
       title: t("sidebar.vocabulary.text"),
       icon: <BsBook />,

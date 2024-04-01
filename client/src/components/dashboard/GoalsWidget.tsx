@@ -26,6 +26,7 @@ export const GoalsWidget: React.FC<GoalsWidgetProps> = ({ title }) => {
   const axiosPrivate = useAxiosPrivate();
   const toast = useToast();
   const { t } = useTranslation("profile");
+  const { t: tDashboard } = useTranslation("dashboard");
 
   const wordsPerWeekItems = [
     { name: "10 words", value: 10 },
@@ -90,7 +91,7 @@ export const GoalsWidget: React.FC<GoalsWidgetProps> = ({ title }) => {
       <form className="flex-1 flex flex-wrap" onSubmit={handleSubmit}>
         <fieldset className="basis-1/2 flex flex-col justify-between pr-1">
           <h4 className="text-sm text-indigo-900 dark:text-indigo-300 mb-2">
-            Words per week you want to learn:
+            {tDashboard("setYourGoals.line1")}
           </h4>
           <div className="flex w-full flex-col justify-center items-center gap-1">
             <RadioGroup
@@ -103,7 +104,7 @@ export const GoalsWidget: React.FC<GoalsWidgetProps> = ({ title }) => {
         </fieldset>
         <fieldset className="basis-1/2 flex flex-col justify-between pl-1">
           <h4 className="text-sm text-indigo-900 dark:text-indigo-300 mb-2">
-            Exercises per week you want to do:
+            {tDashboard("setYourGoals.line2")}
           </h4>
           <div className="flex w-full flex-col justify-center items-center gap-1">
             <RadioGroup
