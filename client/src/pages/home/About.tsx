@@ -1,51 +1,50 @@
-import React from "react";
 import Card from "../../components/common/Card";
 import GrammarImg from "../../assets/images/grammar.jpg";
 import VocabularyImg from "../../assets/images/vocab.jpg";
 import ReadingImg from "../../assets/images/reading.jpg";
 import ListeningImg from "../../assets/images/listening.jpg";
+import { useTranslation } from "react-i18next";
 
-const About: React.FC = () => {
-    return (
-        <section className="py-16 px-4">
-            <div className="container mx-auto">
-                <section
-                    className="flex flex-col justify-center items-center mb-16 px-4"
-                >
-                    <h2 className="text-6xl text-center font-bold text-orange-500 drop-shadow mb-8">
-                        About us
-                    </h2>
-                    <p className="text-2xl font-light text-indigo-700 dark:text-indigo-300 text-center md:max-w-screen-lg drop-shadow">
-                        We offer educational materials and practical exercises which will
-                        increase your English level. There are different learning modules
-                        that you can pick up from.
-                    </p>
-                </section>
-                <section className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10">
-                    <Card
-                        title="Grammar"
-                        text="It’s a good idea to start with basics and master the main grammar structures"
-                        image={GrammarImg}
-                    />
-                    <Card
-                        title="Vocabulary"
-                        text="Grammar is an engine oil of our car but vocabulary is the engine! Let’s pick up some new words :)"
-                        image={VocabularyImg}
-                    />
-                    <Card
-                        title="Reading"
-                        text="Let’s practice your reading skills. It will help you learn new phrases and understand English better!"
-                        image={ReadingImg}
-                    />
-                    <Card
-                        title="Listening"
-                        text="To understand orral speech we should listen to it quite often and get used to it! Try out our listening taks :)"
-                        image={ListeningImg}
-                    />
-                </section>
-            </div>
+export const About = () => {
+  const { t } = useTranslation("home");
+  return (
+    <section className="py-16 px-4" id="about">
+      <div className="container mx-auto">
+        <section className="flex flex-col justify-center items-center mb-16 px-4">
+          <h2 className="text-6xl text-center font-bold text-orange-500 drop-shadow mb-8">
+            {t("about.header")}
+          </h2>
+          <p className="text-2xl font-light text-indigo-700 dark:text-indigo-300 text-center md:max-w-screen-lg drop-shadow">
+            {t("about.description")}
+          </p>
         </section>
-    );
-}
-
-export default About;
+        <section className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10">
+          <Card
+            title={t("about.cards.grammar.title")}
+            text={t("about.cards.grammar.description")}
+            image={GrammarImg}
+            buttonTxt={t("about.cards.btnText")}
+          />
+          <Card
+            title={t("about.cards.vocabulary.title")}
+            text={t("about.cards.vocabulary.description")}
+            image={VocabularyImg}
+            buttonTxt={t("about.cards.btnText")}
+          />
+          <Card
+            title={t("about.cards.reading.title")}
+            text={t("about.cards.reading.description")}
+            image={ReadingImg}
+            buttonTxt={t("about.cards.btnText")}
+          />
+          <Card
+            title={t("about.cards.listening.title")}
+            text={t("about.cards.listening.description")}
+            image={ListeningImg}
+            buttonTxt={t("about.cards.btnText")}
+          />
+        </section>
+      </div>
+    </section>
+  );
+};

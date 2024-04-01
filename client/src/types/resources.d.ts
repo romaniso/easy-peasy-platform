@@ -136,8 +136,36 @@ interface Resources {
     }
   },
   "home": {
-    "inputs": {
-      "select": "Select an option"
+    "hero": {
+      "platformDescription": "Your platform for learning English",
+      "learningDescription": "Here you can learn English with a variety of educational materials prepared for students at different levels. You will find something useful for yourself!",
+      "actions": {
+        "getStarted": "Get Started",
+        "signUp": "Sign Up"
+      }
+    },
+    "about": {
+      "header": "About Us",
+      "description": "We offer educational materials and practical exercises which will increase your English level. There are different learning modules that you can pick up from.",
+      "cards": {
+        "btnText": "Check it out",
+        "grammar": {
+          "title": "Grammar",
+          "description": "It’s a good idea to start with basics and master the main grammar structures"
+        },
+        "vocabulary": {
+          "title": "Vocabulary",
+          "description": "Grammar is an engine oil of our car but vocabulary is the engine! Let’s pick up some new words :)"
+        },
+        "reading": {
+          "title": "Reading",
+          "description": "Let’s practice your reading skills. It will help you learn new phrases and understand English better!"
+        },
+        "listening": {
+          "title": "Listening",
+          "description": "To understand oral speech we should listen to it quite often and get used to it! Try out our listening tasks :)"
+        }
+      }
     }
   },
   "profile": {

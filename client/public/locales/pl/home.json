@@ -1,5 +1,33 @@
 {
-  "inputs": {
-    "select": "Select an option"
+  "hero": {
+    "platformDescription": "Twoja platforma do nauki języka angielskiego",
+    "learningDescription": "Tutaj możesz uczyć się angielskiego z różnorodnymi materiałami edukacyjnymi przygotowanymi dla uczniów różnych poziomów. Znajdziesz coś dla siebie!",
+    "actions": {
+      "getStarted": "Rozpocznij",
+      "signUp": "Zarejestruj się"
+    }
+  },
+  "about": {
+    "header": "O nas",
+    "description": "Oferujemy materiały edukacyjne i praktyczne zadania, które podniosą Twój poziom angielskiego. Dostępne są różne moduły nauki, z których możesz skorzystać.",
+    "cards": {
+      "btnText": "Sprawdź to",
+      "grammar": {
+        "title": "Gramatyka",
+        "description": "Dobrym pomysłem jest zacząć od podstaw i opanować główne struktury gramatyczne"
+      },
+      "vocabulary": {
+        "title": "Słownictwo",
+        "description": "Gramatyka to olej silnikowy naszego samochodu, ale słownictwo to silnik! Poznajmy więc kilka nowych słów :)"
+      },
+      "reading": {
+        "title": "Czytanie",
+        "description": "Ćwiczmy swoje umiejętności czytania. To pomoże ci nauczyć się nowych zwrotów i lepiej zrozumieć angielski!"
+      },
+      "listening": {
+        "title": "Słuchanie",
+        "description": "Aby zrozumieć mowę ustną, powinniśmy często jej słuchać i się do niej przyzwyczajać! Wypróbuj nasze zadania ze słuchaniem :)"
+      }
+    }
   }
 }
