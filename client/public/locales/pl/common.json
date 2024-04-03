@@ -86,5 +86,35 @@
       "settings": "Ustawienia",
       "logout": "Wyloguj się"
     }
+  },
+  "footer": {
+    "moto": "<1>Nigdy</1> nie jest za późno, aby nauczyć się angielskiego!",
+    "copyright": "Wszelkie prawa zastrzeżone.",
+    "terms": "Warunki korzystania",
+    "policy": "Polityka prywatności",
+    "exercises": {
+      "text": "Ćwiczenia",
+      "links": {
+        "grammar": "Gramatyka",
+        "reading": "Czytanie",
+        "vocabulary": "Słownictwo",
+        "listening": "Słuchanie"
+      }
+    },
+    "student": {
+      "text": "Uczeń",
+      "links": {
+        "dashboard": "Panel",
+        "glossary": "Lista słów",
+        "profile": "Profil",
+        "settings": "Ustawienia"
+      }
+    },
+    "resources": {
+      "text": "Zasoby",
+      "links": {
+        "articles": "Artykuły"
+      }
+    }
   }
 }

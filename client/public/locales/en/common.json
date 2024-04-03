@@ -86,5 +86,35 @@
       "settings": "Settings",
       "logout": "Log out"
     }
+  },
+  "footer": {
+    "moto": "It is <1>never</1> too late to learn English!",
+    "copyright": "All rights reserved.",
+    "terms": "Terms and Conditions",
+    "policy": "Privacy Policy",
+    "exercises": {
+      "text": "Exercises",
+      "links": {
+        "grammar": "Grammar",
+        "reading": "Reading",
+        "vocabulary": "Vocabulary",
+        "listening": "Listening"
+      }
+    },
+    "student": {
+      "text": "Student",
+      "links": {
+        "dashboard": "Dashboard",
+        "glossary": "Vocabulary list",
+        "profile": "Profile",
+        "settings": "Settings"
+      }
+    },
+    "resources": {
+      "text": "Resources",
+      "links": {
+        "articles": "Articles"
+      }
+    }
   }
 }

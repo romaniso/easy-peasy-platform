@@ -1,9 +1,8 @@
-import React, { ChangeEvent, ReactElement } from "react";
+import React, { ReactElement } from "react";
 import { Link } from "react-router-dom";
-import Button from "./common/Button";
-import Input from "./common/Input";
 import { FaFacebook, FaInstagram, FaTiktok } from "react-icons/fa";
 import { Logo } from "./common/Logo";
+import { Trans, useTranslation } from "react-i18next";
 
 type SubmenuItem = {
   label: string;
@@ -18,18 +17,19 @@ interface SocialItem {
   path: string;
 }
 const Footer: React.FC = () => {
-  const handleUserName = (e: ChangeEvent) => {
-    console.log(e);
-  };
+  const { t } = useTranslation("common");
+  //  const handleUserName = (e: ChangeEvent) => {
+  //    console.log(e);
+  //  };
 
   const menu: FooterMenuItem[] = [
     {
-      title: "Exercises",
+      title: t("footer.exercises.text"),
       links: [
-        { label: "Grammar", path: "grammar" },
-        { label: "Reading", path: "reading" },
-        { label: "Vocabulary", path: "vocabulary" },
-        { label: "Listening", path: "listening" },
+        { label: t("footer.exercises.links.grammar"), path: "grammar" },
+        { label: t("footer.exercises.links.reading"), path: "reading" },
+        { label: t("footer.exercises.links.vocabulary"), path: "vocabulary" },
+        { label: t("footer.exercises.links.listening"), path: "listening" },
       ],
     },
     // {
@@ -42,20 +42,20 @@ const Footer: React.FC = () => {
     //   ],
     // },
     {
-      title: "Student",
+      title: t("footer.student.text"),
       links: [
-        { label: "Dashboard", path: "dashboard" },
-        { label: "Vocabulary list", path: "glossary" },
+        { label: t("footer.student.links.dashboard"), path: "dashboard" },
+        { label: t("footer.student.links.glossary"), path: "glossary" },
         //  { label: "Buy learning hours", path: "learning-hours" },
         //  { label: "FAQ", path: "docs/faq" },
-        { label: "Profile", path: "profile" },
-        { label: "Settings", path: "settings" },
+        { label: t("footer.student.links.profile"), path: "profile" },
+        { label: t("footer.student.links.settings"), path: "settings" },
       ],
     },
     {
-      title: "Resources",
+      title: t("footer.resources.text"),
       links: [
-        { label: "Articles", path: "articles" },
+        { label: t("footer.resources.links.articles"), path: "articles" },
         //  { label: "Podcasts", path: "resources/podcasts" },
         //  { label: "Books", path: "resources/books" },
         //  { label: "Exercises", path: "resources/exercises" },
@@ -113,9 +113,13 @@ const Footer: React.FC = () => {
       <div className="container mx-auto py-10 px-4">
         <section className="flex flex-col md:flex-row md:justify-between items-center gap-8 border-b border-indigo-100/30 md:pb-16 pb-8">
           <Logo className="scale-150 md:ml-6" />
-          <h3 className="lg:text-3xl text-2xl md:text-right md:mb-0 mb-6 lg:leading-normal font-light md:w-2/5 text-indigo-100">
-            It is <span className="text-indigo-400 font-medium">never</span> too
-            late to learn English!
+          <h3 className="lg:text-2xl text-xl md:text-right md:mb-0 mb-6 lg:leading-normal font-light md:w-2/5 text-indigo-100">
+            <Trans
+              defaults={t("footer.moto")}
+              components={{
+                1: <span className="text-indigo-400 font-medium" />,
+              }}
+            />
           </h3>
           {/* Mini-form */}
           {/*<div className="flex md:flex-row gap-4 items-center justify-between flex-col">
@@ -146,21 +150,21 @@ const Footer: React.FC = () => {
           {renderedMenu}
         </section>
         <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 text-center pt-2 text-indigo-100 opacity-75 text-sm pb-8">
-          <small>&copy; 2024 Easy-Peasy English. All rights reserved.</small>
+          <small>&copy; 2024 Easy-Peasy English. {t("footer.copyright")}</small>
 
           <small>
             <a
               href="https://www.termsandconditionsgenerator.com/live.php?token=XZInxv3hHr224LlY0pjEShgx1wjrbmVy"
               target="_blank"
             >
-              Terms and Conditions
+              {t("footer.terms")}
             </a>{" "}
             &#x2022;{" "}
             <a
               href="https://www.termsfeed.com/live/1ee655fd-6911-48fc-a079-eae0056b61a2"
               target="_blank"
             >
-              Privacy Policy
+              {t("footer.policy")}
             </a>
           </small>
           <div>{renderedSocials}</div>

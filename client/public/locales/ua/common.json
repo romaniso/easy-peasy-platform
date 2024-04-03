@@ -86,5 +86,35 @@
       "settings": "Налаштування",
       "logout": "Вийти"
     }
+  },
+  "footer": {
+    "moto": "<1>Ніколи</1> не пізно вивчати англійську!",
+    "copyright": "Усі права захищені.",
+    "terms": "Умови використання",
+    "policy": "Політика конфіденційності",
+    "exercises": {
+      "text": "Вправи",
+      "links": {
+        "grammar": "Граматика",
+        "reading": "Читання",
+        "vocabulary": "Словник",
+        "listening": "Слухання"
+      }
+    },
+    "student": {
+      "text": "Учень",
+      "links": {
+        "dashboard": "Панель",
+        "glossary": "Словник",
+        "profile": "Профіль",
+        "settings": "Налаштування"
+      }
+    },
+    "resources": {
+      "text": "Ресурси",
+      "links": {
+        "articles": "Статті"
+      }
+    }
   }
 }
