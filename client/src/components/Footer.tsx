@@ -147,7 +147,22 @@ const Footer: React.FC = () => {
         </section>
         <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 text-center pt-2 text-indigo-100 opacity-75 text-sm pb-8">
           <small>&copy; 2024 Easy-Peasy English. All rights reserved.</small>
-          <small>Terms &#x2022; Privacy Policy</small>
+
+          <small>
+            <a
+              href="https://www.termsandconditionsgenerator.com/live.php?token=XZInxv3hHr224LlY0pjEShgx1wjrbmVy"
+              target="_blank"
+            >
+              Terms and Conditions
+            </a>{" "}
+            &#x2022;{" "}
+            <a
+              href="https://www.termsfeed.com/live/1ee655fd-6911-48fc-a079-eae0056b61a2"
+              target="_blank"
+            >
+              Privacy Policy
+            </a>
+          </small>
           <div>{renderedSocials}</div>
         </section>
       </div>
