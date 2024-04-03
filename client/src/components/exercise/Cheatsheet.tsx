@@ -2,6 +2,7 @@ import { BsChevronCompactLeft, BsChevronCompactRight } from "react-icons/bs";
 import React, { useState } from "react";
 import ReactMarkdown from "react-markdown";
 import { Level } from "../../types/level";
+import { useTranslation } from "react-i18next";
 
 interface CheatsheetProps {
   topic: string;
@@ -9,6 +10,7 @@ interface CheatsheetProps {
   content: string;
 }
 const Cheatsheet: React.FC<CheatsheetProps> = ({ topic, level, content }) => {
+  const { t } = useTranslation("exercise");
   const [isExpanded, setIsExpanded] = useState(true);
 
   return (
@@ -30,7 +32,7 @@ const Cheatsheet: React.FC<CheatsheetProps> = ({ topic, level, content }) => {
       >
         <header>
           <h3 className="text-2xl md:text-xl font-bold text-indigo-800 dark:text-indigo-100 my-4">
-            Cheatsheet |{" "}
+            {t("cheatsheet")} |{" "}
             <span className="p-2 dark:bg-[#484848] bg-orange-400 rounded-md text-white text-sm">
               {level}
             </span>

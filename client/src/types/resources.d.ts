@@ -146,6 +146,16 @@ interface Resources {
       "line2": "Exercises per week you want to do:"
     }
   },
+  "exercise": {
+    "tabs": "Exercises",
+    "descriptions": {
+      "text": "Task Description"
+    },
+    "cheatsheet": "Cheatsheet",
+    "actions": {
+      "check-out": "Check out"
+    }
+  },
   "glossary": {
     "header": {
       "mainHeader": "Glossary"

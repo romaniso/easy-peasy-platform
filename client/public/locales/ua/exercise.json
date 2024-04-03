@@ -1,0 +1,10 @@
+{
+  "tabs": "Вправи",
+  "descriptions": {
+    "text": "Опис завдання"
+  },
+  "cheatsheet": "Шпаргалка",
+  "actions": {
+    "check-out": "Перевірити"
+  }
+}

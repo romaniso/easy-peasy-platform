@@ -12,6 +12,7 @@ import { UserResult } from "../../types/userResult";
 import { ExerciseTypeName } from "../../enums/exercise";
 import ExerciseMatchHeaders from "./ExerciseMatchHeaders";
 import ExerciseListenAndType from "./ExerciseListenAndType";
+import { useTranslation } from "react-i18next";
 
 interface ExerciseBodyProps {
   onSubmit(e: React.FormEvent<HTMLFormElement>): void;
@@ -28,7 +29,7 @@ interface ExerciseBodyProps {
 
 const ExerciseBody: React.FC<ExerciseBodyProps> = ({
   onSubmit,
-  btnText = "Check out",
+  btnText,
   exerciseType,
   questions,
   results,
@@ -36,6 +37,7 @@ const ExerciseBody: React.FC<ExerciseBodyProps> = ({
   onSelect,
   text,
 }): React.ReactElement => {
+  const { t } = useTranslation("exercise");
   const handleSelectChange = (
     index: number,
     event: React.ChangeEvent<HTMLInputElement> | string | string[]
@@ -67,7 +69,7 @@ const ExerciseBody: React.FC<ExerciseBodyProps> = ({
             onChange={handleSelectChange}
           />
           <Button primary rounded className="w-full md:w-1/5" type="submit">
-            {btnText}
+            {btnText || t("actions.check-out")}
           </Button>
         </form>
       );
@@ -82,7 +84,7 @@ const ExerciseBody: React.FC<ExerciseBodyProps> = ({
             onChange={handleSelectChange}
           />
           <Button primary rounded className="w-full md:w-1/5" type="submit">
-            {btnText}
+            {btnText || t("actions.check-out")}
           </Button>
         </form>
       );
@@ -97,7 +99,7 @@ const ExerciseBody: React.FC<ExerciseBodyProps> = ({
             onChange={handleSelectChange}
           />
           <Button primary rounded className="w-full md:w-1/5" type="submit">
-            {btnText}
+            {btnText || t("actions.check-out")}
           </Button>
         </form>
       );
@@ -111,7 +113,7 @@ const ExerciseBody: React.FC<ExerciseBodyProps> = ({
             onChange={handleSelectChange}
           />
           <Button primary rounded className="w-full md:w-1/5" type="submit">
-            {btnText}
+            {btnText || t("actions.check-out")}
           </Button>
         </form>
       );
@@ -125,7 +127,7 @@ const ExerciseBody: React.FC<ExerciseBodyProps> = ({
             onChange={handleSelectChange}
           />
           <Button primary rounded className="w-full md:w-2/5" type="submit">
-            {btnText}
+            {btnText || t("actions.check-out")}
           </Button>
         </form>
       );
@@ -140,7 +142,7 @@ const ExerciseBody: React.FC<ExerciseBodyProps> = ({
             onChange={handleSelectChange}
           />
           <Button primary rounded className="w-full md:w-1/5" type="submit">
-            {btnText}
+            {btnText || t("actions.check-out")}
           </Button>
         </form>
       );
@@ -169,7 +171,7 @@ const ExerciseBody: React.FC<ExerciseBodyProps> = ({
             className="w-full md:w-1/5"
             onClick={onSubmit}
           >
-            {btnText}
+            {btnText || t("actions.check-out")}
           </Button>
         </>
       );
@@ -202,7 +204,7 @@ const ExerciseBody: React.FC<ExerciseBodyProps> = ({
               onChange={handleSelectChange}
             />
             <Button primary rounded className="w-full md:w-1/5" type="submit">
-              {btnText}
+              {btnText || t("actions.check-out")}
             </Button>
           </form>
         </ExerciseMatchHeaders>

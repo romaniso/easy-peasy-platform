@@ -2,6 +2,7 @@ import React, { forwardRef, useState } from "react";
 import Button from "../common/Button";
 import Modal from "../common/Modal";
 import { FaQuestionCircle } from "react-icons/fa";
+import { useTranslation } from "react-i18next";
 //import GiffSample from '../../assets/images/fill-box-giff.gif'
 interface ExerciseHeader {
   title: string;
@@ -13,6 +14,7 @@ const ExerciseHeader: React.FC<ExerciseHeader> = ({
   instruction,
   forwardedRef,
 }) => {
+  const { t } = useTranslation("exercise");
   const [showModal, setShowModal] = useState(false);
   return (
     <header ref={forwardedRef}>
@@ -20,11 +22,12 @@ const ExerciseHeader: React.FC<ExerciseHeader> = ({
         {title}
       </h2>
       <p className="text-lg md:text-2xl font-bold text-indigo-400 dark:text-indigo-200 mb-2 md:mb-4 flex items-center gap-4">
-        <span>Task Description</span>
-        <FaQuestionCircle
+        <span>{t("descriptions.text")}</span>
+        {/* @TODO: create modals */}
+        {/*<FaQuestionCircle
           className="cursor-pointer hover:scale-110 transition-transform duration-300"
           onClick={() => setShowModal(!showModal)}
-        />
+        />*/}
       </p>
       <p className="inline-block text-sm md:text-base text-orange-500 dark:text-orange-500 bg-stone-50 dark:bg-[#484848] shadow-inner p-3 md:p-5 mb-4 rounded-lg w-full">
         {instruction}

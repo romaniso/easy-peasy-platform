@@ -1,0 +1,10 @@
+{
+  "tabs": "Exercises",
+  "descriptions": {
+    "text": "Task Description"
+  },
+  "cheatsheet": "Cheatsheet",
+  "actions": {
+    "check-out": "Check out"
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "tabs": "Ćwiczenia",
+  "descriptions": {
+    "text": "Opis zadania"
+  },
+  "cheatsheet": "Ściąga",
+  "actions": {
+    "check-out": "Sprawdź"
+  }
+}
