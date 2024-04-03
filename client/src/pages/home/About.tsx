@@ -24,24 +24,28 @@ export const About = () => {
             text={t("about.cards.grammar.description")}
             image={GrammarImg}
             buttonTxt={t("about.cards.btnText")}
+            link="grammar"
           />
           <Card
             title={t("about.cards.vocabulary.title")}
             text={t("about.cards.vocabulary.description")}
             image={VocabularyImg}
             buttonTxt={t("about.cards.btnText")}
+            link="vocabulary"
           />
           <Card
             title={t("about.cards.reading.title")}
             text={t("about.cards.reading.description")}
             image={ReadingImg}
             buttonTxt={t("about.cards.btnText")}
+            link="reading"
           />
           <Card
             title={t("about.cards.listening.title")}
             text={t("about.cards.listening.description")}
             image={ListeningImg}
             buttonTxt={t("about.cards.btnText")}
+            link="listening"
           />
         </section>
       </div>
