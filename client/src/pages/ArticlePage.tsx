@@ -12,6 +12,7 @@ import { ShareButtons } from "../components/common/ShareButtons";
 import { decodeAndFormatURL } from "../utils/decodeAndFormatUrl";
 import { AsideSection } from "../components/articles/AsideSection";
 import { PreviewArticle } from "../types/previewArticle";
+import { Loader } from "../components/common/Loader";
 
 const ARTICLE_URL = "/articles";
 export const ArticlePage = () => {
@@ -54,6 +55,9 @@ export const ArticlePage = () => {
 
     fetchRelatedArticles();
   }, [articleData]);
+
+  if (isLoading) return <Loader />;
+
   return (
     <div className="relative">
       <img

@@ -3,6 +3,7 @@ import { ArticlesSection } from "../components/articles/ArticlesSection";
 import axios from "../api/axios";
 import useTop from "../hooks/useTop";
 import { AsideSection } from "../components/articles/AsideSection";
+import { Loader } from "../components/common/Loader";
 
 const ARTICLES_URL = "/articles";
 
@@ -26,6 +27,8 @@ export const ArticlesPreviewPage = () => {
     })();
   }, []);
 
+  if (isLoading) return <Loader />;
+
   return (
     <div className="my-24 container mx-auto px-4">
       <h1 className="text-6xl text-center font-bold text-orange-500 drop-shadow mb-6">
@@ -33,16 +36,12 @@ export const ArticlesPreviewPage = () => {
       </h1>
       <div className="flex gap-5 flex-wrap md:flex-nowrap">
         <main className="flex-1 basis-full md:basis-3/4 overflow-hidden">
-          {isLoading ? (
-            <p>Loading...</p>
-          ) : (
-            data?.map(({ section, data }) => {
-              if (section !== "recent")
-                return (
-                  <ArticlesSection title={section} data={data} key={section} />
-                );
-            })
-          )}
+          {data?.map(({ section, data }) => {
+            if (section !== "recent")
+              return (
+                <ArticlesSection title={section} data={data} key={section} />
+              );
+          })}
         </main>
         {data?.map(({ section, data }) => {
           if (section === "recent")

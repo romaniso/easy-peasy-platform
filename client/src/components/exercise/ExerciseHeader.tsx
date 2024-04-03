@@ -1,7 +1,7 @@
 import React, { forwardRef, useState } from "react";
 import Button from "../common/Button";
 import Modal from "../common/Modal";
-import { FaQuestionCircle } from "react-icons/fa";
+//import { FaQuestionCircle } from "react-icons/fa";
 import { useTranslation } from "react-i18next";
 //import GiffSample from '../../assets/images/fill-box-giff.gif'
 interface ExerciseHeader {
