@@ -1,8 +1,8 @@
 import { Request, Response } from "express";
-import { Article } from "../models/Article";
+import { Article } from "../models/Article.js";
 import { Section } from "../types/section";
-import { PreviewSectionData } from "../types/previewSectionData";
-import { haveCommonWord } from "../utils/haveCommonWord";
+import { PreviewSectionData } from "../types/previewSectionData.js";
+import { haveCommonWord } from "../utils/haveCommonWord.js";
 
 export class ArticleController {
   async getAllArticles(req: Request, res: Response) {

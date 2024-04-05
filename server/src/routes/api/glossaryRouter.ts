@@ -1,7 +1,7 @@
 import express, { Router } from "express";
-import { GlossaryController } from "../../controllers/glossaryController";
-import { RoleName } from "../../enums/role";
-import { verifyRoles } from "../../middleware/verifyRoles";
+import { GlossaryController } from "../../controllers/glossaryController.js";
+import { RoleName } from "../../enums/role.js";
+import { verifyRoles } from "../../middleware/verifyRoles.js";
 
 export const glossaryRouter: Router = express.Router();
 const controller = new GlossaryController();

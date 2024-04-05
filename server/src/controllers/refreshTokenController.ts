@@ -1,8 +1,8 @@
 import { Request, Response } from "express";
-import { User } from "../models/User";
-import { generateAccessToken } from "../utils/generateAccessToken";
+import { User } from "../models/User.js";
+import { generateAccessToken } from "../utils/generateAccessToken.js";
 import jwt from "jsonwebtoken";
-import { config } from "../../config/config";
+import { config } from "../config/config.js";
 
 export class RefreshTokenController {
   async handleRefreshToken(req: Request, res: Response) {

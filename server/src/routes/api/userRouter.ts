@@ -1,8 +1,8 @@
 import express, { Router } from "express";
-import { UserController } from "../../controllers/userController";
-import { RoleName } from "../../enums/role";
-import { verifyRoles } from "../../middleware/verifyRoles";
-import { config } from "../../../config/config";
+import { UserController } from "../../controllers/userController.js";
+import { RoleName } from "../../enums/role.js";
+import { verifyRoles } from "../../middleware/verifyRoles.js";
+import { config } from "../../config/config.js";
 
 export const userRouter: Router = express.Router();
 const controller = new UserController();

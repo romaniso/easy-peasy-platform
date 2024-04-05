@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
-import { ExerciseSet, IExerciseSet } from "../models/ExerciseSet";
-import { Section } from "../models/Section";
+import { ExerciseSet, IExerciseSet } from "../models/ExerciseSet.js";
+import { Section } from "../models/Section.js";
 
 export class SectionController {
   async getSetsBySection(req: Request, res: Response) {

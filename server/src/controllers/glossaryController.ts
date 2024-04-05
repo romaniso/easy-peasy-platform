@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { User } from "../models/User";
+import { User } from "../models/User.js";
 import { WordEntity } from "../types/wordEntity";
 import { v4 as uuid } from "uuid";
 

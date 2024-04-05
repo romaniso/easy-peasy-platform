@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
-import { User } from "../models/User";
+import { User } from "../models/User.js";
 import bcrypt from "bcrypt";
-import { generateAccessToken } from "../utils/generateAccessToken";
+import { generateAccessToken } from "../utils/generateAccessToken.js";
 
 export class AuthController {
   async login(req: Request, res: Response) {
@@ -9,12 +9,10 @@ export class AuthController {
       const { username, password } = req.body;
       const foundUser = await User.findOne({ username });
       if (!foundUser) {
-        return res
-          .status(401)
-          .json({
-            message:
-              "User with this username was not found. Try with a different user name.",
-          });
+        return res.status(401).json({
+          message:
+            "User with this username was not found. Try with a different user name.",
+        });
       }
       // evaluate password
       const match = bcrypt.compareSync(password, foundUser.password);

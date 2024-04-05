@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { parseISO, isValid, format, addMonths, parse } from "date-fns";
-import { IUser, User } from "../models/User";
-import { deleteObjectByUrl, uploadFile } from "../services/s3";
+import { IUser, User } from "../models/User.js";
+import { deleteObjectByUrl, uploadFile } from "../services/s3.js";
 import { unlink } from "fs/promises";
 import { CompletedActivityEntity } from "../types/completedActivityEntity";
 import { GoalsObj } from "../types/goals";

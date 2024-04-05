@@ -13,14 +13,8 @@
     "resolveJsonModule": true,
     "baseUrl": "./",
     "paths": {
-      "*": [
-        "types/*"
-      ]
+      "*": ["types/*"]
     }
   },
-  "include": [
-    "src/**/*.ts",
-    "src/**/*.d.ts",
-    "src/**/*.tsx"
-  ]
+  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx"]
 }

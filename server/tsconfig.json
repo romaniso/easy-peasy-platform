@@ -1,27 +1,34 @@
 {
-  "ts-node": {
-    "esm": true,
-    "experimentalSpecifierResolution": "node"
-  },
+  //  "ts-node": {
+  //    "esm": true,
+  //    "experimentalSpecifierResolution": "node"
+  //  },
   "compilerOptions": {
-    "allowSyntheticDefaultImports": true,
-    "declaration": true,
-    "esModuleInterop": true,
-    "types": ["node", "dotenv"],
-    "lib": [
-      "es2021"
-    ],
-    "module": "esnext",
-    "moduleResolution": "node",
-    "outDir": "dist",
+    // "downlevelIteration": true,
+    // "allowSyntheticDefaultImports": true,
+    // "sourceMap": true,
+    // "declaration": true,
+    // "types": ["node", "dotenv"],
+    // "lib": ["es2021"],
+    "moduleResolution": "Node",
+    "outDir": "./dist",
     "strict": true,
     "target": "es2021",
-    "experimentalDecorators": true,
+    "module": "ES6",
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true
+    // "experimentalDecorators": true,
+    // "noImplicitAny": true,
+    // "preserveConstEnums": true,
+    // "alwaysStrict": true,
+    // "importHelpers": false,
+    // "emitDecoratorMetadata": true
   },
-//  "outDir": "./dist",
-//  "rootDir": "./src",
-  "extends": "../tsconfig.json",
-  "include": ["src"],
-  "exclude": ["node_modules", "dist/*"],
-  "lib": ["es6"],
+  "include": ["src/**/*.ts"],
+  "exclude": ["node_modules", "**/*.spec.ts"]
+  //  "extends": "../tsconfig.json",
+  //  // "include": ["./src/**/*"],
+  //  "include": ["src/**/*.ts", "src/**/*.d.ts"],
+  //  "exclude": ["node_modules", "dist/*"]
 }

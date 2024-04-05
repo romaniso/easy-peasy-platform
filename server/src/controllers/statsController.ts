@@ -1,9 +1,9 @@
 import { Request, Response } from "express";
-import { User } from "../models/User";
-import { calculateAverageMark } from "../utils/calculateAverageMark";
+import { User } from "../models/User.js";
+import { calculateAverageMark } from "../utils/calculateAverageMark.js";
 import { CompletedActivityEntity } from "../types/completedActivityEntity";
-import { calculateRestInPercentage } from "../utils/calculateRestInPercentage";
-import { calculateActivityCountMonthly } from "../utils/calculateActivityCountMonthly";
+import { calculateRestInPercentage } from "../utils/calculateRestInPercentage.js";
+import { calculateActivityCountMonthly } from "../utils/calculateActivityCountMonthly.js";
 
 export class StatsController {
   async getAllStats(req: Request, res: Response) {

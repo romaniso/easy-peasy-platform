@@ -1,10 +1,10 @@
 import { Request, Response } from "express";
-import { User } from "../models/User";
-import { Role } from "../models/Role";
-import { RoleName } from "../enums/role";
+import { User } from "../models/User.js";
+import { Role } from "../models/Role.js";
+import { RoleName } from "../enums/role.js";
 import bcrypt from "bcrypt";
 import { validationResult } from "express-validator";
-import { VocabularyLimit } from "../enums/vocabularyLimit";
+import { VocabularyLimit } from "../enums/vocabularyLimit.js";
 
 export class RegisterController {
   async registration(req: Request, res: Response) {
@@ -20,12 +20,10 @@ export class RegisterController {
       const duplicate = await User.findOne({ username }).exec();
       if (duplicate) {
         // Conflict
-        return res
-          .status(409)
-          .json({
-            message:
-              "This user name already exists. Please, insert something different.",
-          });
+        return res.status(409).json({
+          message:
+            "This user name already exists. Please, insert something different.",
+        });
       } else {
         // Register a new user
         // encrypt the password
@@ -39,11 +37,9 @@ export class RegisterController {
           vocabularyLimit: VocabularyLimit.StandardLimit,
         });
         await newUser.save();
-        return res
-          .status(201)
-          .json({
-            message: `New user ${username} has been successfully signed in.`,
-          });
+        return res.status(201).json({
+          message: `New user ${username} has been successfully signed in.`,
+        });
       }
     } catch (err) {
       console.error(err);

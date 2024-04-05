@@ -1,11 +1,11 @@
 import { Request, Response } from "express";
-import { Exercise } from "../models/Exercise";
-import { Cheatsheet } from "../models/Cheatsheet";
-import { Reading } from "../models/Reading";
-import { Listening } from "../models/Listening";
-import { ExerciseSet, IExerciseSet } from "../models/ExerciseSet";
-import { ISection, Section } from "../models/Section";
-import { haveCommonWord } from "../utils/haveCommonWord";
+import { Exercise } from "../models/Exercise.js";
+import { Cheatsheet } from "../models/Cheatsheet.js";
+import { Reading } from "../models/Reading.js";
+import { Listening } from "../models/Listening.js";
+import { ExerciseSet, IExerciseSet } from "../models/ExerciseSet.js";
+import { ISection, Section } from "../models/Section.js";
+import { haveCommonWord } from "../utils/haveCommonWord.js";
 
 export class ExerciseController {
   async getExerciseSet(req: Request, res: Response) {
