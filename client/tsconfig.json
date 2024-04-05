@@ -1,7 +1,16 @@
 {
-  "extends": "../tsconfig.json",
   "compilerOptions": {
-    "jsx": "react-jsx"
+    "target": "esnext",
+    "module": "esnext",
+    "moduleResolution": "node",
+    "skipLibCheck": true,
+    "jsx": "react-jsx",
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "isolatedModules": true,
+    "strict": true,
+    "noEmit": true,
+    "resolveJsonModule": true
   },
   "typeRoots": ["./src/types", "./node_modules/@types"],
   "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx"]
