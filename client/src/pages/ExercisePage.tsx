@@ -6,7 +6,7 @@ import Panel from "../components/common/Panel";
 import ExerciseSet from "../components/exercise/ExerciseSet";
 import Cheatsheet from "../components/exercise/Cheatsheet";
 import Breadcrumbs from "../components/common/Breadcrumbs";
-import axios from "axios";
+import axios from "../api/axios";
 import Reading from "../components/exercise/Reading";
 import CustomSkeleton from "../components/common/Skeleton";
 // Types

@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import useTop from "../hooks/useTop";
-import axios from "axios";
+import axios from "../api/axios";
 import Card from "../components/common/Card";
 import Skeleton from "../components/common/Skeleton";
 import { Level } from "../types/level";
