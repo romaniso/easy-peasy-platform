@@ -33,9 +33,7 @@ const PreviewPage: React.FC = () => {
   useEffect(() => {
     const getSectionSets = async (): Promise<void> => {
       try {
-        const { data } = await axios.get<ExerciseSet[]>(
-          `http://localhost:5000/section${pathname}`
-        );
+        const { data } = await axios.get<ExerciseSet[]>(`/section${pathname}`);
         console.log("response data is: ", data);
         setSets(data);
         setIsLoading(false);

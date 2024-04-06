@@ -51,7 +51,7 @@ const ExercisePage: React.FC = () => {
           cheatsheet: ICheatsheet;
           reading: IReading;
           listening: IListening;
-        }>(`http://localhost:5000/exercise/${setApiKey}`);
+        }>(`/exercise/${setApiKey}`);
         const { section, exercises, cheatsheet, reading, listening } = data;
 
         //@FIXME: useReducer?
