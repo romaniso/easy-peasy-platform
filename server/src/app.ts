@@ -20,15 +20,19 @@ import { statsRouter } from "./routes/statsRouter.js";
 import { articleRouter } from "./routes/api/articleRouter.js";
 dotenv.config();
 const PORT: number = parseInt(process.env.PORT as string, 10) || 5000;
+const HOST: string =
+  process.env.NODE_ENV?.trim() === "development" ? "localhost" : "0.0.0.0.";
 
 const app: Express = express();
 
 const start = async () => {
   try {
     await connectDB();
-    app.listen(PORT, "0.0.0.0.", () => {
-      console.log(`[server]: Server is running at http://localhost:${PORT}`);
+    app.listen(PORT, HOST, () => {
+      console.log(`[server]: Server is running at http://${HOST}:${PORT}`);
     });
+
+    console.log("ENV from process.env.NODE_ENV: ", process.env.NODE_ENV);
   } catch (err) {
     console.error(err);
   }
