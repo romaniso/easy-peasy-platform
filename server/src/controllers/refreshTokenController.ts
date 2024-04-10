@@ -21,7 +21,7 @@ export class RefreshTokenController {
         (err, decoded) => {
           if (err) {
             console.error("JWT Verification Error:", err.message);
-            return res.sendStatus(403); // invalid token
+            return res.status(403); // invalid token
           } else {
             const accessToken = generateAccessToken(
               (decoded as jwt.JwtPayload).UserInfo.username,
@@ -51,7 +51,7 @@ export class RefreshTokenController {
       );
     } catch (err) {
       console.error(err);
-      res.status(401).json({ message: "Login error" });
+      return res.status(401).json({ message: "Login error" });
     }
   }
 }
