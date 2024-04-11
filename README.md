@@ -19,8 +19,8 @@ This short gif presents the main features of the app:
 
 ![Quick overview of the project](https://i.ibb.co/5h5Vd0B/ezgif-3-9b8626aaa2.gif)
 
-<!--Additionally, if you would like to watch the complete overview video with voice description, you can
-[go here](https://www.youtube.com).-->
+Additionally, if you would like to watch the complete overview video with voice description, you can
+[go here](https://www.youtube.com/watch?v=KQTOrAbNrms&ab_channel=RomanIsopenko).
 
 ## Features
 
