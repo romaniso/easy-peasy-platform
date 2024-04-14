@@ -9,6 +9,7 @@ import useAuth from "../hooks/useAuth";
 import ProfilePreview from "./ProfilePreview";
 import { useTranslation } from "react-i18next";
 import { Logo } from "./common/Logo";
+import { LanguageSwitcher } from "./settings/LanguageSwitcher";
 
 export interface SubmenuItem {
   label: string;
@@ -126,6 +127,9 @@ const Navbar: React.FC = () => {
         >
           {renderedItems}
 
+          <div className="my-7 md:ml-2 md:my-0 border-b border-indigo-200 md:border-none">
+            <LanguageSwitcher isHome />
+          </div>
           {isLogged ? (
             <div className="flex justify-between items-start">
               <ProfilePreview dropdown />

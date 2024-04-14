@@ -31,8 +31,6 @@ const start = async () => {
     app.listen(PORT, HOST, () => {
       console.log(`[server]: Server is running at http://${HOST}:${PORT}`);
     });
-
-    console.log("ENV from process.env.NODE_ENV: ", process.env.NODE_ENV);
   } catch (err) {
     console.error(err);
   }
