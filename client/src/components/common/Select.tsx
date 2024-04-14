@@ -1,5 +1,6 @@
-import React, { ReactElement, useEffect, useRef, useState } from "react";
+import { ReactElement, useEffect, useRef, useState } from "react";
 import { PiCaretUpDownLight } from "react-icons/pi";
+import className from "classnames";
 
 interface SelectItem<T> {
   label: string | number;
@@ -11,12 +12,16 @@ interface SelectProps<T> {
   onChange?: (option: T) => void;
   defaultOption?: SelectItem<T>;
   defaultText: string | ReactElement;
+  noBorders?: true;
+  noArrows?: true;
 }
 const Select = <T,>({
   options,
   onChange,
   defaultOption,
   defaultText,
+  noBorders,
+  noArrows,
 }: SelectProps<T>) => {
   const [selectedOption, setSelectedOption] = useState<SelectItem<T> | null>(
     defaultOption || null
@@ -48,21 +53,29 @@ const Select = <T,>({
     };
   }, []);
 
+  const classes = className(
+    "dark:bg-transparent  rounded px-2 md:px-4 py-2 flex items-center justify-between cursor-pointer text-indigo-800 dark:text-indigo-400 hover:bg-indigo-50 dark:hover:bg-indigo-500/10 border border-indigo-100 dark:border-indigo-500/50",
+    { "border-none rounded-full": noBorders }
+  );
+
   return (
     <div className="relative w-full" ref={selectRef}>
-      <div
-        className="border border-indigo-100 dark:bg-transparent dark:border-indigo-500/50 rounded px-2 md:px-4 py-2 flex items-center justify-between cursor-pointer text-indigo-800 dark:text-indigo-400 hover:bg-indigo-50 dark:hover:bg-indigo-500/10"
-        onClick={() => setIsOpen(!isOpen)}
-      >
+      <div className={classes} onClick={() => setIsOpen(!isOpen)}>
         {selectedOption ? (
           <>
-            <span className="mr-4">{defaultText}</span>
+            <span className={`${noArrows ? "" : "mr-4"}`}>{defaultText}</span>
             {selectedOption.icon && selectedOption.icon}
           </>
         ) : (
           <>
-            <span className="mr-4">{defaultText}</span>
-            <PiCaretUpDownLight />
+            {noArrows ? (
+              <span>{defaultText}</span>
+            ) : (
+              <>
+                <span className="mr-4">{defaultText}</span>
+                <PiCaretUpDownLight />
+              </>
+            )}
           </>
         )}
       </div>
