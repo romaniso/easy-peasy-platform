@@ -178,7 +178,7 @@ interface Resources {
   "home": {
     "hero": {
       "platformDescription": "Your platform for learning English",
-      "learningDescription": "Here you can learn English with a variety of educational materials prepared for students at different levels. You will find something useful for yourself!",
+      "learningDescription": "Learn English with our diverse educational materials tailored for all levels. Find something useful for you!",
       "actions": {
         "getStarted": "Get Started",
         "signUp": "Sign Up"
