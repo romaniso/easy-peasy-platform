@@ -1,7 +1,7 @@
 {
   "name": "easy-peasy-server",
-  "version": "1.0.0",
-  "description": "",
+  "version": "0.1.0",
+  "description": "a backend NodeJS application for Easy-Peasy English project",
   "main": "dist/app.js",
   "type": "module",
   "scripts": {
@@ -10,8 +10,8 @@
     "dev": "set NODE_ENV=development && nodemon --watch src --exec node --no-warnings=ExperimentalWarning --loader ts-node/esm ./src/app.ts"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": "Roman Isopenko",
+  "license": "Educational Community License",
   "dependencies": {
     "@types/uuid": "^9.0.8",
     "aws-sdk": "^2.1548.0",

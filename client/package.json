@@ -1,8 +1,11 @@
 {
   "name": "easy-peasy-frontend",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.1.0",
   "type": "module",
+  "author": "Roman Isopenko",
+  "description": "a frontend application for Easy-Peasy English project",
+  "license": "Educational Community License",
   "scripts": {
     "dev": "vite",
     "dev:mobile": "vite --host",
