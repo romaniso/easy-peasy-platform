@@ -1,19 +1,39 @@
 import { calculateRestInPercentage } from "./calculateRestInPercentage";
 
-test("Calculate 1 / 10 to equal 10 in percentage", () => {
-  expect(calculateRestInPercentage(10, 1)).toBe(10);
+it("should calculate rest by total in a rounded percentage", () => {
+  const total = 10;
+  const rest = 1;
+
+  const result = calculateRestInPercentage(total, rest);
+
+  const expectedValue = Math.round((rest / total) * 100);
+
+  expect(result).toBe(expectedValue);
 });
 
-test("Calculate decimal 1.5 / 10 to equal 15 in percentage", () => {
-  expect(calculateRestInPercentage(10, 1.5)).toBe(15);
+it("should calculate decimal rest by total in a rounded percentage", () => {
+  const total = 10;
+  const rest = 1.5;
+
+  const result = calculateRestInPercentage(total, rest);
+
+  const expectedValue = Math.round((rest / total) * 100);
+
+  expect(result).toBe(expectedValue);
 });
 
-test("Round the percentage out of a decimal output: 9 / 2", () => {
+it("should round the percentage out of a decimal output: 9 / 2", () => {
   expect(calculateRestInPercentage(9, 2)).toBe(22);
   expect(calculateRestInPercentage(9, 6)).toBe(67);
 });
 
-test("Always returns  a defined value", () => {
-  expect(calculateRestInPercentage(10, 0)).toBeDefined();
-  expect(calculateRestInPercentage(0, 0)).toBeDefined();
+it("should always returns a defined value", () => {
+  const total1 = 10;
+  const rest1 = 0;
+
+  const total2 = 0;
+  const rest2 = 0;
+
+  expect(calculateRestInPercentage(total1, rest1)).toBeDefined();
+  expect(calculateRestInPercentage(total2, rest2)).toBeDefined();
 });
