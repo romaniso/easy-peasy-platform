@@ -221,19 +221,29 @@ button > svg {
     @apply text-indigo-900 dark:text-indigo-200 text-base md:text-lg;
   }
   .markdown-content p {
-    @apply text-base text-orange-500 bg-stone-50 dark:bg-black/30 shadow-inner p-3 mb-5 rounded-lg;
+    @apply text-base text-indigo-900 dark:text-indigo-200 bg-stone-50 dark:bg-black/30 shadow-inner p-3 mb-5 rounded-lg;
+  }
+  .markdown-content p:has(img),
+  .markdown-content p:has(ul) {
+    @apply p-0 bg-transparent dark:bg-transparent rounded-none shadow-none;
   }
   .markdown-content h2 {
-    @apply text-3xl font-bold text-indigo-400 mb-5 mt-12;
+    @apply pl-2 text-3xl font-bold text-indigo-400 dark:text-orange-500 mb-5 mt-12;
   }
   .markdown-content h3 {
-    @apply text-xl font-bold mb-1;
+    @apply pl-2 dark:text-orange-500 text-xl font-bold mb-1;
+  }
+  .markdown-content h4 {
+    @apply pl-2 dark:text-orange-500 text-lg font-bold mb-0.5;
   }
   .markdown-content ul {
-    @apply mb-5 shadow-inner bg-stone-50 dark:bg-black/30 px-3 py-2 rounded-md;
+    @apply mb-5 pl-3 list-disc;
+  }
+  .markdown-content li {
+    @apply ml-3;
   }
   .markdown-content img {
-    @apply p-5 md:p-10;
+    @apply p-1 md:p-10;
   }
   .markdown-reading {
     @apply px-3 lg:px-6 py-4 lg:py-10 text-indigo-900 dark:text-indigo-200 text-base md:text-lg;
@@ -244,7 +254,11 @@ button > svg {
   .markdown-reading p {
     @apply mb-5;
   }
+  .markdown-content strong,
   .markdown-reading strong {
+    @apply text-orange-500 dark:text-indigo-500 px-0.5 inline-block rounded-md bg-white dark:bg-black/40 shadow-md;
+  }
+  .markdown-content em {
     @apply text-orange-500;
   }
 }
