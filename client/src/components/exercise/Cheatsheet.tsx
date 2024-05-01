@@ -15,7 +15,7 @@ const Cheatsheet: React.FC<CheatsheetProps> = ({ topic, level, content }) => {
 
   return (
     <section
-      className={`border-l dark:border-l-gray-500 transition-all duration-700 ${
+      className={`lg:border-l lg:dark:border-l-gray-500 transition-all duration-700 ${
         isExpanded ? "lg:min-w-[600px] lg:w-1/2" : "lg:max-w-[400px]"
       }  relative`}
     >
