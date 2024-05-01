@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import { Article } from "../interfaces/article";
 import { Badge } from "../components/common/Badge";
 import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 import Button from "../components/common/Button";
 import { Link } from "react-router-dom";
 import { ShareButtons } from "../components/common/ShareButtons";
@@ -85,7 +86,10 @@ export const ArticlePage = () => {
             </div>
           </section>
           <section className="md:mt-8 flex flex-col items-center">
-            <ReactMarkdown className="markdown-content">
+            <ReactMarkdown
+              className="markdown-content"
+              remarkPlugins={[remarkGfm]}
+            >
               {articleData?.data}
             </ReactMarkdown>
             <Link to={`../${articleData?.section}/${articleData?.apiKey}`}>

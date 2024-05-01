@@ -1,6 +1,7 @@
 import { BsChevronCompactLeft, BsChevronCompactRight } from "react-icons/bs";
 import React, { useState } from "react";
 import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 import { Level } from "../../types/level";
 import { useTranslation } from "react-i18next";
 
@@ -41,7 +42,9 @@ const Cheatsheet: React.FC<CheatsheetProps> = ({ topic, level, content }) => {
             {topic}
           </p>
         </header>
-        <ReactMarkdown className="markdown-content">{content}</ReactMarkdown>
+        <ReactMarkdown className="markdown-content" remarkPlugins={[remarkGfm]}>
+          {content}
+        </ReactMarkdown>
       </div>
     </section>
   );
