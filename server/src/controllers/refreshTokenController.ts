@@ -11,11 +11,7 @@ export class RefreshTokenController {
       if (!cookies?.jwt) return res.sendStatus(401);
       const refreshToken: string = cookies.jwt;
 
-      const foundUser = await User.findOne({ refreshToken });
-
-      if (!foundUser) return res.sendStatus(403);
-
-      // Verify the refresh token
+      // Check if the token is valid and get decoded data
       const decoded = await new Promise((resolve, reject) => {
         jwt.verify(
           refreshToken,
@@ -31,7 +27,11 @@ export class RefreshTokenController {
         );
       });
 
-      // If token is valid, generate new access token and send response
+      const foundUser = await User.findOne({ refreshToken });
+
+      if (!foundUser) return res.sendStatus(403);
+
+      // Generate new access token
       const accessToken = generateAccessToken(
         (decoded as jwt.JwtPayload).UserInfo.username,
         (decoded as jwt.JwtPayload).UserInfo.roles
