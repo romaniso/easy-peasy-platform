@@ -2,10 +2,8 @@ import { Request, Response } from "express";
 import { promisify } from "util";
 import { User } from "../models/User.js";
 import { generateAccessToken } from "../utils/generateAccessToken.js";
-import jwt from "jsonwebtoken";
 import { config } from "../config/config.js";
-
-const jwt_verify = promisify(jwt.verify);
+import { jwtVerifyPromise } from "../utils/jwtVerifyPromise.js";
 
 export class RefreshTokenController {
   async handleRefreshToken(req: Request, res: Response) {
@@ -19,10 +17,16 @@ export class RefreshTokenController {
       if (!foundUser) return res.sendStatus(403);
 
       // Check if the token is valid and get decoded data
-      const decoded = await jwt_verify(refreshToken, config.refreshToken as string) as jwt.JwtPayload;
+      const decoded = await jwtVerifyPromise(
+        refreshToken,
+        config.refreshToken as string
+      );
 
       // Generate new access token
-      const accessToken = generateAccessToken(decoded.UserInfo.username, decoded.UserInfo.roles);
+      const accessToken = generateAccessToken(
+        decoded.UserInfo.username,
+        decoded.UserInfo.roles
+      );
 
       const user = {
         avatar: foundUser.avatar,
@@ -44,8 +48,10 @@ export class RefreshTokenController {
       });
     } catch (err) {
       console.error(err);
-      if (err.name === 'TokenExpiredError') {
-        return res.status(401).json({ message: "Token expired, please log in again" });
+      if ((err as Error).name === "TokenExpiredError") {
+        return res
+          .status(401)
+          .json({ message: "Token expired, please log in again" });
       }
       return res.status(401).json({ message: "Login error" });
     }
