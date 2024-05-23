@@ -18,12 +18,22 @@ import { credentials } from "./middleware/credentials.js";
 import { connectDB } from "./config/db.js";
 import { statsRouter } from "./routes/statsRouter.js";
 import { articleRouter } from "./routes/api/articleRouter.js";
+import { rateLimit } from "express-rate-limit";
+
 dotenv.config();
 const PORT: number = parseInt(process.env.PORT as string, 10) || 5000;
 const HOST: string =
   process.env.NODE_ENV?.trim() === "development" ? "localhost" : "0.0.0.0.";
 
 const app: Express = express();
+
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  limit: 100, // Limit each IP to 100 requests per `window` (here, per 15 minutes).
+  standardHeaders: "draft-7", // draft-6: `RateLimit-*` headers; draft-7: combined `RateLimit` header
+  legacyHeaders: false, // Disable the `X-RateLimit-*` headers.
+  // store: ... , // Redis, Memcached, etc. See below.
+});
 
 const start = async () => {
   try {
@@ -37,6 +47,7 @@ const start = async () => {
 };
 
 // MIDDLEWARES
+app.use(limiter);
 app.use(express.json());
 app.use(cookieParser());
 app.use(credentials);
