@@ -13,6 +13,7 @@ import { ExerciseTypeName } from "../../enums/exercise";
 import ExerciseMatchHeaders from "./ExerciseMatchHeaders";
 import ExerciseListenAndType from "./ExerciseListenAndType";
 import { useTranslation } from "react-i18next";
+import { ExerciseActions } from "./ExerciseActions";
 
 interface ExerciseBodyProps {
   onSubmit(e: React.FormEvent<HTMLFormElement>): void;
@@ -68,9 +69,11 @@ const ExerciseBody: React.FC<ExerciseBodyProps> = ({
             results={results}
             onChange={handleSelectChange}
           />
-          <Button primary rounded className="w-full md:w-1/5" type="submit">
-            {btnText || t("actions.check-out")}
-          </Button>
+          <ExerciseActions
+            checkOutTxt={btnText || t("actions.check-out")}
+            answersTxt="See correct answers"
+            results={results}
+          />
         </form>
       );
       break;
@@ -83,9 +86,11 @@ const ExerciseBody: React.FC<ExerciseBodyProps> = ({
             selections={selections}
             onChange={handleSelectChange}
           />
-          <Button primary rounded className="w-full md:w-1/5" type="submit">
-            {btnText || t("actions.check-out")}
-          </Button>
+          <ExerciseActions
+            checkOutTxt={btnText || t("actions.check-out")}
+            answersTxt="See correct answers"
+            results={results}
+          />
         </form>
       );
       break;
@@ -98,9 +103,11 @@ const ExerciseBody: React.FC<ExerciseBodyProps> = ({
             selections={selections}
             onChange={handleSelectChange}
           />
-          <Button primary rounded className="w-full md:w-1/5" type="submit">
-            {btnText || t("actions.check-out")}
-          </Button>
+          <ExerciseActions
+            checkOutTxt={btnText || t("actions.check-out")}
+            answersTxt="See correct answers"
+            results={results}
+          />
         </form>
       );
       break;
@@ -112,9 +119,11 @@ const ExerciseBody: React.FC<ExerciseBodyProps> = ({
             results={results}
             onChange={handleSelectChange}
           />
-          <Button primary rounded className="w-full md:w-1/5" type="submit">
-            {btnText || t("actions.check-out")}
-          </Button>
+          <ExerciseActions
+            checkOutTxt={btnText || t("actions.check-out")}
+            answersTxt="See correct answers"
+            results={results}
+          />
         </form>
       );
       break;
@@ -126,9 +135,11 @@ const ExerciseBody: React.FC<ExerciseBodyProps> = ({
             results={results}
             onChange={handleSelectChange}
           />
-          <Button primary rounded className="w-full md:w-2/5" type="submit">
-            {btnText || t("actions.check-out")}
-          </Button>
+          <ExerciseActions
+            checkOutTxt={btnText || t("actions.check-out")}
+            answersTxt="See correct answers"
+            results={results}
+          />
         </form>
       );
       break;
@@ -141,9 +152,11 @@ const ExerciseBody: React.FC<ExerciseBodyProps> = ({
             text={text as string}
             onChange={handleSelectChange}
           />
-          <Button primary rounded className="w-full md:w-1/5" type="submit">
-            {btnText || t("actions.check-out")}
-          </Button>
+          <ExerciseActions
+            checkOutTxt={btnText || t("actions.check-out")}
+            answersTxt="See correct answers"
+            results={results}
+          />
         </form>
       );
       break;
@@ -203,9 +216,11 @@ const ExerciseBody: React.FC<ExerciseBodyProps> = ({
               selections={selections}
               onChange={handleSelectChange}
             />
-            <Button primary rounded className="w-full md:w-1/5" type="submit">
-              {btnText || t("actions.check-out")}
-            </Button>
+            <ExerciseActions
+              checkOutTxt={btnText || t("actions.check-out")}
+              answersTxt="See correct answers"
+              results={results}
+            />
           </form>
         </ExerciseMatchHeaders>
       );
