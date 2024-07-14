@@ -17,6 +17,7 @@ import SettingsPage from "./pages/SettingsPage";
 import { GlossaryPage } from "./pages/GlossaryPage";
 import { ArticlesPreviewPage } from "./pages/ArticlesPreviewPage";
 import { ArticlePage } from "./pages/ArticlePage";
+import { ResetPasswordPage } from "./pages/ResetPasswordPage";
 
 const App: React.FC = () => {
   return (
@@ -28,6 +29,7 @@ const App: React.FC = () => {
         <Route path="/" element={<RootLayout />}>
           <Route index element={<HomePage />} />
           <Route path="auth" element={<AuthenticationPage />} />
+          <Route path="reset-password" element={<ResetPasswordPage />} />
           <Route path="unauthorized" element={<UnauthorizedPage />} />
           {/*Sections*/}
           <Route path="grammar" element={<PreviewPage />} />
