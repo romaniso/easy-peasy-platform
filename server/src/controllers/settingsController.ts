@@ -8,36 +8,29 @@ export class SettingsController {
       const { username, password, newPassword } = req.body;
       const foundUser = await User.findOne({ username });
       if (!foundUser) {
-        return res
-          .sendStatus(401)
-          .json({
-            message:
-              "User with this username was not found. Try with a different user name.",
-          });
+        return res.sendStatus(401).json({
+          message:
+            "User with this username was not found. Try with a different user name.",
+        });
       }
-      // evaluate password
-      const match = bcrypt.compareSync(password, foundUser.password);
+      const match = await bcrypt.compare(password, foundUser.password);
       if (!match) {
         return res.status(401).json({ message: "Invalid password." });
       } else {
-        const prevPassMatch = bcrypt.compareSync(
+        const prevPassMatch = await bcrypt.compare(
           newPassword,
           foundUser.password
         );
         if (prevPassMatch) {
-          return res
-            .status(401)
-            .json({
-              message: "New password must be different than previous password.",
-            });
+          return res.status(401).json({
+            message: "New password must be different than previous password.",
+          });
         }
-        // create JWT and refresh token
         const hashedNewPassword = await bcrypt.hash(newPassword, 10);
         await User.updateOne(
           { _id: foundUser._id },
           { $set: { password: hashedNewPassword } }
         );
-        //@TODO: in production I need to add secure: true for https
         res.status(201).json({ message: "Password has been changed" });
       }
     } catch (err) {
