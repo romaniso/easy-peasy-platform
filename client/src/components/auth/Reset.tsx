@@ -11,6 +11,7 @@ import useUser from "../../hooks/useUser";
 import { useLocation, useNavigate } from "react-router-dom";
 import { User } from "../../interfaces/user";
 import { Logo } from "../common/Logo";
+import { GrPowerReset } from "react-icons/gr";
 
 const LOGIN_URL = "/auth";
 
@@ -98,10 +99,13 @@ export const Reset: React.FC = () => {
     <Panel className="bg-indigo-50 flex flex-col justify-between items-center max-w-[450px] h-auto md:h-[400px] overflow-hidden m-4 p-6 md:p-10 ">
       <Logo />
       <section className="flex flex-col gap-5 md:gap-10">
-        <h2 className="font-bold text-3xl text-orange-500 text-center">
-          Reset Password
-        </h2>
-        <p className="text-sm text-indigo-800">
+        <div className="flex justify-center items-center gap-2">
+          <h2 className="font-bold text-3xl text-orange-500 text-center">
+            Reset Password
+          </h2>
+          <GrPowerReset className="text-2xl text-orange-500" />
+        </div>
+        <p className="text-sm text-indigo-800 dark:text-indigo-300">
           Enter the username or email associated with your account and we'll
           send you a link to reset your password.
         </p>
