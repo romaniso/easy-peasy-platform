@@ -69,7 +69,7 @@ This project is based on MERN stack which includes:
 - **Patterns**:
   - MVC
 
-## Project Dependencies
+<!--## Project Dependencies
 
 ### Client:
 
@@ -81,7 +81,7 @@ This project is based on MERN stack which includes:
 
 ![Client Dependencies](https://i.ibb.co/Jj7YbKM/server-dep.png)
 
-![Client Dev Dependencies](https://i.ibb.co/BCcD9fg/server-devdep.png)
+![Client Dev Dependencies](https://i.ibb.co/BCcD9fg/server-devdep.png)-->
 
 ## Run Locally
 
