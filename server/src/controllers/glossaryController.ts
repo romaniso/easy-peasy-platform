@@ -61,9 +61,6 @@ export class GlossaryController {
       if (words.length === 0) {
         return res.status(400).json({ message: "Bad client request." });
       }
-
-      console.log(words);
-
       for (const wordEntity of words) {
         const { word, definition, audio, id } = wordEntity;
 
