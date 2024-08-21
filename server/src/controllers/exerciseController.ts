@@ -30,7 +30,6 @@ export class ExerciseController {
     }
   }
   async getRecommendedExerciseSets(req: Request, res: Response) {
-    //@TODO: TEST ME PLEASE
     try {
       const { key, section } = req.query;
 

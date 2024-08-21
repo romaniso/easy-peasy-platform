@@ -39,7 +39,6 @@ export class RefreshTokenController {
         goals: foundUser.goals,
       };
 
-      //@TODO: send user object for user context (non-sensitive data)
       res.json({
         username: foundUser.username,
         accessToken,
