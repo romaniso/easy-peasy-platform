@@ -1,6 +1,6 @@
 import jwt from "jsonwebtoken";
 
-export const jwtVerifyPromise = (
+export const jwtVerifyPromise = async (
   token: string,
   secretOrPublicKey: jwt.Secret,
   options?: jwt.VerifyOptions
