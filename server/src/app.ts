@@ -47,6 +47,7 @@ const start = async () => {
 };
 
 // MIDDLEWARES
+app.set("trust proxy", true);
 app.use(limiter);
 app.use(express.json());
 app.use(cookieParser());
@@ -57,10 +58,11 @@ app.use(express.urlencoded({ extended: false }));
 app.use("/section", sectionRouter);
 app.use("/exercise", exerciseRouter);
 app.use("/register", registerRouter);
-app.use("/auth", authRouter);
-app.use("/refresh", refreshRouter);
-app.use("/logout", logoutRouter);
 app.use("/articles", articleRouter);
+
+app.use("/refresh", refreshRouter);
+app.use("/auth", authRouter);
+app.use("/logout", logoutRouter);
 
 // verified routes
 app.use(verifyJWT);
