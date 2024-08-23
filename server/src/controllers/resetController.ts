@@ -1,4 +1,5 @@
 import { createTransport } from "nodemailer";
+import { randomBytes } from "crypto";
 import Mailgen from "mailgen";
 import { Request, Response } from "express";
 import { User } from "../models/User.js";
@@ -17,6 +18,13 @@ export class ResetController {
       });
     }
 
+    // Generates token
+    const token = randomBytes(32).toString("hex");
+    foundUser.resetToken = token;
+    foundUser.resetTokenExpiration = Date.now() + 15 * 60 * 1000; // 15 minutes from now
+
+    //  Create and config email
+
     const configMailer: SMTPTransport.Options = {
       service: "gmail",
       auth: {
@@ -30,8 +38,8 @@ export class ResetController {
     const MailGenerator = new Mailgen({
       theme: "default",
       product: {
-        name: "Mailgen",
-        link: "https://mailgen.js/",
+        name: "Easy Peasy English",
+        link: "https://www.easypeasy-lang.com",
       },
     });
 
@@ -45,7 +53,7 @@ export class ResetController {
           button: {
             color: "#f97316",
             text: "Reset Password",
-            link: "http:localhost:5000/reset/change-password/token", // @TODO: Send a reset link with a token
+            link: `http:localhost:5000/reset/${token}`,
           },
           outro: "It wasn't you? Please, contact us to secure your account.",
         },
@@ -70,7 +78,9 @@ export class ResetController {
         .json({ message: "Something went wrong. Try again later." });
     }
   }
-  async resetPassword() {
-    console.log("Reset password");
+  async resetPassword(req: Request, res: Response) {
+    const { token } = req.params;
+
+    console.log("Reset password ", token);
   }
 }
