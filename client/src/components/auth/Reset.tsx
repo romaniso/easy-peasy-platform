@@ -6,14 +6,11 @@ import Panel from "../common/Panel";
 import axios from "../../api/axios";
 import { AxiosError } from "axios";
 import { UserRole } from "../../enums/userRole";
-import useAuth from "../../hooks/useAuth";
-import useUser from "../../hooks/useUser";
-import { useLocation, useNavigate } from "react-router-dom";
 import { User } from "../../interfaces/user";
 import { Logo } from "../common/Logo";
 import { GrPowerReset } from "react-icons/gr";
 
-const LOGIN_URL = "/auth";
+const RESET_URL = "/reset";
 
 interface ApiResponse {
   accessToken?: string;
@@ -21,23 +18,8 @@ interface ApiResponse {
   user?: User;
 }
 export const Reset: React.FC = () => {
-  const { setAuth, persist, setPersist } = useAuth();
-  const { setUser } = useUser();
-
-  const navigate = useNavigate();
-  const location = useLocation();
-  const from = location.state?.from.pathname || "/dashboard";
-
-  const {
-    userName,
-    setUserName,
-    pwd,
-    setPwd,
-    errMsg,
-    setErrMsg,
-    userRef,
-    errRef,
-  } = useLoginRegister();
+  const { userEmail, setUserEmail, errMsg, setErrMsg, userRef, errRef } =
+    useLoginRegister();
 
   useEffect(() => {
     userRef.current?.focus();
@@ -45,17 +27,15 @@ export const Reset: React.FC = () => {
 
   useEffect(() => {
     setErrMsg("");
-  }, [userName, pwd]);
+  }, [userEmail]);
 
-  //@FIXME: adjust to reset api
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
     try {
       const response = await axios.post<ApiResponse>(
-        LOGIN_URL,
+        RESET_URL,
         {
-          username: userName,
-          password: pwd,
+          userEmail: userEmail,
         },
         {
           headers: {
@@ -64,36 +44,24 @@ export const Reset: React.FC = () => {
           withCredentials: true,
         }
       );
-      const accessToken = response?.data?.accessToken;
-      const roles = response?.data?.roles;
-
-      // setAuth Context
-      setAuth({ user: userName, pwd, roles, accessToken });
-      // setUserContext
-      // fetch to get user info and store it in context
-      setUser({
-        ...response.data.user,
-        username: userName,
-      });
-      setUserName("");
-      setPwd("");
-      navigate(from, { replace: true });
+      if (response.status === 201) {
+        console.log("Mail has been sent");
+        setUserEmail("");
+      }
     } catch (err) {
       if (!(err instanceof AxiosError) || !err.response) {
         setErrMsg("No Server Response");
       } else if (err.response?.status === 400) {
-        setErrMsg(err.response.data.message || "Missing Username or Password");
-      } else if (err.response?.status === 401) {
-        setErrMsg(err.response.data.message || "Unauthorized");
+        setErrMsg(
+          err.response.data.message ||
+            "There is no such an account with this email. Try another one"
+        );
       } else {
         setErrMsg("Login Failed");
       }
       errRef.current?.focus();
     }
   };
-  useEffect(() => {
-    localStorage.setItem("persist", JSON.stringify(persist));
-  }, [persist]);
 
   return (
     <Panel className="bg-indigo-50 flex flex-col justify-between items-center max-w-[450px] h-auto md:h-[400px] overflow-hidden m-4 p-6 md:p-10 ">
@@ -111,13 +79,13 @@ export const Reset: React.FC = () => {
         </p>
         <form className="flex flex-col gap-6" onSubmit={handleSubmit}>
           <Input
-            name="username"
-            type="text"
+            name="userEmail"
+            type="email"
             primary
             rounded
             ref={userRef}
             autoComplete="off"
-            onChange={setUserName}
+            onChange={setUserEmail}
             required
           >
             Enter your username or email
