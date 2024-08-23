@@ -18,6 +18,8 @@ import { credentials } from "./middleware/credentials.js";
 import { connectDB } from "./config/db.js";
 import { statsRouter } from "./routes/statsRouter.js";
 import { articleRouter } from "./routes/api/articleRouter.js";
+import { resetRouter } from "./routes/resetRouter.js";
+
 import { rateLimit } from "express-rate-limit";
 
 dotenv.config();
@@ -58,6 +60,7 @@ app.use("/section", sectionRouter);
 app.use("/exercise", exerciseRouter);
 app.use("/register", registerRouter);
 app.use("/auth", authRouter);
+app.use("/reset", resetRouter);
 app.use("/refresh", refreshRouter);
 app.use("/logout", logoutRouter);
 app.use("/articles", articleRouter);
