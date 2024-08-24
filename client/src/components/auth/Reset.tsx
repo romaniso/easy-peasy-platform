@@ -1,25 +1,26 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import useLoginRegister from "../../hooks/useLoginRegister";
 import Button from "../common/Button";
 import Input from "../common/Input";
 import Panel from "../common/Panel";
 import axios from "../../api/axios";
 import { AxiosError } from "axios";
-import { UserRole } from "../../enums/userRole";
-import { User } from "../../interfaces/user";
 import { Logo } from "../common/Logo";
 import { GrPowerReset } from "react-icons/gr";
+import { useToast } from "../../context/ToastContext";
+import { ToastType } from "../../enums/toast";
+import { Loader } from "../common/Loader";
 
 const RESET_URL = "/reset";
 
 interface ApiResponse {
-  accessToken?: string;
-  roles?: UserRole[];
-  user?: User;
+  message: string;
 }
 export const Reset: React.FC = () => {
   const { userEmail, setUserEmail, errMsg, setErrMsg, userRef, errRef } =
     useLoginRegister();
+  const [isLoading, setIsLoading] = useState(false);
+  const toast = useToast();
 
   useEffect(() => {
     userRef.current?.focus();
@@ -31,6 +32,7 @@ export const Reset: React.FC = () => {
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
+    setIsLoading(true);
     try {
       const response = await axios.post<ApiResponse>(
         RESET_URL,
@@ -45,7 +47,10 @@ export const Reset: React.FC = () => {
         }
       );
       if (response.status === 201) {
-        console.log("Mail has been sent");
+        toast?.open(
+          "Receive a message on your email and open a link for resetting your password.",
+          ToastType.Success
+        );
         setUserEmail("");
       }
     } catch (err) {
@@ -60,9 +65,12 @@ export const Reset: React.FC = () => {
         setErrMsg("Login Failed");
       }
       errRef.current?.focus();
+    } finally {
+      setIsLoading(false);
     }
   };
 
+  if (isLoading) return <Loader />;
   return (
     <Panel className="bg-indigo-50 flex flex-col justify-between items-center max-w-[450px] h-auto md:h-[400px] overflow-hidden m-4 p-6 md:p-10 ">
       <Logo />
@@ -84,6 +92,7 @@ export const Reset: React.FC = () => {
             primary
             rounded
             ref={userRef}
+            prevValue={userEmail}
             autoComplete="off"
             onChange={setUserEmail}
             required
