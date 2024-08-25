@@ -81,7 +81,7 @@ export const Reset: React.FC = () => {
           </h2>
           <GrPowerReset className="text-2xl text-orange-500" />
         </div>
-        <p className="text-sm text-indigo-800 dark:text-indigo-300">
+        <p className="text-sm text-indigo-800 dark:text-indigo-300 text-center">
           Enter the username or email associated with your account and we'll
           send you a link to reset your password.
         </p>
