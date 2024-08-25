@@ -8,10 +8,10 @@ import { User } from "../models/User.js";
 import { config } from "../config/config.js";
 import SMTPTransport from "nodemailer/lib/smtp-transport/index.js";
 
-const API_URL: string =
+const RESET_URL: string =
   process.env.NODE_ENV?.trim() === "development"
     ? "http://localhost:5173"
-    : (config.backendUrl as string);
+    : "https://www.easypeasy-lang.com";
 
 export class ResetController {
   async sendEmail(req: Request, res: Response) {
@@ -60,7 +60,7 @@ export class ResetController {
           button: {
             color: "#f97316",
             text: "Reset Password",
-            link: `${API_URL}/reset-password/${token}`,
+            link: `${RESET_URL}/reset-password/${token}`,
           },
           outro: "It wasn't you? Please, contact us to secure your account.",
         },
