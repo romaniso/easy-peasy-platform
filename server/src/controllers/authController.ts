@@ -32,12 +32,8 @@ export class AuthController {
         true
       );
       //save refreshToken to DB for this user
-      await User.updateOne(
-        { _id: foundUser._id },
-        { $set: { refreshToken } }
-      );
+      await User.updateOne({ _id: foundUser._id }, { $set: { refreshToken } });
       //httpOnly prevents saving it in JS
-      //@TODO: in production I need to add secure: true for https
       res.cookie("jwt", refreshToken, {
         httpOnly: true,
         sameSite: "none",
@@ -56,7 +52,6 @@ export class AuthController {
         goals: foundUser.goals,
       };
 
-      //@TODO: send user object for user context (non-sensitive data)
       res.json({ accessToken, roles: foundUser.roles, user });
     } catch (err) {
       console.error(err);

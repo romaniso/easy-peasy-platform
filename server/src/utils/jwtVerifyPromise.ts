@@ -1,11 +1,11 @@
 import jwt from "jsonwebtoken";
 
-export const jwtVerifyPromise = (
+export const jwtVerifyPromise = async (
   token: string,
   secretOrPublicKey: jwt.Secret,
   options?: jwt.VerifyOptions
-) => {
-  return new Promise<jwt.JwtPayload>((resolve, reject) => {
+) =>
+  new Promise<jwt.JwtPayload>((resolve, reject) => {
     jwt.verify(token, secretOrPublicKey, options, (err, decoded) => {
       if (err) {
         reject(err);
@@ -14,4 +14,3 @@ export const jwtVerifyPromise = (
       }
     });
   });
-};

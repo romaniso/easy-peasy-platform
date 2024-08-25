@@ -49,6 +49,7 @@ const start = async () => {
 };
 
 // MIDDLEWARES
+app.set("trust proxy", true);
 app.use(limiter);
 app.use(express.json());
 app.use(cookieParser());

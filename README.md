@@ -69,7 +69,7 @@ This project is based on MERN stack which includes:
 - **Patterns**:
   - MVC
 
-## Project Dependencies
+<!--## Project Dependencies
 
 ### Client:
 
@@ -81,7 +81,7 @@ This project is based on MERN stack which includes:
 
 ![Client Dependencies](https://i.ibb.co/Jj7YbKM/server-dep.png)
 
-![Client Dev Dependencies](https://i.ibb.co/BCcD9fg/server-devdep.png)
+![Client Dev Dependencies](https://i.ibb.co/BCcD9fg/server-devdep.png)-->
 
 ## Run Locally
 
@@ -165,6 +165,8 @@ As for creating MongoDB databases and AWS buckets, you would typically do this t
 - [ ] Create common types and enums for client and server apps.
 - [ ] Implement lazy loading for some components.
 - [ ] Add a replacement test for new users.
+- [ ] Refactor Backend App to Nest.js.
+- [ ] Dockerize the app.
 
 ## Releases
 
@@ -188,6 +190,7 @@ As for creating MongoDB databases and AWS buckets, you would typically do this t
 - Schedule
 - Unit tests
 - Podcast pages
+- Dockerization
 
 ## Authors
 

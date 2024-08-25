@@ -1,7 +1,5 @@
 import { RoleName } from "../enums/role";
 import { NextFunction, Request, Response } from "express";
-// import jwt, {JwtPayload} from "jsonwebtoken";
-// import {config} from "../../config/config";
 import { AuthenticatedRequest } from "./verifyJWT.js";
 
 export function verifyRoles(roles: RoleName[]) {

@@ -59,7 +59,6 @@ export class ArticleController {
     res.status(200).json(data);
   }
   async getRelatedArticles(req: Request, res: Response) {
-    //  @TODO:consider implementing filter logic for DB query, not for BE App
     try {
       const { title, section } = req.query;
       const maxNumber = 4;

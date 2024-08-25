@@ -22,7 +22,6 @@ export class LogoutController {
       // or await User.updateOne({ _id: foundUser._id }, { $set: { refreshToken: "" } });
       foundUser.refreshToken = "";
       const result = await foundUser.save();
-      //@TODO: in production I need to add secure: true for https
       res.clearCookie("jwt", {
         httpOnly: true,
         secure: true,
