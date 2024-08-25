@@ -12,5 +12,8 @@ export const config = {
   awsAvatarsBucketRegion: process.env.AWS_AVATARS_BUCKET_REGION,
   awsAccessKey: process.env.AWS_ACCESS_KEY,
   awsSecretKey: process.env.AWS_SECRET_KEY,
+  mailerEmail: process.env.MAILER_EMAIL,
+  mailerPassword: process.env.MAILER_PASSWORD,
+  backendUrl: process.env.BACKEND_URL_PROD,
   upload: multer({ dest: "uploads/" }),
 };

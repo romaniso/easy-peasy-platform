@@ -29,7 +29,7 @@ This app features:
 - **Interactive exercises** of various types, including fill-box, flash-card, drag-and-drop, dropdown, multiple-choice, fill-in-letter, match-heading, and listen-and-type.
 - Four main **learning modules**: grammar, vocabulary, reading, and listening.
 - **An article section** with a preview page where users can filter articles based on language proficiency levels. Each article page fetches markdown files from the database and transforms them into a visually user-friendly format.
-- **Authentication and authorization** functionalities, allowing both users and admins to log in. Security is enhanced using **JSON Web Tokens (JWT)**. Unauthorized users are redirected to appropriate pages
+- **Authentication and authorization** functionalities, allowing both users and admins to log in. Security is enhanced using **JSON Web Tokens (JWT)**. Unauthorized users are redirected to appropriate pages. Additionally, the app includes a password reset feature using the **nodemailer** package, enabling users to receive an email with a validation token.
 - **A dashboard page** where users can access statistical information about their performance on the app. Additionally, users can set personal goals to track their progress.
 - **A profile page** where users can input personal information including their first and last name, email address, preferences, and motivation for learning English.
 - **A settings page** where users can perform various actions such as changing their passwords, choosing the dark or light theme of the app, deleting their account, and switching between English, Polish, and Ukrainian languages

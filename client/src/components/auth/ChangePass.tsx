@@ -3,7 +3,6 @@ import React, { useEffect } from "react";
 import useLoginRegister from "../../hooks/useLoginRegister";
 import Panel from "../common/Panel";
 import LoginImage from "../../assets/images/login-image.jpg";
-import Input from "../common/Input";
 import Password from "./Password";
 import Button from "../common/Button";
 import { CiLogin } from "react-icons/ci";
@@ -11,6 +10,7 @@ import { IoIosInformationCircleOutline } from "react-icons/io";
 import { FaCheck, FaTimes } from "react-icons/fa";
 import axios from "../../api/axios";
 import { AxiosError } from "axios";
+import { Link } from "react-router-dom";
 //#endregion
 
 interface ApiResponse {
@@ -19,20 +19,14 @@ interface ApiResponse {
   };
 }
 
-interface SignupProps {
-  onToggleForm(): void;
+interface ChangePassProps {
+  token: string;
 }
-const USER_REGEX = /^[a-zA-Z][a-zA-Z0-9-_]{3,23}$/;
+
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
-const REGISTER_URL = "/register";
-const Register: React.FC<SignupProps> = ({ onToggleForm }) => {
+const RESET_URL = "/reset";
+export const ChangePass: React.FC<ChangePassProps> = ({ token }) => {
   const {
-    userName,
-    setUserName,
-    validName,
-    setValidName,
-    userFocus,
-    setUserFocus,
     pwd,
     setPwd,
     validPwd,
@@ -49,18 +43,8 @@ const Register: React.FC<SignupProps> = ({ onToggleForm }) => {
     setErrMsg,
     success,
     setSuccess,
-    userRef,
     errRef,
   } = useLoginRegister();
-
-  useEffect(() => {
-    userRef.current?.focus();
-  }, []);
-
-  useEffect(() => {
-    const result = USER_REGEX.test(userName);
-    setValidName(result);
-  }, [userName]);
 
   useEffect(() => {
     const result = PWD_REGEX.test(pwd);
@@ -71,21 +55,19 @@ const Register: React.FC<SignupProps> = ({ onToggleForm }) => {
 
   useEffect(() => {
     setErrMsg("");
-  }, [userName, pwd, matchPwd]);
+  }, [pwd, matchPwd]);
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
     // Additional validation in case a button is enabled with JS hack
-    const v1 = USER_REGEX.test(userName);
-    const v2 = PWD_REGEX.test(pwd);
-    if (!v1 || !v2) {
+    const v1 = PWD_REGEX.test(pwd);
+    if (!v1) {
       setErrMsg("Invalid Entry");
       return;
     }
     try {
       await axios.post<ApiResponse>(
-        REGISTER_URL,
+        RESET_URL + "/" + token,
         JSON.stringify({
-          username: userName,
           password: pwd,
         }),
         {
@@ -95,17 +77,15 @@ const Register: React.FC<SignupProps> = ({ onToggleForm }) => {
       );
       setSuccess(true);
       // Clear up
-      setUserName("");
       setPwd("");
       setMatchPwd("");
-      // navigate(from, { replace: true });
     } catch (err) {
       if (!(err instanceof AxiosError) || !err.response) {
-        setErrMsg("No Server Response");
-      } else if (err.response?.status === 409) {
-        setErrMsg(err.response.data.message || "Auth name Taken");
+        setErrMsg(
+          "Something went wrong. Send a link to your email and try again."
+        );
       } else {
-        setErrMsg("Registration Failed");
+        setErrMsg("No Server Response");
       }
       errRef.current?.focus();
     }
@@ -115,17 +95,17 @@ const Register: React.FC<SignupProps> = ({ onToggleForm }) => {
     <>
       {success ? (
         <Panel className="flex bg-indigo-50 justify-center max-w-3xl !p-0 m-4 overflow-hidden">
-          <section className="flex flex-col justify-center items-center gap-10 sm:w-1/2 p-10">
+          <section className="flex flex-col justify-center items-center gap-6 sm:w-1/2 p-10">
             <h1 className="font-bold text-4xl text-orange-500">Success!</h1>
-            <p className="text-center text-base dark:text-indigo-400 text-indigo-800">
-              Your account has been successfully created. Please, log in now
-              using the same username and password
+            <p className="text-center text-base dark:text-indigo-300 text-indigo-800 bg-green-500/15 py-2 px-1.5 rounded-md shadow-md">
+              Your password has been successfully changed. Please, log in now
+              using your new password
             </p>
-            <p>
-              <Button primary rounded onClick={onToggleForm}>
+            <Link to="/auth">
+              <Button primary rounded>
                 Log In
               </Button>
-            </p>
+            </Link>
           </section>
           <div className="sm:block hidden w-1/2">
             <img
@@ -138,68 +118,10 @@ const Register: React.FC<SignupProps> = ({ onToggleForm }) => {
       ) : (
         <Panel className="flex bg-indigo-50 justify-center max-w-3xl !p-0 m-4 overflow-hidden">
           <section className="flex flex-col justify-center sm:w-1/2 p-10">
-            <h1 className="font-bold text-3xl text-orange-500">Sign-Up</h1>
-            <p className="text-sm mt-4 text-indigo-700 dark:text-indigo-300">
-              Already have an account?{" "}
-              <span
-                className="text-orange-500 cursor-pointer underline hover:text-indigo-500"
-                onClick={onToggleForm}
-              >
-                Log in
-              </span>
-            </p>
+            <h1 className="font-bold text-3xl text-orange-500">
+              Change Password
+            </h1>
             <form className="mt-6 flex flex-col gap-6" onSubmit={handleSubmit}>
-              {/*USERNAME*/}
-              <Input
-                name="username"
-                type="text"
-                primary
-                rounded
-                autoComplete="off"
-                onChange={setUserName}
-                aria-invalid={validName ? "false" : "true"}
-                aria-describedby="uidnote"
-                onFocus={() => setUserFocus(true)}
-                onBlur={() => setUserFocus(false)}
-                required
-                ref={userRef}
-              >
-                Username
-                <span
-                  className={
-                    validName
-                      ? "inline-block ml-1 text-green-500"
-                      : "invisible absolute"
-                  }
-                >
-                  <FaCheck />
-                </span>
-                <span
-                  className={
-                    validName || !userName
-                      ? "invisible absolute"
-                      : "inline-block ml-1 text-red-500"
-                  }
-                >
-                  <FaTimes />
-                </span>
-              </Input>
-              <p
-                id="uidnote"
-                className={
-                  userFocus && userName && !validName
-                    ? "block bg-white dark:bg-transparent dark:border dark:border-orange-400 rounded p-1 text-sm text-orange-500 opacity-100 transition-colors duration-500 -mt-5 shadow"
-                    : "invisible opacity-0 absolute"
-                }
-              >
-                <IoIosInformationCircleOutline className="inline relative bottom-0.5 mr-1 text-lg" />
-                4 to 24 characters
-                <br />
-                Must begin with a letter.
-                <br />
-                Letters, numbers, underscores, hyphens allowed.
-              </p>
-
               {/*PASSWORD*/}
               <Password
                 name="pwd"
@@ -312,31 +234,21 @@ const Register: React.FC<SignupProps> = ({ onToggleForm }) => {
               </p>
               <Button
                 primary
-                disabled={!validName || !validPwd || !validMatch}
+                disabled={!validPwd || !validMatch}
                 rounded
                 type="submit"
                 className={
-                  !validName || !validPwd || !validMatch
+                  !validPwd || !validMatch
                     ? "mt-6 opacity-40 !cursor-not-allowed"
                     : `mt-6`
                 }
               >
                 <>
                   <CiLogin />
-                  Sign up
+                  Change Password
                 </>
               </Button>
             </form>
-            <p className="text-sm mt-4 text-indigo-700 dark:text-indigo-300">
-              By creating your account, you agree to the{" "}
-              <a className="underline" href="/">
-                Terms of Service
-              </a>{" "}
-              and{" "}
-              <a className="underline" href="/">
-                Privacy Policy
-              </a>
-            </p>
           </section>
           <div className="sm:block hidden w-1/2">
             <img
@@ -350,5 +262,3 @@ const Register: React.FC<SignupProps> = ({ onToggleForm }) => {
     </>
   );
 };
-
-export default Register;
