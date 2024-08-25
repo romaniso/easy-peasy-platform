@@ -1,10 +1,17 @@
 import { createTransport } from "nodemailer";
 import { randomBytes } from "crypto";
+import { validationResult } from "express-validator";
+import bcrypt from "bcrypt";
 import Mailgen from "mailgen";
 import { Request, Response } from "express";
 import { User } from "../models/User.js";
 import { config } from "../config/config.js";
 import SMTPTransport from "nodemailer/lib/smtp-transport/index.js";
+
+const API_URL: string =
+  process.env.NODE_ENV?.trim() === "development"
+    ? "http://localhost:5173"
+    : (config.backendUrl as string);
 
 export class ResetController {
   async sendEmail(req: Request, res: Response) {
@@ -22,9 +29,9 @@ export class ResetController {
     const token = randomBytes(32).toString("hex");
     foundUser.resetToken = token;
     foundUser.resetTokenExpiration = Date.now() + 15 * 60 * 1000; // 15 minutes from now
+    await foundUser.save();
 
     //  Create and config email
-
     const configMailer: SMTPTransport.Options = {
       service: "gmail",
       auth: {
@@ -53,7 +60,7 @@ export class ResetController {
           button: {
             color: "#f97316",
             text: "Reset Password",
-            link: `http:localhost:5000/reset/${token}`,
+            link: `${API_URL}/reset-password/${token}`,
           },
           outro: "It wasn't you? Please, contact us to secure your account.",
         },
@@ -79,8 +86,37 @@ export class ResetController {
     }
   }
   async resetPassword(req: Request, res: Response) {
+    console.log("Reset Password method");
     const { token } = req.params;
 
-    console.log("Reset password ", token);
+    const user = await User.findOne({
+      resetToken: token,
+      resetTokenExpiration: { $gt: Date.now() },
+    });
+
+    if (!user) {
+      console.log("Token has expired or there is no such a user");
+      return res
+        .status(400)
+        .json({ message: "Token has expired or there is no such a user" });
+    }
+
+    const { password } = req.body;
+    const errors = validationResult(req);
+    if (!password || !errors.isEmpty()) {
+      return res.status(400).json({
+        message:
+          "Invalid password has been sent. Insert a new password and try again.",
+      });
+    }
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    await user.updateOne({
+      password: hashedPassword,
+      $unset: { resetToken: "", resetTokenExpiration: "" },
+    });
+
+    console.log("Your password has been changed");
+    return res.status(201).json({ message: "success" });
   }
 }

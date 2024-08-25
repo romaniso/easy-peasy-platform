@@ -37,11 +37,14 @@ export interface IUser {
     | undefined;
 }
 
+//@TODO: refactor it with actual arrays/objects structures
 const userSchema = new Schema<IUser>({
   username: { type: String, unique: true, required: true },
   password: { type: String, required: true },
   roles: [{ type: String, ref: "Role" }],
   refreshToken: { type: String, required: false },
+  resetToken: { type: String, required: false },
+  resetTokenExpiration: { type: String, required: false },
   avatar: { type: String, required: false },
   firstName: { type: String, required: false },
   lastName: { type: String, required: false },
