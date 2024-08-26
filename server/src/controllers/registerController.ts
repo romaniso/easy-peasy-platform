@@ -7,7 +7,7 @@ import { validationResult } from "express-validator";
 import { VocabularyLimit } from "../enums/vocabularyLimit.js";
 
 export class RegisterController {
-  async registration(req: Request, res: Response) {
+  async register(req: Request, res: Response) {
     // receives: username? userEmail, password
     // sends: message, activation token to a given userEmail
     //  @TODO: send an activation token to a given email, after it a user should go to a link and activate an account

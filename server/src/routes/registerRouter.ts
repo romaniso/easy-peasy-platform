@@ -20,5 +20,5 @@ registerRouter.post(
       "Password must contain at least 8 signs and maximum 24 signs, include uppercase and lowercase letters, a number and a special character"
     ).matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/),
   ],
-  controller.registration
+  controller.register
 );
