@@ -8,6 +8,9 @@ import { VocabularyLimit } from "../enums/vocabularyLimit.js";
 
 export class RegisterController {
   async registration(req: Request, res: Response) {
+    // receives: username? userEmail, password
+    // sends: message, activation token to a given userEmail
+    //  @TODO: send an activation token to a given email, after it a user should go to a link and activate an account
     try {
       const errors = validationResult(req);
       if (!errors.isEmpty()) {
@@ -15,22 +18,21 @@ export class RegisterController {
           .status(400)
           .json({ message: "Registration error: ", errors });
       }
-      const { username, password } = req.body;
+      const { username, password, userEmail } = req.body;
       // Check for duplicate in the db
-      const duplicate = await User.findOne({ username }).exec();
+      const duplicate = await User.findOne({
+        $or: [{ username }, { userEmail }],
+      }).exec();
       if (duplicate) {
-        // Conflict
         return res.status(409).json({
           message:
-            "This user name already exists. Please, insert something different.",
+            "This user name already exists or the email is taken. Please, insert something different.",
         });
       } else {
-        // Register a new user
-        // encrypt the password
         const hashedPassword = await bcrypt.hash(password, 10);
-        // Create and Store a new user
         const userRole = await Role.findOne({ value: RoleName.User });
         const newUser = new User({
+          email: userEmail,
           username,
           password: hashedPassword,
           roles: [userRole?.value],
