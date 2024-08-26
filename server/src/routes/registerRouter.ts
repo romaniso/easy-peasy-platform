@@ -8,6 +8,7 @@ const controller = new RegisterController();
 registerRouter.post(
   "/",
   [
+    check("userEmail").isEmail(),
     check(
       "username",
       "Username cannot be an empty string. It must consist of 4 to 24 characters, begin with a letter. Letters, numbers, hyphens, underscores are allowed."
