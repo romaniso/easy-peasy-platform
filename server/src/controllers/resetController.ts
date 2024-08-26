@@ -15,6 +15,10 @@ const RESET_URL: string =
 
 export class ResetController {
   async sendEmail(req: Request, res: Response) {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ message: "Registration error: ", errors });
+    }
     const { userEmail } = req.body;
     const foundUser = await User.findOne({ email: userEmail });
     if (!foundUser) {
@@ -24,13 +28,11 @@ export class ResetController {
           "User with this email was not found. Try with a different email.",
       });
     }
-
     // Generates token
     const token = randomBytes(32).toString("hex");
     foundUser.resetToken = token;
     foundUser.resetTokenExpiration = Date.now() + 15 * 60 * 1000; // 15 minutes from now
     await foundUser.save();
-
     //  Create and config email
     const configMailer: SMTPTransport.Options = {
       service: "gmail",
@@ -39,9 +41,7 @@ export class ResetController {
         pass: config.mailerPassword,
       },
     };
-
     const transporter = createTransport(configMailer);
-
     const MailGenerator = new Mailgen({
       theme: "default",
       product: {
@@ -49,7 +49,6 @@ export class ResetController {
         link: "https://www.easypeasy-lang.com",
       },
     });
-
     const response = {
       body: {
         name: foundUser.username,
@@ -86,9 +85,15 @@ export class ResetController {
     }
   }
   async resetPassword(req: Request, res: Response) {
-    console.log("Reset Password method");
-    const { token } = req.params;
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({
+        message:
+          "Invalid password has been sent. Insert a new password and try again.",
+      });
+    }
 
+    const { token } = req.params;
     const user = await User.findOne({
       resetToken: token,
       resetTokenExpiration: { $gt: Date.now() },
@@ -102,13 +107,6 @@ export class ResetController {
     }
 
     const { password } = req.body;
-    const errors = validationResult(req);
-    if (!password || !errors.isEmpty()) {
-      return res.status(400).json({
-        message:
-          "Invalid password has been sent. Insert a new password and try again.",
-      });
-    }
     const hashedPassword = await bcrypt.hash(password, 10);
 
     await user.updateOne({
@@ -116,7 +114,6 @@ export class ResetController {
       $unset: { resetToken: "", resetTokenExpiration: "" },
     });
 
-    console.log("Your password has been changed");
     return res.status(201).json({ message: "success" });
   }
 }
