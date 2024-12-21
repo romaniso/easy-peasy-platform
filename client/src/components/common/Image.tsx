@@ -47,7 +47,13 @@ export const Image = ({ src, alt, ...props }: Props) => {
           onClick={handleZoom}
         />
         {src ? (
-          <img src={src} alt={alt} className="w-full" {...props} />
+          <img
+            src={src}
+            alt={alt}
+            className="w-full hover:cursor-zoom-in"
+            {...props}
+            onClick={handleZoom}
+          />
         ) : (
           <p className="image-caption">{alt}</p>
         )}
