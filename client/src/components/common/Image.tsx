@@ -18,23 +18,25 @@ export const Image = ({ src, alt, ...props }: Props) => {
   };
 
   const handleDownload = async () => {
-    // console.log(`Downloading file ${src}...`);
-    // const imageUrl = src; // Replace with your dynamic URL
-    // try {
-    //   const res = await fetch(imageUrl);
-    //   const blob = await res.blob();
-    //   const url = window.URL.createObjectURL(blob);
-    //   const a = document.createElement("a");
-    //   a.style.display = "none";
-    //   a.href = url;
-    //   a.download = "dynamic-image.jpg"; // Name for the downloaded file
-    //   document.body.appendChild(a);
-    //   a.click();
-    //   window.URL.revokeObjectURL(url);
-    //   document.body.removeChild(a);
-    // } catch (err) {
-    //   console.error("Error downloading the image", err);
-    // }
+    console.log(`Downloading file ${src}...`);
+    const proxyUrl = "https://cors-anywhere.herokuapp.com/";
+    const imageUrl = `${proxyUrl}${src}`;
+    try {
+      const res = await fetch(imageUrl);
+      const blob = await res.blob();
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.style.display = "none";
+      a.href = url;
+      const fileName = imageUrl.split("/").pop();
+      a.download = fileName as string; // Name for the downloaded file
+      document.body.appendChild(a);
+      a.click();
+      window.URL.revokeObjectURL(url);
+      document.body.removeChild(a);
+    } catch (err) {
+      console.error("Error downloading the image", err);
+    }
   };
 
   return (
