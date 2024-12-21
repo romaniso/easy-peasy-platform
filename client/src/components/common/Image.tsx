@@ -5,12 +5,12 @@ import { RxCross2 } from "react-icons/rx";
 
 import Modal from "./Modal";
 
-interface Props {
+interface ImageProps {
   src: string;
   alt?: string;
 }
 
-export const Image = ({ src, alt, ...props }: Props) => {
+export const Image = ({ src, alt, ...props }: ImageProps): JSX.Element => {
   const [isZoomedIn, setZoomedIn] = useState(false);
 
   const handleZoom = () => {
@@ -29,7 +29,7 @@ export const Image = ({ src, alt, ...props }: Props) => {
       a.style.display = "none";
       a.href = url;
       const fileName = imageUrl.split("/").pop();
-      a.download = fileName as string; // Name for the downloaded file
+      a.download = fileName as string;
       document.body.appendChild(a);
       a.click();
       window.URL.revokeObjectURL(url);
