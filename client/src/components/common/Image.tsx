@@ -105,7 +105,7 @@ export const Image = ({ src, alt, ...props }: ImageProps): JSX.Element => {
     <>
       <div className="w-full relative">
         <MdZoomOutMap
-          className="text-4xl absolute bottom-7 right-7 p-1 bg-white dark:bg-black/30 rounded-md hover:scale-110 cursor-pointer transition-transform shadow-md"
+          className="absolute text-2xl md:text-4xl bottom-2 right-2 md:bottom-7 md:right-7 p-1 bg-white dark:bg-black/30 rounded-md hover:scale-110 cursor-pointer transition-transform shadow-md"
           onClick={handleOpened}
         />
         {src ? (
@@ -122,9 +122,9 @@ export const Image = ({ src, alt, ...props }: ImageProps): JSX.Element => {
       </div>
       {isOpened && (
         <Modal onClose={() => setOpened(false)} size="md:w-2/3 md:h-3/4">
-          <div className="w-full h-full grid place-items-center md:py-2 md:px-4 relative overflow-hidden">
+          <div className="w-full h-full grid place-items-center md:py-2 md:px-4 relative md:overflow-hidden">
             <RxCross2
-              className="text-4xl absolute top-2 right-2 p-1 bg-indigo-500 dark:bg-white/20 rounded-md hover:scale-110 cursor-pointer transition-transform text-white dark:text-orange-500 shadow-md z-50"
+              className="text-2xl md:text-4xl absolute -top-1 -right-1 md:top-2 md:right-2 p-1 bg-indigo-500 dark:bg-white/20 rounded-md hover:scale-110 cursor-pointer transition-transform text-white dark:text-orange-500 shadow-md z-50"
               onClick={handleOpened}
             />
             <img
@@ -137,17 +137,17 @@ export const Image = ({ src, alt, ...props }: ImageProps): JSX.Element => {
               {...props}
             />
             <FaCloudDownloadAlt
-              className="absolute bottom-2 right-2 text-4xl p-1 bg-indigo-500 dark:bg-white/20 rounded-md hover:scale-110 cursor-pointer transition-transform text-white dark:text-orange-500 shadow-md"
+              className="absolute -bottom-1 -right-1 md:bottom-2 md:right-2 text-2xl md:text-4xl p-1 bg-indigo-500 dark:bg-white/20 rounded-md hover:scale-110 cursor-pointer transition-transform text-white dark:text-orange-500 shadow-md"
               onClick={handleDownload}
             />
-            <div className="absolute top-2 left-2 flex flex-col items-center gap-1">
+            <div className="absolute -top-1 -left-1 hidden md:top-2 md:left-2 md:flex flex-col items-center gap-1">
               {/* Zoom in and out - 100% + */}
               <FaPlus
-                className="text-4xl p-1 bg-indigo-500 dark:bg-white/20 rounded-md hover:scale-110 cursor-pointer transition-transform text-white dark:text-orange-500 shadow-md"
+                className="text-2xl md:text-4xl p-1 bg-indigo-500 dark:bg-white/20 rounded-md hover:scale-110 cursor-pointer transition-transform text-white dark:text-orange-500 shadow-md"
                 onClick={handleZoomIn}
               />
               <FaMinus
-                className="text-4xl p-1 bg-indigo-500 dark:bg-white/20 rounded-md hover:scale-110 cursor-pointer transition-transform text-white dark:text-orange-500 shadow-md"
+                className="text-2xl md:text-4xl p-1 bg-indigo-500 dark:bg-white/20 rounded-md hover:scale-110 cursor-pointer transition-transform text-white dark:text-orange-500 shadow-md"
                 onClick={handleZoomOut}
               />
             </div>
