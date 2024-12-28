@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { MdZoomOutMap } from "react-icons/md";
 import { FaCloudDownloadAlt, FaPlus, FaMinus } from "react-icons/fa";
 import { RxCross2 } from "react-icons/rx";
@@ -17,7 +17,50 @@ export const Image = ({ src, alt, ...props }: ImageProps): JSX.Element => {
 
   const imageRef = useRef<HTMLImageElement>(null);
 
+  useEffect(() => {
+    const image = imageRef.current;
+    let isDragging = false;
+    let prevPosition = { x: 0, y: 0 };
+
+    // Mouse down event for starting the drag
+    const handleMouseDown = (e: MouseEvent) => {
+      isDragging = true;
+      prevPosition = { x: e.clientX, y: e.clientY };
+    };
+
+    // Mouse move event for dragging the image
+    const handleMouseMove = (e: MouseEvent) => {
+      if (isDragging) {
+        const deltaX = e.clientX - prevPosition.x;
+        const deltaY = e.clientY - prevPosition.y;
+        prevPosition = { x: e.clientX, y: e.clientY };
+        setPosition((position) => ({
+          x: position.x + deltaX,
+          y: position.y + deltaY,
+        }));
+      }
+    };
+
+    // Mouse up event for stopping the drag
+    const handleMouseUp = () => {
+      isDragging = false;
+    };
+
+    // Add event listeners
+    image?.addEventListener("mousedown", handleMouseDown);
+    image?.addEventListener("mousemove", handleMouseMove);
+    image?.addEventListener("mouseup", handleMouseUp);
+
+    // Remove event listeners on unmount
+    return () => {
+      image?.removeEventListener("mousedown", handleMouseDown);
+      image?.removeEventListener("mousemove", handleMouseMove);
+      image?.removeEventListener("mouseup", handleMouseUp);
+    };
+  }, [imageRef, scale]);
+
   const handleOpened = () => {
+    resetTransform();
     setOpened(!isOpened);
   };
 
@@ -49,6 +92,10 @@ export const Image = ({ src, alt, ...props }: ImageProps): JSX.Element => {
   const handleZoomOut = () => {
     setScale((scale) => scale - 0.1);
   };
+  const resetTransform = () => {
+    setScale(1);
+    setPosition({ x: 0, y: 0 });
+  };
 
   const transformStyle = {
     transform: `scale(${scale}) translate(${position.x}px, ${position.y}px)`,
@@ -77,7 +124,7 @@ export const Image = ({ src, alt, ...props }: ImageProps): JSX.Element => {
         <Modal onClose={() => setOpened(false)} size="md:w-2/3 md:h-3/4">
           <div className="w-full h-full grid place-items-center md:py-2 md:px-4 relative overflow-hidden">
             <RxCross2
-              className="text-4xl absolute top-2 right-2 p-1 bg-indigo-500 dark:bg-white/20 rounded-md hover:scale-110 cursor-pointer transition-transform text-white dark:text-orange-500 shadow-md"
+              className="text-4xl absolute top-2 right-2 p-1 bg-indigo-500 dark:bg-white/20 rounded-md hover:scale-110 cursor-pointer transition-transform text-white dark:text-orange-500 shadow-md z-50"
               onClick={handleOpened}
             />
             <img
@@ -86,6 +133,7 @@ export const Image = ({ src, alt, ...props }: ImageProps): JSX.Element => {
               className="w-full cursor-move select-none"
               draggable={false}
               style={transformStyle}
+              ref={imageRef}
               {...props}
             />
             <FaCloudDownloadAlt
