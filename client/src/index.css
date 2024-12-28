@@ -243,7 +243,7 @@ button > svg {
     @apply ml-3;
   }
   .markdown-content img {
-    @apply p-1 md:p-10;
+    @apply px-1 py-1 md:py-4 md:px-0;
   }
   .markdown-reading {
     @apply px-3 lg:px-6 py-4 lg:py-10 text-indigo-900 dark:text-indigo-200 text-base md:text-lg;
