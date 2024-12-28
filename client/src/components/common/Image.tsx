@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { MdZoomOutMap } from "react-icons/md";
-import { FaCloudDownloadAlt } from "react-icons/fa";
+import { FaCloudDownloadAlt, FaPlus, FaMinus } from "react-icons/fa";
 import { RxCross2 } from "react-icons/rx";
 
 import Modal from "./Modal";
@@ -11,10 +11,14 @@ interface ImageProps {
 }
 
 export const Image = ({ src, alt, ...props }: ImageProps): JSX.Element => {
-  const [isZoomedIn, setZoomedIn] = useState(false);
+  const [isOpened, setOpened] = useState(false);
+  const [scale, setScale] = useState(1);
+  const [position, setPosition] = useState({ x: 0, y: 0 });
 
-  const handleZoom = () => {
-    setZoomedIn(!isZoomedIn);
+  const imageRef = useRef<HTMLImageElement>(null);
+
+  const handleOpened = () => {
+    setOpened(!isOpened);
   };
 
   const handleDownload = async () => {
@@ -39,12 +43,23 @@ export const Image = ({ src, alt, ...props }: ImageProps): JSX.Element => {
     }
   };
 
+  const handleZoomIn = () => {
+    setScale((scale) => scale + 0.1);
+  };
+  const handleZoomOut = () => {
+    setScale((scale) => scale - 0.1);
+  };
+
+  const transformStyle = {
+    transform: `scale(${scale}) translate(${position.x}px, ${position.y}px)`,
+  };
+
   return (
     <>
       <div className="w-full relative">
         <MdZoomOutMap
           className="text-4xl absolute bottom-7 right-7 p-1 bg-white dark:bg-black/30 rounded-md hover:scale-110 cursor-pointer transition-transform shadow-md"
-          onClick={handleZoom}
+          onClick={handleOpened}
         />
         {src ? (
           <img
@@ -52,25 +67,40 @@ export const Image = ({ src, alt, ...props }: ImageProps): JSX.Element => {
             alt={alt}
             className="w-full hover:cursor-zoom-in"
             {...props}
-            onClick={handleZoom}
+            onClick={handleOpened}
           />
         ) : (
           <p className="image-caption">{alt}</p>
         )}
       </div>
-      {isZoomedIn && (
-        <Modal onClose={() => setZoomedIn(false)} size="md:w-2/3 md:h-3/4">
-          <div className="w-full h-full grid place-items-center md:py-2 md:px-4 relative">
+      {isOpened && (
+        <Modal onClose={() => setOpened(false)} size="md:w-2/3 md:h-3/4">
+          <div className="w-full h-full grid place-items-center md:py-2 md:px-4 relative overflow-hidden">
             <RxCross2
               className="text-4xl absolute top-2 right-2 p-1 bg-indigo-500 dark:bg-white/20 rounded-md hover:scale-110 cursor-pointer transition-transform text-white dark:text-orange-500 shadow-md"
-              onClick={handleZoom}
+              onClick={handleOpened}
             />
-            <img src={src} alt={alt} className="w-full" {...props} />
-            <div className="absolute bottom-2 right-2 flex items-center gap-3">
+            <img
+              src={src}
+              alt={alt}
+              className="w-full cursor-move select-none"
+              draggable={false}
+              style={transformStyle}
+              {...props}
+            />
+            <FaCloudDownloadAlt
+              className="absolute bottom-2 right-2 text-4xl p-1 bg-indigo-500 dark:bg-white/20 rounded-md hover:scale-110 cursor-pointer transition-transform text-white dark:text-orange-500 shadow-md"
+              onClick={handleDownload}
+            />
+            <div className="absolute top-2 left-2 flex flex-col items-center gap-1">
               {/* Zoom in and out - 100% + */}
-              <FaCloudDownloadAlt
+              <FaPlus
                 className="text-4xl p-1 bg-indigo-500 dark:bg-white/20 rounded-md hover:scale-110 cursor-pointer transition-transform text-white dark:text-orange-500 shadow-md"
-                onClick={handleDownload}
+                onClick={handleZoomIn}
+              />
+              <FaMinus
+                className="text-4xl p-1 bg-indigo-500 dark:bg-white/20 rounded-md hover:scale-110 cursor-pointer transition-transform text-white dark:text-orange-500 shadow-md"
+                onClick={handleZoomOut}
               />
             </div>
           </div>
