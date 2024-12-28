@@ -3,14 +3,20 @@ import { MdZoomOutMap } from "react-icons/md";
 import { FaCloudDownloadAlt, FaPlus, FaMinus } from "react-icons/fa";
 import { RxCross2 } from "react-icons/rx";
 
-import Modal from "./Modal";
+import Modal from "../Modal";
 
 interface ImageProps {
   src: string;
   alt?: string;
+  downloadable?: boolean;
 }
 
-export const Image = ({ src, alt, ...props }: ImageProps): JSX.Element => {
+export const Image = ({
+  src,
+  alt,
+  downloadable = false,
+  ...props
+}: ImageProps): JSX.Element => {
   const [isOpened, setOpened] = useState(false);
   const [scale, setScale] = useState(1);
   const [position, setPosition] = useState({ x: 0, y: 0 });
@@ -65,7 +71,6 @@ export const Image = ({ src, alt, ...props }: ImageProps): JSX.Element => {
   };
 
   const handleDownload = async () => {
-    console.log(`Downloading file ${src}...`);
     const proxyUrl = "https://cors-anywhere.herokuapp.com/";
     const imageUrl = `${proxyUrl}${src}`;
     try {
@@ -136,10 +141,12 @@ export const Image = ({ src, alt, ...props }: ImageProps): JSX.Element => {
               ref={imageRef}
               {...props}
             />
-            <FaCloudDownloadAlt
-              className="absolute -bottom-1 -right-1 md:bottom-2 md:right-2 text-2xl md:text-4xl p-1 bg-indigo-500 dark:bg-white/20 rounded-md hover:scale-110 cursor-pointer transition-transform text-white dark:text-orange-500 shadow-md"
-              onClick={handleDownload}
-            />
+            {downloadable && (
+              <FaCloudDownloadAlt
+                className="absolute -bottom-1 -right-1 md:bottom-2 md:right-2 text-2xl md:text-4xl p-1 bg-indigo-500 dark:bg-white/20 rounded-md hover:scale-110 cursor-pointer transition-transform text-white dark:text-orange-500 shadow-md"
+                onClick={handleDownload}
+              />
+            )}
             <div className="absolute -top-1 -left-1 hidden md:top-2 md:left-2 md:flex flex-col items-center gap-1">
               {/* Zoom in and out - 100% + */}
               <FaPlus

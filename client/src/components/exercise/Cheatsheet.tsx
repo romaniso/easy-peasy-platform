@@ -4,7 +4,7 @@ import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { Level } from "../../types/level";
 import { useTranslation } from "react-i18next";
-import { Image } from "../common/Image";
+import { Image } from "../common/Image/Image";
 
 interface CheatsheetProps {
   topic: string;
@@ -48,7 +48,12 @@ const Cheatsheet: React.FC<CheatsheetProps> = ({ topic, level, content }) => {
           remarkPlugins={[remarkGfm]}
           components={{
             img: ({ src, alt, ...props }) => (
-              <Image src={src as string} alt={alt as string} {...props} />
+              <Image
+                src={src as string}
+                alt={alt as string}
+                downloadable
+                {...props}
+              />
             ),
           }}
         >

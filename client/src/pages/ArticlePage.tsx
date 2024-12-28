@@ -14,7 +14,7 @@ import { decodeAndFormatURL } from "../utils/decodeAndFormatUrl";
 import { AsideSection } from "../components/articles/AsideSection";
 import { PreviewArticle } from "../types/previewArticle";
 import { Loader } from "../components/common/Loader";
-import { Image } from "../components/common/Image";
+import { Image } from "../components/common/Image/Image";
 
 const ARTICLE_URL = "/articles";
 export const ArticlePage = () => {
@@ -90,7 +90,12 @@ export const ArticlePage = () => {
             <ReactMarkdown
               components={{
                 img: ({ src, alt, ...props }) => (
-                  <Image src={src as string} alt={alt as string} {...props} />
+                  <Image
+                    src={src as string}
+                    alt={alt as string}
+                    downloadable
+                    {...props}
+                  />
                 ),
               }}
               className="markdown-content"
