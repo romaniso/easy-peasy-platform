@@ -1,7 +1,6 @@
-import React from "react";
 import { Link } from "react-router-dom";
 
-interface Props {
+interface ArticlePreviewProps {
   title: string;
   introduction: string;
   link: string;
@@ -13,7 +12,7 @@ export const ArticlePreview = ({
   introduction,
   link,
   imgSrc,
-}: Props) => {
+}: ArticlePreviewProps): JSX.Element => {
   return (
     <article className="w-full group transition-transform duration-200 text-center">
       <Link to={link}>

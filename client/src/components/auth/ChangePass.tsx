@@ -3,7 +3,7 @@ import React, { useEffect } from "react";
 import useLoginRegister from "../../hooks/useLoginRegister";
 import Panel from "../common/Panel";
 import LoginImage from "../../assets/images/login-image.jpg";
-import Password from "./Password";
+import { Password } from "./Password";
 import Button from "../common/Button";
 import { CiLogin } from "react-icons/ci";
 import { IoIosInformationCircleOutline } from "react-icons/io";
@@ -25,7 +25,7 @@ interface ChangePassProps {
 
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
 const RESET_URL = "/reset";
-export const ChangePass: React.FC<ChangePassProps> = ({ token }) => {
+export const ChangePass = ({ token }: ChangePassProps): JSX.Element => {
   const {
     pwd,
     setPwd,

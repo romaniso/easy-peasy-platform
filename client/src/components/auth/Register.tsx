@@ -4,7 +4,7 @@ import useLoginRegister from "../../hooks/useLoginRegister";
 import Panel from "../common/Panel";
 import LoginImage from "../../assets/images/login-image.jpg";
 import Input from "../common/Input";
-import Password from "./Password";
+import { Password } from "./Password";
 import Button from "../common/Button";
 import { CiLogin } from "react-icons/ci";
 import { IoIosInformationCircleOutline } from "react-icons/io";
@@ -19,13 +19,13 @@ interface ApiResponse {
   };
 }
 
-interface SignupProps {
+interface RegisterProps {
   onToggleForm(): void;
 }
 const USER_REGEX = /^[a-zA-Z][a-zA-Z0-9-_]{3,23}$/;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
 const REGISTER_URL = "/register";
-const Register: React.FC<SignupProps> = ({ onToggleForm }) => {
+export const Register = ({ onToggleForm }: RegisterProps): JSX.Element => {
   const {
     userName,
     setUserName,
@@ -350,5 +350,3 @@ const Register: React.FC<SignupProps> = ({ onToggleForm }) => {
     </>
   );
 };
-
-export default Register;

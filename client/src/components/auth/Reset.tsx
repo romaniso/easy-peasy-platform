@@ -16,7 +16,7 @@ const RESET_URL = "/reset";
 interface ApiResponse {
   message: string;
 }
-export const Reset: React.FC = () => {
+export const Reset = (): JSX.Element => {
   const { userEmail, setUserEmail, errMsg, setErrMsg, userRef, errRef } =
     useLoginRegister();
   const [isLoading, setIsLoading] = useState(false);
