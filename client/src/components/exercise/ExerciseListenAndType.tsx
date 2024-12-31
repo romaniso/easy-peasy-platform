@@ -3,7 +3,7 @@ import { UserResult } from "../../types/userResult";
 import React from "react";
 import { FaRegThumbsDown, FaRegThumbsUp } from "react-icons/fa";
 import { OrderUnit } from "../common/OrderUnit";
-import { WaveForm }Player from "../common/WaveFormPlayer";
+import { WaveFormPlayer } from "../common/WaveFormPlayer";
 import FillInUnit from "./FillInUnit";
 import { UserResultEnums } from "../../enums/userResult";
 import className from "classnames";

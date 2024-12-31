@@ -9,7 +9,7 @@ interface WaveFormProps {
   className?: string;
   indicators?: true;
 }
-export const WaveForm = ({
+export const WaveFormPlayer = ({
   audioUrl,
   className,
   indicators,

@@ -1,7 +1,7 @@
 import { FaRegThumbsUp, FaShare, FaDownload } from "react-icons/fa";
 import React from "react";
 import { Button } from "../common/Button";
-import { WaveForm }Player from "../common/WaveFormPlayer";
+import { WaveFormPlayer } from "../common/WaveFormPlayer";
 import { Level } from "../../types/level";
 
 interface ListeningProps {
