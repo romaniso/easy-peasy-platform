@@ -1,15 +1,14 @@
-import React from "react";
 import { useTranslation } from "react-i18next";
 interface OrderTabsProps {
   items: number;
   activeExercise: number;
   setActiveItem: (tab: number) => void;
 }
-const OrderTabs: React.FC<OrderTabsProps> = ({
+export const OrderTabs = ({
   items,
   activeExercise,
   setActiveItem,
-}) => {
+}: OrderTabsProps): JSX.Element => {
   const { t } = useTranslation("exercise");
   const handleTab = (tab: number): void => {
     setActiveItem(tab);
@@ -43,5 +42,3 @@ const OrderTabs: React.FC<OrderTabsProps> = ({
     </header>
   );
 };
-
-export default OrderTabs;

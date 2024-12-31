@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Panel from "../components/common/Panel";
+import { Panel } from "../components/common/Panel";
 import { useTranslation } from "react-i18next";
 import { GlossaryHeader } from "../components/glossary/GlossaryHeader";
 import { GlossaryBody } from "../components/glossary/GlossaryBody";

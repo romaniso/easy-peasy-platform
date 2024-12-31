@@ -1,10 +1,10 @@
 //#region imports
 import React, { useEffect } from "react";
 import useLoginRegister from "../../hooks/useLoginRegister";
-import Panel from "../common/Panel";
+import { Panel } from "../common/Panel";
 import LoginImage from "../../assets/images/login-image.jpg";
 import { Password } from "./Password";
-import Button from "../common/Button";
+import { Button } from "../common/Button";
 import { CiLogin } from "react-icons/ci";
 import { IoIosInformationCircleOutline } from "react-icons/io";
 import { FaCheck, FaTimes } from "react-icons/fa";

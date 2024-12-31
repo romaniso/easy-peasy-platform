@@ -1,5 +1,5 @@
 import React from "react";
-import Select from "../common/Select";
+import { Select } from "../common/Select";
 import { FaSortAlphaDown } from "react-icons/fa";
 import { PiClockCountdownLight } from "react-icons/pi";
 import { FaStar } from "react-icons/fa6";

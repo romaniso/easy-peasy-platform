@@ -1,6 +1,6 @@
-import React, { ReactElement, useEffect } from "react";
+import { ReactElement, useEffect } from "react";
 import ReactDOM from "react-dom";
-import Panel from "./Panel";
+import { Panel } from "./Panel";
 
 interface ModalProps {
   onClose(): void;
@@ -8,12 +8,12 @@ interface ModalProps {
   actionBar?: ReactElement;
   size?: string;
 }
-const Modal: React.FC<ModalProps> = ({
+export const Modal = ({
   onClose,
   children,
   actionBar,
   size,
-}) => {
+}: ModalProps): JSX.Element => {
   useEffect(() => {
     document.body.classList.add("overflow-hidden");
     return () => document.body.classList.remove("overflow-hidden");
@@ -36,5 +36,3 @@ const Modal: React.FC<ModalProps> = ({
     document.querySelector(".modal-container") as Element
   );
 };
-
-export default Modal;

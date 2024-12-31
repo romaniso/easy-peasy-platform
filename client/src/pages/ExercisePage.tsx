@@ -2,13 +2,13 @@
 import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import useTop from "../hooks/useTop";
-import Panel from "../components/common/Panel";
+import { Panel } from "../components/common/Panel";
 import ExerciseSet from "../components/exercise/ExerciseSet";
 import Cheatsheet from "../components/exercise/Cheatsheet";
-import Breadcrumbs from "../components/common/Breadcrumbs";
+import { Breadcrumbs } from "../components/common/Breadcrumbs";
 import axios from "../api/axios";
 import Reading from "../components/exercise/Reading";
-import CustomSkeleton from "../components/common/Skeleton";
+import { Skeleton } from "../components/common/Skeleton";
 // Types
 import { Section } from "../types/section";
 import { SingleExercise } from "../interfaces/singleExercise";
@@ -179,7 +179,7 @@ const ExercisePage: React.FC = () => {
         {topic}
       </h1>
       <Breadcrumbs />
-      {isLoading ? <CustomSkeleton items={1} exercise /> : content}
+      {isLoading ? <Skeleton items={1} exercise /> : content}
       {recommendedSets && (
         <RecommendedSection recommendedSets={recommendedSets} />
       )}

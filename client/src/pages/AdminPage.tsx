@@ -1,7 +1,7 @@
 import React from "react";
 import useTop from "../hooks/useTop";
 import { Users } from "../components/auth/Users";
-import Button from "../components/common/Button";
+import { Button } from "../components/common/Button";
 import { useNavigate } from "react-router-dom";
 import useLogout from "../hooks/useLogout";
 

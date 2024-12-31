@@ -3,7 +3,7 @@ import { ReactElement, useState } from "react";
 import PolandFlag from "../../assets/images/poland.png";
 import UsaFlag from "../../assets/images/usa.png";
 import UkraineFlag from "../../assets/images/ukraine.png";
-import Select from "../common/Select";
+import { Select } from "../common/Select";
 import { Language } from "../../enums/lang";
 import { useTranslation } from "react-i18next";
 import { ToastType } from "../../enums/toast";

@@ -1,4 +1,4 @@
-import Button from "../../components/common/Button";
+import { Button } from "../../components/common/Button";
 import HeroDecImg from "../../assets/images/home-dec.jpg";
 import HeroDecImg2 from "../../assets/images/home-dec-2.jpg";
 import HeroDecImg3 from "../../assets/images/home-dec-3.jpg";

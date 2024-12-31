@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import Logo from "../../assets/images/small-logo.png";
 //import BgImage from "../../assets/images/bg-auth.jpg";
 
-export const Loader = () => {
+export const Loader = (): JSX.Element => {
   const [isDarkTheme] = useState<boolean>(() => {
     return (
       window.matchMedia("(prefers-color-scheme: dark)").matches ||

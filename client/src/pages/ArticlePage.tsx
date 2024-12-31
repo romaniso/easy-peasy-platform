@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-import Breadcrumbs from "../components/common/Breadcrumbs";
+import { Breadcrumbs } from "../components/common/Breadcrumbs";
 import useTop from "../hooks/useTop";
 import axios from "../api/axios";
 import { useEffect, useState } from "react";
@@ -7,7 +7,7 @@ import { Article } from "../interfaces/article";
 import { Badge } from "../components/common/Badge";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
-import Button from "../components/common/Button";
+import { Button } from "../components/common/Button";
 import { Link } from "react-router-dom";
 import { ShareButtons } from "../components/common/ShareButtons";
 import { decodeAndFormatURL } from "../utils/decodeAndFormatUrl";

@@ -2,10 +2,10 @@ import React, { ReactNode } from "react";
 import ReactMarkdown, { Components } from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { hasPunctuation } from "../../utils/hasPunctuationSign";
-import ToolTip from "../common/ToolTip";
+import { ToolTip } from "../common/ToolTip";
 import { useIsHeadingsOpened } from "../../context/ReadingContext";
 import { KeyWordObject } from "../../interfaces/keyWord";
-import AudioPlayer from "../common/AudioPlayer";
+import { AudioPlayer } from "../common/AudioPlayer";
 
 interface ReadingProps {
   text: string;

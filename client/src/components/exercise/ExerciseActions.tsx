@@ -1,5 +1,5 @@
 import { UserResult } from "../../types/userResult";
-import Button from "../common/Button";
+import { Button } from "../common/Button";
 
 interface ExerciseActionsProps {
   checkOutTxt: string;

@@ -1,4 +1,4 @@
-import Card from "../../components/common/Card";
+import { Card } from "../../components/common/Card";
 import GrammarImg from "../../assets/images/grammar.jpg";
 import VocabularyImg from "../../assets/images/vocab.jpg";
 import ReadingImg from "../../assets/images/reading.jpg";

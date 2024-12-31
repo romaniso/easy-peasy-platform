@@ -3,7 +3,7 @@ import DictionaryUnit from "./DictionaryUnit";
 import { MdOutlineEditNote } from "react-icons/md";
 import { useSelectedWords } from "../context/ReadingContext";
 import { BsChevronCompactLeft, BsChevronCompactRight } from "react-icons/bs";
-import Button from "./common/Button";
+import { Button } from "./common/Button";
 import useAxiosPrivate from "../hooks/useAxiosPrivate";
 import useUser from "../hooks/useUser";
 import { useToast } from "../context/ToastContext";

@@ -1,7 +1,7 @@
 import React, { SyntheticEvent, useEffect, useState } from "react";
 import { GoGoal } from "react-icons/go";
 import { RadioGroup } from "../common/RadioGroup";
-import Button from "../common/Button";
+import { Button } from "../common/Button";
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 import { User } from "../../interfaces/user";
 import { GoalsObj } from "../../types/goalsObj";

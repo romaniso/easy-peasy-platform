@@ -1,6 +1,6 @@
-import Button from "../common/Button";
+import { Button } from "../common/Button";
 import React, { ReactElement, SyntheticEvent, useState } from "react";
-import CheckboxButton from "../common/CheckboxButton";
+import { CheckboxButton } from "../common/CheckboxButton";
 import { InterestItemText } from "../../enums/interestItem";
 import useAuth from "../../hooks/useAuth";
 import useUser from "../../hooks/useUser";

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import Panel from "../components/common/Panel";
+import { Panel } from "../components/common/Panel";
 import { CircularChart } from "../components/dashboard/CircularChart";
 import { FiguresChart } from "../components/dashboard/FiguresChart";
 import { GoalsWidget } from "../components/dashboard/GoalsWidget";

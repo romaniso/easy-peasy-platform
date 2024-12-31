@@ -1,5 +1,5 @@
 import { RiLockPasswordLine } from "react-icons/ri";
-import Button from "../common/Button";
+import { Button } from "../common/Button";
 import React, { useEffect, useState } from "react";
 import { Password } from "../auth/Password";
 import { IoIosInformationCircleOutline } from "react-icons/io";

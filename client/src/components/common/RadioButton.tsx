@@ -10,12 +10,12 @@ interface RadioButtonProps {
   checked: boolean;
   onChange: React.Dispatch<React.SetStateAction<string | "more" | null>>;
 }
-export const RadioButton: React.FC<RadioButtonProps> = ({
+export const RadioButton = ({
   name,
   item,
   checked,
   onChange,
-}) => {
+}: RadioButtonProps): JSX.Element => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     onChange(e.target.value);
   };

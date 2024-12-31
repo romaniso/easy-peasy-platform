@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import useLoginRegister from "../../hooks/useLoginRegister";
-import Button from "../common/Button";
-import Input from "../common/Input";
-import Panel from "../common/Panel";
+import { Button } from "../common/Button";
+import { Input } from "../common/Input";
+import { Panel } from "../common/Panel";
 import axios from "../../api/axios";
 import { AxiosError } from "axios";
 import { Logo } from "../common/Logo";

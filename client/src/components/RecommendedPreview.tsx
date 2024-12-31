@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import Panel from "./common/Panel";
+import { Panel } from "./common/Panel";
 import { Level } from "../types/level";
 import { Section } from "../types/section";
 
