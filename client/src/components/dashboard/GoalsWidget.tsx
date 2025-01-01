@@ -1,4 +1,4 @@
-import React, { SyntheticEvent, useEffect, useState } from "react";
+import { SyntheticEvent, useEffect, useState } from "react";
 import { GoGoal } from "react-icons/go";
 import { RadioGroup } from "../common/RadioGroup";
 import { Button } from "../common/Button";
@@ -14,7 +14,7 @@ const UPDATE_URL = "/users";
 interface GoalsWidgetProps {
   title: string;
 }
-export const GoalsWidget: React.FC<GoalsWidgetProps> = ({ title }) => {
+export const GoalsWidget = ({ title }: GoalsWidgetProps): JSX.Element => {
   const [wordsPerWeekValue, setWordsPerWeek] = useState<string | "more" | null>(
     null
   );

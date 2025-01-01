@@ -8,11 +8,11 @@ interface FiguresChartProps {
   // put a unit in a plural form, e.g. words, users, kilograms.
   unitNameInPlural?: string;
 }
-export const FiguresChart: React.FC<FiguresChartProps> = ({
+export const FiguresChart = ({
   title,
   percentage,
-  //  unitNameInPlural,
-}) => {
+}: //  unitNameInPlural,
+FiguresChartProps): JSX.Element => {
   const { t } = useTranslation("dashboard");
   return (
     <article className="bg-white dark:bg-black/40 dark:border dark:border-stone-900 rounded-md p-3 shadow-lg h-full flex flex-col justify-between items-center gap-1">
