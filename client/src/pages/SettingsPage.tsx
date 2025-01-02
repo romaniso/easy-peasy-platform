@@ -1,6 +1,6 @@
 import React from "react";
 import { Panel } from "../components/common/Panel";
-import ChangePassword from "../components/settings/ChangePassword";
+import { ChangePassword } from "../components/settings/ChangePassword";
 import { LanguageSwitcher } from "../components/settings/LanguageSwitcher";
 import { useTranslation } from "react-i18next";
 import { ChangeTheme } from "../components/settings/ChangeTheme";

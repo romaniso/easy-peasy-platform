@@ -15,10 +15,12 @@ interface LanguageSwitcherItem {
   label: string;
   icon?: ReactElement;
 }
-interface Props {
+interface LanguageSwitcherProps {
   isHome?: true;
 }
-export const LanguageSwitcher = ({ isHome }: Props) => {
+export const LanguageSwitcher = ({
+  isHome,
+}: LanguageSwitcherProps): JSX.Element => {
   const [selectedLanguage, setSelectedLanguage] = useState<Language>(
     (localStorage.getItem("i18nextLng") as Language) || Language.English
   );

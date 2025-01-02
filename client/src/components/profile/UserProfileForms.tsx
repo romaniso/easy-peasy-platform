@@ -1,4 +1,4 @@
-import React, { ReactElement, useState } from "react";
+import { ReactElement, useState } from "react";
 import { IconsTabBar } from "../common/IconsTabBar";
 import {
   MdFamilyRestroom,
@@ -40,9 +40,9 @@ import {
 import { RiMedicineBottleFill } from "react-icons/ri";
 import { PiExamBold } from "react-icons/pi";
 import { HiOutlineSpeakerphone } from "react-icons/hi";
-import PersonalInformationForm from "./PersonalInformationForm";
-import MotivationForm, { MotivationItem } from "./MotivationForm";
-import InterestsForm, { InterestItem } from "./InterestsForm";
+import { PersonalInformationForm } from "./PersonalInformationForm";
+import { MotivationForm, MotivationItem } from "./MotivationForm";
+import { InterestsForm, InterestItem } from "./InterestsForm";
 import { MotivationItemText } from "../../enums/motivationItem";
 import { InterestItemText } from "../../enums/interestItem";
 import { useTranslation } from "react-i18next";

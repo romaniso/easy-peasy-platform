@@ -1,5 +1,5 @@
 import { BsExclamationDiamondFill } from "react-icons/bs";
-import React, { useState } from "react";
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Button } from "../common/Button";
 import { Modal } from "../common/Modal";
@@ -12,7 +12,8 @@ import { useNavigate } from "react-router-dom";
 import { RiDeleteBin5Fill } from "react-icons/ri";
 
 const DELETE_ACCOUNT_URL = "/users";
-export const DeleteAccount: React.FC = () => {
+
+export const DeleteAccount = (): JSX.Element => {
   const [showModal, setShowModal] = useState(false);
   const axiosPrivate = useAxiosPrivate();
   const { t } = useTranslation("settings");

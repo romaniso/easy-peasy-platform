@@ -1,7 +1,7 @@
 import { Input } from "../common/Input";
 import { Button } from "../common/Button";
 import { FaCheck, FaTimes } from "react-icons/fa";
-import React, { SyntheticEvent, useEffect, useRef, useState } from "react";
+import { SyntheticEvent, useEffect, useRef, useState } from "react";
 import useAuth from "../../hooks/useAuth";
 import { axiosPrivate } from "../../api/axios";
 import useUser from "../../hooks/useUser";
@@ -16,10 +16,14 @@ const FIRSTNAME_REGEX = /^[a-zA-Z][a-zA-Z\s'-]{1,50}$/;
 const LASTNAME_REGEX = /^[a-zA-Z][a-zA-Z\s'-]{1,50}$/;
 const EMAIL_REGEX = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
-// @TODO: break it down to hook, before sending req validate it, show info with Toast
-const PersonalInformationForm: React.FC<{
+interface PersonalInformationFormProps {
   switchForm: (tab: -1 | 1) => void;
-}> = ({ switchForm }) => {
+}
+
+// @TODO: break it down to hook, before sending req validate it, show info with Toast
+export const PersonalInformationForm = ({
+  switchForm,
+}: PersonalInformationFormProps): JSX.Element => {
   const { auth } = useAuth();
   const { setUser, user } = useUser();
 
@@ -352,5 +356,3 @@ const PersonalInformationForm: React.FC<{
     </form>
   );
 };
-
-export default PersonalInformationForm;

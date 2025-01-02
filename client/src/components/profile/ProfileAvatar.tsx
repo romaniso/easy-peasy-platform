@@ -1,6 +1,6 @@
 import { ToolTip } from "../common/ToolTip";
 import { SlPicture } from "react-icons/sl";
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Modal } from "../common/Modal";
 import { Button } from "../common/Button";
 import ImageDropZone from "../ImageDropZone";
@@ -12,7 +12,8 @@ import { ToastType } from "../../enums/toast";
 import { useTranslation } from "react-i18next";
 
 const AVATAR_UPLOAD_URL = "/users/upload";
-const ProfileAvatar: React.FC = () => {
+
+export const ProfileAvatar = (): JSX.Element => {
   const [showModal, setShowModal] = useState(false);
   const [selectedImageUrl, setSelectedImageUrl] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -176,5 +177,3 @@ const ProfileAvatar: React.FC = () => {
     </div>
   );
 };
-
-export default ProfileAvatar;

@@ -11,10 +11,10 @@ interface GlossaryHeaderProps {
   onSearh: (searchPhrase: string) => void;
 }
 
-export const GlossaryHeader: React.FC<GlossaryHeaderProps> = ({
+export const GlossaryHeader = ({
   onSort,
   onSearh,
-}) => {
+}: GlossaryHeaderProps): JSX.Element => {
   const { t } = useTranslation("glossary");
   const sortibles = [
     {

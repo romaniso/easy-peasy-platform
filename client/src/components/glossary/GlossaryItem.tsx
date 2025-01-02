@@ -5,7 +5,7 @@ import { FaRegTrashCan, FaStar } from "react-icons/fa6";
 import { playAudio } from "../../utils/playAudio";
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 import useUser from "../../hooks/useUser";
-import GlossaryAction from "./GlossaryAction";
+import { GlossaryAction } from "./GlossaryAction";
 import { useTranslation } from "react-i18next";
 
 interface GlossaryItemProps {
@@ -17,14 +17,15 @@ interface GlossaryItemProps {
   updateData: () => void;
 }
 const GLOSSARY_URL = "glossary/";
-export const GlossaryItem: React.FC<GlossaryItemProps> = ({
+
+export const GlossaryItem = ({
   id,
   word,
   definition,
   audio,
   marked,
   updateData,
-}) => {
+}: GlossaryItemProps): JSX.Element => {
   const { t } = useTranslation("glossary");
   const [isBeingEdited, setIsBeingEdited] = useState<boolean>(false);
   const [editedValue, setEditedValue] = useState(definition);

@@ -1,5 +1,5 @@
 import { Button } from "../common/Button";
-import React, { ReactElement, SyntheticEvent, useState } from "react";
+import { ReactElement, SyntheticEvent, useState } from "react";
 import { CheckboxButton } from "../common/CheckboxButton";
 import { InterestItemText } from "../../enums/interestItem";
 import useAuth from "../../hooks/useAuth";
@@ -21,7 +21,11 @@ interface InterestsFormProps {
 }
 
 const UPDATE_URL = "/users";
-const InterestsForm: React.FC<InterestsFormProps> = ({ items, switchForm }) => {
+
+export const InterestsForm = ({
+  items,
+  switchForm,
+}: InterestsFormProps): JSX.Element => {
   const { auth } = useAuth();
   const { setUser, user } = useUser();
   const [selectedItems, setSelectedItems] = useState<InterestItemText[]>(
@@ -115,5 +119,3 @@ const InterestsForm: React.FC<InterestsFormProps> = ({ items, switchForm }) => {
     </form>
   );
 };
-
-export default InterestsForm;

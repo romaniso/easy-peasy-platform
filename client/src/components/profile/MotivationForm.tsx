@@ -1,6 +1,6 @@
 // import { Input } from "../Input";
 import { Button } from "../common/Button";
-import React, { ReactElement, SyntheticEvent, useState } from "react";
+import { ReactElement, SyntheticEvent, useState } from "react";
 import { CheckboxButton } from "../common/CheckboxButton";
 import { User } from "../../interfaces/user";
 import { axiosPrivate } from "../../api/axios";
@@ -23,10 +23,10 @@ interface MotivationFormProps {
 
 const UPDATE_URL = "/users";
 
-const MotivationForm: React.FC<MotivationFormProps> = ({
+export const MotivationForm = ({
   items,
   switchForm,
-}) => {
+}: MotivationFormProps): JSX.Element => {
   const { auth } = useAuth();
   const { setUser, user } = useUser();
   const [selectedItems, setSelectedItems] = useState<MotivationItemText[]>(
@@ -119,5 +119,3 @@ const MotivationForm: React.FC<MotivationFormProps> = ({
     </form>
   );
 };
-
-export default MotivationForm;

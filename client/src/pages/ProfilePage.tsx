@@ -1,7 +1,7 @@
 import React from "react";
 import UserProfileForms from "../components/profile/UserProfileForms";
 import { Panel } from "../components/common/Panel";
-import ProfileAvatar from "../components/profile/ProfileAvatar";
+import { ProfileAvatar } from "../components/profile/ProfileAvatar";
 import useUser from "../hooks/useUser";
 import { useTranslation } from "react-i18next";
 

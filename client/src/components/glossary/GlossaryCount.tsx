@@ -1,9 +1,14 @@
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 import useUser from "../../hooks/useUser";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 const STATS_URL = "/stats";
-export const GlossaryCount: React.FC<{ count: number }> = ({ count }) => {
+
+interface GlossaryCountProps {
+  count: number;
+}
+
+export const GlossaryCount = ({ count }: GlossaryCountProps): JSX.Element => {
   const [glossaryLimit, setGlossaryLimit] = useState<number | null>(null);
 
   const axiosPrivate = useAxiosPrivate();

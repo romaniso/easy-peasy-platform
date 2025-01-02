@@ -15,7 +15,7 @@ const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
 const SETTINGS_URL = "/settings";
 
 // @TODO: DRY
-const ChangePassword = () => {
+export const ChangePassword = (): JSX.Element => {
   const [prevPwd, setPrevPwd] = useState("");
   const [newPwd, setNewPwd] = useState("");
   const [validNewPwd, setValidNewPwd] = useState(false);
@@ -237,5 +237,3 @@ const ChangePassword = () => {
     </section>
   );
 };
-
-export default ChangePassword;
