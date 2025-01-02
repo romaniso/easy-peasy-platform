@@ -1,9 +1,9 @@
 import React from "react";
 import { useLocation, Outlet } from "react-router-dom";
-import Navbar from "../components/Navbar";
-import Footer from "../components/Footer";
-import AuthLayout from "./AuthLayout";
-import useAuth from "../hooks/useAuth";
+import { Navbar } from "../components/Navbar";
+import { Footer } from "../components/Footer";
+import { AuthLayout } from "./AuthLayout";
+import { useAuth } from "../hooks/useAuth";
 import { ScrollToTop } from "../components/common/ScrollToTop";
 
 const MODIFIED_PATHS_BY_AUTH = new Set([
@@ -13,7 +13,7 @@ const MODIFIED_PATHS_BY_AUTH = new Set([
   "/glossary",
 ]);
 
-const RootLayout: React.FC = () => {
+export const RootLayout = (): JSX.Element => {
   const { auth } = useAuth();
   const { pathname } = useLocation();
   let layoutContent: React.ReactNode;
@@ -35,5 +35,3 @@ const RootLayout: React.FC = () => {
 
   return layoutContent;
 };
-
-export default RootLayout;

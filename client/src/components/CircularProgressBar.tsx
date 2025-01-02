@@ -1,52 +1,56 @@
 import React, { useCallback, useEffect, useRef } from "react";
-import CircleAnimation from './CircleAnimation';
+import { CircleAnimation } from "./CircleAnimation";
 
 interface CircularProgressBarProps {
-    percentage: number;
-    offset: number;
-    lg?: true;
+  percentage: number;
+  offset: number;
+  lg?: true;
 }
 
-const CircularProgressBar: React.FC<CircularProgressBarProps> = ({ percentage, offset, lg }) => {
-    const resultRef = useRef<HTMLDivElement>(null);
+export const CircularProgressBar = ({
+  percentage,
+  offset,
+  lg,
+}: CircularProgressBarProps): JSX.Element => {
+  const resultRef = useRef<HTMLDivElement>(null);
 
-    const animatePercentage: React.EffectCallback = useCallback(() => {
-        if (resultRef.current) {
-            let counter = 0;
-            resultRef.current.innerHTML = counter + "%";
+  const animatePercentage: React.EffectCallback = useCallback(() => {
+    if (resultRef.current) {
+      let counter = 0;
+      resultRef.current.innerHTML = counter + "%";
 
-            const intervalId = setInterval(() => {
-                if (counter === percentage || counter === 100) {
-                    clearInterval(intervalId);
-                } else {
-                    counter++;
-                    resultRef.current!.innerHTML = counter + "%";
-                }
-            }, 20);
-
-            return () => {
-                clearInterval(intervalId);
-            };
+      const intervalId = setInterval(() => {
+        if (counter === percentage || counter === 100) {
+          clearInterval(intervalId);
+        } else {
+          counter++;
+          resultRef.current!.innerHTML = counter + "%";
         }
-    }, [percentage]);
+      }, 20);
 
-    useEffect(animatePercentage, [animatePercentage]);
+      return () => {
+        clearInterval(intervalId);
+      };
+    }
+  }, [percentage]);
 
-    return (
-        <div className={`progress-bar w-[65px] h-[65px] relative ${lg && 'scale-125'}`}>
-            <div className="outer h-[65px] w-[65px] rounded-full border p-2">
-                <div className="inner h-[45px] w-[45px] rounded-full flex items-center justify-center">
-                    <div
-                        ref={resultRef}
-                        className="font-bold text-indigo-900 text-sm dark:text-indigo-200"
-                    >
-                        {`${percentage ?? '0'}%`}
-                    </div>
-                </div>
-            </div>
-            <CircleAnimation offset={offset} />
+  useEffect(animatePercentage, [animatePercentage]);
+
+  return (
+    <div
+      className={`progress-bar w-[65px] h-[65px] relative ${lg && "scale-125"}`}
+    >
+      <div className="outer h-[65px] w-[65px] rounded-full border p-2">
+        <div className="inner h-[45px] w-[45px] rounded-full flex items-center justify-center">
+          <div
+            ref={resultRef}
+            className="font-bold text-indigo-900 text-sm dark:text-indigo-200"
+          >
+            {`${percentage ?? "0"}%`}
+          </div>
         </div>
-    );
-}
-
-export default CircularProgressBar;
+      </div>
+      <CircleAnimation offset={offset} />
+    </div>
+  );
+};

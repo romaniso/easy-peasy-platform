@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Panel } from "../components/common/Panel";
 import { useTranslation } from "react-i18next";
 import { GlossaryHeader } from "../components/glossary/GlossaryHeader";
@@ -6,7 +6,7 @@ import { GlossaryBody } from "../components/glossary/GlossaryBody";
 import { PiBookOpenTextBold } from "react-icons/pi";
 
 //const STATS_URL = "/glossary";
-export const GlossaryPage: React.FC = () => {
+export const GlossaryPage = (): JSX.Element => {
   const { t } = useTranslation("glossary");
   //@TODO: turn strings into enums
   const [sorted, setSorted] = useState<null | string>(null);

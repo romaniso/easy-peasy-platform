@@ -1,9 +1,8 @@
-import React from "react";
-import useTop from "../hooks/useTop";
+import { useTop } from "../hooks/useTop";
 import { useNavigate } from "react-router-dom";
 import { Button } from "../components/common/Button";
 
-const UnauthorizedPage: React.FC = () => {
+export const UnauthorizedPage = (): JSX.Element => {
   const navigate = useNavigate();
 
   const goBack = () => navigate(-1);
@@ -19,5 +18,3 @@ const UnauthorizedPage: React.FC = () => {
     </div>
   );
 };
-
-export default UnauthorizedPage;

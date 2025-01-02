@@ -3,8 +3,8 @@ import { PiMusicNotesFill } from "react-icons/pi";
 import { MdCheck, MdEdit } from "react-icons/md";
 import { FaRegTrashCan, FaStar } from "react-icons/fa6";
 import { playAudio } from "../../utils/playAudio";
-import useAxiosPrivate from "../../hooks/useAxiosPrivate";
-import useUser from "../../hooks/useUser";
+import { useAxiosPrivate } from "../../hooks/useAxiosPrivate";
+import { useUser } from "../../hooks/useUser";
 import { GlossaryAction } from "./GlossaryAction";
 import { useTranslation } from "react-i18next";
 

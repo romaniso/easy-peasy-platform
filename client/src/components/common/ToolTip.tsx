@@ -1,7 +1,7 @@
 import React, { ReactElement, useRef, useState, useMemo } from "react";
-import TranslationContent from "../TranslationContent";
+import { TranslationContent } from "../TranslationContent";
 import { TranslationContentData } from "../../interfaces/translationContentData";
-import useLookUpWord from "../../hooks/useLookUpWord";
+import { useLookUpWord } from "../../hooks/useLookUpWord";
 import { KeyWordObject } from "../../interfaces/keyWord";
 
 interface ToolTipProps {

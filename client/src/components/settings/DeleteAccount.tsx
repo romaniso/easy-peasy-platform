@@ -3,11 +3,11 @@ import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Button } from "../common/Button";
 import { Modal } from "../common/Modal";
-import useAxiosPrivate from "../../hooks/useAxiosPrivate";
+import { useAxiosPrivate } from "../../hooks/useAxiosPrivate";
 import { ToastType } from "../../enums/toast";
 import { useToast } from "../../context/ToastContext";
-import useAuth from "../../hooks/useAuth";
-import useUser from "../../hooks/useUser";
+import { useAuth } from "../../hooks/useAuth";
+import { useUser } from "../../hooks/useUser";
 import { useNavigate } from "react-router-dom";
 import { RiDeleteBin5Fill } from "react-icons/ri";
 

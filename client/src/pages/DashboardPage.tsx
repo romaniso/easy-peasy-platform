@@ -1,17 +1,18 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Panel } from "../components/common/Panel";
 import { CircularChart } from "../components/dashboard/CircularChart";
 import { FiguresChart } from "../components/dashboard/FiguresChart";
 import { GoalsWidget } from "../components/dashboard/GoalsWidget";
 import { LineChart } from "../components/dashboard/LineChart";
 import { useTranslation } from "react-i18next";
-import useAxiosPrivate from "../hooks/useAxiosPrivate";
-import useUser from "../hooks/useUser";
+import { useAxiosPrivate } from "../hooks/useAxiosPrivate";
+import { useUser } from "../hooks/useUser";
 import { ActivityStatsEntity } from "../types/lastMonthActivitiesEntity";
 import { BiSolidDashboard } from "react-icons/bi";
 
 const STATS_URL = "/stats";
-const DashboardPage: React.FC = () => {
+
+export const DashboardPage = (): JSX.Element => {
   const [averageMark, setAverageMark] = useState<number | null>(null);
   const [addedWords, setAddedWords] = useState<number | null>(null);
   const [vocabularyLimit, setVocabularyLimit] = useState<number | null>(null);
@@ -94,5 +95,3 @@ const DashboardPage: React.FC = () => {
     </div>
   );
 };
-
-export default DashboardPage;

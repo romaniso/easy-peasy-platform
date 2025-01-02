@@ -1,7 +1,7 @@
 //#region imports
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
-import useTop from "../hooks/useTop";
+import { useTop } from "../hooks/useTop";
 import axios from "../api/axios";
 import { Card } from "../components/common/Card";
 import { Skeleton } from "../components/common/Skeleton";
@@ -20,7 +20,7 @@ interface ExerciseSet {
 const defaultExerciseSets: ExerciseSet[] = [];
 
 //#endregion
-const PreviewPage: React.FC = () => {
+export const PreviewPage = (): JSX.Element => {
   const [sets, setSets] = useState<ExerciseSet[]>(defaultExerciseSets);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [selectedLevel, setSelectedLevel] = useState<Level>("All");
@@ -84,5 +84,3 @@ const PreviewPage: React.FC = () => {
     </div>
   );
 };
-
-export default PreviewPage;

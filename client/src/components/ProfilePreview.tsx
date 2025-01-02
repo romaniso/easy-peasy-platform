@@ -1,11 +1,11 @@
-import React, { ReactElement } from "react";
+import { ReactElement } from "react";
 import { Dropdown } from "./common/Dropdown";
 import { CiLogout, CiSettings, CiUser } from "react-icons/ci";
-import useLogout from "../hooks/useLogout";
-import MiniAvatar from "./MiniAvatar";
+import { useLogout } from "../hooks/useLogout";
+import { MiniAvatar } from "./MiniAvatar";
 import { useToast } from "../context/ToastContext";
 import { ToastType } from "../enums/toast";
-import useUser from "../hooks/useUser";
+import { useUser } from "../hooks/useUser";
 import { useTranslation } from "react-i18next";
 
 export interface AvatarItem {
@@ -15,10 +15,14 @@ export interface AvatarItem {
   isLogoutBtn?: true;
   eventHandler?: () => void;
 }
-interface DropdownAvatarProps {
+
+interface ProfilePreviewProps {
   dropdown?: true;
 }
-const ProfilePreview: React.FC<DropdownAvatarProps> = ({ dropdown }) => {
+
+export const ProfilePreview = ({
+  dropdown,
+}: ProfilePreviewProps): JSX.Element => {
   const { user } = useUser();
   const logout = useLogout();
   const toast = useToast();
@@ -60,5 +64,3 @@ const ProfilePreview: React.FC<DropdownAvatarProps> = ({ dropdown }) => {
     </div>
   );
 };
-
-export default ProfilePreview;

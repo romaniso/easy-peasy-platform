@@ -1,4 +1,4 @@
-import React, { ReactElement } from "react";
+import { ReactElement } from "react";
 import { Link } from "react-router-dom";
 import { FaFacebook, FaInstagram, FaTiktok } from "react-icons/fa";
 import { Logo } from "./common/Logo";
@@ -16,7 +16,8 @@ interface SocialItem {
   icon: ReactElement;
   path: string;
 }
-const Footer: React.FC = () => {
+
+export const Footer = (): JSX.Element => {
   const { t } = useTranslation("common");
   //  const handleUserName = (e: ChangeEvent) => {
   //    console.log(e);
@@ -173,5 +174,3 @@ const Footer: React.FC = () => {
     </footer>
   );
 };
-
-export default Footer;

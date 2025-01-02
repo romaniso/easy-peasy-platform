@@ -3,8 +3,8 @@ import { GlossaryList } from "./GlossaryList";
 import { GlossaryCount } from "./GlossaryCount";
 import { Pagination } from "../common/Pagination";
 //import { usePagination } from "../../hooks/usePagination";
-import useAxiosPrivate from "../../hooks/useAxiosPrivate";
-import useUser from "../../hooks/useUser";
+import { useAxiosPrivate } from "../../hooks/useAxiosPrivate";
+import { useUser } from "../../hooks/useUser";
 import { GlossaryItem } from "../../enums/glossaryItem";
 
 interface GlossaryBodyProps {

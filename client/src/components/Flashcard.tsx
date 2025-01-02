@@ -1,4 +1,4 @@
-import React, { SyntheticEvent, useEffect, useState } from "react";
+import { SyntheticEvent, useEffect, useState } from "react";
 import { BsFillVolumeDownFill } from "react-icons/bs";
 import { LuCopyPlus } from "react-icons/lu";
 import { ToolTip } from "./common/ToolTip";
@@ -10,12 +10,13 @@ interface FlashcardProps {
   cardImage: string;
   example: string;
 }
-const Flashcard: React.FC<FlashcardProps> = ({
+
+export const Flashcard = ({
   question,
   isCorrect,
   cardImage,
   example,
-}) => {
+}: FlashcardProps): JSX.Element => {
   const [isFlipped, setIsFlipped] = useState(false);
   const [isSaved, setIsSaved] = useState(false);
   // const [generalAmericanVoice, setGeneralAmericanVoice] = useState<SpeechSynthesisVoice | null>(null);

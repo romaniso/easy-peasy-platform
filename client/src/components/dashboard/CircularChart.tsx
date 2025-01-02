@@ -1,4 +1,4 @@
-import CircularProgressBar from "../CircularProgressBar";
+import { CircularProgressBar } from "../CircularProgressBar";
 import { Trans, useTranslation } from "react-i18next";
 
 interface CircularChartProps {

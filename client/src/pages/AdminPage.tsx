@@ -1,11 +1,10 @@
-import React from "react";
-import useTop from "../hooks/useTop";
+import { useTop } from "../hooks/useTop";
 import { Users } from "../components/auth/Users";
 import { Button } from "../components/common/Button";
 import { useNavigate } from "react-router-dom";
-import useLogout from "../hooks/useLogout";
+import { useLogout } from "../hooks/useLogout";
 
-const AdminPage: React.FC = () => {
+export const AdminPage = (): JSX.Element => {
   useTop();
   const navigate = useNavigate();
   const logout = useLogout();
@@ -23,5 +22,3 @@ const AdminPage: React.FC = () => {
     </div>
   );
 };
-
-export default AdminPage;

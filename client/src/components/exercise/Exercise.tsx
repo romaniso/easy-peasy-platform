@@ -10,8 +10,8 @@ import generateKeySheet from "../../utils/generateKeySheet";
 import generateUserResults from "../../utils/generateUserResults";
 import { ExerciseTypeName } from "../../enums/exercise";
 import { calculateResultIntoPercentage } from "../../utils/calculateResultIntoPercentages";
-import useUser from "../../hooks/useUser";
-import useAxiosPrivate from "../../hooks/useAxiosPrivate";
+import { useUser } from "../../hooks/useUser";
+import { useAxiosPrivate } from "../../hooks/useAxiosPrivate";
 //#endregion
 
 //#region interfaces

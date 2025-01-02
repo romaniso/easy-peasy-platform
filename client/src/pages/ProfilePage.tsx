@@ -1,11 +1,10 @@
-import React from "react";
 import UserProfileForms from "../components/profile/UserProfileForms";
 import { Panel } from "../components/common/Panel";
 import { ProfileAvatar } from "../components/profile/ProfileAvatar";
-import useUser from "../hooks/useUser";
+import { useUser } from "../hooks/useUser";
 import { useTranslation } from "react-i18next";
 
-const ProfilePage: React.FC = () => {
+export const ProfilePage = (): JSX.Element => {
   const { user } = useUser();
 
   const { t } = useTranslation("profile");
@@ -29,5 +28,3 @@ const ProfilePage: React.FC = () => {
     </div>
   );
 };
-
-export default ProfilePage;

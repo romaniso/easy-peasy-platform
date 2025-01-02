@@ -1,5 +1,4 @@
 import { BsFillVolumeDownFill } from "react-icons/bs";
-import React from "react";
 import { TranslationContentData } from "../interfaces/translationContentData";
 import { Button } from "./common/Button";
 import { LuCopyPlus } from "react-icons/lu";
@@ -14,10 +13,11 @@ interface TranslationContentProps {
   word: string;
   fetchedData: TranslationContentData;
 }
-const TranslationContent: React.FC<TranslationContentProps> = ({
+
+export const TranslationContent = ({
   word,
   fetchedData,
-}) => {
+}: TranslationContentProps): JSX.Element => {
   const addWord = useAddWordToDictionary();
   const toast = useToast();
   const handleClick = (selectedWord: string) => {
@@ -82,5 +82,3 @@ const TranslationContent: React.FC<TranslationContentProps> = ({
     </span>
   );
 };
-
-export default TranslationContent;

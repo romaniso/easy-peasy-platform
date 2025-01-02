@@ -1,7 +1,7 @@
 //#region imports
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
-import useTop from "../hooks/useTop";
+import { useTop } from "../hooks/useTop";
 import { Panel } from "../components/common/Panel";
 import { ExerciseSet } from "../components/exercise/ExerciseSet";
 import { Cheatsheet } from "../components/exercise/Cheatsheet";
@@ -16,7 +16,7 @@ import { ICheatsheet } from "../interfaces/cheatsheet";
 import { IReading } from "../interfaces/reading";
 // Just for a template;
 import { RecommendedSection } from "../components/RecommendedSection";
-import DictionarySection from "../components/DictionarySection";
+import { DictionarySection } from "../components/DictionarySection";
 import { ReadingContextProvider } from "../context/ReadingContext";
 import { SectionType } from "../enums/section";
 import { Listening } from "../components/exercise/Listening";
@@ -24,7 +24,7 @@ import { IListening } from "../interfaces/listening";
 import { IRecommendedPreview } from "../components/RecommendedPreview";
 //#endregion
 
-const ExercisePage: React.FC = () => {
+export const ExercisePage = (): JSX.Element => {
   const [section, setSection] = useState<Section | null>(null);
   const [exercises, setExercises] = useState<SingleExercise[] | null>(null);
   const [cheatsheet, setCheatsheet] = useState<ICheatsheet | null>(null);
@@ -186,5 +186,3 @@ const ExercisePage: React.FC = () => {
     </div>
   );
 };
-
-export default ExercisePage;

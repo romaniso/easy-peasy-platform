@@ -5,7 +5,7 @@ interface PaginationRange {
   end: number;
 }
 
-interface Props {
+interface usePaginationProps {
   totalCount: number;
   currentPage: number;
   pageSize: number;
@@ -17,7 +17,7 @@ export const usePagination = ({
   pageSize,
   siblingCount = 1,
   currentPage,
-}: Props): PaginationRange => {
+}: usePaginationProps): PaginationRange => {
   const totalPages = Math.ceil(totalCount / pageSize);
   const start = Math.max(1, currentPage - siblingCount);
   const end = Math.min(totalPages, currentPage + siblingCount);

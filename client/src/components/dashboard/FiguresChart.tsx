@@ -1,4 +1,3 @@
-import React from "react";
 import { GrAchievement } from "react-icons/gr";
 import { Trans, useTranslation } from "react-i18next";
 

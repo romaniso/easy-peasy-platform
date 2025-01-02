@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
 import { Breadcrumbs } from "../components/common/Breadcrumbs";
-import useTop from "../hooks/useTop";
+import { useTop } from "../hooks/useTop";
 import axios from "../api/axios";
 import { useEffect, useState } from "react";
 import { Article } from "../interfaces/article";
@@ -17,7 +17,8 @@ import { Loader } from "../components/common/Loader";
 import { Image } from "../components/common/Image/Image";
 
 const ARTICLE_URL = "/articles";
-export const ArticlePage = () => {
+
+export const ArticlePage = (): JSX.Element => {
   const [articleData, setArticleData] = useState<Article | null>(null);
   const [relatedArticles, setRelatedArticles] = useState<
     PreviewArticle[] | null

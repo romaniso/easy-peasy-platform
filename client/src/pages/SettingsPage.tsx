@@ -1,4 +1,3 @@
-import React from "react";
 import { Panel } from "../components/common/Panel";
 import { ChangePassword } from "../components/settings/ChangePassword";
 import { LanguageSwitcher } from "../components/settings/LanguageSwitcher";
@@ -7,7 +6,7 @@ import { ChangeTheme } from "../components/settings/ChangeTheme";
 import { DeleteAccount } from "../components/settings/DeleteAccount";
 import { IoSettingsOutline } from "react-icons/io5";
 
-const SettingsPage: React.FC = () => {
+export const SettingsPage = (): JSX.Element => {
   const { t } = useTranslation("settings");
 
   return (
@@ -29,5 +28,3 @@ const SettingsPage: React.FC = () => {
     </div>
   );
 };
-
-export default SettingsPage;

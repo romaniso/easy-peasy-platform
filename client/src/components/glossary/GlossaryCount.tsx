@@ -1,5 +1,5 @@
-import useAxiosPrivate from "../../hooks/useAxiosPrivate";
-import useUser from "../../hooks/useUser";
+import { useAxiosPrivate } from "../../hooks/useAxiosPrivate";
+import { useUser } from "../../hooks/useUser";
 import { useEffect, useState } from "react";
 
 const STATS_URL = "/stats";

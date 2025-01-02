@@ -1,11 +1,15 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { RiMoonLine, RiSunLine } from "react-icons/ri";
 
 interface ThemeToggleProps {
   className?: string;
   icons?: true;
 }
-const ThemeToggle: React.FC<ThemeToggleProps> = ({ className, icons }) => {
+
+export const ThemeToggle = ({
+  className,
+  icons,
+}: ThemeToggleProps): JSX.Element => {
   const [isDarkTheme, setIsDarkTheme] = useState<boolean>(() => {
     return (
       window.matchMedia("(prefers-color-scheme: dark)").matches ||
@@ -54,5 +58,3 @@ const ThemeToggle: React.FC<ThemeToggleProps> = ({ className, icons }) => {
     </div>
   );
 };
-
-export default ThemeToggle;

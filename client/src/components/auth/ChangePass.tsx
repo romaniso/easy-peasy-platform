@@ -1,6 +1,6 @@
 //#region imports
 import React, { useEffect } from "react";
-import useLoginRegister from "../../hooks/useLoginRegister";
+import { useLoginRegister } from "../../hooks/useLoginRegister";
 import { Panel } from "../common/Panel";
 import LoginImage from "../../assets/images/login-image.jpg";
 import { Password } from "./Password";

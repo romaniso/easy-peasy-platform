@@ -10,12 +10,12 @@ import {
   useRemoveWordFromDictionary,
 } from "../context/ReadingContext";
 
-const DictionaryUnit: React.FC<IDictionaryUnit> = ({
+export const DictionaryUnit = ({
   word,
   definition,
   audio,
   id,
-}) => {
+}: IDictionaryUnit): JSX.Element => {
   const [isBeingEdited, setIsBeingEdited] = useState<boolean>(false);
   const [editedValue, setEditedValue] = useState(definition);
   const removeWord = useRemoveWordFromDictionary();
@@ -90,5 +90,3 @@ const DictionaryUnit: React.FC<IDictionaryUnit> = ({
     </div>
   );
 };
-
-export default DictionaryUnit;
