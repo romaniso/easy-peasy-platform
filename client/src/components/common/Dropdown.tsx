@@ -1,17 +1,22 @@
-import React, { ReactElement, useEffect, useRef, useState } from "react";
+import { ReactElement, useEffect, useRef, useState } from "react";
 import { SubmenuItem } from "../Navbar";
 import { FaChevronDown, FaChevronUp } from "react-icons/fa";
 
 import { NavLink } from "react-router-dom";
 import { AvatarItem } from "../ProfilePreview";
 
-interface Dropdown {
+interface DropdownProps {
   label: string | ReactElement;
   content: SubmenuItem[] | AvatarItem[];
   avatar?: true;
   block?: true;
 }
-const Dropdown: React.FC<Dropdown> = ({ label, content, avatar, block }) => {
+export const Dropdown = ({
+  label,
+  content,
+  avatar,
+  block,
+}: DropdownProps): JSX.Element => {
   const [isCollapsed, setIsCollapsed] = useState<boolean>(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
@@ -107,5 +112,3 @@ const Dropdown: React.FC<Dropdown> = ({ label, content, avatar, block }) => {
     </div>
   );
 };
-
-export default Dropdown;

@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { GlossaryList } from "./GlossaryList";
 import { GlossaryCount } from "./GlossaryCount";
 import { Pagination } from "../common/Pagination";
 //import { usePagination } from "../../hooks/usePagination";
-import useAxiosPrivate from "../../hooks/useAxiosPrivate";
-import useUser from "../../hooks/useUser";
-import { Glossaryitem } from "../../enums/glossaryItem";
+import { useAxiosPrivate } from "../../hooks/useAxiosPrivate";
+import { useUser } from "../../hooks/useUser";
+import { GlossaryItem } from "../../enums/glossaryItem";
 
 interface GlossaryBodyProps {
   sorted?: null | string;
@@ -13,14 +13,15 @@ interface GlossaryBodyProps {
 }
 
 const GLOSSARY_URL = "glossary/words";
-export const GlossaryBody: React.FC<GlossaryBodyProps> = ({
+
+export const GlossaryBody = ({
   sorted,
   search,
-}) => {
-  const [data, setData] = useState<Glossaryitem[]>([]);
+}: GlossaryBodyProps): JSX.Element => {
+  const [data, setData] = useState<GlossaryItem[]>([]);
 
   //Pagination
-  const [currentData, setCurrentData] = useState<Glossaryitem[]>([]);
+  const [currentData, setCurrentData] = useState<GlossaryItem[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalCount, setTotalCount] = useState<number>(0);
   const pageSize = 10;

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { FaStar } from "react-icons/fa";
 import { FaRegTrashCan } from "react-icons/fa6";
@@ -11,11 +11,11 @@ interface GlossaryActionProps {
   onEdit: () => void;
 }
 
-export default function GlossaryAction({
+export const GlossaryAction = ({
   onRemove,
   onMark,
   onEdit,
-}: GlossaryActionProps) {
+}: GlossaryActionProps): JSX.Element => {
   const { t } = useTranslation("glossary");
   const [isOpened, setIsOpened] = useState<boolean>(false);
 
@@ -80,4 +80,4 @@ export default function GlossaryAction({
       )}
     </div>
   );
-}
+};

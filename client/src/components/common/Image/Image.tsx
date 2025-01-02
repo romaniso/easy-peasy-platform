@@ -3,7 +3,7 @@ import { MdZoomOutMap } from "react-icons/md";
 import { FaCloudDownloadAlt, FaPlus, FaMinus } from "react-icons/fa";
 import { RxCross2 } from "react-icons/rx";
 
-import Modal from "../Modal";
+import { Modal } from "../Modal";
 
 interface ImageProps {
   src: string;

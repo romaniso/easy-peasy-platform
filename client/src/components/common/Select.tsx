@@ -15,14 +15,14 @@ interface SelectProps<T> {
   noBorders?: true;
   noArrows?: true;
 }
-const Select = <T,>({
+export const Select = <T,>({
   options,
   onChange,
   defaultOption,
   defaultText,
   noBorders,
   noArrows,
-}: SelectProps<T>) => {
+}: SelectProps<T>): JSX.Element => {
   const [selectedOption, setSelectedOption] = useState<SelectItem<T> | null>(
     defaultOption || null
   );
@@ -98,5 +98,3 @@ const Select = <T,>({
     </div>
   );
 };
-
-export default Select;

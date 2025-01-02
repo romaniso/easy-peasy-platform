@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { RxChevronUp } from "react-icons/rx";
 
-const ScrollToTop = () => {
+export const ScrollToTop = (): JSX.Element => {
   const [showTopBtn, setShowTopBtn] = useState(false);
   useEffect(() => {
     const onScroll = (): void => {
@@ -32,4 +32,3 @@ const ScrollToTop = () => {
     </div>
   );
 };
-export default ScrollToTop;

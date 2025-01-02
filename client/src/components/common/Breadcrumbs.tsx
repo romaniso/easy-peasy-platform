@@ -4,11 +4,13 @@ import { useLocation } from "react-router-dom";
 import { BsChevronRight } from "react-icons/bs";
 import { Level } from "../../enums/level";
 
-interface Props {
+interface BreadcrumbsProps {
   withoutLevels?: true;
 }
 
-const Breadcrumbs = ({ withoutLevels }: Props) => {
+export const Breadcrumbs = ({
+  withoutLevels,
+}: BreadcrumbsProps): JSX.Element => {
   const { pathname } = useLocation();
   let currentLink: string = "";
 
@@ -54,5 +56,3 @@ const Breadcrumbs = ({ withoutLevels }: Props) => {
     </div>
   );
 };
-
-export default Breadcrumbs;

@@ -1,5 +1,5 @@
 import { UserResult } from "../../types/userResult";
-import Button from "../common/Button";
+import { Button } from "../common/Button";
 
 interface ExerciseActionsProps {
   checkOutTxt: string;
@@ -7,11 +7,11 @@ interface ExerciseActionsProps {
   results: UserResult[] | null;
 }
 
-export const ExerciseActions: React.FC<ExerciseActionsProps> = ({
+export const ExerciseActions = ({
   checkOutTxt,
   answersTxt,
   results,
-}) => {
+}: ExerciseActionsProps): JSX.Element => {
   return (
     <div className="flex gap-5 items-center">
       <Button

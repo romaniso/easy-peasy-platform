@@ -1,18 +1,18 @@
-import React, { useState } from "react";
-import DictionaryUnit from "./DictionaryUnit";
+import { useState } from "react";
+import { DictionaryUnit } from "./DictionaryUnit";
 import { MdOutlineEditNote } from "react-icons/md";
 import { useSelectedWords } from "../context/ReadingContext";
 import { BsChevronCompactLeft, BsChevronCompactRight } from "react-icons/bs";
-import Button from "./common/Button";
-import useAxiosPrivate from "../hooks/useAxiosPrivate";
-import useUser from "../hooks/useUser";
+import { Button } from "./common/Button";
+import { useAxiosPrivate } from "../hooks/useAxiosPrivate";
+import { useUser } from "../hooks/useUser";
 import { useToast } from "../context/ToastContext";
 import { ToastType } from "../enums/toast";
 //import { useTranslation } from "react-i18next";
 
 const ADD_MULTIPLE_WORDS_URL = "glossary/add-multiple";
 
-const DictionarySection: React.FC = () => {
+export const DictionarySection = (): JSX.Element => {
   const [isExpanded, setIsExpanded] = useState(false);
   const selectedWords = useSelectedWords();
 
@@ -103,5 +103,3 @@ const DictionarySection: React.FC = () => {
     </aside>
   );
 };
-
-export default DictionarySection;

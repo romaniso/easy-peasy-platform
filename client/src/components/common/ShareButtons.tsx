@@ -7,11 +7,13 @@ import {
 import { LiaFacebookF } from "react-icons/lia";
 import { FaWhatsapp, FaXTwitter } from "react-icons/fa6";
 
-interface Props {
+interface ShareButtonsProps {
   currentUrl: string;
 }
 
-export const ShareButtons = ({ currentUrl }: Props) => {
+export const ShareButtons = ({
+  currentUrl,
+}: ShareButtonsProps): JSX.Element => {
   return (
     <>
       <p className="text-sm text-indigo-800 dark:text-indigo-200 mr-2">

@@ -1,12 +1,12 @@
-import React, { ReactElement, useEffect, useRef, useState } from "react";
+import { ReactElement, useEffect, useRef, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
-import Dropdown from "./common/Dropdown";
-import Button from "./common/Button";
+import { Dropdown } from "./common/Dropdown";
+import { Button } from "./common/Button";
 import { HiMenu, HiX } from "react-icons/hi";
-import ThemeToggle from "./ThemeToggle";
+import { ThemeToggle } from "./ThemeToggle";
 
-import useAuth from "../hooks/useAuth";
-import ProfilePreview from "./ProfilePreview";
+import { useAuth } from "../hooks/useAuth";
+import { ProfilePreview } from "./ProfilePreview";
 import { useTranslation } from "react-i18next";
 import { Logo } from "./common/Logo";
 import { LanguageSwitcher } from "./settings/LanguageSwitcher";
@@ -22,7 +22,8 @@ interface NavbarItem {
   path?: string;
   subPaths?: SubmenuItem[];
 }
-const Navbar: React.FC = () => {
+
+export const Navbar = (): JSX.Element => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [isLogged, setIsLogged] = useState<boolean>(false);
   const { auth } = useAuth();
@@ -152,5 +153,3 @@ const Navbar: React.FC = () => {
     </header>
   );
 };
-
-export default Navbar;

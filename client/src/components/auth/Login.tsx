@@ -1,23 +1,23 @@
 import React, { useEffect } from "react";
-import useLoginRegister from "../../hooks/useLoginRegister";
+import { useLoginRegister } from "../../hooks/useLoginRegister";
 import { CiLogin } from "react-icons/ci";
-import Button from "../common/Button";
+import { Button } from "../common/Button";
 import LoginImage from "../../assets/images/login-image.jpg";
-import Password from "./Password";
-import Input from "../common/Input";
-import Panel from "../common/Panel";
+import { Password } from "./Password";
+import { Input } from "../common/Input";
+import { Panel } from "../common/Panel";
 import axios from "../../api/axios";
 import { AxiosError } from "axios";
 import { UserRole } from "../../enums/userRole";
-import useAuth from "../../hooks/useAuth";
-import useUser from "../../hooks/useUser";
+import { useAuth } from "../../hooks/useAuth";
+import { useUser } from "../../hooks/useUser";
 import { useLocation, useNavigate } from "react-router-dom";
-import Checkbox from "../common/Checkbox";
+import { Checkbox } from "../common/Checkbox";
 import { User } from "../../interfaces/user";
 import { Link } from "react-router-dom";
 
 const LOGIN_URL = "/auth";
-interface SignupProps {
+interface LoginProps {
   onToggleForm(): void;
 }
 
@@ -26,7 +26,8 @@ interface ApiResponse {
   roles?: UserRole[];
   user?: User;
 }
-const Login: React.FC<SignupProps> = ({ onToggleForm }) => {
+
+export const Login = ({ onToggleForm }: LoginProps): JSX.Element => {
   const { setAuth, persist, setPersist } = useAuth();
   const { setUser } = useUser();
 
@@ -181,5 +182,3 @@ const Login: React.FC<SignupProps> = ({ onToggleForm }) => {
     </Panel>
   );
 };
-
-export default Login;

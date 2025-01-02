@@ -1,5 +1,5 @@
 import React from "react";
-import Select from "../common/Select";
+import { Select } from "../common/Select";
 import { FaSortAlphaDown } from "react-icons/fa";
 import { PiClockCountdownLight } from "react-icons/pi";
 import { FaStar } from "react-icons/fa6";
@@ -11,10 +11,10 @@ interface GlossaryHeaderProps {
   onSearh: (searchPhrase: string) => void;
 }
 
-export const GlossaryHeader: React.FC<GlossaryHeaderProps> = ({
+export const GlossaryHeader = ({
   onSort,
   onSearh,
-}) => {
+}: GlossaryHeaderProps): JSX.Element => {
   const { t } = useTranslation("glossary");
   const sortibles = [
     {

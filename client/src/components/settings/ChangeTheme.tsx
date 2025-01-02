@@ -1,9 +1,8 @@
-import React from "react";
 import { VscColorMode } from "react-icons/vsc";
 import { useTranslation } from "react-i18next";
-import ThemeToggle from "../ThemeToggle";
+import { ThemeToggle } from "../ThemeToggle";
 
-export const ChangeTheme: React.FC = () => {
+export const ChangeTheme = (): JSX.Element => {
   const { t } = useTranslation("settings");
 
   return (

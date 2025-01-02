@@ -1,11 +1,11 @@
-import React, { SyntheticEvent, useEffect, useState } from "react";
+import { SyntheticEvent, useEffect, useState } from "react";
 import { GoGoal } from "react-icons/go";
 import { RadioGroup } from "../common/RadioGroup";
-import Button from "../common/Button";
-import useAxiosPrivate from "../../hooks/useAxiosPrivate";
+import { Button } from "../common/Button";
+import { useAxiosPrivate } from "../../hooks/useAxiosPrivate";
 import { User } from "../../interfaces/user";
 import { GoalsObj } from "../../types/goalsObj";
-import useUser from "../../hooks/useUser";
+import { useUser } from "../../hooks/useUser";
 import { useToast } from "../../context/ToastContext";
 import { ToastType } from "../../enums/toast";
 import { useTranslation } from "react-i18next";
@@ -14,7 +14,7 @@ const UPDATE_URL = "/users";
 interface GoalsWidgetProps {
   title: string;
 }
-export const GoalsWidget: React.FC<GoalsWidgetProps> = ({ title }) => {
+export const GoalsWidget = ({ title }: GoalsWidgetProps): JSX.Element => {
   const [wordsPerWeekValue, setWordsPerWeek] = useState<string | "more" | null>(
     null
   );

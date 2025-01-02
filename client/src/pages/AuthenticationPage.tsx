@@ -1,10 +1,10 @@
-import React, { useState } from "react";
-import useTop from "../hooks/useTop";
-import Login from "../components/auth/Login";
-import Register from "../components/auth/Register";
+import { useState } from "react";
+import { useTop } from "../hooks/useTop";
+import { Login } from "../components/auth/Login";
+import { Register } from "../components/auth/Register";
 //import BgImage from "../assets/images/bg-auth.jpg";
 
-const AuthenticationPage: React.FC = () => {
+export const AuthenticationPage = (): JSX.Element => {
   useTop();
   const [toggle, setToggle] = useState(true);
 
@@ -26,5 +26,3 @@ const AuthenticationPage: React.FC = () => {
     </section>
   );
 };
-
-export default AuthenticationPage;

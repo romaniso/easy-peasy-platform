@@ -17,10 +17,10 @@ import {
   //  BsEnvelopeFill,
 } from "react-icons/bs";
 import LogoImage from "../assets/images/small-logo.png";
-import ThemeToggle from "./ThemeToggle";
-import useLogout from "../hooks/useLogout";
-import useAuth from "../hooks/useAuth";
-import MiniAvatar from "./MiniAvatar";
+import { ThemeToggle } from "./ThemeToggle";
+import { useLogout } from "../hooks/useLogout";
+import { useAuth } from "../hooks/useAuth";
+import { MiniAvatar } from "./MiniAvatar";
 import { useToast } from "../context/ToastContext";
 import { ToastType } from "../enums/toast";
 import { useTranslation } from "react-i18next";
@@ -29,6 +29,7 @@ type SidemenuSubitem = {
   label: string;
   path: string;
 };
+
 interface SidemenuItem {
   title: string;
   icon: React.ReactElement;
@@ -38,7 +39,7 @@ interface SidemenuItem {
   event?(): void;
 }
 
-const Sidebar: React.FC = () => {
+export const Sidebar = (): JSX.Element => {
   const [isSidebarOpened, setIsSidebarOpened] = useState<boolean>(true);
   const [expandedSubmenuItem, setExpandedSubmenuItem] = useState<number | null>(
     null
@@ -269,5 +270,3 @@ const Sidebar: React.FC = () => {
     </aside>
   );
 };
-
-export default Sidebar;
