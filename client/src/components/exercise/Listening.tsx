@@ -1,5 +1,4 @@
 import { FaRegThumbsUp, FaShare, FaDownload } from "react-icons/fa";
-import React from "react";
 import { Button } from "../common/Button";
 import { WaveFormPlayer } from "../common/WaveFormPlayer";
 import { Level } from "../../types/level";
@@ -11,13 +10,14 @@ interface ListeningProps {
   image: string;
   level: Level;
 }
-const Listening: React.FC<ListeningProps> = ({
+
+export const Listening = ({
   audioUrl,
   title,
   description,
   image,
   level,
-}) => {
+}: ListeningProps): JSX.Element => {
   return (
     <>
       <div className="bg-white/90 dark:bg-black/90 md:bg-transparent dark:md:bg-transparent flex items-center md:gap-5 relative rounded-t-md md:rounded-md">
@@ -61,5 +61,3 @@ const Listening: React.FC<ListeningProps> = ({
     </>
   );
 };
-
-export default Listening;

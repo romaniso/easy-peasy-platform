@@ -1,5 +1,5 @@
 import { BsChevronCompactLeft, BsChevronCompactRight } from "react-icons/bs";
-import React, { useState } from "react";
+import { useState } from "react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { Level } from "../../types/level";
@@ -11,7 +11,11 @@ interface CheatsheetProps {
   level: Level;
   content: string;
 }
-const Cheatsheet: React.FC<CheatsheetProps> = ({ topic, level, content }) => {
+export const Cheatsheet = ({
+  topic,
+  level,
+  content,
+}: CheatsheetProps): JSX.Element => {
   const { t } = useTranslation("exercise");
   const [isExpanded, setIsExpanded] = useState(true);
 
@@ -63,5 +67,3 @@ const Cheatsheet: React.FC<CheatsheetProps> = ({ topic, level, content }) => {
     </section>
   );
 };
-
-export default Cheatsheet;

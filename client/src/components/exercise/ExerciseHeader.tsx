@@ -4,16 +4,17 @@ import { Modal } from "../common/Modal";
 //import { FaQuestionCircle } from "react-icons/fa";
 import { useTranslation } from "react-i18next";
 //import GiffSample from '../../assets/images/fill-box-giff.gif'
-interface ExerciseHeader {
+
+interface ExerciseHeaderProps {
   title: string;
   instruction: string;
   forwardedRef?: React.RefObject<HTMLElement>;
 }
-const ExerciseHeader: React.FC<ExerciseHeader> = ({
+const ExerciseHeaderComponent = ({
   title,
   instruction,
   forwardedRef,
-}) => {
+}: ExerciseHeaderProps): JSX.Element => {
   const { t } = useTranslation("exercise");
   const [showModal, setShowModal] = useState(false);
   return (
@@ -57,9 +58,11 @@ const ExerciseHeader: React.FC<ExerciseHeader> = ({
   );
 };
 
-export default forwardRef<HTMLElement, ExerciseHeader>((props, ref) => (
-  <ExerciseHeader
-    {...props}
-    forwardedRef={ref as React.RefObject<HTMLElement>}
-  />
-));
+export const ExerciseHeader = forwardRef<HTMLElement, ExerciseHeaderProps>(
+  (props, ref) => (
+    <ExerciseHeaderComponent
+      {...props}
+      forwardedRef={ref as React.RefObject<HTMLElement>}
+    />
+  )
+);

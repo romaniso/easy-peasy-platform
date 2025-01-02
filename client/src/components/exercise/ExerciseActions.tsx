@@ -7,11 +7,11 @@ interface ExerciseActionsProps {
   results: UserResult[] | null;
 }
 
-export const ExerciseActions: React.FC<ExerciseActionsProps> = ({
+export const ExerciseActions = ({
   checkOutTxt,
   answersTxt,
   results,
-}) => {
+}: ExerciseActionsProps): JSX.Element => {
   return (
     <div className="flex gap-5 items-center">
       <Button

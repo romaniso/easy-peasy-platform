@@ -1,10 +1,9 @@
 import { ExerciseUnit } from "../../interfaces/exerciseUnit";
 import { UserResult } from "../../types/userResult";
-import React from "react";
 import { FaRegThumbsDown, FaRegThumbsUp } from "react-icons/fa";
 import { OrderUnit } from "../common/OrderUnit";
 import { WaveFormPlayer } from "../common/WaveFormPlayer";
-import FillInUnit from "./FillInUnit";
+import { FillInUnit } from "./FillInUnit";
 import { UserResultEnums } from "../../enums/userResult";
 import className from "classnames";
 
@@ -13,11 +12,11 @@ interface ExerciseListenAndTypeProps {
   results: UserResult[] | null;
   onChange(index: number, event: string): void;
 }
-const ExerciseListenAndType: React.FC<ExerciseListenAndTypeProps> = ({
+export const ExerciseListenAndType = ({
   questions,
   results,
   onChange,
-}) => {
+}: ExerciseListenAndTypeProps): JSX.Element => {
   const renderedExerciseFill = (
     <ul>
       {questions.map((item, index) => {
@@ -64,5 +63,3 @@ const ExerciseListenAndType: React.FC<ExerciseListenAndTypeProps> = ({
   );
   return renderedExerciseFill;
 };
-
-export default ExerciseListenAndType;

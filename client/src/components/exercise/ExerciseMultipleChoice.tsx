@@ -3,6 +3,7 @@ import { FaRegThumbsDown, FaRegThumbsUp } from "react-icons/fa";
 import { ExerciseUnit } from "../../interfaces/exerciseUnit";
 import { UserResult } from "../../types/userResult";
 import { OrderUnit } from "../common/OrderUnit";
+
 interface ExerciseMultipleChoiceProps {
   questions: ExerciseUnit[];
   results: UserResult[] | null;
@@ -12,12 +13,13 @@ interface ExerciseMultipleChoiceProps {
     event: React.ChangeEvent<HTMLInputElement> | string
   ): void;
 }
-const ExerciseMultipleChoice: React.FC<ExerciseMultipleChoiceProps> = ({
+
+export const ExerciseMultipleChoice = ({
   questions,
   results,
   selections,
   onChange,
-}) => {
+}: ExerciseMultipleChoiceProps): JSX.Element => {
   const renderedMultipleChoice = (
     <ul>
       {questions.map(({ question, options }, index) => {
@@ -112,5 +114,3 @@ const ExerciseMultipleChoice: React.FC<ExerciseMultipleChoiceProps> = ({
 
   return renderedMultipleChoice;
 };
-
-export default ExerciseMultipleChoice;

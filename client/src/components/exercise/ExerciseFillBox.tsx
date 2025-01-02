@@ -9,12 +9,13 @@ interface ExerciseFillBoxProps {
   results: UserResult[] | null;
   onChange(index: number, e: string): void;
 }
-const ExerciseFillBox: React.FC<ExerciseFillBoxProps> = ({
+
+export const ExerciseFillBox = ({
   questions,
   text,
   results,
   onChange,
-}) => {
+}: ExerciseFillBoxProps): JSX.Element => {
   const handleText = (text: string) => {
     return text
       .split("***")
@@ -70,5 +71,3 @@ const ExerciseFillBox: React.FC<ExerciseFillBoxProps> = ({
     </div>
   );
 };
-
-export default ExerciseFillBox;

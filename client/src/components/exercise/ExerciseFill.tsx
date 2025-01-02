@@ -1,20 +1,19 @@
-import React from "react";
 import { FaRegThumbsUp, FaRegThumbsDown } from "react-icons/fa";
 import { ExerciseUnit } from "../../interfaces/exerciseUnit";
 import { UserResult } from "../../types/userResult";
 import { OrderUnit } from "../common/OrderUnit";
-import FillInUnit from "./FillInUnit";
+import { FillInUnit } from "./FillInUnit";
 
 interface ExerciseFillProps {
   questions: ExerciseUnit[];
   results: UserResult[] | null;
   onChange(index: number, event: string): void;
 }
-const ExerciseFill: React.FC<ExerciseFillProps> = ({
+export const ExerciseFill = ({
   questions,
   results,
   onChange,
-}) => {
+}: ExerciseFillProps): JSX.Element => {
   const renderedExerciseFill = (
     <ul>
       {questions.map((item, index) => {
@@ -44,5 +43,3 @@ const ExerciseFill: React.FC<ExerciseFillProps> = ({
   );
   return renderedExerciseFill;
 };
-
-export default ExerciseFill;

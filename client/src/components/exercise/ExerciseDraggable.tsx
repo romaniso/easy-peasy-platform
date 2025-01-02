@@ -1,6 +1,6 @@
 import React, { ReactElement, useEffect, useState } from "react";
-import { shuffleArray } from "../../utils/shuffleArray";
 
+import { shuffleArray } from "../../utils/shuffleArray";
 import Draggable from "../Draggable";
 import Droppable from "../Droppable";
 import { DndContext, DragEndEvent } from "@dnd-kit/core";
@@ -25,12 +25,12 @@ interface ExerciseDraggableProps {
   selections: string[];
   onSelect(index: number, event: string): void;
 }
-const ExerciseDraggable: React.FC<ExerciseDraggableProps> = ({
+export const ExerciseDraggable = ({
   draggables,
   droppables,
   onSelect,
   results,
-}) => {
+}: ExerciseDraggableProps): JSX.Element => {
   const [shuffledDrags, setShuffledDrags] = useState<draggable[]>([]);
   const [toDrops, setDroppables] = useState<droppable[]>(droppables);
 
@@ -113,4 +113,3 @@ const ExerciseDraggable: React.FC<ExerciseDraggableProps> = ({
     </DndContext>
   );
 };
-export default ExerciseDraggable;

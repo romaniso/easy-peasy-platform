@@ -1,12 +1,13 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { SingleExercise } from "../../interfaces/singleExercise";
-import Exercise from "./Exercise";
+import { Exercise } from "./Exercise";
 import { OrderTabs } from "../common/OrderTabs";
+
 interface ExerciseSetProps {
   exercises: SingleExercise[];
 }
 
-const ExerciseSet: React.FC<ExerciseSetProps> = ({ exercises }) => {
+export const ExerciseSet = ({ exercises }: ExerciseSetProps): JSX.Element => {
   const [activeExercise, setActiveExercise] = useState<number>(1);
   const renderedExercises = exercises.map(
     ({ instruction, title, type, data }, index) => {
@@ -37,5 +38,3 @@ const ExerciseSet: React.FC<ExerciseSetProps> = ({ exercises }) => {
     </section>
   );
 };
-
-export default ExerciseSet;

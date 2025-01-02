@@ -1,4 +1,4 @@
-import React, { ReactNode } from "react";
+import { ReactNode } from "react";
 import ReactMarkdown, { Components } from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { hasPunctuation } from "../../utils/hasPunctuationSign";
@@ -15,13 +15,13 @@ interface ReadingProps {
   audioUrl: string;
 }
 
-const Reading: React.FC<ReadingProps> = ({
+export const Reading = ({
   text,
   title,
   image,
   level,
   audioUrl,
-}) => {
+}: ReadingProps): JSX.Element => {
   const isHeadingsOpened = useIsHeadingsOpened();
   const renderWord = (word: string, index: number): ReactNode => {
     if (hasPunctuation(word)) {
@@ -151,5 +151,3 @@ const Reading: React.FC<ReadingProps> = ({
     </div>
   );
 };
-
-export default Reading;
