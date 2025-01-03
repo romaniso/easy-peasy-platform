@@ -15,8 +15,15 @@ Defines the allowed values for the `type` prop.
 
 ```tsx
 export enum IconType {
-  Check = "check", // Renders a checkmark icon
-  SelectArrow = "selectArrow", // Renders a downward caret arrow icon
+  Login = "login", // Renders a login icon
+  Tick = "tick", // Renders a checkmark icon
+  Cross = "cross", // Renders a cross icon
+  Exclamation = "exclamation", // Renders an exclamation icon
+  Reset = "reset", // Renders a reset icon
+  Expand = "expand", // Renders an expand icon
+  Plus = "plus", // Renders a plus icon
+  Minus = "minus", // Renders a minus icon
+  Download = "download", // Renders a download icon
 }
 ```
 

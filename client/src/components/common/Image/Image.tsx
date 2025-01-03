@@ -1,7 +1,5 @@
 import { useState, useRef, useEffect } from "react";
-import { MdZoomOutMap } from "react-icons/md";
-import { FaCloudDownloadAlt, FaPlus, FaMinus } from "react-icons/fa";
-import { RxCross2 } from "react-icons/rx";
+import { Icon, IconType } from "../icon/Icon";
 
 import { Modal } from "../Modal";
 
@@ -109,7 +107,8 @@ export const Image = ({
   return (
     <>
       <div className="w-full relative">
-        <MdZoomOutMap
+        <Icon
+          type={IconType.Expand}
           className="absolute text-2xl md:text-4xl bottom-2 right-2 md:bottom-7 md:right-7 p-1 bg-white dark:bg-black/30 rounded-md hover:scale-110 cursor-pointer transition-transform shadow-md"
           onClick={handleOpened}
         />
@@ -128,7 +127,8 @@ export const Image = ({
       {isOpened && (
         <Modal onClose={() => setOpened(false)} size="md:w-2/3 md:h-3/4">
           <div className="w-full h-full grid place-items-center md:py-2 md:px-4 relative md:overflow-hidden">
-            <RxCross2
+            <Icon
+              type={IconType.Cross}
               className="text-2xl md:text-4xl absolute -top-1 -right-1 md:top-2 md:right-2 p-1 bg-indigo-500 dark:bg-white/20 rounded-md hover:scale-110 cursor-pointer transition-transform text-white dark:text-orange-500 shadow-md z-50"
               onClick={handleOpened}
             />
@@ -142,18 +142,20 @@ export const Image = ({
               {...props}
             />
             {downloadable && (
-              <FaCloudDownloadAlt
+              <Icon
+                type={IconType.Download}
                 className="absolute -bottom-1 -right-1 md:bottom-2 md:right-2 text-2xl md:text-4xl p-1 bg-indigo-500 dark:bg-white/20 rounded-md hover:scale-110 cursor-pointer transition-transform text-white dark:text-orange-500 shadow-md"
                 onClick={handleDownload}
               />
             )}
             <div className="absolute -top-1 -left-1 hidden md:top-2 md:left-2 md:flex flex-col items-center gap-1">
-              {/* Zoom in and out - 100% + */}
-              <FaPlus
+              <Icon
+                type={IconType.Plus}
                 className="text-2xl md:text-4xl p-1 bg-indigo-500 dark:bg-white/20 rounded-md hover:scale-110 cursor-pointer transition-transform text-white dark:text-orange-500 shadow-md"
                 onClick={handleZoomIn}
               />
-              <FaMinus
+              <Icon
+                type={IconType.Minus}
                 className="text-2xl md:text-4xl p-1 bg-indigo-500 dark:bg-white/20 rounded-md hover:scale-110 cursor-pointer transition-transform text-white dark:text-orange-500 shadow-md"
                 onClick={handleZoomOut}
               />
