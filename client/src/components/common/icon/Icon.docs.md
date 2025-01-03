@@ -25,7 +25,7 @@ export enum IconType {
 #### Basic Usage
 
 ```tsx
-import Icon, { IconType } from "./Icon";
+import { Icon, IconType } from "./Icon";
 
 // Render a check icon
 <Icon type={IconType.Check} />

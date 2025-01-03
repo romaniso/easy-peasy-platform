@@ -7,10 +7,9 @@ import { Input } from "../common/Input";
 import { Password } from "./Password";
 import { Button } from "../common/Button";
 import { CiLogin } from "react-icons/ci";
-import { IoIosInformationCircleOutline } from "react-icons/io";
-import { FaCheck, FaTimes } from "react-icons/fa";
 import axios from "../../api/axios";
 import { AxiosError } from "axios";
+import { Icon, IconType } from "../common/icon/Icon";
 //#endregion
 
 interface ApiResponse {
@@ -165,24 +164,22 @@ export const Register = ({ onToggleForm }: RegisterProps): JSX.Element => {
                 ref={userRef}
               >
                 Username
-                <span
+                <Icon
                   className={
                     validName
                       ? "inline-block ml-1 text-green-500"
                       : "invisible absolute"
                   }
-                >
-                  <FaCheck />
-                </span>
-                <span
+                  type={IconType.Tick}
+                />
+                <Icon
                   className={
                     validName || !userName
                       ? "invisible absolute"
                       : "inline-block ml-1 text-red-500"
                   }
-                >
-                  <FaTimes />
-                </span>
+                  type={IconType.Cross}
+                />
               </Input>
               <p
                 id="uidnote"
@@ -192,7 +189,10 @@ export const Register = ({ onToggleForm }: RegisterProps): JSX.Element => {
                     : "invisible opacity-0 absolute"
                 }
               >
-                <IoIosInformationCircleOutline className="inline relative bottom-0.5 mr-1 text-lg" />
+                <Icon
+                  className="inline relative bottom-0.5 mr-1 text-lg"
+                  type={IconType.Exclamation}
+                />
                 4 to 24 characters
                 <br />
                 Must begin with a letter.
@@ -215,24 +215,22 @@ export const Register = ({ onToggleForm }: RegisterProps): JSX.Element => {
                 onBlur={() => setPwdFocus(false)}
               >
                 Password
-                <span
+                <Icon
                   className={
                     validPwd
                       ? "inline-block ml-1 text-green-500"
                       : "invisible absolute"
                   }
-                >
-                  <FaCheck />
-                </span>
-                <span
+                  type={IconType.Tick}
+                />
+                <Icon
                   className={
                     validPwd || !pwd
                       ? "invisible absolute"
                       : "inline-block ml-1 text-red-500"
                   }
-                >
-                  <FaTimes />
-                </span>
+                  type={IconType.Cross}
+                />
               </Password>
               <p
                 id="pwdnote"
@@ -242,7 +240,10 @@ export const Register = ({ onToggleForm }: RegisterProps): JSX.Element => {
                     : "invisible opacity-0 absolute"
                 }
               >
-                <IoIosInformationCircleOutline className="inline relative bottom-0.5 mr-1 text-lg" />
+                <Icon
+                  className="inline relative bottom-0.5 mr-1 text-lg"
+                  type={IconType.Exclamation}
+                />
                 8 to 24 characters.
                 <br />
                 Must include uppercase and lowercase letters, a number and a
@@ -269,24 +270,22 @@ export const Register = ({ onToggleForm }: RegisterProps): JSX.Element => {
                 onBlur={() => setMatchFocus(false)}
               >
                 Confirm Password
-                <span
+                <Icon
                   className={
                     validMatch && matchPwd
                       ? "inline-block ml-1 text-green-500"
                       : "invisible absolute"
                   }
-                >
-                  <FaCheck />
-                </span>
-                <span
+                  type={IconType.Tick}
+                />
+                <Icon
                   className={
                     validMatch || !matchPwd
                       ? "invisible absolute"
                       : "inline-block ml-1 text-red-500"
                   }
-                >
-                  <FaTimes />
-                </span>
+                  type={IconType.Cross}
+                />
               </Password>
               <p
                 id="confirmnote"
@@ -296,7 +295,10 @@ export const Register = ({ onToggleForm }: RegisterProps): JSX.Element => {
                     : "invisible opacity-0 absolute"
                 }
               >
-                <IoIosInformationCircleOutline className="inline relative bottom-0.5 mr-1 text-lg" />
+                <Icon
+                  className="inline relative bottom-0.5 mr-1 text-lg"
+                  type={IconType.Exclamation}
+                />
                 Must match the first password input field.
               </p>
               <p

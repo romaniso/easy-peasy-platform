@@ -1,10 +1,16 @@
 import { useMemo } from "react";
-import { FaCheck, FaCaretDown } from "react-icons/fa";
+import { CiLogin } from "react-icons/ci";
+import { FaCheck, FaTimes } from "react-icons/fa";
+import { IoIosInformationCircleOutline } from "react-icons/io";
+import { GrPowerReset } from "react-icons/gr";
 
 // Define the types of icons available
 export enum IconType {
-  Check = "check",
-  SelectArrow = "selectArrow",
+  Login = "login",
+  Tick = "tick",
+  Cross = "cross",
+  Exclamation = "exclamation",
+  Reset = "reset",
 }
 
 // Interface for component props
@@ -27,11 +33,16 @@ export const Icon = ({ className, type }: IconProps): JSX.Element => {
   const iconMap = useMemo(
     () =>
       new Map<IconType, (className?: string) => JSX.Element>([
-        [IconType.Check, (className) => <FaCheck className={className} />],
+        [IconType.Login, (className) => <CiLogin className={className} />],
+        [IconType.Tick, (className) => <FaCheck className={className} />],
+        [IconType.Cross, (className) => <FaTimes className={className} />],
         [
-          IconType.SelectArrow,
-          (className) => <FaCaretDown className={className} />,
+          IconType.Exclamation,
+          (className) => (
+            <IoIosInformationCircleOutline className={className} />
+          ),
         ],
+        [IconType.Reset, (className) => <GrPowerReset className={className} />],
       ]),
     []
   );
