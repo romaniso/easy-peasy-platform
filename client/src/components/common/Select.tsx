@@ -1,6 +1,6 @@
 import { ReactElement, useEffect, useRef, useState } from "react";
-import { PiCaretUpDownLight } from "react-icons/pi";
 import className from "classnames";
+import { Icon, IconType } from "./icon/Icon";
 
 interface SelectItem<T> {
   label: string | number;
@@ -73,7 +73,7 @@ export const Select = <T,>({
             ) : (
               <>
                 <span className="mr-4">{defaultText}</span>
-                <PiCaretUpDownLight />
+                <Icon type={IconType.ChevronUpDown} />
               </>
             )}
           </>

@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from "react";
-import { FaPlay, FaPause } from "react-icons/fa";
 import { getCalculatedStringifiedTime } from "../../utils/getCalculatedStringifiedTime";
+import { Icon, IconType } from "./icon/Icon";
 
 interface AudioPlayerProps {
   audioUrl: string;
@@ -101,9 +101,9 @@ export const AudioPlayer = ({
         className="mx-1 bg-orange-500 rounded-full w-10 h-10 text-xl text-indigo-50 flex justify-center items-center shadow-md hover:bg-indigo-300 transition-colors duration-300"
       >
         {isPlaying ? (
-          <FaPause className="m-0" />
+          <Icon className="m-0" type={IconType.Pause} />
         ) : (
-          <FaPlay className="m-0 relative left-[2px]" />
+          <Icon className="m-0 relative left-[2px]" type={IconType.Play} />
         )}
       </button>
       <div className="font-mono text-lg ml-3 text-indigo-700 dark:text-indigo-400">

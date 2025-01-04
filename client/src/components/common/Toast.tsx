@@ -1,10 +1,7 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import { ToastContext } from "../../context/ToastContext";
-import { IoIosCloseCircle } from "react-icons/io";
-import { RiAlarmWarningLine } from "react-icons/ri";
-import { FaExclamationCircle } from "react-icons/fa";
-import { FaCheck } from "react-icons/fa";
 import { ToastType } from "../../enums/toast";
+import { Icon, IconType } from "./icon/Icon";
 import className from "classnames";
 
 const useTimeout = (callbackFunction: () => void) => {
@@ -42,13 +39,15 @@ export const Toast = ({ message, close, type }: ToastProps): JSX.Element => {
 
   switch (type) {
     case ToastType.Success:
-      icon = <FaCheck className="text-indigo-50" />;
+      icon = <Icon className="text-indigo-50" type={IconType.Tick} />;
       break;
     case ToastType.Warning:
-      icon = <RiAlarmWarningLine className="text-indigo-50" />;
+      icon = <Icon className="text-indigo-50" type={IconType.WarningBulb} />;
       break;
     case ToastType.Failure:
-      icon = <FaExclamationCircle className="text-indigo-50" />;
+      icon = (
+        <Icon className="text-indigo-50" type={IconType.ExclamationCircle} />
+      );
       break;
   }
 
@@ -62,7 +61,10 @@ export const Toast = ({ message, close, type }: ToastProps): JSX.Element => {
         <p className="text-indigo-900 dark:text-indigo-50">{message}</p>
       </div>
       <button className="" onClick={close}>
-        <IoIosCloseCircle className="text-2xl text-indigo-900 dark:text-indigo-50" />
+        <Icon
+          className="text-2xl text-indigo-900 dark:text-indigo-50"
+          type={IconType.CrossCircle}
+        />
       </button>
     </div>
   );

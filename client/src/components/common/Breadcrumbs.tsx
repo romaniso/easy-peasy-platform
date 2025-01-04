@@ -1,8 +1,7 @@
-import React from "react";
 import { Link } from "react-router-dom";
 import { useLocation } from "react-router-dom";
-import { BsChevronRight } from "react-icons/bs";
 import { Level } from "../../enums/level";
+import { Icon, IconType } from "./icon/Icon";
 
 interface BreadcrumbsProps {
   withoutLevels?: true;
@@ -43,7 +42,7 @@ export const Breadcrumbs = ({
           key={decodedCrumb}
         >
           <Link to={currentLink}>{decodedCrumb}</Link>
-          {index !== arr.length - 1 && <BsChevronRight />}
+          {index !== arr.length - 1 && <Icon type={IconType.ChevronRight} />}
         </div>
       );
     });
