@@ -1,12 +1,10 @@
 import React, { FormEvent, useState } from "react";
-import { PiMusicNotesFill } from "react-icons/pi";
-import { MdCheck, MdEdit } from "react-icons/md";
-import { FaRegTrashCan, FaStar } from "react-icons/fa6";
 import { playAudio } from "../../utils/playAudio";
 import { useAxiosPrivate } from "../../hooks/useAxiosPrivate";
 import { useUser } from "../../hooks/useUser";
 import { GlossaryAction } from "./GlossaryAction";
 import { useTranslation } from "react-i18next";
+import { Icon, IconType } from "../common/icon/Icon";
 
 interface GlossaryItemProps {
   id: string;
@@ -117,7 +115,7 @@ export const GlossaryItem = ({
         className="absolute bottom-3 right-2.5 bg-indigo-400 p-0.5 w-6 h-6 rounded-full shadow hover:bg-orange-400 transition-colors"
         type="submit"
       >
-        <MdCheck className="text-lg text-indigo-50" />
+        <Icon className="text-lg text-indigo-50" type={IconType.Tick} />
       </button>
     </form>
   );
@@ -127,7 +125,10 @@ export const GlossaryItem = ({
       <div className="basis-full md:basis-1/6 flex flex-col relative">
         <div className="text-lg text-orange-600 drop-shadow-sm flex gap-1">
           {marked && (
-            <FaStar className="text-orange-300 flex-shrink-0 mt-1.5" />
+            <Icon
+              className="text-orange-300 flex-shrink-0 mt-1.5"
+              type={IconType.Star}
+            />
           )}
           <span className="">{word}</span>
         </div>
@@ -140,13 +141,13 @@ export const GlossaryItem = ({
               className="flex items-center gap-0.5 font-semibold text-indigo-900 dark:text-indigo-300 cursor-pointer hover:scale-110 transition-transform"
               onClick={handlePlay}
             >
-              UK <PiMusicNotesFill />
+              UK <Icon type={IconType.Note} />
             </span>
             <span
               className="flex items-center gap-0.5 font-semibold text-indigo-900 dark:text-indigo-300 cursor-pointer hover:scale-110 transition-transform"
               onClick={handlePlay}
             >
-              US <PiMusicNotesFill />
+              US <Icon type={IconType.Note} />
             </span>
           </div>
         )}
@@ -201,19 +202,19 @@ export const GlossaryItem = ({
           className="flex items-center bg-red-500 hover:opacity-80 text-white text-sm p-1 rounded-md shadow-sm gap-1"
           onClick={handleRemove}
         >
-          {t("actions.remove")} <FaRegTrashCan />
+          {t("actions.remove")} <Icon type={IconType.TrashBin} />
         </button>
         <button
           className="flex items-center bg-indigo-500 hover:opacity-80 text-white text-sm p-1 rounded-md shadow-sm gap-1"
           onClick={() => setIsBeingEdited(!isBeingEdited)}
         >
-          {t("actions.edit")} <MdEdit />
+          {t("actions.edit")} <Icon type={IconType.Edit} />
         </button>
         <button
           className="flex items-center bg-orange-500 hover:opacity-80 text-white text-sm p-1 rounded-md shadow-sm gap-1"
           onClick={handleMark}
         >
-          {t("actions.star")} <FaStar />
+          {t("actions.star")} <Icon type={IconType.Star} />
         </button>
       </div>
     </div>

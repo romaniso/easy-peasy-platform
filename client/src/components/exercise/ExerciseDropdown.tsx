@@ -1,8 +1,8 @@
 import React from "react";
-import { FaRegThumbsUp, FaRegThumbsDown } from "react-icons/fa";
 import { ExerciseUnit } from "../../interfaces/exerciseUnit";
 import { UserResult } from "../../types/userResult";
 import { v4 as uuid } from "uuid";
+import { Icon, IconType } from "../common/icon/Icon";
 
 interface ExerciseDropdownProps {
   questions: ExerciseUnit[];
@@ -23,9 +23,15 @@ export const ExerciseDropdown = ({
         const feedbackIcon =
           results &&
           (results[index] === "Same" ? (
-            <FaRegThumbsUp className="inline-block text-green-500 ml-2" />
+            <Icon
+              className="inline-block text-green-500 ml-2"
+              type={IconType.ThumbsUp}
+            />
           ) : (
-            <FaRegThumbsDown className="inline-block ml-2 text-red-400" />
+            <Icon
+              className="inline-block ml-2 text-red-400"
+              type={IconType.ThumbsDown}
+            />
           ));
 
         const { question, options } = item;

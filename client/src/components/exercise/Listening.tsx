@@ -1,4 +1,4 @@
-import { FaRegThumbsUp, FaShare, FaDownload } from "react-icons/fa";
+import { Icon, IconType } from "../common/icon/Icon";
 import { Button } from "../common/Button";
 import { WaveFormPlayer } from "../common/WaveFormPlayer";
 import { Level } from "../../types/level";
@@ -42,17 +42,17 @@ export const Listening = ({
           <div className="mt-4 md:mt-8 flex gap-2">
             <Button secondary outline rounded small>
               <span className="flex items-center gap-2">
-                <FaRegThumbsUp /> Add
+                <Icon type={IconType.ThumbsUp} /> Add
               </span>
             </Button>
             <Button secondary outline rounded small>
               <span className="flex items-center gap-2">
-                <FaShare /> Share
+                <Icon type={IconType.Share} /> Share
               </span>
             </Button>
             <Button secondary outline rounded small className="ml-auto">
               <span className="flex items-center gap-2">
-                <FaDownload /> Download the script
+                <Icon type={IconType.Download} /> Download the script
               </span>
             </Button>
           </div>

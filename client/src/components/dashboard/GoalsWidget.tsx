@@ -1,5 +1,5 @@
 import { SyntheticEvent, useEffect, useState } from "react";
-import { GoGoal } from "react-icons/go";
+import { Icon, IconType } from "../common/icon/Icon";
 import { RadioGroup } from "../common/RadioGroup";
 import { Button } from "../common/Button";
 import { useAxiosPrivate } from "../../hooks/useAxiosPrivate";
@@ -86,7 +86,7 @@ export const GoalsWidget = ({ title }: GoalsWidgetProps): JSX.Element => {
     <article className="bg-white dark:bg-black/40 dark:border dark:border-stone-900 rounded-md px-3 py-2 shadow-lg h-full">
       <div className="text-orange-500 dark:text-orange-500 font-bold text-xl md:text-3xl flex items-center gap-2 drop-shadow mb-1">
         <h4>{title}</h4>
-        <GoGoal />
+        <Icon type={IconType.Goal} />
       </div>
       <form className="flex-1 flex flex-wrap" onSubmit={handleSubmit}>
         <fieldset className="basis-1/2 flex flex-col justify-between pr-1">

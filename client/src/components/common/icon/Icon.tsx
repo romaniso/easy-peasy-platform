@@ -14,47 +14,74 @@ import {
   FaChevronRight,
   FaChevronLeft,
   FaSearch,
+  FaShare,
+  FaStar,
   FaExclamationCircle,
+  FaRegThumbsUp,
+  FaRegThumbsDown,
+  FaQuestionCircle,
+  FaSortAlphaDown,
 } from "react-icons/fa";
+import { BsChevronCompactLeft, BsChevronCompactRight } from "react-icons/bs";
 import {
   IoIosInformationCircleOutline,
   IoIosCloseCircle,
 } from "react-icons/io";
-import { GrPowerReset } from "react-icons/gr";
+import { GrPowerReset, GrAchievement } from "react-icons/gr";
 import { MdZoomOutMap } from "react-icons/md";
 import { RiEditFill, RiAlarmWarningLine } from "react-icons/ri";
-import { PiCaretUpDownLight } from "react-icons/pi";
+import {
+  PiCaretUpDownLight,
+  PiClockCountdownLight,
+  PiMusicNotesFill,
+} from "react-icons/pi";
 import { LiaFacebookF } from "react-icons/lia";
-import { FaWhatsapp, FaXTwitter } from "react-icons/fa6";
+import { FaWhatsapp, FaXTwitter, FaRegTrashCan } from "react-icons/fa6";
+import { GoGoal } from "react-icons/go";
+import { HiOutlineDotsVertical } from "react-icons/hi";
 import { IconBaseProps } from "react-icons";
 
 // Define the types of icons available
 export enum IconType {
-  Login = "login",
-  Tick = "tick",
+  Achievement = "achievement",
+  ByAlphabet = "by-alphabet",
+  ChevronCompactLeft = "chevron-compact-left",
+  ChevronCompactRight = "chevron-compact-right",
+  ChevronDown = "chevron-down",
+  ChevronLeft = "chevron-left",
+  ChevronRight = "chevron-right",
+  ChevronUp = "chevron-up",
+  ChevronUpDown = "chevron-up-down",
   Cross = "cross",
   CrossCircle = "cross-circle",
+  VerticalDots = "vertical-dots",
+  Download = "download",
+  Edit = "edit",
   Exclamation = "exclamation",
   ExclamationCircle = "exclamation-circle",
-  Reset = "reset",
   Expand = "expand",
-  Plus = "plus",
+  Facebook = "facebook",
+  Goal = "goal",
+  Login = "login",
   Minus = "minus",
-  Download = "download",
+  Note = "note",
   Pause = "pause",
   Play = "play",
-  ChevronRight = "chevron-right",
-  ChevronLeft = "chevron-left",
-  ChevronUp = "chevron-up",
-  ChevronDown = "chevron-down",
-  ChevronUpDown = "chevron-up-down",
+  Plus = "plus",
+  Question = "question",
+  Recent = "recent",
+  Reset = "reset",
   Save = "save",
-  Edit = "edit",
   Search = "search",
-  Facebook = "facebook",
+  Share = "share",
+  Star = "star",
+  ThumbsDown = "thumbs-down",
+  ThumbsUp = "thumbs-up",
+  Tick = "tick",
+  TrashBin = "trash-bin",
+  WarningBulb = "warning-bulb",
   Whatsapp = "whatsapp",
   XPlatform = "x-platform",
-  WarningBulb = "warning-bulb",
 }
 
 // Interface for component props
@@ -90,6 +117,21 @@ export const Icon = ({ className, type, ...props }: IconProps): JSX.Element => {
         [IconType.Minus, (props) => <FaMinus {...props} />],
         [IconType.Plus, (props) => <FaPlus {...props} />],
         [IconType.Download, (props) => <FaCloudDownloadAlt {...props} />],
+        [IconType.ThumbsUp, (props) => <FaRegThumbsUp {...props} />],
+        [IconType.ThumbsDown, (props) => <FaRegThumbsDown {...props} />],
+        [IconType.Question, (props) => <FaQuestionCircle {...props} />],
+        [IconType.Share, (props) => <FaShare {...props} />],
+        [
+          IconType.VerticalDots,
+          (props) => <HiOutlineDotsVertical {...props} />,
+        ],
+
+        // Glossary icons
+        [IconType.Star, (props) => <FaStar {...props} />],
+        [IconType.TrashBin, (props) => <FaRegTrashCan {...props} />],
+        [IconType.ByAlphabet, (props) => <FaSortAlphaDown {...props} />],
+        [IconType.Recent, (props) => <PiClockCountdownLight {...props} />],
+        [IconType.Note, (props) => <PiMusicNotesFill {...props} />],
 
         // Media player icons
         [IconType.Pause, (props) => <FaPause {...props} />],
@@ -98,7 +140,15 @@ export const Icon = ({ className, type, ...props }: IconProps): JSX.Element => {
         // Navigation icons
         [IconType.Reset, (props) => <GrPowerReset {...props} />],
         [IconType.ChevronRight, (props) => <FaChevronRight {...props} />],
+        [
+          IconType.ChevronCompactRight,
+          (props) => <BsChevronCompactRight {...props} />,
+        ],
         [IconType.ChevronLeft, (props) => <FaChevronLeft {...props} />],
+        [
+          IconType.ChevronCompactLeft,
+          (props) => <BsChevronCompactLeft {...props} />,
+        ],
         [IconType.ChevronUp, (props) => <FaChevronUp {...props} />],
         [IconType.ChevronDown, (props) => <FaChevronDown {...props} />],
         [IconType.ChevronUpDown, (props) => <PiCaretUpDownLight {...props} />],
@@ -120,6 +170,10 @@ export const Icon = ({ className, type, ...props }: IconProps): JSX.Element => {
         ],
         [IconType.CrossCircle, (props) => <IoIosCloseCircle {...props} />],
         [IconType.WarningBulb, (props) => <RiAlarmWarningLine {...props} />],
+
+        // Stats icons
+        [IconType.Achievement, (props) => <GrAchievement {...props} />],
+        [IconType.Goal, (props) => <GoGoal {...props} />],
       ]),
     []
   );

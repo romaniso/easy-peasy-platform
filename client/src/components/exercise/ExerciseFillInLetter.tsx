@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { FillInLetterUnit } from "./FillInLetterUnit";
-import { FaRegThumbsDown, FaRegThumbsUp } from "react-icons/fa";
 import { ExerciseUnit } from "../../interfaces/exerciseUnit";
 import { UserResult } from "../../types/userResult";
+import { Icon, IconType } from "../common/icon/Icon";
 
 interface ExerciseFillInLetterProps {
   questions: ExerciseUnit[];
@@ -73,9 +73,15 @@ export const ExerciseFillInLetter = ({
     const feedbackIcon =
       results &&
       (results[wordIndex] === "Same" ? (
-        <FaRegThumbsUp className="inline-block text-green-500 ml-2" />
+        <Icon
+          className="inline-block text-green-500 ml-2"
+          type={IconType.ThumbsUp}
+        />
       ) : (
-        <FaRegThumbsDown className="inline-block ml-2 text-red-400" />
+        <Icon
+          className="inline-block ml-2 text-red-400"
+          type={IconType.ThumbsDown}
+        />
       ));
     return (
       <div className="flex items-baseline gap-2" key={wordIndex}>
