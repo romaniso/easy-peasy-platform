@@ -1,4 +1,3 @@
-import { BsExclamationDiamondFill } from "react-icons/bs";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Button } from "../common/Button";
@@ -9,7 +8,7 @@ import { useToast } from "../../context/ToastContext";
 import { useAuth } from "../../hooks/useAuth";
 import { useUser } from "../../hooks/useUser";
 import { useNavigate } from "react-router-dom";
-import { RiDeleteBin5Fill } from "react-icons/ri";
+import { Icon, IconType } from "../common/icon/Icon";
 
 const DELETE_ACCOUNT_URL = "/users";
 
@@ -49,7 +48,7 @@ export const DeleteAccount = (): JSX.Element => {
       <div>
         <h2 className="text-lg md:text-2xl text-indigo-500 dark:text-indigo-200 font-bold drop-shadow flex items-center gap-1 flex-wrap">
           {t("subheadings.deleteAccount")}
-          <BsExclamationDiamondFill />
+          <Icon type={IconType.ExclamationCircle} />
         </h2>
         <p className="hidden md:block text-indigo-900 dark:text-indigo-300">
           {t("deleteAccount.deleteAccountDescription")}
@@ -92,7 +91,7 @@ export const DeleteAccount = (): JSX.Element => {
           <div className="h-full">
             <h5 className="text-red-500 text-2xl font-bold mb-2 drop-shadow-sm flex items-center gap-1">
               {t("deleteAccount.warning.heading")}
-              <RiDeleteBin5Fill />
+              <Icon type={IconType.TrashBin} />
             </h5>
             <div className="mx-auto h-5/6">
               <p className="bg-red-500/20 text-red-900 p-2 text-lg dark:text-red-100 rounded-md">

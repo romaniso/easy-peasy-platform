@@ -1,4 +1,3 @@
-import { TbWorld } from "react-icons/tb";
 import { ReactElement, useState } from "react";
 import PolandFlag from "../../assets/images/poland.png";
 import UsaFlag from "../../assets/images/usa.png";
@@ -8,7 +7,7 @@ import { Language } from "../../enums/lang";
 import { useTranslation } from "react-i18next";
 import { ToastType } from "../../enums/toast";
 import { useToast } from "../../context/ToastContext";
-import { IoLanguage } from "react-icons/io5";
+import { Icon, IconType } from "../common/icon/Icon";
 
 interface LanguageSwitcherItem {
   value: Language;
@@ -69,7 +68,7 @@ export const LanguageSwitcher = ({
           onChange={handleSwitchLanguage}
           defaultText={
             <div className="flex justify-center items-center gap-2">
-              <TbWorld className="text-xl" />
+              <Icon type={IconType.World} className="text-xl" />
               <span className="uppercase">{selectedLanguage}</span>
             </div>
           }
@@ -83,7 +82,7 @@ export const LanguageSwitcher = ({
     <section>
       <h2 className="text-lg md:text-2xl text-indigo-500 dark:text-indigo-200 font-bold drop-shadow flex items-center gap-1 mb-3.5 md:mb-6">
         {t("subheadings.defaultLanguage")}
-        <IoLanguage />
+        <Icon type={IconType.Language} />
       </h2>
       <Select
         options={languages}

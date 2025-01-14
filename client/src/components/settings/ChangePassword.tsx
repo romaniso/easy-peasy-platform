@@ -1,15 +1,13 @@
-import { RiLockPasswordLine } from "react-icons/ri";
 import { Button } from "../common/Button";
 import React, { useEffect, useState } from "react";
 import { Password } from "../auth/Password";
-import { IoIosInformationCircleOutline } from "react-icons/io";
-import { FaCheck, FaTimes } from "react-icons/fa";
 import { useAxiosPrivate } from "../../hooks/useAxiosPrivate";
 import { AxiosError } from "axios";
 import { useAuth } from "../../hooks/useAuth";
 import { ToastType } from "../../enums/toast";
 import { useToast } from "../../context/ToastContext";
 import { Trans, useTranslation } from "react-i18next";
+import { Icon, IconType } from "../common/icon/Icon";
 
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
 const SETTINGS_URL = "/settings";
@@ -100,7 +98,7 @@ export const ChangePassword = (): JSX.Element => {
     <section>
       <h2 className="text-lg md:text-2xl text-indigo-500 dark:text-indigo-200 font-bold drop-shadow flex items-center gap-1 mb-3.5 md:mb-6">
         {t("subheadings.changePassword")}
-        <RiLockPasswordLine />
+        <Icon type={IconType.Password} />
       </h2>
       <form onSubmit={handleSubmit}>
         <div className="mb-5 flex flex-col gap-5 md:gap-6">
@@ -137,7 +135,7 @@ export const ChangePassword = (): JSX.Element => {
                   : "invisible absolute"
               }
             >
-              <FaCheck />
+              <Icon type={IconType.Tick} />
             </span>
             <span
               className={
@@ -146,7 +144,7 @@ export const ChangePassword = (): JSX.Element => {
                   : "inline-block ml-1 text-red-500"
               }
             >
-              <FaTimes />
+              <Icon type={IconType.Cross} />
             </span>
           </Password>
           <p
@@ -159,12 +157,18 @@ export const ChangePassword = (): JSX.Element => {
           >
             {newPwd === prevPwd ? (
               <span>
-                <IoIosInformationCircleOutline className="inline relative bottom-0.5 mr-1 text-lg" />
+                <Icon
+                  type={IconType.Exclamation}
+                  className="inline relative bottom-0.5 mr-1 text-lg"
+                />
                 {t("validation.validationMessage_one")}
               </span>
             ) : (
               <span>
-                <IoIosInformationCircleOutline className="inline relative bottom-0.5 mr-1 text-lg" />
+                <Icon
+                  type={IconType.Exclamation}
+                  className="inline relative bottom-0.5 mr-1 text-lg"
+                />
                 <Trans
                   defaults={t("validation.validationMessage_two")}
                   components={{ 1: <br /> }}
@@ -197,7 +201,7 @@ export const ChangePassword = (): JSX.Element => {
                   : "invisible absolute"
               }
             >
-              <FaCheck />
+              <Icon type={IconType.Tick} />
             </span>
             <span
               className={
@@ -206,7 +210,7 @@ export const ChangePassword = (): JSX.Element => {
                   : "inline-block ml-1 text-red-500"
               }
             >
-              <FaTimes />
+              <Icon type={IconType.Cross} />
             </span>
           </Password>
           <p
@@ -217,7 +221,10 @@ export const ChangePassword = (): JSX.Element => {
                 : "invisible opacity-0 absolute"
             }
           >
-            <IoIosInformationCircleOutline className="inline relative bottom-0.5 mr-1 text-lg" />
+            <Icon
+              type={IconType.Exclamation}
+              className="inline relative bottom-0.5 mr-1 text-lg"
+            />
             {t("validation.validationMessage_three")}
           </p>
         </div>

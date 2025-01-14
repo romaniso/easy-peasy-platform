@@ -1,8 +1,15 @@
+// React imports
 import { useMemo } from "react";
+
+// React-icons grouped by library
 import {
   MdFamilyRestroom,
   MdOutlineWorkOutline,
   MdOutlineSelfImprovement,
+  MdZoomOutMap,
+  MdOutlineSportsFootball,
+  MdOutlineScience,
+  MdForest,
 } from "react-icons/md";
 import {
   CiLogin,
@@ -40,13 +47,16 @@ import {
   FaBookReader,
   FaPaintBrush,
   FaGamepad,
+  FaWhatsapp,
 } from "react-icons/fa";
+import { FaRegTrashCan, FaXTwitter } from "react-icons/fa6";
 import { BsChevronCompactLeft, BsChevronCompactRight } from "react-icons/bs";
 import {
   IoIosInformationCircleOutline,
   IoIosCloseCircle,
   IoIosFitness,
 } from "react-icons/io";
+import { IoLanguage } from "react-icons/io5";
 import { GrPowerReset, GrAchievement } from "react-icons/gr";
 import {
   GiRoad,
@@ -58,15 +68,10 @@ import {
   GiCook,
 } from "react-icons/gi";
 import {
-  MdZoomOutMap,
-  MdOutlineSportsFootball,
-  MdOutlineScience,
-  MdForest,
-} from "react-icons/md";
-import {
   RiEditFill,
   RiAlarmWarningLine,
   RiMedicineBottleFill,
+  RiLockPasswordLine,
 } from "react-icons/ri";
 import {
   PiCaretUpDownLight,
@@ -75,54 +80,55 @@ import {
   PiExamBold,
 } from "react-icons/pi";
 import { TiPen } from "react-icons/ti";
-import { TbMickey } from "react-icons/tb";
+import { TbMickey, TbWorld } from "react-icons/tb";
 import { LiaFacebookF } from "react-icons/lia";
-import { FaWhatsapp, FaXTwitter, FaRegTrashCan } from "react-icons/fa6";
 import { GoGoal } from "react-icons/go";
 import { HiOutlineDotsVertical, HiOutlineSpeakerphone } from "react-icons/hi";
 import { SlPicture, SlSocialInstagram } from "react-icons/sl";
+import { VscColorMode } from "react-icons/vsc";
 import { IconBaseProps } from "react-icons";
 
 // Define the types of icons available
 export enum IconType {
   // Motivation section
-  Family = "family",
   Career = "career",
-  School = "school",
-  Traveling = "traveling",
-  Exams = "exams",
-  SelfDevelopment = "self-development",
-  Emigration = "emigration",
   Culture = "culture",
+  Emigration = "emigration",
+  Exams = "exams",
+  Family = "family",
+  School = "school",
+  SelfDevelopment = "self-development",
+  Traveling = "traveling",
 
   // Profile section icons
   Form = "form",
-  Motivation = "motivation",
   Interests = "interests",
+  Motivation = "motivation",
 
   // Interests icons
-  Music = "music",
-  Films = "films",
-  IT = "it",
-  Reading = "reading",
-  Art = "art",
-  Gaming = "gaming",
-  Sports = "sports",
-  Fashion = "fashion",
-  Science = "science",
-  Nature = "nature",
-  History = "history",
-  Economics = "economics",
-  Marketing = "marketing",
-  Beauty = "beauty",
   Animals = "animals",
-  SocialMedia = "social-media",
-  Medicine = "medicine",
-  Cooking = "cooking",
-  Fitness = "fitness",
-  ContentMaking = "content-making",
+  Art = "art",
+  Beauty = "beauty",
   Cartoons = "cartoons",
+  Cooking = "cooking",
+  ContentMaking = "content-making",
+  Economics = "economics",
+  Fashion = "fashion",
+  Films = "films",
+  Fitness = "fitness",
+  Gaming = "gaming",
+  History = "history",
+  IT = "it",
+  Marketing = "marketing",
+  Medicine = "medicine",
+  Music = "music",
+  Nature = "nature",
+  Reading = "reading",
+  Science = "science",
+  SocialMedia = "social-media",
+  Sports = "sports",
 
+  // Miscellaneous icons
   Achievement = "achievement",
   ByAlphabet = "by-alphabet",
   ChevronCompactLeft = "chevron-compact-left",
@@ -134,7 +140,6 @@ export enum IconType {
   ChevronUpDown = "chevron-up-down",
   Cross = "cross",
   CrossCircle = "cross-circle",
-  VerticalDots = "vertical-dots",
   Download = "download",
   Edit = "edit",
   Exclamation = "exclamation",
@@ -145,6 +150,7 @@ export enum IconType {
   Login = "login",
   Minus = "minus",
   Note = "note",
+  Password = "password",
   Pause = "pause",
   Picture = "picture",
   Play = "play",
@@ -160,9 +166,15 @@ export enum IconType {
   ThumbsUp = "thumbs-up",
   Tick = "tick",
   TrashBin = "trash-bin",
+  VerticalDots = "vertical-dots",
   WarningBulb = "warning-bulb",
   Whatsapp = "whatsapp",
   XPlatform = "x-platform",
+
+  // Settings icons
+  ColorMode = "color-mode",
+  Language = "language",
+  World = "world",
 }
 
 // Interface for component props
@@ -297,6 +309,12 @@ export const Icon = ({ className, type, ...props }: IconProps): JSX.Element => {
         [IconType.Fitness, (props) => <IoIosFitness {...props} />],
         [IconType.ContentMaking, (props) => <TiPen {...props} />],
         [IconType.Cartoons, (props) => <TbMickey {...props} />],
+
+        // Settings icons
+        [IconType.ColorMode, (props) => <VscColorMode {...props} />],
+        [IconType.Password, (props) => <RiLockPasswordLine {...props} />],
+        [IconType.Language, (props) => <IoLanguage {...props} />],
+        [IconType.World, (props) => <TbWorld {...props} />],
       ]),
     []
   );
