@@ -1,5 +1,17 @@
 import { useMemo } from "react";
-import { CiLogin } from "react-icons/ci";
+import {
+  MdFamilyRestroom,
+  MdOutlineWorkOutline,
+  MdOutlineSelfImprovement,
+} from "react-icons/md";
+import {
+  CiLogin,
+  CiViewList,
+  CiTrophy,
+  CiFootball,
+  CiMusicNote1,
+  CiLaptop,
+} from "react-icons/ci";
 import {
   FaCloudDownloadAlt,
   FaPlus,
@@ -21,28 +33,96 @@ import {
   FaRegThumbsDown,
   FaQuestionCircle,
   FaSortAlphaDown,
+  FaSchool,
+  FaUmbrellaBeach,
+  FaFlagUsa,
+  FaFilm,
+  FaBookReader,
+  FaPaintBrush,
+  FaGamepad,
 } from "react-icons/fa";
 import { BsChevronCompactLeft, BsChevronCompactRight } from "react-icons/bs";
 import {
   IoIosInformationCircleOutline,
   IoIosCloseCircle,
+  IoIosFitness,
 } from "react-icons/io";
 import { GrPowerReset, GrAchievement } from "react-icons/gr";
-import { MdZoomOutMap } from "react-icons/md";
-import { RiEditFill, RiAlarmWarningLine } from "react-icons/ri";
+import {
+  GiRoad,
+  GiFlowerHat,
+  GiAncientColumns,
+  GiReceiveMoney,
+  GiButterfly,
+  GiCat,
+  GiCook,
+} from "react-icons/gi";
+import {
+  MdZoomOutMap,
+  MdOutlineSportsFootball,
+  MdOutlineScience,
+  MdForest,
+} from "react-icons/md";
+import {
+  RiEditFill,
+  RiAlarmWarningLine,
+  RiMedicineBottleFill,
+} from "react-icons/ri";
 import {
   PiCaretUpDownLight,
   PiClockCountdownLight,
   PiMusicNotesFill,
+  PiExamBold,
 } from "react-icons/pi";
+import { TiPen } from "react-icons/ti";
+import { TbMickey } from "react-icons/tb";
 import { LiaFacebookF } from "react-icons/lia";
 import { FaWhatsapp, FaXTwitter, FaRegTrashCan } from "react-icons/fa6";
 import { GoGoal } from "react-icons/go";
-import { HiOutlineDotsVertical } from "react-icons/hi";
+import { HiOutlineDotsVertical, HiOutlineSpeakerphone } from "react-icons/hi";
+import { SlPicture, SlSocialInstagram } from "react-icons/sl";
 import { IconBaseProps } from "react-icons";
 
 // Define the types of icons available
 export enum IconType {
+  // Motivation section
+  Family = "family",
+  Career = "career",
+  School = "school",
+  Traveling = "traveling",
+  Exams = "exams",
+  SelfDevelopment = "self-development",
+  Emigration = "emigration",
+  Culture = "culture",
+
+  // Profile section icons
+  Form = "form",
+  Motivation = "motivation",
+  Interests = "interests",
+
+  // Interests icons
+  Music = "music",
+  Films = "films",
+  IT = "it",
+  Reading = "reading",
+  Art = "art",
+  Gaming = "gaming",
+  Sports = "sports",
+  Fashion = "fashion",
+  Science = "science",
+  Nature = "nature",
+  History = "history",
+  Economics = "economics",
+  Marketing = "marketing",
+  Beauty = "beauty",
+  Animals = "animals",
+  SocialMedia = "social-media",
+  Medicine = "medicine",
+  Cooking = "cooking",
+  Fitness = "fitness",
+  ContentMaking = "content-making",
+  Cartoons = "cartoons",
+
   Achievement = "achievement",
   ByAlphabet = "by-alphabet",
   ChevronCompactLeft = "chevron-compact-left",
@@ -66,6 +146,7 @@ export enum IconType {
   Minus = "minus",
   Note = "note",
   Pause = "pause",
+  Picture = "picture",
   Play = "play",
   Plus = "plus",
   Question = "question",
@@ -174,6 +255,48 @@ export const Icon = ({ className, type, ...props }: IconProps): JSX.Element => {
         // Stats icons
         [IconType.Achievement, (props) => <GrAchievement {...props} />],
         [IconType.Goal, (props) => <GoGoal {...props} />],
+
+        // Profile icons
+        [IconType.Picture, (props) => <SlPicture {...props} />],
+        [IconType.Form, (props) => <CiViewList {...props} />],
+        [IconType.Motivation, (props) => <CiTrophy {...props} />],
+        [IconType.Interests, (props) => <CiFootball {...props} />],
+
+        // Motivation icons
+        [IconType.Family, (props) => <MdFamilyRestroom {...props} />],
+        [IconType.Career, (props) => <MdOutlineWorkOutline {...props} />],
+        [IconType.School, (props) => <FaSchool {...props} />],
+        [IconType.Traveling, (props) => <FaUmbrellaBeach {...props} />],
+        [IconType.Exams, (props) => <PiExamBold {...props} />],
+        [
+          IconType.SelfDevelopment,
+          (props) => <MdOutlineSelfImprovement {...props} />,
+        ],
+        [IconType.Emigration, (props) => <GiRoad {...props} />],
+        [IconType.Culture, (props) => <FaFlagUsa {...props} />],
+
+        // Interests icons
+        [IconType.Music, (props) => <CiMusicNote1 {...props} />],
+        [IconType.Films, (props) => <FaFilm {...props} />],
+        [IconType.IT, (props) => <CiLaptop {...props} />],
+        [IconType.Reading, (props) => <FaBookReader {...props} />],
+        [IconType.Art, (props) => <FaPaintBrush {...props} />],
+        [IconType.Gaming, (props) => <FaGamepad {...props} />],
+        [IconType.Sports, (props) => <MdOutlineSportsFootball {...props} />],
+        [IconType.Fashion, (props) => <GiFlowerHat {...props} />],
+        [IconType.Science, (props) => <MdOutlineScience {...props} />],
+        [IconType.Nature, (props) => <MdForest {...props} />],
+        [IconType.History, (props) => <GiAncientColumns {...props} />],
+        [IconType.Economics, (props) => <GiReceiveMoney {...props} />],
+        [IconType.Marketing, (props) => <HiOutlineSpeakerphone {...props} />],
+        [IconType.Beauty, (props) => <GiButterfly {...props} />],
+        [IconType.Animals, (props) => <GiCat {...props} />],
+        [IconType.SocialMedia, (props) => <SlSocialInstagram {...props} />],
+        [IconType.Medicine, (props) => <RiMedicineBottleFill {...props} />],
+        [IconType.Cooking, (props) => <GiCook {...props} />],
+        [IconType.Fitness, (props) => <IoIosFitness {...props} />],
+        [IconType.ContentMaking, (props) => <TiPen {...props} />],
+        [IconType.Cartoons, (props) => <TbMickey {...props} />],
       ]),
     []
   );
