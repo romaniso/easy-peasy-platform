@@ -1,6 +1,6 @@
 import { useDraggable } from "@dnd-kit/core";
 import { CSS } from "@dnd-kit/utilities";
-import { MdDragIndicator } from "react-icons/md";
+import { Icon, IconType } from "./common/icon/Icon";
 
 interface DraggableProps {
   id: number;
@@ -28,7 +28,7 @@ export const Draggable = ({ id, title }: DraggableProps): JSX.Element => {
       >
         <span>{title}</span>
 
-        <MdDragIndicator />
+        <Icon type={IconType.Drag} />
       </div>
     </button>
   );

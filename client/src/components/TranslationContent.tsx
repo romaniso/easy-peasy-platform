@@ -1,13 +1,12 @@
-import { BsFillVolumeDownFill } from "react-icons/bs";
 import { TranslationContentData } from "../interfaces/translationContentData";
 import { Button } from "./common/Button";
-import { LuCopyPlus } from "react-icons/lu";
 import { ToolTip } from "./common/ToolTip";
 import { useAddWordToDictionary } from "../context/ReadingContext";
 import { useToast } from "../context/ToastContext";
 import { ToastType } from "../enums/toast";
 import { v4 as uuid } from "uuid";
 import { playAudio } from "../utils/playAudio";
+import { Icon, IconType } from "./common/icon/Icon";
 
 interface TranslationContentProps {
   word: string;
@@ -52,7 +51,7 @@ export const TranslationContent = ({
         </dt>
         {fetchedData && fetchedData.audio && (
           <button className="cursor-pointer" onClick={handlePlay}>
-            <BsFillVolumeDownFill className="text-lg" />
+            <Icon type={IconType.Sound} className="text-lg" />
           </button>
         )}
       </span>
@@ -73,7 +72,10 @@ export const TranslationContent = ({
             <Button secondary outline small onClick={() => handleClick(word)}>
               <span>
                 add
-                <LuCopyPlus className="text-sm ml-2 inline align-baseline" />
+                <Icon
+                  type={IconType.Add}
+                  className="text-sm ml-2 inline align-baseline"
+                />
               </span>
             </Button>
           </ToolTip>

@@ -10,7 +10,10 @@ import {
   MdOutlineSportsFootball,
   MdOutlineScience,
   MdForest,
+  MdOutlineEditNote,
+  MdDragIndicator,
 } from "react-icons/md";
+import { BiSolidDashboard } from "react-icons/bi";
 import {
   CiLogin,
   CiViewList,
@@ -18,7 +21,11 @@ import {
   CiFootball,
   CiMusicNote1,
   CiLaptop,
+  CiLogout,
+  CiSettings,
+  CiUser,
 } from "react-icons/ci";
+import { LuCopyPlus } from "react-icons/lu";
 import {
   FaCloudDownloadAlt,
   FaPlus,
@@ -48,9 +55,20 @@ import {
   FaPaintBrush,
   FaGamepad,
   FaWhatsapp,
+  FaTiktok,
+  FaInstagram,
+  FaUpload,
 } from "react-icons/fa";
 import { FaRegTrashCan, FaXTwitter } from "react-icons/fa6";
-import { BsChevronCompactLeft, BsChevronCompactRight } from "react-icons/bs";
+import {
+  BsChevronCompactLeft,
+  BsChevronCompactRight,
+  BsArrowLeftShort,
+  BsListTask,
+  BsBook,
+  BsCollectionPlay,
+  BsFillVolumeDownFill,
+} from "react-icons/bs";
 import {
   IoIosInformationCircleOutline,
   IoIosCloseCircle,
@@ -72,18 +90,26 @@ import {
   RiAlarmWarningLine,
   RiMedicineBottleFill,
   RiLockPasswordLine,
+  RiMoonLine,
+  RiSunLine,
 } from "react-icons/ri";
 import {
   PiCaretUpDownLight,
   PiClockCountdownLight,
   PiMusicNotesFill,
   PiExamBold,
+  PiBookOpenTextBold,
 } from "react-icons/pi";
 import { TiPen } from "react-icons/ti";
 import { TbMickey, TbWorld } from "react-icons/tb";
 import { LiaFacebookF } from "react-icons/lia";
 import { GoGoal } from "react-icons/go";
-import { HiOutlineDotsVertical, HiOutlineSpeakerphone } from "react-icons/hi";
+import {
+  HiOutlineDotsVertical,
+  HiOutlineSpeakerphone,
+  HiMenu,
+  HiX,
+} from "react-icons/hi";
 import { SlPicture, SlSocialInstagram } from "react-icons/sl";
 import { VscColorMode } from "react-icons/vsc";
 import { IconBaseProps } from "react-icons";
@@ -128,8 +154,11 @@ export enum IconType {
   SocialMedia = "social-media",
   Sports = "sports",
 
-  // Miscellaneous icons
+  // Common icons
   Achievement = "achievement",
+  Add = "add",
+  ArrowLeft = "arrow-left",
+  Book = "book",
   ByAlphabet = "by-alphabet",
   ChevronCompactLeft = "chevron-compact-left",
   ChevronCompactRight = "chevron-compact-right",
@@ -140,15 +169,22 @@ export enum IconType {
   ChevronUpDown = "chevron-up-down",
   Cross = "cross",
   CrossCircle = "cross-circle",
+  Dashboard = "dashboard",
   Download = "download",
+  Drag = "drag",
   Edit = "edit",
   Exclamation = "exclamation",
   ExclamationCircle = "exclamation-circle",
   Expand = "expand",
-  Facebook = "facebook",
+  Grid = "grid",
   Goal = "goal",
+  Glossary = "glossary",
+  Logout = "logout",
   Login = "login",
+  List = "list",
+  Media = "media",
   Minus = "minus",
+  Moon = "moon",
   Note = "note",
   Password = "password",
   Pause = "pause",
@@ -160,14 +196,25 @@ export enum IconType {
   Reset = "reset",
   Save = "save",
   Search = "search",
+  Settings = "settings",
   Share = "share",
+  Sound = "sound",
   Star = "star",
+  Sun = "sun",
   ThumbsDown = "thumbs-down",
   ThumbsUp = "thumbs-up",
   Tick = "tick",
+  ThinCross = "thin-cross",
   TrashBin = "trash-bin",
+  Upload = "upload",
+  User = "user",
   VerticalDots = "vertical-dots",
   WarningBulb = "warning-bulb",
+
+  // Social media icons
+  Facebook = "facebook",
+  Instagram = "instagram",
+  Tiktok = "tiktok",
   Whatsapp = "whatsapp",
   XPlatform = "x-platform",
 
@@ -175,6 +222,9 @@ export enum IconType {
   ColorMode = "color-mode",
   Language = "language",
   World = "world",
+
+  // Dictionary
+  Dictionary = "dictionary",
 }
 
 // Interface for component props
@@ -218,6 +268,23 @@ export const Icon = ({ className, type, ...props }: IconProps): JSX.Element => {
           IconType.VerticalDots,
           (props) => <HiOutlineDotsVertical {...props} />,
         ],
+        [IconType.Drag, (props) => <MdDragIndicator {...props} />],
+        [IconType.Add, (props) => <LuCopyPlus {...props} />],
+        [IconType.Upload, (props) => <FaUpload {...props} />],
+        [IconType.Grid, (props) => <HiMenu {...props} />],
+        [IconType.ThinCross, (props) => <HiX {...props} />],
+        [IconType.Logout, (props) => <CiLogout {...props} />],
+        [IconType.Settings, (props) => <CiSettings {...props} />],
+        [IconType.User, (props) => <CiUser {...props} />],
+        [IconType.ArrowLeft, (props) => <BsArrowLeftShort {...props} />],
+        [IconType.List, (props) => <BsListTask {...props} />],
+        [IconType.Book, (props) => <BsBook {...props} />],
+        [IconType.Media, (props) => <BsCollectionPlay {...props} />],
+        [IconType.Dashboard, (props) => <BiSolidDashboard {...props} />],
+        [IconType.Moon, (props) => <RiMoonLine {...props} />],
+        [IconType.Sun, (props) => <RiSunLine {...props} />],
+        [IconType.Sound, (props) => <BsFillVolumeDownFill {...props} />],
+        [IconType.Glossary, (props) => <PiBookOpenTextBold {...props} />],
 
         // Glossary icons
         [IconType.Star, (props) => <FaStar {...props} />],
@@ -253,6 +320,8 @@ export const Icon = ({ className, type, ...props }: IconProps): JSX.Element => {
 
         // Socila media icons
         [IconType.Facebook, (props) => <LiaFacebookF {...props} />],
+        [IconType.Instagram, (props) => <FaInstagram {...props} />],
+        [IconType.Tiktok, (props) => <FaTiktok {...props} />],
         [IconType.Whatsapp, (props) => <FaWhatsapp {...props} />],
         [IconType.XPlatform, (props) => <FaXTwitter {...props} />],
 
@@ -315,6 +384,9 @@ export const Icon = ({ className, type, ...props }: IconProps): JSX.Element => {
         [IconType.Password, (props) => <RiLockPasswordLine {...props} />],
         [IconType.Language, (props) => <IoLanguage {...props} />],
         [IconType.World, (props) => <TbWorld {...props} />],
+
+        // Dictionary
+        [IconType.Dictionary, (props) => <MdOutlineEditNote {...props} />],
       ]),
     []
   );

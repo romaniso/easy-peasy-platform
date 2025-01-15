@@ -2,7 +2,6 @@ import { ReactElement, useEffect, useRef, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { Dropdown } from "./common/Dropdown";
 import { Button } from "./common/Button";
-import { HiMenu, HiX } from "react-icons/hi";
 import { ThemeToggle } from "./ThemeToggle";
 
 import { useAuth } from "../hooks/useAuth";
@@ -10,6 +9,7 @@ import { ProfilePreview } from "./ProfilePreview";
 import { useTranslation } from "react-i18next";
 import { Logo } from "./common/Logo";
 import { LanguageSwitcher } from "./settings/LanguageSwitcher";
+import { Icon, IconType } from "./common/icon/Icon";
 
 export interface SubmenuItem {
   label: string;
@@ -118,7 +118,11 @@ export const Navbar = (): JSX.Element => {
           onClick={() => setIsOpen(!isOpen)}
           className="absolute right-8 top-3 cursor-pointer md:hidden text-3xl text-indigo-800 dark:text-indigo-200 hover:text-orange-500"
         >
-          {isOpen ? <HiX /> : <HiMenu />}
+          {isOpen ? (
+            <Icon type={IconType.ThinCross} />
+          ) : (
+            <Icon type={IconType.Grid} />
+          )}
         </div>
         {/* MENU */}
         <ul

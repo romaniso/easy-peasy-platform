@@ -1,8 +1,8 @@
 import { ReactElement } from "react";
 import { Link } from "react-router-dom";
-import { FaFacebook, FaInstagram, FaTiktok } from "react-icons/fa";
 import { Logo } from "./common/Logo";
 import { Trans, useTranslation } from "react-i18next";
+import { Icon, IconType } from "./common/icon/Icon";
 
 type SubmenuItem = {
   label: string;
@@ -64,16 +64,17 @@ export const Footer = (): JSX.Element => {
     },
   ];
 
+  //@FIXME: populate with actual links:
   const socials: SocialItem[] = [
     {
-      icon: <FaFacebook />,
+      icon: <Icon type={IconType.Facebook} />,
       path: "wwww.google.com",
     },
     {
-      icon: <FaInstagram />,
+      icon: <Icon type={IconType.Instagram} />,
       path: "https://www.instagram.com/easy_peazy_english",
     },
-    { icon: <FaTiktok />, path: "wwww.google.com" },
+    { icon: <Icon type={IconType.Tiktok} />, path: "wwww.google.com" },
   ];
 
   const renderedMenu = menu.map((category: FooterMenuItem, index: number) => {
