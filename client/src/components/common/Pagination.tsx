@@ -1,5 +1,4 @@
-import React from "react";
-import { BsChevronRight, BsChevronLeft } from "react-icons/bs";
+import { Icon, IconType } from "./icon/Icon";
 
 interface PaginationProps {
   totalCount: number;
@@ -9,13 +8,13 @@ interface PaginationProps {
   siblingCount?: number;
 }
 
-export const Pagination: React.FC<PaginationProps> = ({
+export const Pagination = ({
   totalCount,
   currentPage,
   pageSize,
   onPageChange,
   siblingCount = 1,
-}) => {
+}: PaginationProps): JSX.Element | null => {
   const totalPages = Math.ceil(totalCount / pageSize);
 
   if (totalPages <= 1) return null; // Hide pagination if there is only one page
@@ -39,7 +38,7 @@ export const Pagination: React.FC<PaginationProps> = ({
         onClick={() => handlePageChange(currentPage - 1)}
         disabled={currentPage === 1}
       >
-        <BsChevronLeft />
+        <Icon type={IconType.ChevronLeft} />
       </button>
       {pages.map((page) => (
         <button
@@ -60,7 +59,7 @@ export const Pagination: React.FC<PaginationProps> = ({
         onClick={() => handlePageChange(currentPage + 1)}
         disabled={currentPage === totalPages}
       >
-        <BsChevronRight />
+        <Icon type={IconType.ChevronRight} />
       </button>
     </div>
   );

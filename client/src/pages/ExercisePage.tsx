@@ -1,14 +1,14 @@
 //#region imports
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
-import useTop from "../hooks/useTop";
-import Panel from "../components/common/Panel";
-import ExerciseSet from "../components/exercise/ExerciseSet";
-import Cheatsheet from "../components/exercise/Cheatsheet";
-import Breadcrumbs from "../components/common/Breadcrumbs";
+import { useTop } from "../hooks/useTop";
+import { Panel } from "../components/common/Panel";
+import { ExerciseSet } from "../components/exercise/ExerciseSet";
+import { Cheatsheet } from "../components/exercise/Cheatsheet";
+import { Breadcrumbs } from "../components/common/Breadcrumbs";
 import axios from "../api/axios";
-import Reading from "../components/exercise/Reading";
-import CustomSkeleton from "../components/common/Skeleton";
+import { Reading } from "../components/exercise/Reading";
+import { Skeleton } from "../components/common/Skeleton";
 // Types
 import { Section } from "../types/section";
 import { SingleExercise } from "../interfaces/singleExercise";
@@ -16,15 +16,15 @@ import { ICheatsheet } from "../interfaces/cheatsheet";
 import { IReading } from "../interfaces/reading";
 // Just for a template;
 import { RecommendedSection } from "../components/RecommendedSection";
-import DictionarySection from "../components/DictionarySection";
+import { DictionarySection } from "../components/DictionarySection";
 import { ReadingContextProvider } from "../context/ReadingContext";
 import { SectionType } from "../enums/section";
-import Listening from "../components/exercise/Listening";
+import { Listening } from "../components/exercise/Listening";
 import { IListening } from "../interfaces/listening";
 import { IRecommendedPreview } from "../components/RecommendedPreview";
 //#endregion
 
-const ExercisePage: React.FC = () => {
+export const ExercisePage = (): JSX.Element => {
   const [section, setSection] = useState<Section | null>(null);
   const [exercises, setExercises] = useState<SingleExercise[] | null>(null);
   const [cheatsheet, setCheatsheet] = useState<ICheatsheet | null>(null);
@@ -179,12 +179,10 @@ const ExercisePage: React.FC = () => {
         {topic}
       </h1>
       <Breadcrumbs />
-      {isLoading ? <CustomSkeleton items={1} exercise /> : content}
+      {isLoading ? <Skeleton items={1} exercise /> : content}
       {recommendedSets && (
         <RecommendedSection recommendedSets={recommendedSets} />
       )}
     </div>
   );
 };
-
-export default ExercisePage;

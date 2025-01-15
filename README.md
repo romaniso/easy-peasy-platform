@@ -153,8 +153,16 @@ As for creating MongoDB databases and AWS buckets, you would typically do this t
 
 **Start the server**
 
+For **Windows** users:
+
 ```bash
-  npm run dev
+  npm run dev:win
+```
+
+For **Linux** or **MacOS** users:
+
+```bash
+  npm run dev:darwin
 ```
 
 ## Todo list

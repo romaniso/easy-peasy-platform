@@ -1,14 +1,15 @@
-import React from "react";
 import { Link } from "react-router-dom";
 import { useLocation } from "react-router-dom";
-import { BsChevronRight } from "react-icons/bs";
 import { Level } from "../../enums/level";
+import { Icon, IconType } from "./icon/Icon";
 
-interface Props {
+interface BreadcrumbsProps {
   withoutLevels?: true;
 }
 
-const Breadcrumbs = ({ withoutLevels }: Props) => {
+export const Breadcrumbs = ({
+  withoutLevels,
+}: BreadcrumbsProps): JSX.Element => {
   const { pathname } = useLocation();
   let currentLink: string = "";
 
@@ -41,7 +42,7 @@ const Breadcrumbs = ({ withoutLevels }: Props) => {
           key={decodedCrumb}
         >
           <Link to={currentLink}>{decodedCrumb}</Link>
-          {index !== arr.length - 1 && <BsChevronRight />}
+          {index !== arr.length - 1 && <Icon type={IconType.ChevronRight} />}
         </div>
       );
     });
@@ -54,5 +55,3 @@ const Breadcrumbs = ({ withoutLevels }: Props) => {
     </div>
   );
 };
-
-export default Breadcrumbs;

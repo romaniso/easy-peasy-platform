@@ -1,15 +1,15 @@
-import React, { ReactElement, useEffect, useRef, useState } from "react";
+import { ReactElement, useEffect, useRef, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
-import Dropdown from "./common/Dropdown";
-import Button from "./common/Button";
-import { HiMenu, HiX } from "react-icons/hi";
-import ThemeToggle from "./ThemeToggle";
+import { Dropdown } from "./common/Dropdown";
+import { Button } from "./common/Button";
+import { ThemeToggle } from "./ThemeToggle";
 
-import useAuth from "../hooks/useAuth";
-import ProfilePreview from "./ProfilePreview";
+import { useAuth } from "../hooks/useAuth";
+import { ProfilePreview } from "./ProfilePreview";
 import { useTranslation } from "react-i18next";
 import { Logo } from "./common/Logo";
 import { LanguageSwitcher } from "./settings/LanguageSwitcher";
+import { Icon, IconType } from "./common/icon/Icon";
 
 export interface SubmenuItem {
   label: string;
@@ -22,7 +22,8 @@ interface NavbarItem {
   path?: string;
   subPaths?: SubmenuItem[];
 }
-const Navbar: React.FC = () => {
+
+export const Navbar = (): JSX.Element => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [isLogged, setIsLogged] = useState<boolean>(false);
   const { auth } = useAuth();
@@ -117,7 +118,11 @@ const Navbar: React.FC = () => {
           onClick={() => setIsOpen(!isOpen)}
           className="absolute right-8 top-3 cursor-pointer md:hidden text-3xl text-indigo-800 dark:text-indigo-200 hover:text-orange-500"
         >
-          {isOpen ? <HiX /> : <HiMenu />}
+          {isOpen ? (
+            <Icon type={IconType.ThinCross} />
+          ) : (
+            <Icon type={IconType.Grid} />
+          )}
         </div>
         {/* MENU */}
         <ul
@@ -152,5 +157,3 @@ const Navbar: React.FC = () => {
     </header>
   );
 };
-
-export default Navbar;

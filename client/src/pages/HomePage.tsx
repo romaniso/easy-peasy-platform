@@ -1,8 +1,8 @@
-import useTop from "../hooks/useTop";
+import { useTop } from "../hooks/useTop";
 import { Hero } from "./home/Hero";
 import { About } from "./home/About";
 
-const HomePage = () => {
+export const HomePage = (): JSX.Element => {
   useTop();
   return (
     <>
@@ -11,5 +11,3 @@ const HomePage = () => {
     </>
   );
 };
-
-export default HomePage;

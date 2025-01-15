@@ -7,7 +7,8 @@
   "scripts": {
     "build": "npx tsc",
     "start": "npx tsx src/app.ts",
-    "dev": "set NODE_ENV=development && nodemon --watch src --exec node --no-warnings=ExperimentalWarning --loader ts-node/esm ./src/app.ts"
+    "dev:darwin": "export NODE_ENV=development && nodemon --watch src --exec node --no-warnings=ExperimentalWarning --loader ts-node/esm ./src/app.ts",
+    "dev:win": "set NODE_ENV=development && nodemon --watch src --exec node --no-warnings=ExperimentalWarning --loader ts-node/esm ./src/app.ts"
   },
   "keywords": [],
   "author": "Roman Isopenko",

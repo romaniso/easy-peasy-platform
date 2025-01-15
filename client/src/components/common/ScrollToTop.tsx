@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import { RxChevronUp } from "react-icons/rx";
+import { Icon, IconType } from "./icon/Icon";
 
-const ScrollToTop = () => {
+export const ScrollToTop = (): JSX.Element => {
   const [showTopBtn, setShowTopBtn] = useState(false);
   useEffect(() => {
     const onScroll = (): void => {
@@ -24,12 +24,12 @@ const ScrollToTop = () => {
   return (
     <div className="relative">
       {showTopBtn && (
-        <RxChevronUp
-          className="fixed bottom-10 right-6 z-50 icon-style rounded-md bg-indigo-500 text-indigo-50 cursor-pointer transition-transform ease-in-out duration-500 h-10 w-10 shadow-md"
+        <Icon
+          type={IconType.ChevronUp}
+          className="fixed bottom-10 right-6 z-50 icon-style p-1.5 rounded-md bg-indigo-500 text-indigo-50 cursor-pointer transition-transform ease-in-out duration-500 h-10 w-10 shadow-md"
           onClick={goToTop}
         />
       )}
     </div>
   );
 };
-export default ScrollToTop;

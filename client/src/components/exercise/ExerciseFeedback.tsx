@@ -1,5 +1,5 @@
-import CircularProgressBar from "../CircularProgressBar";
-import React, { useCallback, useEffect, useState } from "react";
+import { CircularProgressBar } from "../CircularProgressBar";
+import { useCallback, useEffect, useState } from "react";
 import { UserResult } from "../../types/userResult";
 import { calculateResultIntoPercentage } from "./../../utils/calculateResultIntoPercentages";
 
@@ -8,10 +8,10 @@ interface ExerciseFeedbackProps {
   questionsNumber: number;
 }
 
-const ExerciseFeedback: React.FC<ExerciseFeedbackProps> = ({
+export const ExerciseFeedback = ({
   results,
   questionsNumber,
-}) => {
+}: ExerciseFeedbackProps): JSX.Element | null => {
   const [result, setResult] = useState<number>(0);
   const [offset, setOffset] = useState<number>(243);
 
@@ -51,5 +51,3 @@ const ExerciseFeedback: React.FC<ExerciseFeedbackProps> = ({
     </section>
   ) : null;
 };
-
-export default ExerciseFeedback;

@@ -1,13 +1,18 @@
 import { Link } from "react-router-dom";
 
-interface Props {
+interface AsidePreviewProps {
   title: string;
   introduction: string;
   link: string;
   imgSrc: string;
 }
 
-export const AsidePreview = ({ title, introduction, link, imgSrc }: Props) => {
+export const AsidePreview = ({
+  title,
+  introduction,
+  link,
+  imgSrc,
+}: AsidePreviewProps): JSX.Element => {
   return (
     <article className="group transition-transform duration-200 hover:scale-95">
       <Link to={link} className="flex gap-2">

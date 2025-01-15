@@ -1,22 +1,24 @@
 import { useParams } from "react-router-dom";
-import Breadcrumbs from "../components/common/Breadcrumbs";
-import useTop from "../hooks/useTop";
+import { Breadcrumbs } from "../components/common/Breadcrumbs";
+import { useTop } from "../hooks/useTop";
 import axios from "../api/axios";
 import { useEffect, useState } from "react";
 import { Article } from "../interfaces/article";
 import { Badge } from "../components/common/Badge";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
-import Button from "../components/common/Button";
+import { Button } from "../components/common/Button";
 import { Link } from "react-router-dom";
 import { ShareButtons } from "../components/common/ShareButtons";
 import { decodeAndFormatURL } from "../utils/decodeAndFormatUrl";
 import { AsideSection } from "../components/articles/AsideSection";
 import { PreviewArticle } from "../types/previewArticle";
 import { Loader } from "../components/common/Loader";
+import { Image } from "../components/common/Image/Image";
 
 const ARTICLE_URL = "/articles";
-export const ArticlePage = () => {
+
+export const ArticlePage = (): JSX.Element => {
   const [articleData, setArticleData] = useState<Article | null>(null);
   const [relatedArticles, setRelatedArticles] = useState<
     PreviewArticle[] | null
@@ -87,6 +89,16 @@ export const ArticlePage = () => {
           </section>
           <section className="md:mt-8 flex flex-col items-center">
             <ReactMarkdown
+              components={{
+                img: ({ src, alt, ...props }) => (
+                  <Image
+                    src={src as string}
+                    alt={alt as string}
+                    downloadable
+                    {...props}
+                  />
+                ),
+              }}
               className="markdown-content"
               remarkPlugins={[remarkGfm]}
             >

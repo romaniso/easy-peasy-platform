@@ -1,5 +1,4 @@
-import CircularProgressBar from "../CircularProgressBar";
-import React from "react";
+import { CircularProgressBar } from "../CircularProgressBar";
 import { Trans, useTranslation } from "react-i18next";
 
 interface CircularChartProps {
@@ -10,13 +9,13 @@ interface CircularChartProps {
   unitNameInPlural?: string;
   usedUnits: number;
 }
-export const CircularChart: React.FC<CircularChartProps> = ({
+export const CircularChart = ({
   title,
   percentage,
   maxNumber,
   //  unitNameInPlural,
   usedUnits,
-}) => {
+}: CircularChartProps): JSX.Element => {
   const { t } = useTranslation("dashboard");
   const calculateOffsetWithPercentage = (percentage: number): number => {
     return Math.floor(243 - (percentage / 100) * 147);

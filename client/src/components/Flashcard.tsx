@@ -1,7 +1,7 @@
-import React, { SyntheticEvent, useEffect, useState } from "react";
-import { BsFillVolumeDownFill } from "react-icons/bs";
-import { LuCopyPlus } from "react-icons/lu";
-import ToolTip from "./common/ToolTip";
+import { SyntheticEvent, useState } from "react";
+//import { BsFillVolumeDownFill } from "react-icons/bs";
+import { ToolTip } from "./common/ToolTip";
+import { Icon, IconType } from "./common/icon/Icon";
 //import { useSpeechSynthesis, SpeechSynthesisVoice } from "react-speech-kit";
 
 interface FlashcardProps {
@@ -10,12 +10,13 @@ interface FlashcardProps {
   cardImage: string;
   example: string;
 }
-const Flashcard: React.FC<FlashcardProps> = ({
+
+export const Flashcard = ({
   question,
   isCorrect,
   cardImage,
   example,
-}) => {
+}: FlashcardProps): JSX.Element => {
   const [isFlipped, setIsFlipped] = useState(false);
   const [isSaved, setIsSaved] = useState(false);
   // const [generalAmericanVoice, setGeneralAmericanVoice] = useState<SpeechSynthesisVoice | null>(null);
@@ -70,7 +71,7 @@ const Flashcard: React.FC<FlashcardProps> = ({
             <ToolTip
               tooltip={(!isSaved && "Save the card to my Vocabulary") as string}
             >
-              <LuCopyPlus className="text-white" />
+              <Icon type={IconType.Add} className="text-white" />
             </ToolTip>
           </div>
           <img

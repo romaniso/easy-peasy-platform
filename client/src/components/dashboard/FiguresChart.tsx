@@ -1,6 +1,5 @@
-import React from "react";
-import { GrAchievement } from "react-icons/gr";
 import { Trans, useTranslation } from "react-i18next";
+import { Icon, IconType } from "../common/icon/Icon";
 
 interface FiguresChartProps {
   title: string;
@@ -8,17 +7,17 @@ interface FiguresChartProps {
   // put a unit in a plural form, e.g. words, users, kilograms.
   unitNameInPlural?: string;
 }
-export const FiguresChart: React.FC<FiguresChartProps> = ({
+export const FiguresChart = ({
   title,
   percentage,
-  //  unitNameInPlural,
-}) => {
+}: //  unitNameInPlural,
+FiguresChartProps): JSX.Element => {
   const { t } = useTranslation("dashboard");
   return (
     <article className="bg-white dark:bg-black/40 dark:border dark:border-stone-900 rounded-md p-3 shadow-lg h-full flex flex-col justify-between items-center gap-1">
       <div className="text-orange-500 dark:text-orange-500 font-bold text-xl md:text-3xl flex justify-center items-center gap-2 drop-shadow">
         <h4>{title}</h4>
-        <GrAchievement />
+        <Icon type={IconType.Achievement} />
       </div>
       <p className="text-3xl md:text-5xl text-indigo-500 drop-shadow font-bold relative">
         {percentage}%

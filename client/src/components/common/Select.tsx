@@ -1,6 +1,6 @@
 import { ReactElement, useEffect, useRef, useState } from "react";
-import { PiCaretUpDownLight } from "react-icons/pi";
 import className from "classnames";
+import { Icon, IconType } from "./icon/Icon";
 
 interface SelectItem<T> {
   label: string | number;
@@ -15,14 +15,14 @@ interface SelectProps<T> {
   noBorders?: true;
   noArrows?: true;
 }
-const Select = <T,>({
+export const Select = <T,>({
   options,
   onChange,
   defaultOption,
   defaultText,
   noBorders,
   noArrows,
-}: SelectProps<T>) => {
+}: SelectProps<T>): JSX.Element => {
   const [selectedOption, setSelectedOption] = useState<SelectItem<T> | null>(
     defaultOption || null
   );
@@ -73,7 +73,7 @@ const Select = <T,>({
             ) : (
               <>
                 <span className="mr-4">{defaultText}</span>
-                <PiCaretUpDownLight />
+                <Icon type={IconType.ChevronUpDown} />
               </>
             )}
           </>
@@ -98,5 +98,3 @@ const Select = <T,>({
     </div>
   );
 };
-
-export default Select;

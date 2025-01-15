@@ -3,15 +3,15 @@ import {
   TwitterShareButton,
   WhatsappShareButton,
 } from "react-share";
+import { Icon, IconType } from "./icon/Icon";
 
-import { LiaFacebookF } from "react-icons/lia";
-import { FaWhatsapp, FaXTwitter } from "react-icons/fa6";
-
-interface Props {
+interface ShareButtonsProps {
   currentUrl: string;
 }
 
-export const ShareButtons = ({ currentUrl }: Props) => {
+export const ShareButtons = ({
+  currentUrl,
+}: ShareButtonsProps): JSX.Element => {
   return (
     <>
       <p className="text-sm text-indigo-800 dark:text-indigo-200 mr-2">
@@ -19,17 +19,17 @@ export const ShareButtons = ({ currentUrl }: Props) => {
       </p>
       <FacebookShareButton url={currentUrl} hashtag="#easy-peasy-english">
         <span className="bg-blue-500 p-1.5 text-center rounded-md inline-flex justify-center items-center hover:px-5 transition-all duration-150 shadow-md">
-          <LiaFacebookF className="text-white text-xl m-0" />
+          <Icon className="text-white text-xl m-0" type={IconType.Facebook} />
         </span>
       </FacebookShareButton>
       <TwitterShareButton url={currentUrl}>
         <span className="bg-black p-1.5 text-center rounded-md inline-flex justify-center items-center hover:px-5 transition-all duration-150 shadow-md">
-          <FaXTwitter className="text-white text-xl m-0" />
+          <Icon className="text-white text-xl m-0" type={IconType.XPlatform} />
         </span>
       </TwitterShareButton>
       <WhatsappShareButton url={currentUrl}>
         <span className="bg-green-500 p-1.5 text-center rounded-md inline-flex justify-center items-center hover:px-5 transition-all duration-150 shadow-md">
-          <FaWhatsapp className="text-white text-xl m-0" />
+          <Icon className="text-white text-xl m-0" type={IconType.Whatsapp} />
         </span>
       </WhatsappShareButton>
     </>
