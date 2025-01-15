@@ -1,5 +1,5 @@
 import React from "react";
-import { FaRegThumbsDown, FaRegThumbsUp } from "react-icons/fa";
+import { Icon, IconType } from "../common/icon/Icon";
 import { ExerciseUnit } from "../../interfaces/exerciseUnit";
 import { UserResult } from "../../types/userResult";
 import { OrderUnit } from "../common/OrderUnit";
@@ -26,14 +26,16 @@ export const ExerciseMultipleChoice = ({
         const feedbackIcon =
           results &&
           (results[index] === "Same" ? (
-            <FaRegThumbsUp
+            <Icon
               className="inline-block text-green-500 ml-2"
               key={`thumbs-up-${index}`}
+              type={IconType.ThumbsUp}
             />
           ) : (
-            <FaRegThumbsDown
+            <Icon
               className="inline-block ml-2 text-red-400"
               key={`thumbs-down-${index}`}
+              type={IconType.ThumbsDown}
             />
           ));
 

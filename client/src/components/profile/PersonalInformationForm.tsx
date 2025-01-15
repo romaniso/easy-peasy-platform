@@ -1,15 +1,14 @@
 import { Input } from "../common/Input";
 import { Button } from "../common/Button";
-import { FaCheck, FaTimes } from "react-icons/fa";
 import { SyntheticEvent, useEffect, useRef, useState } from "react";
 import { useAuth } from "../../hooks/useAuth";
 import { axiosPrivate } from "../../api/axios";
 import { useUser } from "../../hooks/useUser";
 import { User } from "../../interfaces/user";
-import { IoIosArrowForward } from "react-icons/io";
 import { ToastType } from "../../enums/toast";
 import { useToast } from "../../context/ToastContext";
 import { useTranslation } from "react-i18next";
+import { Icon, IconType } from "../common/icon/Icon";
 
 const UPDATE_URL = "/users";
 const FIRSTNAME_REGEX = /^[a-zA-Z][a-zA-Z\s'-]{1,50}$/;
@@ -204,7 +203,7 @@ export const PersonalInformationForm = ({
                 : "invisible absolute"
             }
           >
-            <FaCheck />
+            <Icon type={IconType.Tick} />
           </span>
           <span
             className={
@@ -213,7 +212,7 @@ export const PersonalInformationForm = ({
                 : "inline-block ml-1 text-red-500"
             }
           >
-            <FaTimes />
+            <Icon type={IconType.Cross} />
           </span>
         </Input>
         <Input
@@ -239,7 +238,7 @@ export const PersonalInformationForm = ({
                 : "invisible absolute"
             }
           >
-            <FaCheck />
+            <Icon type={IconType.Tick} />
           </span>
           <span
             className={
@@ -248,7 +247,7 @@ export const PersonalInformationForm = ({
                 : "inline-block ml-1 text-red-500"
             }
           >
-            <FaTimes />
+            <Icon type={IconType.Cross} />
           </span>
         </Input>
         <Input
@@ -273,7 +272,7 @@ export const PersonalInformationForm = ({
                 : "invisible absolute"
             }
           >
-            <FaCheck />
+            <Icon type={IconType.Tick} />
           </span>
           <span
             className={
@@ -282,7 +281,7 @@ export const PersonalInformationForm = ({
                 : "inline-block ml-1 text-red-500"
             }
           >
-            <FaTimes />
+            <Icon type={IconType.Cross} />
           </span>
         </Input>
         <Input
@@ -307,7 +306,7 @@ export const PersonalInformationForm = ({
                 : "invisible absolute"
             }
           >
-            <FaCheck />
+            <Icon type={IconType.Tick} />
           </span>
           <span
             className={
@@ -316,7 +315,7 @@ export const PersonalInformationForm = ({
                 : "inline-block ml-1 text-red-500"
             }
           >
-            <FaTimes />
+            <Icon type={IconType.Cross} />
           </span>
         </Input>
       </div>
@@ -349,7 +348,7 @@ export const PersonalInformationForm = ({
         >
           <span className="flex items-center gap-2">
             {tCommon("buttons.next")}
-            <IoIosArrowForward />
+            <Icon type={IconType.ChevronCompactRight} />
           </span>
         </Button>
       </div>

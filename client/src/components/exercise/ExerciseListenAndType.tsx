@@ -1,6 +1,6 @@
 import { ExerciseUnit } from "../../interfaces/exerciseUnit";
 import { UserResult } from "../../types/userResult";
-import { FaRegThumbsDown, FaRegThumbsUp } from "react-icons/fa";
+import { Icon, IconType } from "../common/icon/Icon";
 import { OrderUnit } from "../common/OrderUnit";
 import { WaveFormPlayer } from "../common/WaveFormPlayer";
 import { FillInUnit } from "./FillInUnit";
@@ -23,9 +23,15 @@ export const ExerciseListenAndType = ({
         const feedbackIcon =
           results &&
           (results[index] === UserResultEnums.Success ? (
-            <FaRegThumbsUp className="inline-block text-green-500 ml-2" />
+            <Icon
+              className="inline-block text-green-500 ml-2"
+              type={IconType.ThumbsUp}
+            />
           ) : (
-            <FaRegThumbsDown className="inline-block ml-2 text-red-400" />
+            <Icon
+              className="inline-block ml-2 text-red-400"
+              type={IconType.ThumbsDown}
+            />
           ));
 
         const { question, audioUrl } = item;

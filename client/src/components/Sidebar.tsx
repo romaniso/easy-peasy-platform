@@ -2,20 +2,6 @@ import { Link, useNavigate, NavLink } from "react-router-dom";
 import React, { useState } from "react";
 //TODO: Handle single collapse issue (maybe by using a separate Dropdown component), consider how to change content (NavLink, or state)
 
-import {
-  BsArrowLeftShort,
-  BsSearch,
-  BsChevronDown,
-  BsListTask,
-  BsBoxArrowRight,
-  BsReverseLayoutTextWindowReverse,
-  BsCollectionPlay,
-  //  BsCalendar3,
-  BsGear,
-  BsBook,
-  BsPersonFill,
-  //  BsEnvelopeFill,
-} from "react-icons/bs";
 import LogoImage from "../assets/images/small-logo.png";
 import { ThemeToggle } from "./ThemeToggle";
 import { useLogout } from "../hooks/useLogout";
@@ -24,6 +10,7 @@ import { MiniAvatar } from "./MiniAvatar";
 import { useToast } from "../context/ToastContext";
 import { ToastType } from "../enums/toast";
 import { useTranslation } from "react-i18next";
+import { Icon, IconType } from "./common/icon/Icon";
 
 type SidemenuSubitem = {
   label: string;
@@ -58,12 +45,12 @@ export const Sidebar = (): JSX.Element => {
   const menu: SidemenuItem[] = [
     {
       title: t("sidebar.dashboard.text"),
-      icon: <BsReverseLayoutTextWindowReverse />,
+      icon: <Icon type={IconType.Dashboard} />,
       path: "/dashboard",
     },
     {
       title: t("sidebar.exercises.text"),
-      icon: <BsListTask />,
+      icon: <Icon type={IconType.List} />,
       links: [
         { label: t("sidebar.exercises.links.grammar"), path: "/grammar" },
         { label: t("sidebar.exercises.links.reading"), path: "/reading" },
@@ -74,7 +61,7 @@ export const Sidebar = (): JSX.Element => {
     },
     {
       title: t("sidebar.resources.links.articles"),
-      icon: <BsCollectionPlay />,
+      icon: <Icon type={IconType.Media} />,
       path: "/articles",
     },
     // {
@@ -87,7 +74,7 @@ export const Sidebar = (): JSX.Element => {
     // },
     {
       title: t("sidebar.vocabulary.text"),
-      icon: <BsBook />,
+      icon: <Icon type={IconType.Book} />,
       path: "/glossary",
     },
 
@@ -111,18 +98,18 @@ export const Sidebar = (): JSX.Element => {
     // },
     {
       title: t("sidebar.profile.text"),
-      icon: <BsPersonFill />,
+      icon: <Icon type={IconType.User} />,
       path: "/profile",
       spacing: true,
     },
     {
       title: t("sidebar.settings.text"),
-      icon: <BsGear />,
+      icon: <Icon type={IconType.Settings} />,
       path: "/settings",
     },
     {
       title: t("sidebar.logout.text"),
-      icon: <BsBoxArrowRight />,
+      icon: <Icon type={IconType.Logout} />,
       path: "/",
       event: signOut,
     },
@@ -171,7 +158,10 @@ export const Sidebar = (): JSX.Element => {
               {item.title}
             </span>
             {item.links && isSidebarOpened && (
-              <BsChevronDown className={`${isExpanded && "rotate-180"}`} />
+              <Icon
+                type={IconType.ChevronDown}
+                className={`${isExpanded && "rotate-180"}`}
+              />
             )}
           </NavLink>
         </li>
@@ -201,7 +191,8 @@ export const Sidebar = (): JSX.Element => {
           : " max-w-20 justify-around px-5"
       } relative duration-300 shadow z-50 transition-all`}
     >
-      <BsArrowLeftShort
+      <Icon
+        type={IconType.ArrowLeft}
         className={`dark:bg-gradient-to-r dark:from-stone-800 dark:to-stone-900 bg-gradient-to-r from-indigo-50 to-white transition hover:brightness-110 text-indigo-900 dark:text-indigo-300 text-3xl absolute top-9 border border-indigo-300 rounded-lg cursor-pointer ${
           isSidebarOpened ? "right-3" : "rotate-180 -right-3"
         }`}

@@ -1,5 +1,4 @@
 import { ToolTip } from "../common/ToolTip";
-import { SlPicture } from "react-icons/sl";
 import { useEffect, useRef, useState } from "react";
 import { Modal } from "../common/Modal";
 import { Button } from "../common/Button";
@@ -10,6 +9,7 @@ import { useUser } from "../../hooks/useUser";
 import { useToast } from "../../context/ToastContext";
 import { ToastType } from "../../enums/toast";
 import { useTranslation } from "react-i18next";
+import { Icon, IconType } from "../common/icon/Icon";
 
 const AVATAR_UPLOAD_URL = "/users/upload";
 
@@ -119,7 +119,7 @@ export const ProfileAvatar = (): JSX.Element => {
         onClick={() => setShowModal(!showModal)}
       >
         <ToolTip tooltip="Upload your photo">
-          <SlPicture className="text-2xl text-indigo-200" />
+          <Icon type={IconType.Picture} className="text-2xl text-indigo-200" />
         </ToolTip>
       </button>
       {showModal && (

@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useLoginRegister } from "../../hooks/useLoginRegister";
-import { CiLogin } from "react-icons/ci";
+import { Icon, IconType } from "../common/icon/Icon";
 import { Button } from "../common/Button";
 import LoginImage from "../../assets/images/login-image.jpg";
 import { Password } from "./Password";
@@ -166,7 +166,7 @@ export const Login = ({ onToggleForm }: LoginProps): JSX.Element => {
           </p>
           <Button primary rounded type="submit">
             <>
-              <CiLogin />
+              <Icon type={IconType.Login} />
               Log in
             </>
           </Button>

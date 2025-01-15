@@ -1,7 +1,7 @@
 import { ButtonHTMLAttributes, ReactElement, ReactEventHandler } from "react";
 import className from "classnames";
-import { FaSave } from "react-icons/fa";
 import { useTranslation } from "react-i18next";
+import { Icon, IconType } from "./icon/Icon";
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   children?: ReactElement | string;
@@ -68,7 +68,7 @@ export const Button = ({
       {save ? (
         <span>
           {t("buttons.save")}
-          <FaSave className="inline ml-1.5" />
+          <Icon className="inline ml-1.5" type={IconType.Save} />
         </span>
       ) : (
         children

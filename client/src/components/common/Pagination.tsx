@@ -1,4 +1,4 @@
-import { BsChevronRight, BsChevronLeft } from "react-icons/bs";
+import { Icon, IconType } from "./icon/Icon";
 
 interface PaginationProps {
   totalCount: number;
@@ -38,7 +38,7 @@ export const Pagination = ({
         onClick={() => handlePageChange(currentPage - 1)}
         disabled={currentPage === 1}
       >
-        <BsChevronLeft />
+        <Icon type={IconType.ChevronLeft} />
       </button>
       {pages.map((page) => (
         <button
@@ -59,7 +59,7 @@ export const Pagination = ({
         onClick={() => handlePageChange(currentPage + 1)}
         disabled={currentPage === totalPages}
       >
-        <BsChevronRight />
+        <Icon type={IconType.ChevronRight} />
       </button>
     </div>
   );

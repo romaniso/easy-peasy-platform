@@ -7,10 +7,10 @@ import { axiosPrivate } from "../../api/axios";
 import { useAuth } from "../../hooks/useAuth";
 import { useUser } from "../../hooks/useUser";
 import { MotivationItemText } from "../../enums/motivationItem";
-import { IoIosArrowForward } from "react-icons/io";
 import { ToastType } from "../../enums/toast";
 import { useToast } from "../../context/ToastContext";
 import { useTranslation } from "react-i18next";
+import { Icon, IconType } from "../common/icon/Icon";
 
 export type MotivationItem = {
   text: MotivationItemText;
@@ -112,7 +112,7 @@ export const MotivationForm = ({
         >
           <span className="flex items-center gap-2">
             {tCommon("buttons.next")}
-            <IoIosArrowForward />
+            <Icon type={IconType.ChevronCompactRight} />
           </span>
         </Button>
       </div>

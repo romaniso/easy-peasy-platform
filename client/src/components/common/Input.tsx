@@ -7,7 +7,7 @@ import {
   ForwardedRef,
 } from "react";
 import classNames from "classnames";
-import { RiEditFill } from "react-icons/ri";
+import { Icon, IconType } from "./icon/Icon";
 
 type InputRestProps = Omit<
   InputHTMLAttributes<HTMLInputElement>,
@@ -114,7 +114,10 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
           <p className="border-indigo-100 dark:border-indigo-500/50 bg-transparent text-orange-500">
             {prevValue}
           </p>
-          <RiEditFill className="text-xl text-orange-500 hover:scale-110 transition-transform" />
+          <Icon
+            className="text-xl text-orange-500 hover:scale-110 transition-transform"
+            type={IconType.Edit}
+          />
         </div>
       </div>
     ) : (

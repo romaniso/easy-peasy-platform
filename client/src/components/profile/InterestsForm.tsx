@@ -1,19 +1,19 @@
 import { Button } from "../common/Button";
-import { ReactElement, SyntheticEvent, useState } from "react";
+import { SyntheticEvent, useState } from "react";
 import { CheckboxButton } from "../common/CheckboxButton";
 import { InterestItemText } from "../../enums/interestItem";
 import { useAuth } from "../../hooks/useAuth";
 import { useUser } from "../../hooks/useUser";
 import { User } from "../../interfaces/user";
 import { axiosPrivate } from "../../api/axios";
-import { IoIosArrowBack } from "react-icons/io";
 import { useToast } from "../../context/ToastContext";
 import { ToastType } from "../../enums/toast";
 import { useTranslation } from "react-i18next";
+import { Icon, IconType } from "../common/icon/Icon";
 
 export type InterestItem = {
   text: InterestItemText;
-  icon: ReactElement;
+  icon: JSX.Element;
 };
 interface InterestsFormProps {
   items: InterestItem[];
@@ -110,7 +110,7 @@ export const InterestsForm = ({
           onClick={handlePrevForm}
         >
           <span className="flex items-center gap-2">
-            <IoIosArrowBack />
+            <Icon type={IconType.ChevronCompactLeft} />
             {tCommon("buttons.prev")}
           </span>
         </Button>

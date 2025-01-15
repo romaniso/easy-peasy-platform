@@ -1,14 +1,12 @@
 import React, { useState } from "react";
 import { ToolTip } from "./common/ToolTip";
 import { IDictionaryUnit } from "../interfaces/dictionaryUnit";
-import { RiDeleteBinFill } from "react-icons/ri";
-import { RiEditFill } from "react-icons/ri";
-import { MdCheck } from "react-icons/md";
 import { playAudio } from "../utils/playAudio";
 import {
   useEditWordInDictionary,
   useRemoveWordFromDictionary,
 } from "../context/ReadingContext";
+import { Icon, IconType } from "./common/icon/Icon";
 
 export const DictionaryUnit = ({
   word,
@@ -51,7 +49,7 @@ export const DictionaryUnit = ({
         className="absolute bottom-3 right-2.5 bg-indigo-400 p-0.5 w-6 h-6 rounded-full shadow hover:bg-orange-400 transition-colors"
         type="submit"
       >
-        <MdCheck className="text-lg text-indigo-50" />
+        <Icon type={IconType.Tick} className="text-lg text-indigo-50" />
       </button>
     </form>
   );
@@ -78,12 +76,18 @@ export const DictionaryUnit = ({
       <div className="translate-y-0.5 flex border-l border-indigo-200 pl-2">
         <ToolTip tooltip="Edit">
           <button onClick={() => setIsBeingEdited(!isBeingEdited)}>
-            <RiEditFill className="text-xl text-indigo-900 dark:text-indigo-200 hover:scale-125 transition-transform" />
+            <Icon
+              type={IconType.Edit}
+              className="text-xl text-indigo-900 dark:text-indigo-200 hover:scale-125 transition-transform"
+            />
           </button>
         </ToolTip>
         <ToolTip tooltip="Remove">
           <button onClick={() => removeWord(id)}>
-            <RiDeleteBinFill className="text-xl text-red-600 dark:text-red-400 hover:scale-125 transition-transform" />
+            <Icon
+              type={IconType.TrashBin}
+              className="text-xl text-red-600 dark:text-red-400 hover:scale-125 transition-transform"
+            />
           </button>
         </ToolTip>
       </div>

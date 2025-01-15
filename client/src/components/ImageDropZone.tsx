@@ -1,8 +1,8 @@
 import React, { DragEvent, useState } from "react";
 import className from "classnames";
-import { FaUpload } from "react-icons/fa";
 import { useDroppable } from "@dnd-kit/core";
 import { useTranslation } from "react-i18next";
+import { Icon, IconType } from "./common/icon/Icon";
 
 interface ImageDropZoneProps {
   onImageDrop: (files: File) => void;
@@ -59,7 +59,7 @@ export const ImageDropZone = ({
         htmlFor="image"
         className="underline cursor-pointer text-center hover:text-orange-500 transition-colors"
       >
-        <FaUpload className="text-3xl mx-auto mb-3" />{" "}
+        <Icon type={IconType.Upload} className="text-3xl mx-auto mb-3" />{" "}
         {t("profileAvatar.instructions.instruction_choose")}
         <input
           type="file"

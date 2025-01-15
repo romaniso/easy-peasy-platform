@@ -6,10 +6,10 @@ import { Panel } from "../common/Panel";
 import axios from "../../api/axios";
 import { AxiosError } from "axios";
 import { Logo } from "../common/Logo";
-import { GrPowerReset } from "react-icons/gr";
 import { useToast } from "../../context/ToastContext";
 import { ToastType } from "../../enums/toast";
 import { Loader } from "../common/Loader";
+import { Icon, IconType } from "../common/icon/Icon";
 
 const RESET_URL = "/reset";
 
@@ -79,7 +79,7 @@ export const Reset = (): JSX.Element => {
           <h2 className="font-bold text-3xl text-orange-500 text-center">
             Reset Password
           </h2>
-          <GrPowerReset className="text-2xl text-orange-500" />
+          <Icon className="text-2xl text-orange-500" type={IconType.Reset} />
         </div>
         <p className="text-sm text-indigo-800 dark:text-indigo-300 text-center">
           Enter the username or email associated with your account and we'll

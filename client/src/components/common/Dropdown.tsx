@@ -1,9 +1,8 @@
 import { ReactElement, useEffect, useRef, useState } from "react";
 import { SubmenuItem } from "../Navbar";
-import { FaChevronDown, FaChevronUp } from "react-icons/fa";
-
 import { NavLink } from "react-router-dom";
 import { AvatarItem } from "../ProfilePreview";
+import { Icon, IconType } from "./icon/Icon";
 
 interface DropdownProps {
   label: string | ReactElement;
@@ -33,9 +32,9 @@ export const Dropdown = ({
   }, []);
 
   const icon: ReactElement = isCollapsed ? (
-    <FaChevronUp className="text-lg relative top-0.5" />
+    <Icon className="text-lg relative top-0.5" type={IconType.ChevronUp} />
   ) : (
-    <FaChevronDown className="text-lg relative top-0.5" />
+    <Icon className="text-lg relative top-0.5" type={IconType.ChevronDown} />
   );
   return (
     <div ref={dropdownRef} className="relative">

@@ -1,12 +1,12 @@
 import { ReactElement } from "react";
 import { Dropdown } from "./common/Dropdown";
-import { CiLogout, CiSettings, CiUser } from "react-icons/ci";
 import { useLogout } from "../hooks/useLogout";
 import { MiniAvatar } from "./MiniAvatar";
 import { useToast } from "../context/ToastContext";
 import { ToastType } from "../enums/toast";
 import { useUser } from "../hooks/useUser";
 import { useTranslation } from "react-i18next";
+import { Icon, IconType } from "./common/icon/Icon";
 
 export interface AvatarItem {
   icon?: ReactElement;
@@ -41,17 +41,17 @@ export const ProfilePreview = ({
           label={user.username as string}
           content={[
             {
-              icon: <CiUser className="text-xl" />,
+              icon: <Icon type={IconType.User} className="text-xl" />,
               label: t("navbar.profile.profile"),
               path: "/profile",
             },
             {
-              icon: <CiSettings className="text-xl" />,
+              icon: <Icon type={IconType.Settings} className="text-xl" />,
               label: t("navbar.profile.settings"),
               path: "/settings",
             },
             {
-              icon: <CiLogout className="text-xl" />,
+              icon: <Icon type={IconType.Logout} className="text-xl" />,
               label: t("navbar.profile.logout"),
               eventHandler: handleLogout,
               isLogoutBtn: true,

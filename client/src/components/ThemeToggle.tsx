@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { RiMoonLine, RiSunLine } from "react-icons/ri";
+import { Icon, IconType } from "./common/icon/Icon";
 
 interface ThemeToggleProps {
   className?: string;
@@ -37,7 +37,10 @@ export const ThemeToggle = ({
     <div className={`flex justify-center items-center ${className}`}>
       {icons && (
         <span className="text-xl">
-          <RiSunLine className="text-orange-500 dark:text-indigo-400" />
+          <Icon
+            type={IconType.Sun}
+            className="text-orange-500 dark:text-indigo-400"
+          />
         </span>
       )}
       <div className="p-1">
@@ -52,7 +55,10 @@ export const ThemeToggle = ({
       </div>
       {icons && (
         <span className="text-xl">
-          <RiMoonLine className="text-stone-700 dark:text-stone-300" />
+          <Icon
+            type={IconType.Moon}
+            className="text-stone-700 dark:text-stone-300"
+          />
         </span>
       )}
     </div>
