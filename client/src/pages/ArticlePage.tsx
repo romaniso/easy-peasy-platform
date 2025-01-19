@@ -15,6 +15,7 @@ import { AsideSection } from "../components/articles/AsideSection";
 import { PreviewArticle } from "../types/previewArticle";
 import { Loader } from "../components/common/Loader";
 import { Image } from "../components/common/Image/Image";
+import { slugify } from "../utils/slugify";
 
 const ARTICLE_URL = "/articles";
 
@@ -59,6 +60,8 @@ export const ArticlePage = (): JSX.Element => {
     fetchRelatedArticles();
   }, [articleData]);
 
+  let currentH2Id: string;
+
   if (isLoading) return <Loader />;
 
   return (
@@ -98,6 +101,17 @@ export const ArticlePage = (): JSX.Element => {
                     {...props}
                   />
                 ),
+                h2: ({ children }) => {
+                  const h2Title = String(children);
+                  const id = slugify(h2Title);
+                  currentH2Id = id;
+                  return <h2 id={id}>{children}</h2>;
+                },
+                h3: ({ children }) => {
+                  const h3Title = String(children);
+                  const id = `${currentH2Id}-${slugify(h3Title)}`;
+                  return <h3 id={id}>{children}</h3>;
+                },
               }}
               className="markdown-content"
               remarkPlugins={[remarkGfm]}
@@ -111,11 +125,13 @@ export const ArticlePage = (): JSX.Element => {
             </Link>
           </section>
         </main>
+        {/*@FIXME: not only related articles but also TableOfContents */}
         {relatedArticles && (
           <AsideSection
             title="Related Articles"
             data={relatedArticles}
             pathRoot="../articles/"
+            article={articleData as Article}
           />
         )}
       </div>
