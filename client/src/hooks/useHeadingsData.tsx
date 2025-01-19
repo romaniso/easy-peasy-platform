@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Article } from "../interfaces/article";
 
 type Heading3 = {
   title: string;
@@ -11,17 +12,19 @@ type Heading2 = {
   items: Heading3[];
 };
 
-export const useHeadingsData = () => {
+export const useHeadingsData = (data: Article) => {
   const [nestedHeadings, setNestedHeadings] = useState<Heading2[]>([]);
 
   useEffect(() => {
     const headingElements: HTMLHeadingElement[] = Array.from(
-      document.querySelectorAll("h2, h3")
+      document.querySelectorAll(".markdown-content h2, .markdown-content h3")
     );
 
     const newNestedHeadings = getNestedHeadings(headingElements);
     setNestedHeadings(newNestedHeadings);
-  }, []);
+
+    return () => setNestedHeadings([]);
+  }, [data]);
 
   const getNestedHeadings = (headingElements: HTMLHeadingElement[]) => {
     const nestedHeadings: Heading2[] = [];
