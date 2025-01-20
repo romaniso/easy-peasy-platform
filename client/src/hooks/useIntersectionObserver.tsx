@@ -1,68 +1,64 @@
-import { useEffect, useRef } from "react";
-import { Article } from "../interfaces/article";
+import { useEffect, useRef, useState } from "react";
 
-export const useIntersectionObserver = (
-  data: Article,
-  setActiveId: React.Dispatch<React.SetStateAction<string>>,
-  activeId: string
-) => {
-  const headingElementsRef = useRef<Record<string, IntersectionObserverEntry>>(
-    {}
-  ); // Explicit type
+export function useIntersectionObserver(dataId: string) {
+  const observer = useRef<IntersectionObserver | null>(null);
+  const [activeId, setActiveId] = useState("");
+  const [elementsReady, setElementsReady] = useState(false); // Track when elements are ready
 
   useEffect(() => {
-    console.log("useEffect from IntersectionObserver");
+    console.log(dataId);
 
-    const callback: IntersectionObserverCallback = (entries) => {
-      console.log("from callback");
-      console.log(headingElementsRef);
-      console.log(headingElements);
-      headingElementsRef.current = entries.reduce((map, entry) => {
-        map[entry.target.id] = entry; // Use `entry.target.id`
-        return map;
-      }, {} as Record<string, IntersectionObserverEntry>); // Ensure proper type
+    if (!dataId) return;
 
-      const visibleHeadings: IntersectionObserverEntry[] = [];
-      Object.keys(headingElementsRef.current).forEach((key) => {
-        const headingElement = headingElementsRef.current[key];
-        if (headingElement.isIntersecting) visibleHeadings.push(headingElement);
-      });
+    // Clean up previous observer
+    if (observer.current) {
+      observer.current.disconnect();
+      observer.current = null;
+    }
 
-      const getIndexFromId = (id: string) =>
-        headingElements.findIndex((heading) => heading.id === id);
-
-      if (visibleHeadings.length === 1) {
-        setActiveId(visibleHeadings[0].target.id);
-      } else if (visibleHeadings.length > 1) {
-        const sortedVisibleHeadings = visibleHeadings.sort(
-          (a, b) => getIndexFromId(a.target.id) - getIndexFromId(b.target.id)
-        );
-        setActiveId(sortedVisibleHeadings[0].target.id);
-      }
-
-      if (visibleHeadings.length === 0) {
-        const activeElement = headingElements.find((el) => el.id === activeId);
-        const activeIndex = headingElements.findIndex(
-          (el) => el.id === activeId
-        );
-
-        const activeIdYcoord = activeElement?.getBoundingClientRect().y;
-        if (activeIdYcoord && activeIdYcoord > 150 && activeIndex !== 0) {
-          setActiveId(headingElements[activeIndex - 1].id);
+    const handleObserver: IntersectionObserverCallback = (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          console.log("Active entry:", entry);
+          setActiveId(entry.target.id);
         }
+      });
+    };
+
+    observer.current = new IntersectionObserver(handleObserver, {
+      rootMargin: "40% 0% -20% 0px",
+    });
+
+    // Retry observing if elements are not ready yet
+    const tryObserving = () => {
+      const elements = document.querySelectorAll(
+        ".markdown-content h2, .markdown-content h3"
+      );
+
+      if (elements.length > 0) {
+        console.log("Observing elements:", elements);
+        elements.forEach((elem) => observer.current?.observe(elem));
+        setElementsReady(true); // Mark elements as ready
+      } else {
+        console.warn("No headings found to observe. Retrying...");
       }
     };
 
-    const observer = new IntersectionObserver(callback, {
-      rootMargin: "-80px 0px -40% 0px", // Adjust margins to fit your layout
-    });
+    // Defer observation to ensure DOM updates are complete
+    const timeoutId = setTimeout(tryObserving, 50);
 
-    const headingElements: HTMLHeadingElement[] = Array.from(
-      document.querySelectorAll(".markdown-content h2, .markdown-content h3")
-    );
+    return () => {
+      clearTimeout(timeoutId);
+      observer.current?.disconnect();
+    };
+  }, [dataId]); // Effect runs when `data` changes
 
-    headingElements.forEach((element) => observer.observe(element));
+  useEffect(() => {
+    // Log when elements become ready
+    if (elementsReady) {
+      console.log("Elements are ready for observation.");
+    }
+  }, [elementsReady]);
 
-    return () => observer.disconnect();
-  }, [setActiveId, activeId, data]);
-};
+  return { activeId };
+}
