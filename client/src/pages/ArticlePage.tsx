@@ -131,7 +131,7 @@ export const ArticlePage = (): JSX.Element => {
             title="Related Articles"
             data={relatedArticles}
             pathRoot="../articles/"
-            article={articleData as Article}
+            article={articleData}
           />
         )}
       </div>

@@ -22,7 +22,8 @@ export const RootLayout = (): JSX.Element => {
     layoutContent = <AuthLayout />;
   } else {
     layoutContent = (
-      <div className="bg-gradient-to-r from-[#F5F3FF] dark:from-[#202020] via-[#FAE8FF] dark:via-[#3b4058] to-[#C7D2FE] dark:to-[#202020] overflow-hidden flex flex-col min-h-screen">
+      // @TODO: deal with overflow-hidden and sticky position of child elements
+      <div className="bg-gradient-to-r from-[#F5F3FF] dark:from-[#202020] via-[#FAE8FF] dark:via-[#3b4058] to-[#C7D2FE] dark:to-[#202020] flex flex-col min-h-screen">
         <Navbar />
         <main className="flex-1">
           <Outlet />
