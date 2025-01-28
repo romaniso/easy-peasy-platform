@@ -125,15 +125,12 @@ export const ArticlePage = (): JSX.Element => {
             </Link>
           </section>
         </main>
-        {/*@FIXME: not only related articles but also TableOfContents */}
-        {relatedArticles && (
-          <AsideSection
-            title="Related Articles"
-            data={relatedArticles}
-            pathRoot="../articles/"
-            article={articleData}
-          />
-        )}
+        <AsideSection
+          title="Related Articles"
+          relatedArticles={relatedArticles}
+          pathRoot="../articles/"
+          article={articleData}
+        />
       </div>
     </div>
   );
