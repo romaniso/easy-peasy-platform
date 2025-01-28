@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { Article } from "../interfaces/article";
 
 type Heading3 = {
   title: string;
@@ -12,7 +11,7 @@ type Heading2 = {
   items: Heading3[];
 };
 
-export const useHeadingsData = (data: Article) => {
+export const useHeadingsData = <T,>(data: T) => {
   const [nestedHeadings, setNestedHeadings] = useState<Heading2[]>([]);
 
   useEffect(() => {

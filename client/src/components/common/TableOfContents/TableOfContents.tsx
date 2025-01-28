@@ -1,18 +1,17 @@
 import { useHeadingsData } from "../../../hooks/useHeadingsData";
 import { useIntersectionObserver } from "../../../hooks/useIntersectionObserver";
-import { Article } from "../../../interfaces/article";
 
-interface TableOfContentsProps {
+interface TableOfContentsProps<T> {
   title?: string;
-  data: Article; //@FIXME: should be generic type: article, blog, everything
+  data: T;
 }
 
-export const TableOfContents = ({
+export const TableOfContents = <T,>({
   title,
   data,
-}: TableOfContentsProps): JSX.Element => {
+}: TableOfContentsProps<T>): JSX.Element => {
   const { nestedHeadings } = useHeadingsData(data);
-  const { activeId } = useIntersectionObserver(data);
+  const { activeId } = useIntersectionObserver();
 
   const handleSmoothScroll = (
     e: React.MouseEvent<HTMLAnchorElement, MouseEvent>,
