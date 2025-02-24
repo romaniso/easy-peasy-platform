@@ -236,6 +236,10 @@ button > svg {
   .markdown-content h4 {
     @apply pl-2 dark:text-orange-500 text-lg font-bold mb-0.5;
   }
+  .markdown-content h2,
+  .markdown-content h3 {
+    @apply scroll-mt-20;
+  }
   .markdown-content ul {
     @apply mb-5 pl-3 list-disc;
   }
