@@ -1,10 +1,10 @@
 import LogoImage from "../../assets/images/small-logo.png";
 
-interface Props {
+interface LogoProps {
   className?: string;
 }
 
-export const Logo = ({ className }: Props) => {
+export const Logo = ({ className }: LogoProps): JSX.Element => {
   return (
     <span className={`flex items-center group ${className}`}>
       <img

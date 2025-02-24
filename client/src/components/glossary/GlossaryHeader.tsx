@@ -1,36 +1,33 @@
-import React from "react";
-import Select from "../common/Select";
-import { FaSortAlphaDown } from "react-icons/fa";
-import { PiClockCountdownLight } from "react-icons/pi";
-import { FaStar } from "react-icons/fa6";
+import { Select } from "../common/Select";
 import { SearchBar } from "../common/SearchBar";
 import { useTranslation } from "react-i18next";
+import { Icon, IconType } from "../common/icon/Icon";
 
 interface GlossaryHeaderProps {
   onSort: (sortable: string) => void;
   onSearh: (searchPhrase: string) => void;
 }
 
-export const GlossaryHeader: React.FC<GlossaryHeaderProps> = ({
+export const GlossaryHeader = ({
   onSort,
   onSearh,
-}) => {
+}: GlossaryHeaderProps): JSX.Element => {
   const { t } = useTranslation("glossary");
   const sortibles = [
     {
       value: "abc",
       label: t("sortBar.abc"),
-      icon: <FaSortAlphaDown />,
+      icon: <Icon type={IconType.ByAlphabet} />,
     },
     {
       value: "recent",
       label: t("sortBar.recent"),
-      icon: <PiClockCountdownLight />,
+      icon: <Icon type={IconType.Recent} />,
     },
     {
       value: "marked",
       label: t("sortBar.marked"),
-      icon: <FaStar />,
+      icon: <Icon type={IconType.Star} />,
     },
   ];
 

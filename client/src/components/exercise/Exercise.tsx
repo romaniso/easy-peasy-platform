@@ -1,8 +1,8 @@
 //#region imports
 import React, { useRef, useState } from "react";
-import ExerciseHeader from "./ExerciseHeader";
-import ExerciseBody from "./ExerciseBody";
-import ExerciseFeedback from "./ExerciseFeedback";
+import { ExerciseHeader } from "./ExerciseHeader";
+import { ExerciseBody } from "./ExerciseBody";
+import { ExerciseFeedback } from "./ExerciseFeedback";
 import { ExerciseUnit } from "../../interfaces/exerciseUnit";
 import { UserResult } from "../../types/userResult";
 // Utils
@@ -10,8 +10,8 @@ import generateKeySheet from "../../utils/generateKeySheet";
 import generateUserResults from "../../utils/generateUserResults";
 import { ExerciseTypeName } from "../../enums/exercise";
 import { calculateResultIntoPercentage } from "../../utils/calculateResultIntoPercentages";
-import useUser from "../../hooks/useUser";
-import useAxiosPrivate from "../../hooks/useAxiosPrivate";
+import { useUser } from "../../hooks/useUser";
+import { useAxiosPrivate } from "../../hooks/useAxiosPrivate";
 //#endregion
 
 //#region interfaces
@@ -27,14 +27,14 @@ interface ExerciseProps {
 
 const RECORD_ACTIVITY_URL = "/users/save";
 
-const Exercise: React.FC<ExerciseProps> = ({
+export const Exercise = ({
   active = false,
   instruction,
   title,
   type,
   text,
   questions,
-}) => {
+}: ExerciseProps): JSX.Element => {
   const [userSelections, setUserSelections] = useState<string[]>(
     Array(questions.length).fill("")
   );
@@ -109,4 +109,3 @@ const Exercise: React.FC<ExerciseProps> = ({
     </section>
   );
 };
-export default Exercise;

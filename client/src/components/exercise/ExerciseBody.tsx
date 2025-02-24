@@ -1,17 +1,17 @@
 import React from "react";
-import Button from "../common/Button";
-import ExerciseMultipleChoice from "./ExerciseMultipleChoice";
-import ExerciseDropdown from "./ExerciseDropdown";
-import ExerciseFill from "./ExerciseFill";
-import ExerciseFillInLetter from "./ExerciseFillInLetter";
-import ExerciseFillBox from "./ExerciseFillBox";
-import ExerciseDraggable from "./ExerciseDraggable";
+import { Button } from "../common/Button";
+import { ExerciseMultipleChoice } from "./ExerciseMultipleChoice";
+import { ExerciseDropdown } from "./ExerciseDropdown";
+import { ExerciseFill } from "./ExerciseFill";
+import { ExerciseFillInLetter } from "./ExerciseFillInLetter";
+import { ExerciseFillBox } from "./ExerciseFillBox";
+import { ExerciseDraggable } from "./ExerciseDraggable";
 import Flashcard from "../Flashcard";
 import { ExerciseUnit } from "../../interfaces/exerciseUnit";
 import { UserResult } from "../../types/userResult";
 import { ExerciseTypeName } from "../../enums/exercise";
-import ExerciseMatchHeaders from "./ExerciseMatchHeaders";
-import ExerciseListenAndType from "./ExerciseListenAndType";
+import { ExerciseMatchHeaders } from "./ExerciseMatchHeaders";
+import { ExerciseListenAndType } from "./ExerciseListenAndType";
 import { useTranslation } from "react-i18next";
 import { ExerciseActions } from "./ExerciseActions";
 
@@ -28,7 +28,7 @@ interface ExerciseBodyProps {
   text?: string;
 }
 
-const ExerciseBody: React.FC<ExerciseBodyProps> = ({
+export const ExerciseBody = ({
   onSubmit,
   btnText,
   exerciseType,
@@ -37,7 +37,7 @@ const ExerciseBody: React.FC<ExerciseBodyProps> = ({
   selections,
   onSelect,
   text,
-}): React.ReactElement => {
+}: ExerciseBodyProps): JSX.Element => {
   const { t } = useTranslation("exercise");
   const handleSelectChange = (
     index: number,
@@ -231,5 +231,3 @@ const ExerciseBody: React.FC<ExerciseBodyProps> = ({
 
   return renderedExercise;
 };
-
-export default ExerciseBody;

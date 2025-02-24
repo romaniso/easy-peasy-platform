@@ -1,6 +1,6 @@
 import { useState, useRef } from "react";
 
-function useLoginRegister() {
+export const useLoginRegister = () => {
   const [userName, setUserName] = useState<string>("");
   const [userEmail, setUserEmail] = useState<string>("");
   const [validName, setValidName] = useState<boolean>(false);
@@ -48,6 +48,4 @@ function useLoginRegister() {
     userRef,
     errRef,
   };
-}
-
-export default useLoginRegister;
+};

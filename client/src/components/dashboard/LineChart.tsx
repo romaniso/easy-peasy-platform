@@ -1,4 +1,3 @@
-import React from "react";
 import {
   ResponsiveContainer,
   AreaChart,
@@ -9,6 +8,7 @@ import {
   CartesianGrid,
   TooltipProps,
 } from "recharts";
+
 import {
   ValueType,
   NameType,
@@ -16,16 +16,17 @@ import {
 import { format, parseISO } from "date-fns";
 import { useTranslation } from "react-i18next";
 import { ActivityStatsEntity } from "../../types/lastMonthActivitiesEntity";
+
 interface LineChartProps {
   title: string;
   explanation?: string;
   data: ActivityStatsEntity[];
 }
-export const LineChart: React.FC<LineChartProps> = ({
+export const LineChart = ({
   title,
   explanation,
   data,
-}) => {
+}: LineChartProps): JSX.Element => {
   return (
     <article className="bg-white dark:bg-black/40 dark:border dark:border-stone-900 rounded-md py-2 md:py-3 px-1 md:px-4 shadow-lg h-full flex flex-col transition-transform duration-300">
       <div className="px-3 md:px-10">

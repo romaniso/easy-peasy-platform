@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import Panel from "./common/Panel";
+import { Panel } from "./common/Panel";
 import { Level } from "../types/level";
 import { Section } from "../types/section";
 
@@ -12,11 +12,13 @@ export interface IRecommendedPreview {
   apiKey: string;
 }
 
-interface Props {
+interface RecommendedPreviewProps {
   data: IRecommendedPreview;
 }
 
-export const RecommendedPreview = ({ data }: Props) => {
+export const RecommendedPreview = ({
+  data,
+}: RecommendedPreviewProps): JSX.Element => {
   return (
     <Panel className="basis-1/2 md:basis-1/5 bg-white flex justify-between items-center pr-0 transition-all duration-700 hover:scale-105">
       <div className="flex items-center gap-2">

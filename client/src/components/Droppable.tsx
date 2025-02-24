@@ -1,4 +1,4 @@
-import React, { ReactElement } from "react";
+import { ReactElement } from "react";
 import { useDroppable } from "@dnd-kit/core";
 import className from "classnames";
 import { UserResult } from "../types/userResult";
@@ -9,12 +9,13 @@ interface DroppableProps {
   isFilled: string | null;
   results: UserResult[] | null;
 }
-const Droppable: React.FC<DroppableProps> = ({
+
+export const Droppable = ({
   children,
   id,
   isFilled,
   results,
-}) => {
+}: DroppableProps): JSX.Element => {
   const { isOver, setNodeRef } = useDroppable({
     id: id.toString(),
     data: {
@@ -42,5 +43,3 @@ const Droppable: React.FC<DroppableProps> = ({
     </div>
   );
 };
-
-export default Droppable;

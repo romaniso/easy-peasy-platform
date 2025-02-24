@@ -1,4 +1,4 @@
-export type Glossaryitem = {
+export type GlossaryItem = {
   id: string;
   word: string;
   definition: string;

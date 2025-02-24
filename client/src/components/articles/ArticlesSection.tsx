@@ -12,12 +12,15 @@ import "swiper/css/navigation";
 import { PreviewArticle } from "../../types/previewArticle";
 import { decodeAndFormatURL } from "../../utils/decodeAndFormatUrl";
 
-interface Props {
+interface ArticlesSectionProps {
   title: string;
   data: PreviewArticle[];
 }
 
-export const ArticlesSection = ({ title, data }: Props) => {
+export const ArticlesSection = ({
+  title,
+  data,
+}: ArticlesSectionProps): JSX.Element => {
   const [selectedLevel, setSelectedLevel] = useState<Level>("All");
   const [selectedData, setSelectedData] = useState(data);
   useEffect(() => {

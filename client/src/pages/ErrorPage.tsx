@@ -1,9 +1,8 @@
-import React from "react";
-import useTop from "../hooks/useTop";
+import { useTop } from "../hooks/useTop";
 import { Link } from "react-router-dom";
 import NotFoundImg from "../assets/images/not-found.png";
 
-const ErrorPage: React.FC = () => {
+export const ErrorPage = (): JSX.Element => {
   useTop();
   return (
     <div className="min-h-screen flex flex-col justify-center items-center gap-5 md:gap-7 text-center">
@@ -28,5 +27,3 @@ const ErrorPage: React.FC = () => {
     </div>
   );
 };
-
-export default ErrorPage;

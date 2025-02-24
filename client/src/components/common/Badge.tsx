@@ -1,9 +1,9 @@
-interface Props {
+interface BadgeProps {
   accent?: true;
   children: string;
 }
 
-export const Badge = ({ children, accent }: Props) => {
+export const Badge = ({ children, accent }: BadgeProps): JSX.Element => {
   return (
     <span
       className={`${

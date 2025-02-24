@@ -1,16 +1,21 @@
-import { BsChevronCompactLeft, BsChevronCompactRight } from "react-icons/bs";
-import React, { useState } from "react";
+import { Icon, IconType } from "../common/icon/Icon";
+import { useState } from "react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { Level } from "../../types/level";
 import { useTranslation } from "react-i18next";
+import { Image } from "../common/Image/Image";
 
 interface CheatsheetProps {
   topic: string;
   level: Level;
   content: string;
 }
-const Cheatsheet: React.FC<CheatsheetProps> = ({ topic, level, content }) => {
+export const Cheatsheet = ({
+  topic,
+  level,
+  content,
+}: CheatsheetProps): JSX.Element => {
   const { t } = useTranslation("exercise");
   const [isExpanded, setIsExpanded] = useState(true);
 
@@ -24,7 +29,11 @@ const Cheatsheet: React.FC<CheatsheetProps> = ({ topic, level, content }) => {
         onClick={() => setIsExpanded(!isExpanded)}
         className="invisible lg:visible text-lg border dark:border-gray-500 rounded shadow-md text-indigo-900 dark:text-indigo-200 p-4 absolute -top-2 left-0 bg-white dark:bg-stone-800 hover:bg-indigo-50 hover:dark:bg-[#202020] transition-colors -translate-x-1/2 z-10"
       >
-        {isExpanded ? <BsChevronCompactRight /> : <BsChevronCompactLeft />}
+        {isExpanded ? (
+          <Icon type={IconType.ChevronCompactRight} />
+        ) : (
+          <Icon type={IconType.ChevronCompactLeft} />
+        )}
       </button>
       <div
         className={`lg:gradient-blur px-3 lg:px-12 py-4 lg:py-10 lg:h-[1200px] transition-all overflow-y-auto ${
@@ -42,12 +51,23 @@ const Cheatsheet: React.FC<CheatsheetProps> = ({ topic, level, content }) => {
             {topic}
           </p>
         </header>
-        <ReactMarkdown className="markdown-content" remarkPlugins={[remarkGfm]}>
+        <ReactMarkdown
+          className="markdown-content"
+          remarkPlugins={[remarkGfm]}
+          components={{
+            img: ({ src, alt, ...props }) => (
+              <Image
+                src={src as string}
+                alt={alt as string}
+                downloadable
+                {...props}
+              />
+            ),
+          }}
+        >
           {content}
         </ReactMarkdown>
       </div>
     </section>
   );
 };
-
-export default Cheatsheet;

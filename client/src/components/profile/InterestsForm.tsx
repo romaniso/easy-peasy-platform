@@ -1,19 +1,19 @@
-import Button from "../common/Button";
-import React, { ReactElement, SyntheticEvent, useState } from "react";
-import CheckboxButton from "../common/CheckboxButton";
+import { Button } from "../common/Button";
+import { SyntheticEvent, useState } from "react";
+import { CheckboxButton } from "../common/CheckboxButton";
 import { InterestItemText } from "../../enums/interestItem";
-import useAuth from "../../hooks/useAuth";
-import useUser from "../../hooks/useUser";
+import { useAuth } from "../../hooks/useAuth";
+import { useUser } from "../../hooks/useUser";
 import { User } from "../../interfaces/user";
 import { axiosPrivate } from "../../api/axios";
-import { IoIosArrowBack } from "react-icons/io";
 import { useToast } from "../../context/ToastContext";
 import { ToastType } from "../../enums/toast";
 import { useTranslation } from "react-i18next";
+import { Icon, IconType } from "../common/icon/Icon";
 
 export type InterestItem = {
   text: InterestItemText;
-  icon: ReactElement;
+  icon: JSX.Element;
 };
 interface InterestsFormProps {
   items: InterestItem[];
@@ -21,7 +21,11 @@ interface InterestsFormProps {
 }
 
 const UPDATE_URL = "/users";
-const InterestsForm: React.FC<InterestsFormProps> = ({ items, switchForm }) => {
+
+export const InterestsForm = ({
+  items,
+  switchForm,
+}: InterestsFormProps): JSX.Element => {
   const { auth } = useAuth();
   const { setUser, user } = useUser();
   const [selectedItems, setSelectedItems] = useState<InterestItemText[]>(
@@ -106,7 +110,7 @@ const InterestsForm: React.FC<InterestsFormProps> = ({ items, switchForm }) => {
           onClick={handlePrevForm}
         >
           <span className="flex items-center gap-2">
-            <IoIosArrowBack />
+            <Icon type={IconType.ChevronCompactLeft} />
             {tCommon("buttons.prev")}
           </span>
         </Button>
@@ -115,5 +119,3 @@ const InterestsForm: React.FC<InterestsFormProps> = ({ items, switchForm }) => {
     </form>
   );
 };
-
-export default InterestsForm;

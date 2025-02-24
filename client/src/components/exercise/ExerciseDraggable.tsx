@@ -1,11 +1,10 @@
 import React, { ReactElement, useEffect, useState } from "react";
-import { shuffleArray } from "../../utils/shuffleArray";
 
-import Draggable from "../Draggable";
-import Droppable from "../Droppable";
+import { shuffleArray } from "../../utils/shuffleArray";
+import { Draggable } from "../Draggable";
+import { Droppable } from "../Droppable";
 import { DndContext, DragEndEvent } from "@dnd-kit/core";
 import { UserResult } from "../../types/userResult";
-import draggable from "../Draggable";
 
 //TODO: This component definitely requires a lot of refactoring. A user can currently dnd in one way but cannot drag a draggable component backwards.
 type draggable = {
@@ -25,12 +24,12 @@ interface ExerciseDraggableProps {
   selections: string[];
   onSelect(index: number, event: string): void;
 }
-const ExerciseDraggable: React.FC<ExerciseDraggableProps> = ({
+export const ExerciseDraggable = ({
   draggables,
   droppables,
   onSelect,
   results,
-}) => {
+}: ExerciseDraggableProps): JSX.Element => {
   const [shuffledDrags, setShuffledDrags] = useState<draggable[]>([]);
   const [toDrops, setDroppables] = useState<droppable[]>(droppables);
 
@@ -113,4 +112,3 @@ const ExerciseDraggable: React.FC<ExerciseDraggableProps> = ({
     </DndContext>
   );
 };
-export default ExerciseDraggable;

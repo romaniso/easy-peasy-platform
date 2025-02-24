@@ -1,16 +1,15 @@
-import React from "react";
 import { GlossaryItem } from "./GlossaryItem";
-import { Glossaryitem } from "../../enums/glossaryItem";
+import { GlossaryItem as GlossaryItemEnum } from "../../enums/glossaryItem";
 
 interface GlossaryListProps {
-  data: Glossaryitem[];
+  data: GlossaryItemEnum[];
   updateData: () => void;
 }
 
-export const GlossaryList: React.FC<GlossaryListProps> = ({
+export const GlossaryList = ({
   data,
   updateData,
-}) => {
+}: GlossaryListProps): JSX.Element => {
   const renderedGlossaryItems = data.map((item) => (
     <GlossaryItem
       key={item.id}

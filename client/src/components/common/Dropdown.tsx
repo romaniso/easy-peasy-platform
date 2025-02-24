@@ -1,17 +1,21 @@
-import React, { ReactElement, useEffect, useRef, useState } from "react";
+import { ReactElement, useEffect, useRef, useState } from "react";
 import { SubmenuItem } from "../Navbar";
-import { FaChevronDown, FaChevronUp } from "react-icons/fa";
-
 import { NavLink } from "react-router-dom";
 import { AvatarItem } from "../ProfilePreview";
+import { Icon, IconType } from "./icon/Icon";
 
-interface Dropdown {
+interface DropdownProps {
   label: string | ReactElement;
   content: SubmenuItem[] | AvatarItem[];
   avatar?: true;
   block?: true;
 }
-const Dropdown: React.FC<Dropdown> = ({ label, content, avatar, block }) => {
+export const Dropdown = ({
+  label,
+  content,
+  avatar,
+  block,
+}: DropdownProps): JSX.Element => {
   const [isCollapsed, setIsCollapsed] = useState<boolean>(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
@@ -28,9 +32,9 @@ const Dropdown: React.FC<Dropdown> = ({ label, content, avatar, block }) => {
   }, []);
 
   const icon: ReactElement = isCollapsed ? (
-    <FaChevronUp className="text-lg relative top-0.5" />
+    <Icon className="text-lg relative top-0.5" type={IconType.ChevronUp} />
   ) : (
-    <FaChevronDown className="text-lg relative top-0.5" />
+    <Icon className="text-lg relative top-0.5" type={IconType.ChevronDown} />
   );
   return (
     <div ref={dropdownRef} className="relative">
@@ -107,5 +111,3 @@ const Dropdown: React.FC<Dropdown> = ({ label, content, avatar, block }) => {
     </div>
   );
 };
-
-export default Dropdown;

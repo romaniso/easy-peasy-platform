@@ -1,13 +1,11 @@
 //#region imports
 import React, { useEffect } from "react";
-import useLoginRegister from "../../hooks/useLoginRegister";
-import Panel from "../common/Panel";
+import { useLoginRegister } from "../../hooks/useLoginRegister";
+import { Panel } from "../common/Panel";
 import LoginImage from "../../assets/images/login-image.jpg";
-import Password from "./Password";
-import Button from "../common/Button";
-import { CiLogin } from "react-icons/ci";
-import { IoIosInformationCircleOutline } from "react-icons/io";
-import { FaCheck, FaTimes } from "react-icons/fa";
+import { Password } from "./Password";
+import { Button } from "../common/Button";
+import { Icon, IconType } from "../common/icon/Icon";
 import axios from "../../api/axios";
 import { AxiosError } from "axios";
 import { Link } from "react-router-dom";
@@ -25,7 +23,7 @@ interface ChangePassProps {
 
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
 const RESET_URL = "/reset";
-export const ChangePass: React.FC<ChangePassProps> = ({ token }) => {
+export const ChangePass = ({ token }: ChangePassProps): JSX.Element => {
   const {
     pwd,
     setPwd,
@@ -137,24 +135,22 @@ export const ChangePass: React.FC<ChangePassProps> = ({ token }) => {
                 onBlur={() => setPwdFocus(false)}
               >
                 Password
-                <span
+                <Icon
                   className={
                     validPwd
                       ? "inline-block ml-1 text-green-500"
                       : "invisible absolute"
                   }
-                >
-                  <FaCheck />
-                </span>
-                <span
+                  type={IconType.Tick}
+                />
+                <Icon
                   className={
                     validPwd || !pwd
                       ? "invisible absolute"
                       : "inline-block ml-1 text-red-500"
                   }
-                >
-                  <FaTimes />
-                </span>
+                  type={IconType.Cross}
+                />
               </Password>
               <p
                 id="pwdnote"
@@ -164,7 +160,10 @@ export const ChangePass: React.FC<ChangePassProps> = ({ token }) => {
                     : "invisible opacity-0 absolute"
                 }
               >
-                <IoIosInformationCircleOutline className="inline relative bottom-0.5 mr-1 text-lg" />
+                <Icon
+                  type={IconType.Exclamation}
+                  className="inline relative bottom-0.5 mr-1 text-lg"
+                />
                 8 to 24 characters.
                 <br />
                 Must include uppercase and lowercase letters, a number and a
@@ -191,24 +190,22 @@ export const ChangePass: React.FC<ChangePassProps> = ({ token }) => {
                 onBlur={() => setMatchFocus(false)}
               >
                 Confirm Password
-                <span
+                <Icon
                   className={
                     validMatch && matchPwd
                       ? "inline-block ml-1 text-green-500"
                       : "invisible absolute"
                   }
-                >
-                  <FaCheck />
-                </span>
-                <span
+                  type={IconType.Tick}
+                />
+                <Icon
                   className={
                     validMatch || !matchPwd
                       ? "invisible absolute"
                       : "inline-block ml-1 text-red-500"
                   }
-                >
-                  <FaTimes />
-                </span>
+                  type={IconType.Cross}
+                />
               </Password>
               <p
                 id="confirmnote"
@@ -218,7 +215,10 @@ export const ChangePass: React.FC<ChangePassProps> = ({ token }) => {
                     : "invisible opacity-0 absolute"
                 }
               >
-                <IoIosInformationCircleOutline className="inline relative bottom-0.5 mr-1 text-lg" />
+                <Icon
+                  type={IconType.Exclamation}
+                  className="inline relative bottom-0.5 mr-1 text-lg"
+                />
                 Must match the first password input field.
               </p>
               <p
@@ -244,7 +244,7 @@ export const ChangePass: React.FC<ChangePassProps> = ({ token }) => {
                 }
               >
                 <>
-                  <CiLogin />
+                  <Icon type={IconType.Login} />
                   Change Password
                 </>
               </Button>

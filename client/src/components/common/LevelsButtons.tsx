@@ -1,12 +1,14 @@
-import React from "react";
 import { Level } from "../../types/level";
 
-interface Props {
+interface LevelsButtonsProps {
   selectedLevel: Level | null;
   onSelect: (level: Level) => void;
 }
 
-export const LevelsButtons = ({ selectedLevel, onSelect }: Props) => {
+export const LevelsButtons = ({
+  selectedLevel,
+  onSelect,
+}: LevelsButtonsProps): JSX.Element => {
   //TODO: selection logics with state here
 
   const levels: Level[] = ["A1", "A2", "B1", "B2", "C1", "C2", "All"];

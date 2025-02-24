@@ -1,44 +1,54 @@
-import React, {useState, createContext, ReactNode, Dispatch, SetStateAction} from "react";
+import {
+  useState,
+  createContext,
+  ReactNode,
+  Dispatch,
+  SetStateAction,
+} from "react";
 
 interface AuthContextProps {
-    auth: {
-        user?: string;
-        pwd?: string;
-        roles?: string[];
-        accessToken?: string;
-    };
-    setAuth: Dispatch<SetStateAction<{
-        user?: string;
-        pwd?: string;
-        roles?: string[];
-        accessToken?: string;
-    }>>;
-    persist: boolean,
-    setPersist: Dispatch<SetStateAction< boolean>>
+  auth: {
+    user?: string;
+    pwd?: string;
+    roles?: string[];
+    accessToken?: string;
+  };
+  setAuth: Dispatch<
+    SetStateAction<{
+      user?: string;
+      pwd?: string;
+      roles?: string[];
+      accessToken?: string;
+    }>
+  >;
+  persist: boolean;
+  setPersist: Dispatch<SetStateAction<boolean>>;
 
-    // isAuthenticated: () => boolean;
+  // isAuthenticated: () => boolean;
 }
 
 const AuthContext = createContext<AuthContextProps>({
-    auth: {},
-    setAuth: () => {},
-    persist: false,
-    setPersist: () => {},
+  auth: {},
+  setAuth: () => {},
+  persist: false,
+  setPersist: () => {},
 });
 
 interface AuthProviderProps {
-    children: ReactNode;
+  children: ReactNode;
 }
 
-export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
-    const [auth, setAuth] = useState({});
-    const [persist, setPersist] = useState(JSON.parse((localStorage.getItem('persist') as string)) || false);
+export const AuthProvider = ({ children }: AuthProviderProps): JSX.Element => {
+  const [auth, setAuth] = useState({});
+  const [persist, setPersist] = useState(
+    JSON.parse(localStorage.getItem("persist") as string) || false
+  );
 
-    return (
-        <AuthContext.Provider value={{ auth, setAuth, persist, setPersist}}>
-            {children}
-        </AuthContext.Provider>
-    );
+  return (
+    <AuthContext.Provider value={{ auth, setAuth, persist, setPersist }}>
+      {children}
+    </AuthContext.Provider>
+  );
 };
 
 export default AuthContext;

@@ -1,4 +1,4 @@
-import React, {
+import {
   InputHTMLAttributes,
   ReactNode,
   useCallback,
@@ -6,7 +6,7 @@ import React, {
   useRef,
   useState,
 } from "react";
-import Input from "../common/Input";
+import { Input } from "../common/Input";
 
 type PasswordRestProps = Omit<
   InputHTMLAttributes<HTMLInputElement>,
@@ -24,7 +24,7 @@ interface PasswordProps extends PasswordRestProps {
   onChange(value: string): void;
 }
 
-const Password: React.FC<PasswordProps> = ({
+export const Password = ({
   children,
   // showPassword,
   // toggleShowPassword,
@@ -32,7 +32,7 @@ const Password: React.FC<PasswordProps> = ({
   name,
   previewEnabled,
   ...rest
-}) => {
+}: PasswordProps): JSX.Element => {
   const [isPreviewed, setIsPreviewed] = useState<boolean>(false);
   const inputRef = useRef<HTMLInputElement>(null);
   const handleToggleShowPassword = useCallback(() => {
@@ -93,5 +93,3 @@ const Password: React.FC<PasswordProps> = ({
     </Input>
   );
 };
-
-export default Password;

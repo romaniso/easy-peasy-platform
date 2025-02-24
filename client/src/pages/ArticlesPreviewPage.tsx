@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
 import { ArticlesSection } from "../components/articles/ArticlesSection";
 import axios from "../api/axios";
-import useTop from "../hooks/useTop";
+import { useTop } from "../hooks/useTop";
 import { AsideSection } from "../components/articles/AsideSection";
 import { Loader } from "../components/common/Loader";
 
 const ARTICLES_URL = "/articles";
 
-export const ArticlesPreviewPage = () => {
+export const ArticlesPreviewPage = (): JSX.Element => {
   //@TODO: Where is types? PreviewSectionData
   const [data, setData] = useState<[] | null>(null);
   const [isLoading, setIsLoading] = useState(true);

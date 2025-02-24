@@ -1,25 +1,24 @@
-import React from "react";
 import { Route, Routes } from "react-router-dom";
-import HomePage from "./pages/HomePage";
-import AuthenticationPage from "./pages/AuthenticationPage";
-import ErrorPage from "./pages/ErrorPage";
-import DashboardPage from "./pages/DashboardPage";
-import RootLayout from "./layouts/RootLayout";
-import ExercisePage from "./pages/ExercisePage";
-import PreviewPage from "./pages/PreviewPage";
-import RequireAuth from "./components/auth/RequireAuth";
-import UnauthorizedPage from "./pages/UnauthorizedPage";
+import { HomePage } from "./pages/HomePage";
+import { AuthenticationPage } from "./pages/AuthenticationPage";
+import { ErrorPage } from "./pages/ErrorPage";
+import { DashboardPage } from "./pages/DashboardPage";
+import { RootLayout } from "./layouts/RootLayout";
+import { ExercisePage } from "./pages/ExercisePage";
+import { PreviewPage } from "./pages/PreviewPage";
+import { RequireAuth } from "./components/auth/RequireAuth";
+import { UnauthorizedPage } from "./pages/UnauthorizedPage";
 import { UserRole } from "./enums/userRole";
-import PersistLogin from "./components/auth/PersistLogin";
-import AdminPage from "./pages/AdminPage";
-import ProfilePage from "./pages/ProfilePage";
-import SettingsPage from "./pages/SettingsPage";
+import { PersistLogin } from "./components/auth/PersistLogin";
+import { AdminPage } from "./pages/AdminPage";
+import { ProfilePage } from "./pages/ProfilePage";
+import { SettingsPage } from "./pages/SettingsPage";
 import { GlossaryPage } from "./pages/GlossaryPage";
 import { ArticlesPreviewPage } from "./pages/ArticlesPreviewPage";
 import { ArticlePage } from "./pages/ArticlePage";
 import { ResetPasswordPage } from "./pages/ResetPasswordPage";
 
-const App: React.FC = () => {
+export const App = (): JSX.Element => {
   return (
     // <RootLayout>
     <Routes>
@@ -72,5 +71,3 @@ const App: React.FC = () => {
     // </RootLayout>
   );
 };
-
-export default App;

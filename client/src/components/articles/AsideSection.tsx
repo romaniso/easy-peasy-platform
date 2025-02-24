@@ -2,13 +2,17 @@ import { decodeAndFormatURL } from "../../utils/decodeAndFormatUrl";
 import { AsidePreview } from "./AsidePreview";
 import { PreviewArticle } from "../../types/previewArticle";
 
-interface Props {
+interface AsideSectionProps {
   data: PreviewArticle[];
   title: string;
   pathRoot?: string;
 }
 
-export const AsideSection = ({ data, title, pathRoot }: Props) => {
+export const AsideSection = ({
+  data,
+  title,
+  pathRoot,
+}: AsideSectionProps): JSX.Element => {
   return (
     <aside className="flex-1 basis-full md:basis-1/4">
       <h3 className="text-2xl font-bold text-orange-500 drop-shadow mb-2">

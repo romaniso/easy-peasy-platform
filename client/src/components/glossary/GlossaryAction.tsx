@@ -1,9 +1,6 @@
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { FaStar } from "react-icons/fa";
-import { FaRegTrashCan } from "react-icons/fa6";
-import { HiOutlineDotsVertical } from "react-icons/hi";
-import { MdEdit } from "react-icons/md";
+import { Icon, IconType } from "../common/icon/Icon";
 
 interface GlossaryActionProps {
   onRemove: () => void;
@@ -11,11 +8,11 @@ interface GlossaryActionProps {
   onEdit: () => void;
 }
 
-export default function GlossaryAction({
+export const GlossaryAction = ({
   onRemove,
   onMark,
   onEdit,
-}: GlossaryActionProps) {
+}: GlossaryActionProps): JSX.Element => {
   const { t } = useTranslation("glossary");
   const [isOpened, setIsOpened] = useState<boolean>(false);
 
@@ -48,12 +45,13 @@ export default function GlossaryAction({
 
   return (
     <div className="relative" ref={glossaryActionRef}>
-      <HiOutlineDotsVertical
+      <Icon
         className={`
                ${isOpened ? "text-indigo-950" : "text-orange-500"}
                text-lg md:hidden relative z-10
            `}
         onClick={() => setIsOpened(!isOpened)}
+        type={IconType.VerticalDots}
       />
       {isOpened && (
         <div className="flex flex-col items-start gap-0.5 absolute -top-2 -right-1 bg-indigo-50 py-1.5 pl-2 pr-7 shadow-md">
@@ -62,22 +60,22 @@ export default function GlossaryAction({
             onClick={handleRemove}
           >
             {t("actions.remove")}
-            <FaRegTrashCan />
+            <Icon type={IconType.TrashBin} />
           </button>
           <button
             className="flex items-center text-indigo-950 dark:text-white text-sm gap-1 mb-1"
             onClick={handleEdit}
           >
-            {t("actions.edit")} <MdEdit />
+            {t("actions.edit")} <Icon type={IconType.Edit} />
           </button>
           <button
             className="flex items-center text-indigo-950 dark:text-white text-sm gap-1 mb-1"
             onClick={handleMark}
           >
-            {t("actions.star")} <FaStar />
+            {t("actions.star")} <Icon type={IconType.Star} />
           </button>
         </div>
       )}
     </div>
   );
-}
+};
