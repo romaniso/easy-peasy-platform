@@ -8,28 +8,30 @@ import { Input } from "../common/Input";
 import { Panel } from "../common/Panel";
 import axios from "../../api/axios";
 import { AxiosError } from "axios";
-import { UserRole } from "../../enums/userRole";
+//import { UserRole } from "../../enums/userRole";
 import { useAuth } from "../../hooks/useAuth";
-import { useUser } from "../../hooks/useUser";
+//import { useUser } from "../../hooks/useUser";xq
 import { useLocation, useNavigate } from "react-router-dom";
 import { Checkbox } from "../common/Checkbox";
-import { User } from "../../interfaces/user";
+//import { User } from "../../interfaces/user";
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { setUser } from "../../state/user/userSlice";
 
-const LOGIN_URL = "/auth";
+//const LOGIN_URL = "/auth";
 interface LoginProps {
   onToggleForm(): void;
 }
 
-interface ApiResponse {
-  accessToken?: string;
-  roles?: UserRole[];
-  user?: User;
-}
+//interface ApiResponse {
+//  accessToken?: string;
+//  roles?: UserRole[];
+//  user?: User;
+//}
 
 export const Login = ({ onToggleForm }: LoginProps): JSX.Element => {
   const { setAuth, persist, setPersist } = useAuth();
-  const { setUser } = useUser();
+  const dispatch = useDispatch();
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -77,10 +79,11 @@ export const Login = ({ onToggleForm }: LoginProps): JSX.Element => {
       setAuth({ user: userName, pwd, roles, accessToken });
       // setUserContext
       // fetch to get user info and store it in context
-      setUser({
-        ...response.data.user,
-        username: userName,
-      });
+      dispatch(setUser(response.data.user));
+      //setUser({
+      //  ...response.data.user,
+      //  username: userName,
+      //});
       setUserName("");
       setPwd("");
       navigate(from, { replace: true });
