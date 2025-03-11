@@ -1,22 +1,31 @@
 import { createSlice } from "@reduxjs/toolkit";
-//import { InterestItemText } from "../../enums/interestItem";
-//import { MotivationItemText } from "../../enums/motivationItem";
-//import { GoalsObj } from "../../types/goalsObj";
+import { InterestItemText } from "../../enums/interestItem";
+import { MotivationItemText } from "../../enums/motivationItem";
+import { GoalsObj } from "../../types/goalsObj";
+import { loginUser } from "../thunks/userThunk";
 
 interface UserState {
   username: string;
-  //  avatar: string;
-  //  email: string;
-  //  firstName: string;
-  //  lastName: string;
-  //  birthday: string;
-  //  likes: InterestItemText[];
-  //  motivations: MotivationItemText[];
-  //  goals: GoalsObj;
+  avatar: string | null;
+  email: string | null;
+  firstName: string | null;
+  lastName: string | null;
+  birthday: string | null;
+  likes: InterestItemText[];
+  motivations: MotivationItemText[];
+  goals: GoalsObj | null;
 }
 
 const initialState: UserState = {
   username: "",
+  avatar: null,
+  email: null,
+  firstName: null,
+  lastName: null,
+  birthday: null,
+  likes: [],
+  motivations: [],
+  goals: null,
 };
 
 const userSlice = createSlice({
@@ -24,8 +33,13 @@ const userSlice = createSlice({
   initialState,
   reducers: {
     setUser: (state, action) => {
-      state.username = action.payload.username;
+      state = action.payload;
     },
+  },
+  extraReducers: (builder) => {
+    builder.addCase(loginUser.fulfilled, (state, action) => {
+      state = action.payload.user;
+    });
   },
 });
 
