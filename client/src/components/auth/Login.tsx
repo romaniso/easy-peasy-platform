@@ -8,30 +8,33 @@ import { Input } from "../common/Input";
 import { Panel } from "../common/Panel";
 import axios from "../../api/axios";
 import { AxiosError } from "axios";
-//import { UserRole } from "../../enums/userRole";
+import { UserRole } from "../../enums/userRole";
 import { useAuth } from "../../hooks/useAuth";
-//import { useUser } from "../../hooks/useUser";xq
+//import { useUser } from "../../hooks/useUser";
 import { useLocation, useNavigate } from "react-router-dom";
 import { Checkbox } from "../common/Checkbox";
-//import { User } from "../../interfaces/user";
+import { User } from "../../interfaces/user";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setUser } from "../../state/user/userSlice";
+import { AppDispatch } from "../../state/store";
+import { loginUser } from "../../state/store";
+import { LoginResponse } from "../../state/thunks/userThunk";
 
 //const LOGIN_URL = "/auth";
 interface LoginProps {
   onToggleForm(): void;
 }
 
-//interface ApiResponse {
-//  accessToken?: string;
-//  roles?: UserRole[];
-//  user?: User;
-//}
+interface ApiResponse {
+  accessToken?: string;
+  roles?: UserRole[];
+  user?: User;
+}
 
 export const Login = ({ onToggleForm }: LoginProps): JSX.Element => {
   const { setAuth, persist, setPersist } = useAuth();
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -58,47 +61,38 @@ export const Login = ({ onToggleForm }: LoginProps): JSX.Element => {
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
-    try {
-      const response = await axios.post<ApiResponse>(
-        LOGIN_URL,
-        {
-          username: userName,
-          password: pwd,
-        },
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-          withCredentials: true,
-        }
-      );
-      const accessToken = response?.data?.accessToken;
-      const roles = response?.data?.roles;
+    const response = await dispatch(
+      loginUser({ username: userName, password: pwd })
+    );
 
-      // setAuth Context
-      setAuth({ user: userName, pwd, roles, accessToken });
-      // setUserContext
-      // fetch to get user info and store it in context
-      dispatch(setUser(response.data.user));
-      //setUser({
-      //  ...response.data.user,
-      //  username: userName,
-      //});
-      setUserName("");
-      setPwd("");
-      navigate(from, { replace: true });
-    } catch (err) {
-      if (!(err instanceof AxiosError) || !err.response) {
-        setErrMsg("No Server Response");
-      } else if (err.response?.status === 400) {
-        setErrMsg(err.response.data.message || "Missing Username or Password");
-      } else if (err.response?.status === 401) {
-        setErrMsg(err.response.data.message || "Unauthorized");
-      } else {
-        setErrMsg("Login Failed");
-      }
+    if (response.error) {
+      //if (!(response.error instanceof AxiosError) || !response.error.response) {
+      //  setErrMsg("No Server Response");
+      //} else if (response.error.response?.status === 400) {
+      //  setErrMsg(
+      //    response.error.response.data.message || "Missing Username or Password"
+      //  );
+      //} else if (response.error.response?.status === 401) {
+      //  setErrMsg(response.error.response.data.message || "Unauthorized");
+      //} else {
+      setErrMsg("Login Failed");
+      //}
       errRef.current?.focus();
+      console.log(response);
+      return;
     }
+
+    const accessToken = (response.payload as LoginResponse)?.accessToken;
+    const roles = (response.payload as LoginResponse)?.roles;
+
+    setAuth({ user: userName, pwd, roles, accessToken });
+    // fetch to get user info and store it in context
+    if ((response.payload as LoginResponse)?.user) {
+      dispatch(setUser((response.payload as LoginResponse).user));
+    }
+    setUserName("");
+    setPwd("");
+    navigate(from, { replace: true });
   };
   const togglePersist = () => {
     setPersist((prev) => !prev);

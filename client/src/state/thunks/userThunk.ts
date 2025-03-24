@@ -9,7 +9,7 @@ interface LoginCredentials {
   password: string;
 }
 
-type LoginResponse = {
+export type LoginResponse = {
   accessToken: string;
   roles: UserRole[];
   user: User;

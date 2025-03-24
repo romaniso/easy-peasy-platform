@@ -6,6 +6,9 @@ import { loginUser } from "../thunks/userThunk";
 
 interface UserState {
   username: string;
+}
+
+interface UserStateWithProfile extends UserState {
   avatar: string | null;
   email: string | null;
   firstName: string | null;
@@ -18,14 +21,8 @@ interface UserState {
 
 const initialState: UserState = {
   username: "",
-  avatar: null,
-  email: null,
-  firstName: null,
-  lastName: null,
-  birthday: null,
-  likes: [],
-  motivations: [],
-  goals: null,
+  //  avatar: null,
+  //  email: null,
 };
 
 const userSlice = createSlice({
