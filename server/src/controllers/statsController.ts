@@ -12,7 +12,7 @@ export class StatsController {
       const foundUser = await User.findOne({ username });
       if (!foundUser) {
         return res
-          .sendStatus(401)
+          .status(401)
           .json({ message: "User with this username was not found." });
       }
 
@@ -28,7 +28,7 @@ export class StatsController {
         ? calculateActivityCountMonthly(foundUser.completedActivities)
         : calculateActivityCountMonthly([]);
 
-      res.status(200).json({
+      return res.status(200).json({
         stats: {
           averageMark,
           addedWords,
@@ -38,7 +38,7 @@ export class StatsController {
         },
       });
     } catch (err) {
-      res.status(400).json({ message: "Bad request." });
+      return res.status(400).json({ message: "Bad request." });
     }
   }
 }
