@@ -18,7 +18,7 @@ export type LoginResponse = {
 export const loginUser = createAsyncThunk(
   "user/login",
   async ({ username, password }: LoginCredentials) => {
-    const response = await axios.post<LoginResponse>(
+    const { data } = await axios.post<LoginResponse>(
       API_URL.login,
       {
         username: username,
@@ -32,6 +32,6 @@ export const loginUser = createAsyncThunk(
       }
     );
 
-    return response.data;
+    return data;
   }
 );

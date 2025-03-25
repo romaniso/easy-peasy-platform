@@ -4,8 +4,14 @@ import { MotivationItemText } from "../../enums/motivationItem";
 import { GoalsObj } from "../../types/goalsObj";
 import { loginUser } from "../thunks/userThunk";
 
-interface UserState {
+interface User {
   username: string;
+}
+
+interface UserState {
+  user: User;
+  isLoading: boolean;
+  errorMsg: string | null;
 }
 
 interface UserStateWithProfile extends UserState {
@@ -20,9 +26,13 @@ interface UserStateWithProfile extends UserState {
 }
 
 const initialState: UserState = {
-  username: "",
+  user: {
+    username: "",
+  },
   //  avatar: null,
   //  email: null,
+  isLoading: false,
+  error: null,
 };
 
 const userSlice = createSlice({
@@ -34,9 +44,21 @@ const userSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    builder.addCase(loginUser.fulfilled, (state, action) => {
-      state = action.payload.user;
-    });
+    builder
+      .addCase(loginUser.fulfilled, (state, action) => {
+        state.user.username = action.payload.user.username;
+        state.isLoading = false;
+      })
+      .addCase(loginUser.pending, (state) => {
+        state.isLoading = true;
+        console.log("Pending");
+      })
+      .addCase(loginUser.rejected, (state, action) => {
+        console.log("Rejected");
+        console.log(action.error);
+        state.isLoading = false;
+        state.errorMsg = action.error.message as string;
+      });
   },
 });
 
