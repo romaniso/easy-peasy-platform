@@ -9,7 +9,7 @@ import { UserProvider } from "./context/UserContext";
 import "./services/i18n";
 import { Loader } from "./components/common/Loader";
 import { Provider } from "react-redux";
-import { store } from "./state/store";
+import { store } from "./store/store";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>

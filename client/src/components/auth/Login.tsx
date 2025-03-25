@@ -16,10 +16,10 @@ import { Checkbox } from "../common/Checkbox";
 import { User } from "../../interfaces/user";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { setUser } from "../../state/user/userSlice";
-import { AppDispatch } from "../../state/store";
-import { loginUser } from "../../state/store";
-import { LoginResponse } from "../../state/thunks/userThunk";
+import { setUser } from "../../store/user/userSlice";
+import { AppDispatch } from "../../store/store";
+import { loginUser } from "../../store/store";
+import { LoginResponse } from "../../store/thunks/userThunk";
 
 //const LOGIN_URL = "/auth";
 interface LoginProps {
@@ -65,18 +65,19 @@ export const Login = ({ onToggleForm }: LoginProps): JSX.Element => {
       loginUser({ username: userName, password: pwd })
     );
 
-    if (response.error) {
-      //if (!(response.error instanceof AxiosError) || !response.error.response) {
-      //  setErrMsg("No Server Response");
-      //} else if (response.error.response?.status === 400) {
-      //  setErrMsg(
-      //    response.error.response.data.message || "Missing Username or Password"
-      //  );
-      //} else if (response.error.response?.status === 401) {
-      //  setErrMsg(response.error.response.data.message || "Unauthorized");
-      //} else {
-      setErrMsg("Login Failed");
-      //}
+    //@TODO: handle errors from server. I need to replace error handling to thunk
+    if ("error" in response) {
+      if (!(response.error instanceof AxiosError) || !response.error.response) {
+        setErrMsg("No Server Response");
+      } else if (response.error.response?.status === 400) {
+        setErrMsg(
+          response.error.response.data.message || "Missing Username or Password"
+        );
+      } else if (response.error.response?.status === 401) {
+        setErrMsg(response.error.response.data.message || "Unauthorized");
+      } else {
+        setErrMsg("Login Failed");
+      }
       errRef.current?.focus();
       console.log(response);
       return;
