@@ -6,34 +6,26 @@ import LoginImage from "../../assets/images/login-image.jpg";
 import { Password } from "./Password";
 import { Input } from "../common/Input";
 import { Panel } from "../common/Panel";
-import axios from "../../api/axios";
-import { AxiosError } from "axios";
 import { UserRole } from "../../enums/userRole";
 import { useAuth } from "../../hooks/useAuth";
-//import { useUser } from "../../hooks/useUser";
 import { useLocation, useNavigate } from "react-router-dom";
 import { Checkbox } from "../common/Checkbox";
 import { User } from "../../interfaces/user";
 import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { setUser } from "../../store/user/userSlice";
-import { AppDispatch } from "../../store/store";
+import { useDispatch, useSelector } from "react-redux";
+import { clearError, setUser } from "../../store/user/userSlice";
+import { AppDispatch, RootState } from "../../store/store";
 import { loginUser } from "../../store/store";
-import { LoginResponse } from "../../store/thunks/userThunk";
 
-//const LOGIN_URL = "/auth";
 interface LoginProps {
   onToggleForm(): void;
 }
 
-interface ApiResponse {
-  accessToken?: string;
-  roles?: UserRole[];
-  user?: User;
-}
-
 export const Login = ({ onToggleForm }: LoginProps): JSX.Element => {
   const { setAuth, persist, setPersist } = useAuth();
+  const { user, isLoading, errorMsg } = useSelector(
+    (state: RootState) => state.user
+  );
   const dispatch = useDispatch<AppDispatch>();
 
   const navigate = useNavigate();
@@ -56,48 +48,40 @@ export const Login = ({ onToggleForm }: LoginProps): JSX.Element => {
   }, []);
 
   useEffect(() => {
-    setErrMsg("");
+    dispatch(clearError());
   }, [userName, pwd]);
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
-    const response = await dispatch(
-      loginUser({ username: userName, password: pwd })
-    );
-
-    //@TODO: handle errors from server. I need to replace error handling to thunk
-    if ("error" in response) {
-      if (!(response.error instanceof AxiosError) || !response.error.response) {
-        setErrMsg("No Server Response");
-      } else if (response.error.response?.status === 400) {
-        setErrMsg(
-          response.error.response.data.message || "Missing Username or Password"
-        );
-      } else if (response.error.response?.status === 401) {
-        setErrMsg(response.error.response.data.message || "Unauthorized");
-      } else {
-        setErrMsg("Login Failed");
-      }
+    await dispatch(loginUser({ username: userName, password: pwd }));
+    if (errorMsg) {
       errRef.current?.focus();
-      console.log(response);
+      setUserName("");
+      setPwd("");
       return;
     }
 
-    const accessToken = (response.payload as LoginResponse)?.accessToken;
-    const roles = (response.payload as LoginResponse)?.roles;
-
-    setAuth({ user: userName, pwd, roles, accessToken });
-    // fetch to get user info and store it in context
-    if ((response.payload as LoginResponse)?.user) {
-      dispatch(setUser((response.payload as LoginResponse).user));
+    if (user.username && !errorMsg && !isLoading) {
+      setAuth({
+        user: userName,
+        pwd,
+        //@TODO: change with real roles
+        //  roles: user.roles,
+        roles: ["USER"],
+        //@TODO: add accessToken
+        //  accessToken: result.payload?.accessToken,
+      });
+      dispatch(setUser(user));
+      setUserName("");
+      setPwd("");
+      navigate(from, { replace: true });
     }
-    setUserName("");
-    setPwd("");
-    navigate(from, { replace: true });
   };
+
   const togglePersist = () => {
     setPersist((prev) => !prev);
   };
+
   useEffect(() => {
     localStorage.setItem("persist", JSON.stringify(persist));
   }, [persist]);
@@ -115,7 +99,6 @@ export const Login = ({ onToggleForm }: LoginProps): JSX.Element => {
             Sign Up
           </span>
         </p>
-        {/*<form className="mt-6 flex flex-col gap-6" onSubmit={handleFormSubmit}>*/}
         <form className="mt-6 flex flex-col gap-6" onSubmit={handleSubmit}>
           <Input
             name="username"
@@ -154,13 +137,13 @@ export const Login = ({ onToggleForm }: LoginProps): JSX.Element => {
           <p
             ref={errRef}
             className={
-              errMsg
+              errorMsg
                 ? "block bg-red-500/10 dark:border dark:border-red-400 rounded p-1 text-sm font-bold text-red-500 opacity-100 transition-colors duration-500 -mt-5 shadow"
                 : "invisible absolute"
             }
             aria-live="assertive"
           >
-            {errMsg}
+            {errorMsg}
           </p>
           <Button primary rounded type="submit">
             <>

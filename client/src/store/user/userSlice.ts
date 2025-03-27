@@ -32,7 +32,7 @@ const initialState: UserState = {
   //  avatar: null,
   //  email: null,
   isLoading: false,
-  error: null,
+  errorMsg: null,
 };
 
 const userSlice = createSlice({
@@ -40,7 +40,10 @@ const userSlice = createSlice({
   initialState,
   reducers: {
     setUser: (state, action) => {
-      state = action.payload;
+      state.user = action.payload;
+    },
+    clearError: (state) => {
+      state.errorMsg = null;
     },
   },
   extraReducers: (builder) => {
@@ -48,20 +51,19 @@ const userSlice = createSlice({
       .addCase(loginUser.fulfilled, (state, action) => {
         state.user.username = action.payload.user.username;
         state.isLoading = false;
+        state.errorMsg = null;
       })
       .addCase(loginUser.pending, (state) => {
         state.isLoading = true;
-        console.log("Pending");
+        state.errorMsg = null;
       })
       .addCase(loginUser.rejected, (state, action) => {
-        console.log("Rejected");
-        console.log(action.error);
         state.isLoading = false;
-        state.errorMsg = action.error.message as string;
+        state.errorMsg = action.payload?.message || "Login failed";
       });
   },
 });
 
-export const { setUser } = userSlice.actions;
+export const { setUser, clearError } = userSlice.actions;
 
 export default userSlice.reducer;

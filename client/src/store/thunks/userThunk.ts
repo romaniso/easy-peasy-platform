@@ -3,6 +3,7 @@ import { API_URL } from "../../api/endpoints";
 import axios from "../../api/axios";
 import { UserRole } from "../../enums/userRole";
 import { User } from "../../interfaces/user";
+import { AxiosError } from "axios";
 
 interface LoginCredentials {
   username: string;
@@ -15,9 +16,16 @@ export type LoginResponse = {
   user: User;
 };
 
-export const loginUser = createAsyncThunk(
-  "user/login",
-  async ({ username, password }: LoginCredentials) => {
+export type LoginError = {
+  message: string;
+};
+
+export const loginUser = createAsyncThunk<
+  LoginResponse, // Return type
+  LoginCredentials, // Argument type
+  { rejectValue: LoginError } // Error type
+>("user/login", async ({ username, password }, { rejectWithValue }) => {
+  try {
     const { data } = await axios.post<LoginResponse>(
       API_URL.login,
       {
@@ -33,5 +41,15 @@ export const loginUser = createAsyncThunk(
     );
 
     return data;
+  } catch (err) {
+    if (err instanceof AxiosError && err.response?.data) {
+      const { message } = err.response.data;
+      return rejectWithValue({
+        message: message || "Login failed",
+      });
+    }
+    return rejectWithValue({
+      message: "An unexpected error occurred",
+    });
   }
-);
+});
