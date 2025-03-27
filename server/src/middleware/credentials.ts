@@ -7,8 +7,13 @@ export const credentials = (
   next: NextFunction
 ) => {
   const origin = req.headers.origin;
-  if (allowedOrigins.includes(origin as string)) {
+
+  // In development, allow all origins
+  if (process.env.NODE_ENV === "development") {
+    res.header("Access-Control-Allow-Credentials", "true");
+  } else if (origin && allowedOrigins.includes(origin)) {
     res.header("Access-Control-Allow-Credentials", "true");
   }
+
   next();
 };
