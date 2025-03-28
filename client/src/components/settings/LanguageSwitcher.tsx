@@ -7,7 +7,7 @@ import { Language } from "../../enums/lang";
 import { useTranslation } from "react-i18next";
 import { ToastType } from "../../enums/toast";
 import { useToast } from "../../context/ToastContext";
-import { Icon, IconType } from "../common/icon/Icon";
+import { Icon, IconType } from "../common/Icon/Icon";
 
 interface LanguageSwitcherItem {
   value: Language;

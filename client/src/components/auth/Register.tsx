@@ -9,7 +9,7 @@ import { Button } from "../common/Button";
 import { CiLogin } from "react-icons/ci";
 import axios from "../../api/axios";
 import { AxiosError } from "axios";
-import { Icon, IconType } from "../common/icon/Icon";
+import { Icon, IconType } from "../common/Icon/Icon";
 //#endregion
 
 interface ApiResponse {

@@ -1,21 +1,21 @@
 import React, { useEffect } from "react";
+import { Link } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+
+import { AppDispatch, RootState } from "../../store/store";
+import { clearError, setUser } from "../../store/user/userSlice";
+import { loginUser } from "../../store/store";
 import { useLoginRegister } from "../../hooks/useLoginRegister";
-import { Icon, IconType } from "../common/icon/Icon";
+import { useAuth } from "../../hooks/useAuth";
+
+import { Icon, IconType } from "../common/Icon/Icon";
 import { Button } from "../common/Button";
 import LoginImage from "../../assets/images/login-image.jpg";
 import { Password } from "./Password";
 import { Input } from "../common/Input";
 import { Panel } from "../common/Panel";
-import { UserRole } from "../../enums/userRole";
-import { useAuth } from "../../hooks/useAuth";
-import { useLocation, useNavigate } from "react-router-dom";
 import { Checkbox } from "../common/Checkbox";
-import { User } from "../../interfaces/user";
-import { Link } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { clearError, setUser } from "../../store/user/userSlice";
-import { AppDispatch, RootState } from "../../store/store";
-import { loginUser } from "../../store/store";
 
 interface LoginProps {
   onToggleForm(): void;
@@ -37,13 +37,17 @@ export const Login = ({ onToggleForm }: LoginProps): JSX.Element => {
 
   useEffect(() => {
     userRef.current?.focus();
-  }, []);
+  }, [userRef]);
 
   useEffect(() => {
     if (errorMsg) {
       dispatch(clearError());
     }
   }, [userName, pwd]);
+
+  useEffect(() => {
+    localStorage.setItem("persist", JSON.stringify(persist));
+  }, [persist]);
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
@@ -70,10 +74,6 @@ export const Login = ({ onToggleForm }: LoginProps): JSX.Element => {
   const togglePersist = () => {
     setPersist((prev) => !prev);
   };
-
-  useEffect(() => {
-    localStorage.setItem("persist", JSON.stringify(persist));
-  }, [persist]);
 
   return (
     <Panel className="bg-indigo-50 flex justify-center max-w-3xl !p-0 m-4 overflow-hidden">

@@ -4,7 +4,7 @@ import { LanguageSwitcher } from "../components/settings/LanguageSwitcher";
 import { useTranslation } from "react-i18next";
 import { ChangeTheme } from "../components/settings/ChangeTheme";
 import { DeleteAccount } from "../components/settings/DeleteAccount";
-import { Icon, IconType } from "../components/common/icon/Icon";
+import { Icon, IconType } from "../components/common/Icon/Icon";
 
 export const SettingsPage = (): JSX.Element => {
   const { t } = useTranslation("settings");

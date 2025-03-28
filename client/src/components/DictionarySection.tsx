@@ -6,7 +6,7 @@ import { useAxiosPrivate } from "../hooks/useAxiosPrivate";
 import { useUser } from "../hooks/useUser";
 import { useToast } from "../context/ToastContext";
 import { ToastType } from "../enums/toast";
-import { Icon, IconType } from "./common/icon/Icon";
+import { Icon, IconType } from "./common/Icon/Icon";
 //import { useTranslation } from "react-i18next";
 
 const ADD_MULTIPLE_WORDS_URL = "glossary/add-multiple";

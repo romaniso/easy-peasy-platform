@@ -6,7 +6,7 @@ import { InterestsForm, InterestItem } from "./InterestsForm";
 import { MotivationItemText } from "../../enums/motivationItem";
 import { InterestItemText } from "../../enums/interestItem";
 import { useTranslation } from "react-i18next";
-import { Icon, IconType } from "../common/icon/Icon";
+import { Icon, IconType } from "../common/Icon/Icon";
 
 const UserProfileForms = () => {
   const [activeTab, setActiveTab] = useState<number>(0);

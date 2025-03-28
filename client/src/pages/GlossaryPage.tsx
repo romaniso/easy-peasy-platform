@@ -3,7 +3,7 @@ import { Panel } from "../components/common/Panel";
 import { useTranslation } from "react-i18next";
 import { GlossaryHeader } from "../components/glossary/GlossaryHeader";
 import { GlossaryBody } from "../components/glossary/GlossaryBody";
-import { Icon, IconType } from "../components/common/icon/Icon";
+import { Icon, IconType } from "../components/common/Icon/Icon";
 
 //const STATS_URL = "/glossary";
 export const GlossaryPage = (): JSX.Element => {

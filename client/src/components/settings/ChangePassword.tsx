@@ -7,7 +7,7 @@ import { useAuth } from "../../hooks/useAuth";
 import { ToastType } from "../../enums/toast";
 import { useToast } from "../../context/ToastContext";
 import { Trans, useTranslation } from "react-i18next";
-import { Icon, IconType } from "../common/icon/Icon";
+import { Icon, IconType } from "../common/Icon/Icon";
 
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
 const SETTINGS_URL = "/settings";

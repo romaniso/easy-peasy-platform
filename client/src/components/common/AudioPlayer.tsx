@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import { getCalculatedStringifiedTime } from "../../utils/getCalculatedStringifiedTime";
-import { Icon, IconType } from "./icon/Icon";
+import { Icon, IconType } from "./Icon/Icon";
 
 interface AudioPlayerProps {
   audioUrl: string;

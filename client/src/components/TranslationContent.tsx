@@ -6,7 +6,7 @@ import { useToast } from "../context/ToastContext";
 import { ToastType } from "../enums/toast";
 import { v4 as uuid } from "uuid";
 import { playAudio } from "../utils/playAudio";
-import { Icon, IconType } from "./common/icon/Icon";
+import { Icon, IconType } from "./common/Icon/Icon";
 
 interface TranslationContentProps {
   word: string;

@@ -1,6 +1,6 @@
 import { useTranslation } from "react-i18next";
 import { ThemeToggle } from "../ThemeToggle";
-import { Icon, IconType } from "../common/icon/Icon";
+import { Icon, IconType } from "../common/Icon/Icon";
 
 export const ChangeTheme = (): JSX.Element => {
   const { t } = useTranslation("settings");

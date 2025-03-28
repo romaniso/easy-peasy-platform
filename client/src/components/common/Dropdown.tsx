@@ -2,7 +2,7 @@ import { ReactElement, useEffect, useRef, useState } from "react";
 import { SubmenuItem } from "../Navbar";
 import { NavLink } from "react-router-dom";
 import { AvatarItem } from "../ProfilePreview";
-import { Icon, IconType } from "./icon/Icon";
+import { Icon, IconType } from "./Icon/Icon";
 
 interface DropdownProps {
   label: string | ReactElement;

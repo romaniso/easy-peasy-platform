@@ -2,7 +2,7 @@ import React, { DragEvent, useState } from "react";
 import className from "classnames";
 import { useDroppable } from "@dnd-kit/core";
 import { useTranslation } from "react-i18next";
-import { Icon, IconType } from "./common/icon/Icon";
+import { Icon, IconType } from "./common/Icon/Icon";
 
 interface ImageDropZoneProps {
   onImageDrop: (files: File) => void;

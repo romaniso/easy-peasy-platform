@@ -8,7 +8,7 @@ import { User } from "../../interfaces/user";
 import { ToastType } from "../../enums/toast";
 import { useToast } from "../../context/ToastContext";
 import { useTranslation } from "react-i18next";
-import { Icon, IconType } from "../common/icon/Icon";
+import { Icon, IconType } from "../common/Icon/Icon";
 
 const UPDATE_URL = "/users";
 const FIRSTNAME_REGEX = /^[a-zA-Z][a-zA-Z\s'-]{1,50}$/;

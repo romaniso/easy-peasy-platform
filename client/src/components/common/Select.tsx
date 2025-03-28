@@ -1,6 +1,6 @@
 import { ReactElement, useEffect, useRef, useState } from "react";
 import className from "classnames";
-import { Icon, IconType } from "./icon/Icon";
+import { Icon, IconType } from "./Icon/Icon";
 
 interface SelectItem<T> {
   label: string | number;

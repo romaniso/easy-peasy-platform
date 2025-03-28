@@ -1,7 +1,7 @@
 import { ButtonHTMLAttributes, ReactElement, ReactEventHandler } from "react";
 import className from "classnames";
 import { useTranslation } from "react-i18next";
-import { Icon, IconType } from "./icon/Icon";
+import { Icon, IconType } from "./Icon/Icon";
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   children?: ReactElement | string;

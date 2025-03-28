@@ -1,4 +1,4 @@
-import { Icon, IconType } from "../common/icon/Icon";
+import { Icon, IconType } from "../common/Icon/Icon";
 import { Button } from "../common/Button";
 import { WaveFormPlayer } from "../common/WaveFormPlayer";
 import { Level } from "../../types/level";

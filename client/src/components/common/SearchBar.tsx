@@ -1,4 +1,4 @@
-import { Icon, IconType } from "./icon/Icon";
+import { Icon, IconType } from "./Icon/Icon";
 
 interface SearchBarProps {
   placeholder: string;

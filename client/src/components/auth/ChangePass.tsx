@@ -5,7 +5,7 @@ import { Panel } from "../common/Panel";
 import LoginImage from "../../assets/images/login-image.jpg";
 import { Password } from "./Password";
 import { Button } from "../common/Button";
-import { Icon, IconType } from "../common/icon/Icon";
+import { Icon, IconType } from "../common/Icon/Icon";
 import axios from "../../api/axios";
 import { AxiosError } from "axios";
 import { Link } from "react-router-dom";

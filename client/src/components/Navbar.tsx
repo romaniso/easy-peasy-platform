@@ -9,7 +9,7 @@ import { ProfilePreview } from "./ProfilePreview";
 import { useTranslation } from "react-i18next";
 import { Logo } from "./common/Logo";
 import { LanguageSwitcher } from "./settings/LanguageSwitcher";
-import { Icon, IconType } from "./common/icon/Icon";
+import { Icon, IconType } from "./common/Icon/Icon";
 
 export interface SubmenuItem {
   label: string;

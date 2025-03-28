@@ -9,7 +9,7 @@ import { axiosPrivate } from "../../api/axios";
 import { useToast } from "../../context/ToastContext";
 import { ToastType } from "../../enums/toast";
 import { useTranslation } from "react-i18next";
-import { Icon, IconType } from "../common/icon/Icon";
+import { Icon, IconType } from "../common/Icon/Icon";
 
 export type InterestItem = {
   text: InterestItemText;

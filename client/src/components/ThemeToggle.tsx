@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Icon, IconType } from "./common/icon/Icon";
+import { Icon, IconType } from "./common/Icon/Icon";
 
 interface ThemeToggleProps {
   className?: string;

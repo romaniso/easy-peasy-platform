@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Icon, IconType } from "./icon/Icon";
+import { Icon, IconType } from "./Icon/Icon";
 
 export const ScrollToTop = (): JSX.Element => {
   const [showTopBtn, setShowTopBtn] = useState(false);

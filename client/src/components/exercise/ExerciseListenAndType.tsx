@@ -1,6 +1,6 @@
 import { ExerciseUnit } from "../../interfaces/exerciseUnit";
 import { UserResult } from "../../types/userResult";
-import { Icon, IconType } from "../common/icon/Icon";
+import { Icon, IconType } from "../common/Icon/Icon";
 import { OrderUnit } from "../common/OrderUnit";
 import { WaveFormPlayer } from "../common/WaveFormPlayer";
 import { FillInUnit } from "./FillInUnit";

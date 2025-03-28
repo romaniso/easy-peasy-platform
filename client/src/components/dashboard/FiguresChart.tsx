@@ -1,5 +1,5 @@
 import { Trans, useTranslation } from "react-i18next";
-import { Icon, IconType } from "../common/icon/Icon";
+import { Icon, IconType } from "../common/Icon/Icon";
 
 interface FiguresChartProps {
   title: string;

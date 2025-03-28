@@ -3,7 +3,7 @@ import {
   TwitterShareButton,
   WhatsappShareButton,
 } from "react-share";
-import { Icon, IconType } from "./icon/Icon";
+import { Icon, IconType } from "./Icon/Icon";
 
 interface ShareButtonsProps {
   currentUrl: string;

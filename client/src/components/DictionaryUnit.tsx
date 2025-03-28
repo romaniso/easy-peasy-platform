@@ -6,7 +6,7 @@ import {
   useEditWordInDictionary,
   useRemoveWordFromDictionary,
 } from "../context/ReadingContext";
-import { Icon, IconType } from "./common/icon/Icon";
+import { Icon, IconType } from "./common/Icon/Icon";
 
 export const DictionaryUnit = ({
   word,

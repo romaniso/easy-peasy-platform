@@ -1,5 +1,5 @@
 import { SyntheticEvent, useEffect, useState } from "react";
-import { Icon, IconType } from "../common/icon/Icon";
+import { Icon, IconType } from "../common/Icon/Icon";
 import { RadioGroup } from "../common/RadioGroup";
 import { Button } from "../common/Button";
 import { useAxiosPrivate } from "../../hooks/useAxiosPrivate";

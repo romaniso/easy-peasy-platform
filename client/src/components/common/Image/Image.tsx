@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from "react";
-import { Icon, IconType } from "../icon/Icon";
+import { Icon, IconType } from "../Icon/Icon";
 
 import { Modal } from "../Modal";
 

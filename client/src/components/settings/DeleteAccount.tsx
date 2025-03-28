@@ -8,7 +8,7 @@ import { useToast } from "../../context/ToastContext";
 import { useAuth } from "../../hooks/useAuth";
 import { useUser } from "../../hooks/useUser";
 import { useNavigate } from "react-router-dom";
-import { Icon, IconType } from "../common/icon/Icon";
+import { Icon, IconType } from "../common/Icon/Icon";
 
 const DELETE_ACCOUNT_URL = "/users";
 

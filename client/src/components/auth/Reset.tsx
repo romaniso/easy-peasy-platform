@@ -9,7 +9,7 @@ import { Logo } from "../common/Logo";
 import { useToast } from "../../context/ToastContext";
 import { ToastType } from "../../enums/toast";
 import { Loader } from "../common/Loader";
-import { Icon, IconType } from "../common/icon/Icon";
+import { Icon, IconType } from "../common/Icon/Icon";
 
 const RESET_URL = "/reset";
 

@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import { ToastContext } from "../../context/ToastContext";
 import { ToastType } from "../../enums/toast";
-import { Icon, IconType } from "./icon/Icon";
+import { Icon, IconType } from "./Icon/Icon";
 import className from "classnames";
 
 const useTimeout = (callbackFunction: () => void) => {

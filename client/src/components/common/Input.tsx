@@ -7,7 +7,7 @@ import {
   ForwardedRef,
 } from "react";
 import classNames from "classnames";
-import { Icon, IconType } from "./icon/Icon";
+import { Icon, IconType } from "./Icon/Icon";
 
 type InputRestProps = Omit<
   InputHTMLAttributes<HTMLInputElement>,

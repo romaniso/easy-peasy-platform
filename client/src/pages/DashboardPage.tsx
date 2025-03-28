@@ -8,7 +8,7 @@ import { useTranslation } from "react-i18next";
 import { useAxiosPrivate } from "../hooks/useAxiosPrivate";
 import { useUser } from "../hooks/useUser";
 import { ActivityStatsEntity } from "../types/lastMonthActivitiesEntity";
-import { Icon, IconType } from "../components/common/icon/Icon";
+import { Icon, IconType } from "../components/common/Icon/Icon";
 
 const STATS_URL = "/stats";
 

@@ -2,7 +2,7 @@ import React from "react";
 import { ExerciseUnit } from "../../interfaces/exerciseUnit";
 import { UserResult } from "../../types/userResult";
 import { v4 as uuid } from "uuid";
-import { Icon, IconType } from "../common/icon/Icon";
+import { Icon, IconType } from "../common/Icon/Icon";
 
 interface ExerciseDropdownProps {
   questions: ExerciseUnit[];

@@ -10,7 +10,7 @@ import { MotivationItemText } from "../../enums/motivationItem";
 import { ToastType } from "../../enums/toast";
 import { useToast } from "../../context/ToastContext";
 import { useTranslation } from "react-i18next";
-import { Icon, IconType } from "../common/icon/Icon";
+import { Icon, IconType } from "../common/Icon/Icon";
 
 export type MotivationItem = {
   text: MotivationItemText;

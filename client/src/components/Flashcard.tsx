@@ -1,7 +1,7 @@
 import { SyntheticEvent, useState } from "react";
 //import { BsFillVolumeDownFill } from "react-icons/bs";
 import { ToolTip } from "./common/ToolTip";
-import { Icon, IconType } from "./common/icon/Icon";
+import { Icon, IconType } from "./common/Icon/Icon";
 //import { useSpeechSynthesis, SpeechSynthesisVoice } from "react-speech-kit";
 
 interface FlashcardProps {

@@ -4,7 +4,7 @@ import { useAxiosPrivate } from "../../hooks/useAxiosPrivate";
 import { useUser } from "../../hooks/useUser";
 import { GlossaryAction } from "./GlossaryAction";
 import { useTranslation } from "react-i18next";
-import { Icon, IconType } from "../common/icon/Icon";
+import { Icon, IconType } from "../common/Icon/Icon";
 
 interface GlossaryItemProps {
   id: string;

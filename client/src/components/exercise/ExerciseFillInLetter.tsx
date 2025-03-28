@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { FillInLetterUnit } from "./FillInLetterUnit";
 import { ExerciseUnit } from "../../interfaces/exerciseUnit";
 import { UserResult } from "../../types/userResult";
-import { Icon, IconType } from "../common/icon/Icon";
+import { Icon, IconType } from "../common/Icon/Icon";
 
 interface ExerciseFillInLetterProps {
   questions: ExerciseUnit[];

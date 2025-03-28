@@ -1,5 +1,5 @@
 import { useRef, useState, useEffect, LegacyRef } from "react";
-import { Icon, IconType } from "./icon/Icon";
+import { Icon, IconType } from "./Icon/Icon";
 import WaveSurfer from "wavesurfer.js";
 import { getCalculatedStringifiedTime } from "../../utils/getCalculatedStringifiedTime";
 import { Skeleton } from "./Skeleton";
