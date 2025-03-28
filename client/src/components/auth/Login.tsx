@@ -32,23 +32,17 @@ export const Login = ({ onToggleForm }: LoginProps): JSX.Element => {
   const location = useLocation();
   const from = location.state?.from.pathname || "/dashboard";
 
-  const {
-    userName,
-    setUserName,
-    pwd,
-    setPwd,
-    errMsg,
-    setErrMsg,
-    userRef,
-    errRef,
-  } = useLoginRegister();
+  const { userName, setUserName, pwd, setPwd, userRef, errRef } =
+    useLoginRegister();
 
   useEffect(() => {
     userRef.current?.focus();
   }, []);
 
   useEffect(() => {
-    dispatch(clearError());
+    if (errorMsg) {
+      dispatch(clearError());
+    }
   }, [userName, pwd]);
 
   const handleSubmit = async (event: React.FormEvent) => {
@@ -58,18 +52,13 @@ export const Login = ({ onToggleForm }: LoginProps): JSX.Element => {
       errRef.current?.focus();
       setUserName("");
       setPwd("");
-      return;
-    }
-
-    if (user.username && !errorMsg && !isLoading) {
+    } else if (user.accessToken) {
+      console.log("Login success", user);
       setAuth({
         user: userName,
         pwd,
-        //@TODO: change with real roles
-        //  roles: user.roles,
-        roles: ["USER"],
-        //@TODO: add accessToken
-        //  accessToken: result.payload?.accessToken,
+        roles: user.roles,
+        accessToken: user.accessToken || undefined,
       });
       dispatch(setUser(user));
       setUserName("");
@@ -147,6 +136,8 @@ export const Login = ({ onToggleForm }: LoginProps): JSX.Element => {
           </p>
           <Button primary rounded type="submit">
             <>
+              {/* TODO: create a spinner and send it as a prop loading to Button */}
+              {isLoading && <div>Loading...</div>}
               <Icon type={IconType.Login} />
               Log in
             </>
