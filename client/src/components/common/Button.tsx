@@ -2,7 +2,7 @@ import { ButtonHTMLAttributes, ReactElement, ReactEventHandler } from "react";
 import className from "classnames";
 import { useTranslation } from "react-i18next";
 import { Icon, IconType } from "./Icon/Icon";
-
+import { Spinner, SpinnerSize } from "./Spinner/Spinner";
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   children?: ReactElement | string;
   primary?: true;
@@ -16,6 +16,8 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   onClick?: ReactEventHandler;
   submit?: true;
   save?: true;
+  loading?: boolean;
+  icon?: ReactElement;
 }
 export const Button = ({
   children,
@@ -29,6 +31,8 @@ export const Button = ({
   rounded,
   submit,
   save,
+  loading,
+  icon,
   onClick,
   ...rest
 }: ButtonProps): JSX.Element => {
@@ -65,6 +69,8 @@ export const Button = ({
       onClick={onClick}
       type={submit ? "submit" : rest.type}
     >
+      {loading && <Spinner size={SpinnerSize.SMALL} />}
+      {icon && !loading && icon}
       {save ? (
         <span>
           {t("buttons.save")}

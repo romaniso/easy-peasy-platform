@@ -134,13 +134,14 @@ export const Login = ({ onToggleForm }: LoginProps): JSX.Element => {
           >
             {errorMsg}
           </p>
-          <Button primary rounded type="submit">
-            <>
-              {/* TODO: create a spinner and send it as a prop loading to Button */}
-              {isLoading && <div>Loading...</div>}
-              <Icon type={IconType.Login} />
-              Log in
-            </>
+          <Button
+            primary
+            rounded
+            type="submit"
+            loading={isLoading}
+            icon={<Icon type={IconType.Login} />}
+          >
+            Log in
           </Button>
         </form>
       </section>
