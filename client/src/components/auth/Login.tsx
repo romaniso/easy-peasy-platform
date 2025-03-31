@@ -23,6 +23,8 @@ interface LoginProps {
 
 export const Login = ({ onToggleForm }: LoginProps): JSX.Element => {
   const { setAuth, persist, setPersist } = useAuth();
+  const { userName, setUserName, pwd, setPwd, userRef, errRef } =
+    useLoginRegister();
   const { user, isLoading, errorMsg } = useSelector(
     (state: RootState) => state.user
   );
@@ -32,9 +34,6 @@ export const Login = ({ onToggleForm }: LoginProps): JSX.Element => {
   const location = useLocation();
   const from = location.state?.from.pathname || "/dashboard";
 
-  const { userName, setUserName, pwd, setPwd, userRef, errRef } =
-    useLoginRegister();
-
   useEffect(() => {
     userRef.current?.focus();
   }, [userRef]);
@@ -43,32 +42,30 @@ export const Login = ({ onToggleForm }: LoginProps): JSX.Element => {
     if (errorMsg) {
       dispatch(clearError());
     }
-  }, [userName, pwd]);
+  }, [userName, pwd, errorMsg, dispatch]);
 
   useEffect(() => {
     localStorage.setItem("persist", JSON.stringify(persist));
   }, [persist]);
 
+  useEffect(() => {
+    //@TODO: clearup access token while logging out
+    if (!user.accessToken) return;
+    setAuth({
+      user: userName,
+      pwd,
+      roles: user.roles,
+      accessToken: user.accessToken || undefined,
+    });
+    dispatch(setUser(user));
+    setUserName("");
+    setPwd("");
+    navigate(from, { replace: true });
+  }, [user.accessToken]);
+
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
     await dispatch(loginUser({ username: userName, password: pwd }));
-    if (errorMsg) {
-      errRef.current?.focus();
-      setUserName("");
-      setPwd("");
-    } else if (user.accessToken) {
-      console.log("Login success", user);
-      setAuth({
-        user: userName,
-        pwd,
-        roles: user.roles,
-        accessToken: user.accessToken || undefined,
-      });
-      dispatch(setUser(user));
-      setUserName("");
-      setPwd("");
-      navigate(from, { replace: true });
-    }
   };
 
   const togglePersist = () => {
