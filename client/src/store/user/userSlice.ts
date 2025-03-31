@@ -13,7 +13,7 @@ interface User {
 }
 
 interface UserState {
-  user: User;
+  user: User; // na poczatku moze musi byc null
   isLoading: boolean;
   errorMsg: string | null;
 }
