@@ -42,17 +42,21 @@ export class AuthController {
       }); //one day
 
       const user = {
-        avatar: foundUser.avatar,
-        firstName: foundUser.firstName,
-        lastName: foundUser.lastName,
-        email: foundUser.email,
-        birthday: foundUser.birthday,
-        likes: foundUser.likes,
-        motivations: foundUser.motivations,
-        goals: foundUser.goals,
+        username: foundUser.username,
+        profile: {
+          avatar: foundUser.avatar,
+          firstName: foundUser.firstName,
+          lastName: foundUser.lastName,
+          email: foundUser.email,
+          birthday: foundUser.birthday,
+          likes: foundUser.likes,
+          motivations: foundUser.motivations,
+          goals: foundUser.goals,
+        },
+        roles: foundUser.roles,
       };
 
-      res.json({ accessToken, roles: foundUser.roles, user });
+      res.json({ accessToken, user });
     } catch (err) {
       console.error(err);
       res.status(401).json({ message: "Login error" });
