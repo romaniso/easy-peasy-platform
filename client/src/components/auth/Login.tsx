@@ -42,7 +42,7 @@ export const Login = ({ onToggleForm }: LoginProps): JSX.Element => {
     if (errorMsg) {
       dispatch(clearError());
     }
-  }, [userName, pwd, errorMsg, dispatch]);
+  }, [userName, pwd, dispatch]);
 
   useEffect(() => {
     localStorage.setItem("persist", JSON.stringify(persist));

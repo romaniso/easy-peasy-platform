@@ -7,11 +7,17 @@ export enum SpinnerSize {
 }
 
 interface SpinnerProps {
-  size: SpinnerSize;
+  size?: SpinnerSize;
 }
 
 export const Spinner = ({
   size = SpinnerSize.MEDIUM,
 }: SpinnerProps): JSX.Element => {
-  return <PiSpinnerGap className={`animate-spin text-2xl`} />;
+  const sizeClass = {
+    [SpinnerSize.SMALL]: "text-2xl",
+    [SpinnerSize.MEDIUM]: "text-4xl",
+    [SpinnerSize.LARGE]: "text-6xl",
+  }[size || SpinnerSize.MEDIUM];
+
+  return <PiSpinnerGap className={`animate-spin ${sizeClass} text-white`} />;
 };
