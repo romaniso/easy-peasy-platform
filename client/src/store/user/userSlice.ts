@@ -64,14 +64,16 @@ const userSlice = createSlice({
     builder
       .addCase(loginUser.fulfilled, (state, action) => {
         state.user.username = action.payload.user.username;
-        state.user.profile.avatar = action.payload.user.avatar;
-        state.user.profile.email = action.payload.user.email;
-        state.user.profile.firstName = action.payload.user.firstName;
-        state.user.profile.lastName = action.payload.user.lastName;
-        state.user.profile.birthday = action.payload.user.birthday;
-        state.user.profile.likes = action.payload.user.likes;
-        state.user.profile.motivations = action.payload.user.motivations;
-        state.user.roles = action.payload.roles;
+        state.user.profile.avatar = action.payload.user.profile.avatar;
+        state.user.profile.email = action.payload.user.profile.email;
+        state.user.profile.firstName = action.payload.user.profile.firstName;
+        state.user.profile.lastName = action.payload.user.profile.lastName;
+        state.user.profile.birthday = action.payload.user.profile.birthday;
+        state.user.profile.likes = action.payload.user.profile.likes;
+        state.user.profile.motivations =
+          action.payload.user.profile.motivations;
+        state.user.profile.goals = action.payload.user.profile.goals;
+        state.user.roles = action.payload.user.roles;
         state.user.accessToken = action.payload.accessToken;
         state.isLoading = false;
         state.errorMsg = null;

@@ -5,11 +5,12 @@ import { Button } from "../common/Button";
 import { ImageDropZone } from "../ImageDropZone";
 import { AxiosError } from "axios";
 import { useAxiosPrivate } from "../../hooks/useAxiosPrivate";
-import { useUser } from "../../hooks/useUser";
 import { useToast } from "../../context/ToastContext";
 import { ToastType } from "../../enums/toast";
 import { useTranslation } from "react-i18next";
 import { Icon, IconType } from "../common/Icon/Icon";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState, setUser } from "../../store/store";
 
 const AVATAR_UPLOAD_URL = "/users/upload";
 
@@ -19,7 +20,8 @@ export const ProfileAvatar = (): JSX.Element => {
   const [isLoading, setIsLoading] = useState(false);
   const [errMsg, setErrMsg] = useState<string>("");
   const axiosPrivate = useAxiosPrivate();
-  const { user, setUser } = useUser();
+  const { user } = useSelector((state: RootState) => state.user);
+  const dispatch = useDispatch();
 
   const toast = useToast();
   const { t } = useTranslation("profile");
@@ -56,8 +58,8 @@ export const ProfileAvatar = (): JSX.Element => {
     try {
       const formData = new FormData();
       formData.append("avatar", file);
-      if (user.avatar) {
-        formData.append("prevAvatar", user.avatar);
+      if (user.profile.avatar) {
+        formData.append("prevAvatar", user.profile.avatar);
       }
       formData.append("userName", user.username as string);
       const response = await axiosPrivate.post(AVATAR_UPLOAD_URL, formData, {
@@ -66,12 +68,16 @@ export const ProfileAvatar = (): JSX.Element => {
         },
       });
       const { imagePath } = response.data;
-      setUser((prev) => {
-        return {
-          ...prev,
-          avatar: imagePath,
-        };
-      });
+      dispatch(
+        setUser({
+          ...user,
+          profile: {
+            ...user.profile,
+            avatar: imagePath,
+          },
+        })
+      );
+
       // Optional: Show a preview of the dropped image
       setSelectedImageUrl(imagePath);
       setShowModal(false);
@@ -109,7 +115,9 @@ export const ProfileAvatar = (): JSX.Element => {
       {/*@TODO: should be fetched from user.avatar not from fetch response*/}
       <img
         src={
-          user.avatar ? user.avatar : "https://avatar.iran.liara.run/public/boy"
+          user.profile.avatar
+            ? user.profile.avatar
+            : "https://avatar.iran.liara.run/public/boy"
         }
         alt=""
         className="w-full h-full object-cover group-hover:brightness-50 transition-all duration-300"

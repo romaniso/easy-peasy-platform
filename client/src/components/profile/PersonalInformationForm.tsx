@@ -1,14 +1,14 @@
 import { Input } from "../common/Input";
 import { Button } from "../common/Button";
 import { SyntheticEvent, useEffect, useRef, useState } from "react";
-import { useAuth } from "../../hooks/useAuth";
 import { axiosPrivate } from "../../api/axios";
-import { useUser } from "../../hooks/useUser";
 import { User } from "../../interfaces/user";
 import { ToastType } from "../../enums/toast";
 import { useToast } from "../../context/ToastContext";
 import { useTranslation } from "react-i18next";
 import { Icon, IconType } from "../common/Icon/Icon";
+import { useSelector, useDispatch } from "react-redux";
+import { RootState, setUser } from "../../store/store";
 
 const UPDATE_URL = "/users";
 const FIRSTNAME_REGEX = /^[a-zA-Z][a-zA-Z\s'-]{1,50}$/;
@@ -23,8 +23,8 @@ interface PersonalInformationFormProps {
 export const PersonalInformationForm = ({
   switchForm,
 }: PersonalInformationFormProps): JSX.Element => {
-  const { auth } = useAuth();
-  const { setUser, user } = useUser();
+  const { user } = useSelector((state: RootState) => state.user);
+  const dispatch = useDispatch();
 
   const [firstName, setFirstName] = useState<string>("");
   const [validFirstName, setValidFirstName] = useState<boolean>(false);
@@ -124,23 +124,21 @@ export const PersonalInformationForm = ({
     }
 
     const updatedUser: User = {
-      username: auth.user,
-      firstName,
-      lastName,
-      email: userEmail,
-      birthday,
+      username: user.username,
+      profile: {
+        ...user.profile,
+        firstName,
+        lastName,
+        email: userEmail,
+        birthday,
+      },
     };
     try {
       const response = await axiosPrivate.put(UPDATE_URL, updatedUser, {
         withCredentials: true,
       });
       if (response.status === 200) {
-        setUser((prev) => {
-          return {
-            ...prev,
-            ...updatedUser,
-          };
-        });
+        dispatch(setUser(updatedUser));
         toast?.open(t("personalInfo.toastMessage.success"), ToastType.Success);
       }
     } catch (err) {
@@ -190,7 +188,7 @@ export const PersonalInformationForm = ({
           autoComplete="off"
           lg
           onChange={setFirstName}
-          prevValue={user.firstName}
+          prevValue={user.profile.firstName || ""}
           onFocus={() => setFirstNameFocus(true)}
           onBlur={() => setFirstNameFocus(false)}
           ref={firstNameRef}
@@ -224,7 +222,7 @@ export const PersonalInformationForm = ({
           outline
           autoComplete="off"
           lg
-          prevValue={user.lastName}
+          prevValue={user.profile.lastName || ""}
           onFocus={() => setLastNameFocus(true)}
           onBlur={() => setLastNameFocus(false)}
           onChange={setLastName}
@@ -259,7 +257,7 @@ export const PersonalInformationForm = ({
           outline
           autoComplete="off"
           lg
-          prevValue={user.email}
+          prevValue={user.profile.email || ""}
           onChange={setUserEmail}
           onFocus={() => setUserEmailFocus(true)}
           onBlur={() => setUserEmailFocus(false)}
@@ -293,7 +291,7 @@ export const PersonalInformationForm = ({
           outline
           autoComplete="off"
           lg
-          prevValue={user.birthday}
+          prevValue={user.profile.birthday || ""}
           onChange={setBirthday}
           onFocus={() => setBirthdayFocus(true)}
           onBlur={() => setBirthdayFocus(false)}

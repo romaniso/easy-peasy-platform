@@ -3,7 +3,6 @@ import { AxiosError } from "axios";
 
 import { API_URL } from "../../api/endpoints";
 import axios from "../../api/axios";
-import { UserRole } from "../../enums/userRole";
 import { User } from "../../interfaces/user";
 
 interface LoginCredentials {
@@ -13,7 +12,6 @@ interface LoginCredentials {
 
 export type LoginResponse = {
   accessToken: string;
-  roles: UserRole[];
   user: User;
 };
 

@@ -6,9 +6,10 @@ import { GoalsWidget } from "../components/dashboard/GoalsWidget";
 import { LineChart } from "../components/dashboard/LineChart";
 import { useTranslation } from "react-i18next";
 import { useAxiosPrivate } from "../hooks/useAxiosPrivate";
-import { useUser } from "../hooks/useUser";
 import { ActivityStatsEntity } from "../types/lastMonthActivitiesEntity";
 import { Icon, IconType } from "../components/common/Icon/Icon";
+import { RootState } from "../store/store";
+import { useSelector } from "react-redux";
 
 const STATS_URL = "/stats";
 
@@ -23,7 +24,7 @@ export const DashboardPage = (): JSX.Element => {
     number | null
   >(null);
   const axiosPrivate = useAxiosPrivate();
-  const { user } = useUser();
+  const { user } = useSelector((state: RootState) => state.user);
 
   const { t } = useTranslation("dashboard");
 
