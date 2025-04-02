@@ -34,20 +34,22 @@ export class RefreshTokenController {
         );
 
         const user = {
-          avatar: foundUser.avatar,
-          firstName: foundUser.firstName,
-          lastName: foundUser.lastName,
-          email: foundUser.email,
-          birthday: foundUser.birthday,
-          likes: foundUser.likes,
-          motivations: foundUser.motivations,
-          goals: foundUser.goals,
+          username: foundUser.username,
+          profile: {
+            avatar: foundUser.avatar,
+            firstName: foundUser.firstName,
+            lastName: foundUser.lastName,
+            email: foundUser.email,
+            birthday: foundUser.birthday,
+            likes: foundUser.likes,
+            motivations: foundUser.motivations,
+            goals: foundUser.goals,
+          },
+          roles: foundUser.roles,
         };
 
         res.json({
-          username: foundUser.username,
           accessToken,
-          roles: foundUser.roles,
           user,
         });
       }

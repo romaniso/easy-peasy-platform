@@ -1,34 +1,35 @@
+import { useDispatch } from "react-redux";
 import axios from "../api/axios";
 import { useAuth } from "./useAuth";
-import { useUser } from "./useUser";
+import { setUser } from "../store/store";
+
+interface RefreshTokenResponse {
+  user: {
+    username: string;
+    roles: string[];
+  };
+  accessToken: string;
+}
 
 export const useRefreshToken = () => {
   const { setAuth } = useAuth();
-  const { setUser } = useUser();
+  const dispatch = useDispatch();
 
   const refresh = async () => {
-    const response = await axios.get("/refresh", {
+    const response = await axios.get<RefreshTokenResponse>("/refresh", {
       withCredentials: true,
     });
-    const { user, username, accessToken, roles } = response.data;
+    const { user, accessToken } = response.data;
     setAuth((prev) => {
       return {
         ...prev,
-        user: username,
-        roles,
+        user: user.username,
+        roles: user.roles,
         accessToken,
       };
     });
 
-    //@TODO: set User Context
-    setUser((prev) => {
-      return {
-        ...prev,
-        username,
-        ...user,
-      };
-    });
-
+    dispatch(setUser(user));
     return response.data.accessToken;
   };
   return refresh;
