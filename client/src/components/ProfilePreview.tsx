@@ -1,10 +1,11 @@
 import { ReactElement } from "react";
+import { useSelector } from "react-redux";
+import { RootState } from "../store/store";
 import { Dropdown } from "./common/Dropdown";
 import { useLogout } from "../hooks/useLogout";
 import { MiniAvatar } from "./MiniAvatar";
 import { useToast } from "../context/ToastContext";
 import { ToastType } from "../enums/toast";
-import { useUser } from "../hooks/useUser";
 import { useTranslation } from "react-i18next";
 import { Icon, IconType } from "./common/Icon/Icon";
 
@@ -23,10 +24,10 @@ interface ProfilePreviewProps {
 export const ProfilePreview = ({
   dropdown,
 }: ProfilePreviewProps): JSX.Element => {
-  const { user } = useUser();
   const logout = useLogout();
   const toast = useToast();
   const { t } = useTranslation("common");
+  const { user } = useSelector((state: RootState) => state.user);
 
   const handleLogout = async () => {
     await logout();
