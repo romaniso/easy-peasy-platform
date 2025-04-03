@@ -68,21 +68,25 @@ export class UserController {
   }
   async updateUser(req: Request, res: Response) {
     try {
-      const { username, birthday, goals, ...requestObj } = req.body;
+      const { username, profile } = req.body;
+      const { birthday, goals } = profile;
+
+      console.log(req.body);
+
       const user = await User.findOne({ username });
       if (!user) {
         return res
           .status(400)
           .json({ message: `Username ${username} was not found` });
       }
-      if (!requestObj) {
+      if (!profile) {
         return res.status(400).json({ message: "Bad client request." });
       }
       // Find out which value was updated
       const updatedUser: Partial<IUser> = {};
-      for (const key in requestObj) {
-        if (requestObj[key]) {
-          updatedUser[key] = requestObj[key] as string;
+      for (const key in profile) {
+        if (profile[key]) {
+          updatedUser[key] = profile[key] as string;
         }
       }
 

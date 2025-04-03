@@ -42,9 +42,11 @@ const userSchema = new Schema<IUser>({
   username: { type: String, unique: true, required: true },
   password: { type: String, required: true },
   roles: [{ type: String, ref: "Role" }],
+  //  AUTH
   refreshToken: { type: String, required: false },
   resetToken: { type: String, required: false },
   resetTokenExpiration: { type: String, required: false },
+  //  PROFILE:
   avatar: { type: String, required: false },
   firstName: { type: String, required: false },
   lastName: { type: String, required: false },
