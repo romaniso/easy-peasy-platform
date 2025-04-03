@@ -10,6 +10,7 @@ import { useToast } from "../../context/ToastContext";
 import { ToastType } from "../../enums/toast";
 import { useTranslation } from "react-i18next";
 import { Icon, IconType } from "../common/Icon/Icon";
+import { API_URL } from "../../api/endpoints";
 
 export type InterestItem = {
   text: InterestItemText;
