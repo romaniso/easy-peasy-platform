@@ -70,10 +70,8 @@ export class UserController {
     try {
       const { username, profile } = req.body;
       const { birthday, goals } = profile;
-
-      console.log(req.body);
-
       const user = await User.findOne({ username });
+
       if (!user) {
         return res
           .status(400)
