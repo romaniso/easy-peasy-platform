@@ -2,14 +2,16 @@ import { useTop } from "../hooks/useTop";
 import { Users } from "../components/auth/Users";
 import { Button } from "../components/common/Button";
 import { useNavigate } from "react-router-dom";
-import { useLogout } from "../hooks/useLogout";
+import { useDispatch } from "react-redux";
+import { AppDispatch, logoutUser } from "../store/store";
 
 export const AdminPage = (): JSX.Element => {
   useTop();
+  const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
-  const logout = useLogout();
+
   const signOut = async () => {
-    await logout();
+    dispatch(logoutUser());
     navigate("/");
   };
   return (
