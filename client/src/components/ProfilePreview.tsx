@@ -39,7 +39,7 @@ export const ProfilePreview = ({
       {dropdown ? (
         <Dropdown
           avatar
-          label={user.username as string}
+          label={user?.username as string}
           content={[
             {
               icon: <Icon type={IconType.User} className="text-xl" />,
@@ -60,7 +60,7 @@ export const ProfilePreview = ({
           ]}
         />
       ) : (
-        <span className="px-1">{user.username as string}</span>
+        <span className="px-1">{user?.username as string}</span>
       )}
     </div>
   );

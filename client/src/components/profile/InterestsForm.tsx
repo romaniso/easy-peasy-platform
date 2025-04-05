@@ -28,7 +28,7 @@ export const InterestsForm = ({
 }: InterestsFormProps): JSX.Element => {
   const { user } = useSelector((state: RootState) => state.user);
   const [selectedItems, setSelectedItems] = useState<InterestItemText[]>(
-    user.profile.likes || []
+    user?.profile.likes || []
   );
 
   const dispatch = useDispatch();
@@ -49,10 +49,13 @@ export const InterestsForm = ({
 
   const handleSubmit = async (event: SyntheticEvent) => {
     event.preventDefault();
+    if (!user) {
+      throw new Error("No user to update");
+    }
     const updatedUser = {
-      username: user.username,
+      ...user,
       profile: {
-        ...user.profile,
+        ...user?.profile,
         likes: selectedItems,
       },
     };
