@@ -15,4 +15,5 @@ export type User = {
     goals: GoalsObj;
   };
   roles: UserRole[];
+  accessToken: string;
 };

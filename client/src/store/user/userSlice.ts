@@ -1,22 +1,9 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { InterestItemText } from "../../enums/interestItem";
 import { MotivationItemText } from "../../enums/motivationItem";
 import { GoalsObj } from "../../types/goalsObj";
-import { loginUser } from "../thunks/userThunk";
+import { loginUser, LoginResponse } from "../thunks/userThunk";
 import { UserRole } from "../../enums/userRole";
-
-interface User {
-  username: string;
-  profile: UserProfile;
-  roles: UserRole[];
-  accessToken: string | null;
-}
-
-interface UserState {
-  user: User; // na poczatku moze musi byc null
-  isLoading: boolean;
-  errorMsg: string | null;
-}
 
 interface UserProfile {
   avatar: string | null;
@@ -27,6 +14,19 @@ interface UserProfile {
   likes: InterestItemText[];
   motivations: MotivationItemText[];
   goals: GoalsObj | null;
+}
+
+interface User {
+  username: string;
+  profile: UserProfile;
+  roles: UserRole[];
+  accessToken: string | null;
+}
+
+interface UserState {
+  user: User;
+  isLoading: boolean;
+  errorMsg: string | null;
 }
 
 const initialState: UserState = {
@@ -53,7 +53,7 @@ const userSlice = createSlice({
   name: "user",
   initialState,
   reducers: {
-    setUser: (state, action) => {
+    setUser: (state, action: PayloadAction<User>) => {
       state.user = action.payload;
     },
     clearError: (state) => {
@@ -62,22 +62,17 @@ const userSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(loginUser.fulfilled, (state, action) => {
-        state.user.username = action.payload.user.username;
-        state.user.profile.avatar = action.payload.user.profile.avatar;
-        state.user.profile.email = action.payload.user.profile.email;
-        state.user.profile.firstName = action.payload.user.profile.firstName;
-        state.user.profile.lastName = action.payload.user.profile.lastName;
-        state.user.profile.birthday = action.payload.user.profile.birthday;
-        state.user.profile.likes = action.payload.user.profile.likes;
-        state.user.profile.motivations =
-          action.payload.user.profile.motivations;
-        state.user.profile.goals = action.payload.user.profile.goals;
-        state.user.roles = action.payload.user.roles;
-        state.user.accessToken = action.payload.accessToken;
-        state.isLoading = false;
-        state.errorMsg = null;
-      })
+      .addCase(
+        loginUser.fulfilled,
+        (state, action: PayloadAction<LoginResponse>) => {
+          state.user = {
+            ...action.payload.user,
+            accessToken: action.payload.accessToken,
+          };
+          state.isLoading = false;
+          state.errorMsg = null;
+        }
+      )
       .addCase(loginUser.pending, (state) => {
         state.isLoading = true;
         state.errorMsg = null;

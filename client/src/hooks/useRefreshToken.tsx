@@ -2,12 +2,10 @@ import { useDispatch } from "react-redux";
 import axios from "../api/axios";
 import { useAuth } from "./useAuth";
 import { setUser } from "../store/store";
+import { User } from "../interfaces/user";
 
 interface RefreshTokenResponse {
-  user: {
-    username: string;
-    roles: string[];
-  };
+  user: User;
   accessToken: string;
 }
 
