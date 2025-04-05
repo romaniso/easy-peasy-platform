@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { InterestItemText } from "../../enums/interestItem";
 import { MotivationItemText } from "../../enums/motivationItem";
 import { GoalsObj } from "../../types/goalsObj";
-import { loginUser, LoginResponse } from "../thunks/userThunk";
+import { loginUser, LoginResponse, logoutUser } from "../thunks/userThunk";
 import { UserRole } from "../../enums/userRole";
 
 interface UserProfile {
@@ -24,7 +24,7 @@ interface User {
 }
 
 interface UserState {
-  user: User;
+  user: User | null;
   isLoading: boolean;
   errorMsg: string | null;
 }
@@ -62,6 +62,7 @@ const userSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
+      // LOGIN:
       .addCase(
         loginUser.fulfilled,
         (state, action: PayloadAction<LoginResponse>) => {
@@ -80,6 +81,20 @@ const userSlice = createSlice({
       .addCase(loginUser.rejected, (state, action) => {
         state.isLoading = false;
         state.errorMsg = action.payload?.errMsg || "Login failed";
+      })
+      //LOGOUT
+      .addCase(logoutUser.fulfilled, (state) => {
+        state.user = null;
+        state.isLoading = false;
+        state.errorMsg = null;
+      })
+      .addCase(logoutUser.pending, (state) => {
+        state.isLoading = true;
+        state.errorMsg = null;
+      })
+      .addCase(logoutUser.rejected, (state, action) => {
+        state.isLoading = false;
+        state.errorMsg = action.error.message!;
       });
   },
 });
