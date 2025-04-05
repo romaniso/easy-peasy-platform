@@ -18,10 +18,10 @@ export class LogoutController {
         });
         return res.sendStatus(204); //No content but successful
       }
+
       // Update the user document to remove refreshToken
-      // or await User.updateOne({ _id: foundUser._id }, { $set: { refreshToken: "" } });
       foundUser.refreshToken = "";
-      const result = await foundUser.save();
+      await foundUser.save();
       res.clearCookie("jwt", {
         httpOnly: true,
         secure: true,
