@@ -2,27 +2,27 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import { AxiosError } from "axios";
 
 import { API_URL } from "../../api/endpoints";
-import axios from "../../api/axios";
+import axios, { axiosPrivate } from "../../api/axios";
 import { User } from "../../interfaces/user";
 
-interface LoginCredentials {
+interface Credentials {
   username: string;
   password: string;
 }
+
+export type ResponseError = {
+  errMsg: string;
+};
 
 export type LoginResponse = {
   accessToken: string;
   user: User;
 };
 
-export type LoginError = {
-  errMsg: string;
-};
-
 export const loginUser = createAsyncThunk<
   LoginResponse,
-  LoginCredentials,
-  { rejectValue: LoginError }
+  Credentials,
+  { rejectValue: ResponseError }
 >("user/login", async ({ username, password }, { rejectWithValue }) => {
   try {
     const { data } = await axios.post<LoginResponse>(
@@ -54,3 +54,28 @@ export const loginUser = createAsyncThunk<
     }
   }
 });
+
+export const updateUser = createAsyncThunk(
+  "user/update",
+  async (updatedUser) => {
+    try {
+      const { data, status } = await axiosPrivate.put(
+        API_URL.users,
+        updatedUser,
+        {
+          withCredentials: true,
+        }
+      );
+      if (status === 200) {
+        //  dispatch(setUser(updatedUser));
+        //@TODO: replace toasting to an InterestsForm:
+        //  toast?.open(t("interests.toastMessage.success"), ToastType.Success);
+        return data;
+      }
+    } catch (err) {
+      console.error(err);
+      //@TODO: replace toasting to an InterestsForm:
+      //toast?.open(t("interests.toastMessage.failure"), ToastType.Failure);
+    }
+  }
+);
