@@ -1,15 +1,17 @@
 import { ReactElement, useEffect, useRef, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
+import { useTranslation } from "react-i18next";
+
+import { RootState } from "../store/store";
+
 import { Dropdown } from "./common/Dropdown";
 import { Button } from "./common/Button";
 import { ThemeToggle } from "./ThemeToggle";
-
-import { useAuth } from "../hooks/useAuth";
 import { ProfilePreview } from "./ProfilePreview";
-import { useTranslation } from "react-i18next";
 import { Logo } from "./common/Logo";
 import { LanguageSwitcher } from "./settings/LanguageSwitcher";
 import { Icon, IconType } from "./common/Icon/Icon";
+import { useSelector } from "react-redux";
 
 export interface SubmenuItem {
   label: string;
@@ -26,7 +28,7 @@ interface NavbarItem {
 export const Navbar = (): JSX.Element => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [isLogged, setIsLogged] = useState<boolean>(false);
-  const { auth } = useAuth();
+  const { user } = useSelector((state: RootState) => state.user);
 
   const navbarRef = useRef<HTMLElement>(null);
   const { t } = useTranslation("common");
@@ -45,12 +47,12 @@ export const Navbar = (): JSX.Element => {
   }, []);
 
   useEffect(() => {
-    if (auth?.user) {
+    if (user?.accessToken) {
       setIsLogged(true);
     } else {
       setIsLogged(false);
     }
-  }, [JSON.stringify(auth)]);
+  }, [user?.accessToken]);
 
   const links: NavbarItem[] = [
     { label: t("navbar.home.text"), path: "/" },

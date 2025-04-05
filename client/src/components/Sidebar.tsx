@@ -1,15 +1,17 @@
 import { Link, useNavigate, NavLink } from "react-router-dom";
 import React, { useState } from "react";
+import { useTranslation } from "react-i18next";
+import { useDispatch } from "react-redux";
+
+import { AppDispatch, logoutUser } from "../store/store";
 //TODO: Handle single collapse issue (maybe by using a separate Dropdown component), consider how to change content (NavLink, or state)
 
 import LogoImage from "../assets/images/small-logo.png";
 import { ThemeToggle } from "./ThemeToggle";
-import { useLogout } from "../hooks/useLogout";
 import { useAuth } from "../hooks/useAuth";
 import { MiniAvatar } from "./MiniAvatar";
 import { useToast } from "../context/ToastContext";
 import { ToastType } from "../enums/toast";
-import { useTranslation } from "react-i18next";
 import { Icon, IconType } from "./common/Icon/Icon";
 
 type SidemenuSubitem = {
@@ -31,13 +33,16 @@ export const Sidebar = (): JSX.Element => {
   const [expandedSubmenuItem, setExpandedSubmenuItem] = useState<number | null>(
     null
   );
+
+  const dispatch = useDispatch<AppDispatch>();
+
   const { auth } = useAuth();
   const navigate = useNavigate();
-  const logout = useLogout();
+
   const toast = useToast();
   const { t } = useTranslation("common");
   const signOut = async () => {
-    await logout();
+    dispatch(logoutUser());
     navigate("/");
     toast?.open(t("sidebar.toastMessage.success"), ToastType.Success);
   };

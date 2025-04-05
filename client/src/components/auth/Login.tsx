@@ -50,7 +50,7 @@ export const Login = ({ onToggleForm }: LoginProps): JSX.Element => {
 
   useEffect(() => {
     //@TODO: clearup access token while logging out
-    if (!user.accessToken) return;
+    if (!user || !user.accessToken) return;
     setAuth({
       user: userName,
       pwd,
@@ -61,7 +61,7 @@ export const Login = ({ onToggleForm }: LoginProps): JSX.Element => {
     setUserName("");
     setPwd("");
     navigate(from, { replace: true });
-  }, [user.accessToken]);
+  }, [user?.accessToken]);
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();

@@ -1,12 +1,12 @@
 import { ReactElement } from "react";
-import { useSelector } from "react-redux";
-import { RootState } from "../store/store";
+import { useDispatch, useSelector } from "react-redux";
+import { useTranslation } from "react-i18next";
+
+import { AppDispatch, RootState, logoutUser } from "../store/store";
 import { Dropdown } from "./common/Dropdown";
-import { useLogout } from "../hooks/useLogout";
 import { MiniAvatar } from "./MiniAvatar";
 import { useToast } from "../context/ToastContext";
 import { ToastType } from "../enums/toast";
-import { useTranslation } from "react-i18next";
 import { Icon, IconType } from "./common/Icon/Icon";
 
 export interface AvatarItem {
@@ -24,13 +24,15 @@ interface ProfilePreviewProps {
 export const ProfilePreview = ({
   dropdown,
 }: ProfilePreviewProps): JSX.Element => {
-  const logout = useLogout();
-  const toast = useToast();
-  const { t } = useTranslation("common");
   const { user } = useSelector((state: RootState) => state.user);
 
+  const dispatch = useDispatch<AppDispatch>();
+
+  const toast = useToast();
+  const { t } = useTranslation("common");
+
   const handleLogout = async () => {
-    await logout();
+    dispatch(logoutUser());
     toast?.open("You have been successfully logged out", ToastType.Success);
   };
   return (

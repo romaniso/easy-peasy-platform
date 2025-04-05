@@ -2,13 +2,13 @@ import { useSelector } from "react-redux";
 import { RootState } from "../store/store";
 
 export const MiniAvatar = (): JSX.Element => {
-  const { avatar } = useSelector((state: RootState) => state.user.user.profile);
+  const { user } = useSelector((state: RootState) => state.user);
 
   return (
     <div className='-top-1.5 md:top-0 mr-2 md:mr-0 flex-shrink-0 bg-indigo-200 dark:bg-transparent rounded-full w-10 h-10 relative after:[content: ""] after:absolute after:bottom-1 after:right-0 after:w-2.5 after:h-2.5 after:bg-green-500 after:rounded-full'>
       {/*Check if there is an avatar*/}
       <img
-        src={avatar || "https://avatar.iran.liara.run/public/boy"}
+        src={user?.profile.avatar || "https://avatar.iran.liara.run/public/boy"}
         alt="avatar"
         className="object-cover rounded-full w-10 h-10"
       />

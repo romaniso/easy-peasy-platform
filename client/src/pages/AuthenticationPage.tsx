@@ -9,15 +9,15 @@ import { useNavigate } from "react-router-dom";
 export const AuthenticationPage = (): JSX.Element => {
   useTop();
   const [toggle, setToggle] = useState(true);
-  const { accessToken } = useSelector((state: RootState) => state.user.user);
+  const { user } = useSelector((state: RootState) => state.user);
 
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (accessToken) {
+    if (user?.accessToken) {
       navigate("/dashboard");
     }
-  }, [accessToken, navigate]);
+  }, [user?.accessToken, navigate]);
 
   const handleToggle = () => {
     setToggle(!toggle);
