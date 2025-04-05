@@ -79,3 +79,13 @@ export const updateUser = createAsyncThunk(
     }
   }
 );
+
+export const logoutUser = createAsyncThunk("user/logout", async () => {
+  try {
+    await axios(API_URL.logout, {
+      withCredentials: true,
+    });
+  } catch (err) {
+    console.error(err);
+  }
+});
