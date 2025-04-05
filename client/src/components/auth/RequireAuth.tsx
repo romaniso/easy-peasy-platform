@@ -1,6 +1,7 @@
 import { useLocation, Navigate, Outlet } from "react-router-dom";
-import { useAuth } from "../../hooks/useAuth";
 import { UserRole } from "../../enums/userRole";
+import { useSelector } from "react-redux";
+import { RootState } from "../../store/store";
 
 interface RequireAuthProps {
   allowedRoles: UserRole[];
@@ -8,14 +9,15 @@ interface RequireAuthProps {
 export const RequireAuth = ({
   allowedRoles,
 }: RequireAuthProps): JSX.Element => {
-  const { auth } = useAuth();
+  const { accessToken, roles } = useSelector(
+    (state: RootState) => state.user.user
+  );
+
   const location = useLocation();
 
-  return auth?.roles?.find((role) =>
-    allowedRoles?.includes(role as UserRole)
-  ) ? (
+  return roles.find((role) => allowedRoles?.includes(role as UserRole)) ? (
     <Outlet />
-  ) : auth?.user ? (
+  ) : accessToken ? (
     <Navigate to="/unauthorized" state={{ from: location }} replace />
   ) : (
     <Navigate to="/auth" state={{ from: location }} replace />
