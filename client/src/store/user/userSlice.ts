@@ -30,21 +30,7 @@ interface UserState {
 }
 
 const initialState: UserState = {
-  user: {
-    username: "",
-    profile: {
-      avatar: null,
-      email: null,
-      firstName: null,
-      lastName: null,
-      birthday: null,
-      likes: [],
-      motivations: [],
-      goals: null,
-    },
-    roles: [],
-    accessToken: null,
-  },
+  user: null,
   isLoading: false,
   errorMsg: null,
 };
@@ -62,7 +48,7 @@ const userSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      // LOGIN:
+      // Login
       .addCase(
         loginUser.fulfilled,
         (state, action: PayloadAction<LoginResponse>) => {
@@ -82,7 +68,7 @@ const userSlice = createSlice({
         state.isLoading = false;
         state.errorMsg = action.payload?.errMsg || "Login failed";
       })
-      //LOGOUT
+      // Logout
       .addCase(logoutUser.fulfilled, (state) => {
         state.user = null;
         state.isLoading = false;
@@ -94,7 +80,7 @@ const userSlice = createSlice({
       })
       .addCase(logoutUser.rejected, (state, action) => {
         state.isLoading = false;
-        state.errorMsg = action.error.message!;
+        state.errorMsg = action.error.message || "Logout failed";
       });
   },
 });

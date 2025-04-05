@@ -55,6 +55,7 @@ export const loginUser = createAsyncThunk<
   }
 });
 
+//@TODO: add response type
 export const updateUser = createAsyncThunk(
   "user/update",
   async (updatedUser) => {
@@ -80,6 +81,7 @@ export const updateUser = createAsyncThunk(
   }
 );
 
+//@TODO: add response type
 export const logoutUser = createAsyncThunk("user/logout", async () => {
   try {
     await axios(API_URL.logout, {
