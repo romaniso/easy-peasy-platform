@@ -29,7 +29,7 @@ export const useRefreshToken = () => {
       };
     });
 
-    dispatch(setUser(user));
+    dispatch(setUser({ ...user, accessToken }));
     return response.data.accessToken;
   };
   return refresh;
