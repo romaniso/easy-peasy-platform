@@ -1,17 +1,14 @@
 import { SyntheticEvent, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
-import { RootState, setUser } from "../../store/store";
+import { AppDispatch, RootState, updateUser } from "../../store/store";
 
 import { Button } from "../common/Button";
 import { CheckboxButton } from "../common/CheckboxButton";
 import { InterestItemText } from "../../enums/interestItem";
-//import { User } from "../../interfaces/user";
-import { axiosPrivate } from "../../api/axios";
 import { useToast } from "../../context/ToastContext";
 import { ToastType } from "../../enums/toast";
 import { Icon, IconType } from "../common/Icon/Icon";
-import { API_URL } from "../../api/endpoints";
 
 export type InterestItem = {
   text: InterestItemText;
@@ -31,7 +28,7 @@ export const InterestsForm = ({
     user?.profile.likes || []
   );
 
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
 
   const toast = useToast();
   const { t } = useTranslation("profile");
@@ -60,15 +57,9 @@ export const InterestsForm = ({
       },
     };
 
-    //@TODO: must be as extra reducer which will fire setUser and make a PUT request
     try {
-      const response = await axiosPrivate.put(API_URL.users, updatedUser, {
-        withCredentials: true,
-      });
-      if (response.status === 200) {
-        dispatch(setUser(updatedUser));
-        toast?.open(t("interests.toastMessage.success"), ToastType.Success);
-      }
+      await dispatch(updateUser(updatedUser)).unwrap();
+      toast?.open(t("interests.toastMessage.success"), ToastType.Success);
     } catch (err) {
       console.error(err);
       toast?.open(t("interests.toastMessage.failure"), ToastType.Failure);

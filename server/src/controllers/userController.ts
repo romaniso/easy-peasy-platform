@@ -105,7 +105,30 @@ export class UserController {
 
       await User.updateOne({ username: username }, { $set: updatedUser });
 
-      return res.status(200).json(user);
+      // Get the updated user
+      const updatedUserDoc = await User.findOne({ username });
+      if (!updatedUserDoc) {
+        return res.status(404).json({ message: "User not found after update" });
+      }
+
+      const response = {
+        user: {
+          username: updatedUserDoc.username,
+          profile: {
+            avatar: updatedUserDoc.avatar,
+            firstName: updatedUserDoc.firstName,
+            lastName: updatedUserDoc.lastName,
+            email: updatedUserDoc.email,
+            birthday: updatedUserDoc.birthday,
+            likes: updatedUserDoc.likes,
+            motivations: updatedUserDoc.motivations,
+            goals: updatedUserDoc.goals,
+          },
+          roles: updatedUserDoc.roles,
+        },
+      };
+
+      return res.status(200).json(response);
     } catch (err) {
       console.error(err);
       return res.status(500).json({ error: "Error updating user" });
