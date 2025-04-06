@@ -20,6 +20,7 @@ interface PersonalInformationFormProps {
 }
 
 // @TODO: break it down to hook, before sending req validate it, show info with Toast
+// @TODO: break these states gown to an object state
 export const PersonalInformationForm = ({
   switchForm,
 }: PersonalInformationFormProps): JSX.Element => {
