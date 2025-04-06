@@ -5,14 +5,14 @@ import { UserRole } from "../enums/userRole";
 export type User = {
   username: string;
   profile: {
-    avatar: string;
-    email: string;
-    firstName: string;
-    lastName: string;
-    birthday: string;
+    avatar: string | null;
+    email: string | null;
+    firstName: string | null;
+    lastName: string | null;
+    birthday: string | null;
     likes: InterestItemText[];
     motivations: MotivationItemText[];
-    goals: GoalsObj;
+    goals: GoalsObj | null;
   };
   roles: UserRole[];
   accessToken: string;
