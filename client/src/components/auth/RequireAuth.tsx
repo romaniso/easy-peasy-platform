@@ -9,15 +9,14 @@ interface RequireAuthProps {
 export const RequireAuth = ({
   allowedRoles,
 }: RequireAuthProps): JSX.Element => {
-  const { accessToken, roles } = useSelector(
-    (state: RootState) => state.user.user
-  );
-
+  const { user } = useSelector((state: RootState) => state.user);
   const location = useLocation();
 
-  return roles.find((role) => allowedRoles?.includes(role as UserRole)) ? (
+  return user?.roles.find((role) =>
+    allowedRoles?.includes(role as UserRole)
+  ) ? (
     <Outlet />
-  ) : accessToken ? (
+  ) : user?.accessToken ? (
     <Navigate to="/unauthorized" state={{ from: location }} replace />
   ) : (
     <Navigate to="/auth" state={{ from: location }} replace />
