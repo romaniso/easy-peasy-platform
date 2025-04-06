@@ -2,7 +2,13 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { InterestItemText } from "../../enums/interestItem";
 import { MotivationItemText } from "../../enums/motivationItem";
 import { GoalsObj } from "../../types/goalsObj";
-import { loginUser, LoginResponse, logoutUser } from "../thunks/userThunk";
+import {
+  loginUser,
+  LoginResponse,
+  logoutUser,
+  updateUser,
+  UpdateResponse,
+} from "../thunks/userThunk";
 import { UserRole } from "../../enums/userRole";
 
 interface UserProfile {
@@ -20,7 +26,7 @@ interface User {
   username: string;
   profile: UserProfile;
   roles: UserRole[];
-  accessToken: string | null;
+  accessToken: string;
 }
 
 interface UserState {
@@ -81,6 +87,23 @@ const userSlice = createSlice({
       .addCase(logoutUser.rejected, (state, action) => {
         state.isLoading = false;
         state.errorMsg = action.error.message || "Logout failed";
+      })
+      // Update
+      .addCase(
+        updateUser.fulfilled,
+        (state, action: PayloadAction<UpdateResponse>) => {
+          state.isLoading = false;
+          state.user = action.payload.user;
+          state.errorMsg = null;
+        }
+      )
+      .addCase(updateUser.pending, (state) => {
+        state.isLoading = true;
+        state.errorMsg = null;
+      })
+      .addCase(updateUser.rejected, (state, action) => {
+        state.isLoading = false;
+        state.errorMsg = action.payload?.errMsg || "Updating user failed";
       });
   },
 });

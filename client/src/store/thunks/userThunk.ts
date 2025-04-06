@@ -19,6 +19,10 @@ export type LoginResponse = {
   user: User;
 };
 
+export type UpdateResponse = {
+  user: User;
+};
+
 export const loginUser = createAsyncThunk<
   LoginResponse,
   Credentials,
@@ -55,31 +59,33 @@ export const loginUser = createAsyncThunk<
   }
 });
 
-//@TODO: add response type
-export const updateUser = createAsyncThunk(
-  "user/update",
-  async (updatedUser) => {
-    try {
-      const { data, status } = await axiosPrivate.put(
-        API_URL.users,
-        updatedUser,
-        {
-          withCredentials: true,
-        }
-      );
-      if (status === 200) {
-        //  dispatch(setUser(updatedUser));
-        //@TODO: replace toasting to an InterestsForm:
-        //  toast?.open(t("interests.toastMessage.success"), ToastType.Success);
-        return data;
+export const updateUser = createAsyncThunk<
+  UpdateResponse,
+  User,
+  { rejectValue: ResponseError }
+>("user/update", async (updatedUser, { rejectWithValue }) => {
+  try {
+    const { data } = await axiosPrivate.put<UpdateResponse>(
+      API_URL.users,
+      updatedUser,
+      {
+        withCredentials: true,
       }
-    } catch (err) {
-      console.error(err);
-      //@TODO: replace toasting to an InterestsForm:
-      //toast?.open(t("interests.toastMessage.failure"), ToastType.Failure);
+    );
+    return data;
+  } catch (err) {
+    if (err instanceof AxiosError && err.response?.data) {
+      const { message } = err.response.data;
+      return rejectWithValue({
+        errMsg: message || "Update failed",
+      });
+    } else {
+      return rejectWithValue({
+        errMsg: `An unexpected error occurred: ${(err as Error).message}`,
+      });
     }
   }
-);
+});
 
 //@TODO: add response type
 export const logoutUser = createAsyncThunk("user/logout", async () => {
