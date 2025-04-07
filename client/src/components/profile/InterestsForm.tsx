@@ -23,7 +23,7 @@ export const InterestsForm = ({
   items,
   switchForm,
 }: InterestsFormProps): JSX.Element => {
-  const { user } = useSelector((state: RootState) => state.user);
+  const { user, isLoading } = useSelector((state: RootState) => state.user);
   const [selectedItems, setSelectedItems] = useState<InterestItemText[]>(
     user?.profile.likes || []
   );
@@ -31,8 +31,8 @@ export const InterestsForm = ({
   const dispatch = useDispatch<AppDispatch>();
 
   const toast = useToast();
-  const { t } = useTranslation("profile");
-  const tCommon = useTranslation("common").t;
+  const { t: tProfile } = useTranslation("profile");
+  const { t: tCommon } = useTranslation("common");
 
   const handleCheckboxChange = (itemText: InterestItemText) => {
     setSelectedItems((prevSelectedItems) => {
@@ -59,10 +59,16 @@ export const InterestsForm = ({
 
     try {
       await dispatch(updateUser(updatedUser)).unwrap();
-      toast?.open(t("interests.toastMessage.success"), ToastType.Success);
+      toast?.open(
+        tProfile("interests.toastMessage.success"),
+        ToastType.Success
+      );
     } catch (err) {
       console.error(err);
-      toast?.open(t("interests.toastMessage.failure"), ToastType.Failure);
+      toast?.open(
+        tProfile("interests.toastMessage.failure"),
+        ToastType.Failure
+      );
     }
   };
 
@@ -78,10 +84,10 @@ export const InterestsForm = ({
     >
       <div>
         <h3 className="text-indigo-500 dark:text-indigo-200 font-bold text-center drop-shadow text-xl md:text-3xl mb-1 md:mb-3">
-          {t("headers.interestsHeader")}
+          {tProfile("headers.interestsHeader")}
         </h3>
         <p className="text-indigo-900 dark:text-indigo-300 font-semibold text-center">
-          {t("subheadings.interestsSubheading")}
+          {tProfile("subheadings.interestsSubheading")}
         </p>
       </div>
       <div className="flex-shrink w-full flex flex-wrap gap-2 lg:gap-4">
@@ -109,7 +115,16 @@ export const InterestsForm = ({
             {tCommon("buttons.prev")}
           </span>
         </Button>
-        <Button submit primary rounded className="basis-1/2" save />
+        <Button
+          submit
+          primary
+          rounded
+          className="basis-1/2"
+          icon={<Icon className="inline ml-1.5" type={IconType.Save} />}
+          loading={isLoading}
+        >
+          {tCommon("buttons.save")}
+        </Button>
       </div>
     </form>
   );
