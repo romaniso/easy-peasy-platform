@@ -1,9 +1,13 @@
-import { ButtonHTMLAttributes, ReactElement, ReactEventHandler } from "react";
+import {
+  ReactElement,
+  ReactEventHandler,
+  ComponentPropsWithoutRef,
+} from "react";
 import className from "classnames";
-import { useTranslation } from "react-i18next";
-import { Icon, IconType } from "./Icon/Icon";
+
 import { Spinner, SpinnerSize } from "./Spinner/Spinner";
-interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+
+type ButtonProps = {
   children?: ReactElement | string;
   primary?: true;
   secondary?: true;
@@ -18,7 +22,8 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   save?: true;
   loading?: boolean;
   icon?: ReactElement;
-}
+} & ComponentPropsWithoutRef<"button">;
+
 export const Button = ({
   children,
   primary,
@@ -30,13 +35,11 @@ export const Button = ({
   outline,
   rounded,
   submit,
-  save,
   loading,
   icon,
   onClick,
   ...rest
 }: ButtonProps): JSX.Element => {
-  const { t } = useTranslation("common");
   const classes = className(
     rest.className,
     "flex items-center justify-center cursor-pointer transition-colors border shadow",
@@ -71,14 +74,7 @@ export const Button = ({
     >
       {loading && <Spinner size={SpinnerSize.SMALL} />}
       {icon && !loading && icon}
-      {save ? (
-        <span>
-          {t("buttons.save")}
-          <Icon className="inline ml-1.5" type={IconType.Save} />
-        </span>
-      ) : (
-        children
-      )}
+      {children}
     </button>
   );
 };
