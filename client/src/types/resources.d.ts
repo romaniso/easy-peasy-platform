@@ -230,7 +230,8 @@ interface Resources {
       "birthday": "Your Birthday",
       "toastMessage": {
         "success": "Yor profile has been successfully updated.",
-        "failure": "Oops. Something went wrong. Try again.."
+        "failure": "Oops. Something went wrong. Try again..",
+        "warning": "Please, choose at least one option"
       }
     },
     "motivation": {

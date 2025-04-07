@@ -1,32 +1,31 @@
 import { SyntheticEvent, useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
+import { useDispatch, useSelector } from "react-redux";
+
 import { Icon, IconType } from "../common/Icon/Icon";
 import { RadioGroup } from "../common/RadioGroup";
 import { Button } from "../common/Button";
-import { useAxiosPrivate } from "../../hooks/useAxiosPrivate";
 import { User } from "../../interfaces/user";
 import { GoalsObj } from "../../types/goalsObj";
-import { useUser } from "../../hooks/useUser";
 import { useToast } from "../../context/ToastContext";
 import { ToastType } from "../../enums/toast";
-import { useTranslation } from "react-i18next";
+import { AppDispatch, RootState, updateUser } from "../../store/store";
 
-const UPDATE_URL = "/users";
 interface GoalsWidgetProps {
   title: string;
 }
-export const GoalsWidget = ({ title }: GoalsWidgetProps): JSX.Element => {
-  const [wordsPerWeekValue, setWordsPerWeek] = useState<string | "more" | null>(
-    null
-  );
-  const [tasksPerWeekValue, setTasksPerWeek] = useState<string | "more" | null>(
-    null
-  );
 
-  const { user, setUser } = useUser();
-  const axiosPrivate = useAxiosPrivate();
+export const GoalsWidget = ({ title }: GoalsWidgetProps): JSX.Element => {
+  const [wordsPerWeekValue, setWordsPerWeek] = useState<string | null>(null);
+  const [tasksPerWeekValue, setTasksPerWeek] = useState<string | null>(null);
+  const { user, isLoading } = useSelector((state: RootState) => state.user);
+
+  const dispatch = useDispatch<AppDispatch>();
+
   const toast = useToast();
   const { t } = useTranslation("profile");
   const { t: tDashboard } = useTranslation("dashboard");
+  const { t: tCommon } = useTranslation("common");
 
   const wordsPerWeekItems = [
     { name: "10 words", value: 10 },
@@ -43,6 +42,18 @@ export const GoalsWidget = ({ title }: GoalsWidgetProps): JSX.Element => {
 
   const handleSubmit = async (event: SyntheticEvent) => {
     event.preventDefault();
+    if (!user) {
+      throw new Error("No user in a global state to update");
+    }
+
+    console.log(wordsPerWeekValue, tasksPerWeekValue);
+    if (!wordsPerWeekValue && !tasksPerWeekValue) {
+      return toast?.open(
+        t("personalInfo.toastMessage.warning"),
+        ToastType.Warning
+      );
+    }
+
     const goals = {
       wordsPerWeek:
         wordsPerWeekValue === "more" ? "more" : Number(wordsPerWeekValue),
@@ -50,24 +61,17 @@ export const GoalsWidget = ({ title }: GoalsWidgetProps): JSX.Element => {
         tasksPerWeekValue === "more" ? "more" : Number(tasksPerWeekValue),
     };
 
-    const updatedUser: Partial<User> = {
-      username: user.username,
-      goals: goals as GoalsObj,
+    const updatedUser: User = {
+      ...user,
+      profile: {
+        ...user.profile,
+        goals: goals as GoalsObj,
+      },
     };
 
     try {
-      const response = await axiosPrivate.put(UPDATE_URL, updatedUser, {
-        withCredentials: true,
-      });
-      if (response.status === 200) {
-        setUser((prev) => {
-          return {
-            ...prev,
-            ...updatedUser,
-          };
-        });
-        toast?.open(t("personalInfo.toastMessage.success"), ToastType.Success);
-      }
+      await dispatch(updateUser(updatedUser)).unwrap();
+      toast?.open(t("personalInfo.toastMessage.success"), ToastType.Success);
     } catch (err) {
       console.error(err);
       toast?.open(t("personalInfo.toastMessage.failure"), ToastType.Failure);
@@ -75,11 +79,12 @@ export const GoalsWidget = ({ title }: GoalsWidgetProps): JSX.Element => {
   };
 
   useEffect(() => {
-    if (user.goals?.tasksPerWeek) {
-      setTasksPerWeek(user.goals.tasksPerWeek.toString());
+    if (!user || !user.profile.goals) {
+      throw new Error("No user in a global state to update");
     }
-    if (user.goals?.wordsPerWeek) {
-      setWordsPerWeek(user.goals.wordsPerWeek.toString());
+    if (user.profile.goals) {
+      setTasksPerWeek(user.profile.goals.tasksPerWeek.toString());
+      setWordsPerWeek(user.profile.goals.wordsPerWeek.toString());
     }
   }, []);
   return (
@@ -116,13 +121,15 @@ export const GoalsWidget = ({ title }: GoalsWidgetProps): JSX.Element => {
           </div>
         </fieldset>
         <Button
-          save
           submit
           secondary
-          small
           rounded
           className="mt-3 basis-full md:basis-auto"
-        />
+          icon={<Icon className="inline ml-1.5" type={IconType.Save} />}
+          loading={isLoading}
+        >
+          {tCommon("buttons.save")}
+        </Button>
       </form>
     </article>
   );

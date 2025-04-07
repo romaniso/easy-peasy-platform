@@ -20,7 +20,8 @@
     "birthday": "Twój dzień urodzenia",
     "toastMessage": {
       "success": "Twój profil został pomyślnie zaktualizowany.",
-      "failure": "Ups. Coś poszło nie tak. Spróbuj ponownie."
+      "failure": "Ups. Coś poszło nie tak. Spróbuj ponownie.",
+      "warning": "Wybierz co najmniej jedną opcję."
     }
   },
   "motivation": {

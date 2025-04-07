@@ -29,7 +29,8 @@ export const DashboardPage = (): JSX.Element => {
   const { t } = useTranslation("dashboard");
 
   useEffect(() => {
-    const url = `${STATS_URL}/${user.username}`;
+    if (!user) return;
+    const url = `${STATS_URL}/${user?.username}`;
     (async () => {
       try {
         const response = await axiosPrivate.get(url, {
@@ -53,7 +54,7 @@ export const DashboardPage = (): JSX.Element => {
         console.error(err);
       }
     })();
-  }, []);
+  }, [user]);
 
   return (
     <div className="h-full md:p-12">
