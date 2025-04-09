@@ -8,6 +8,7 @@ import {
   logoutUser,
   updateUser,
   UpdateResponse,
+  changeUserPassword,
 } from "../thunks/userThunk";
 import { UserRole } from "../../enums/userRole";
 
@@ -104,6 +105,19 @@ const userSlice = createSlice({
       .addCase(updateUser.rejected, (state, action) => {
         state.isLoading = false;
         state.errorMsg = action.payload?.errMsg || "Updating user failed";
+      })
+      // Change Password
+      .addCase(changeUserPassword.fulfilled, (state) => {
+        state.isLoading = false;
+        state.errorMsg = null;
+      })
+      .addCase(changeUserPassword.pending, (state) => {
+        state.isLoading = true;
+        state.errorMsg = null;
+      })
+      .addCase(changeUserPassword.rejected, (state, action) => {
+        state.isLoading = false;
+        state.errorMsg = action.payload?.errMsg || "Updating password failed";
       });
   },
 });
