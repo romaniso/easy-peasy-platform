@@ -1,17 +1,16 @@
 import { SyntheticEvent, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { useDispatch, useSelector } from "react-redux";
+import { updateUser } from "../../store/thunks/userThunk";
+import { AppDispatch, RootState } from "../../store/store";
 
 import { Input } from "../common/Input";
 import { Button } from "../common/Button";
-import { axiosPrivate } from "../../api/axios";
 import { User } from "../../interfaces/user";
 import { ToastType } from "../../enums/toast";
 import { useToast } from "../../context/ToastContext";
 import { Icon, IconType } from "../common/Icon/Icon";
-import { useSelector, useDispatch } from "react-redux";
-import { RootState, setUser } from "../../store/store";
 
-const UPDATE_URL = "/users";
 const FIRST_NAME_REGEX = /^[a-zA-Z][a-zA-Z\s'-]{1,50}$/;
 const LAST_NAME_REGEX = /^[a-zA-Z][a-zA-Z\s'-]{1,50}$/;
 const EMAIL_REGEX = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
@@ -25,8 +24,8 @@ interface PersonalInformationFormProps {
 export const PersonalInformationForm = ({
   switchForm,
 }: PersonalInformationFormProps): JSX.Element => {
-  const { user } = useSelector((state: RootState) => state.user);
-  const dispatch = useDispatch();
+  const { user, isLoading } = useSelector((state: RootState) => state.user);
+  const dispatch = useDispatch<AppDispatch>();
 
   const [firstName, setFirstName] = useState<string>("");
   const [validFirstName, setValidFirstName] = useState<boolean>(false);
@@ -142,17 +141,13 @@ export const PersonalInformationForm = ({
       roles: user.roles,
       accessToken: user.accessToken,
     };
+
     try {
-      const response = await axiosPrivate.put(UPDATE_URL, updatedUser, {
-        withCredentials: true,
-      });
-      if (response.status === 200) {
-        dispatch(setUser(updatedUser));
-        toast?.open(
-          tProfile("personalInfo.toastMessage.success"),
-          ToastType.Success
-        );
-      }
+      await dispatch(updateUser(updatedUser)).unwrap();
+      toast?.open(
+        tProfile("personalInfo.toastMessage.success"),
+        ToastType.Success
+      );
     } catch (err) {
       console.error(err);
       toast?.open(
@@ -334,9 +329,11 @@ export const PersonalInformationForm = ({
       </div>
       <div className="md:self-start flex justify-between w-full gap-4">
         <Button
+          submit
           primary
           rounded
-          submit
+          icon={<Icon className="inline ml-1.5" type={IconType.Save} />}
+          loading={isLoading}
           disabled={
             !validFirstName ||
             !validLastName ||
@@ -351,8 +348,9 @@ export const PersonalInformationForm = ({
               ? "opacity-40 !cursor-not-allowed basis-1/2"
               : "basis-1/2"
           }
-          save
-        />
+        >
+          {tCommon("buttons.save")}
+        </Button>
         <Button
           secondary
           rounded
