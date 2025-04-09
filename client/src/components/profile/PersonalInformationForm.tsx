@@ -1,18 +1,19 @@
+import { SyntheticEvent, useEffect, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
+
 import { Input } from "../common/Input";
 import { Button } from "../common/Button";
-import { SyntheticEvent, useEffect, useRef, useState } from "react";
 import { axiosPrivate } from "../../api/axios";
 import { User } from "../../interfaces/user";
 import { ToastType } from "../../enums/toast";
 import { useToast } from "../../context/ToastContext";
-import { useTranslation } from "react-i18next";
 import { Icon, IconType } from "../common/Icon/Icon";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState, setUser } from "../../store/store";
 
 const UPDATE_URL = "/users";
-const FIRSTNAME_REGEX = /^[a-zA-Z][a-zA-Z\s'-]{1,50}$/;
-const LASTNAME_REGEX = /^[a-zA-Z][a-zA-Z\s'-]{1,50}$/;
+const FIRST_NAME_REGEX = /^[a-zA-Z][a-zA-Z\s'-]{1,50}$/;
+const LAST_NAME_REGEX = /^[a-zA-Z][a-zA-Z\s'-]{1,50}$/;
 const EMAIL_REGEX = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
 interface PersonalInformationFormProps {
@@ -29,19 +30,19 @@ export const PersonalInformationForm = ({
 
   const [firstName, setFirstName] = useState<string>("");
   const [validFirstName, setValidFirstName] = useState<boolean>(false);
-  const [firstNameFocus, setFirstNameFocus] = useState<boolean>(false);
+  const [, setFirstNameFocus] = useState<boolean>(false);
 
   const [lastName, setLastName] = useState<string>("");
   const [validLastName, setValidLastName] = useState<boolean>(false);
-  const [lastNameFocus, setLastNameFocus] = useState<boolean>(false);
+  const [, setLastNameFocus] = useState<boolean>(false);
 
   const [userEmail, setUserEmail] = useState<string>("");
   const [validUserEmail, setValidUserEmail] = useState<boolean>(false);
-  const [userEmailFocus, setUserEmailFocus] = useState<boolean>(false);
+  const [, setUserEmailFocus] = useState<boolean>(false);
 
   const [birthday, setBirthday] = useState<string>("");
   const [validBirthday, setValidBirthday] = useState<boolean>(false);
-  const [birthdayFocus, setBirthdayFocus] = useState<boolean>(false);
+  const [, setBirthdayFocus] = useState<boolean>(false);
 
   const [errMsg, setErrMsg] = useState<string>("");
 
@@ -50,8 +51,8 @@ export const PersonalInformationForm = ({
   const errRef = useRef<HTMLParagraphElement>(null);
 
   const toast = useToast();
-  const { t } = useTranslation("profile");
-  const tCommon = useTranslation("common").t;
+  const { t: tProfile } = useTranslation("profile");
+  const { t: tCommon } = useTranslation("common");
 
   const validateBirthday = (stringDate: string): boolean => {
     const parsedDate = stringDate ? new Date(stringDate) : undefined;
@@ -73,7 +74,7 @@ export const PersonalInformationForm = ({
       setValidFirstName(true);
       return;
     }
-    const result = FIRSTNAME_REGEX.test(firstName);
+    const result = FIRST_NAME_REGEX.test(firstName);
     setValidFirstName(result);
   }, [firstName]);
   //PRE Validation - LASTNAME
@@ -83,7 +84,7 @@ export const PersonalInformationForm = ({
       setValidLastName(true);
       return;
     }
-    const result = LASTNAME_REGEX.test(lastName);
+    const result = LAST_NAME_REGEX.test(lastName);
     setValidLastName(result);
   }, [lastName]);
   //PRE Validation - EMAIL
@@ -111,8 +112,8 @@ export const PersonalInformationForm = ({
     event.preventDefault();
 
     // Additional validation in case a button is enabled with JS hack
-    const v1 = LASTNAME_REGEX.test(lastName);
-    const v2 = FIRSTNAME_REGEX.test(firstName);
+    const v1 = LAST_NAME_REGEX.test(lastName);
+    const v2 = FIRST_NAME_REGEX.test(firstName);
     const v3 = EMAIL_REGEX.test(userEmail);
     if (
       (!v1 && lastName.length > 0) ||
@@ -121,6 +122,11 @@ export const PersonalInformationForm = ({
       !validUserEmail
     ) {
       setErrMsg("Invalid Entry");
+      return;
+    }
+
+    if (!user) {
+      setErrMsg("No user to update");
       return;
     }
 
@@ -133,6 +139,8 @@ export const PersonalInformationForm = ({
         email: userEmail,
         birthday,
       },
+      roles: user.roles,
+      accessToken: user.accessToken,
     };
     try {
       const response = await axiosPrivate.put(UPDATE_URL, updatedUser, {
@@ -140,11 +148,17 @@ export const PersonalInformationForm = ({
       });
       if (response.status === 200) {
         dispatch(setUser(updatedUser));
-        toast?.open(t("personalInfo.toastMessage.success"), ToastType.Success);
+        toast?.open(
+          tProfile("personalInfo.toastMessage.success"),
+          ToastType.Success
+        );
       }
     } catch (err) {
       console.error(err);
-      toast?.open(t("personalInfo.toastMessage.failure"), ToastType.Failure);
+      toast?.open(
+        tProfile("personalInfo.toastMessage.failure"),
+        ToastType.Failure
+      );
     }
   };
 
@@ -161,10 +175,10 @@ export const PersonalInformationForm = ({
     >
       <div>
         <h3 className="text-indigo-500 dark:text-indigo-200 font-bold text-center drop-shadow text-xl md:text-3xl mb-1 md:mb-3">
-          {t("headers.personalInfoHeader")}
+          {tProfile("headers.personalInfoHeader")}
         </h3>
         <p className="text-indigo-900 dark:text-indigo-300 font-semibold text-center">
-          {t("subheadings.personalInfoSubheading")}
+          {tProfile("subheadings.personalInfoSubheading")}
         </p>
       </div>
       <div className="flex-shrink flex flex-col gap-10 w-full">
@@ -189,12 +203,12 @@ export const PersonalInformationForm = ({
           autoComplete="off"
           lg
           onChange={setFirstName}
-          prevValue={user.profile.firstName || ""}
+          prevValue={user?.profile.firstName || ""}
           onFocus={() => setFirstNameFocus(true)}
           onBlur={() => setFirstNameFocus(false)}
           ref={firstNameRef}
         >
-          {t("personalInfo.firstName")}
+          {tProfile("personalInfo.firstName")}
           <span
             className={
               validFirstName && firstName
@@ -223,13 +237,13 @@ export const PersonalInformationForm = ({
           outline
           autoComplete="off"
           lg
-          prevValue={user.profile.lastName || ""}
+          prevValue={user?.profile.lastName || ""}
           onFocus={() => setLastNameFocus(true)}
           onBlur={() => setLastNameFocus(false)}
           onChange={setLastName}
           ref={lastNameRef}
         >
-          {t("personalInfo.lastName")}
+          {tProfile("personalInfo.lastName")}
           <span
             className={
               validLastName && lastName
@@ -258,12 +272,12 @@ export const PersonalInformationForm = ({
           outline
           autoComplete="off"
           lg
-          prevValue={user.profile.email || ""}
+          prevValue={user?.profile.email || ""}
           onChange={setUserEmail}
           onFocus={() => setUserEmailFocus(true)}
           onBlur={() => setUserEmailFocus(false)}
         >
-          {t("personalInfo.email")}
+          {tProfile("personalInfo.email")}
           <span
             className={
               validUserEmail && userEmail
@@ -292,12 +306,12 @@ export const PersonalInformationForm = ({
           outline
           autoComplete="off"
           lg
-          prevValue={user.profile.birthday || ""}
+          prevValue={user?.profile.birthday || ""}
           onChange={setBirthday}
           onFocus={() => setBirthdayFocus(true)}
           onBlur={() => setBirthdayFocus(false)}
         >
-          {t("personalInfo.birthday")}
+          {tProfile("personalInfo.birthday")}
           <span
             className={
               validBirthday && birthday
