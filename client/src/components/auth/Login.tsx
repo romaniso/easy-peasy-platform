@@ -4,7 +4,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
 import { AppDispatch, RootState } from "../../store/store";
-import { clearError, setUser } from "../../store/user/userSlice";
+import { clearError, setUser } from "../../store/slices/userSlice";
 import { loginUser } from "../../store/store";
 import { useLoginRegister } from "../../hooks/useLoginRegister";
 import { useAuth } from "../../hooks/useAuth";
