@@ -1,18 +1,16 @@
-import { Button } from "../common/Button";
 import React, { useEffect, useState } from "react";
+import { Trans, useTranslation } from "react-i18next";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch, RootState, changeUserPassword } from "../../store/store";
+
+import { Button } from "../common/Button";
 import { Password } from "../auth/Password";
-import { useAxiosPrivate } from "../../hooks/useAxiosPrivate";
-import { AxiosError } from "axios";
-import { useAuth } from "../../hooks/useAuth";
 import { ToastType } from "../../enums/toast";
 import { useToast } from "../../context/ToastContext";
-import { Trans, useTranslation } from "react-i18next";
 import { Icon, IconType } from "../common/Icon/Icon";
 
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
-const SETTINGS_URL = "/settings";
 
-// @TODO: DRY
 export const ChangePassword = (): JSX.Element => {
   const [prevPwd, setPrevPwd] = useState("");
   const [newPwd, setNewPwd] = useState("");
@@ -22,12 +20,13 @@ export const ChangePassword = (): JSX.Element => {
   const [newPwdFocus, setNewPwdFocus] = useState<boolean>(false);
   const [matchFocus, setMatchFocus] = useState<boolean>(false);
 
-  const { auth } = useAuth();
-  const axiosPrivate = useAxiosPrivate();
+  const { user, isLoading } = useSelector((state: RootState) => state.user);
 
+  const dispatch = useDispatch<AppDispatch>();
   const toast = useToast();
 
-  const { t } = useTranslation("settings");
+  const { t: tSettings } = useTranslation("settings");
+  const { t: tCommon } = useTranslation("common");
   // const {validationMessage_one, validationMessage_two} = t('validation');
 
   // const newPwdFocus = useRef<HTMLInputElement>(null);
@@ -44,7 +43,7 @@ export const ChangePassword = (): JSX.Element => {
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
-    const { user } = auth;
+    // const { user } = auth;
 
     // Additional validation in case a button is enabled with JS hack
     const v1 = PWD_REGEX.test(newPwd);
@@ -53,23 +52,19 @@ export const ChangePassword = (): JSX.Element => {
       // setErrMsg('Invalid Entry');
       return;
     }
-    try {
-      const response = await axiosPrivate.post(
-        SETTINGS_URL + "/password",
-        {
-          username: user,
-          password: prevPwd,
-          newPassword: newPwd,
-        },
-        {
-          headers: { "Content-Type": "application/json" },
-          // withCredentials: true,
-        }
-      );
 
-      console.log(response.data);
-      // setSuccess(true);
-      // Clear up
+    if (!user) {
+      throw new Error("User not found");
+    }
+
+    try {
+      await dispatch(
+        changeUserPassword({
+          username: user.username,
+          newPassword: newPwd,
+          prePassword: prevPwd,
+        })
+      ).unwrap();
       toast?.open(
         "You have successfully changed your password",
         ToastType.Success
@@ -78,26 +73,15 @@ export const ChangePassword = (): JSX.Element => {
       setNewPwd("");
       setMatchPwd("");
     } catch (err) {
-      if (!(err instanceof AxiosError) || !err.response) {
-        // setErrMsg('No Server Response');
-        console.error("No Server Response");
-      } else if (err.response?.status === 409) {
-        // setErrMsg(err.response.data.message || "Auth name Taken");
-        console.error(err.response.data.message || "Auth name Taken");
-      } else {
-        // setErrMsg("Registration Failed")
-        console.error("Registration Failed");
-        console.log(err.response.data);
-      }
+      console.error(err);
       toast?.open("Oops something went wrong. Try again", ToastType.Failure);
-      // errRef.current?.focus();
     }
   };
 
   return (
     <section>
       <h2 className="text-lg md:text-2xl text-indigo-500 dark:text-indigo-200 font-bold drop-shadow flex items-center gap-1 mb-3.5 md:mb-6">
-        {t("subheadings.changePassword")}
+        {tSettings("subheadings.changePassword")}
         <Icon type={IconType.Password} />
       </h2>
       <form onSubmit={handleSubmit}>
@@ -112,7 +96,7 @@ export const ChangePassword = (): JSX.Element => {
             name="prevPwd"
             outline
           >
-            {t("changePassword.prevPassword")}
+            {tSettings("changePassword.prevPassword")}
           </Password>
           <Password
             onChange={setNewPwd}
@@ -127,7 +111,7 @@ export const ChangePassword = (): JSX.Element => {
             onFocus={() => setNewPwdFocus(true)}
             onBlur={() => setNewPwdFocus(false)}
           >
-            {t("changePassword.newPassword")}
+            {tSettings("changePassword.newPassword")}
             <span
               className={
                 validNewPwd
@@ -161,7 +145,7 @@ export const ChangePassword = (): JSX.Element => {
                   type={IconType.Exclamation}
                   className="inline relative bottom-0.5 mr-1 text-lg"
                 />
-                {t("validation.validationMessage_one")}
+                {tSettings("validation.validationMessage_one")}
               </span>
             ) : (
               <span>
@@ -170,7 +154,7 @@ export const ChangePassword = (): JSX.Element => {
                   className="inline relative bottom-0.5 mr-1 text-lg"
                 />
                 <Trans
-                  defaults={t("validation.validationMessage_two")}
+                  defaults={tSettings("validation.validationMessage_two")}
                   components={{ 1: <br /> }}
                 />
                 <span aria-label="exclamation mark">!</span>
@@ -193,7 +177,7 @@ export const ChangePassword = (): JSX.Element => {
             onFocus={() => setMatchFocus(true)}
             onBlur={() => setMatchFocus(false)}
           >
-            {t("changePassword.confirmPassword")}
+            {tSettings("changePassword.confirmPassword")}
             <span
               className={
                 validMatch && matchPwd
@@ -225,21 +209,24 @@ export const ChangePassword = (): JSX.Element => {
               type={IconType.Exclamation}
               className="inline relative bottom-0.5 mr-1 text-lg"
             />
-            {t("validation.validationMessage_three")}
+            {tSettings("validation.validationMessage_three")}
           </p>
         </div>
         <Button
-          secondary
+          submit
+          primary
           rounded
-          save
-          small
           disabled={!validNewPwd || !validMatch}
           className={
             !validNewPwd || !validMatch
               ? "w-full md:w-1/5 opacity-40 !cursor-not-allowed !p-2"
               : `w-full md:w-1/5 !p-2`
           }
-        />
+          icon={<Icon className="inline ml-1.5" type={IconType.Save} />}
+          loading={isLoading}
+        >
+          {tCommon("buttons.save")}
+        </Button>
       </form>
     </section>
   );
