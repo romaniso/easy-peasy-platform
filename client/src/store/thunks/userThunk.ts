@@ -10,6 +10,12 @@ interface Credentials {
   password: string;
 }
 
+interface NewCredentials {
+  username: string;
+  newPassword: string;
+  prePassword: string;
+}
+
 export type ResponseError = {
   errMsg: string;
 };
@@ -21,6 +27,10 @@ export type LoginResponse = {
 
 export type UpdateResponse = {
   user: User;
+};
+
+export type UpdatePasswordResponse = {
+  message: string;
 };
 
 export const loginUser = createAsyncThunk<
@@ -90,6 +100,7 @@ export const updateUser = createAsyncThunk<
 //@TODO: add response type
 export const logoutUser = createAsyncThunk("user/logout", async () => {
   try {
+    //@FIXME: probably need to be axiosPrivate
     await axios(API_URL.logout, {
       withCredentials: true,
     });
@@ -97,3 +108,40 @@ export const logoutUser = createAsyncThunk("user/logout", async () => {
     console.error(err);
   }
 });
+
+export const changeUserPassword = createAsyncThunk<
+  UpdatePasswordResponse,
+  NewCredentials,
+  { rejectValue: ResponseError }
+>(
+  "user/changePassword",
+  async ({ username, newPassword, prePassword }, { rejectWithValue }) => {
+    try {
+      const response = await axiosPrivate.post(
+        API_URL.settings.password,
+        {
+          username,
+          password: prePassword,
+          newPassword: newPassword,
+        },
+        {
+          headers: { "Content-Type": "application/json" },
+          withCredentials: true,
+        }
+      );
+
+      return response.data;
+    } catch (err) {
+      if (err instanceof AxiosError && err.response?.data) {
+        const { message } = err.response.data;
+        return rejectWithValue({
+          errMsg: message || "Update settings failed",
+        });
+      } else {
+        return rejectWithValue({
+          errMsg: `An unexpected error occurred: ${(err as Error).message}`,
+        });
+      }
+    }
+  }
+);
