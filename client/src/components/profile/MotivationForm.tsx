@@ -1,16 +1,16 @@
-// import { Input } from "../Input";
-import { Button } from "../common/Button";
 import { ReactElement, SyntheticEvent, useState } from "react";
+import { useTranslation } from "react-i18next";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch, RootState } from "../../store/store";
+import { updateUser } from "../../store/thunks/userThunk";
+
+import { Button } from "../common/Button";
 import { CheckboxButton } from "../common/CheckboxButton";
-import { User } from "../../interfaces/user";
-import { axiosPrivate } from "../../api/axios";
-import { useAuth } from "../../hooks/useAuth";
-import { useUser } from "../../hooks/useUser";
 import { MotivationItemText } from "../../enums/motivationItem";
 import { ToastType } from "../../enums/toast";
 import { useToast } from "../../context/ToastContext";
-import { useTranslation } from "react-i18next";
 import { Icon, IconType } from "../common/Icon/Icon";
+import { User } from "../../interfaces/user";
 
 export type MotivationItem = {
   text: MotivationItemText;
@@ -21,20 +21,19 @@ interface MotivationFormProps {
   switchForm: (tab: -1 | 1) => void;
 }
 
-const UPDATE_URL = "/users";
-
 export const MotivationForm = ({
   items,
   switchForm,
 }: MotivationFormProps): JSX.Element => {
-  const { auth } = useAuth();
-  const { setUser, user } = useUser();
+  const { user, isLoading } = useSelector((state: RootState) => state.user);
+  const dispatch = useDispatch<AppDispatch>();
+
   const [selectedItems, setSelectedItems] = useState<MotivationItemText[]>(
-    user.motivations || []
+    user?.profile.motivations || []
   );
 
   const toast = useToast();
-  const { t } = useTranslation("profile");
+  const { t: tMotivation } = useTranslation("profile");
   const tCommon = useTranslation("common").t;
 
   const handleCheckboxChange = (itemText: MotivationItemText) => {
@@ -49,26 +48,29 @@ export const MotivationForm = ({
 
   const handleSubmit = async (event: SyntheticEvent) => {
     event.preventDefault();
+    if (!user) {
+      throw new Error("No user to update");
+    }
     const updatedUser: User = {
-      username: auth.user,
-      motivations: selectedItems,
+      ...user,
+      profile: {
+        ...user?.profile,
+        motivations: selectedItems,
+      },
     };
+
     try {
-      const response = await axiosPrivate.put(UPDATE_URL, updatedUser, {
-        withCredentials: true,
-      });
-      if (response.status === 200) {
-        setUser((prev) => {
-          return {
-            ...prev,
-            ...updatedUser,
-          };
-        });
-        toast?.open(t("motivation.toastMessage.success"), ToastType.Success);
-      }
+      await dispatch(updateUser(updatedUser)).unwrap();
+      toast?.open(
+        tMotivation("motivation.toastMessage.success"),
+        ToastType.Success
+      );
     } catch (err) {
       console.error(err);
-      toast?.open(t("motivation.toastMessage.failure"), ToastType.Failure);
+      toast?.open(
+        tMotivation("motivation.toastMessage.failure"),
+        ToastType.Failure
+      );
     }
   };
 
@@ -84,10 +86,10 @@ export const MotivationForm = ({
     >
       <div>
         <h3 className="text-indigo-500 dark:text-indigo-200 font-bold text-center drop-shadow text-xl md:text-3xl mb-1 md:mb-3">
-          {t("headers.motivationHeader")}
+          {tMotivation("headers.motivationHeader")}
         </h3>
         <p className="text-indigo-900 dark:text-indigo-300 font-semibold text-center">
-          {t("subheadings.motivationSubheading")}
+          {tMotivation("subheadings.motivationSubheading")}
         </p>
       </div>
       <div className="flex-shrink w-full grid grid-cols-1 md:grid-cols-2 gap-3">
@@ -103,7 +105,16 @@ export const MotivationForm = ({
         })}
       </div>
       <div className="md:self-start flex justify-between w-full gap-4">
-        <Button submit primary rounded className="basis-1/2" save />
+        <Button
+          submit
+          primary
+          rounded
+          className="basis-1/2"
+          icon={<Icon className="inline ml-1.5" type={IconType.Save} />}
+          loading={isLoading}
+        >
+          {tCommon("buttons.save")}
+        </Button>
         <Button
           secondary
           rounded
